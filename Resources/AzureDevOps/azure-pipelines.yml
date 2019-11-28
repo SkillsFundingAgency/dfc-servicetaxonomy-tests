@@ -1,5 +1,5 @@
 variables:
-    SolutionBaseName: 'DFC.Composite.Shell'
+    SolutionBaseName: 'DFC.ServiceTaxonomy.Tests'
     BuildPlatform: 'any cpu'
     BuildConfiguration: 'release'
 
@@ -9,5 +9,5 @@ resources:
   - repository: dfc-devops
     type: github
     name: SkillsFundingAgency/dfc-devops
-    ref: refs/tags/v1.6.5
+    ref: refs/tags/v1.6.12
     endpoint: 'GitHub (ESFA)'
