@@ -1,5 +1,8 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Helpers;
+using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -13,6 +16,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     public sealed class Steps
     {
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        EnvironmentSettings env = new EnvironmentSettings();
 
         private readonly ScenarioContext context;
 
@@ -68,6 +72,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             IRestResponse response = (IRestResponse)context["RestResponse"];
             var a = JsonHelper.DocumentCount(response.Content);
             NUnit.Framework.Assert.AreEqual(a, p0);
+        }
+
+
+        [Given(@"I get a list of occupations from esco")]
+        public void GivenIGetAListOfOccupationsFromEsco()
+        {
+
+            IRestResponse response = RestHelper.Get(env.escoApiBaseUrl + "/search?language=en&type=occupation&limit=10000");
+            JObject escoResults = JObject.Parse(response.Content);
+            IList<JToken> results = escoResults["_embedded"]["results"].Children().ToList();
+            IList <EscoDataItem> escoData = new List<EscoDataItem>();
+            foreach (JToken result in results)
+            {
+                // JToken.ToObject is a helper method that uses JsonSerializer internally
+                EscoDataItem escoDataItem = result.ToObject<EscoDataItem>();
+                escoData.Add(escoDataItem);
+            }
+
         }
 
     }
