@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DFC.ServiceTaxonomy.TestSuite
 {
-    class EnvironmentSettings
+    public class EnvironmentSettings
     {
         private static readonly IConfiguration Configuration =
         new EnvironmentSettingsConfigurationBuilder(nameof(DFC.ServiceTaxonomy.TestSuite)).BuildConfiguration();

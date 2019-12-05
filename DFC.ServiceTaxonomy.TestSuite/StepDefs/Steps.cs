@@ -1,5 +1,6 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using DFC.ServiceTaxonomy.TestSuite.Models;
+using DFC.ServiceTaxonomy.TestSuite.Context;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -19,10 +20,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         EnvironmentSettings env = new EnvironmentSettings();
 
         private readonly ScenarioContext context;
-
-        public Steps(ScenarioContext injectedContext)
+        private readonly ApiRequest testContext;
+        public Steps(ScenarioContext injectedContext, ApiRequest injectedTestContext)
         {
             context = injectedContext;
+            testContext = injectedTestContext;
         }
 
         [Given("I have entered (.*) into the calculator")]
@@ -78,18 +80,35 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I get a list of occupations from esco")]
         public void GivenIGetAListOfOccupationsFromEsco()
         {
-
             IRestResponse response = RestHelper.Get(env.escoApiBaseUrl + "/search?language=en&type=occupation&limit=10000");
             JObject escoResults = JObject.Parse(response.Content);
             IList<JToken> results = escoResults["_embedded"]["results"].Children().ToList();
-            IList <EscoDataItem> escoData = new List<EscoDataItem>();
+            //IList <EscoDataItem> escoData = new List<EscoDataItem>();
             foreach (JToken result in results)
             {
                 // JToken.ToObject is a helper method that uses JsonSerializer internally
+                
                 EscoDataItem escoDataItem = result.ToObject<EscoDataItem>();
-                escoData.Add(escoDataItem);
+                testContext.escoData.Add(escoDataItem);
+                //escoData.Add(escoDataItem);
             }
+        }
 
+        [Given(@"I request all occupations from the NCS API")]
+        public void GivenIRequestAllOccupationsFromTheNCSAPI()
+        {
+            IRestResponse response = RestHelper.Get(testContext.GetTaxonomyUri("GetAllOccupations"),testContext.taxonomyApiHeaders);
+
+            JObject ncsResults = JObject.Parse(response.Content);
+            IList<JToken> results = ncsResults.Children().ToList();
+            foreach (JToken result in results)
+            {
+                // JToken.ToObject is a helper method that uses JsonSerializer internally
+
+                Occupation occupation = result.ToObject<Occupation>();
+                testContext.occupations.Add(occupation);
+                //escoData.Add(escoDataItem);
+            }
         }
 
     }

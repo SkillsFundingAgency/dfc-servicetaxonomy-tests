@@ -103,6 +103,8 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 15
  testRunner.Given("I get a list of occupations from esco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+ testRunner.And("I request all occupations from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

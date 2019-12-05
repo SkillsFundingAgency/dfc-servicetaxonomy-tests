@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Models
 {
-    class EscoDataItem
+    public class EscoDataItem
     {
         public string className { get; set; }
         public string classId { get; set; }

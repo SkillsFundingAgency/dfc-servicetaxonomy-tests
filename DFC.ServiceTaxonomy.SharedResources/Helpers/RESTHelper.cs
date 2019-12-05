@@ -8,7 +8,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
     public static class RestHelper
     {
-        public static IRestResponse Get(string url)
+        public static IRestResponse Get(string url, Dictionary<string, string> headers = null )
         {
             //Thread.Sleep(250);
             Console.WriteLine("Attempt to GET: " + url);
@@ -17,6 +17,13 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 var client = new RestClient(url);
                 var request = new RestRequest(Method.GET);
 
+                if (headers != null)
+                {
+                    foreach (var header in headers)
+                    {
+                        request.AddHeader(header.Key, header.Value);
+                    }
+                }
                 IRestResponse response = null;
                 bool retry = true;
                 int tries = 0;

@@ -13,3 +13,4 @@ Scenario: Retreive full list of occupations
 
 Scenario: Get occupations from esco
 	Given I get a list of occupations from esco
+	And I request all occupations from the NCS API
