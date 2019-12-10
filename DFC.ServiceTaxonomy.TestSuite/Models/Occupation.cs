@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Models
 {

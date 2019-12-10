@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DFC.ServiceTaxonomy.TestSuite.Models
+namespace DFC.ServiceTaxonomy.TestSuite.Interfaces
 {
     public interface NcsEntity
     {

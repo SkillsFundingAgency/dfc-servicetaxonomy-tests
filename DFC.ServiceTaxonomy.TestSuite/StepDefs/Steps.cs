@@ -1,6 +1,7 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.TestSuite.Context;
+using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using FluentAssertions;
 using Newtonsoft.Json;
