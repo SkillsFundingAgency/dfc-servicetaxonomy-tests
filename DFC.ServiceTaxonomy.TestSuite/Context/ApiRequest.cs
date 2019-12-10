@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using DFC.ServiceTaxonomy.TestSuite.Models;
+using RestSharp;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Context
 {
     public class ApiRequest
     {
-        public IList<Occupation> occupations;
+        public IList<Occupation> occupations = new List<Occupation>();
+        public IList<Skill> skills = new List<Skill>();
         public IList<EscoDataItem> escoData = new List<EscoDataItem>();
+        public IList<string> valueList = new List<string>();
         public EnvironmentSettings envSettings;
         public Dictionary<string, string> taxonomyApiHeaders = new Dictionary<string, string>();
-
+        public IRestResponse apiResponse;
         string UriGetAllOccupations = "GetAllOccupations/Execute/";
+        string UriGetAllSkills = "GetAllSkills/Execute/";
 
         public ApiRequest (EnvironmentSettings injectEnvSettings)
         {
@@ -27,8 +31,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Context
         {
             switch (resource)
             {
-                default: return envSettings.taxonomyApiBaseUrl + UriGetAllOccupations;
+                case "GetAllSkills":
+                    return envSettings.taxonomyApiBaseUrl + UriGetAllSkills;
+                case "GetAllOccupations":
+                    return envSettings.taxonomyApiBaseUrl + UriGetAllOccupations;
+                default:
+                    return "";
             }
+        }
+
+        public string GetSkillOrKnowlegeFromSkillTypeUri(string uri)
+        {
+            return ( uri.Contains("knowledge") ? "knowledge" : "competency");
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Text;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Models
 {
-    public class Occupation
+    public class Occupation : NcsEntity
     {
         public string occupation { get; set; }
         public string[] alternativeLabels { get; set; }
         public string lastModified { get; set; }
-        public string url { get; set; }
+        public string uri { get; set; }
     /*SAMPLE RESPONSE
      * "occupation": [
     {

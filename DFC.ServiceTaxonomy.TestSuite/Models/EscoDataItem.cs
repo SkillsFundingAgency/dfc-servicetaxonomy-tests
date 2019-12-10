@@ -10,5 +10,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
         public string classId { get; set; }
         public string uri { get; set; }
         public string title { get; set; }
+        public string[] hasSkillType { get; set; }
     }
 }
