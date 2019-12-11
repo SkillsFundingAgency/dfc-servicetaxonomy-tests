@@ -15,13 +15,14 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];
 
-        public string editorBaseUrl => Configuration["EscoApi:BaseUrl"];
+        public string editorBaseUrl => Configuration["Editor:BaseUrl"];
         public string editorUid => Configuration["Editor:UserName"];
         public string editorPassword => Configuration["Editor:Password"];
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
+
 
     }
 }

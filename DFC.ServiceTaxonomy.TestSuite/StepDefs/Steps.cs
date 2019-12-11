@@ -35,6 +35,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenTheOccupationIDIWishToLookUpIs(string occupationId)
         {
             context["occupationId"] = occupationId;
+            context.Set<string>("123", "2323");
+            context.Set("123", "2323");
+            context.Set<object>(234,"flap");
         }
 
         [When(@"I make the request")]
