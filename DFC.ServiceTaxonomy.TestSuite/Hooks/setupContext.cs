@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
-using DFC.ServiceTaxonomy.TestSuite.Context;
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -13,18 +13,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     [Binding]
     public sealed class setupContext
     {
-        // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
+        FeatureContext _featureContext;
+        ScenarioContext _scenarioContext;
 
-        [BeforeScenario]
-        public void BeforeScenario( EditorContext  editorContext)
+        // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
+        public setupContext ( FeatureContext fContext, ScenarioContext sContext)
         {
-            editorContext.SetupWebDriver(new ChromeDriver(Environment.CurrentDirectory));
+            _featureContext = fContext;
+            _scenarioContext = sContext;
+        }
+        [BeforeScenario("webtest")] 
+        public void IntialiseWebDriver()
+        {
+            _scenarioContext.SetWebDriver(new ChromeDriver(Environment.CurrentDirectory));
         }
 
-        [AfterScenario]
-        public void AfterScenario()
+        [BeforeScenario]
+        public void IntialiseEnvironementVariables()
         {
-            //TODO: implement logic that has to run after executing each scenario
+            _scenarioContext.SetEnv(new EnvironmentSettings());
         }
     }
 }

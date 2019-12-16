@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Context
 {
-    public class EditorContext : EnvironmentSettings
+    public class EditorContextOld
     {
         private IWebDriver _driver;
 

@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Context
 {
-    public class ApiRequest
+    public class ApiRequestOld
     {
         public IList<Occupation> occupations = new List<Occupation>();
         public IList<Skill> skills = new List<Skill>();
@@ -18,7 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Context
         string UriGetAllOccupations = "GetAllOccupations/Execute/";
         string UriGetAllSkills = "GetAllSkills/Execute/";
 
-        public ApiRequest (EnvironmentSettings injectEnvSettings)
+        public ApiRequestOld (EnvironmentSettings injectEnvSettings)
         {
             envSettings = injectEnvSettings;
 
@@ -42,7 +42,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Context
 
         public string GetSkillOrKnowlegeFromSkillTypeUri(string uri)
         {
-            return ( uri.Contains("knowledge") ? "knowledge" : "competency");
+            return ( uri.Contains("knowledge") ? "knowledge" : "competency" );
         }
     }
 }
