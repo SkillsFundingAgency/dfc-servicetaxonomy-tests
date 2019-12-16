@@ -25,7 +25,7 @@ namespace DFC.ServiceTaxonomy.MockRestAPI.Controllers
         public IEnumerable<ResponseRow> Get()
         {
             string id = "114e1eff-215e-47df-8e10-45a5b72f8197";
-            Neo4JHelper neo = new Neo4JHelper();
+            Neo4JHelper neo = new Neo4JHelper("bolt://localhost");
             IStatementResult result;
             var skills = new List<ResponseRow>();
             string query = "MATCH (s:esco__Skill)" +
@@ -37,7 +37,8 @@ namespace DFC.ServiceTaxonomy.MockRestAPI.Controllers
                         "ELSE ''" +
                         "END AS IsEssential";
 
-            result = neo.executeTableQuery(query);
+            result = neo.ExecuteTableQuery(query,null);
+
             var a = result.Summary.ResultAvailableAfter;
             foreach (var record in result)
             {
@@ -71,7 +72,7 @@ namespace DFC.ServiceTaxonomy.MockRestAPI.Controllers
                         "ELSE ''" +
                         "END AS IsEssential";
             
-            result = neo.executeTableQuery(query);
+            result = neo.ExecuteTableQuery(query,null);
 
             foreach (var record in result)
             {
