@@ -16,6 +16,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keyOccupationData = "EscoOccupationList";
         const string keySkillData = "EscoSkillList";
         const string keyListOfStrings = "EscoListOfStrings";
+        const string keyExpectedRecordCount = "ExpectedRecordCount";
         #endregion
 
         //public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
@@ -101,6 +102,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return (context.ContainsKey(keySkillData) ? context.Get<IList<Skill>>(keySkillData).Count : 0);
         }
 
+        public static void SetExpectedRecordCount(this ScenarioContext context, int recordCount)
+        {
+            context.Set<int>(recordCount, keyExpectedRecordCount);
+        }
+
+        public static int GetExpectedRecordCount(this ScenarioContext context)
+        {
+            return (context.ContainsKey(keyExpectedRecordCount) ? context.Get<int>(keyExpectedRecordCount) : 0);
+        }
+
+        
         //public static void SetStringListData(this ScenarioContext context, IList<string> strings)
         //{
         //    context.Set<IList<string>>(strings, keyListOfStrings);

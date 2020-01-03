@@ -19,7 +19,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     [Binding]
     public sealed class ApiSteps
     {
-      private readonly ScenarioContext context;
+        #region consts
+        private const string cypher_skillWithRelatedJobProfile = "MATCH (s:esco__Skill) --> (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN distinct s.uri";
+        private const string cypher_AddJobProfileAndRelationToOccupation = "to define";
+        private const string cypher_occupationWithRelatedJobProfile = "MATCH (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN o.uri";
+        #endregion
+
+
+        private readonly ScenarioContext context;
 
         public ApiSteps(ScenarioContext injectedContext )
         {
@@ -92,6 +99,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.SetOccupationListData( occupations );
         }
 
+        [Given(@"I request all occupations with related job profile from the NCS API")]
+        public void GivenIRequestAllOccupationsWithRelatedJobProfileFromTheNCSAPI()
+        {
+            IList<Occupation> occupations = new List<Occupation>();
+
+            var response = RestHelper.Get(context.GetTaxonomyUri("GetAllOccupationsWithRelatedJobProfile"), context.GetTaxonomyApiHeaders());
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            JObject ncsResults = JObject.Parse(response.Content);
+            IList<JToken> results = ncsResults["occupations"].Children().ToList();
+            foreach (JToken result in results)
+            {
+                Occupation occupation = result.ToObject<Occupation>();
+                occupations.Add(occupation);
+            }
+
+            context.SetOccupationListData(occupations);
+        }
+
         [Given(@"I request all skills from the NCS API")]
         public void GivenIRequestAllSkillsFromTheNCSAPI()
         {
@@ -110,6 +136,84 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             context.SetSkillListData( skills );
         }
+
+        [Given(@"I request all skills with related job profile from the NCS API")]
+        public void GivenIRequestAllSkillsWithRelatedJobProfileFromTheNCSAPI()
+        {
+            IList<Skill> skills = new List<Skill>();
+
+            IRestResponse response = RestHelper.Get(context.GetTaxonomyUri("GetAllSkillsWithRelationshipToJobProfile"), context.GetTaxonomyApiHeaders());
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            JObject ncsResults = JObject.Parse(response.Content);
+            IList<JToken> results = ncsResults["skills"].Children().ToList();
+            foreach (JToken result in results)
+            {
+                Skill skill = result.ToObject<Skill>();
+                skills.Add(skill);
+            }
+
+            context.SetSkillListData(skills);
+        }
+
+        [Given(@"I have made sure that ""(.*)"" with related job profiles are present in the graph datastore")]
+        public void GivenIHaveMadeSureThatWithRelatedJobProfilesArePresentInTheGraphDatastore(string p0)
+        {
+            //  check how many skills exist for occupations with related job profile
+            var statementTemplate = (p0.ToLower().Equals("skills") ? cypher_skillWithRelatedJobProfile : cypher_occupationWithRelatedJobProfile );
+            // var statementParameters = new Dictionary<string, object> { { "uri", context.Get<string>(keyGeneratedUri) } };
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+
+            int numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+
+            if (numberOfRecords < 1)
+            {
+                // add a record
+                neo4JHelper.ExecuteTableQuery(cypher_AddJobProfileAndRelationToOccupation, null);
+            }
+
+            // check success
+            numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+            numberOfRecords.Should().BeGreaterThan(0);
+
+            // store in context
+            context.SetExpectedRecordCount(numberOfRecords);
+        }
+
+
+
+
+        //[Given(@"I have made sure that occupations with related job profiles are present in the graph datastore")]
+        //public void GivenIHaveMadeSureThatOccupationsWithRelatedJobProfilesArePresentInTheGraphDatastore()
+        //{
+        //    //  check how many skills exist for occupations with related job profile
+        //    var statementTemplate = cypher_skillWithRelatedJobProfile;
+        //   // var statementParameters = new Dictionary<string, object> { { "uri", context.Get<string>(keyGeneratedUri) } };
+
+        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
+        //    neo4JHelper.connect(context.GetEnv().neo4JUrl,
+        //                            context.GetEnv().neo4JUid,
+        //                            context.GetEnv().neo4JPassword);
+
+        //    int numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+
+        //    if ( numberOfRecords < 1)
+        //    {
+        //        // add a record
+        //        neo4JHelper.ExecuteTableQuery(cypher_AddJobProfileAndRelationToOccupation,null);
+        //    }
+
+        //    // check success
+        //    numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+        //    numberOfRecords.Should().BeGreaterThan(0);
+
+        //    // store in context
+        //    context.SetExpectedRecordCount(numberOfRecords);
+        //}
 
         static bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
         {
@@ -274,5 +378,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // confirm match with ncs api response data
             return AreEqual( escoAlternativeReferences, ncsAlternateLabels );
         }
+
+        [Then(@"the number of results returned matches the expected value")]
+        public void ThenTheNumberOfResultsReturnedMatchesTheExpectedValue()
+        {
+            context.GetSkillListData().Count.Should().Be(context.GetExpectedRecordCount());
+        }
+
     }
 }

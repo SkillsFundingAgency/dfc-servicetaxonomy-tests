@@ -50,6 +50,12 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return result;
         }
 
+        public int GetRecordCount(string queryText, Dictionary<string, object> queryParameters)
+        {
+            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            return result.Keys.Count;
+
+        }
         public IList<T> GetResultsList<T>(string queryText, Dictionary<string, object> queryParameters) where T : new()
         {
             IList<T> resultsList = new List<T>();
@@ -73,5 +79,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return resultsList;
         }
+
+
     }
 }
