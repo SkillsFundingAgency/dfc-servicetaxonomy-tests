@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -117,6 +118,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             context.SetOccupationListData(occupations);
         }
+
+        public static Dictionary<string, string> ToDictionary(Table table)
+        {
+            var dictionary = new Dictionary<string, string>();
+            foreach (var row in table.Rows)
+            {
+                dictionary.Add(row[0], row[1]);
+            }
+            return dictionary;
+        }
+
+        [Given(@"I want to supply an invalid security header")]
+        public void GivenIWantToSupplyAnInvalidSecurityHeader()
+        {
+            context["securityHeader"] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
+        }
+
+        [Given(@"I want to fail to send a security header")]
+        public void GivenIWantToFailToSendASecurityHeader()
+        {
+            context["securityHeader"] = new Dictionary<string, string>() ;
+        }
+
+
+
+        [Given(@"I make a request to the service taxonomy API ""(.*)""")]
+        public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
+        {
+            string requestBody = "{}";
+            var requestItems = ToDictionary(table);
+            foreach ( var item in requestItems )
+            {
+               requestBody = JsonHelper.AddPropertyToJsonString(requestBody, item.Key, item.Value);
+            }
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0), requestBody, ( context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders() ) );
+            //response.StatusCode.Should().Be(HttpStatusCode.OK);
+            context["responseStatus"] = response.StatusCode;
+            context["responseBody"] = response.Content;
+        }
+
+
 
         [Given(@"I request all skills from the NCS API")]
         public void GivenIRequestAllSkillsFromTheNCSAPI()
@@ -384,6 +426,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             context.GetSkillListData().Count.Should().Be(context.GetExpectedRecordCount());
         }
+
+        [Then(@"the response json matches:")]
+        public void ThenTheResponseJsonMatches(string multilineText)
+        {
+            JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
+            
+        }
+
+        [Then(@"the response code is (.*)")]
+        public void ThenTheResponseCodeIs(int p0)
+        {
+            context["responseStatus"].Should().Be(p0);
+        }
+
+        [Then(@"the the response message is (.*)")]
+        public void ThenTheTheResponseMessageIs(string p0)
+        {
+            context["responseBody"].Should().Be(p0);
+         }
+
 
     }
 }

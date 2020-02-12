@@ -146,5 +146,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             var obj = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(json, jsonSerializerSettings);
             return (obj.ContainsKey(property) ? obj.Property(property).Value.ToString() : string.Empty);
         }
+
+        public static bool CompareJsonString( string json1, string json2)
+        {
+            JObject o1 = JObject.Parse(json1);
+            JObject o2 = JObject.Parse(json2);
+
+            return JToken.DeepEquals(o1, o2);
+        }
     }
 }
