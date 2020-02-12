@@ -11,6 +11,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         #region contants
         const string UriGetAllOccupations = "GetAllOccupations/Execute/";
         const string UriGetAllSkills = "GetAllSkills/Execute/";
+        const string UriGetSkillById = "GetSkillById/Execute";
 
         const string keyEscoData = "EscoItemList";
         const string keyOccupationData = "EscoOccupationList";
@@ -26,12 +27,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static string GetTaxonomyUri(this ScenarioContext context, string resource)
         {
-            switch (resource)
+            switch (resource.ToLower())
             {
-                case "GetAllSkills":
-                    return context.GetEnv().taxonomyApiBaseUrl + UriGetAllSkills;
-                case "GetAllOccupations":
-                    return context.GetEnv().taxonomyApiBaseUrl + UriGetAllOccupations;
+                case "getallskills":
+                    return context.GetEnv().taxonomyApiBaseUrl +"/" + UriGetAllSkills;
+                case "getalloccupations":
+                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetAllOccupations;
+                case "getskillbyid":
+                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillById;
                 default:
                     return "";
             }
