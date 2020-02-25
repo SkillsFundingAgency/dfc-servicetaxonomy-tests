@@ -159,7 +159,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
 
-
         [Given(@"I request all skills from the NCS API")]
         public void GivenIRequestAllSkillsFromTheNCSAPI()
         {
@@ -433,6 +432,46 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
             
         }
+
+        [Then(@"the response json has collection ""(.*)"" with an item matching")]
+        public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)
+        {
+            bool bMatch = false;
+            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context["responseBody"]);
+            dynamic includedCollection = responseJson[p0];
+            foreach ( var item in includedCollection)
+            {
+               string json = Newtonsoft.Json.JsonConvert.SerializeObject(item); 
+                bMatch = JsonHelper.CompareJsonString(json, multilineText);
+                if (bMatch) break;
+            }
+            bMatch.Should().BeTrue();
+        }
+
+
+        [Then(@"the response json with element ""(.*)"" removed matches:")]
+        public void ThenTheResponseJsonWithElementRemovedMatches(string p0, string multilineText)
+        {
+            string response = (string)context["responseBody"];
+            string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
+            JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
+        }
+
+
+        [Then(@"the response value for ""(.*)"" is an empty array")]
+        public void ThenTheValueForIsAnEmptyArray(string p0)
+        {
+            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context["responseBody"]);
+        }
+
+        [Then(@"the response body includes the text:")]
+        public void ThenTheResponseBodyIncludesTheText(string multilineText)
+        {
+            string response = (string)context["responseBody"];
+            bool check = response.Contains(multilineText);
+            check.Should().BeTrue();
+        }
+
 
         [Then(@"the response code is (.*)")]
         public void ThenTheResponseCodeIs(int p0)

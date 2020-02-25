@@ -13,6 +13,9 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string taxonomyApiBaseUrl => Configuration["TaxonomyApi:BaseUrl"];
         public string taxonomySubscriptionKey => Configuration["TaxonomyApi:SubscriptionKey"];
 
+        public string jobProfileApiBaseUrl => Configuration["JobProfileApi:BaseUrl"];
+        public string jobProfileSubscriptionKey => Configuration["JobProfileApi:SubscriptionKey"];
+
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];
 
         public string editorBaseUrl => Configuration["Editor:BaseUrl"];
