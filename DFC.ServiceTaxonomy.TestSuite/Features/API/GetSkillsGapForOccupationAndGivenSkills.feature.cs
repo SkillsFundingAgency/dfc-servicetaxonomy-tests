@@ -80,16 +80,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
  testRunner.Given("I supply the parameter \"occupation\" as a string with value \"123\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Value"});
-            table12.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "1232"});
-            table12.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "234"});
-            table12.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "234234"});
 #line 6
- testRunner.And("I supply the parameter \"skilllist\" as a collection with values", ((string)(null)), table12, "And ");
+ testRunner.And("I supply the parameter \"skilllist\" as a collection with values", ((string)(null)), table19, "And ");
 #line 11
  testRunner.When("I request skill gap for an occupation and a list of skills", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
@@ -97,43 +97,43 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
  testRunner.And("the response matches the expected format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "skill",
                         "uri",
                         "type",
                         "reuselevel"});
-            table13.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
-            table13.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
 #line 14
- testRunner.And("the missing skills include", ((string)(null)), table13, "And ");
+ testRunner.And("the missing skills include", ((string)(null)), table20, "And ");
 #line 18
  testRunner.And("the number of missings skills is 27", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "skill",
                         "uri",
                         "type",
                         "reuselevel"});
-            table14.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
-            table14.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
 #line 19
- testRunner.And("the match skills include", ((string)(null)), table14, "And ");
+ testRunner.And("the match skills include", ((string)(null)), table21, "And ");
 #line 23
  testRunner.And("the number of matching skills is 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
