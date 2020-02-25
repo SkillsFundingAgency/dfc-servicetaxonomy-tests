@@ -70,10 +70,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get skills for occupation")]
-        public virtual void GetSkillsForOccupation()
+        [NUnit.Framework.DescriptionAttribute("Get skills for valid occupation occupation")]
+        public virtual void GetSkillsForValidOccupationOccupation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for occupation", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for valid occupation occupation", null, ((string[])(null)));
 #line 4
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -83,6 +83,74 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I make the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
  testRunner.Then("The number of skills returned is 35", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get skills for occupation with invalid request body")]
+        public virtual void GetSkillsForOccupationWithInvalidRequestBody()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for occupation with invalid request body", null, ((string[])(null)));
+#line 10
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 11
+  testRunner.Given("I request all skills for occupation \"uri\" from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 12
+  testRunner.Then("the response code is 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get skills for occupation with unknown occupation")]
+        public virtual void GetSkillsForOccupationWithUnknownOccupation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for occupation with unknown occupation", null, ((string[])(null)));
+#line 14
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 15
+  testRunner.Given("I request all skills for occupation \"uri\" from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+  testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get skills for occupation with missing security header")]
+        public virtual void GetSkillsForOccupationWithMissingSecurityHeader()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for occupation with missing security header", null, ((string[])(null)));
+#line 18
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 19
+  testRunner.Given("I don\'t want to send a security header with the next request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+     testRunner.Given("I request all skills for occupation \"uri\" from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 21
+  testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get skills for occupation with invalid security header")]
+        public virtual void GetSkillsForOccupationWithInvalidSecurityHeader()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for occupation with invalid security header", null, ((string[])(null)));
+#line 24
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 25
+  testRunner.Given("I don\'t want to send an invalid API key with the next request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 26
+     testRunner.Given("I request all skills for occupation \"uri\" from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+  testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -1,4 +1,4 @@
-﻿Feature: SkillGapAnalysis
+﻿Feature: SkillsGapForOccupations
 
 
 @GetAllSkills
