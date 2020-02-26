@@ -158,6 +158,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context["responseBody"] = response.Content;
         }
 
+        [Given(@"I make a request to the service taxonomy API ""(.*)"" with request body")]
+        public void GivenIMakeARequestToTheServiceTaxonomyAPIWithRequestBody(string p0, string multilineText)
+        {
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0), multilineText, (context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders()));
+            //response.StatusCode.Should().Be(HttpStatusCode.OK);
+            context["responseStatus"] = response.StatusCode;
+            context["responseBody"] = response.Content;
+        }
+
 
         [Given(@"I request all skills from the NCS API")]
         public void GivenIRequestAllSkillsFromTheNCSAPI()
@@ -456,6 +465,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
         }
+
+        [Then(@"the response json with elements ""(.*)"" and ""(.*)"" removed matches:")]
+        public void ThenTheResponseJsonWithElementsAndRemovedMatches(string p0, string p1, string multilineText)
+        {
+            string response = (string)context["responseBody"];
+            string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
+            strippedResonse = JsonHelper.RemovePropertyFromJsonString(strippedResonse, p1);
+            JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
+
+        }
+
+        [Then(@"the element ""(.*)"" in the collection ""(.*)"" has distinct values")]
+        public void ThenTheElementInTheCollectionHasDistinctValues(string p0, string p1)
+        {
+            Dictionary<string, string> distinctValues = new Dictionary<string, string>();
+            string response = (string)context["responseBody"];
+            var collection = JsonHelper.GetCollectionPropertyFromJson(response, p1);
+            
+            foreach ( var item in collection)
+            {
+                try
+                {
+                    distinctValues.Add((string)item[p0], "OK");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error checking distinct values in collection:{0}", e.Message);
+                }
+                
+            }
+            distinctValues.Count.Should().Be(JsonHelper.GetDocumentCountInCollection(response, p1));
+        }
+
+
+        [Then(@"the count of collection ""(.*)"" is (.*)")]
+        public void ThenTheCountOfCollectionIs(string p0, int p1)
+        {
+            string response = (string)context["responseBody"];
+            JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
+        }
+
+
 
 
         [Then(@"the response value for ""(.*)"" is an empty array")]
