@@ -119,6 +119,70 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Skill list is supplied that matches one occupation")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
+        public virtual void SkillListIsSuppliedThatMatchesOneOccupation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skill list is supplied that matches one occupation", null, new string[] {
+                        "GetOccupationsWithMatchingSkills"});
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line hidden
+#line 23
+ testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
+                    "ills\" with request body", "{\r\n   \"minimumMatchingSkills\":1,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
+                    "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 31
+ testRunner.And("the response json matches:", @"{
+""matchingOccupations"": [
+    {
+        ""matchingOptionalSkills"": 1,
+        ""occupation"": ""microbiologist"",
+        ""totalOccupationOptionalSkills"": 30,
+        ""jobProfileTitle"": ""Microbiologist"",
+        ""totalOccupationEssentialSkills"": 19,
+        ""matchingEssentialSkills"": 0,
+        ""lastModified"": ""2017-01-17T14:18:17Z"",
+        ""jobProfileUri"": ""http://nationalcareers.service.gov.uk/jobprofile/2abdd237-350f-433f-b96f-4f4e231e16f1"",
+        ""uri"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c""
+    }
+]
+}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Skill list is supplied that does not match any occupations with the given number " +
+            "of matches")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
+        public virtual void SkillListIsSuppliedThatDoesNotMatchAnyOccupationsWithTheGivenNumberOfMatches()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skill list is supplied that does not match any occupations with the given number " +
+                    "of matches", null, new string[] {
+                        "GetOccupationsWithMatchingSkills"});
+#line 52
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line hidden
+#line 53
+ testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
+                    "ills\" with request body", "{\r\n   \"minimumMatchingSkills\":2,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
+                    "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 60
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 61
+ testRunner.And("the response json matches:", "{\r\n\"matchingOccupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
