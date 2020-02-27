@@ -14,6 +14,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string UriGetSkillById = "GetSkillById/Execute";
         const string UriGetSkillsForOccupation = "GetAllSkillsForOccupation/Execute";
         const string UriGetSkillsGapForOccupationAndGivenSkills = "GetSkillsGapForOccupationAndGivenSkills/Execute";
+        const string UriGetJobProfileDetail = "GetJobProfileByTitle/Execute/";
 
         const string UriJobProfileSummary = "summary";
 
@@ -29,7 +30,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         //    Set(context, webDriver, WebDriverKey);
         //}
 
-        public static string GetTaxonomyUri(this ScenarioContext context, string resource)
+        public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
             {
@@ -43,6 +44,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                     return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillsForOccupation;
                 case "getskillsgapforoccupationandgivenskills":
                     return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillsGapForOccupationAndGivenSkills;
+                case "jobprofiledetail":
+                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetJobProfileDetail + "/" + param;
                 default:
                     return "";
             }

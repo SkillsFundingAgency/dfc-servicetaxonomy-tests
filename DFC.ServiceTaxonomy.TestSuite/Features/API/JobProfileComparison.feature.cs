@@ -87,6 +87,50 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Check mocked response against api")]
+        public virtual void CheckMockedResponseAgainstApi()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, ((string[])(null)));
+#line 13
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line hidden
+#line 15
+testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
+                    "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
+                    "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +
+                    "nd operate bottling machinery in food, drink and bottling factories.</p>\",\r\n  \"W" +
+                    "orkingPattern\": \"evenings / weekends\",\r\n  \"AlternativeTitle\": \"canning and bottl" +
+                    "ing operative, canning operative, canning and bottling worker, canner\",\r\n  \"Work" +
+                    "ingHoursDetails\": \"a week\",\r\n  \"Url\": \"https://pp.api.nationalcareers.service.go" +
+                    "v.uk/job-profiles/bottler\",\r\n  \"WhatYouWillDo\": {\r\n    \"WYDDayToDayTasks\": [\r\n  " +
+                    "    \"<p>keeping machinery clean and sterile, to meet high standards of food safe" +
+                    "ty</p>\",\r\n      \"<p>setting up machines and starting the bottling process</p>\",\r" +
+                    "\n      \"<p>making sure bottles or jars are correctly filled and labelled</p>\",\r\n" +
+                    "      \"<p>reporting more serious machinery problems to your line manager or a te" +
+                    "chnician</p>\",\r\n      \"<p>sorting out any problems with the production line so b" +
+                    "ottling is not held up</p>\"\r\n    ],\r\n    \"WorkingEnvironment\": {\r\n      \"Environ" +
+                    "ment\": \"<p>Your working environment may be noisy.</p>\",\r\n      \"Uniform\": \"\",\r\n " +
+                    "     \"Location\": \"<p>You could work in a factory.</p>\"\r\n    }\r\n  },\r\n  \"ONetOccu" +
+                    "pationalCode\": \"ToDo\",\r\n  \"MaximumHours\": 43.0,\r\n  \"WhatItTakes\": {\r\n    \"Skills" +
+                    "\": [\r\n      \"ToDo\"\r\n    ],\r\n    \"DigitalSkillsLevel\": \"<p>to be able to carry ou" +
+                    "t basic tasks on a computer or hand-held device</p>\"\r\n  },\r\n  \"CareerPathAndProg" +
+                    "ression\": {\r\n    \"CareerPathAndProgression\": [\r\n      \"<p>With experience, you c" +
+                    "ould progress to team supervisor or manager.</p>\"\r\n    ]\r\n  },\r\n  \"WorkingPatter" +
+                    "nDetails\": \"on shifts\",\r\n  \"HowToBecome\": {\r\n    \"EntryRoutes\": {\r\n      \"Univer" +
+                    "sity\": {\r\n        \"AdditionalInformation\": [\r\n          \"ToDo\"\r\n        ],\r\n    " +
+                    "    \"EntryRequirements\": [\r\n          \"ToDo\"\r\n        ],\r\n        \"RelevantSubje" +
+                    "cts\": [\r\n          \"ToDo\"\r\n        ],\r\n        \"FurtherInformation\": [\r\n        " +
+                    "  \"ToDo\"\r\n        ],\r\n        \"EntryRequirementPreface\": [\r\n          \"ToDo\"\r\n  " +
+                    "      ]\r\n      }\r\n    },\r\n    \"EntryRouteSummary\": \"ToDo\",\r\n    \"MoreInformation" +
+                    "\": {\r\n      \"Registration\": [\r\n        \"ToDo\"\r\n      ],\r\n      \"FurtherInformati" +
+                    "on\": [\r\n        \"\"\r\n      ],\r\n      \"ProfessionalAndIndustryBodies\": [\r\n        " +
+                    "\"\"\r\n      ],\r\n      \"CareerTips\": [\r\n        \"\"\r\n      ]\r\n    }\r\n  }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
