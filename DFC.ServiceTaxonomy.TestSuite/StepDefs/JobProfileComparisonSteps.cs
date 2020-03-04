@@ -40,6 +40,69 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context["AllJobProfiles"] = allJobProfiles;
         }
 
+        [Given(@"I have got a list of all available job profile from the new API")]
+        public void GivenIHaveGotAListOfAllAvailableJobProfileFromTheNewAPI()
+        {
+            var response = RestHelper.Get(context.GetTaxonomyUri("GetJobProfileSummary"), context.GetTaxonomyApiHeaders());
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            JArray responseData = JArray.Parse(response.Content);
+            var allJobProfiles = responseData.ToObject<List<JobProfileSummary>>();
+
+            context["AllSTAXJobProfiles"] = allJobProfiles;
+        }
+
+        [Then(@"The existing and new job profile summaries are comparable")]
+        public void ThenTheExistingAndNewJobProfileSummariesAreComparable()
+        {
+            string padding = "--------------------------------------------------------------------------------------------------------------------------------------------------------";
+            List<JobProfileSummary> existingList = (List<JobProfileSummary>)context["AllJobProfiles"];
+            List<JobProfileSummary> newList = (List<JobProfileSummary>)context["AllSTAXJobProfiles"];
+            int totalFailed = 0;
+            //existingList.Count.Should().Be(newList.Count);
+            
+            // not all are present yet, so drive the checks from the new list
+
+            foreach ( var item in newList)
+            {
+                bool checksOK = true;
+                bool matched, lastUpdateDateCheck, titleCheck, uriCheck;
+                matched = lastUpdateDateCheck = titleCheck = uriCheck = false;
+                string canonicalName = item.url.Substring(item.url.LastIndexOf('/'));
+                var match = existingList.Where(u => u.url.EndsWith(canonicalName)).FirstOrDefault();
+
+                // check titles match
+                matched = ( match != null );
+
+                if (matched)
+                {
+                    // check last updated is not null
+                    lastUpdateDateCheck = item.lastUpdated != null;
+
+                    //title check
+                    titleCheck = item.title == match.title;
+
+                    //uri check
+                    uriCheck = false;
+
+                    checksOK = (matched && lastUpdateDateCheck && titleCheck && uriCheck);
+                }
+                else
+                {
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("Check for {0}{1} is Match {2} \tTitle {3}\tLastUpdate {4}\turi {5}", item.title
+                                                                                                      , padding.Substring(0,50-item.title.Length)
+                                                                                                      , matched.ToString()
+                                                                                                      ,titleCheck
+                                                                                                      , lastUpdateDateCheck
+                                                                                                      , uriCheck);
+                if (!checksOK) totalFailed++;
+            }
+            Console.WriteLine("Total Checked: {0} Total Failed {1}", newList.Count, totalFailed);
+        }
+
+
         [Then(@"The output for each API matches for all job profiles")]
         public void ThenTheOutputForEachAPIMatchesForAllJobProfiles()
         {
@@ -55,12 +118,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 var responseTestData = RestHelper.Get(context.GetTaxonomyUri("JobProfileDetail",jobProfile.title),context.GetTaxonomyApiHeaders() );
 
                 // compare data
+                JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content));
+                //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
+                string output = diffs.ToString();
+                Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine(output);
 
             }
-
-
-
         }
+
+        [Given(@"I compare actor")]
+        public void GivenICompareActor()
+        {
+            var responseSourceData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/job-profiles/Actor", context.GetJobProfileApiHeaders());
+
+            var responseTestData = RestHelper.Get("https://dev.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
+
+            // compare data
+            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content));
+            //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
+            string output = diffs.ToString();
+            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine(output);
+        }
+
 
         public JObject FindDiff(JToken Current, JToken Model, string key = "")
         {

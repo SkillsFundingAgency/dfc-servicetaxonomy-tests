@@ -80,16 +80,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
  testRunner.Given("I supply the parameter \"minumMatchingSkills\" as a string with value \"123\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Value"});
-            table1.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "1232"});
-            table1.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "234"});
-            table1.AddRow(new string[] {
+            table5.AddRow(new string[] {
                         "234234"});
 #line 6
- testRunner.And("I supply the parameter \"skillList\" as a collection with values", ((string)(null)), table1, "And ");
+ testRunner.And("I supply the parameter \"skillList\" as a collection with values", ((string)(null)), table5, "And ");
 #line 11
  testRunner.When("I request occupations with matching skills", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
@@ -97,23 +97,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
  testRunner.And("the response matches the expected format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "skill",
                         "uri",
                         "type",
                         "reuselevel"});
-            table2.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
-            table2.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "123",
                         "12",
                         "123",
                         "12312"});
 #line 14
- testRunner.And("the results include", ((string)(null)), table2, "And ");
+ testRunner.And("the results include", ((string)(null)), table6, "And ");
 #line 18
  testRunner.And("the number of results is 43", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden

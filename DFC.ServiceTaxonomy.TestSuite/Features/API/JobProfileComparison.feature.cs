@@ -89,15 +89,47 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile summary API")]
+        public virtual void CompareOutputFromCurrentAndNewJobProfileSummaryAPI()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, ((string[])(null)));
+#line 12
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 13
+ testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 14
+ testRunner.And("I have got a list of all available job profile from the new API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+    testRunner.Then("The existing and new job profile summaries are comparable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Job Profile ACTOR is compared in old and new API")]
+        public virtual void JobProfileACTORIsComparedInOldAndNewAPI()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Job Profile ACTOR is compared in old and new API", null, ((string[])(null)));
+#line 18
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 19
+    testRunner.Given("I compare actor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Check mocked response against api")]
         public virtual void CheckMockedResponseAgainstApi()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, ((string[])(null)));
-#line 13
+#line 21
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 15
+#line 23
 testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
                     "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
                     "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +

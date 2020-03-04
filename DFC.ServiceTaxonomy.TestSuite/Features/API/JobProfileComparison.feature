@@ -9,6 +9,14 @@ Scenario: Compare output from current and new job profile API
 	Then The output for each API matches for all job profiles
 
 
+Scenario: Compare output from current and new job profile summary API
+	Given I have got a list of all available job profile from the existing API
+	And I have got a list of all available job profile from the new API
+    Then The existing and new job profile summaries are comparable
+
+
+Scenario: Job Profile ACTOR is compared in old and new API
+    Given I compare actor
 
 Scenario:  Check mocked response against api
 
