@@ -439,6 +439,71 @@ Given I make a request to the service taxonomy API "getskillsbylabelsearch" with
 
 
 
+    
+Scenario: Alt label value is supplied as parameter
+
+Given I want to supply "?matchAltLabels=true" as a parameter in the following request
+Given I make a request to the service taxonomy API "getskillsbylabelsearch" with request body
+# includes all skill resablity examples, competncy and knowledge, skill match, alt label match
+    """
+{
+  "label": "cocktail"
+}
+    """
+	Then the response code is 200
+    And the response json matches:
+"""
+{
+    "skills": [
+        {
+            "skillType": "competency",
+            "skill": "prepare mixed beverages",
+            "lastModified": "2016-09-15T10:50:50Z",
+            "alternativeLabels": [
+                "serve cocktails",
+                "mix and serve alcoholic and non-alcoholic beverages",
+                "prepare a mix of beverages"
+            ],
+            "uri": "http://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199",
+            "matches": {
+                "hiddenLabels": [],
+                "skill": [],
+                "alternativeLabels": [
+                    "serve cocktails"
+                ]
+            },
+            "skillReusability": "sector-specific"
+        },
+        {
+            "skillType": "competency",
+            "skill": "assemble cocktail garnishes",
+            "lastModified": "2016-09-15T10:55:54Z",
+            "alternativeLabels": [
+                "choose various items to present cocktails",
+                "use different items to decorate cocktails",
+                "assemble garnish for cocktails",
+                "assemble garnishing for cocktails"
+            ],
+            "uri": "http://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3",
+            "matches": {
+                "hiddenLabels": [],
+                "skill": [
+                    "assemble cocktail garnishes"
+                ],
+                "alternativeLabels": [
+                    "choose various items to present cocktails",
+                    "use different items to decorate cocktails",
+                    "assemble garnish for cocktails",
+                    "assemble garnishing for cocktails"
+                ]
+            },
+            "skillReusability": "sector-specific"
+        }
+    ]
+}
+"""
+
+
 
 
 @GetSkillsGapOforOccupationAndGivenSkills

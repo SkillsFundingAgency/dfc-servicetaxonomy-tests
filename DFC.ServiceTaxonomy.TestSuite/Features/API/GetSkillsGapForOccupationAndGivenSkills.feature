@@ -6,15 +6,10 @@ Scenario: Occupation is supplied with a skill list which has some commonality
 	Given I make a request to the service taxonomy API "getskillsgapforoccupationandgivenskills" with request body
 """
 {
-  "occupation": "http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c",
-  "skillList": [
-    "http://data.europa.eu/esco/skill/0058526a-11e9-40a1-ab33-7c5ffdf5da05",
-	"http://data.europa.eu/esco/skill/e3fcd642-5f9c-48ee-be58-258dd895d281",
-	"http://data.europa.eu/esco/skill/7a34b3d9-bd3b-4f4e-a0f6-f97439901cb7",
-	"http://data.europa.eu/esco/skill/23cb29ec-5738-4966-8453-09952ed8c1fc",
-	"http://data.europa.eu/esco/skill/e3fcd642-5f9c-48ee-be58-258dd895d281"
-  ]
+  "label": "torch",
+  "matchAltLabels": "true"
 }
+
 """
 	Then the response code is 200
 	And the response json with elements "missingSkills" and "matchingSkills" removed matches:

@@ -87,12 +87,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 11
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title"});
-            table27.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "My new activity"});
 #line 12
- testRunner.And("I Enter the following form data", ((string)(null)), table27, "And ");
+ testRunner.And("I Enter the following form data", ((string)(null)), table31, "And ");
 #line 15
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
@@ -106,12 +106,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title"});
-            table28.AddRow(new string[] {
+            table32.AddRow(new string[] {
                         "New activity title"});
 #line 23
- testRunner.And("I Enter the following form data", ((string)(null)), table28, "And ");
+ testRunner.And("I Enter the following form data", ((string)(null)), table32, "And ");
 #line 26
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 27

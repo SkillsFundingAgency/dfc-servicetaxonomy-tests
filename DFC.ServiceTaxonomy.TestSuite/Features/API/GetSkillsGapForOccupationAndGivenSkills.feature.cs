@@ -411,12 +411,12 @@ this.ScenarioInitialize(scenarioInfo);
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
 #line 301
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\"", ((string)(null)), table23, "Given ");
+                    "ills\"", ((string)(null)), table27, "Given ");
 #line 303
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 304
@@ -436,15 +436,15 @@ this.ScenarioInitialize(scenarioInfo);
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table24.AddRow(new string[] {
+            table28.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 309
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\"", ((string)(null)), table24, "Given ");
+                    "ills\"", ((string)(null)), table28, "Given ");
 #line 312
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 313
@@ -466,15 +466,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 319
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table25.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 320
  testRunner.And("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\"", ((string)(null)), table25, "And ");
+                    "ills\"", ((string)(null)), table29, "And ");
 #line 323
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -498,15 +498,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 335
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table26.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 336
  testRunner.And("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\"", ((string)(null)), table26, "And ");
+                    "ills\"", ((string)(null)), table30, "And ");
 #line 339
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

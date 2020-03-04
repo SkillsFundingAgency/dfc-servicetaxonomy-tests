@@ -141,18 +141,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context["securityHeader"] = new Dictionary<string, string>() ;
         }
 
+        [Given(@"I want to supply ""(.*)"" as a parameter in the following request")]
+        public void GivenIWantToSupplyAsAParameterInTheFollowingRequest(string p0)
+        {
+            context["requestParam"] = p0;
+        }
 
 
         [Given(@"I make a request to the service taxonomy API ""(.*)""")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
         {
             string requestBody = "{}";
+            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
             var requestItems = ToDictionary(table);
             foreach ( var item in requestItems )
             {
                requestBody = JsonHelper.AddPropertyToJsonString(requestBody, item.Key, item.Value);
             }
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0), requestBody, ( context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders() ) );
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, ( context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders() ) );
             //response.StatusCode.Should().Be(HttpStatusCode.OK);
             context["responseStatus"] = response.StatusCode;
             context["responseBody"] = response.Content;
@@ -161,7 +167,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I make a request to the service taxonomy API ""(.*)"" with request body")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPIWithRequestBody(string p0, string multilineText)
         {
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0), multilineText, (context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders()));
+            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, (context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders()));
             //response.StatusCode.Should().Be(HttpStatusCode.OK);
             context["responseStatus"] = response.StatusCode;
             context["responseBody"] = response.Content;

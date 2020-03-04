@@ -390,24 +390,69 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Alt label value is supplied as parameter")]
+        public virtual void AltLabelValueIsSuppliedAsParameter()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label value is supplied as parameter", null, ((string[])(null)));
+#line 443
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 445
+testRunner.Given("I want to supply \"?matchAltLabels=true\" as a parameter in the following request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 446
+testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
+                    "t body", "{\r\n\"label\": \"cocktail\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 453
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 454
+    testRunner.And("the response json matches:", "{\r\n    \"skills\": [\r\n        {\r\n            \"skillType\": \"competency\",\r\n          " +
+                    "  \"skill\": \"prepare mixed beverages\",\r\n            \"lastModified\": \"2016-09-15T1" +
+                    "0:50:50Z\",\r\n            \"alternativeLabels\": [\r\n                \"serve cocktails" +
+                    "\",\r\n                \"mix and serve alcoholic and non-alcoholic beverages\",\r\n    " +
+                    "            \"prepare a mix of beverages\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "],\r\n                \"alternativeLabels\": [\r\n                    \"serve cocktails" +
+                    "\"\r\n                ]\r\n            },\r\n            \"skillReusability\": \"sector-sp" +
+                    "ecific\"\r\n        },\r\n        {\r\n            \"skillType\": \"competency\",\r\n        " +
+                    "    \"skill\": \"assemble cocktail garnishes\",\r\n            \"lastModified\": \"2016-0" +
+                    "9-15T10:55:54Z\",\r\n            \"alternativeLabels\": [\r\n                \"choose va" +
+                    "rious items to present cocktails\",\r\n                \"use different items to deco" +
+                    "rate cocktails\",\r\n                \"assemble garnish for cocktails\",\r\n           " +
+                    "     \"assemble garnishing for cocktails\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "\r\n                    \"assemble cocktail garnishes\"\r\n                ],\r\n       " +
+                    "         \"alternativeLabels\": [\r\n                    \"choose various items to pr" +
+                    "esent cocktails\",\r\n                    \"use different items to decorate cocktail" +
+                    "s\",\r\n                    \"assemble garnish for cocktails\",\r\n                    " +
+                    "\"assemble garnishing for cocktails\"\r\n                ]\r\n            },\r\n        " +
+                    "    \"skillReusability\": \"sector-specific\"\r\n        }\r\n    ]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("No body is supplied")]
         [NUnit.Framework.CategoryAttribute("GetSkillsGapOforOccupationAndGivenSkills")]
         public virtual void NoBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No body is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 445
+#line 510
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-#line 446
- testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table12, "Given ");
-#line 448
+#line 511
+ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table16, "Given ");
+#line 513
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 449
+#line 514
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -420,21 +465,21 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid body is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 453
+#line 518
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table13.AddRow(new string[] {
+            table17.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 454
- testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table13, "Given ");
-#line 457
+#line 519
+ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table17, "Given ");
+#line 522
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 458
+#line 523
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -447,24 +492,24 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 463
+#line 528
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 464
+#line 529
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table14.AddRow(new string[] {
+            table18.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 465
- testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table14, "And ");
-#line 468
+#line 530
+ testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table18, "And ");
+#line 533
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 469
+#line 534
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to invalid subscrip" +
                     "tion key. Make sure to provide a valid key for an active subscription.\"\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -478,24 +523,24 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 479
+#line 544
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 480
+#line 545
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-            table15.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 481
- testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table15, "And ");
-#line 484
+#line 546
+ testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table19, "And ");
+#line 549
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 485
+#line 550
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to missing subscrip" +
                     "tion key. Make sure to include subscription key when making requests to an API.\"" +
                     "\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
