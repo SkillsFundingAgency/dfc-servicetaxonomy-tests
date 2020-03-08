@@ -80,6 +80,30 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return resultsList;
         }
 
+        public IList<Object> GetResultsList(Type type, string queryText, Dictionary<string, object> queryParameters) 
+        {
+            IList<Object> resultsList = new List<Object>();
+            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+
+            foreach (IRecord record in result)
+            {
+                object newItem = Activator.CreateInstance(type);
+                PropertyInfo[] properties = type.GetProperties();
+                foreach (PropertyInfo property in properties)
+                {
+                    string value;
+                    try
+                    {
+                        value = record.Values[property.Name].ToString();
+                        property.SetValue(newItem, value);
+                    }
+                    catch { }
+                }
+                resultsList.Add(newItem);
+            }
+            return resultsList;
+        }
+
 
     }
 }
