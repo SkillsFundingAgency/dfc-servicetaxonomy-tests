@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -106,58 +106,337 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"The output for each API matches for all job profiles")]
         public void ThenTheOutputForEachAPIMatchesForAllJobProfiles()
         {
-            List<JobProfileSummary> allJobProfiles = (List<JobProfileSummary>)context["AllJobProfiles"];
+            //List<JobProfileSummary> allJobProfiles = (List<JobProfileSummary>)context["AllJobProfiles"];
 
+            List<JobProfileSummary> allJobProfiles = new List<JobProfileSummary>();
+
+            JobProfileSummary jps = new JobProfileSummary();
+
+            jps = new JobProfileSummary();  jps.title ="admin-assistant"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "admin-assistant"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "border-force-officer"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "cabin-crew"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "care-worker"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "construction-labourer"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "electrician"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "emergency-medical-dispatcher"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "farmer"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "mp"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "personal-assistant"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "plumber"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "police-officer"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "postman-or-postwoman"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "primary-school-teacher"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "sales-assistant"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "social-worker"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "train-driver"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "waiter"; allJobProfiles.Add(jps);
+
+            List<Dictionary<String, String>> allDicts = new List<Dictionary<String, String>>();
+            List<Dictionary<String, String>> allNewDicts = new List<Dictionary<String, String>>();
+            Dictionary<String, String> longestList = new Dictionary<string, string>();
+            
+
+            int max = 2000;
+            int count = 0;
             foreach ( var jobProfile in allJobProfiles)
             {
+                Dictionary<string, String> structure = new Dictionary<string, string>();
+                Dictionary<string, String> newStructure = new Dictionary<string, string>();
                 //  get source job profile data
 
-                var responseSourceData = RestHelper.Get(jobProfile.url, context.GetJobProfileApiHeaders());
+                var responseSourceData = RestHelper.Get("https://pp.api.nationalcareers.service.gov.uk/job-profiles/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
 
                 //  get test subject job profile data
-                var responseTestData = RestHelper.Get(context.GetTaxonomyUri("JobProfileDetail",jobProfile.title),context.GetTaxonomyApiHeaders() );
+                string unslug = char.ToUpper(jobProfile.title[0])  +  jobProfile.title.Replace("-"," ").Substring(1);
+                if (unslug == "Mp") unslug = "MP";
+                if (unslug == "Border force officer") unslug = "Border Force officer";
+                
+                var responseTestData = RestHelper.Get(context.GetTaxonomyUri("JobProfileDetail", unslug),context.GetTaxonomyApiHeaders() );
 
-                // compare data
-                JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content));
-                //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
-                string output = diffs.ToString();
-                Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-                Console.WriteLine(output);
+                structure.Add("JobProfile", jobProfile.title);// url.Substring(jobProfile.url.LastIndexOf('/')));
+                newStructure.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
 
+                if (responseTestData.StatusCode == HttpStatusCode.OK)
+                    {
+                        // compare data
+                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), structure, newStructure);
+                        //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
+              //          string output = diffs.ToString();
+              //         Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+              //          Console.WriteLine(output);
+                    }
+
+                if (structure.Count > longestList.Count)
+                {
+                    longestList = structure;
+                }
+
+                allDicts.Add(structure);
+                allNewDicts.Add(newStructure);
+                count++;
+                if (count > max) break;
             }
+
+            foreach ( var kv in allDicts[0])
+            {
+                Console.Write(kv.Key +", STAX,");
+            }
+            Console.WriteLine();
+            foreach (var item in allDicts)
+            {
+                Dictionary<String, String> newItem = new Dictionary<string, string>();
+                foreach ( var dict in allNewDicts)
+                {
+                    if (dict["JobProfile"] == item["JobProfile"])
+                    {
+                        newItem = dict;
+                        break;
+                    }
+                }
+                foreach (var kv in longestList)
+                {
+                    Console.Write( (item.ContainsKey(kv.Key) ? item[kv.Key] : "NOVALUE") + ",");
+                    Console.Write( (newItem.ContainsKey(kv.Key) ? newItem[kv.Key] : "NOVALUE") + ",");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+
+            Console.Write("FieldName,");
+            foreach (var dict in allDicts)
+            {
+                string jp = dict["JobProfile"];
+                Console.Write(jp + ",Stax Api,");
+            }
+            Console.WriteLine();
+            foreach ( var item in longestList.Where( item => item.Key != "JobProfile") )
+            {
+                Console.Write(item.Key + ",");
+                foreach ( var dict in allDicts)
+                {
+                    Dictionary<String, String> newItem = new Dictionary<string, string>();
+                    foreach (var newDict in allNewDicts)
+                    {
+                        if (dict["JobProfile"] == newDict["JobProfile"])
+                        {
+                            newItem = newDict;
+                            break;
+                        }
+                    }
+                    foreach ( var newDict in allNewDicts)
+                    {
+
+                    }
+                    string jp = dict["JobProfile"];
+                    Console.Write( ( dict.ContainsKey(item.Key)? dict[item.Key] : "N/A") + ",");
+                    Console.Write((newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A") + ",");
+                }
+                Console.WriteLine();
+            }
+
+
+
         }
 
         [Given(@"I compare actor")]
         public void GivenICompareActor()
         {
-            var responseSourceData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/job-profiles/Actor", context.GetJobProfileApiHeaders());
 
-            var responseTestData = RestHelper.Get("https://dev.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
+            string url = "https://pp.api.nationalcareers.service.gov.uk/job-profiles/actor";
+            string sitUrl = "https://sit.api.nationalcareersservice.org.uk/job-profiles/Actor";
+            var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
+            Dictionary<string, String> structure = new Dictionary<string, string>();
+            Dictionary<string, String> newStructure = new Dictionary<string, string>();
+            var responseTestData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
-            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content));
+            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content),structure,newStructure);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine(output);
+            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
+            foreach ( var item in structure)
+            {
+                Console.WriteLine(item.Key + "," + item.Value);
+            }
         }
 
 
-        public JObject FindDiff(JToken Current, JToken Model, string key = "")
+        private JToken ReplaceTags( JToken source) 
+        {
+            bool success = true;
+            string replacedValue = "";
+            string newLinkText = "";
+            string PATTERN = @"(<a.*?>.*?</a>)";
+            string href = "";
+
+            try
+            {
+                replacedValue = source.Value<string>();
+                replacedValue = replacedValue.Replace("<p>", "");
+                replacedValue = replacedValue.Replace("</p>", "");
+                replacedValue = replacedValue.Replace("<ul>", "");
+                replacedValue = replacedValue.Replace("<li>", "");
+                replacedValue = replacedValue.Replace("</li></ul>", "");
+                replacedValue = replacedValue.Replace("</li>", "; ");
+                MatchCollection collection = Regex.Matches(replacedValue, PATTERN, RegexOptions.Singleline);
+
+                foreach (Match match in collection)
+                {
+                    string a = match.Groups[1].Value;
+                    Match m2 = Regex.Match(a, @"href=\""(.*?)\""", RegexOptions.Singleline);
+                    if (m2.Success)
+                    {
+                        href = m2.Groups[1].Value; //= http://www.microsoft.com
+                    }
+
+                    string linkText = Regex.Replace(a, @"\s*<.*?>\s*", "", RegexOptions.Singleline); //= Microsoft
+
+                    newLinkText = "[" + linkText + " | " + href + "]";
+                    replacedValue = replacedValue.Replace(a, newLinkText);
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+            return ( success ? (JToken)replacedValue : source );
+        }
+
+        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, string key = "", string path = "")
         {
             var diff = new JObject();
-
+            JArray newModel = new JArray();
             // exception handling
+
+            switch (Current.Type)
+            {
+                case JTokenType.Array:
+                    var current = Current as JArray;
+
+                    structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
+                    //structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
+
+                    if (Model != null)
+                    {
+                        if (Model.Type == JTokenType.Array)
+                        {
+                            var model = Model as JArray;
+                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + model.Count + "]");
+                        }
+                        else
+                        {
+                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : "")));
+                        }
+                    }
+                    else
+                    {
+                        modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "MISSING");
+                    }
+
+
+
+
+                    break;
+                case JTokenType.Object:
+                    break;
+                default:
+                    structure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Current.ToString().Length == 0 ? "_EMPTY" : ""));
+                    if (Model != null)
+                    {
+                        if (Model.Type == JTokenType.Array)
+                        {
+                            var model = Model as JArray;
+                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + model.Count + "]");
+                        }
+                        else
+                        {
+                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : "")));
+                        }
+                    }
+                    else
+                    {
+                        modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "MISSING");
+                    }
+                    break;
+
+            }
             switch (key)
             {
-                case "AlternativeLabel":
+                // SIMPLE SKIPS
+       //         case "AlternativeTitle":
+                case "LastUpdatedDate":
+       //         case "ONetOccupationalCode":
+                case "Skills":
+                case "Url":
+                    return diff;
+
+                // SINGLE VALUE REPLACEMENTS
+                case "DigitalSkillsLevel":
+                case "Overview":
+                case "EntryRequirementPreface":
+                case "Location":
+                case "Environment":
+                    JToken newToken = ReplaceTags(Model);
+                    diff["REPLACETAGSTEXT"] = newToken; 
+                    Model = newToken;
                     break;
+
+                // ARRAY REPLACEMENTS
+                case "ProfessionalAndIndustryBodies":
+                case "CareerTips":
+                case "FurtherInformation":
+                case "AdditionalInformation":
+
+                case "EntryRequirements":
+                case "RelevantSubjects":
+ //               case "Volunteering":
+                case "DirectApplication":
+ //               case "OtherRoutes":
+
+                    if (key == "RelevantSubjects")
+                    {
+                        Console.WriteLine("");
+
+                    }
+                    foreach (var item in Model)
+                    {
+                        newModel.Add(ReplaceTags(item));
+                    }
+                    diff["REPLACETAGSARRAY"] = newModel;
+                    Model = newModel;
+                    break;
+
+                case "CareerPathAndProgression":
+                case "Volunteering":
+                case "OtherRoutes":
+                    if (Current.Type == JTokenType.Array)
+                    {
+                        JArray newCurrent = new JArray();
+                        string singleItem = "";
+                        foreach ( var item in Current)
+                        {
+                            singleItem += item.ToString();
+                        }
+                        newCurrent.Add((JToken)singleItem);
+                        diff["SINGLEARRAYITEM"] = newCurrent;
+                        Current = newCurrent;
+                        foreach (var item in Model)
+                        {
+                            newModel.Add(ReplaceTags(item));
+                        }
+                        diff["REPLACETAGSARRAY"] = newModel;
+                        Model = newModel;
+                    }
+                    break;
+
                 default:
                     break;
             }
 
-
-
+ 
             if (JToken.DeepEquals(Current, Model)) return diff;
             switch (Current.Type)
             {
@@ -182,10 +461,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                 ["-"] = Model[k]
                             };
                         }
-                        var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys).Except(unchangedKeys);
+                        var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys);//.Except(unchangedKeys);
                         foreach (var k in potentiallyModifiedKeys)
                         {
-                            diff[k] = FindDiff(current[k], model[k], k);
+                            diff[k] = FindDiff(current[k], model[k], structure,  modelStructure, k, path + (path.Length > 0?".":"") + k);
                         }
                     }
                     break;
@@ -193,6 +472,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         var current = Current as JArray;
                         var model = Model as JArray;
+                        //structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
                         if (model != null)
                         {
                             diff["+"] = new JArray(current.Except(model));
@@ -206,6 +486,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     }
                     break;
                 default:
+                    //  var parentProperty = Current.Ancestors<JProperty>()
+                    //        .FirstOrDefault();
+
+                    // alternatively, if you know it'll be a property:
+                    //structure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING_" + Current.ToString().Length);
+                    var parentProperty2 = ((JProperty)Current.Parent);
+
+
                     diff["+"] = Current;
                     diff["-"] = Model;
                     break;
@@ -221,13 +509,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var responseSourceData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/job-profiles/bottler", context.GetJobProfileApiHeaders());
 
             var responseTestData = multilineText;
-
+            Dictionary<string, String> structure = new Dictionary<string, string>();
+            Dictionary<string, String> newStructure = new Dictionary<string, string>();
             var tempString = "{  \"SalaryStarter\": \"13500\", \"SalaryExperienced\": \"24000\", \"LastUpdatedDate\": \"ToDo\", \"MinimumHours\": 41.0, \"RelatedCareers\": [ \"ToDo\" ], \"Soc\": \"9134\", \"Title\": \"Bottler\", \"Overview\":\"<p>Bottlers fill, pack and operate bottling machinery in food, drink and bottling factories.</p>\", \"WorkingPattern\": \"evenings / weekends\", \"AlternativeTitle\": \"canning and bottling operative, canningoperative, canning and bottling worker, canner\", \"WorkingHoursDetails\": \"a week\", \"Url\": \"https://pp.api.nationalcareers.service.gov.uk/job-profiles/bottler\", \"WhatYouWillDo\": { \"WYDDayToDayTasks\": [ \"<p>keeping machinery clean and sterile, to meet high standards of food safety</p>\", \"<p>setting up machines and starting the bottling process</p>\", \"<p>making sure bottles or jars are correctly filled andlabelled</p>\", \"<p>reporting more serious machinery problems to your line manager or a technician</p>\", \"<p>sorting out any problems with the production line so bottling is not held up</p>\" ], \"WorkingEnvironment\": { \"Environment\": \"<p>Your working environment may be noisy.</p>\", \"Uniform\": \"\", \"Location\": \"<p>You could work in a factory.</p>\" } }, \"ONetOccupationalCode\": \"ToDo\", \"MaximumHours\": 43.0, \"WhatItTakes\": { \"Skills\": [ \"ToDo\" ], \"DigitalSkillsLevel\": \"<p>to be able to carry out basic tasks on a computer or hand-held device</p>\" }, \"CareerPathAndProgression\": { \"CareerPathAndProgression\": [ \"<p>With experience, you could progress to team supervisor or manager.</p>\" ] }, \"WorkingPatternDetails\": \"on shifts\", \"HowToBecome\": { \"EntryRoutes\": { \"University\": { \"AdditionalInformation\": [ \"ToDo\" ], \"EntryRequirements\": [ \"ToDo\",\"flippy\" ], \"RelevantSubjects\": [ \"ToDo\" ], \"FurtherInformation\": [ \"ToDo\" ], \"EntryRequirementPreface\": [ \"ToDo\" ] } }, \"EntryRouteSummary\": \"ToDo\", \"MoreInformation\": { \"Registration\": [ \"ToDo\" ], \"FurtherInformation\": [ \"\" ], \"ProfessionalAndIndustryBodies\": [ \"\" ], \"CareerTips\": [ \"\" ] } }}";
             dynamic sourceObject = JsonConvert.DeserializeObject(responseSourceData.Content);
 
             //exploreObject(sourceObject, 0, "TOP");
 
-            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString));
+            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), structure, newStructure);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
