@@ -7,6 +7,7 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -80,6 +81,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     [Binding]
     public sealed class JobProfileComparisonSteps
     {
+
+        public class CustomTableStyle
+        {
+            public CustomTableStylePosition CustomTableStylePosition { get; set; }
+
+            public List<string> ClassNameList { get; set; }
+            public Dictionary<string, string> InlineStyleValueList { get; set; }
+        }
+
+        public enum CustomTableStylePosition
+        {
+            Table,
+            Tr,
+            Th,
+            Td,
+            TdGood
+        }
+
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext context;
@@ -173,7 +192,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             JobProfileSummary jps = new JobProfileSummary();
 
-            jps = new JobProfileSummary();  jps.title ="admin-assistant"; allJobProfiles.Add(jps);
+           // jps = new JobProfileSummary();  jps.title ="admin-assistant"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "admin-assistant"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "border-force-officer"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "cabin-crew"; allJobProfiles.Add(jps);
@@ -196,8 +215,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             List<Dictionary<String, String>> allDicts = new List<Dictionary<String, String>>();
             List<Dictionary<String, String>> allNewDicts = new List<Dictionary<String, String>>();
             List<Dictionary<String, String>> allcheckStatusDicts = new List<Dictionary<String, String>>();
+            List<Dictionary<String, String>> allDetails = new List<Dictionary<String, String>>();
 
-           
+
             Dictionary<String, String> longestList = new Dictionary<string, string>();
             
 
@@ -208,6 +228,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Dictionary<string, String> structure = new Dictionary<string, string>();
                 Dictionary<string, String> newStructure = new Dictionary<string, string>();
                 Dictionary<string, String> checkStatus = new Dictionary<string, string>();
+                Dictionary<string, String> details = new Dictionary<string, string>();
                 //  get source job profile data
 
                 var responseSourceData = RestHelper.Get("https://pp.api.nationalcareers.service.gov.uk/job-profiles/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
@@ -222,11 +243,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 structure.Add("JobProfile", jobProfile.title);// url.Substring(jobProfile.url.LastIndexOf('/')));
                 newStructure.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
                 checkStatus.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
+                details.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
 
                 if (responseTestData.StatusCode == HttpStatusCode.OK)
                     {
                         // compare data
-                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), structure, newStructure, checkStatus);
+                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), structure, newStructure, checkStatus, details);
                         //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
               //          string output = diffs.ToString();
               //         Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -241,10 +263,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 allDicts.Add(structure);
                 allNewDicts.Add(newStructure);
                 allcheckStatusDicts. Add(checkStatus);
+                allDetails.Add(details);
                 count++;
                 if (count > max) break;
             }
 
+   
             foreach ( var kv in allDicts[0])
             {
                 Console.Write(kv.Key +", STAX,");
@@ -270,16 +294,56 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             Console.WriteLine("------------------------------------------------------------------------------------------");
 
+
+            var customTableStyles = new List<CustomTableStyle>
+            {
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"font-family", "Comic Sans MS" },{"font-size","15px"}}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"background-color", "white" }}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Tr, InlineStyleValueList =new Dictionary<string, string>{{"color","Blue"},{"font-size","10px"}}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Th,ClassNameList = new List<string>{"normal","underline"}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Th,InlineStyleValueList =new Dictionary<string, string>{{ "background-color", "gray"}}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Td, InlineStyleValueList  =new Dictionary<string, string>{{"color","black"},{"font-size","15px"}}},
+                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.TdGood, InlineStyleValueList  =new Dictionary<string, string>{{"color","green"},{"font-size","15px"}}},
+            };
+
+            var tableCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var trCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var thCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var tdCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+
+            var tableInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var trInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var thInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var tdInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var tdInlineCssGood = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.TdGood).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+
+
+            var sb = new StringBuilder();
+
+            sb.Append($"<table{(string.IsNullOrEmpty(tableCss) ? "" : $" class=\"{tableCss}\"")}{(string.IsNullOrEmpty(tableInlineCss) ? "" : $" style=\"{tableInlineCss}\"")}>");
+
+
+            sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
+
             Console.Write("FieldName,");
+            sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}FieldName</th>");
             foreach (var dict in allDicts)
             {
                 string jp = dict["JobProfile"];
                 Console.Write(jp + ",Stax Api,Status,");
+                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>{jp}</th>");
+                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>STax API</th>");
+                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>Status</th>");
             }
+            sb.Append("</tr>");
+
             Console.WriteLine();
             foreach ( var item in longestList.Where( item => item.Key != "JobProfile") )
             {
+                sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
+
                 Console.Write(item.Key + ",");
+                sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{item.Key}</td>");
                 foreach ( var dict in allDicts)
                 {
                     Dictionary<String, String> newItem = new Dictionary<string, string>();
@@ -300,16 +364,46 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             break;
                         }
                     }
-                    foreach ( var newDict in allNewDicts)
+                    Dictionary<String, String> newDetails = new Dictionary<string, string>();
+                    foreach ( var newDets in allDetails)
                     {
+                        if (dict["JobProfile"] == newDets["JobProfile"])
+                        {
+                            newDetails = newDets;
+                            break;
+                        }
 
                     }
                     string jp = dict["JobProfile"];
                     Console.Write( ( dict.ContainsKey(item.Key)? dict[item.Key] : "N/A") + ",");
                     Console.Write((newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A") + ",");
                     Console.Write((newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???") + ",");
+                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (dict.ContainsKey(item.Key) ? dict[item.Key] : "N/A")}</td>");
+                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")} Title=\"{(newDetails.ContainsKey(item.Key)? newDetails[item.Key].Replace("\"", "&quot;") :"")}\" {(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A")}</td>");
+                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{(newCheck.ContainsKey(item.Key) && newCheck[item.Key]=="Match"? tdInlineCssGood :  tdInlineCss)}\"")}>{ (newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???")}</td>");
+
                 }
+                sb.Append("</tr>");
                 Console.WriteLine();
+            }
+
+            sb.Append("</table>");
+
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine(sb);
+
+            string path = @"D:\wamp64\www\jobprofiles\comparison.html";
+
+            if (File.Exists(path))
+            {
+                File.Delete(@"D:\wamp64\www\jobprofiles\comparison.html");
+            }
+            // This text is added only once to the file.
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                string createText = "Hello and Welcome" + Environment.NewLine;
+                File.WriteAllText(path, sb.ToString()) ;
             }
 
 
@@ -326,10 +420,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Dictionary<string, String> structure = new Dictionary<string, string>();
             Dictionary<string, String> newStructure = new Dictionary<string, string>();
             Dictionary<string, String> checkStatus = new Dictionary<string, string>();
+            Dictionary<string, String> details = new Dictionary<string, string>();
             var responseTestData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
-            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content),structure,newStructure, checkStatus);
+            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content),structure,newStructure, checkStatus, details);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -388,12 +483,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return ( success ? (JToken)replacedValue : source );
         }
 
-        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, Dictionary<string, string> checkStatus,string key = "", string path = "")
+        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, Dictionary<string, string> checkStatus, Dictionary<string,string> details, string key = "", string path = "")
         {
             var diff = new JObject();
             JArray newModel = new JArray();
             bool replacementsMade = false;
+            string detailsString = "";
             // exception handling
+
+            detailsString = Current.ToString() + "\n\n-------vs--------\n\n" + (Model == null? " ... " :Model.ToString());
+            details.Add(path + (path.Length > 0 ? "." : "") + key, detailsString);
 
             switch (Current.Type)
             {
@@ -552,7 +651,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys);//.Except(unchangedKeys);
                         foreach (var k in potentiallyModifiedKeys)
                         {
-                            diff[k] = FindDiff(current[k], model[k], structure,  modelStructure, checkStatus, k, path + (path.Length > 0?".":"") + k);
+                            diff[k] = FindDiff(current[k], model[k], structure,  modelStructure, checkStatus, details, k, path + (path.Length > 0?".":"") + k);
                         }
                     }
                     break;
@@ -602,12 +701,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Dictionary<string, String> structure = new Dictionary<string, string>();
             Dictionary<string, String> newStructure = new Dictionary<string, string>();
             Dictionary<string, String> checkStatus = new Dictionary<string, string>();
+            Dictionary<string, String> details = new Dictionary<string, string>();
             var tempString = "{  \"SalaryStarter\": \"13500\", \"SalaryExperienced\": \"24000\", \"LastUpdatedDate\": \"ToDo\", \"MinimumHours\": 41.0, \"RelatedCareers\": [ \"ToDo\" ], \"Soc\": \"9134\", \"Title\": \"Bottler\", \"Overview\":\"<p>Bottlers fill, pack and operate bottling machinery in food, drink and bottling factories.</p>\", \"WorkingPattern\": \"evenings / weekends\", \"AlternativeTitle\": \"canning and bottling operative, canningoperative, canning and bottling worker, canner\", \"WorkingHoursDetails\": \"a week\", \"Url\": \"https://pp.api.nationalcareers.service.gov.uk/job-profiles/bottler\", \"WhatYouWillDo\": { \"WYDDayToDayTasks\": [ \"<p>keeping machinery clean and sterile, to meet high standards of food safety</p>\", \"<p>setting up machines and starting the bottling process</p>\", \"<p>making sure bottles or jars are correctly filled andlabelled</p>\", \"<p>reporting more serious machinery problems to your line manager or a technician</p>\", \"<p>sorting out any problems with the production line so bottling is not held up</p>\" ], \"WorkingEnvironment\": { \"Environment\": \"<p>Your working environment may be noisy.</p>\", \"Uniform\": \"\", \"Location\": \"<p>You could work in a factory.</p>\" } }, \"ONetOccupationalCode\": \"ToDo\", \"MaximumHours\": 43.0, \"WhatItTakes\": { \"Skills\": [ \"ToDo\" ], \"DigitalSkillsLevel\": \"<p>to be able to carry out basic tasks on a computer or hand-held device</p>\" }, \"CareerPathAndProgression\": { \"CareerPathAndProgression\": [ \"<p>With experience, you could progress to team supervisor or manager.</p>\" ] }, \"WorkingPatternDetails\": \"on shifts\", \"HowToBecome\": { \"EntryRoutes\": { \"University\": { \"AdditionalInformation\": [ \"ToDo\" ], \"EntryRequirements\": [ \"ToDo\",\"flippy\" ], \"RelevantSubjects\": [ \"ToDo\" ], \"FurtherInformation\": [ \"ToDo\" ], \"EntryRequirementPreface\": [ \"ToDo\" ] } }, \"EntryRouteSummary\": \"ToDo\", \"MoreInformation\": { \"Registration\": [ \"ToDo\" ], \"FurtherInformation\": [ \"\" ], \"ProfessionalAndIndustryBodies\": [ \"\" ], \"CareerTips\": [ \"\" ] } }}";
             dynamic sourceObject = JsonConvert.DeserializeObject(responseSourceData.Content);
 
             //exploreObject(sourceObject, 0, "TOP");
 
-            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), structure, newStructure, checkStatus);
+            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), structure, newStructure, checkStatus, details);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -657,7 +757,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     public class CompairisonItem
     {
         public string Name { get; set; }
-        public string 
         public string Lastname { get; set; }
         public string Other { get; set; }
     }
