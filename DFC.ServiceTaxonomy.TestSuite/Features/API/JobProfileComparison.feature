@@ -18,6 +18,9 @@ Scenario: Compare output from current and new job profile summary API
 Scenario: Job Profile ACTOR is compared in old and new API
     Given I compare actor
 
+    Scenario: htmloutputtest
+    Given htmloutputtest
+
 Scenario:  Check mocked response against api
 
 Given mock test step
