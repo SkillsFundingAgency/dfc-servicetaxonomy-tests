@@ -121,15 +121,29 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("htmloutputtest")]
+        public virtual void Htmloutputtest()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("htmloutputtest", null, ((string[])(null)));
+#line 21
+    this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 22
+    testRunner.Given("htmloutputtest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Check mocked response against api")]
         public virtual void CheckMockedResponseAgainstApi()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, ((string[])(null)));
-#line 21
+#line 24
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 23
+#line 26
 testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
                     "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
                     "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +

@@ -11,11 +11,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Text;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
+
+    public static class EnumerableExtension
+    {
+        public static string ToHtmlTable<T>(this IEnumerable<T> list, List<string> headerList, List<CustomTableStyle> customTableStyles, params Func<T, object>[] columns)
+        {
+            if (customTableStyles == null)
+                customTableStyles = new List<CustomTableStyle>();
+
+            var tableCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var trCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var thCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+            var tdCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
+
+            var tableInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var trInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var thInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+            var tdInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
+
+            var sb = new StringBuilder();
+
+            sb.Append($"<table{(string.IsNullOrEmpty(tableCss) ? "" : $" class=\"{tableCss}\"")}{(string.IsNullOrEmpty(tableInlineCss) ? "" : $" style=\"{tableInlineCss}\"")}>");
+            if (headerList != null)
+            {
+                sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
+                foreach (var header in headerList)
+                {
+                    sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>{header}</th>");
+                }
+                sb.Append("</tr>");
+            }
+            foreach (var item in list)
+            {
+                sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
+                foreach (var column in columns)
+                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{column(item)}</td>");
+                sb.Append("</tr>");
+            }
+
+            sb.Append("</table>");
+
+            return sb.ToString();
+        }
+
+        public class CustomTableStyle
+        {
+            public CustomTableStylePosition CustomTableStylePosition { get; set; }
+
+            public List<string> ClassNameList { get; set; }
+            public Dictionary<string, string> InlineStyleValueList { get; set; }
+        }
+
+        public enum CustomTableStylePosition
+        {
+            Table,
+            Tr,
+            Th,
+            Td
+        }
+    }
+
     [Binding]
     public sealed class JobProfileComparisonSteps
     {
@@ -134,6 +195,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             List<Dictionary<String, String>> allDicts = new List<Dictionary<String, String>>();
             List<Dictionary<String, String>> allNewDicts = new List<Dictionary<String, String>>();
+            List<Dictionary<String, String>> allcheckStatusDicts = new List<Dictionary<String, String>>();
+
+           
             Dictionary<String, String> longestList = new Dictionary<string, string>();
             
 
@@ -143,6 +207,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 Dictionary<string, String> structure = new Dictionary<string, string>();
                 Dictionary<string, String> newStructure = new Dictionary<string, string>();
+                Dictionary<string, String> checkStatus = new Dictionary<string, string>();
                 //  get source job profile data
 
                 var responseSourceData = RestHelper.Get("https://pp.api.nationalcareers.service.gov.uk/job-profiles/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
@@ -156,11 +221,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
                 structure.Add("JobProfile", jobProfile.title);// url.Substring(jobProfile.url.LastIndexOf('/')));
                 newStructure.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
+                checkStatus.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
 
                 if (responseTestData.StatusCode == HttpStatusCode.OK)
                     {
                         // compare data
-                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), structure, newStructure);
+                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), structure, newStructure, checkStatus);
                         //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
               //          string output = diffs.ToString();
               //         Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -174,6 +240,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
                 allDicts.Add(structure);
                 allNewDicts.Add(newStructure);
+                allcheckStatusDicts. Add(checkStatus);
                 count++;
                 if (count > max) break;
             }
@@ -207,7 +274,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             foreach (var dict in allDicts)
             {
                 string jp = dict["JobProfile"];
-                Console.Write(jp + ",Stax Api,");
+                Console.Write(jp + ",Stax Api,Status,");
             }
             Console.WriteLine();
             foreach ( var item in longestList.Where( item => item.Key != "JobProfile") )
@@ -224,6 +291,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             break;
                         }
                     }
+                    Dictionary<String, String> newCheck = new Dictionary<string, string>();
+                    foreach (var newDict in allcheckStatusDicts)
+                    {
+                        if (dict["JobProfile"] == newDict["JobProfile"])
+                        {
+                            newCheck = newDict;
+                            break;
+                        }
+                    }
                     foreach ( var newDict in allNewDicts)
                     {
 
@@ -231,6 +307,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     string jp = dict["JobProfile"];
                     Console.Write( ( dict.ContainsKey(item.Key)? dict[item.Key] : "N/A") + ",");
                     Console.Write((newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A") + ",");
+                    Console.Write((newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???") + ",");
                 }
                 Console.WriteLine();
             }
@@ -248,10 +325,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
             Dictionary<string, String> structure = new Dictionary<string, string>();
             Dictionary<string, String> newStructure = new Dictionary<string, string>();
+            Dictionary<string, String> checkStatus = new Dictionary<string, string>();
             var responseTestData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
-            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content),structure,newStructure);
+            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content),structure,newStructure, checkStatus);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -264,27 +342,32 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
 
-        private JToken ReplaceTags( JToken source) 
+        private JToken ReplaceTags( JToken source, out bool replacementsMade) 
         {
             bool success = true;
             string replacedValue = "";
+            string checkValue;
             string newLinkText = "";
             string PATTERN = @"(<a.*?>.*?</a>)";
             string href = "";
+            replacementsMade = false;
 
             try
             {
                 replacedValue = source.Value<string>();
+                checkValue = replacedValue;
                 replacedValue = replacedValue.Replace("<p>", "");
                 replacedValue = replacedValue.Replace("</p>", "");
                 replacedValue = replacedValue.Replace("<ul>", "");
                 replacedValue = replacedValue.Replace("<li>", "");
                 replacedValue = replacedValue.Replace("</li></ul>", "");
                 replacedValue = replacedValue.Replace("</li>", "; ");
+                replacementsMade = (checkValue != replacedValue);
                 MatchCollection collection = Regex.Matches(replacedValue, PATTERN, RegexOptions.Singleline);
 
                 foreach (Match match in collection)
                 {
+                    replacementsMade = true;
                     string a = match.Groups[1].Value;
                     Match m2 = Regex.Match(a, @"href=\""(.*?)\""", RegexOptions.Singleline);
                     if (m2.Success)
@@ -305,10 +388,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return ( success ? (JToken)replacedValue : source );
         }
 
-        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, string key = "", string path = "")
+        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, Dictionary<string, string> checkStatus,string key = "", string path = "")
         {
             var diff = new JObject();
             JArray newModel = new JArray();
+            bool replacementsMade = false;
             // exception handling
 
             switch (Current.Type)
@@ -379,7 +463,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "EntryRequirementPreface":
                 case "Location":
                 case "Environment":
-                    JToken newToken = ReplaceTags(Model);
+                    JToken newToken = ReplaceTags(Model, out replacementsMade);
                     diff["REPLACETAGSTEXT"] = newToken; 
                     Model = newToken;
                     break;
@@ -403,7 +487,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     }
                     foreach (var item in Model)
                     {
-                        newModel.Add(ReplaceTags(item));
+                        newModel.Add(ReplaceTags(item, out replacementsMade));
                     }
                     diff["REPLACETAGSARRAY"] = newModel;
                     Model = newModel;
@@ -425,7 +509,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         Current = newCurrent;
                         foreach (var item in Model)
                         {
-                            newModel.Add(ReplaceTags(item));
+                            newModel.Add(ReplaceTags(item, out replacementsMade));
                         }
                         diff["REPLACETAGSARRAY"] = newModel;
                         Model = newModel;
@@ -436,8 +520,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     break;
             }
 
- 
-            if (JToken.DeepEquals(Current, Model)) return diff;
+
+            if (JToken.DeepEquals(Current, Model))
+            {
+                checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Match" + (replacementsMade ? "(WithMods)" : ""));
+                return diff;
+            };
             switch (Current.Type)
             {
                 case JTokenType.Object:
@@ -464,7 +552,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys);//.Except(unchangedKeys);
                         foreach (var k in potentiallyModifiedKeys)
                         {
-                            diff[k] = FindDiff(current[k], model[k], structure,  modelStructure, k, path + (path.Length > 0?".":"") + k);
+                            diff[k] = FindDiff(current[k], model[k], structure,  modelStructure, checkStatus, k, path + (path.Length > 0?".":"") + k);
                         }
                     }
                     break;
@@ -477,10 +565,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         {
                             diff["+"] = new JArray(current.Except(model));
                             diff["-"] = new JArray(model.Except(current));
+                            checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Mismatch");
                         }
                         else
                         {
                             diff["-"] = new JArray(current);
+                            checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Missing");
                         }
                         
                     }
@@ -493,7 +583,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     //structure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING_" + Current.ToString().Length);
                     var parentProperty2 = ((JProperty)Current.Parent);
 
-
+                    checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "StrMismatch");
                     diff["+"] = Current;
                     diff["-"] = Model;
                     break;
@@ -511,12 +601,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var responseTestData = multilineText;
             Dictionary<string, String> structure = new Dictionary<string, string>();
             Dictionary<string, String> newStructure = new Dictionary<string, string>();
+            Dictionary<string, String> checkStatus = new Dictionary<string, string>();
             var tempString = "{  \"SalaryStarter\": \"13500\", \"SalaryExperienced\": \"24000\", \"LastUpdatedDate\": \"ToDo\", \"MinimumHours\": 41.0, \"RelatedCareers\": [ \"ToDo\" ], \"Soc\": \"9134\", \"Title\": \"Bottler\", \"Overview\":\"<p>Bottlers fill, pack and operate bottling machinery in food, drink and bottling factories.</p>\", \"WorkingPattern\": \"evenings / weekends\", \"AlternativeTitle\": \"canning and bottling operative, canningoperative, canning and bottling worker, canner\", \"WorkingHoursDetails\": \"a week\", \"Url\": \"https://pp.api.nationalcareers.service.gov.uk/job-profiles/bottler\", \"WhatYouWillDo\": { \"WYDDayToDayTasks\": [ \"<p>keeping machinery clean and sterile, to meet high standards of food safety</p>\", \"<p>setting up machines and starting the bottling process</p>\", \"<p>making sure bottles or jars are correctly filled andlabelled</p>\", \"<p>reporting more serious machinery problems to your line manager or a technician</p>\", \"<p>sorting out any problems with the production line so bottling is not held up</p>\" ], \"WorkingEnvironment\": { \"Environment\": \"<p>Your working environment may be noisy.</p>\", \"Uniform\": \"\", \"Location\": \"<p>You could work in a factory.</p>\" } }, \"ONetOccupationalCode\": \"ToDo\", \"MaximumHours\": 43.0, \"WhatItTakes\": { \"Skills\": [ \"ToDo\" ], \"DigitalSkillsLevel\": \"<p>to be able to carry out basic tasks on a computer or hand-held device</p>\" }, \"CareerPathAndProgression\": { \"CareerPathAndProgression\": [ \"<p>With experience, you could progress to team supervisor or manager.</p>\" ] }, \"WorkingPatternDetails\": \"on shifts\", \"HowToBecome\": { \"EntryRoutes\": { \"University\": { \"AdditionalInformation\": [ \"ToDo\" ], \"EntryRequirements\": [ \"ToDo\",\"flippy\" ], \"RelevantSubjects\": [ \"ToDo\" ], \"FurtherInformation\": [ \"ToDo\" ], \"EntryRequirementPreface\": [ \"ToDo\" ] } }, \"EntryRouteSummary\": \"ToDo\", \"MoreInformation\": { \"Registration\": [ \"ToDo\" ], \"FurtherInformation\": [ \"\" ], \"ProfessionalAndIndustryBodies\": [ \"\" ], \"CareerTips\": [ \"\" ] } }}";
             dynamic sourceObject = JsonConvert.DeserializeObject(responseSourceData.Content);
 
             //exploreObject(sourceObject, 0, "TOP");
 
-            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), structure, newStructure);
+            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), structure, newStructure, checkStatus);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -525,6 +616,49 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
      
         }
 
+        [Given(@"htmloutputtest")]
+        public void GivenHtmloutputtest()
+        {
+            var dataList = new List<TestDataClass>
+        {
+            new TestDataClass {Name = "A", Lastname = "B", Other = "ABO"},
+            new TestDataClass {Name = "C", Lastname = "D", Other = "CDO"},
+            new TestDataClass {Name = "E", Lastname = "F", Other = "EFO"},
+            new TestDataClass {Name = "G", Lastname = "H", Other = "GHO"}
+        };
 
+            var headerList = new List<string> { "Name", "Surname", "Merge" };
+
+            var customTableStyle = new List<EnumerableExtension.CustomTableStyle>
+        {
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"font-family", "Comic Sans MS" },{"font-size","15px"}}},
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"background-color", "yellow" }}},
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Tr, InlineStyleValueList =new Dictionary<string, string>{{"color","Blue"},{"font-size","10px"}}},
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Th,ClassNameList = new List<string>{"normal","underline"}},
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Th,InlineStyleValueList =new Dictionary<string, string>{{ "background-color", "gray"}}},
+            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Td, InlineStyleValueList  =new Dictionary<string, string>{{"color","Red"},{"font-size","15px"}}},
+        };
+
+            var htmlResult = dataList.ToHtmlTable(headerList, customTableStyle, x => x.Name, x => x.Lastname, x => $"{x.Name} {x.Lastname}");
+            Console.WriteLine(htmlResult);
+        }
+
+
+
+    }
+
+    public class TestDataClass
+    {
+        public string Name { get; set; }
+        public string Lastname { get; set; }
+        public string Other { get; set; }
+    }
+
+    public class CompairisonItem
+    {
+        public string Name { get; set; }
+        public string 
+        public string Lastname { get; set; }
+        public string Other { get; set; }
     }
 }
