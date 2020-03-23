@@ -25,7 +25,7 @@ stages:
     workspace:
       clean: all
     steps:
-    - template: StepTemplates/dfc-dotnetcore-build-notests.yml
+    - template: Build/StepTemplates/dfc-dotnetcore-build-notests.yml
       parameters:
         SolutionBaseName: $(SolutionBaseName)
         BuildPlatform: $(BuildPlatform)
