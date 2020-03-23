@@ -1,5 +1,5 @@
 variables:
-    SolutionBaseName: 'DFC.ServiceTaxonomy.Tests'
+    SolutionBaseName: 'DFC.ServiceTaxonomy'
     BuildPlatform: 'any cpu'
     BuildConfiguration: 'release'
 
