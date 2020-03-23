@@ -3,6 +3,12 @@ variables:
     BuildPlatform: 'any cpu'
     BuildConfiguration: 'release'
 
+pool:
+  name: NCS - CI and CD
+  demands:
+  - msbuild
+  - visualstudio
+
 resources:
   repositories:
   - repository: self
@@ -16,6 +22,8 @@ stages:
 - stage: Build
   jobs:
   - job: Build
+    workspace:
+      clean: all
     steps:
     - template: StepTemplates/dfc-dotnetcore-build-notests.yml
       parameters:
