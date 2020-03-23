@@ -1,7 +1,11 @@
 variables:
-    SolutionBaseName: 'DFC.ServiceTaxonomy.Tests'
-    BuildPlatform: 'any cpu'
-    BuildConfiguration: 'release'
+    SolutionBaseName: 'DFC.ServiceTaxonomy'
+
+pool:
+  name: NCS - CI and CD
+  demands:
+  - msbuild
+  - visualstudio
 
 resources:
   repositories:
@@ -9,5 +13,16 @@ resources:
   - repository: dfc-devops
     type: github
     name: SkillsFundingAgency/dfc-devops
-    ref: refs/tags/v1.6.12
+    ref: refs/tags/v1.11.0
     endpoint: 'GitHub (ESFA)'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    workspace:
+      clean: all
+    steps:
+    - template: AzureDevOpsTemplates/Build/StepTemplates/dfc-dotnetcore-build-notests.yml@dfc-devops
+      parameters:
+        SolutionBaseName: $(SolutionBaseName).TestSuite
