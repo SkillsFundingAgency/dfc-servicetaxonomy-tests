@@ -8,6 +8,10 @@ Scenario: Compare output from current and new job profile API
 	Given I have got a list of all available job profile from the existing API
 	Then The output for each API matches for all job profiles
 
+@mytag
+Scenario: Compare output from current and new job profile API new version
+	Given I have got a list of all available job profile from the existing API
+	Then The output for each API matches for all job profiles NEW VERSION
 
 Scenario: Compare output from current and new job profile summary API
 	Given I have got a list of all available job profile from the existing API
