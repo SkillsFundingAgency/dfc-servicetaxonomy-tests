@@ -1,6 +1,6 @@
 ﻿Feature: GetOccupationsWithMatchingSkills
 
-
+@GetOccupationsWithMatchingSkills
 Scenario: Search for matching occupations
 	Given I supply the parameter "minumMatchingSkills" as a string with value "123"
 	And I supply the parameter "skillList" as a collection with values

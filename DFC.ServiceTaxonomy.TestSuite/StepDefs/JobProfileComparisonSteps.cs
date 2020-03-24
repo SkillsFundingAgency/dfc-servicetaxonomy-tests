@@ -219,7 +219,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 comparedItem headerItem = new comparedItem();
                 //  get source job profile data
 
-                var responseSourceData = RestHelper.Get("https://pp.api.nationalcareers.service.gov.uk/job-profiles/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
+                var responseSourceData = RestHelper.Get( context.GetJobProfileApiBaseUrl() + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
 
                 //  get test subject job profile data
                 string unslug = char.ToUpper(jobProfile.title[0]) + jobProfile.title.Replace("-", " ").Substring(1);
@@ -366,15 +366,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenICompareActor()
         {
 
-            string url = "https://pp.api.nationalcareers.service.gov.uk/job-profiles/actor";
-            string sitUrl = "https://sit.api.nationalcareersservice.org.uk/job-profiles/Actor";
+            string url = context.GetJobProfileApiBaseUrl()  +"/actor";
             var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
 
 
             Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
 
             
-            var responseTestData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
+            var responseTestData = RestHelper.Get( context.GetTaxonomyApiBaseUrl() + "/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
             JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparison);
@@ -614,7 +613,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"mock test step")]
         public void GivenMockTestStep(string multilineText)
         {
-            var responseSourceData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/job-profiles/bottler", context.GetJobProfileApiHeaders());
+            var responseSourceData = RestHelper.Get( context.GetTaxonomyApiBaseUrl() + "/job-profiles/bottler", context.GetJobProfileApiHeaders());
 
             var responseTestData = multilineText;
             Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();

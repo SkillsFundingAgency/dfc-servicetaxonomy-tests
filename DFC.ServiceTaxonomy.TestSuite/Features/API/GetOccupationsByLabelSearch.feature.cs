@@ -71,11 +71,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a full word")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabelSearch")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void SearchForAFullWord()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a full word", null, new string[] {
-                        "GetOccupationsByLabelSearch"});
+                        "GetOccupationsByLabel"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -111,9 +111,11 @@ testRunner.Then("the response json matches:", @"{
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a partial word")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void SearchForAPartialWord()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a partial word", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a partial word", null, new string[] {
+                        "GetOccupationsByLabel"});
 #line 39
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -156,20 +158,22 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a full word with alternate labels included")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void SearchForAFullWordWithAlternateLabelsIncluded()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a full word with alternate labels included", null, ((string[])(null)));
-#line 79
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a full word with alternate labels included", null, new string[] {
+                        "GetOccupationsByLabel"});
+#line 80
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 81
+#line 82
 testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\" with r" +
                     "equest body", "{\r\n\"label\": \"dietician\",\r\n\"matchAltLabels\": \"true\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 89
+#line 90
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 90
+#line 91
     testRunner.And("the response json matches:", @"{
     ""occupations"": [
         {
@@ -197,20 +201,22 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search where there are no matches")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void SearchWhereThereAreNoMatches()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search where there are no matches", null, ((string[])(null)));
-#line 115
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search where there are no matches", null, new string[] {
+                        "GetOccupationsByLabel"});
+#line 117
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 117
+#line 119
 testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\" with r" +
                     "equest body", "{\r\n\"label\": \"guardian of the galaxy\",\r\n\"matchAltLabels\": \"true\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 125
+#line 127
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 126
+#line 128
     testRunner.And("the response json matches:", "{\r\n\"occupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -218,20 +224,22 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Alt label search defaults to false")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void AltLabelSearchDefaultsToFalse()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label search defaults to false", null, ((string[])(null)));
-#line 133
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label search defaults to false", null, new string[] {
+                        "GetOccupationsByLabel"});
+#line 136
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 135
+#line 138
 testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\" with r" +
                     "equest body", "{\r\n\"label\": \"dietician\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 142
+#line 145
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 143
+#line 146
     testRunner.And("the response json matches:", "{\r\n\"occupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -239,20 +247,22 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for that is only in alt labels without allowing alt label search")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void SearchForThatIsOnlyInAltLabelsWithoutAllowingAltLabelSearch()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for that is only in alt labels without allowing alt label search", null, ((string[])(null)));
-#line 152
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for that is only in alt labels without allowing alt label search", null, new string[] {
+                        "GetOccupationsByLabel"});
+#line 155
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 154
+#line 157
 testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\" with r" +
                     "equest body", "{\r\n\"label\": \"dietician\",\r\n\"matchAltLabels\": \"false\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 162
+#line 165
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 163
+#line 166
     testRunner.And("the response json matches:", "{\r\n\"occupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -260,24 +270,24 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Alt label value is supplied as parameter")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsGapOforOccupationAndGivenOccupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void AltLabelValueIsSuppliedAsParameter()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label value is supplied as parameter", null, new string[] {
-                        "GetOccupationsGapOforOccupationAndGivenOccupations"});
-#line 174
+                        "GetOccupationsByLabel"});
+#line 177
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 176
+#line 179
 testRunner.Given("I want to supply \"?matchAltLabels=true\" as a parameter in the following request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 177
+#line 180
 testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\" with r" +
                     "equest body", "{\r\n\"label\": \"dietician\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 183
+#line 186
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 184
+#line 187
     testRunner.And("the response json matches:", @"{
     ""occupations"": [
         {
@@ -305,23 +315,23 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("No body is supplied")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsGapOforOccupationAndGivenOccupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void NoBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No body is supplied", null, new string[] {
-                        "GetOccupationsGapOforOccupationAndGivenOccupations"});
-#line 212
+                        "GetOccupationsByLabel"});
+#line 215
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-#line 213
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table1, "Given ");
-#line 215
-    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 216
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table1, "Given ");
+#line 218
+    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 219
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -329,12 +339,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid body is supplied")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsGapOforOccupationAndGivenOccupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void InvalidBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid body is supplied", null, new string[] {
-                        "GetOccupationsGapOforOccupationAndGivenOccupations"});
-#line 220
+                        "GetOccupationsByLabel"});
+#line 223
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -344,11 +354,11 @@ this.ScenarioInitialize(scenarioInfo);
             table2.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 221
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table2, "Given ");
 #line 224
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table2, "Given ");
+#line 227
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 225
+#line 228
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -356,15 +366,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid security header is supplied")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsGapOforOccupationAndGivenOccupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void InvalidSecurityHeaderIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header is supplied", null, new string[] {
-                        "GetOccupationsGapOforOccupationAndGivenOccupations"});
-#line 230
+                        "GetOccupationsByLabel"});
+#line 233
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 231
+#line 234
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -373,12 +383,12 @@ this.ScenarioInitialize(scenarioInfo);
             table3.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 232
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table3, "And ");
 #line 235
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table3, "And ");
+#line 238
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 236
+#line 239
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to invalid subscrip" +
                     "tion key. Make sure to provide a valid key for an active subscription.\"\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -387,15 +397,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing security header")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsGapOforOccupationAndGivenOccupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsByLabel")]
         public virtual void MissingSecurityHeader()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
-                        "GetOccupationsGapOforOccupationAndGivenOccupations"});
-#line 246
+                        "GetOccupationsByLabel"});
+#line 249
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 247
+#line 250
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -404,12 +414,12 @@ this.ScenarioInitialize(scenarioInfo);
             table4.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 248
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table4, "And ");
 #line 251
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table4, "And ");
+#line 254
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 252
+#line 255
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to missing subscrip" +
                     "tion key. Make sure to include subscription key when making requests to an API.\"" +
                     "\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");

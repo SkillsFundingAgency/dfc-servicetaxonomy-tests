@@ -72,11 +72,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile API")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void CompareOutputFromCurrentAndNewJobProfileAPI()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile API", null, new string[] {
-                        "mytag"});
+                        "ignore"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -90,11 +90,11 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile API new version")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void CompareOutputFromCurrentAndNewJobProfileAPINewVersion()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile API new version", null, new string[] {
-                        "mytag"});
+                        "ignore"});
 #line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -108,17 +108,19 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile summary API")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void CompareOutputFromCurrentAndNewJobProfileSummaryAPI()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, ((string[])(null)));
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, new string[] {
+                        "ignore"});
+#line 17
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 17
- testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
- testRunner.And("I have got a list of all available job profile from the new API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
+ testRunner.And("I have got a list of all available job profile from the new API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 20
     testRunner.Then("The existing and new job profile summaries are comparable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -126,13 +128,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Job Profile ACTOR is compared in old and new API")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void JobProfileACTORIsComparedInOldAndNewAPI()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Job Profile ACTOR is compared in old and new API", null, ((string[])(null)));
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Job Profile ACTOR is compared in old and new API", null, new string[] {
+                        "ignore"});
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 23
+#line 24
     testRunner.Given("I compare actor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -143,10 +147,10 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void Htmloutputtest()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("htmloutputtest", null, ((string[])(null)));
-#line 25
+#line 26
     this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 26
+#line 27
     testRunner.Given("htmloutputtest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -154,14 +158,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Check mocked response against api")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void CheckMockedResponseAgainstApi()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, ((string[])(null)));
-#line 28
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, new string[] {
+                        "ignore"});
+#line 30
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 30
+#line 32
 testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
                     "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
                     "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +

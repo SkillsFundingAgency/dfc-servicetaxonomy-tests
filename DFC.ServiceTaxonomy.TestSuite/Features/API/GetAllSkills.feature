@@ -1,6 +1,7 @@
 ﻿Feature: GetAllSkills
 
 
+@Ignore
 @GetAllSkills
 Scenario: Retrieve a list of all skills
 	Given I get a list of skills from esco
