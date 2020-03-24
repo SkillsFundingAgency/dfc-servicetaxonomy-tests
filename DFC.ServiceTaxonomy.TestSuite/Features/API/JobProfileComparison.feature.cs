@@ -89,18 +89,36 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile summary API")]
-        public virtual void CompareOutputFromCurrentAndNewJobProfileSummaryAPI()
+        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile API new version")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        public virtual void CompareOutputFromCurrentAndNewJobProfileAPINewVersion()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile API new version", null, new string[] {
+                        "mytag"});
 #line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 13
  testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
+ testRunner.Then("The output for each API matches for all job profiles NEW VERSION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile summary API")]
+        public virtual void CompareOutputFromCurrentAndNewJobProfileSummaryAPI()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, ((string[])(null)));
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 17
+ testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 18
  testRunner.And("I have got a list of all available job profile from the new API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 19
     testRunner.Then("The existing and new job profile summaries are comparable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -111,10 +129,10 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void JobProfileACTORIsComparedInOldAndNewAPI()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Job Profile ACTOR is compared in old and new API", null, ((string[])(null)));
-#line 18
+#line 22
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 23
     testRunner.Given("I compare actor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -125,10 +143,10 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void Htmloutputtest()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("htmloutputtest", null, ((string[])(null)));
-#line 21
+#line 25
     this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 22
+#line 26
     testRunner.Given("htmloutputtest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
@@ -139,11 +157,11 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CheckMockedResponseAgainstApi()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, ((string[])(null)));
-#line 24
+#line 28
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 26
+#line 30
 testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
                     "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
                     "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +
