@@ -38,8 +38,6 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-
-
   <ItemGroup>
     <SpecFlowFeatureFiles Update="Features\Editor\Registration.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
@@ -66,7 +64,6 @@
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="appsettings-template.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
