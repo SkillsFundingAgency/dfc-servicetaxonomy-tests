@@ -37,7 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             //}
         }
 
-        public new AddDayToDayTask SetFieldValue(string field, string value, string itemType = "")
+        public  AddDayToDayTask SetFieldValue(string field, string value, string itemType = "")
         {
             string id;
             IWebElement item = null;

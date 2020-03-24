@@ -235,7 +235,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 if (responseTestData.StatusCode == HttpStatusCode.OK)
                 {
                     // compare data
-                    JObject diffs = FindDiff2(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparedItems);
+                    JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparedItems);
                     //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
                     //          string output = diffs.ToString();
                     //         Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
@@ -362,370 +362,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
 
-
-        [Then(@"The output for each API matches for all job profiles")]
-        public void ThenTheOutputForEachAPIMatchesForAllJobProfiles()
-        {
-            //List<JobProfileSummary> allJobProfiles = (List<JobProfileSummary>)context["AllJobProfiles"];
-
-            List<JobProfileSummary> allJobProfiles = new List<JobProfileSummary>();
-
-            JobProfileSummary jps = new JobProfileSummary();
-
-           // jps = new JobProfileSummary();  jps.title ="admin-assistant"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "admin-assistant"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "border-force-officer"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "cabin-crew"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "care-worker"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "construction-labourer"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "electrician"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "emergency-medical-dispatcher"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "farmer"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "mp"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "personal-assistant"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "plumber"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "police-officer"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "postman-or-postwoman"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "primary-school-teacher"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "sales-assistant"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "social-worker"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "train-driver"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "waiter"; allJobProfiles.Add(jps);
-
-            List<Dictionary<String, String>> allDicts = new List<Dictionary<String, String>>();
-            List<Dictionary<String, String>> allNewDicts = new List<Dictionary<String, String>>();
-            List<Dictionary<String, String>> allcheckStatusDicts = new List<Dictionary<String, String>>();
-            List<Dictionary<String, String>> allDetails = new List<Dictionary<String, String>>();
-
-            List<Dictionary<String, comparedItem>> allComparisons = new List<Dictionary<String, comparedItem>>();
-
-
-            Dictionary<String, String> longestList = new Dictionary<string, string>();
-            
-
-            int max = 2000;
-            int count = 0;
-            foreach ( var jobProfile in allJobProfiles)
-            {
-                Dictionary<string, String> structure = new Dictionary<string, string>();
-                Dictionary<string, String> newStructure = new Dictionary<string, string>();
-                Dictionary<string, String> checkStatus = new Dictionary<string, string>();
-                Dictionary<string, String> details = new Dictionary<string, string>();
-
-                Dictionary<string, comparedItem> compReports = new Dictionary<string, comparedItem>();
-                comparedItem headerItem = new comparedItem();
-
-                //  get source job profile data
-
-                var responseSourceData = RestHelper.Get("https://pp.api.nationalcareers.service.gov.uk/job-profiles/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
-
-                //  get test subject job profile data
-                string unslug = char.ToUpper(jobProfile.title[0])  +  jobProfile.title.Replace("-"," ").Substring(1);
-                if (unslug == "Mp") unslug = "MP";
-                if (unslug == "Border force officer") unslug = "Border Force officer";
-                
-                var responseTestData = RestHelper.Get(context.GetTaxonomyUri("JobProfileDetail", unslug),context.GetTaxonomyApiHeaders() );
-
-                structure.Add("JobProfile", jobProfile.title);// url.Substring(jobProfile.url.LastIndexOf('/')));
-                newStructure.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
-                checkStatus.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
-                details.Add("JobProfile", jobProfile.title);//.url.Substring(jobProfile.url.LastIndexOf('/')));
-                headerItem.Name = jobProfile.title;
-                compReports.Add("JobProfile",headerItem);
-
-                //compReports.
-                if (responseTestData.StatusCode == HttpStatusCode.OK)
-                    {
-                        // compare data
-                        JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), compReports,structure, newStructure, checkStatus, details);
-                        //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
-              //          string output = diffs.ToString();
-              //         Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-              //          Console.WriteLine(output);
-                    }
-
-                if (structure.Count > longestList.Count)
-                {
-                    longestList = structure;
-                }
-
-                allDicts.Add(structure);
-                allNewDicts.Add(newStructure);
-                allcheckStatusDicts. Add(checkStatus);
-                allDetails.Add(details);
-                allComparisons.Add(compReports);
-                count++;
-                if (count > max) break;
-            }
-
-   
-            foreach ( var kv in allDicts[0])
-            {
-                Console.Write(kv.Key +", STAX,");
-            }
-            Console.WriteLine();
-            foreach (var item in allDicts)
-            {
-                Dictionary<String, String> newItem = new Dictionary<string, string>();
-                foreach ( var dict in allNewDicts)
-                {
-                    if (dict["JobProfile"] == item["JobProfile"])
-                    {
-                        newItem = dict;
-                        break;
-                    }
-                }
-                foreach (var kv in longestList)
-                {
-                    Console.Write( (item.ContainsKey(kv.Key) ? item[kv.Key] : "NOVALUE") + ",");
-                    Console.Write( (newItem.ContainsKey(kv.Key) ? newItem[kv.Key] : "NOVALUE") + ",");
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine("------------------------------------------------------------------------------------------");
-
-
-            var customTableStyles = new List<CustomTableStyle>
-            {
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"font-family", "Arial" },{"font-size","15px"}}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"background-color", "white" }}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Tr, InlineStyleValueList =new Dictionary<string, string>{{"color","Blue"},{"font-size","10px"}}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Th,ClassNameList = new List<string>{"normal","underline"}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Th,InlineStyleValueList =new Dictionary<string, string>{{ "background-color", "gray"}}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.Td, InlineStyleValueList  =new Dictionary<string, string>{{"color","black"},{"font-size","15px"}}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.TdGood, InlineStyleValueList  =new Dictionary<string, string>{{"color","black"},{"font-size","15px"}}},
-                new CustomTableStyle{CustomTableStylePosition = CustomTableStylePosition.TdGood, InlineStyleValueList  =new Dictionary<string, string>{{ "background-color", "palegreen"},{"font-size","15px"}}},
-            };
-
-            var tableCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
-            var trCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
-            var thCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
-            var tdCss = string.Join(" ", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.ClassNameList != null).SelectMany(s => s.ClassNameList)) ?? "";
-
-            var tableInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Table).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
-            var trInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Tr).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
-            var thInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Th).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
-            var tdInlineCss = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.Td).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
-            var tdInlineCssGood = string.Join(";", customTableStyles?.Where(w => w.CustomTableStylePosition == CustomTableStylePosition.TdGood).Where(w => w.InlineStyleValueList != null).SelectMany(s => s.InlineStyleValueList?.Select(x => String.Format("{0}:{1}", x.Key, x.Value)))) ?? "";
-
-
-            var sb = new StringBuilder();
-
-            sb.Append($"<table{(string.IsNullOrEmpty(tableCss) ? "" : $" class=\"{tableCss}\"")}{(string.IsNullOrEmpty(tableInlineCss) ? "" : $" style=\"{tableInlineCss}\"")}>");
-
-
-            sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
-
-            Console.Write("FieldName,");
-            sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}FieldName</th>");
-            foreach (var dict in allDicts)
-            {
-                string jp = dict["JobProfile"];
-                Console.Write(jp + ",Stax Api,Status,");
-                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>{jp}</th>");
-                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>STax API</th>");
-                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>Status</th>");
-            }
-            sb.Append("</tr>");
-
-            Console.WriteLine();
-            foreach ( var item in longestList.Where( item => item.Key != "JobProfile") )
-            {
-                sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
-
-                Console.Write(item.Key + ",");
-                sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{item.Key}</td>");
-                foreach ( var dict in allDicts)
-                {
-                    Dictionary<String, String> newItem = new Dictionary<string, string>();
-                    foreach (var newDict in allNewDicts)
-                    {
-                        if (dict["JobProfile"] == newDict["JobProfile"])
-                        {
-                            newItem = newDict;
-                            break;
-                        }
-                    }
-                    Dictionary<String, String> newCheck = new Dictionary<string, string>();
-                    foreach (var newDict in allcheckStatusDicts)
-                    {
-                        if (dict["JobProfile"] == newDict["JobProfile"])
-                        {
-                            newCheck = newDict;
-                            break;
-                        }
-                    }
-                    Dictionary<String, String> newDetails = new Dictionary<string, string>();
-                    foreach ( var newDets in allDetails)
-                    {
-                        if (dict["JobProfile"] == newDets["JobProfile"])
-                        {
-                            newDetails = newDets;
-                            break;
-                        }
-
-                    }
-                    string jp = dict["JobProfile"];
-                    Console.Write( ( dict.ContainsKey(item.Key)? dict[item.Key] : "N/A") + ",");
-                    Console.Write((newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A") + ",");
-                    Console.Write((newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???") + ",");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (dict.ContainsKey(item.Key) ? dict[item.Key] : "N/A")}</td>");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")} Title=\"{(newDetails.ContainsKey(item.Key)? newDetails[item.Key].Replace("\"", "&quot;") :"")}\" {(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A")}</td>");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{(newCheck.ContainsKey(item.Key) && newCheck[item.Key]=="Match"? tdInlineCssGood :  tdInlineCss)}\"")}>{ (newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???")}</td>");
-
-                }
-                sb.Append("</tr>");
-                Console.WriteLine();
-            }
-
-            sb.Append("</table>");
-
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine(sb);
-
-            string path = @"D:\wamp64\www\jobprofiles\comparison.html";
-
-            if (File.Exists(path))
-            {
-                File.Delete(@"D:\wamp64\www\jobprofiles\comparison.html");
-            }
-            // This text is added only once to the file.
-            if (!File.Exists(path))
-            {
-                // Create a file to write to.
-                string createText = "Hello and Welcome" + Environment.NewLine;
-                File.WriteAllText(path, sb.ToString()) ;
-            }
-
-            ////////////////////////////////////////////////////////////////////////////
-            ///
-
-            sb = new StringBuilder();
-
-            sb.Append($"<table{(string.IsNullOrEmpty(tableCss) ? "" : $" class=\"{tableCss}\"")}{(string.IsNullOrEmpty(tableInlineCss) ? "" : $" style=\"{tableInlineCss}\"")}>");
-
-
-            sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
-
-            Console.Write("FieldName,");
-            sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}FieldName</th>");
-            foreach (var dict in allComparisons)
-            {
-                string jp = dict["JobProfile"].Name;
-                Console.Write(jp);
-                sb.Append($"<th{(string.IsNullOrEmpty(thCss) ? "" : $" class=\"{thCss}\"")}{(string.IsNullOrEmpty(thInlineCss) ? "" : $" style=\"{thInlineCss}\"")}>{jp}</th>");
-            }
-            sb.Append("</tr>");
-
-            Console.WriteLine();
-            foreach (var item in allComparisons[0].Where(item => item.Key != "JobProfile"))
-            {
-                sb.Append($"<tr{(string.IsNullOrEmpty(trCss) ? "" : $" class=\"{trCss}\"")}{(string.IsNullOrEmpty(trInlineCss) ? "" : $" style=\"{trInlineCss}\"")}>");
-
-                Console.Write(item.Key + ",");
-                sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{item.Key}</td>");
-                foreach (var dict in allComparisons)
-                {
-                    string text = "???";
-                    string cssFormat = tdInlineCss;
-                    string toolTip = "";
-
-                    if (dict.ContainsKey(item.Key))
-                    {
-                        toolTip = " Title=\"" + dict[item.Key].ComparisonDetail.Replace("\"", "&quot;") +"\" ";
-                        if (dict[item.Key].ContentMatch)
-                        {
-                            text = "ContentMatch";
-                            cssFormat = tdInlineCssGood;
-                        }
-                        else if (dict[item.Key].FormatMatch)
-                        {
-                            text = "StructureMatch";
-                            cssFormat = tdInlineCssGood.Replace("palegreen","lightyellow");
-                        }
-                        //else if ()
-                        else if (!dict[item.Key].Included)
-                        {
-                            text = "Missing";
-                            cssFormat = tdInlineCssGood.Replace("palegreen", "lightgrey");
-                        }
-                        else
-                        {
-                            cssFormat = tdInlineCssGood.Replace("palegreen", "lightsalmon");
-                            text = "Differs";
-                        }
-                    }
-                    else
-                    {
-                        text = "Unknown";
-                    }
-                    
-
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{toolTip}{(string.IsNullOrEmpty(cssFormat) ? "" : $" style=\"{cssFormat}\"")}>{text}</td>");
-                    //sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")} Title=\"{(newDetails.ContainsKey(item.Key) ? newDetails[item.Key].Replace("\"", "&quot;") : "")}\" {(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A")}</td>");
-                    /*Dictionary<String, String> newItem = new Dictionary<string, string>();
-                    foreach (var newDict in allNewDicts)
-                    {
-                        if (dict["JobProfile"] == newDict["JobProfile"])
-                        {
-                            newItem = newDict;
-                            break;
-                        }
-                    }
-                    Dictionary<String, String> newCheck = new Dictionary<string, string>();
-                    foreach (var newDict in allcheckStatusDicts)
-                    {
-                        if (dict["JobProfile"] == newDict["JobProfile"])
-                        {
-                            newCheck = newDict;
-                            break;
-                        }
-                    }
-                    Dictionary<String, String> newDetails = new Dictionary<string, string>();
-                    foreach (var newDets in allDetails)
-                    {
-                        if (dict["JobProfile"] == newDets["JobProfile"])
-                        {
-                            newDetails = newDets;
-                            break;
-                        }
-
-                    }
-                    string jp = dict["JobProfile"];
-                    Console.Write((dict.ContainsKey(item.Key) ? dict[item.Key] : "N/A") + ",");
-                    Console.Write((newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A") + ",");
-                    Console.Write((newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???") + ",");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (dict.ContainsKey(item.Key) ? dict[item.Key] : "N/A")}</td>");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")} Title=\"{(newDetails.ContainsKey(item.Key) ? newDetails[item.Key].Replace("\"", "&quot;") : "")}\" {(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{tdInlineCss}\"")}>{ (newItem.ContainsKey(item.Key) ? newItem[item.Key] : "N/A")}</td>");
-                    sb.Append($"<td{(string.IsNullOrEmpty(tdCss) ? "" : $" class=\"{tdCss}\"")}{(string.IsNullOrEmpty(tdInlineCss) ? "" : $" style=\"{(newCheck.ContainsKey(item.Key) && newCheck[item.Key] == "Match" ? tdInlineCssGood : tdInlineCss)}\"")}>{ (newCheck.ContainsKey(item.Key) ? newCheck[item.Key] : "???")}</td>");
-                    */
-                }
-                sb.Append("</tr>");
-                Console.WriteLine();
-            }
-
-            sb.Append("</table>");
-
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine(sb);
-
-            path = @"D:\wamp64\www\jobprofiles\comparison2.html";
-
-            if (File.Exists(path))
-            {
-                File.Delete(@"D:\wamp64\www\jobprofiles\comparison2.html");
-            }
-            // This text is added only once to the file.
-            if (!File.Exists(path))
-            {
-                // Create a file to write to.
-                string createText = "Hello and Welcome" + Environment.NewLine;
-                File.WriteAllText(path, sb.ToString());
-            }
-
-
-        }
-
         [Given(@"I compare actor")]
         public void GivenICompareActor()
         {
@@ -733,10 +369,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string url = "https://pp.api.nationalcareers.service.gov.uk/job-profiles/actor";
             string sitUrl = "https://sit.api.nationalcareersservice.org.uk/job-profiles/Actor";
             var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
-            Dictionary<string, String> structure = new Dictionary<string, string>();
-            Dictionary<string, String> newStructure = new Dictionary<string, string>();
-            Dictionary<string, String> checkStatus = new Dictionary<string, string>();
-            Dictionary<string, String> details = new Dictionary<string, string>();
+
 
             Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
 
@@ -744,15 +377,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var responseTestData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/servicetaxonomy/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
-            JObject diffs = FindDiff2(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparison);
-            //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
+            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparison);
+
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine(output);
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-            foreach ( var item in structure)
+            foreach ( var item in comparison)
             {
-                Console.WriteLine(item.Key + "," + item.Value);
+                Console.WriteLine(item.Key + "," + item.Value.ContentMatch);
             }
         }
 
@@ -821,7 +454,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
 
-        public JObject FindDiff2(JToken Current, JToken Model, Dictionary<string, comparedItem> comparisons, string key = "", string path = "")
+        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string, comparedItem> comparisons, string key = "", string path = "")
         {
             var diff = new JObject();
             comparedItem comparison = new comparedItem();
@@ -847,7 +480,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys);//.Except(unchangedKeys);
                 foreach (var k in potentiallyModifiedKeys)
                 {
-                    diff[k] = FindDiff2(current[k], model[k], comparisons, k, path + (path.Length > 0 ? "." : "") + k);
+                    diff[k] = FindDiff(current[k], model[k], comparisons, k, path + (path.Length > 0 ? "." : "") + k);
                 }
                 return diff;
             }
@@ -975,260 +608,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return diff;
         } 
                                    
-           
-        public JObject FindDiff(JToken Current, JToken Model, Dictionary<string, comparedItem> comparisons, Dictionary<string,string> structure, Dictionary<string, string> modelStructure, Dictionary<string, string> checkStatus, Dictionary<string,string> details, string key = "", string path = "")
-        {
-            var diff = new JObject();
-            JArray newModel = new JArray();
-            bool replacementsMade = false;
-            bool addItem = false;       
-            string detailsString = "";
-            // exception handling
-            comparedItem comparison = new comparedItem();
-
-            comparison.Path = path;
-            comparison.Name = key;
-            comparison.ComparisonDetail = Current.ToString() + "\n\n-------vs--------\n\n" + (Model == null ? " ... " : Model.ToString());
-            
-            
-            detailsString = Current.ToString() + "\n\n-------vs--------\n\n" + (Model == null? " ... " :Model.ToString());
-            details.Add(path + (path.Length > 0 ? "." : "") + key, detailsString);
-
-            switch (Current.Type)
-            {
-                case JTokenType.Array:
-                    var current = Current as JArray;
-
-                    comparison.OriginalFormat = "[" + current.Count + "]";
-                    structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
-                    //structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
-
-                    if (Model != null)
-                    {
-                        if (Model.Type == JTokenType.Array)
-                        {
-                            var model = Model as JArray;
-                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + model.Count + "]");
-                            comparison.NewFormat = "[" + model.Count + "]";
-                            comparison.Included = true;
-                        }
-                        else
-                        {
-                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : "")));
-                            comparison.NewFormat = "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : ""));
-                        }
-                    }
-                    else
-                    {
-                        modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "MISSING");
-                    }
-
-                    comparison.FormatMatch = (comparison.OriginalFormat == comparison.NewFormat);
-                    addItem = true;
-
-                    break;
-                case JTokenType.Object:
-                    break;
-                default:
-                    structure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Current.ToString().Length == 0 ? "_EMPTY" : ""));
-
-                    comparison.OriginalFormat = "STRING" + (Current.ToString().Length == 0 ? "_EMPTY" : "");
-                    if (Model != null)
-                    {
-                        comparison.Included = true;
-                        if (Model.Type == JTokenType.Array)
-                        {
-                            var model = Model as JArray;
-                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + model.Count + "]");
-                            comparison.NewFormat = "[" + model.Count + "]";
-                        }
-                        else
-                        {
-                            modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : "")));
-                            comparison.NewFormat = "STRING" + (Model.ToString().ToLower() == "todo" ? "_TODO" : (Model.ToString().Length == 0 ? "_EMPTY" : ""));
-                        }
-                    }
-                    else
-                    {
-                        modelStructure.Add(path + (path.Length > 0 ? "." : "") + key, "MISSING");
-                    }
-                    comparison.FormatMatch = (comparison.OriginalFormat == comparison.NewFormat);
-                    addItem = true;
-                    break;
-
-            }
-            switch (key)
-            {
-                // SIMPLE SKIPS
-       //         case "AlternativeTitle":
-                case "LastUpdatedDate":
-       //         case "ONetOccupationalCode":
-                case "Skills":
-                case "Url":
-                    return diff;
-
-                // SINGLE VALUE REPLACEMENTS
-                case "DigitalSkillsLevel":
-                case "Overview":
-                case "EntryRequirementPreface":
-                case "Location":
-                case "Environment":
-                case "Uniform":
-                    JToken newToken = ReplaceTags(Model, out replacementsMade);
-                    diff["REPLACETAGSTEXT"] = newToken; 
-                    Model = newToken;
-                    break;
-
-                // ARRAY REPLACEMENTS
-                case "ProfessionalAndIndustryBodies":
-                case "CareerTips":
-                case "FurtherInformation":
-                case "AdditionalInformation":
-
-                case "EntryRequirements":
-                case "RelevantSubjects":
- //               case "Volunteering":
-                case "DirectApplication":
- //               case "OtherRoutes":
-
-                    if (key == "RelevantSubjects")
-                    {
-                        Console.WriteLine("");
-
-                    }
-                    if (Model.Type == JTokenType.Array)
-                    {
-                        foreach (var item in Model)
-                        {
-                            newModel.Add(ReplaceTags(item, out replacementsMade));
-                            comparison.Manipulated = replacementsMade;
-                        }
-                        diff["REPLACETAGSARRAY"] = newModel;
-                        Model = newModel;
-                    }
-                    else if (Model.Type != JTokenType.Object)
-                    {
-                        Model = ReplaceTags(Model, out replacementsMade);
-                        diff["REPLACETAGSSTRING"] = Model;
-                    }
-
-                    break;
-
-                case "CareerPathAndProgression":
-                case "Volunteering":
-                case "OtherRoutes":
-                    if (Current.Type == JTokenType.Array)
-                    {
-                        JArray newCurrent = new JArray();
-                        string singleItem = "";
-                        foreach ( var item in Current)
-                        {
-                            singleItem += item.ToString();
-                        }
-                        newCurrent.Add((JToken)singleItem);
-                        diff["SINGLEARRAYITEM"] = newCurrent;
-                        Current = newCurrent;
-                        foreach (var item in Model)
-                        {
-                            newModel.Add(ReplaceTags(item, out replacementsMade));
-                            comparison.Manipulated = replacementsMade;
-                        }
-                        diff["REPLACETAGSARRAY"] = newModel;
-                        Model = newModel;
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-
-
-            if (JToken.DeepEquals(Current, Model))
-            {
-                comparison.ContentMatch = true;
-                if (addItem )
-                    comparisons.Add(path + (path.Length > 0 ? "." : "") + key,comparison);
-
-                checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Match" + (replacementsMade ? "(WithMods)" : ""));
-                return diff;
-            };
-            switch (Current.Type)
-            {
-                case JTokenType.Object:
-                    {
-                        var current = Current as JObject;
-                        var model = Model as JObject;
-                        var addedKeys = current.Properties().Select(c => c.Name).Except(model.Properties().Select(c => c.Name));
-                        var removedKeys = model.Properties().Select(c => c.Name).Except(current.Properties().Select(c => c.Name));
-                        var unchangedKeys = current.Properties().Where(c => JToken.DeepEquals(c.Value, Model[c.Name])).Select(c => c.Name);
-                        foreach (var k in addedKeys)
-                        {
-                            diff[k] = new JObject
-                            {
-                                ["+"] = Current[k]
-                            };
-                        }
-                        foreach (var k in removedKeys)
-                        {
-                            diff[k] = new JObject
-                            {
-                                ["-"] = Model[k]
-                            };
-                        }
-                        var potentiallyModifiedKeys = current.Properties().Select(c => c.Name).Except(addedKeys);//.Except(unchangedKeys);
-                        foreach (var k in potentiallyModifiedKeys)
-                        {
-                            diff[k] = FindDiff(current[k], model[k], comparisons,  structure,  modelStructure, checkStatus, details, k, path + (path.Length > 0?".":"") + k);
-                        }
-                    }
-                    break;
-                case JTokenType.Array:
-                    {
-                        var current = Current as JArray;
-                        var model = Model as JArray;
-                        //structure.Add(path + (path.Length > 0 ? "." : "") + key, "[" + current.Count + "]");
-
-                        if (Model.Type == JTokenType.Array)
-                        {
-                            if (model != null)
-                            {
-                                diff["+"] = new JArray(current.Except(model));
-                                diff["-"] = new JArray(model.Except(current));
-                                checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Mismatch");
-                                comparison.Included = true;
-                            }
-                            else
-                            {
-                                diff["-"] = new JArray(current);
-                                checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "Missing");
-
-                            }
-                            
-                        }
-                        else if (Model.ToString().Length > 0)
-                        {
-                            comparison.Included = true;
-                        }
-
-                    }
-                    break;
-                default:
-                    //  var parentProperty = Current.Ancestors<JProperty>()
-                    //        .FirstOrDefault();
-
-                    // alternatively, if you know it'll be a property:
-                    //structure.Add(path + (path.Length > 0 ? "." : "") + key, "STRING_" + Current.ToString().Length);
-                    var parentProperty2 = ((JProperty)Current.Parent);
-
-                    checkStatus.Add(path + (path.Length > 0 ? "." : "") + key, "StrMismatch");
-                    diff["+"] = Current;
-                    diff["-"] = Model;
-                    break;
-            }
-            if (addItem)
-                comparisons.Add(path + (path.Length > 0 ? "." : "") + key, comparison);
-            return diff;
-        }
+     
 
 
         [Given(@"mock test step")]
@@ -1237,12 +617,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var responseSourceData = RestHelper.Get("https://sit.api.nationalcareersservice.org.uk/job-profiles/bottler", context.GetJobProfileApiHeaders());
 
             var responseTestData = multilineText;
-            Dictionary<string, String> structure = new Dictionary<string, string>();
-            Dictionary<string, String> newStructure = new Dictionary<string, string>();
-            Dictionary<string, String> checkStatus = new Dictionary<string, string>();
-            Dictionary<string, String> details = new Dictionary<string, string>();
-
-
             Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
 
             var tempString = "{  \"SalaryStarter\": \"13500\", \"SalaryExperienced\": \"24000\", \"LastUpdatedDate\": \"ToDo\", \"MinimumHours\": 41.0, \"RelatedCareers\": [ \"ToDo\" ], \"Soc\": \"9134\", \"Title\": \"Bottler\", \"Overview\":\"<p>Bottlers fill, pack and operate bottling machinery in food, drink and bottling factories.</p>\", \"WorkingPattern\": \"evenings / weekends\", \"AlternativeTitle\": \"canning and bottling operative, canningoperative, canning and bottling worker, canner\", \"WorkingHoursDetails\": \"a week\", \"Url\": \"https://pp.api.nationalcareers.service.gov.uk/job-profiles/bottler\", \"WhatYouWillDo\": { \"WYDDayToDayTasks\": [ \"<p>keeping machinery clean and sterile, to meet high standards of food safety</p>\", \"<p>setting up machines and starting the bottling process</p>\", \"<p>making sure bottles or jars are correctly filled andlabelled</p>\", \"<p>reporting more serious machinery problems to your line manager or a technician</p>\", \"<p>sorting out any problems with the production line so bottling is not held up</p>\" ], \"WorkingEnvironment\": { \"Environment\": \"<p>Your working environment may be noisy.</p>\", \"Uniform\": \"\", \"Location\": \"<p>You could work in a factory.</p>\" } }, \"ONetOccupationalCode\": \"ToDo\", \"MaximumHours\": 43.0, \"WhatItTakes\": { \"Skills\": [ \"ToDo\" ], \"DigitalSkillsLevel\": \"<p>to be able to carry out basic tasks on a computer or hand-held device</p>\" }, \"CareerPathAndProgression\": { \"CareerPathAndProgression\": [ \"<p>With experience, you could progress to team supervisor or manager.</p>\" ] }, \"WorkingPatternDetails\": \"on shifts\", \"HowToBecome\": { \"EntryRoutes\": { \"University\": { \"AdditionalInformation\": [ \"ToDo\" ], \"EntryRequirements\": [ \"ToDo\",\"flippy\" ], \"RelevantSubjects\": [ \"ToDo\" ], \"FurtherInformation\": [ \"ToDo\" ], \"EntryRequirementPreface\": [ \"ToDo\" ] } }, \"EntryRouteSummary\": \"ToDo\", \"MoreInformation\": { \"Registration\": [ \"ToDo\" ], \"FurtherInformation\": [ \"\" ], \"ProfessionalAndIndustryBodies\": [ \"\" ], \"CareerTips\": [ \"\" ] } }}";
@@ -1250,7 +624,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             //exploreObject(sourceObject, 0, "TOP");
 
-            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), comparison,structure, newStructure, checkStatus, details);
+            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), comparison);
             //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
             string output = diffs.ToString();
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
