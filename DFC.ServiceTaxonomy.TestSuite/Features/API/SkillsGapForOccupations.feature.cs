@@ -71,11 +71,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap analysis where common skills exists")]
-        [NUnit.Framework.CategoryAttribute("GetAllSkills")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapAnalysisWhereCommonSkillsExists()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where common skills exists", null, new string[] {
-                        "GetAllSkills"});
+                        "Ignore"});
 #line 5
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -89,10 +89,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap analysis where no common skills exists")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapAnalysisWhereNoCommonSkillsExists()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where no common skills exists", null, ((string[])(null)));
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where no common skills exists", null, new string[] {
+                        "Ignore"});
+#line 10
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -102,11 +104,13 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is essential for Occupation 1 and optional for Occupatio" +
             "n 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsEssentialForOccupation1AndOptionalForOccupation2()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is essential for Occupation 1 and optional for Occupatio" +
-                    "n 2", null, ((string[])(null)));
-#line 11
+                    "n 2", null, new string[] {
+                        "Ignore"});
+#line 13
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -116,11 +120,13 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is optional for Occupation 1 and essential for Occupatio" +
             "n 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsOptionalForOccupation1AndEssentialForOccupation2()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is optional for Occupation 1 and essential for Occupatio" +
-                    "n 2", null, ((string[])(null)));
-#line 13
+                    "n 2", null, new string[] {
+                        "Ignore"});
+#line 16
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -129,10 +135,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is essential for Occupation 1 and  Occupation 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsEssentialForOccupation1AndOccupation2()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is essential for Occupation 1 and  Occupation 2", null, ((string[])(null)));
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is essential for Occupation 1 and  Occupation 2", null, new string[] {
+                        "Ignore"});
+#line 19
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -141,10 +149,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is optional for Occupation 1 and  Occupation 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsOptionalForOccupation1AndOccupation2()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is optional for Occupation 1 and  Occupation 2", null, ((string[])(null)));
-#line 17
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is optional for Occupation 1 and  Occupation 2", null, new string[] {
+                        "Ignore"});
+#line 22
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -154,11 +164,13 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is essential for Occupation 1 and not related to Occupat" +
             "ion 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsEssentialForOccupation1AndNotRelatedToOccupation2()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is essential for Occupation 1 and not related to Occupat" +
-                    "ion 2", null, ((string[])(null)));
-#line 19
+                    "ion 2", null, new string[] {
+                        "Ignore"});
+#line 25
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -168,11 +180,13 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill is optional for Occupation 1 and not related to Occupati" +
             "on 2")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillIsOptionalForOccupation1AndNotRelatedToOccupation2()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill is optional for Occupation 1 and not related to Occupati" +
-                    "on 2", null, ((string[])(null)));
-#line 21
+                    "on 2", null, new string[] {
+                        "Ignore"});
+#line 28
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -181,10 +195,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill with transverse reusability is identified as a gap")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillWithTransverseReusabilityIsIdentifiedAsAGap()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with transverse reusability is identified as a gap", null, ((string[])(null)));
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with transverse reusability is identified as a gap", null, new string[] {
+                        "Ignore"});
+#line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -193,10 +209,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill with cross sectoral reusability is identified as a gap")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillWithCrossSectoralReusabilityIsIdentifiedAsAGap()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with cross sectoral reusability is identified as a gap", null, ((string[])(null)));
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with cross sectoral reusability is identified as a gap", null, new string[] {
+                        "Ignore"});
+#line 34
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -205,10 +223,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill with sector secific reusability is identified as a gap")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillWithSectorSecificReusabilityIsIdentifiedAsAGap()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with sector secific reusability is identified as a gap", null, ((string[])(null)));
-#line 27
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with sector secific reusability is identified as a gap", null, new string[] {
+                        "Ignore"});
+#line 37
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -218,11 +238,13 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap where a skill with occupation secific reusability is identified as a g" +
             "ap")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapWhereASkillWithOccupationSecificReusabilityIsIdentifiedAsAGap()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap where a skill with occupation secific reusability is identified as a g" +
-                    "ap", null, ((string[])(null)));
-#line 29
+                    "ap", null, new string[] {
+                        "Ignore"});
+#line 40
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -231,10 +253,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap analysis where first occupation is invalid")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapAnalysisWhereFirstOccupationIsInvalid()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where first occupation is invalid", null, ((string[])(null)));
-#line 31
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where first occupation is invalid", null, new string[] {
+                        "Ignore"});
+#line 43
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -243,10 +267,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap analysis where second occupation is invalid")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapAnalysisWhereSecondOccupationIsInvalid()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where second occupation is invalid", null, ((string[])(null)));
-#line 33
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where second occupation is invalid", null, new string[] {
+                        "Ignore"});
+#line 46
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -255,10 +281,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skills gap analysis where both occupations are invalid")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void SkillsGapAnalysisWhereBothOccupationsAreInvalid()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where both occupations are invalid", null, ((string[])(null)));
-#line 35
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skills gap analysis where both occupations are invalid", null, new string[] {
+                        "Ignore"});
+#line 49
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -267,10 +295,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing security header")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void MissingSecurityHeader()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, ((string[])(null)));
-#line 37
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
+                        "Ignore"});
+#line 52
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -279,10 +309,12 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid security header")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void InvalidSecurityHeader()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header", null, ((string[])(null)));
-#line 39
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header", null, new string[] {
+                        "Ignore"});
+#line 55
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden

@@ -71,9 +71,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for matching occupations")]
+        [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
         public virtual void SearchForMatchingOccupations()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for matching occupations", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for matching occupations", null, new string[] {
+                        "GetOccupationsWithMatchingSkills"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

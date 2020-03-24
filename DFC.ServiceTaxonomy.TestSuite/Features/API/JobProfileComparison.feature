@@ -3,28 +3,30 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
+@ignore
 Scenario: Compare output from current and new job profile API
 	Given I have got a list of all available job profile from the existing API
 	Then The output for each API matches for all job profiles
 
-@mytag
+@ignore
 Scenario: Compare output from current and new job profile API new version
 	Given I have got a list of all available job profile from the existing API
 	Then The output for each API matches for all job profiles NEW VERSION
 
+@ignore
 Scenario: Compare output from current and new job profile summary API
 	Given I have got a list of all available job profile from the existing API
 	And I have got a list of all available job profile from the new API
     Then The existing and new job profile summaries are comparable
 
-
+@ignore
 Scenario: Job Profile ACTOR is compared in old and new API
     Given I compare actor
 
     Scenario: htmloutputtest
     Given htmloutputtest
 
+@ignore
 Scenario:  Check mocked response against api
 
 Given mock test step

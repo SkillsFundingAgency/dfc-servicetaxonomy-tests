@@ -1,5 +1,6 @@
 ﻿Feature: GetAllOccupations
 
+@Ignore
 @GetAllOccupations
 Scenario: Retrieve a list of all occupations
 	Given I get a list of occupations from esco

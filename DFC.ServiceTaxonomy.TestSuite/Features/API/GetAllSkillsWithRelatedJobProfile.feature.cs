@@ -80,23 +80,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Retreive a list of all skill relating to occupation with job profile")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void RetreiveAListOfAllSkillRelatingToOccupationWithJobProfile()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retreive a list of all skill relating to occupation with job profile", null, ((string[])(null)));
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Retreive a list of all skill relating to occupation with job profile", null, new string[] {
+                        "Ignore"});
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 4
 this.FeatureBackground();
-#line 8
- testRunner.Given("I request all skills with related job profile from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
- testRunner.Then("the alternate labels listed for first Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I request all skills with related job profile from the NCS API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
- testRunner.And("the alternate labels listed for mid Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the alternate labels listed for first Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 11
- testRunner.And("the alternate labels listed for last Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the alternate labels listed for mid Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
+ testRunner.And("the alternate labels listed for last Skill returned matches esco data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
  testRunner.And("the number of results returned matches the expected value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

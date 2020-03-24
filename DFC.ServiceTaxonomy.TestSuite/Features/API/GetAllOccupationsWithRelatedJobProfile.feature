@@ -3,6 +3,7 @@
 Background: 
 	Given I have made sure that "occupations" with related job profiles are present in the graph datastore
 
+@Ignore
 @GetAllOccupationsWithRelatedJobProfile
 Scenario: Retrieve a list of occupations with related job profile
 	Given I request all occupations with related job profile from the NCS API
