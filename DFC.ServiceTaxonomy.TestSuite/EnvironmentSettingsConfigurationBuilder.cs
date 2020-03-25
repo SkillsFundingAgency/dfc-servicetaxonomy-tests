@@ -32,7 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
             else
             {
                 configurationBuilder
-                   .AddJsonFile("appsettings.json, false, true");
+                   .AddJsonFile("appsettings.json", false, true);
             }
            
             return configurationBuilder.Build();
