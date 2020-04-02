@@ -27,8 +27,8 @@ stages:
       displayName: 'Publish $(SolutionBaseName).TestSuite tests'
       inputs:
         command: 'publish'
-        projects: '$(SolutionBaseName)\$(SolutionBaseName).TestSuite\$(SolutionBaseName).TestSuite.csproj'
-        arguments: '-o "$(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName)"'
+        projects: '$(SolutionBaseName).TestSuite\$(SolutionBaseName).TestSuite.csproj'
+        arguments: '-o "$(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName).TestSuite"'
         publishWebProjects: False
         zipAfterPublish: true
     - task: PublishPipelineArtifact@1
