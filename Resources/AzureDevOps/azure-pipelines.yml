@@ -23,6 +23,16 @@ stages:
     workspace:
       clean: all
     steps:
-    - template: AzureDevOpsTemplates/Build/StepTemplates/dfc-dotnetcore-build-notests.yml@dfc-devops
-      parameters:
-        SolutionBaseName: $(SolutionBaseName).TestSuite
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish $(SolutionBaseName).TestSuite tests'
+      inputs:
+        command: 'publish'
+        projects: '$(SolutionBaseName).TestSuite\$(SolutionBaseName).TestSuite.csproj'
+        arguments: '-o "$(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName).TestSuite"'
+        publishWebProjects: False
+        zipAfterPublish: true
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Artifact: $(SolutionBaseName).TestSuite'
+      inputs:
+        targetPath: $(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName).TestSuite\
+        artifactName: $(SolutionBaseName).TestSuite.DeploymentPackages
