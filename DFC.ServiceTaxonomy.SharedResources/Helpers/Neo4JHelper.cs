@@ -50,6 +50,19 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return result;
         }
 
+        public int ExecuteCountQuery(string queryText, Dictionary<string, object> queryParameters)
+        {
+            int recordCount = -1;
+            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            foreach (IRecord record in result)
+            {
+                string a = record.Values["count(a)"].ToString(); ;
+                int.TryParse(a, out recordCount);
+            }
+            return recordCount;
+
+        }
+
         public int GetRecordCount(string queryText, Dictionary<string, object> queryParameters)
         {
             IStatementResult result = ExecuteTableQuery(queryText, queryParameters);

@@ -89,14 +89,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table31.AddRow(new string[] {
+            table34.AddRow(new string[] {
                         "My Test Day to Day task",
                         "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table31, "And ");
+ testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table34, "And ");
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17

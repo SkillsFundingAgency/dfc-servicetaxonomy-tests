@@ -26,6 +26,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
 
+        public string sqlServerConnectionString = Configuration["SqlServer:ConnectionString"];
+
 
     }
 }

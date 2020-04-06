@@ -89,16 +89,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Url",
                         "LinkText"});
-            table41.AddRow(new string[] {
+            table44.AddRow(new string[] {
                         "My Test UniversityLink",
                         "http://test.com",
                         "more info ho!"});
 #line 13
- testRunner.And("I Enter the following form data for \"UniversityLink\"", ((string)(null)), table41, "And ");
+ testRunner.And("I Enter the following form data for \"UniversityLink\"", ((string)(null)), table44, "And ");
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17

@@ -37,6 +37,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
         }
 
+        protected By getLocatorFromType(String contentType, String type, String field)
+        {
+            switch (type)
+            {
+                case "Text Field":
+                    return By.Id(contentType + "_TextField_Text");
+                 case "Numeric Field":
+                    return By.Id(contentType + "_NumericField_Value");
+                case "Title":
+                    return getLocatorBase(field);
+                default:
+                    return null;
+            }
+        }
+
         public By getLocator(string field)
         {
             return getLocatorBase(field);
@@ -113,6 +128,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public void SetFieldValue(string field, string value)//, Func <String, By> OverrideLocator)
         {
              EnterText( field, value, getLocatorBase(field)) ;
+        }
+
+        public void SetFieldValueFromType(string contenType, string field, string value, string type)//, Func <String, By> OverrideLocator)
+        {
+            EnterText(field, value, getLocatorFromType(contenType, type, field));
         }
 
         public bool ConfirmSuccess()

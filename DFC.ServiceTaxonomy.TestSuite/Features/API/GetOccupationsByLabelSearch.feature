@@ -19,9 +19,9 @@ Then the response json matches:
             "occupation": "dietitian",
             "lastModified": "2016-09-22T13:31:57Z",
             "alternativeLabels": [
+                "dietician",
                 "public health nutritionist",
-                "specialist dietician",
-                "dietician"
+                "specialist dietician"
             ],
             "uri": "http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f",
             "matches": {
@@ -96,16 +96,16 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
             "occupation": "dietitian",
             "lastModified": "2016-09-22T13:31:57Z",
             "alternativeLabels": [
+                "dietician",
                 "public health nutritionist",
-                "specialist dietician",
-                "dietician"
+                "specialist dietician"
             ],
             "uri": "http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f",
             "matches": {
                 "occupation": [],
                 "alternativeLabels": [
-                    "specialist dietician",
-                    "dietician"
+                    "dietician",
+                    "specialist dietician"
                 ]
             }
         }
