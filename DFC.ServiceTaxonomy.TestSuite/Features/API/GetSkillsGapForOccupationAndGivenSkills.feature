@@ -2,6 +2,8 @@
 
 	
 @GetSkillsGapOforOccupationAndGivenSkills
+@ignore
+@todo
 Scenario: Occupation is supplied with a skill list which has some commonality
 	Given I make a request to the service taxonomy API "getskillsgapforoccupationandgivenskills" with request body
 """
@@ -198,6 +200,8 @@ Scenario: Occupation is supplied with a skill list which has some commonality
 	
 
 @GetSkillsGapOforOccupationAndGivenSkills
+@ignore
+@todo
 Scenario: Occupation is supplied with a skill list including a matching skill with no alternate labels
 # also covers matching skill of type knowledge
 	Given I make a request to the service taxonomy API "getskillsgapforoccupationandgivenskills" with request body

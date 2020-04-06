@@ -211,12 +211,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skills for a valid occupation with no alternate labels")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         [NUnit.Framework.CategoryAttribute("GetAllSkillsForOccupation")]
         public virtual void GetSkillsForAValidOccupationWithNoAlternateLabels()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for a valid occupation with no alternate labels", null, new string[] {
+                        "ignore",
+                        "todo",
                         "GetAllSkillsForOccupation"});
-#line 63
+#line 65
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -226,17 +230,17 @@ this.ScenarioInitialize(scenarioInfo);
             table25.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/occupation/d051a141-92cd-4800-b0ee-6c8c31ea5838"});
-#line 66
+#line 68
  testRunner.Given("I make a request to the service taxonomy API \"getSkillsForOccupation\"", ((string)(null)), table25, "Given ");
-#line 69
+#line 71
     testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 70
+#line 72
     testRunner.And("the response json with element \"skills\" removed matches:", "{\r\n\"occupation\": \"crane technician\",\r\n\"lastModified\": \"2016-07-05T16:53:42Z\",\r\n\"a" +
                     "lternativeLabels\": [],\r\n\"uri\": \"http://data.europa.eu/esco/occupation/d051a141-9" +
                     "2cd-4800-b0ee-6c8c31ea5838\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 79
+#line 81
     testRunner.And("the response json has collection \"skills\" with an item matching", @"{
 ""relationshipType"": ""essential"",
 ""skill"": ""secure crane"",
@@ -261,12 +265,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skills for a valid occupation")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         [NUnit.Framework.CategoryAttribute("GetAllSkillsForOccuation")]
         public virtual void GetSkillsForAValidOccupation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skills for a valid occupation", null, new string[] {
+                        "ignore",
+                        "todo",
                         "GetAllSkillsForOccuation"});
-#line 103
+#line 106
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -276,12 +284,12 @@ this.ScenarioInitialize(scenarioInfo);
             table26.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/occupation/b633af32-c8c0-4481-9971-7932ea4b16b5"});
-#line 105
- testRunner.Given("I make a request to the service taxonomy API \"getSkillsForOccupation\"", ((string)(null)), table26, "Given ");
 #line 108
+ testRunner.Given("I make a request to the service taxonomy API \"getSkillsForOccupation\"", ((string)(null)), table26, "Given ");
+#line 111
     testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 109
+#line 112
  testRunner.And("the response json matches:", "{\r\n   \"skills\": [\r\n       {\r\n           \"relationshipType\": \"essential\",\r\n       " +
                     "    \"skill\": \"woodworking processes\",\r\n           \"lastModified\": \"2016-12-20T19" +
                     ":09:23Z\",\r\n           \"alternativeLabels\": [\r\n               \"woodwork processes" +

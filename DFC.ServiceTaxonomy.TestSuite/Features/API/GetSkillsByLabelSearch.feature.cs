@@ -71,11 +71,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a full word")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchForAFullWord()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a full word", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -175,11 +179,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a partial word")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchForAPartialWord()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a partial word", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 222
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -225,11 +233,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for a full word with alternate labels included")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchForAFullWordWithAlternateLabelsIncluded()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a full word with alternate labels included", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 266
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -270,11 +282,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search where there are no matches")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchWhereThereAreNoMatches()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search where there are no matches", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 330
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -293,11 +309,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Alt label search defaults to false")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void AltLabelSearchDefaultsToFalse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label search defaults to false", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 349
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -316,11 +336,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search for that is only in alt labels without allowing alt label search")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchForThatIsOnlyInAltLabelsWithoutAllowingAltLabelSearch()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for that is only in alt labels without allowing alt label search", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 369
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -339,11 +363,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search that returns skill with no alt labels")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SearchThatReturnsSkillWithNoAltLabels()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search that returns skill with no alt labels", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 389
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -403,11 +431,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Alt label value is supplied as parameter")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void AltLabelValueIsSuppliedAsParameter()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alt label value is supplied as parameter", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 448
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -450,11 +482,15 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("No body is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void NoBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No body is supplied", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 515
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -474,11 +510,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid body is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void InvalidBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid body is supplied", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 523
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -501,11 +541,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid security header is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void InvalidSecurityHeaderIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header is supplied", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 533
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -532,11 +576,15 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing security header")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void MissingSecurityHeader()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
-                        "GetSkillsByLabel"});
+                        "GetSkillsByLabel",
+                        "ignore",
+                        "todo"});
 #line 549
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

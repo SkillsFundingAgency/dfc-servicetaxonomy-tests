@@ -59,6 +59,8 @@ Scenario: Missing security header
     }
     """
 
+@ignore
+@todo
 @GetAllSkillsForOccupation
 Scenario: Get skills for a valid occupation with no alternate labels
 # includes check for occupation specific resuse levels
@@ -98,7 +100,8 @@ Scenario: Get skills for a valid occupation with no alternate labels
 }
     """
 
-
+@ignore
+@todo
 @GetAllSkillsForOccuation
 Scenario: Get skills for a valid occupation
 # includes skill with no labels, essential and optional skills, Sector specific cross-sectoral resuse levels, types competency and knowledge
