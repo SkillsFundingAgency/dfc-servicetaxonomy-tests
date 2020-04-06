@@ -1,6 +1,8 @@
 ﻿Feature: GetOccupationsWithMatchingSkills
 
 @GetOccupationsWithMatchingSkills
+@ignore
+@todo
 Scenario: Search for matching occupations
 	Given I supply the parameter "minumMatchingSkills" as a string with value "123"
 	And I supply the parameter "skillList" as a collection with values
@@ -19,6 +21,8 @@ Scenario: Search for matching occupations
 
 	
 @GetOccupationsWithMatchingSkills
+@ignore
+@todo
 Scenario: Skill list is supplied that matches one occupation
 	Given I make a request to the service taxonomy API "getskillsgapforoccupationandgivenskills" with request body
 	"""
@@ -49,6 +53,8 @@ Scenario: Skill list is supplied that matches one occupation
 
 
 @GetOccupationsWithMatchingSkills
+@ignore
+@todo
 Scenario: Skill list is supplied that does not match any occupations with the given number of matches
 	Given I make a request to the service taxonomy API "getskillsgapforoccupationandgivenskills" with request body
 	"""
