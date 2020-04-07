@@ -71,22 +71,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Occupation is supplied with a skill list which has some commonality")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsGapOforOccupationAndGivenSkills")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void OccupationIsSuppliedWithASkillListWhichHasSomeCommonality()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Occupation is supplied with a skill list which has some commonality", null, new string[] {
-                        "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 5
+                        "GetSkillsGapOforOccupationAndGivenSkills",
+                        "ignore",
+                        "todo"});
+#line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 6
+#line 8
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\" with request body", "{\r\n  \"label\": \"torch\",\r\n  \"matchAltLabels\": \"true\"\r\n}\r\n", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
+#line 16
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 15
+#line 17
  testRunner.And("the response json with elements \"missingSkills\" and \"matchingSkills\" removed matc" +
                     "hes:", @"{
 ""occupation"": ""microbiologist"",
@@ -117,7 +121,7 @@ this.ScenarioInitialize(scenarioInfo);
 ""uri"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c""
 }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 46
+#line 48
     testRunner.And("the response json has collection \"missingSkills\" with an item matching", @"{
         ""relationshipType"": ""essential"",
         ""skill"": ""gather experimental data"",
@@ -134,7 +138,7 @@ this.ScenarioInitialize(scenarioInfo);
         ""skillReusability"": ""cross-sectoral""
     }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 64
+#line 66
     testRunner.And("the response json has collection \"missingSkills\" with an item matching", @"    {
         ""relationshipType"": ""essential"",
         ""skill"": ""microbiology-bacteriology"",
@@ -159,7 +163,7 @@ this.ScenarioInitialize(scenarioInfo);
         ""skillReusability"": ""sector-specific""
     }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 90
+#line 92
     testRunner.And("the response json has collection \"missingSkills\" with an item matching", @"     {
          ""relationshipType"": ""optional"",
          ""skill"": ""helminthology"",
@@ -173,7 +177,7 @@ this.ScenarioInitialize(scenarioInfo);
          ""skillReusability"": ""occupation-specific""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 105
+#line 107
     testRunner.And("the response json has collection \"missingSkills\" with an item matching", @"     {
          ""relationshipType"": ""optional"",
          ""skill"": ""write research proposals"",
@@ -183,12 +187,12 @@ this.ScenarioInitialize(scenarioInfo);
          ""uri"": ""http://data.europa.eu/esco/skill/0ee7b0d6-db98-4785-9948-f2ef415d155a"",
          ""skillReusability"": ""cross-sectoral""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 117
+#line 119
    testRunner.And("the count of collection \"missingSkills\" is 45", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 118
+#line 120
    testRunner.And("the element \"uri\" in the collection \"missingSkills\" has distinct values", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 119
+#line 121
    testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"{
          ""relationshipType"": ""essential"",
          ""skill"": ""conduct research on flora"",
@@ -205,7 +209,7 @@ this.ScenarioInitialize(scenarioInfo);
          ""skillReusability"": ""sector-specific""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 137
+#line 139
    testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"{
          ""relationshipType"": ""essential"",
          ""skill"": ""collect biological data"",
@@ -226,7 +230,7 @@ this.ScenarioInitialize(scenarioInfo);
          ""skillReusability"": ""cross-sectoral""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 159
+#line 161
    testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"     {
          ""relationshipType"": ""essential"",
          ""skill"": ""apply scientific methods"",
@@ -244,7 +248,7 @@ this.ScenarioInitialize(scenarioInfo);
          ""skillReusability"": ""cross-sectoral""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 178
+#line 180
    testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"    {
          ""relationshipType"": ""optional"",
          ""skill"": ""develop bioremediation techniques"",
@@ -260,9 +264,9 @@ this.ScenarioInitialize(scenarioInfo);
          ""uri"": ""http://data.europa.eu/esco/skill/23cb29ec-5738-4966-8453-09952ed8c1fc"",
          ""skillReusability"": ""occupation-specific""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 196
+#line 198
    testRunner.And("the count of collection \"matchingSkills\" is 4", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 197
+#line 199
    testRunner.And("the element \"uri\" in the collection \"matchingSkills\" has distinct values", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -271,17 +275,21 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Occupation is supplied with a skill list including a matching skill with no alter" +
             "nate labels")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillsGapOforOccupationAndGivenSkills")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void OccupationIsSuppliedWithASkillListIncludingAMatchingSkillWithNoAlternateLabels()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Occupation is supplied with a skill list including a matching skill with no alter" +
                     "nate labels", null, new string[] {
-                        "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 201
+                        "GetSkillsGapOforOccupationAndGivenSkills",
+                        "ignore",
+                        "todo"});
+#line 205
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 203
+#line 207
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\" with request body", @"{
   ""occupation"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c"",
@@ -290,10 +298,10 @@ this.ScenarioInitialize(scenarioInfo);
     ""http://data.europa.eu/esco/skill/0bc42cda-a6f0-4cac-9b34-7911faba0bd4""
   ]
 }", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 213
+#line 217
     testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 214
+#line 218
     testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"     {
          ""relationshipType"": ""optional"",
          ""skill"": ""write research proposals"",
@@ -304,7 +312,7 @@ this.ScenarioInitialize(scenarioInfo);
          ""skillReusability"": ""cross-sectoral""
      }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 226
+#line 230
     testRunner.And("the response json has collection \"matchingSkills\" with an item matching", @"    {
         ""relationshipType"": ""essential"",
         ""skill"": ""microbiology-bacteriology"",
@@ -328,9 +336,9 @@ this.ScenarioInitialize(scenarioInfo);
         ""uri"": ""http://data.europa.eu/esco/skill/0bc42cda-a6f0-4cac-9b34-7911faba0bd4"",
         ""skillReusability"": ""sector-specific""
     }", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 252
+#line 256
    testRunner.And("the count of collection \"matchingSkills\" is 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 253
+#line 257
    testRunner.And("the count of collection \"missingSkills\" is 47", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -343,20 +351,20 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Occupation is supplied with a skill list including no matching skills", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 259
+#line 263
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 261
+#line 265
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\" with request body", "{\r\n  \"occupation\": \"http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af" +
                     "-92df8042520c\",\r\n  \"skillList\": [\r\n    \"http://data.europa.eu/esco/nonmatchingsk" +
                     "ill/0ee7b0d6-db98-4785-9948-f2ef415d155a\"\r\n  ]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 270
+#line 274
     testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 271
+#line 275
     testRunner.And("the count of collection \"matchingSkills\" is 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 272
+#line 276
     testRunner.And("the count of collection \"missingSkills\" is 49", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -369,11 +377,11 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unknown occupation is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 276
+#line 280
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 277
+#line 281
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\" with request body", @"{
   ""occupation"": ""http://data.europa.eu/esco/Invalidoccupation/a7a74a05-3dd0-46c6-99af-92df8042520c"",
@@ -385,7 +393,7 @@ this.ScenarioInitialize(scenarioInfo);
 	""http://data.europa.eu/esco/skill/e3fcd642-5f9c-48ee-be58-258dd895d281""
   ]
 }", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 290
+#line 294
     testRunner.Then("the response code is 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -398,19 +406,19 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No body is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 295
+#line 299
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-#line 296
+#line 300
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\"", ((string)(null)), table27, "Given ");
-#line 298
+#line 302
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 299
+#line 303
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -423,7 +431,7 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid body is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 303
+#line 307
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -433,12 +441,12 @@ this.ScenarioInitialize(scenarioInfo);
             table28.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 304
+#line 308
  testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\"", ((string)(null)), table28, "Given ");
-#line 307
+#line 311
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 308
+#line 312
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -451,10 +459,10 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header is supplied", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 313
+#line 317
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 314
+#line 318
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -463,13 +471,13 @@ this.ScenarioInitialize(scenarioInfo);
             table29.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 315
+#line 319
  testRunner.And("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\"", ((string)(null)), table29, "And ");
-#line 318
+#line 322
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 319
+#line 323
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to invalid subscrip" +
                     "tion key. Make sure to provide a valid key for an active subscription.\"\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -483,10 +491,10 @@ this.ScenarioInitialize(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
                         "GetSkillsGapOforOccupationAndGivenSkills"});
-#line 329
+#line 333
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 330
+#line 334
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
@@ -495,13 +503,13 @@ this.ScenarioInitialize(scenarioInfo);
             table30.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 331
+#line 335
  testRunner.And("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
                     "ills\"", ((string)(null)), table30, "And ");
-#line 334
+#line 338
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 335
+#line 339
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to missing subscrip" +
                     "tion key. Make sure to include subscription key when making requests to an API.\"" +
                     "\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
