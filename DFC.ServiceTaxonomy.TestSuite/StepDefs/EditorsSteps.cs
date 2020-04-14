@@ -407,7 +407,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                   counter = 0;
                 }
-                Thread.Sleep(36000);
+                Thread.Sleep(720000);
             }
 
             file.Close();
@@ -569,21 +569,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             done = false;
             string cypher = "match(a:ncs__" + table + ") return count(a)";
             int neo4jRecordCount = 0;
+            bool tmModExtended = false;
             while (!done)
             {
                 // check neo count
                 Neo4JHelper neo4JHelper = new Neo4JHelper();
-                neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                try
+                {
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                     _scenarioContext.GetEnv().neo4JUid,
                                     _scenarioContext.GetEnv().neo4JPassword);
-               /* var countInfo = neo4JHelper.ExecuteTableQuery(cypher,null);
-                var returnObject = neo4JHelper.GetRecordCount(cypher, null);
-                foreach (IRecord record in countInfo)
+                    /* var countInfo = neo4JHelper.ExecuteTableQuery(cypher,null);
+                     var returnObject = neo4JHelper.GetRecordCount(cypher, null);
+                     foreach (IRecord record in countInfo)
+                     {
+                         string a = record.Values["count(a)"].ToString(); ;
+                         int.TryParse(a, out neo4jRecordCount);
+                     }*/
+                    neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
+                }
+                catch 
                 {
-                    string a = record.Values["count(a)"].ToString(); ;
-                    int.TryParse(a, out neo4jRecordCount);
-                }*/
-                neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
+                    Thread.Sleep(120000);
+                    tmMod = (tmModExtended ? tmMod : tmMod * 2 );
+                    tmModExtended = true;
+                    
+                }
+                
                 if (neo4jRecordCount.Equals(recordCount + startingSQLRecordCount))
                 {
                     // we are done
