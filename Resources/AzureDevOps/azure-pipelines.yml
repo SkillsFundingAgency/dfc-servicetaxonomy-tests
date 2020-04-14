@@ -28,7 +28,7 @@ stages:
       inputs:
         command: 'publish'
         projects: '$(SolutionBaseName).TestSuite\$(SolutionBaseName).TestSuite.csproj'
-        arguments: '-o "$(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName).TestSuite"'
+        arguments: '-o "$(build.artifactstagingdirectory)\Artifact\$(SolutionBaseName).TestSuite"  --self-contained --runtime win-x86'
         publishWebProjects: False
         zipAfterPublish: true
     - task: PublishPipelineArtifact@1
