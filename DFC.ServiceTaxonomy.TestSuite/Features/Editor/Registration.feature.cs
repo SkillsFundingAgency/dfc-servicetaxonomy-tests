@@ -82,11 +82,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new Registration")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void AddANewRegistration()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new Registration", null, new string[] {
-                        "mytag"});
+                        "Editor"});
 #line 11
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -99,14 +99,14 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table44.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "My Test Registration",
                         "My test description"});
 #line 16
- testRunner.And("I Enter the following form data for \"Registration\"", ((string)(null)), table44, "And ");
+ testRunner.And("I Enter the following form data for \"Registration\"", ((string)(null)), table42, "And ");
 #line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20

@@ -5,6 +5,7 @@
 Background: 
 	Given I have made sure that "occupations" with related job profiles are present in the graph datastore
 
+@GetSkillById @ignore @todo
 @GetSkillById 
 Scenario: Get skill classified as Knowledge and cross-sectoral
 	Given I make a request to the service taxonomy API "getskillbyid"

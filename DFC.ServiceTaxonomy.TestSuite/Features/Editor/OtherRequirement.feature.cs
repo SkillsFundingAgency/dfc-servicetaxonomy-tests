@@ -81,11 +81,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new FurtherInfo content item")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void AddANewFurtherInfoContentItem()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new FurtherInfo content item", null, new string[] {
-                        "mytag"});
+                        "Editor"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -98,14 +98,14 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table38.AddRow(new string[] {
+            table36.AddRow(new string[] {
                         "My Test Other Requirement",
                         "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"OtherRequirement\"", ((string)(null)), table38, "And ");
+ testRunner.And("I Enter the following form data for \"OtherRequirement\"", ((string)(null)), table36, "And ");
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
