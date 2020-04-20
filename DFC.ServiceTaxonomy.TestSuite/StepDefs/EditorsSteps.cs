@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
@@ -23,11 +24,18 @@ using Neo4j.Driver.V1;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
+    class RowItem
+    {
+        public string uri { get; set; }
+        public string test_name { get; set; }
+        public string test_description { get; set; }
+    }
+
     [Binding]
     public sealed class EditorsSteps
     {
         #region consts
-        private const string cypher_activityByUri = "match(a:ncs__Activity { uri: { uri} }) return a.skos__prefLabel as activity, a.uri as uri";
+        private const string cypher_activityByUri = "match(a:ncs__Activity { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as uri";
         private const string cypher_DayToDayTaskByUri = "match(a:ncs__DayToDayTask { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
         private const string cypher_OtherRequirementByUri = "match(a:ncs__OtherRequirement { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
         private const string cypher_FurtherInfoByUri = "match(a:ncs__FurtherInfo { uri: { uri} }) return a.skos__prefLabel as Title, a.ncs__Link_url as Url, a.ncs__Link_text as LinkText";
@@ -38,6 +46,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private const string keyGeneratedUri = "GeneratedURI";
         private const string keyEditorDescriptionField = "Title";
+
+        private const string sql_ClearDownAllContentItemsOfType = 
+                                                                @"begin transaction t1
+                                                                select DocumentId
+                                                                into #tmpdocids
+                                                                from [dbo].[ContentItemIndex]
+                                                                where contentType = '@CONTENTTYPE@';
+                                                                delete from [dbo].[ContentItemIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
+                                                                delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
+                                                                drop table #tmpdocids
+                                                                commit transaction t1";
         #endregion
 
         private readonly ScenarioContext _scenarioContext;
@@ -45,10 +64,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private StartPage _startPage;
         private AddActivity _addActivity;
         private AddContentItemBase _addContentItemBase;
-        private AddFurtherInfo _addFurtherInfo;
+        private AddLinkItem _addLinkItem;
         private ManageContent _manageContent;
         private ModalOKCancel _modalOkCancel;
         private AddContentTypeBaseItem _addContentType;
+        private EditContentType _editContentType;
         private GraphSyncPart _GraphSyncPart;
 
 
@@ -59,14 +79,41 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _startPage = new StartPage(scenarioContext);
             _addActivity = new AddActivity(scenarioContext);
             _addContentItemBase = new AddContentItemBase(scenarioContext);
-            _addFurtherInfo = new AddFurtherInfo(scenarioContext);
+            _addLinkItem = new AddLinkItem(scenarioContext);
             _manageContent = new ManageContent(scenarioContext);
             _modalOkCancel = new ModalOKCancel(scenarioContext);
             _addContentType = new AddContentTypeBaseItem(scenarioContext);
             _GraphSyncPart = new GraphSyncPart(scenarioContext);
+            _editContentType = new EditContentType(scenarioContext);
         }
 
         #region given steps
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        [Given(@"I set up a data prefix for ""(.*)""")]
+        public void GivenISetUpADataPrefixFor(string p0)
+        {
+            _scenarioContext["prefix"] = RandomString(5) + "_";
+            _scenarioContext["prefixField"] = p0;
+        }
+
+        [Given(@"I get the recipe files ready")]
+        public void GivenIGetTheRecipeFilesReady()
+        {
+            if (_scenarioContext.ContainsKey("prefix"))
+            {
+                _scenarioContext.ReplaceTokensInDirectory(Directory.GetCurrentDirectory() + "/Recipes/" ,"@PREFIX@",(string)_scenarioContext["prefix"] );
+            }
+        }
+
+
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
@@ -118,6 +165,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                          }*/
         }
 
+
+
+        [Then(@"the values displayed in the editor match")]
+        public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
+        {
+            foreach (var row in table.Rows)
+            {
+               foreach (var item in row)
+                {
+                    string newValue = item.Value;
+                    if (_scenarioContext.ContainsKey("prefix") && item.Key.Equals("Title") )
+                    {
+                        newValue = (string)_scenarioContext["prefix"] + newValue;
+                    }
+                    newValue.Should().Be(_editContentType.GetFieldValue( item.Key));
+                }
+            }
+        }
+
         [Given(@"I Enter the following form data for ""(.*)""")]
         public void GivenIEnterTheFollowingFormDataFor(string p0, Table table)
         {
@@ -130,24 +196,29 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "DayToDayTask":
                     _scenarioContext["ResponseType"] = typeof(DayToDayTask);
                     _scenarioContext["CypherQuery"] = cypher_DayToDayTaskByUri;
-                    //addItem = _addDayToDayTask;
+                    iAddItem = _addContentItemBase;
                     break;
                 case "FurtherInfo":
                     _scenarioContext["ResponseType"] = typeof(FurtherInfo);
                     _scenarioContext["CypherQuery"] = cypher_FurtherInfoByUri;
-                    iAddItem = _addFurtherInfo;
+                    iAddItem = _addLinkItem;
+                    break;
+                case "Activity":
+                    _scenarioContext["ResponseType"] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
+                    _scenarioContext["CypherQuery"] = cypher_activityByUri;
+                    iAddItem = _addLinkItem;
                     break;
                 case "UniversityLink":
                     _scenarioContext["ResponseType"] = typeof(UniversityLink);
                     _scenarioContext["CypherQuery"] = cypher_UniverstyLinkByUri;
-                    iAddItem = _addFurtherInfo;
+                    iAddItem = _addLinkItem;
                     break;
                 case "RequirementsPrefix":
-                case "Restriction":
                 case "UniversityRequirement":
                     _scenarioContext["ResponseType"] = typeof(GenericContent);
                     _scenarioContext["CypherQuery"] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", p0);
                     break;
+                case "Restriction":
                 default:
                     _scenarioContext["ResponseType"] = typeof(GenericContent);
                     _scenarioContext["CypherQuery"] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", p0);
@@ -159,13 +230,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Dictionary<string, string> vars = new Dictionary<string, string>();
             foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
             {
+                string newValue = item.value.Value;
                 if (item.index == 0)
                 {
+                    newValue = ( _scenarioContext.ContainsKey("prefix") ? _scenarioContext["prefix"] : "" ) + newValue;
                     // store first field in scenario context
                     _scenarioContext.Set(item.value.Value, item.value.Key);
                 }
-                vars.Add(item.value.Key, item.value.Value);
-                iAddItem.SetFieldValue(item.value.Key, item.value.Value);
+                vars.Add(item.value.Key, newValue);
+                iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
             _scenarioContext["RequestVariables"] = vars;
 
@@ -185,7 +258,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.SelectFirstItem();
         }
 
-
+        //content type
         [Given(@"I add a new contentType called ""(.*)""")]
         public void GivenIAddANewContentTypeCalled(string p0)
         {
@@ -195,12 +268,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
  
         }
 
+        //content type
         [Given(@"I edit the ""(.*)"" part")]
         public void GivenIEditThePart(string p0)
         {
             string contentType = (string)_scenarioContext["ContentType"];
             _addContentType.EditPart(contentType, p0);
         }
+
+        //content type
+        [Given(@"I try to delete content type ""(.*)""")]
+        public void GivenITryToDeleteContentType(string p0)
+        {
+            _editContentType.DeleteContentType(p0);
+        }
+
+        //content item
+        [Given(@"I delete any items of type ""(.*)""")]
+        public void GivenIDeleteAnyItemsOfType(string p0)
+        {
+            _manageContent.DeleteAllItemsOfType(p0);
+        }
+
 
 
         [Given(@"I set the following field values")]
@@ -271,7 +360,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string error = "";
             try
             {
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl("https://dfc-dev-stax-editor-as.azurewebsites.net/Admin/OrchardCore.Deployment/Import/Index");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl( _scenarioContext.GetEnv().editorBaseUrl +  "/Admin/OrchardCore.Deployment/Import/Index");
                 var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
                 webElement.SendKeys(p0);
                 var item = _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Import']"));
@@ -353,6 +442,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
             }*/
             Console.WriteLine("Finished import");
+        }
+
+
+        [Given(@"I load recipe file ""(.*)""")]
+        public void GivenILoadRecipeFile(string p0)
+        {
+            GivenINavigateTo("/Admin/DeploymentPlan/Import/Index");
+            GivenLoadTheFile(Directory.GetCurrentDirectory() + "/Recipes/" + p0);
+            //GivenIImportRecipesFromTheFile(Directory.GetCurrentDirectory() +"/" +p0);
         }
 
 
@@ -689,6 +787,130 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.ConfirmRemovedSuccessfully().Should().BeTrue();
         }
 
+        public bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
+        {
+            if (thisItems.Count != otherItems.Count)
+            {
+                return false;
+            }
+            var thisKeys = thisItems.Keys;
+            foreach (var key in thisKeys)
+            {
+                if (!(otherItems.TryGetValue(key, out var value)
+                     && string.Equals(thisItems[key], value, StringComparison.OrdinalIgnoreCase))
+                    )
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public string DictionaryToString(IDictionary<string, string> dict)
+        {
+            string output = "";
+            foreach ( var kp in dict)
+            {
+                output += kp.Key + " - " + kp.Value + "\n";
+            }
+            return output;
+        }
+
+
+            public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
+        {
+            bool match;
+            message = "";
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                _scenarioContext.GetEnv().neo4JUid,
+                                _scenarioContext.GetEnv().neo4JPassword);
+           
+            var results = neo4JHelper.GetSingleRowAsDictionary(cypherQuery);
+
+            match = AreEqual(expectedresults, results);
+            if (!match)
+            {
+                message = "Expected: \n" + DictionaryToString(expectedresults) + "\n";
+                message += "Actual: \n" + DictionaryToString(results) + "\n";
+            }
+            return match;
+        }
+
+
+        [Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
+        public void GivenIConfirmTheFollowingDataIsPresetInTheGraphDatabase(string p0, Table table)
+        {
+            bool addPrefix = _scenarioContext.ContainsKey("prefixField");
+            foreach ( var r in table.Rows)
+            {
+                Dictionary<string, string> rowData = new Dictionary<string, string>();
+                int count = 0;
+                string cyperQuery = "match (i:" + p0 + ") where i.uri = '";
+                string message;
+                foreach ( var i in r)
+                {
+                    string newValue = i.Value;
+                    if (addPrefix && i.Key == (string)_scenarioContext["prefixField"] ) 
+                    {
+                        newValue = (string)_scenarioContext["prefix"] + newValue;
+                    }
+                    count++;
+                    rowData.Add(i.Key, newValue);
+                    if (count == 1)
+                    {
+                        cyperQuery += newValue + "' return i.uri as uri";
+                    }
+                    else
+                    {
+                        cyperQuery += " ,i." + i.Key + " as " + i.Key;
+                    }
+
+                }
+                var match = matchGraphQueryResultsWithDictionary(cyperQuery, rowData, out message);
+                if (!match)
+                {
+                    Console.WriteLine("**confirm the following data is preset in the Graph Database**");
+                    Console.WriteLine("Mismatch between expected and actual results");
+                    Console.WriteLine(message);
+                }
+                match.Should().BeTrue();
+            }
+
+        }
+
+
+        [Then(@"I can navigate to the content item ""(.*)"" in Orchard Core core")]
+        public void ThenICanNavigateToTheContentItemInOrchardCoreCore(string p0)
+        {
+            //_manageContent.FindItem(p0);
+            _manageContent.EditItem(p0);
+        }
+
+        [Given(@"I delete Graph data for content type ""(.*)""")]
+        public void GivenIDeleteGraphDataForContentType(string p0)
+        {
+            //todo make use of extension method
+            string cypher = "match (n) where any(l in labels(n) where l starts with '" + p0 + "') detach delete n";
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                _scenarioContext.GetEnv().neo4JUid,
+                                _scenarioContext.GetEnv().neo4JPassword);
+            neo4JHelper.ExecuteTableQuery(cypher, null);
+        }
+
+        [Given(@"I delete SQL Server data for content type ""(.*)""")]
+        public void GivenIDeleteSQLServerDataForContentType(string p0)
+        {
+            string sqlCommand = sql_ClearDownAllContentItemsOfType;
+            sqlCommand = sqlCommand.Replace("@ContentType@", p0);
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            int count = sqlInstance.ExecuteNonQuery(sqlCommand,null);
+            Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);
+        }
+
+
         [Then(@"the new data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
         {
@@ -715,7 +937,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     varValue = (string)propertyInfo.GetValue(returnObject[0], null);
                 }
-                catch { }
+                catch ( Exception e ){
+                    Console.WriteLine(e.Message);
+                }
                 
                 string rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
                 

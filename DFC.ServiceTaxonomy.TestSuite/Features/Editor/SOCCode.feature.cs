@@ -72,6 +72,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 7
+#line 8
+ testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new SOCCode")]
         [NUnit.Framework.CategoryAttribute("mytag")]
@@ -79,29 +87,31 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new SOCCode", null, new string[] {
                         "mytag"});
-#line 8
+#line 11
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 9
- testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
- testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/SOCCode/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 7
+this.FeatureBackground();
 #line 12
+ testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 13
+ testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/SOCCode/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table43.AddRow(new string[] {
+            table47.AddRow(new string[] {
                         "My Test SOCCode",
                         "My test description"});
-#line 13
- testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table43, "And ");
 #line 16
+ testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table47, "And ");
+#line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
+#line 20
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 18
+#line 21
  testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

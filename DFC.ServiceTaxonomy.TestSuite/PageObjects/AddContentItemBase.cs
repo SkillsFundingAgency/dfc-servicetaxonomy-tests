@@ -44,7 +44,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 case "Text Field":
                     return By.Id(contentType + "_TextField_Text");
                  case "Numeric Field":
-                    return By.Id(contentType + "_NumericField_Value");
+                    return By.Id(contentType + "_ValueField_Value");
                 case "Title":
                     return getLocatorBase(field);
                 default:
@@ -125,7 +125,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public void SetFieldValue(string field, string value)//, Func <String, By> OverrideLocator)
+        public string GetFieldValue(string fieldName)
+        {
+            //only currently works with base types
+            string value = "";
+            try
+            {
+                value = _scenarioContext.GetWebDriver().FindElement(getLocatorBase(fieldName)).GetAttribute("value");
+            }
+            catch
+            {
+            }
+            return value;
+
+        }
+
+        public void SetFieldValue(string type, string field, string value)//, Func <String, By> OverrideLocator)
         {
              EnterText( field, value, getLocatorBase(field)) ;
         }

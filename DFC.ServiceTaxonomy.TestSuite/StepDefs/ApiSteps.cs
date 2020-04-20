@@ -147,7 +147,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context["requestParam"] = p0;
         }
 
-
         [Given(@"I make a request to the service taxonomy API ""(.*)""")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
         {

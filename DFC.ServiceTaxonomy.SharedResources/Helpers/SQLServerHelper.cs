@@ -225,6 +225,38 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return ds;
         }
+
+        public int ExecuteNonQuery(string commandText, string[] parameters)
+        {
+            string paramsString = "";
+            int rowsAffected = 0;
+            //parameters.Where((data, index) =>
+            //{
+            //    paramsString += (index > 0 ? "," : "(") + Apos + data + Apos + (index == parameters.Length - 1 ? ")" : "");
+            //    return false;
+            //}).Any();
+
+    //        string sqlString = "select * from [" + functionName + "] " + paramsString;
+            if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
+            {
+                try
+                {
+                    SqlCommand myCommand = new SqlCommand(commandText, Connection);
+                    // myCommand.CommandText = commandText;
+
+
+                    rowsAffected = myCommand.ExecuteNonQuery();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+            return rowsAffected;
+        }
+
+
         public DataSet ExecuteStoredProcedure(string procName)
         {
             DataSet ds = new DataSet(procName);

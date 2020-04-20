@@ -26,11 +26,72 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public ManageContent FindItem( string title)
         {
+            _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentItems");
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).Clear();
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).SendKeys(title);
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).SendKeys(Keys.Return);
             return this;
         }
+
+        public ManageContent EditItem(string title)
+        {
+            FindItem(title);
+            _scenarioContext.GetWebDriver().ClickButton("Edit");
+            return this;
+        }
+
+
+        public ManageContent DeleteAllItemsOfType(string type)
+        {
+            string typeViewUrl = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentItems?Options.SelectedContentType=" + type;
+            try
+            {
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(typeViewUrl);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            var check = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()='The page could not be found.']"));
+            if (check.Count > 0)
+            {
+                // not items found
+                return this;
+
+            }
+
+            bool done = false;
+            while (!done)
+            {
+                try
+                {
+                    DeleteFirstItem();
+                }
+                catch
+                {
+                    done = true;
+                }
+            }
+
+            // check they've all gone
+            try
+            {
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(typeViewUrl);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            check = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()='The page could not be found.']"));
+            if (check.Count == 0)
+            {
+                throw new Exception("Unexpected items found of type:" + type);
+
+            }
+            return this;
+        }
+
 
         public ManageContent SelectFirstItem()
         {
@@ -58,16 +119,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
             try
             {
+                _scenarioContext.GetWebDriver().ClickButton(".btn-group:nth-child(3) > .btn");
+                _scenarioContext.GetWebDriver().ClickButton("Delete");
+                _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
 
-
-                _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".list-group-item:nth-child(1) .btn-group > .btn"))
-                                               .Click();
-                _scenarioContext.GetWebDriver().FindElement(By.LinkText("Delete"))
-                                               .Click();
+                if (! ConfirmRemovedSuccessfully() )
+                {
+                    throw new Exception("Unable to confirm the item has been removed");
+                }
             }
-            catch
+            catch ( Exception e)
             {
-
+                Console.WriteLine(e);
             }
             return this;
         }

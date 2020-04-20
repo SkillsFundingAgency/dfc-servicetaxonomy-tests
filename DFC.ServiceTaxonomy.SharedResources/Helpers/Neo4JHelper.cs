@@ -69,6 +69,24 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return result.Keys.Count;
 
         }
+
+        public Dictionary<string,string> GetSingleRowAsDictionary(string queryText)
+        {
+            IStatementResult result = ExecuteTableQuery(queryText, null);
+            Dictionary<string, string> results = new Dictionary<string, string>();
+            foreach (IRecord record in result)
+            {
+                foreach (var item in record.Values)
+                {
+                    results.Add(item.Key, (item.Value == null ? "" : item.Value.ToString()) );
+                }
+                // only want first row so exit
+                break;
+            }
+            return results;
+        }
+
+
         public IList<T> GetResultsList<T>(string queryText, Dictionary<string, object> queryParameters) where T : new()
         {
             IList<T> resultsList = new List<T>();

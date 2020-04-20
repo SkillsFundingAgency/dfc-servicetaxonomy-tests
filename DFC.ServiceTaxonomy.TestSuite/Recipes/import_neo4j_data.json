@@ -1,0 +1,21 @@
+﻿{
+  "name": "",
+  "displayName": "",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "CypherToContent",
+      "queries": [
+        {
+          "query": "match (l:test__CypherItem)\r\nreturn { ContentType: 'CypherItem', GraphSyncPart:{Text:l.uri}, TitlePart:{Title:l.test__Name}} order by l.uri\r\nskip 0 limit 10"
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,10 @@ Feature: DayToDayTasks
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
+Background:
+	Given I set up a data prefix for "skos__prefLabel"
+
+@Editor
 Scenario: Add a new DayToDayTask
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/DayToDayTask/Create" 

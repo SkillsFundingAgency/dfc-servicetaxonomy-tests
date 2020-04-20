@@ -74,59 +74,61 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add, edit and remove an activity in the editor")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void AddEditAndRemoveAnActivityInTheEditor()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add, edit and remove an activity in the editor", null, ((string[])(null)));
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add, edit and remove an activity in the editor", null, new string[] {
+                        "ignore"});
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 8
- testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
+ testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/Activity/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
+#line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title"});
             table36.AddRow(new string[] {
                         "My new activity"});
-#line 12
- testRunner.And("I Enter the following form data", ((string)(null)), table36, "And ");
-#line 15
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 13
+ testRunner.And("I Enter the following form data for \"Activity\"", ((string)(null)), table36, "And ");
 #line 16
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
+ testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 18
  testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
- testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 21
- testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 22
+ testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title"});
             table37.AddRow(new string[] {
                         "New activity title"});
-#line 23
+#line 24
  testRunner.And("I Enter the following form data", ((string)(null)), table37, "And ");
-#line 26
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 27
- testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 28
+ testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 29
  testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.Given("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 32
- testRunner.When("I delete the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 33
- testRunner.And("I confirm the delete action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I delete the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 34
- testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I confirm the delete action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
+ testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 36
  testRunner.And("the data is not present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

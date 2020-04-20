@@ -4,7 +4,10 @@ Feature: SOCCode
 	As a math idiot
 	I want to be told the sum of two numbers
 
-@mytag
+Background:
+	Given I set up a data prefix for "Title"
+
+@Editor
 Scenario: Add a new SOCCode
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/SOCCode/Create" 

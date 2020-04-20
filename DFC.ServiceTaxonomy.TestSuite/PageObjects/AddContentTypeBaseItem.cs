@@ -24,7 +24,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // navigate to /Admin/ContentTypes/List
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl("https://dfc-dev-stax-editor-as.azurewebsites.net/Admin/ContentTypes/List");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/List");
                 // click on "Create new type"
                 _scenarioContext.GetWebDriver().FindElement(By.Id("btnCreate")).Click();
 
@@ -76,7 +76,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                var url = "https://dfc-dev-stax-editor-as.azurewebsites.net/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
+                var url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);
 
             }
@@ -93,7 +93,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 // click Add button
                 //_scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Add Field']")).Click();
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl("https://dfc-dev-stax-editor-as.azurewebsites.net/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
           
                 // enter name
                 var textField = _scenarioContext.GetWebDriver().FindElement(By.Id("DisplayName"));

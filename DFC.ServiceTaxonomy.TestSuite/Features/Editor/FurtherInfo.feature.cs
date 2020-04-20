@@ -71,6 +71,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+#line 5
+ testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new FurtherInfo content item")]
         [NUnit.Framework.CategoryAttribute("mytag")]
@@ -78,14 +86,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new FurtherInfo content item", null, new string[] {
                         "mytag"});
-#line 6
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 7
+#line 4
+this.FeatureBackground();
+#line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 8
- testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/FurtherInfo/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
+ testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/FurtherInfo/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
@@ -96,13 +106,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "My Test FurtherInfo item",
                         "http://testcom",
                         "more info here"});
-#line 11
+#line 13
  testRunner.And("I Enter the following form data for \"FurtherInfo\"", ((string)(null)), table35, "And ");
-#line 14
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 16
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+ testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 18
  testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

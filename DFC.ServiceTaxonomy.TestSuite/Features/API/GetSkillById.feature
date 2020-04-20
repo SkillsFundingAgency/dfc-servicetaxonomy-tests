@@ -5,7 +5,7 @@
 Background: 
 	Given I have made sure that "occupations" with related job profiles are present in the graph datastore
 
-@GetSkillById @ignore @todo
+@GetSkillById 
 Scenario: Get skill classified as Knowledge and cross-sectoral
 	Given I make a request to the service taxonomy API "getskillbyid"
 	| dataItem | value                                                                 |
@@ -17,11 +17,11 @@ Scenario: Get skill classified as Knowledge and cross-sectoral
     "skill": "types of wood materials",
     "lastModified": "2017-02-15T12:22:24Z",
     "alternativeLabels": [
-        "sorts of wood materials",
-        "varieties of wood materials",
-        "categories of wood materials",
-        "kinds of wood materials",
-        "type of wood material"
+        "type of wood material",
+		"varieties of wood materials",
+		"kinds of wood materials",
+		"sorts of wood materials",
+		"categories of wood materials"
     ],
     "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
     "skillReusability": "cross-sectoral"

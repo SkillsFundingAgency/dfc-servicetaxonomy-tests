@@ -5,7 +5,10 @@ Feature: QCF
 	I want to be told the sum of two numbers
 
 
-@mytag
+Background:
+	Given I set up a data prefix for "Title"
+
+@Editor
 Scenario: Add a new QCF Level
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/QCFLevel/Create" 

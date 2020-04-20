@@ -8,6 +8,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Interfaces
     public interface IEditorContentItem
     {
         By getLocator(String field);
-        void SetFieldValue(string field, string value);
+        void SetFieldValue(string type, string field, string value);
     }
 }

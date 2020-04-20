@@ -1,8 +1,10 @@
 ﻿@webtest
 Feature: OtherRequirement
 
+Background:
+	Given I set up a data prefix for "Title"
 
-@mytag
+@Editor
 Scenario: Add a new FurtherInfo content item
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/OtherRequirement/Create" 

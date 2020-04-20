@@ -3,8 +3,9 @@ Feature: ContentTypeUserActions
 
 Background:
 	Given I logon to the editor
+	And I try to delete content type "AutomatedTestItem"
 
-@mytag
+@Editor
 Scenario: Add a new content type with Title Part
 	Given I add a new contentType called "AutomatedTestItem"
 #	Enter Display Name and Technical Name, click create
@@ -44,5 +45,5 @@ Scenario: Add a new content type with Title Part
 	When I publish the item
 #	Then the graph item matches the one in the editor
 	Then the new data is present in the Graph databases
-	And the graph item matches the one in the editor
+#	And the graph item matches the one in the editorTODO
 	

@@ -80,15 +80,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as Knowledge and cross-sectoral")]
-        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
-        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void GetSkillClassifiedAsKnowledgeAndCross_Sectoral()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as Knowledge and cross-sectoral", null, new string[] {
-                        "GetSkillById",
-                        "ignore",
-                        "todo"});
+                        "GetSkillById"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -110,11 +106,11 @@ this.FeatureBackground();
    ""skill"": ""types of wood materials"",
    ""lastModified"": ""2017-02-15T12:22:24Z"",
    ""alternativeLabels"": [
-       ""sorts of wood materials"",
-       ""varieties of wood materials"",
-       ""categories of wood materials"",
-       ""kinds of wood materials"",
-       ""type of wood material""
+       ""type of wood material"",
+	""varieties of wood materials"",
+	""kinds of wood materials"",
+	""sorts of wood materials"",
+	""categories of wood materials""
    ],
    ""uri"": ""http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7"",
    ""skillReusability"": ""cross-sectoral""
