@@ -76,6 +76,9 @@
     <None Update="appsettings.local.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="chromedriver.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Recipes\create_neo4j_content.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
