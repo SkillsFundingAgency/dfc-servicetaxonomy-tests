@@ -70,89 +70,40 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search for matching occupations")]
-        [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
-        public virtual void SearchForMatchingOccupations()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for matching occupations", null, new string[] {
-                        "GetOccupationsWithMatchingSkills"});
-#line 4
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 5
- testRunner.Given("I supply the parameter \"minumMatchingSkills\" as a string with value \"123\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Value"});
-            table5.AddRow(new string[] {
-                        "1232"});
-            table5.AddRow(new string[] {
-                        "234"});
-            table5.AddRow(new string[] {
-                        "234234"});
-#line 6
- testRunner.And("I supply the parameter \"skillList\" as a collection with values", ((string)(null)), table5, "And ");
-#line 11
- testRunner.When("I request occupations with matching skills", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 12
- testRunner.Then("the response code is 201", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 13
- testRunner.And("the response matches the expected format", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                        "skill",
-                        "uri",
-                        "type",
-                        "reuselevel"});
-            table6.AddRow(new string[] {
-                        "123",
-                        "12",
-                        "123",
-                        "12312"});
-            table6.AddRow(new string[] {
-                        "123",
-                        "12",
-                        "123",
-                        "12312"});
-#line 14
- testRunner.And("the results include", ((string)(null)), table6, "And ");
-#line 18
- testRunner.And("the number of results is 43", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Skill list is supplied that matches one occupation")]
         [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SkillListIsSuppliedThatMatchesOneOccupation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skill list is supplied that matches one occupation", null, new string[] {
-                        "GetOccupationsWithMatchingSkills"});
-#line 22
+                        "GetOccupationsWithMatchingSkills",
+                        "todo"});
+#line 7
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 23
- testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\" with request body", "{\r\n   \"minimumMatchingSkills\":1,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
+#line 8
+ testRunner.Given("I make a request to the service taxonomy API \"GetOccupationsWithMatchingSkills\" w" +
+                    "ith request body", "{\r\n   \"minimumMatchingSkills\":1,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
                     "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
+#line 15
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 31
+#line 16
  testRunner.And("the response json matches:", @"{
 ""matchingOccupations"": [
     {
         ""matchingOptionalSkills"": 1,
         ""occupation"": ""microbiologist"",
+        ""jobProfileDescription"": ""<p>Microbiologists study micro-organisms like bacteria, viruses, fungi and algae.</p>"",
         ""totalOccupationOptionalSkills"": 30,
         ""jobProfileTitle"": ""Microbiologist"",
         ""totalOccupationEssentialSkills"": 19,
         ""matchingEssentialSkills"": 0,
         ""lastModified"": ""2017-01-17T14:18:17Z"",
-        ""jobProfileUri"": ""http://nationalcareers.service.gov.uk/jobprofile/2abdd237-350f-433f-b96f-4f4e231e16f1"",
-        ""uri"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c""
+        ""jobProfileUri"": ""http://nationalcareers.service.gov.uk/jobprofile/a9d9a3fd-cb00-4f94-966d-d9e71ca4131a"",
+        ""uri"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c"",
+        ""socCode"": ""2112""
     }
 ]
 }", ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -164,23 +115,25 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.DescriptionAttribute("Skill list is supplied that does not match any occupations with the given number " +
             "of matches")]
         [NUnit.Framework.CategoryAttribute("GetOccupationsWithMatchingSkills")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void SkillListIsSuppliedThatDoesNotMatchAnyOccupationsWithTheGivenNumberOfMatches()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Skill list is supplied that does not match any occupations with the given number " +
                     "of matches", null, new string[] {
-                        "GetOccupationsWithMatchingSkills"});
-#line 52
+                        "GetOccupationsWithMatchingSkills",
+                        "todo"});
+#line 41
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 53
- testRunner.Given("I make a request to the service taxonomy API \"getskillsgapforoccupationandgivensk" +
-                    "ills\" with request body", "{\r\n   \"minimumMatchingSkills\":2,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
+#line 42
+ testRunner.Given("I make a request to the service taxonomy API \"GetOccupationsWithMatchingSkills\" w" +
+                    "ith request body", "{\r\n   \"minimumMatchingSkills\":2,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
                     "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 60
+#line 49
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 61
+#line 50
  testRunner.And("the response json matches:", "{\r\n\"matchingOccupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

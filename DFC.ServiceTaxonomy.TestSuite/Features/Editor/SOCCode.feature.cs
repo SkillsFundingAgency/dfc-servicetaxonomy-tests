@@ -89,14 +89,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table43.AddRow(new string[] {
+            table41.AddRow(new string[] {
                         "My Test SOCCode",
                         "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table43, "And ");
+ testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table41, "And ");
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17

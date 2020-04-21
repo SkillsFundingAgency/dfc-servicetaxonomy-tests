@@ -34,10 +34,44 @@ namespace DFC.ServiceTaxonomy.TestSuite
                 configurationBuilder
                    .AddJsonFile("appsettings.json", false, true);
             }
-           
+
             return configurationBuilder.Build();
 
         }
+
+        //public IConfiguration BuildConfiguration()
+        //{
+
+        //    var configurationBuilder = new ConfigurationBuilder()
+        //       .SetBasePath(Directory.GetCurrentDirectory());
+
+        //    Console.WriteLine("------------- Configuring Runtime Params--------------");
+        //    if (IsRunningInTfsPipeline)
+        //    {
+        //        Console.WriteLine("Pipeline run detected - Loading tokenised app settings");
+        //        configurationBuilder
+        //            .AddJsonFile("appsettings.json", false, true);
+        //    }
+        //    else
+        //    {
+        //        var homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
+        //                        Environment.OSVersion.Platform == PlatformID.MacOSX)
+        //                        ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+
+        //        var customAppSettingsPath =
+        //            Environment.ExpandEnvironmentVariables(homePath + $@"\Automation\dfc-servicetaxonomy-tests\DFC.ServiceTaxonomy.TestSuite\appsettings.local.json");
+        //        Console.WriteLine("Loading local app settings: " + customAppSettingsPath);
+
+        //        configurationBuilder
+        //            .AddJsonFile(customAppSettingsPath, false, true);
+        //    }
+
+        //    Console.WriteLine("-----------------------------------------------------");
+
+
+        //    return configurationBuilder.Build();
+
+        //}
 
         private static bool GetIsRunningInTfsPipeline() => Environment.GetEnvironmentVariables()
             .Cast<DictionaryEntry>()

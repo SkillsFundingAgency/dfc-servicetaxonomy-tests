@@ -17,11 +17,11 @@ Scenario: Get skill classified as Knowledge and cross-sectoral
     "skill": "types of wood materials",
     "lastModified": "2017-02-15T12:22:24Z",
     "alternativeLabels": [
-        "sorts of wood materials",
-        "varieties of wood materials",
-        "categories of wood materials",
-        "kinds of wood materials",
-        "type of wood material"
+        "type of wood material",
+		"varieties of wood materials",
+		"kinds of wood materials",
+		"sorts of wood materials",
+		"categories of wood materials"
     ],
     "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
     "skillReusability": "cross-sectoral"
@@ -40,11 +40,11 @@ Scenario: Get skill classified as Competency and Sector Specific
     "skill": "operate forestry equipment",
     "lastModified": "2016-12-20T17:26:38Z",
     "alternativeLabels": [
-        "use forestry equipment",
         "forestry equipment operating",
+        "use forestry equipment",
         "using forestry equipment",
-        "operating forestry equipment",
-        "forestry equipment using"
+        "forestry equipment using",
+        "operating forestry equipment"
     ],
     "uri": "http://data.europa.eu/esco/skill/ffe198e3-3f51-40c1-8d43-6e559bb98c8d",
     "skillReusability": "sector-specific"
@@ -63,12 +63,12 @@ Scenario: Get skill classified as occupation-specific
     "skill": "manage office appliance requirements",
     "lastModified": "2016-12-20T18:06:31Z",
     "alternativeLabels": [
-        "oversee office appliance requirements",
-        "check needs for office stationary items",
-        "manage requirements of office appliance",
         "monitor office appliance requirements",
         "managing office appliance requirements",
-        "manage office appliance's requirements"
+        "oversee office appliance requirements",
+        "manage office appliance's requirements",
+        "check needs for office stationary items",
+        "manage requirements of office appliance"
     ],
     "uri": "http://data.europa.eu/esco/skill/cb108a0a-88e6-4579-885d-b1e794ada512",
     "skillReusability": "occupation-specific"

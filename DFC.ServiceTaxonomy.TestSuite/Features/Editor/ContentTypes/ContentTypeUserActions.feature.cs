@@ -96,44 +96,44 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I edit the \"Graph Sync\" part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value"});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "RelationshipType",
                         ""});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "NodeNameTransform",
                         "$\"ncs__{Value}\""});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "PropertyNameTransform",
                         "$\"ncs__{Value}\""});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "CreateRelationshipType",
                         ""});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "IDPropertyName",
                         "uri"});
-            table31.AddRow(new string[] {
+            table29.AddRow(new string[] {
                         "GenerateIDValue",
                         "$\"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid(" +
                             "):D}\""});
 #line 16
- testRunner.And("I set the following field values", ((string)(null)), table31, "And ");
+ testRunner.And("I set the following field values", ((string)(null)), table29, "And ");
 #line 24
  testRunner.And("I save the edited part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
                         "Display Name",
                         "Type"});
-            table32.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "TextField",
                         "Text Field"});
-            table32.AddRow(new string[] {
+            table30.AddRow(new string[] {
                         "ValueField",
                         "Numeric Field"});
 #line 25
- testRunner.And("I add the following fields", ((string)(null)), table32, "And ");
+ testRunner.And("I add the following fields", ((string)(null)), table30, "And ");
 #line 30
  testRunner.And("I save the contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 33
@@ -141,24 +141,24 @@ this.FeatureBackground();
 #line 35
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
                         "Field",
                         "Value",
                         "Type"});
-            table33.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "Title",
                         "TestItem",
                         "Title"});
-            table33.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "TextField",
                         "Test text",
                         "Text Field"});
-            table33.AddRow(new string[] {
+            table31.AddRow(new string[] {
                         "ValueField",
                         "25",
                         "Numeric Field"});
 #line 36
- testRunner.And("I Enter the following form data", ((string)(null)), table33, "And ");
+ testRunner.And("I Enter the following form data", ((string)(null)), table31, "And ");
 #line 41
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 42

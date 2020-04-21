@@ -212,7 +212,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             context.SetSkillListData(skills);
         }
-
+        
         [Given(@"I have made sure that ""(.*)"" with related job profiles are present in the graph datastore")]
         public void GivenIHaveMadeSureThatWithRelatedJobProfilesArePresentInTheGraphDatastore(string p0)
         {
@@ -446,7 +446,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheResponseJsonMatches(string multilineText)
         {
             JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
-            
+
         }
 
         [Then(@"the response json has collection ""(.*)"" with an item matching")]

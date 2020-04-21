@@ -59,7 +59,7 @@ Scenario: Missing security header
     }
     """
 
-@ignore
+#@ignore
 @todo
 @GetAllSkillsForOccupation
 Scenario: Get skills for a valid occupation with no alternate labels
@@ -81,26 +81,26 @@ Scenario: Get skills for a valid occupation with no alternate labels
     And the response json has collection "skills" with an item matching
     """
 {
-    "relationshipType": "essential",
-    "skill": "secure crane",
-    "lastModified": "2016-12-20T19:40:50Z",
-    "alternativeLabels": [
-        "harness crane",
-        "attach crane",
-        "harness mechanical lifting device",
-        "fix crane",
-        "anchor mechanical lifting device",
-        "fix mechanical lifting device",
-        "anchor crane",
-        "attach mechanical lifting device"
-    ],
-    "type": "competency",
-    "uri": "http://data.europa.eu/esco/skill/c56d4a15-8454-4544-bb5a-3de6ce1be4e4",
-    "skillReusability": "occupation-specific"
+	"relationshipType": "essential",
+	"skill": "secure crane",
+	"lastModified": "2016-12-20T19:40:50Z",
+	"alternativeLabels": [
+		"fix crane",
+		"fix mechanical lifting device",
+		"harness mechanical lifting device",
+		"anchor crane",
+		"attach mechanical lifting device",
+		"attach crane",
+		"anchor mechanical lifting device",
+		"harness crane"
+	],
+	"type": "competency",
+	"uri": "http://data.europa.eu/esco/skill/c56d4a15-8454-4544-bb5a-3de6ce1be4e4",
+	"skillReusability": "occupation-specific"
 }
     """
 
-@ignore
+#@ignore
 @todo
 @GetAllSkillsForOccuation
 Scenario: Get skills for a valid occupation
@@ -118,12 +118,12 @@ Scenario: Get skills for a valid occupation
             "skill": "woodworking processes",
             "lastModified": "2016-12-20T19:09:23Z",
             "alternativeLabels": [
-                "woodwork processes",
-                "woodworking procedures",
-                "wood working processes",
-                "woodworking mechanisms",
                 "woodworking measures",
-                "woodworking systems"
+                "woodworking mechanisms",
+                "woodworking procedures",
+                "woodworking systems",
+                "woodwork processes",
+                "wood working processes"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/0f9098d1-9bcd-453c-a9ec-e8b635705976",
@@ -134,12 +134,12 @@ Scenario: Get skills for a valid occupation
             "skill": "delegate activities",
             "lastModified": "2016-12-20T19:12:39Z",
             "alternativeLabels": [
-                "distribute tasks",
                 "delegate tasks",
-                "distribute activities",
                 "share duties",
+                "share tasks",
+                "distribute activities",
                 "delegate activities to others",
-                "share tasks"
+                "distribute tasks"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/b00e948c-19be-4951-8cff-60f88f1046e9",
@@ -150,11 +150,11 @@ Scenario: Get skills for a valid occupation
             "skill": "advise customers on wood products",
             "lastModified": "2016-12-20T21:26:47Z",
             "alternativeLabels": [
+                "advise customers on wood items",
+                "advising customers on wood products",
+                "advise customers on wood artefacts",
                 "advise customer on wood products",
                 "advise customers on wood merchandise",
-                "advise customers on wood artefacts",
-                "advising customers on wood products",
-                "advise customers on wood items",
                 "advise customers on wood goods"
             ],
             "type": "competency",
@@ -166,13 +166,13 @@ Scenario: Get skills for a valid occupation
             "skill": "follow company standards",
             "lastModified": "2016-12-20T19:03:56Z",
             "alternativeLabels": [
-                "follow company codes",
-                "follow company measures",
-                "follow a company standard",
                 "follow company rules",
-                "following company standards",
+                "follow company measures",
                 "follow company requirements",
-                "follow the company standards"
+                "follow the company standards",
+                "follow company codes",
+                "follow a company standard",
+                "following company standards"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/f5f5b244-6cea-4fbc-8a50-8f712791bc09",
@@ -183,13 +183,13 @@ Scenario: Get skills for a valid occupation
             "skill": "analyse production processes for improvement",
             "lastModified": "2016-12-20T19:03:12Z",
             "alternativeLabels": [
-                "test production processes for improvement",
-                "scrutinise production processes for improvement",
-                "analyse a production processes for improvement",
-                "investigate production processes for improvement",
+                "search production processes for improvement",
                 "analyse the production process for improvement",
+                "test production processes for improvement",
+                "investigate production processes for improvement",
+                "analyse a production processes for improvement",
                 "analyse production processes for improvements",
-                "search production processes for improvement"
+                "scrutinise production processes for improvement"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/f1b5800e-b763-4740-9586-3fef30568e81",
@@ -200,14 +200,14 @@ Scenario: Get skills for a valid occupation
             "skill": "construction products",
             "lastModified": "2016-12-20T20:37:12Z",
             "alternativeLabels": [
-                "constructing products",
-                "construction brands",
                 "construction commodities",
-                "construction stock",
+                "construction brands",
                 "construction product",
                 "construction goods",
+                "constructing products",
                 "construction merchandise",
-                "a construction product"
+                "a construction product",
+                "construction stock"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/5ac07f1a-6436-4103-b891-c59a7ac505f0",
@@ -228,11 +228,11 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T20:30:17Z",
             "alternativeLabels": [
                 "coordinate and monitor employees",
-                "manage subordinates",
                 "coordinate and monitor subordinates",
-                "manage team",
+                "manage employees",
                 "coordinate and monitor staff",
-                "manage employees"
+                "manage subordinates",
+                "manage team"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/339ac029-066a-4985-9f9d-b3d7c8fea0bb",
@@ -243,10 +243,10 @@ Scenario: Get skills for a valid occupation
             "skill": "manage production systems",
             "lastModified": "2016-12-20T21:26:22Z",
             "alternativeLabels": [
-                "run production systems",
-                "managing production systems",
-                "supervise production systems",
                 "oversee production systems",
+                "managing production systems",
+                "run production systems",
+                "supervise production systems",
                 "manage production system",
                 "direct production systems"
             ],
@@ -259,11 +259,11 @@ Scenario: Get skills for a valid occupation
             "skill": "manage factory operations",
             "lastModified": "2016-12-20T21:26:22Z",
             "alternativeLabels": [
-                "direct factory operations",
-                "run factory operations",
-                "managing factory operations",
-                "manage factory operation",
                 "oversee factory operations",
+                "managing factory operations",
+                "run factory operations",
+                "manage factory operation",
+                "direct factory operations",
                 "supervise factory operations"
             ],
             "type": "competency",
@@ -275,13 +275,13 @@ Scenario: Get skills for a valid occupation
             "skill": "wood products",
             "lastModified": "2016-12-20T20:42:15Z",
             "alternativeLabels": [
-                "wood goods",
-                "wood commodities",
                 "wood brands",
-                "wood product",
+                "wood merchandise",
                 "wood stock",
                 "a wood product",
-                "wood merchandise"
+                "wood goods",
+                "wood product",
+                "wood commodities"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/c9026b8f-7c5c-44b4-9e59-ae1e72fb29c0",
@@ -292,11 +292,11 @@ Scenario: Get skills for a valid occupation
             "skill": "sell processed timber in a commercial environment",
             "lastModified": "2016-12-20T17:31:26Z",
             "alternativeLabels": [
-                "selling processed timber in a commercial environment",
                 "processed timber selling in a commercial environment",
-                "selling processed timber in a commercial setting",
+                "selling processed timber in a commercial environment",
                 "sell timber and timber-based products in a commercial environment",
-                "sell processed timber in a commercial setting"
+                "sell processed timber in a commercial setting",
+                "selling processed timber in a commercial setting"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/04dd3f36-7056-4824-9eee-b0312d4a25b7",
@@ -308,11 +308,11 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T19:08:26Z",
             "alternativeLabels": [
                 "liaise with a manager",
-                "work with managers",
-                "work together with managers",
-                "collaborate with managers",
                 "cooperate with managers",
-                "liaising with managers"
+                "liaising with managers",
+                "collaborate with managers",
+                "work together with managers",
+                "work with managers"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e",
@@ -323,11 +323,11 @@ Scenario: Get skills for a valid occupation
             "skill": "meet deadlines",
             "lastModified": "2016-12-20T19:02:39Z",
             "alternativeLabels": [
-                "achieve deadlines",
                 "complete deadlines",
                 "make deadlines",
                 "meet a deadline",
-                "conform with deadlines"
+                "conform with deadlines",
+                "achieve deadlines"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/91abe492-18be-4cce-93c7-0dca07072363",
@@ -338,12 +338,12 @@ Scenario: Get skills for a valid occupation
             "skill": "develop manufacturing policies",
             "lastModified": "2016-12-20T18:15:34Z",
             "alternativeLabels": [
-                "draft manufacturing policies",
                 "drafting manufacturing policies",
-                "developing of manufacturing policies",
-                "manufacturing policies drafting",
                 "developing manufacturing policies",
-                "manufacturing policies developing"
+                "manufacturing policies developing",
+                "developing of manufacturing policies",
+                "draft manufacturing policies",
+                "manufacturing policies drafting"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/764db027-9063-4468-acb3-c73ecfc76f35",
@@ -355,13 +355,13 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T20:31:51Z",
             "alternativeLabels": [
                 "plan supplies",
+                "control and monitor supplies",
                 "monitor and control supplies",
-                "manage supply chain",
-                "supplies management",
                 "supply chain management",
                 "supplies planning",
-                "control and monitor supplies",
-                "supplies managing"
+                "supplies managing",
+                "manage supply chain",
+                "supplies management"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/020b3c27-bae1-4b85-9d6f-eccee0f5ed99",
@@ -372,16 +372,16 @@ Scenario: Get skills for a valid occupation
             "skill": "timber products",
             "lastModified": "2017-01-05T14:55:52Z",
             "alternativeLabels": [
-                "types of wood and wood-based products",
-                "characteristics of timber products",
-                "range of wood and wood-based products",
                 "range of timber products",
                 "typology of wood and wood-based products",
-                "types of timber products",
-                "features of wood and wood-based products",
+                "characteristics of timber products",
+                "types of wood and wood-based products",
                 "characteristics of wood and wood-based products",
                 "typology of timber products",
-                "features of timber products"
+                "features of timber products",
+                "types of timber products",
+                "features of wood and wood-based products",
+                "range of wood and wood-based products"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/2336b108-a59b-4ff0-84c4-d838b4d297bd",
@@ -393,11 +393,11 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2017-01-05T15:52:55Z",
             "alternativeLabels": [
                 "manufacturing mechanisms",
-                "manufacturing system",
-                "manufacturing process",
-                "manufacturing procedures",
                 "a manufacturing process",
+                "manufacturing process",
+                "manufacturing system",
                 "process of manufacturing",
+                "manufacturing procedures",
                 "manufacturing measures"
             ],
             "type": "knowledge",
@@ -409,14 +409,14 @@ Scenario: Get skills for a valid occupation
             "skill": "ensure equipment availability",
             "lastModified": "2016-12-20T20:21:05Z",
             "alternativeLabels": [
+                "assure equipment availability",
                 "secure equipment availability",
+                "secure apparatus availability",
                 "assure apparatus availability",
                 "provide equipment availability",
-                "provide apparatus availability",
+                "safeguard equipment availability",
                 "safeguard apparatus availability",
-                "assure equipment availability",
-                "secure apparatus availability",
-                "safeguard equipment availability"
+                "provide apparatus availability"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/69f23426-9279-4fe6-a283-24c2aa4c855d",
@@ -427,8 +427,8 @@ Scenario: Get skills for a valid occupation
             "skill": "plan health and safety procedures",
             "lastModified": "2017-01-23T14:31:21Z",
             "alternativeLabels": [
-                "plan procedures of health and safety",
                 "organise health and safety processes",
+                "plan procedures of health and safety",
                 "planning health and safety procedures",
                 "programme health and safety procedures"
             ],
@@ -441,10 +441,10 @@ Scenario: Get skills for a valid occupation
             "skill": "strive for company growth",
             "lastModified": "2016-12-20T18:10:04Z",
             "alternativeLabels": [
-                "work hard for company growth",
-                "striving for company growth",
+                "strive growth of the company",
                 "crusade for  company growth",
-                "strive growth of the company"
+                "work hard for company growth",
+                "striving for company growth"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/2a2fa8e8-aaf3-4abf-a60b-af6415f1c6d4",
@@ -455,15 +455,15 @@ Scenario: Get skills for a valid occupation
             "skill": "study prices of wood products",
             "lastModified": "2016-12-20T17:31:14Z",
             "alternativeLabels": [
-                "wood product prices monitoring",
-                "monitoring prices of wood products",
                 "studying prices of wood products",
                 "prices of wood products studying",
                 "study wood product prices",
                 "monitor prices of wood products",
+                "wood product prices monitoring",
                 "monitor wood product prices",
-                "prices of wood products monitoring",
-                "wood product prices studying"
+                "monitoring prices of wood products",
+                "wood product prices studying",
+                "prices of wood products monitoring"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/3fa84dbb-f9f4-48a5-ab56-18d3ff0e5951",
@@ -474,16 +474,16 @@ Scenario: Get skills for a valid occupation
             "skill": "carry out purchasing operations in the timber business",
             "lastModified": "2016-12-20T17:31:20Z",
             "alternativeLabels": [
-                "purchasing carrying out in the timber business",
-                "purchase timber in a commercial environment",
-                "purchasing operations carrying out in the timber business",
-                "purchase timber-based products in a commercial environment",
-                "carrying out purchasing operations in the timber trade",
-                "carrying out purchasing operations in the timber business",
-                "purchasing timber and timber-based products in a commercial environment",
-                "purchasing operations carrying out in the timber trade",
                 "carrying out purchasing in the timber business",
-                "timber and timber-based products purchasing in a commercial environment"
+                "purchasing operations carrying out in the timber trade",
+                "purchase timber in a commercial environment",
+                "purchasing carrying out in the timber business",
+                "purchasing operations carrying out in the timber business",
+                "timber and timber-based products purchasing in a commercial environment",
+                "carrying out purchasing operations in the timber business",
+                "purchase timber-based products in a commercial environment",
+                "purchasing timber and timber-based products in a commercial environment",
+                "carrying out purchasing operations in the timber trade"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/8602ff2d-1b18-4205-b4fa-2643c6ce6d22",
@@ -495,12 +495,12 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T18:57:35Z",
             "alternativeLabels": [
                 "heed organisational guidelines",
-                "adhere to an organisations guidelines",
-                "comply to organisational guidelines",
-                "adhere to an organisational guideline",
                 "observe organisational guidelines",
+                "comply to organisational guidelines",
+                "adhere to an organisations guidelines",
                 "adhering to organisational guidelines",
-                "obey organisational guidelines"
+                "obey organisational guidelines",
+                "adhere to an organisational guideline"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/aa238394-8126-4ada-be2f-9dfe065cf314",
@@ -511,11 +511,11 @@ Scenario: Get skills for a valid occupation
             "skill": "types of wood materials",
             "lastModified": "2017-02-15T12:22:24Z",
             "alternativeLabels": [
-                "sorts of wood materials",
+                "type of wood material",
                 "varieties of wood materials",
-                "categories of wood materials",
                 "kinds of wood materials",
-                "type of wood material"
+                "sorts of wood materials",
+                "categories of wood materials"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
@@ -526,11 +526,11 @@ Scenario: Get skills for a valid occupation
             "skill": "types of wood materials",
             "lastModified": "2017-02-15T12:22:24Z",
             "alternativeLabels": [
-                "sorts of wood materials",
+                "type of wood material",
                 "varieties of wood materials",
-                "categories of wood materials",
                 "kinds of wood materials",
-                "type of wood material"
+                "sorts of wood materials",
+                "categories of wood materials"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
@@ -541,13 +541,13 @@ Scenario: Get skills for a valid occupation
             "skill": "oversee quality control",
             "lastModified": "2016-12-21T11:46:15Z",
             "alternativeLabels": [
-                "overseeing quality control",
-                "control quality control",
                 "supervise quality control",
-                "oversight of quality control",
                 "manage quality control",
                 "oversee quality controls",
-                "administer quality control"
+                "overseeing quality control",
+                "oversight of quality control",
+                "administer quality control",
+                "control quality control"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/5d34adde-0b78-42b4-9d3d-69e9388d8398",
@@ -558,13 +558,13 @@ Scenario: Get skills for a valid occupation
             "skill": "create manufacturing guidelines",
             "lastModified": "2016-12-20T20:24:40Z",
             "alternativeLabels": [
-                "draw up manufacturing guidelines prepare manufacturing guidelines",
-                "develop manufacturing guidelines",
-                "creating manufacturing guideline",
-                "draft manufacturing guidelines",
-                "create manufacturing guideline",
                 "creating manufacturing guidelines",
-                "define manufacturing guidelines"
+                "define manufacturing guidelines",
+                "draw up manufacturing guidelines prepare manufacturing guidelines",
+                "creating manufacturing guideline",
+                "develop manufacturing guidelines",
+                "draft manufacturing guidelines",
+                "create manufacturing guideline"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/37520413-563e-4d99-a14c-1c6dca3cf833",
@@ -575,17 +575,17 @@ Scenario: Get skills for a valid occupation
             "skill": "define manufacturing quality criteria",
             "lastModified": "2016-12-20T19:59:16Z",
             "alternativeLabels": [
+                "definition of quality criteria for manufacturing",
+                "definition of manufacturing quality criteria",
+                "defining manufacturing quality criteria",
                 "manufacturing standards setting",
                 "set manufacturing standards",
-                "definition of manufacturing quality criteria",
-                "manufacturing quality criteria definition",
-                "definition of quality criteria for manufacturing",
                 "setting manufacturing standards",
-                "defining manufacturing quality criteria",
-                "defining quality criteria for manufacturing",
+                "setting of manufacturing standards",
                 "define quality criteria for manufacturing",
                 "defining of manufacturing quality criteria",
-                "setting of manufacturing standards"
+                "manufacturing quality criteria definition",
+                "defining quality criteria for manufacturing"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/46e1b714-94f4-462d-88e6-31f442708812",
@@ -596,11 +596,11 @@ Scenario: Get skills for a valid occupation
             "skill": "liaise with shareholders",
             "lastModified": "2016-12-20T18:08:31Z",
             "alternativeLabels": [
-                "collaborate with shareholders",
-                "liaising with shareholders",
                 "cooperate with shareholders",
                 "liaise with shareholder",
-                "work together with shareholders"
+                "liaising with shareholders",
+                "work together with shareholders",
+                "collaborate with shareholders"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/8f9e8842-94f3-48d5-8d09-c43829bcabc5",
@@ -625,10 +625,10 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T18:06:29Z",
             "alternativeLabels": [
                 "align business development efforts",
-                "align efforts towards business growth",
-                "coordinate efforts towards business development",
+                "aligning efforts towards business development",
                 "align effort towards business development",
-                "aligning efforts towards business development"
+                "coordinate efforts towards business development",
+                "align efforts towards business growth"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/ee7f90cc-922e-4da7-a7ae-83c2688fed10",
@@ -639,15 +639,15 @@ Scenario: Get skills for a valid occupation
             "skill": "assess felled timber volume",
             "lastModified": "2016-12-20T17:38:33Z",
             "alternativeLabels": [
-                "measure volume of felled timber",
                 "measuring volume of felled timber",
-                "felled timber volume assessing",
-                "measuring felled timber volume",
+                "felled timber volume measuring",
                 "assessing volume of felled timber",
-                "assess volume of felled timber",
-                "measure felled timber volume",
+                "measuring felled timber volume",
+                "felled timber volume assessing",
                 "assessing felled timber volume",
-                "felled timber volume measuring"
+                "measure felled timber volume",
+                "measure volume of felled timber",
+                "assess volume of felled timber"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/5cead3a5-92ad-41be-ab53-03d8d0b38d0e",
@@ -667,13 +667,13 @@ Scenario: Get skills for a valid occupation
             "skill": "negotiate improvement with suppliers",
             "lastModified": "2016-12-20T19:02:22Z",
             "alternativeLabels": [
-                "negotiate improvement with a supplier",
+                "discuss improvements with suppliers",
                 "negotiate an improvement with suppliers",
-                "negotiate improvements with suppliers",
+                "negotiate improvement with a supplier",
                 "improve relations with suppliers",
                 "determine improvement with suppliers",
                 "agree improvement with suppliers",
-                "discuss improvements with suppliers"
+                "negotiate improvements with suppliers"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/97bcbb41-c42b-4777-ab26-1f8f7dcfafd8",
@@ -684,11 +684,11 @@ Scenario: Get skills for a valid occupation
             "skill": "check material rescources",
             "lastModified": "2016-12-20T17:45:39Z",
             "alternativeLabels": [
+                "check technical resources",
+                "check resource materials",
                 "check technical and material resources",
                 "checking material resources",
-                "check materials and resources",
-                "check technical resources",
-                "check resource materials"
+                "check materials and resources"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/d1a2437d-7eee-4c13-9104-0bb3dd7b45d6",
@@ -700,11 +700,11 @@ Scenario: Get skills for a valid occupation
             "lastModified": "2016-12-20T19:07:20Z",
             "alternativeLabels": [
                 "schedule regular machine servicing",
+                "schedule regular maintenance of machinery",
                 "schedule regular machine cleaning",
                 "schedule regular machine analysis",
-                "schedule regular maintenance of machinery",
-                "schedule regular machinery maintenance",
-                "schedule regular machine repairs"
+                "schedule regular machine repairs",
+                "schedule regular machinery maintenance"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/a7b9039e-0145-4e3e-bbf8-30151d3e6cc0",
@@ -715,14 +715,14 @@ Scenario: Get skills for a valid occupation
             "skill": "wear appropriate protective gear",
             "lastModified": "2016-12-20T19:52:20Z",
             "alternativeLabels": [
-                "clothe in appropriate protective gear",
-                "put on appropriate protective gear",
-                "turn out in appropriate protective gear",
-                "turn out in necessary safety clothing",
                 "don necessary safety clothing",
+                "put on appropriate protective gear",
                 "clothe in necessary safety clothing",
+                "turn out in necessary safety clothing",
+                "put on necessary safety clothing",
                 "don appropriate protective gear",
-                "put on necessary safety clothing"
+                "turn out in appropriate protective gear",
+                "clothe in appropriate protective gear"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/6122d586-5978-431f-8e7a-96e61fc1f3fc",
@@ -733,11 +733,11 @@ Scenario: Get skills for a valid occupation
             "skill": "check durability of wood materials",
             "lastModified": "2016-12-20T21:27:06Z",
             "alternativeLabels": [
-                "check durability of wood material",
-                "check durability of wood stuffs",
-                "checking durability of wood",
-                "check durability of wood resources",
                 "check durability of wood",
+                "check durability of wood material",
+                "checking durability of wood",
+                "check durability of wood stuffs",
+                "check durability of wood resources",
                 "check durability of wood supplies"
             ],
             "type": "competency",
@@ -749,12 +749,12 @@ Scenario: Get skills for a valid occupation
             "skill": "prepare production reports",
             "lastModified": "2016-12-20T21:26:36Z",
             "alternativeLabels": [
-                "arrange production reports",
                 "plan production reports",
-                "preparing production reports",
+                "prepare production report",
                 "organise production reports",
                 "ready production reports",
-                "prepare production report"
+                "arrange production reports",
+                "preparing production reports"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/96d6a0a7-5923-44c1-adec-c76ab617c6d9",
@@ -765,12 +765,12 @@ Scenario: Get skills for a valid occupation
             "skill": "prospect new customers",
             "lastModified": "2017-02-14T14:26:31Z",
             "alternativeLabels": [
+                "prospect a new customer",
+                "find new customers",
+                "prospecting new customers",
                 "prospecting a new customer",
                 "identify new customers",
                 "seek new customers",
-                "find new customers",
-                "prospecting new customers",
-                "prospect a new customer",
                 "look for new customers"
             ],
             "type": "competency",
@@ -782,11 +782,11 @@ Scenario: Get skills for a valid occupation
             "skill": "recruit personnel",
             "lastModified": "2016-12-20T17:25:36Z",
             "alternativeLabels": [
-                "personnel hiring",
-                "recruiting personnel",
                 "hire personnel",
-                "personnel recruiting",
-                "hiring personnel"
+                "recruiting personnel",
+                "hiring personnel",
+                "personnel hiring",
+                "personnel recruiting"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/65715f7a-c791-416b-b88a-2933a1c81647",
@@ -797,11 +797,11 @@ Scenario: Get skills for a valid occupation
             "skill": "meet contract specifications",
             "lastModified": "2016-12-20T21:23:21Z",
             "alternativeLabels": [
-                "abide by contract specifications",
-                "live up to contract specifications",
                 "meet contract specification",
+                "meeting contract specifications",
+                "abide by contract specifications",
                 "fulfil contract specifications",
-                "meeting contract specifications"
+                "live up to contract specifications"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/576b305e-8c25-4546-8a69-87f975783114",
@@ -812,11 +812,11 @@ Scenario: Get skills for a valid occupation
             "skill": "negotiate terms with suppliers",
             "lastModified": "2016-12-20T19:01:26Z",
             "alternativeLabels": [
-                "improve terms with suppliers",
                 "negotiate terms with a supplier",
-                "agree terms with suppliers",
+                "determine terms with suppliers",
+                "improve terms with suppliers",
                 "discuss terms with suppliers",
-                "determine terms with suppliers"
+                "agree terms with suppliers"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/5f2efbdf-08a2-49cd-9c06-bd284e4f0fbf",
@@ -836,10 +836,10 @@ Scenario: Get skills for a valid occupation
             "skill": "company policies",
             "lastModified": "2017-02-15T11:00:40Z",
             "alternativeLabels": [
-                "corporation's policies",
-                "employer's policies",
                 "company policy",
-                "policies of a company"
+                "policies of a company",
+                "employer's policies",
+                "corporation's policies"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/f75b740c-b36c-495e-bc67-efe347bbc6b5",
@@ -850,16 +850,16 @@ Scenario: Get skills for a valid occupation
             "skill": "assess felled timber quality",
             "lastModified": "2016-12-20T17:37:12Z",
             "alternativeLabels": [
-                "evaluate quality of felled timber",
-                "assessing quality of felled timber",
-                "felled timber quality evaluating",
+                "evaluate felled timber quality",
                 "assess quality of felled timber",
-                "evaluating quality of felled timber",
                 "assess felled timber quality",
-                "assessing felled timber quality",
+                "assessing quality of felled timber",
                 "felled timber quality assessing",
+                "felled timber quality evaluating",
+                "assessing felled timber quality",
+                "evaluate quality of felled timber",
                 "evaluating felled timber quality",
-                "evaluate felled timber quality"
+                "evaluating quality of felled timber"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/fa959bf8-31b2-449b-a2d3-ae6ee9f05f3d",
@@ -884,19 +884,19 @@ Scenario: Get skills for a valid occupation
             "skill": "manage timber stocks",
             "lastModified": "2016-12-20T17:33:45Z",
             "alternativeLabels": [
-                "managing timber stocks",
-                "control timber stocks",
-                "stocks of timber controlling",
-                "control stocks of timber",
-                "stocks of timber managing",
-                "controlling stocks of timber",
-                "timber stock controlling",
-                "timber stock managing",
                 "timber stocks controlling",
-                "controlling timber stocks",
+                "manage stocks of timber",
+                "control stocks of timber",
                 "managing stocks of timber",
+                "control timber stocks",
+                "managing timber stocks",
                 "timber stocks managing",
-                "manage stocks of timber"
+                "controlling timber stocks",
+                "timber stock controlling",
+                "stocks of timber controlling",
+                "stocks of timber managing",
+                "timber stock managing",
+                "controlling stocks of timber"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/c6d43089-8855-4da5-9b8b-ace87281476e",
@@ -907,11 +907,11 @@ Scenario: Get skills for a valid occupation
             "skill": "evaluate employees work",
             "lastModified": "2016-12-20T17:23:52Z",
             "alternativeLabels": [
-                "evaluate team performance",
-                "evaluating employees work",
-                "evaluating team performance",
-                "evaluate employees work",
                 "employees work evaluating",
+                "evaluating employees work",
+                "evaluate employees work",
+                "evaluating team performance",
+                "evaluate team performance",
                 "team performance evaluating"
             ],
             "type": "competency",
@@ -925,12 +925,12 @@ Scenario: Get skills for a valid occupation
             "alternativeLabels": [
                 "monitor logistics of finished products",
                 "oversee finished products' logistics",
-                "supervise logistics of finished products, manage logistics of finished products",
                 "look after logistics of finished products",
                 "ensure logistics of finished products",
+                "supervise logistics of finished products, manage logistics of finished products",
+                "oversee packing, storage and shipment of finished products",
                 "administer logistcs of finished goods",
-                "inspect logistics of finished products",
-                "oversee packing, storage and shipment of finished products"
+                "inspect logistics of finished products"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/40f27736-0d98-4446-8234-11646e4f4bc3",
@@ -941,11 +941,11 @@ Scenario: Get skills for a valid occupation
             "skill": "inspect wood materials",
             "lastModified": "2016-12-20T21:26:45Z",
             "alternativeLabels": [
-                "inspect wood supplies",
                 "inspect wood",
-                "inspect wood resources",
-                "inspect wood stuffs",
                 "inspecting wood",
+                "inspect wood stuffs",
+                "inspect wood resources",
+                "inspect wood supplies",
                 "inspect wood material"
             ],
             "type": "competency",
@@ -957,11 +957,11 @@ Scenario: Get skills for a valid occupation
             "skill": "train employees",
             "lastModified": "2017-02-15T15:15:17Z",
             "alternativeLabels": [
-                "teach employees",
-                "train an employee",
-                "instruct employees",
                 "training employees",
-                "upskill employees"
+                "upskill employees",
+                "instruct employees",
+                "train an employee",
+                "teach employees"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/e54ff029-1ce9-447d-a5b2-eb7283a23e6e",
@@ -972,16 +972,16 @@ Scenario: Get skills for a valid occupation
             "skill": "environmental legislation in agriculture and forestry",
             "lastModified": "2016-12-20T17:27:43Z",
             "alternativeLabels": [
-                "range of environmental legislation in in agriculture and forestry",
-                "agriculture and forestry environmental regulation",
-                "impact of environmental legislation in in agriculture and forestry",
+                "impact of environmental regulation in in agriculture and forestry",
                 "scope of environmental legislation in in agriculture and forestry",
                 "implications of environmental regulation in in agriculture and forestry",
-                "range of environmental regulation in in agriculture and forestry",
-                "impact of environmental regulation in in agriculture and forestry",
                 "scope of environmental regulation in in agriculture and forestry",
-                "implications of environmental legislation in in agriculture and forestry",
-                "agriculture and forestry environmental legislation"
+                "impact of environmental legislation in in agriculture and forestry",
+                "range of environmental legislation in in agriculture and forestry",
+                "range of environmental regulation in in agriculture and forestry",
+                "agriculture and forestry environmental legislation",
+                "agriculture and forestry environmental regulation",
+                "implications of environmental legislation in in agriculture and forestry"
             ],
             "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/3419fac9-575d-4492-a018-edff6f4dae26",
@@ -992,14 +992,14 @@ Scenario: Get skills for a valid occupation
             "skill": "prepare purchasing reportings",
             "lastModified": "2016-12-20T20:38:38Z",
             "alternativeLabels": [
-                "prepare a purchasing report",
-                "develop purchasing reportings",
-                "supply purchasing reportings",
-                "arrange purchasing reportings",
-                "preparing purchasing reports",
                 "purchasing reporting preparation",
+                "plan purchasing reportings",
+                "arrange purchasing reportings",
+                "develop purchasing reportings",
+                "preparing purchasing reports",
                 "provide purchasing reportings",
-                "plan purchasing reportings"
+                "prepare a purchasing report",
+                "supply purchasing reportings"
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/bf987b9a-64f3-44b7-98f1-a60e4585b69b",
@@ -1009,21 +1009,21 @@ Scenario: Get skills for a valid occupation
     "occupation": "wood factory manager",
     "lastModified": "2017-01-04T16:25:03Z",
     "alternativeLabels": [
-        "natural wood factory controller",
-        "wood factory supervisor",
-        "solid wood factory supervisor",
-        "timber factory manager",
-        "wood factory administrator",
-        "solid wood factory controller",
-        "solid wood factory manager",
-        "wood factory executive",
-        "furniture factory manager",
-        "natural wood factory manager",
-        "wood factory controller",
         "wood factory overseer",
-        "natural wood factory supervisor",
+        "wood factory administrator",
+        "timber factory manager",
+        "wood factory controller",
         "wood manager",
-        "wood factory coordinator"
+        "wood factory coordinator",
+        "furniture factory manager",
+        "wood factory supervisor",
+        "natural wood factory manager",
+        "wood factory executive",
+        "natural wood factory supervisor",
+        "solid wood factory supervisor",
+        "natural wood factory controller",
+        "solid wood factory manager",
+        "solid wood factory controller"
     ],
     "uri": "http://data.europa.eu/esco/occupation/b633af32-c8c0-4481-9971-7932ea4b16b5"
 }
