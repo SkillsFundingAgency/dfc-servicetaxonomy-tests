@@ -58,8 +58,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                     return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetOccupationsWithMatchingSkills + "/" + param;
                 case "getjobprofilesummary":
                     return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSTAXJobProfileSummary + "/" + param;
-                case "getoccupationswithmatchingskills":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + "GetOccupationsWithMatchingSkills/Execute/" + "/ " + param;
                 default:
                     return "";
             }
