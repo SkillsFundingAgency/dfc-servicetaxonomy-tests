@@ -5,6 +5,7 @@
     <UseAppHost>true</UseAppHost>
     <ApplicationIcon />
     <Win32Resource />
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
