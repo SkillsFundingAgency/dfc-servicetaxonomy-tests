@@ -85,105 +85,88 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 16
-    testRunner.And("the response json matches:", "{\r\n\"skills\": [\r\n{\r\n   \"skillType\": \"knowledge\",\r\n   \"skill\": \"torch temperature f" +
-                    "or metal processes\",\r\n   \"lastModified\": \"2017-01-05T13:52:33Z\",\r\n   \"alternativ" +
-                    "eLabels\": [\r\n       \"torch temperature for metal working\",\r\n       \"torch temper" +
-                    "ature for metal procedures\",\r\n       \"correct heat for machine and tool operatio" +
-                    "ns\",\r\n       \"torch temperature for metal operations\",\r\n       \"correct heat for" +
-                    " machine and tool working\",\r\n       \"torch temperature for metal activities\",\r\n " +
-                    "      \"correct heat for machine and tool activities\",\r\n       \"correct heat for " +
-                    "machine and tool procedures\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill" +
-                    "/46f2796e-e1b8-4210-95e2-d9a89af956e7\",\r\n   \"matches\": {\r\n       \"hiddenLabels\":" +
-                    " [],\r\n       \"skill\": [\r\n           \"torch temperature for metal processes\"\r\n   " +
-                    "    ],\r\n       \"alternativeLabels\": [\r\n           \"torch temperature for metal w" +
-                    "orking\",\r\n           \"torch temperature for metal procedures\",\r\n           \"torc" +
-                    "h temperature for metal operations\",\r\n           \"torch temperature for metal ac" +
-                    "tivities\"\r\n       ]\r\n   },\r\n   \"skillReusability\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"" +
-                    "skillType\": \"competency\",\r\n   \"skill\": \"operate oxy-fuel cutting torch\",\r\n   \"la" +
-                    "stModified\": \"2016-12-20T19:48:21Z\",\r\n   \"alternativeLabels\": [\r\n       \"utilise" +
-                    " oxyacetylene cutter\",\r\n       \"handle oxy-fuel cutting torch\",\r\n       \"utilise" +
-                    " oxy-fuel cutting torch\",\r\n       \"use oxy-fuel cutting torch\",\r\n       \"run oxy" +
-                    "-fuel cutting torch\",\r\n       \"use oxyacetylene cutter\",\r\n       \"handle oxyacet" +
-                    "ylene cutter\",\r\n       \"run oxyacetylene cutter\"\r\n   ],\r\n   \"uri\": \"http://data." +
-                    "europa.eu/esco/skill/8b09c290-c941-4119-870f-bdafbd78c669\",\r\n   \"matches\": {\r\n  " +
-                    "     \"hiddenLabels\": [],\r\n       \"skill\": [\r\n           \"operate oxy-fuel cuttin" +
-                    "g torch\"\r\n       ],\r\n       \"alternativeLabels\": [\r\n           \"handle oxy-fuel " +
-                    "cutting torch\",\r\n           \"utilise oxy-fuel cutting torch\",\r\n           \"use o" +
-                    "xy-fuel cutting torch\",\r\n           \"run oxy-fuel cutting torch\"\r\n       ]\r\n   }" +
-                    ",\r\n   \"skillReusability\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"skillType\": \"competency\"," +
-                    "\r\n   \"skill\": \"operate oxy-fuel welding torch\",\r\n   \"lastModified\": \"2016-12-20T" +
-                    "19:50:07Z\",\r\n   \"alternativeLabels\": [\r\n       \"operate oxyacetylene gas equipme" +
-                    "nt\",\r\n       \"use oxy-fuel welding torch equipment\",\r\n       \"use oxyacetylene g" +
-                    "as equipment\",\r\n       \"utilise oxy-fuel welding torch equipment\",\r\n       \"run " +
-                    "oxy-fuel welding torch equipment\",\r\n       \"handle oxy-fuel welding torch equipm" +
-                    "ent\",\r\n       \"handle oxyacetylene gas equipment\",\r\n       \"utilise oxyacetylene" +
-                    " gas equipment\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/14b4a40e-da8" +
-                    "0-452a-86d6-88a959052219\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": [],\r\n       " +
-                    "\"skill\": [\r\n           \"operate oxy-fuel welding torch\"\r\n       ],\r\n       \"alte" +
-                    "rnativeLabels\": [\r\n           \"use oxy-fuel welding torch equipment\",\r\n         " +
-                    "  \"utilise oxy-fuel welding torch equipment\",\r\n           \"run oxy-fuel welding " +
-                    "torch equipment\",\r\n           \"handle oxy-fuel welding torch equipment\"\r\n       " +
-                    "]\r\n   },\r\n   \"skillReusability\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"skillType\": \"compe" +
-                    "tency\",\r\n   \"skill\": \"operate oxygen cutting torch\",\r\n   \"lastModified\": \"2016-1" +
-                    "2-20T18:23:07Z\",\r\n   \"alternativeLabels\": [\r\n       \"cutting metal with oxygen t" +
-                    "orch\",\r\n       \"metal cutting with oxygen torch\",\r\n       \"oxygen cutting torch " +
-                    "operation\",\r\n       \"operating oxygen cutting torch\",\r\n       \"oxygen torch meta" +
-                    "l-cutting\",\r\n       \"cut metal with oxygen torch\",\r\n       \"operation of oxygen " +
-                    "cutting torch\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/d7cab350-7eba" +
-                    "-41cf-9c35-827b74541ce8\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": [],\r\n       \"" +
-                    "skill\": [\r\n           \"operate oxygen cutting torch\"\r\n       ],\r\n       \"alterna" +
-                    "tiveLabels\": [\r\n           \"cutting metal with oxygen torch\",\r\n           \"metal" +
-                    " cutting with oxygen torch\",\r\n           \"oxygen cutting torch operation\",\r\n    " +
-                    "       \"operating oxygen cutting torch\",\r\n           \"oxygen torch metal-cutting" +
-                    "\",\r\n           \"cut metal with oxygen torch\",\r\n           \"operation of oxygen c" +
-                    "utting torch\"\r\n       ]\r\n   },\r\n   \"skillReusability\": \"sector-specific\"\r\n},\r\n{\r" +
-                    "\n   \"skillType\": \"competency\",\r\n   \"skill\": \"operate plasma cutting torch\",\r\n   " +
-                    "\"lastModified\": \"2016-12-20T18:23:01Z\",\r\n   \"alternativeLabels\": [\r\n       \"oper" +
-                    "ation of plasma cutting torch\",\r\n       \"use plasma cutter\",\r\n       \"plasma tor" +
-                    "ch cutting\",\r\n       \"cut with plasma torch\",\r\n       \"plasma cutting torch oper" +
-                    "ation\",\r\n       \"operating plasma cutting torch\",\r\n       \"using plasma cutter\"\r" +
-                    "\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/f1e122e5-24a8-44c0-bf3f-9004" +
-                    "4e72370c\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": [],\r\n       \"skill\": [\r\n    " +
-                    "       \"operate plasma cutting torch\"\r\n       ],\r\n       \"alternativeLabels\": [\r" +
-                    "\n           \"operation of plasma cutting torch\",\r\n           \"plasma torch cutti" +
-                    "ng\",\r\n           \"cut with plasma torch\",\r\n           \"plasma cutting torch oper" +
-                    "ation\",\r\n           \"operating plasma cutting torch\"\r\n       ]\r\n   },\r\n   \"skill" +
-                    "Reusability\": \"sector-specific\"\r\n},\r\n{\r\n   \"skillType\": \"knowledge\",\r\n   \"skill\"" +
-                    ": \"plasma torches\",\r\n   \"lastModified\": \"2017-01-05T17:04:51Z\",\r\n   \"alternative" +
-                    "Labels\": [\r\n       \"plasma arc incendiaries\",\r\n       \"plasma lamps\",\r\n       \"p" +
-                    "lasma beacons\",\r\n       \"plasma arc beacons\",\r\n       \"plasma arc lamps\",\r\n     " +
-                    "  \"plasma incendiaries\",\r\n       \"plasm lanterns\"\r\n   ],\r\n   \"uri\": \"http://data" +
-                    ".europa.eu/esco/skill/3cb0d886-1b34-4941-a134-b84d8a17b8d5\",\r\n   \"matches\": {\r\n " +
-                    "      \"hiddenLabels\": [],\r\n       \"skill\": [\r\n           \"plasma torches\"\r\n     " +
-                    "  ],\r\n       \"alternativeLabels\": []\r\n   },\r\n   \"skillReusability\": \"occupation-" +
-                    "specific\"\r\n}\r\n]\r\n}         ", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Search for a partial word")]
-        [NUnit.Framework.CategoryAttribute("GetSkillsByLabel")]
-        [NUnit.Framework.CategoryAttribute("#@ignore")]
-        [NUnit.Framework.CategoryAttribute("todo")]
-        public virtual void SearchForAPartialWord()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search for a partial word", null, new string[] {
-                        "GetSkillsByLabel",
-                        "#@ignore",
-                        "todo"});
-#line 195
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line hidden
-#line 197
-testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
-                    "t body", "{\r\n\"label\": \"ncendiari\",\r\n\"matchAltLabels\": \"true\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 205
- testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 206
-    testRunner.And("the response json matches:", "{\r\n\"skills\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("the response json matches:", "{\r\n\"skills\": [\r\n{\r\n   \"skillType\": \"competency\",\r\n   \"skill\": \"operate brazing eq" +
+                    "uipment\",\r\n   \"lastModified\": \"2016-12-20T19:49:34Z\",\r\n   \"alternativeLabels\": [" +
+                    "\r\n       \"use welding torches\",\r\n       \"use brazing equipment\",\r\n       \"handle" +
+                    " brazing equipment\",\r\n       \"run brazing equipment\",\r\n       \"utilise welding t" +
+                    "orches\",\r\n       \"run welding torches\",\r\n       \"utilise brazing equipment\",\r\n  " +
+                    "     \"handle welding torches\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skil" +
+                    "l/10f24e0d-bd23-4432-b96b-e9f23136c503\",\r\n   \"matches\": {\r\n       \"hiddenLabels\"" +
+                    ": [],\r\n       \"skill\": [],\r\n       \"alternativeLabels\": [\r\n           \"use weldi" +
+                    "ng torches\",\r\n           \"utilise welding torches\",\r\n           \"run welding tor" +
+                    "ches\",\r\n           \"handle welding torches\"\r\n       ]\r\n   },\r\n   \"skillReusabili" +
+                    "ty\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"skillType\": \"knowledge\",\r\n   \"skill\": \"torch t" +
+                    "emperature for metal processes\",\r\n   \"lastModified\": \"2017-01-05T13:52:33Z\",\r\n  " +
+                    " \"alternativeLabels\": [\r\n       \"torch temperature for metal working\",\r\n       \"" +
+                    "torch temperature for metal procedures\",\r\n       \"correct heat for machine and t" +
+                    "ool operations\",\r\n       \"torch temperature for metal operations\",\r\n       \"corr" +
+                    "ect heat for machine and tool working\",\r\n       \"torch temperature for metal act" +
+                    "ivities\",\r\n       \"correct heat for machine and tool activities\",\r\n       \"corre" +
+                    "ct heat for machine and tool procedures\"\r\n   ],\r\n   \"uri\": \"http://data.europa.e" +
+                    "u/esco/skill/46f2796e-e1b8-4210-95e2-d9a89af956e7\",\r\n   \"matches\": {\r\n       \"hi" +
+                    "ddenLabels\": [],\r\n       \"skill\": [\r\n           \"torch temperature for metal pro" +
+                    "cesses\"\r\n       ],\r\n       \"alternativeLabels\": [\r\n           \"torch temperature" +
+                    " for metal working\",\r\n           \"torch temperature for metal procedures\",\r\n    " +
+                    "       \"torch temperature for metal operations\",\r\n           \"torch temperature " +
+                    "for metal activities\"\r\n       ]\r\n   },\r\n   \"skillReusability\": \"cross-sectoral\"\r" +
+                    "\n},\r\n{\r\n   \"skillType\": \"competency\",\r\n   \"skill\": \"operate oxy-fuel cutting tor" +
+                    "ch\",\r\n   \"lastModified\": \"2016-12-20T19:48:21Z\",\r\n   \"alternativeLabels\": [\r\n   " +
+                    "    \"utilise oxyacetylene cutter\",\r\n       \"handle oxy-fuel cutting torch\",\r\n   " +
+                    "    \"utilise oxy-fuel cutting torch\",\r\n       \"use oxy-fuel cutting torch\",\r\n   " +
+                    "    \"run oxy-fuel cutting torch\",\r\n       \"use oxyacetylene cutter\",\r\n       \"ha" +
+                    "ndle oxyacetylene cutter\",\r\n       \"run oxyacetylene cutter\"\r\n   ],\r\n   \"uri\": \"" +
+                    "http://data.europa.eu/esco/skill/8b09c290-c941-4119-870f-bdafbd78c669\",\r\n   \"mat" +
+                    "ches\": {\r\n       \"hiddenLabels\": [],\r\n       \"skill\": [\r\n           \"operate oxy" +
+                    "-fuel cutting torch\"\r\n       ],\r\n       \"alternativeLabels\": [\r\n           \"hand" +
+                    "le oxy-fuel cutting torch\",\r\n           \"utilise oxy-fuel cutting torch\",\r\n     " +
+                    "      \"use oxy-fuel cutting torch\",\r\n           \"run oxy-fuel cutting torch\"\r\n  " +
+                    "     ]\r\n   },\r\n   \"skillReusability\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"skillType\": \"" +
+                    "competency\",\r\n   \"skill\": \"operate oxy-fuel welding torch\",\r\n   \"lastModified\": " +
+                    "\"2016-12-20T19:50:07Z\",\r\n   \"alternativeLabels\": [\r\n       \"operate oxyacetylene" +
+                    " gas equipment\",\r\n       \"use oxy-fuel welding torch equipment\",\r\n       \"use ox" +
+                    "yacetylene gas equipment\",\r\n       \"utilise oxy-fuel welding torch equipment\",\r\n" +
+                    "       \"run oxy-fuel welding torch equipment\",\r\n       \"handle oxy-fuel welding " +
+                    "torch equipment\",\r\n       \"handle oxyacetylene gas equipment\",\r\n       \"utilise " +
+                    "oxyacetylene gas equipment\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/" +
+                    "14b4a40e-da80-452a-86d6-88a959052219\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": " +
+                    "[],\r\n       \"skill\": [\r\n           \"operate oxy-fuel welding torch\"\r\n       ],\r\n" +
+                    "       \"alternativeLabels\": [\r\n           \"use oxy-fuel welding torch equipment\"" +
+                    ",\r\n           \"utilise oxy-fuel welding torch equipment\",\r\n           \"run oxy-f" +
+                    "uel welding torch equipment\",\r\n           \"handle oxy-fuel welding torch equipme" +
+                    "nt\"\r\n       ]\r\n   },\r\n   \"skillReusability\": \"cross-sectoral\"\r\n},\r\n{\r\n   \"skillT" +
+                    "ype\": \"competency\",\r\n   \"skill\": \"operate oxygen cutting torch\",\r\n   \"lastModifi" +
+                    "ed\": \"2016-12-20T18:23:07Z\",\r\n   \"alternativeLabels\": [\r\n       \"cutting metal w" +
+                    "ith oxygen torch\",\r\n       \"metal cutting with oxygen torch\",\r\n       \"oxygen cu" +
+                    "tting torch operation\",\r\n       \"operating oxygen cutting torch\",\r\n       \"oxyge" +
+                    "n torch metal-cutting\",\r\n       \"cut metal with oxygen torch\",\r\n       \"operatio" +
+                    "n of oxygen cutting torch\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/d" +
+                    "7cab350-7eba-41cf-9c35-827b74541ce8\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": [" +
+                    "],\r\n       \"skill\": [\r\n           \"operate oxygen cutting torch\"\r\n       ],\r\n   " +
+                    "    \"alternativeLabels\": [\r\n           \"cutting metal with oxygen torch\",\r\n     " +
+                    "      \"metal cutting with oxygen torch\",\r\n           \"oxygen cutting torch opera" +
+                    "tion\",\r\n           \"operating oxygen cutting torch\",\r\n           \"oxygen torch m" +
+                    "etal-cutting\",\r\n           \"cut metal with oxygen torch\",\r\n           \"operation" +
+                    " of oxygen cutting torch\"\r\n       ]\r\n   },\r\n   \"skillReusability\": \"sector-speci" +
+                    "fic\"\r\n},\r\n{\r\n   \"skillType\": \"competency\",\r\n   \"skill\": \"operate plasma cutting " +
+                    "torch\",\r\n   \"lastModified\": \"2016-12-20T18:23:01Z\",\r\n   \"alternativeLabels\": [\r\n" +
+                    "       \"operation of plasma cutting torch\",\r\n       \"use plasma cutter\",\r\n      " +
+                    " \"plasma torch cutting\",\r\n       \"cut with plasma torch\",\r\n       \"plasma cuttin" +
+                    "g torch operation\",\r\n       \"operating plasma cutting torch\",\r\n       \"using pla" +
+                    "sma cutter\"\r\n   ],\r\n   \"uri\": \"http://data.europa.eu/esco/skill/f1e122e5-24a8-44" +
+                    "c0-bf3f-90044e72370c\",\r\n   \"matches\": {\r\n       \"hiddenLabels\": [],\r\n       \"ski" +
+                    "ll\": [\r\n           \"operate plasma cutting torch\"\r\n       ],\r\n       \"alternativ" +
+                    "eLabels\": [\r\n           \"operation of plasma cutting torch\",\r\n           \"plasma" +
+                    " torch cutting\",\r\n           \"cut with plasma torch\",\r\n           \"plasma cuttin" +
+                    "g torch operation\",\r\n           \"operating plasma cutting torch\"\r\n       ]\r\n   }" +
+                    ",\r\n   \"skillReusability\": \"sector-specific\"\r\n},\r\n{\r\n   \"skillType\": \"knowledge\"," +
+                    "\r\n   \"skill\": \"plasma torches\",\r\n   \"lastModified\": \"2017-01-05T17:04:51Z\",\r\n   " +
+                    "\"alternativeLabels\": [\r\n       \"plasma arc incendiaries\",\r\n       \"plasma lamps\"" +
+                    ",\r\n       \"plasma beacons\",\r\n       \"plasma arc beacons\",\r\n       \"plasma arc la" +
+                    "mps\",\r\n       \"plasma incendiaries\",\r\n       \"plasm lanterns\"\r\n   ],\r\n   \"uri\": " +
+                    "\"http://data.europa.eu/esco/skill/3cb0d886-1b34-4941-a134-b84d8a17b8d5\",\r\n   \"ma" +
+                    "tches\": {\r\n       \"hiddenLabels\": [],\r\n       \"skill\": [\r\n           \"plasma tor" +
+                    "ches\"\r\n       ],\r\n       \"alternativeLabels\": []\r\n   },\r\n   \"skillReusability\": " +
+                    "\"occupation-specific\"\r\n}\r\n]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -199,46 +182,40 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 214
+#line 222
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 216
+#line 224
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"cocktail\",\r\n\"matchAltLabels\": \"true\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 224
+#line 232
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 225
-    testRunner.And("the response json matches:", @"{
-    ""skills"": [
-        {
-            ""skillType"": ""competency"",
-            ""skill"": ""assemble cocktail garnishes"",
-            ""lastModified"": ""2016-09-15T10:55:54Z"",
-            ""alternativeLabels"": [
-                ""use different items to decorate cocktails"",
-                ""assemble garnishing for cocktails"",
-                ""choose various items to present cocktails"",
-                ""assemble garnish for cocktails""
-            ],
-            ""uri"": ""http://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3"",
-            ""matches"": {
-                ""hiddenLabels"": [],
-                ""skill"": [
-                    ""assemble cocktail garnishes""
-                ],
-                ""alternativeLabels"": [
-                    ""use different items to decorate cocktails"",
-                    ""assemble garnishing for cocktails"",
-                    ""choose various items to present cocktails"",
-                    ""assemble garnish for cocktails""
-                ]
-            },
-            ""skillReusability"": ""sector-specific""
-        }
-    ]
-}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 233
+    testRunner.And("the response json matches:", "{\r\n    \"skills\": [\r\n        {\r\n            \"skillType\": \"competency\",\r\n          " +
+                    "  \"skill\": \"prepare mixed beverages\",\r\n            \"lastModified\": \"2016-09-15T1" +
+                    "0:50:50Z\",\r\n            \"alternativeLabels\": [\r\n                \"serve cocktails" +
+                    "\",\r\n                \"prepare a mix of beverages\",\r\n                \"mix and serv" +
+                    "e alcoholic and non-alcoholic beverages\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "],\r\n                \"alternativeLabels\": [\r\n                    \"serve cocktails" +
+                    "\"\r\n                ]\r\n            },\r\n            \"skillReusability\": \"sector-sp" +
+                    "ecific\"\r\n        },\r\n        {\r\n            \"skillType\": \"competency\",\r\n        " +
+                    "    \"skill\": \"assemble cocktail garnishes\",\r\n            \"lastModified\": \"2016-0" +
+                    "9-15T10:55:54Z\",\r\n            \"alternativeLabels\": [\r\n                \"use diffe" +
+                    "rent items to decorate cocktails\",\r\n                \"assemble garnishing for coc" +
+                    "ktails\",\r\n                \"choose various items to present cocktails\",\r\n        " +
+                    "        \"assemble garnish for cocktails\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "\r\n                    \"assemble cocktail garnishes\"\r\n                ],\r\n       " +
+                    "         \"alternativeLabels\": [\r\n                    \"use different items to dec" +
+                    "orate cocktails\",\r\n                    \"assemble garnishing for cocktails\",\r\n   " +
+                    "                 \"choose various items to present cocktails\",\r\n                 " +
+                    "   \"assemble garnish for cocktails\"\r\n                ]\r\n            },\r\n        " +
+                    "    \"skillReusability\": \"sector-specific\"\r\n        }\r\n    ]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -254,17 +231,17 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 259
+#line 286
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 261
+#line 288
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"bincendiari\",\r\n\"matchAltLabels\": \"true\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 269
+#line 296
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 270
+#line 297
     testRunner.And("the response json matches:", "{\r\n\"skills\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -281,17 +258,17 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 278
+#line 305
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 280
+#line 307
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"ncendiari\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 287
+#line 314
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 288
+#line 315
     testRunner.And("the response json matches:", "{\r\n\"skills\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -308,17 +285,17 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 298
+#line 325
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 300
+#line 327
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"ncendiari\",\r\n\"matchAltLabels\": \"false\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 308
+#line 335
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 309
+#line 336
     testRunner.And("the response json matches:", "{\r\n\"skills\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -335,17 +312,17 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 318
+#line 345
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 320
+#line 347
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"manage budgets\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 327
+#line 354
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 328
+#line 355
     testRunner.And("the response json matches:", @"{
 ""skills"": [
     {
@@ -403,48 +380,42 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 377
+#line 404
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 379
+#line 406
 testRunner.Given("I want to supply \"?matchAltLabels=true\" as a parameter in the following request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 380
+#line 407
 testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\" with reques" +
                     "t body", "{\r\n\"label\": \"cocktail\"\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 387
+#line 414
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 388
-    testRunner.And("the response json matches:", @"{
-    ""skills"": [
-        {
-            ""skillType"": ""competency"",
-            ""skill"": ""assemble cocktail garnishes"",
-            ""lastModified"": ""2016-09-15T10:55:54Z"",
-            ""alternativeLabels"": [
-                ""use different items to decorate cocktails"",
-                ""assemble garnishing for cocktails"",
-                ""choose various items to present cocktails"",
-                ""assemble garnish for cocktails""
-            ],
-            ""uri"": ""http://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3"",
-            ""matches"": {
-                ""hiddenLabels"": [],
-                ""skill"": [
-                    ""assemble cocktail garnishes""
-                ],
-                ""alternativeLabels"": [
-                    ""use different items to decorate cocktails"",
-                    ""assemble garnishing for cocktails"",
-                    ""choose various items to present cocktails"",
-                    ""assemble garnish for cocktails""
-                ]
-            },
-            ""skillReusability"": ""sector-specific""
-        }
-    ]
-}", ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 415
+    testRunner.And("the response json matches:", "{\r\n    \"skills\": [\r\n        {\r\n            \"skillType\": \"competency\",\r\n          " +
+                    "  \"skill\": \"prepare mixed beverages\",\r\n            \"lastModified\": \"2016-09-15T1" +
+                    "0:50:50Z\",\r\n            \"alternativeLabels\": [\r\n                \"serve cocktails" +
+                    "\",\r\n                \"prepare a mix of beverages\",\r\n                \"mix and serv" +
+                    "e alcoholic and non-alcoholic beverages\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "],\r\n                \"alternativeLabels\": [\r\n                    \"serve cocktails" +
+                    "\"\r\n                ]\r\n            },\r\n            \"skillReusability\": \"sector-sp" +
+                    "ecific\"\r\n        },\r\n        {\r\n            \"skillType\": \"competency\",\r\n        " +
+                    "    \"skill\": \"assemble cocktail garnishes\",\r\n            \"lastModified\": \"2016-0" +
+                    "9-15T10:55:54Z\",\r\n            \"alternativeLabels\": [\r\n                \"use diffe" +
+                    "rent items to decorate cocktails\",\r\n                \"assemble garnishing for coc" +
+                    "ktails\",\r\n                \"choose various items to present cocktails\",\r\n        " +
+                    "        \"assemble garnish for cocktails\"\r\n            ],\r\n            \"uri\": \"ht" +
+                    "tp://data.europa.eu/esco/skill/f42df0af-c63b-41a7-815f-ab5eb85098e3\",\r\n         " +
+                    "   \"matches\": {\r\n                \"hiddenLabels\": [],\r\n                \"skill\": [" +
+                    "\r\n                    \"assemble cocktail garnishes\"\r\n                ],\r\n       " +
+                    "         \"alternativeLabels\": [\r\n                    \"use different items to dec" +
+                    "orate cocktails\",\r\n                    \"assemble garnishing for cocktails\",\r\n   " +
+                    "                 \"choose various items to present cocktails\",\r\n                 " +
+                    "   \"assemble garnish for cocktails\"\r\n                ]\r\n            },\r\n        " +
+                    "    \"skillReusability\": \"sector-specific\"\r\n        }\r\n    ]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -460,18 +431,18 @@ testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabe
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 425
+#line 471
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-#line 426
+#line 472
  testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table14, "Given ");
-#line 428
+#line 474
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 429
+#line 475
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -488,7 +459,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 433
+#line 479
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
@@ -498,11 +469,11 @@ this.ScenarioInitialize(scenarioInfo);
             table15.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 434
+#line 480
  testRunner.Given("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table15, "Given ");
-#line 437
+#line 483
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 438
+#line 484
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -519,10 +490,10 @@ this.ScenarioInitialize(scenarioInfo);
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 443
+#line 489
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 444
+#line 490
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
@@ -531,12 +502,12 @@ this.ScenarioInitialize(scenarioInfo);
             table16.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 445
+#line 491
  testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table16, "And ");
-#line 448
+#line 494
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 449
+#line 495
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to invalid subscrip" +
                     "tion key. Make sure to provide a valid key for an active subscription.\"\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -554,10 +525,10 @@ this.ScenarioInitialize(scenarioInfo);
                         "GetSkillsByLabel",
                         "#@ignore",
                         "todo"});
-#line 459
+#line 505
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 460
+#line 506
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -566,12 +537,12 @@ this.ScenarioInitialize(scenarioInfo);
             table17.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 461
+#line 507
  testRunner.And("I make a request to the service taxonomy API \"getskillsbylabelsearch\"", ((string)(null)), table17, "And ");
-#line 464
+#line 510
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 465
+#line 511
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to missing subscrip" +
                     "tion key. Make sure to include subscription key when making requests to an API.\"" +
                     "\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");

@@ -18,6 +18,33 @@ Given I make a request to the service taxonomy API "getskillsbylabelsearch" with
 {
     "skills": [
         {
+            "skillType": "competency",
+            "skill": "operate brazing equipment",
+            "lastModified": "2016-12-20T19:49:34Z",
+            "alternativeLabels": [
+                "use welding torches",
+                "use brazing equipment",
+                "handle brazing equipment",
+                "run brazing equipment",
+                "utilise welding torches",
+                "run welding torches",
+                "utilise brazing equipment",
+                "handle welding torches"
+            ],
+            "uri": "http://data.europa.eu/esco/skill/10f24e0d-bd23-4432-b96b-e9f23136c503",
+            "matches": {
+                "hiddenLabels": [],
+                "skill": [],
+                "alternativeLabels": [
+                    "use welding torches",
+                    "utilise welding torches",
+                    "run welding torches",
+                    "handle welding torches"
+                ]
+            },
+            "skillReusability": "cross-sectoral"
+        },
+        {
             "skillType": "knowledge",
             "skill": "torch temperature for metal processes",
             "lastModified": "2017-01-05T13:52:33Z",
@@ -188,27 +215,8 @@ Given I make a request to the service taxonomy API "getskillsbylabelsearch" with
             "skillReusability": "occupation-specific"
         }
     ]
-}         
-         """
-
-@GetSkillsByLabel #@ignore @todo
-Scenario: Search for a partial word
-
-Given I make a request to the service taxonomy API "getskillsbylabelsearch" with request body
-# includes all skill resablity examples, competncy and knowledge, skill match, alt label match
-    """
-{
-  "label": "ncendiari",
-  "matchAltLabels": "true"
 }
-    """
-	Then the response code is 200
-    And the response json matches:
-    """
-    {
-	"skills": []
-}
-    """
+"""
 
 @GetSkillsByLabel #@ignore @todo
 Scenario: Search for a full word with alternate labels included
@@ -226,6 +234,25 @@ Given I make a request to the service taxonomy API "getskillsbylabelsearch" with
 """
 {
     "skills": [
+        {
+            "skillType": "competency",
+            "skill": "prepare mixed beverages",
+            "lastModified": "2016-09-15T10:50:50Z",
+            "alternativeLabels": [
+                "serve cocktails",
+                "prepare a mix of beverages",
+                "mix and serve alcoholic and non-alcoholic beverages"
+            ],
+            "uri": "http://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199",
+            "matches": {
+                "hiddenLabels": [],
+                "skill": [],
+                "alternativeLabels": [
+                    "serve cocktails"
+                ]
+            },
+            "skillReusability": "sector-specific"
+        },
         {
             "skillType": "competency",
             "skill": "assemble cocktail garnishes",
@@ -389,6 +416,25 @@ Given I make a request to the service taxonomy API "getskillsbylabelsearch" with
 """
 {
     "skills": [
+        {
+            "skillType": "competency",
+            "skill": "prepare mixed beverages",
+            "lastModified": "2016-09-15T10:50:50Z",
+            "alternativeLabels": [
+                "serve cocktails",
+                "prepare a mix of beverages",
+                "mix and serve alcoholic and non-alcoholic beverages"
+            ],
+            "uri": "http://data.europa.eu/esco/skill/81d5b408-e805-4788-8dbd-42f22e8fd199",
+            "matches": {
+                "hiddenLabels": [],
+                "skill": [],
+                "alternativeLabels": [
+                    "serve cocktails"
+                ]
+            },
+            "skillReusability": "sector-specific"
+        },
         {
             "skillType": "competency",
             "skill": "assemble cocktail garnishes",
