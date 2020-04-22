@@ -80,12 +80,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as Knowledge and cross-sectoral")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
+        [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
         public virtual void GetSkillClassifiedAsKnowledgeAndCross_Sectoral()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as Knowledge and cross-sectoral", null, new string[] {
+                        "GetSkillById",
+                        "ignore",
+                        "todo",
                         "GetSkillById"});
-#line 9
+#line 10
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -97,10 +103,10 @@ this.FeatureBackground();
             table5.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7"});
-#line 10
+#line 11
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table5, "Given ");
 #line hidden
-#line 13
+#line 14
  testRunner.Then("the response json matches:", @"{
    ""skillType"": ""knowledge"",
    ""skill"": ""types of wood materials"",
@@ -130,7 +136,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 32
+#line 33
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -142,10 +148,10 @@ this.FeatureBackground();
             table6.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/skill/ffe198e3-3f51-40c1-8d43-6e559bb98c8d"});
-#line 33
+#line 34
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table6, "Given ");
 #line hidden
-#line 36
+#line 37
  testRunner.Then("the response json matches:", @"{
    ""skillType"": ""competency"",
    ""skill"": ""operate forestry equipment"",
@@ -175,7 +181,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 55
+#line 56
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -187,10 +193,10 @@ this.FeatureBackground();
             table7.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/skill/cb108a0a-88e6-4579-885d-b1e794ada512"});
-#line 56
+#line 57
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table7, "Given ");
 #line hidden
-#line 59
+#line 60
  testRunner.Then("the response json matches:", @"{
    ""skillType"": ""competency"",
    ""skill"": ""manage office appliance requirements"",
@@ -221,7 +227,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 79
+#line 80
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -233,10 +239,10 @@ this.FeatureBackground();
             table8.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 80
+#line 81
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table8, "Given ");
 #line hidden
-#line 83
+#line 84
  testRunner.Then("the response json matches:", @"{
    ""skillType"": ""competency"",
    ""skill"": ""manage data, information and digital content"",
@@ -260,7 +266,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 96
+#line 97
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -272,9 +278,9 @@ this.FeatureBackground();
             table9.AddRow(new string[] {
                         "uri",
                         "http://data.europa.eu/esco/InvalidSkill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7"});
-#line 97
+#line 98
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table9, "Given ");
-#line 100
+#line 101
     testRunner.Then("the response code is 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -291,7 +297,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 105
+#line 106
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -300,11 +306,11 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "dataItem",
                         "value"});
-#line 106
+#line 107
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table10, "Given ");
-#line 108
-    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 109
+    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 110
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -321,7 +327,7 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 113
+#line 114
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
@@ -333,11 +339,11 @@ this.FeatureBackground();
             table11.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 114
+#line 115
  testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table11, "Given ");
-#line 117
-    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 118
+    testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 119
     testRunner.And("the the response message is \"Unable to process supplied parameters\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -354,12 +360,12 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 123
+#line 124
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
 this.FeatureBackground();
-#line 124
+#line 125
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -368,12 +374,12 @@ this.FeatureBackground();
             table12.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 125
+#line 126
  testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table12, "And ");
-#line 128
+#line 129
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 129
+#line 130
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to invalid subscrip" +
                     "tion key. Make sure to provide a valid key for an active subscription.\"\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
@@ -391,12 +397,12 @@ this.FeatureBackground();
                         "GetSkillById",
                         "ignore",
                         "todo"});
-#line 139
+#line 140
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
 this.FeatureBackground();
-#line 140
+#line 141
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -405,12 +411,12 @@ this.FeatureBackground();
             table13.AddRow(new string[] {
                         "skill",
                         "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
-#line 141
+#line 142
  testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table13, "And ");
-#line 144
+#line 145
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 145
+#line 146
     testRunner.And("the response json matches:", "   {\r\n   \"statusCode\": 401,\r\n   \"message\": \"Access denied due to missing subscrip" +
                     "tion key. Make sure to include subscription key when making requests to an API.\"" +
                     "\r\n   }", ((TechTalk.SpecFlow.Table)(null)), "And ");

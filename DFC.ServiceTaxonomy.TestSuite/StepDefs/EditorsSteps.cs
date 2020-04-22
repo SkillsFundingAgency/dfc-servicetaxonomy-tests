@@ -268,6 +268,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
  
         }
 
+        [Given(@"I add a new graph contentType called ""(.*)""")]
+        public void GivenIAddANewGraphContentTypeCalled(string p0)
+        {
+            GivenIAddANewContentTypeCalled(p0);
+            // now add graph sync item with default settings
+            GivenIEditThePart("Graph Sync");
+            _GraphSyncPart.SetFieldValues(p0,_scenarioContext.GetGraphSyncPartSettings());
+            
+
+
+        }
+
+
         //content type
         [Given(@"I edit the ""(.*)"" part")]
         public void GivenIEditThePart(string p0)

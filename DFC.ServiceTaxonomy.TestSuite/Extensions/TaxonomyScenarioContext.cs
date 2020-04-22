@@ -62,6 +62,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
         }
 
+        public static Dictionary<string, string> GetGraphSyncPartSettings(this ScenarioContext context)
+        {
+            return new Dictionary<string, string>()
+            {
+                { "NodeNameTransform", @"$""ncs__{ContentType}"""},
+                { "PropertyNameTransform",@"$""ncs__{Value}"""},
+                { "IDPropertyName", "uri" },
+                { "GenerateIDValue", @"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid():D}" }
+            };
+        }
+
 
         public static string GetJobProfileUri(this ScenarioContext context, string resource)
         {
