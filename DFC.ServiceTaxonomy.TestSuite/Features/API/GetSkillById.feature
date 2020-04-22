@@ -41,11 +41,11 @@ Scenario: Get skill classified as Competency and Sector Specific
     "skill": "operate forestry equipment",
     "lastModified": "2016-12-20T17:26:38Z",
     "alternativeLabels": [
-        "use forestry equipment",
         "forestry equipment operating",
+        "use forestry equipment",
         "using forestry equipment",
-        "operating forestry equipment",
-        "forestry equipment using"
+        "forestry equipment using",
+        "operating forestry equipment"
     ],
     "uri": "http://data.europa.eu/esco/skill/ffe198e3-3f51-40c1-8d43-6e559bb98c8d",
     "skillReusability": "sector-specific"
@@ -64,12 +64,12 @@ Scenario: Get skill classified as occupation-specific
     "skill": "manage office appliance requirements",
     "lastModified": "2016-12-20T18:06:31Z",
     "alternativeLabels": [
-        "oversee office appliance requirements",
-        "check needs for office stationary items",
-        "manage requirements of office appliance",
         "monitor office appliance requirements",
         "managing office appliance requirements",
-        "manage office appliance's requirements"
+        "oversee office appliance requirements",
+        "manage office appliance's requirements",
+        "check needs for office stationary items",
+        "manage requirements of office appliance"
     ],
     "uri": "http://data.europa.eu/esco/skill/cb108a0a-88e6-4579-885d-b1e794ada512",
     "skillReusability": "occupation-specific"

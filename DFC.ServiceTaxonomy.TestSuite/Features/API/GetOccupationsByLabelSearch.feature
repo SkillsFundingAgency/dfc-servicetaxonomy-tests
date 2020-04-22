@@ -1,6 +1,6 @@
 ﻿Feature: GetOccupationsByLabelSearch
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Search for a full word
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -35,7 +35,7 @@ Then the response json matches:
 }
    """
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel @todo
 Scenario: Search for a partial word
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -55,12 +55,12 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
             "occupation": "aesthetician",
             "lastModified": "2016-07-05T16:54:48Z",
             "alternativeLabels": [
-                "facialist",
-                "beauty specialist",
-                "esthetician",
                 "skin care technician",
-                "facial treatment operator",
+                "beauty specialist",
                 "cosmetician",
+                "facial treatment operator",
+                "esthetician",
+                "facialist",
                 "skin care specialist",
                 "beautician"
             ],
@@ -76,7 +76,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
 }
     """
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Search for a full word with alternate labels included
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -113,7 +113,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
 }
 """
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Search where there are no matches
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -132,7 +132,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
 }
     """
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Alt label search defaults to false
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -151,7 +151,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
     """
 
 # skill type, reusablity, no alt labels
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Search for that is only in alt labels without allowing alt label search
 
 Given I make a request to the service taxonomy API "getoccupationsbylabelsearch" with request body
@@ -173,7 +173,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
 
     
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Alt label value is supplied as parameter
 
 Given I want to supply "?matchAltLabels=true" as a parameter in the following request
@@ -192,16 +192,16 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
             "occupation": "dietitian",
             "lastModified": "2016-09-22T13:31:57Z",
             "alternativeLabels": [
+                "dietician",
                 "public health nutritionist",
-                "specialist dietician",
-                "dietician"
+                "specialist dietician"
             ],
             "uri": "http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f",
             "matches": {
                 "occupation": [],
                 "alternativeLabels": [
-                    "specialist dietician",
-                    "dietician"
+                    "dietician",
+                    "specialist dietician"
                 ]
             }
         }
@@ -211,7 +211,7 @@ Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
 
 
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: No body is supplied
 	Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
     	| dataItem | value  |
@@ -219,7 +219,7 @@ Scenario: No body is supplied
     And the the response message is "Unable to process supplied parameters"
 
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Invalid body is supplied
 	Given I make a request to the service taxonomy API "getoccupationsbylabelsearch"
     	| dataItem | value                                                                 |
@@ -229,7 +229,7 @@ Scenario: Invalid body is supplied
 
 
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Invalid security header is supplied
     Given I want to supply an invalid security header
 	And I make a request to the service taxonomy API "getoccupationsbylabelsearch"
@@ -245,7 +245,7 @@ Scenario: Invalid security header is supplied
     """
 
 
-@GetOccupationsByLabel   @ignore @todo
+@GetOccupationsByLabel   #@ignore @todo
 Scenario: Missing security header
     Given I want to fail to send a security header
 	And I make a request to the service taxonomy API "getoccupationsbylabelsearch"

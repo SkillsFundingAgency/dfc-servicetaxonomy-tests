@@ -174,6 +174,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             JObject o2 = JObject.Parse(json2);
 
             return JToken.DeepEquals(o1, o2);
+
+            //return JToken.ReferenceEquals(o1, o2);
         }
     }
 }
