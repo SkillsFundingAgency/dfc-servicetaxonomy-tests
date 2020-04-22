@@ -79,19 +79,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
  testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 12
-    testRunner.Given("I add a new graph contentType called \"AutomatedTestItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
+ testRunner.And("I try to delete content type \"TestContentPicker1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 13
+    testRunner.Given("I add a new graph contentType called \"TestContentPicker1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Display Name",
-                        "Type"});
+                        "Type",
+                        "Editor"});
             table46.AddRow(new string[] {
-                        "TextField",
-                        "Text Field"});
-            table46.AddRow(new string[] {
-                        "ValueField",
-                        "Numeric Field"});
-#line 13
+                        "Description",
+                        "Html Field",
+                        "Wysiwyg editor"});
+#line 14
  testRunner.And("I add the following fields", ((string)(null)), table46, "And ");
 #line hidden
         }
