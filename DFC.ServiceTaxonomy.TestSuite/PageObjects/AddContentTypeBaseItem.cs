@@ -87,7 +87,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
-        public AddContentTypeBaseItem AddField( string contentType, string displayName, string fieldType)
+        public AddContentTypeBaseItem AddField( string contentType, string displayName, string fieldType, string editorType = "")
         {
             try
             {
@@ -105,6 +105,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
                 // click Save button
                _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Save']")).Click();
+
+                if (editorType.Length > 0)
+                {
+                    // also set the editor type
+
+                }
 
             }
             catch (Exception e)

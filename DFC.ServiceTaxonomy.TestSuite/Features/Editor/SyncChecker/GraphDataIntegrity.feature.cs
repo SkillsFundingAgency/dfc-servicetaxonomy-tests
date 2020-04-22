@@ -19,6 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("GraphDataIntegritity")]
+    [NUnit.Framework.CategoryAttribute("webtest")]
     public partial class GraphDataIntegritityFeature
     {
         
@@ -32,7 +33,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GraphDataIntegritity", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "f two numbers", ProgrammingLanguage.CSharp, new string[] {
+                        "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -72,76 +74,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         
         public virtual void FeatureBackground()
         {
-#line 6
 #line 7
- testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
+ testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 11
-testRunner.Given("I add a new graph contentType called \"AutomatedTestItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
- testRunner.And("I edit the \"Graph Sync\" part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+    testRunner.Given("I add a new graph contentType called \"AutomatedTestItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Field",
-                        "Value"});
-            table46.AddRow(new string[] {
-                        "RelationshipType",
-                        ""});
-            table46.AddRow(new string[] {
-                        "NodeNameTransform",
-                        "$\"ncs__{Value}\""});
-            table46.AddRow(new string[] {
-                        "PropertyNameTransform",
-                        "$\"ncs__{Value}\""});
-            table46.AddRow(new string[] {
-                        "CreateRelationshipType",
-                        ""});
-            table46.AddRow(new string[] {
-                        "IDPropertyName",
-                        "uri"});
-            table46.AddRow(new string[] {
-                        "GenerateIDValue",
-                        "$\"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid(" +
-                            "):D}\""});
-#line 18
- testRunner.And("I set the following field values", ((string)(null)), table46, "And ");
-#line 26
- testRunner.And("I save the edited part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                         "Display Name",
                         "Type"});
-            table47.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "TextField",
                         "Text Field"});
-            table47.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "ValueField",
                         "Numeric Field"});
-#line 27
- testRunner.And("I add the following fields", ((string)(null)), table47, "And ");
+#line 13
+ testRunner.And("I add the following fields", ((string)(null)), table46, "And ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
+        [NUnit.Framework.DescriptionAttribute("Initial Sync Test")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void AddTwoNumbers()
+        public virtual void InitialSyncTest()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Initial Sync Test", null, new string[] {
                         "mytag"});
-#line 37
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 6
+#line 7
 this.FeatureBackground();
-#line 38
+#line 24
  testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 39
+#line 25
  testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 26
  testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
+#line 27
  testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

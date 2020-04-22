@@ -275,9 +275,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // now add graph sync item with default settings
             GivenIEditThePart("Graph Sync");
             _GraphSyncPart.SetFieldValues(p0,_scenarioContext.GetGraphSyncPartSettings());
-            
-
-
+            _GraphSyncPart.SaveChanges();
         }
 
 
@@ -339,6 +337,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
+                _addContentType.AddField(contentType, row[0], row[1], ( row[2].Length>0? row[2] : null ) );
                 dictionary.Add(row[0], row[1]);
             }
             foreach (var item in dictionary)
