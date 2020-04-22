@@ -407,6 +407,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                   counter = 0;
                 }
+                Thread.Sleep(720000);
             }
 
             file.Close();
@@ -448,9 +449,27 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string loadMessage = "";
             int returnedAfterSeconds = 0;
             int verifiedSqlCountAfterSeconds = 0;
+
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+
+
+            // get table name
+            var pattern = "[a-zA-Z]+";
+            Regex rgx = new Regex(pattern);
+            var table = rgx.Matches(filename).First().Value; ;
+            table = filename.Split('.')[1];
+            table = rgx.Match(filename.Split('.')[1]).Value;
+            table = TransformTableName(table);
+
+
+            // get initial record count
+            var ds = sqlInstance.GetRecordCount("ContentItemIndex", "ContentType", table);
+            int startingSQLRecordCount = (int)ds;
+
             try
             {
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl("https://dfc-sit-stax-editor-as.azurewebsites.net/Admin/OrchardCore.Deployment/Import/Index");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl( _scenarioContext.GetEnv().editorBaseUrl +  "/Admin/OrchardCore.Deployment/Import/Index");
                 var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
                 webElement.SendKeys(filename);
                 var item = _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Import']"));
@@ -496,16 +515,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             // now need to check that / wait until all the records have arrived in sql database
 
-            // get table name
-            var pattern = "[a-zA-Z]+";
-            Regex rgx = new Regex(pattern);
-            var table = rgx.Matches(filename).First().Value; ;
-            table = filename.Split('.')[1];
-            table = rgx.Match(filename.Split('.')[1]).Value;
-            table = TransformTableName(table);
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
             int count = 0;
             int tmMod = 5;
             bool status = true;
@@ -524,9 +534,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             while (!done)
             {
-                var ds = sqlInstance.GetRecordCount("ContentItemIndex", "ContentType", table);
+                ds = sqlInstance.GetRecordCount("ContentItemIndex", "ContentType", table);
                 discoveredRows = (int)ds;
-                if (ds.Equals(recordCount + existingRows))
+                if (ds.Equals(recordCount + startingSQLRecordCount))
                 {
                     // we are done
                     done = true;
@@ -559,22 +569,34 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             done = false;
             string cypher = "match(a:ncs__" + table + ") return count(a)";
             int neo4jRecordCount = 0;
+            bool tmModExtended = false;
             while (!done)
             {
                 // check neo count
                 Neo4JHelper neo4JHelper = new Neo4JHelper();
-                neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                try
+                {
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                     _scenarioContext.GetEnv().neo4JUid,
                                     _scenarioContext.GetEnv().neo4JPassword);
-               /* var countInfo = neo4JHelper.ExecuteTableQuery(cypher,null);
-                var returnObject = neo4JHelper.GetRecordCount(cypher, null);
-                foreach (IRecord record in countInfo)
+                    /* var countInfo = neo4JHelper.ExecuteTableQuery(cypher,null);
+                     var returnObject = neo4JHelper.GetRecordCount(cypher, null);
+                     foreach (IRecord record in countInfo)
+                     {
+                         string a = record.Values["count(a)"].ToString(); ;
+                         int.TryParse(a, out neo4jRecordCount);
+                     }*/
+                    neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
+                }
+                catch 
                 {
-                    string a = record.Values["count(a)"].ToString(); ;
-                    int.TryParse(a, out neo4jRecordCount);
-                }*/
-                neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
-                if (neo4jRecordCount.Equals(recordCount + existingRows))
+                    Thread.Sleep(120000);
+                    tmMod = (tmModExtended ? tmMod : tmMod * 2 );
+                    tmModExtended = true;
+                    
+                }
+                
+                if (neo4jRecordCount.Equals(recordCount + startingSQLRecordCount))
                 {
                     // we are done
                     done = true;

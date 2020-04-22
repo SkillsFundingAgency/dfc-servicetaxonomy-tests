@@ -80,11 +80,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as Knowledge and cross-sectoral")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void GetSkillClassifiedAsKnowledgeAndCross_Sectoral()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as Knowledge and cross-sectoral", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -121,11 +125,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as Competency and Sector Specific")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void GetSkillClassifiedAsCompetencyAndSectorSpecific()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as Competency and Sector Specific", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 32
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -162,11 +170,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as occupation-specific")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void GetSkillClassifiedAsOccupation_Specific()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as occupation-specific", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 55
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -204,11 +216,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Get skill classified as Transveral with no alternate labels")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void GetSkillClassifiedAsTransveralWithNoAlternateLabels()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get skill classified as Transveral with no alternate labels", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 79
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -239,11 +255,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Unknown skill is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void UnknownSkillIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unknown skill is supplied", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 96
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -266,11 +286,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("No body is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void NoBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No body is supplied", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 105
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -292,11 +316,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid body is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void InvalidBodyIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid body is supplied", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 113
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -321,11 +349,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid security header is supplied")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void InvalidSecurityHeaderIsSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid security header is supplied", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 123
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -354,11 +386,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing security header")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("GetSkillById")]
+        [NUnit.Framework.CategoryAttribute("todo")]
         public virtual void MissingSecurityHeader()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing security header", null, new string[] {
-                        "GetSkillById"});
+                        "GetSkillById",
+                        "ignore",
+                        "todo"});
 #line 139
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

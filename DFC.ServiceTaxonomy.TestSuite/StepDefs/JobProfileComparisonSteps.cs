@@ -102,7 +102,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext context;
-
+        private int comparisonCount = 0;
+        private string JobProfileName = "";
         public JobProfileComparisonSteps(ScenarioContext injectedContext)
         {
             context = injectedContext;
@@ -219,7 +220,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 comparedItem headerItem = new comparedItem();
                 //  get source job profile data
 
-                var responseSourceData = RestHelper.Get( context.GetJobProfileApiBaseUrl() + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
+                var responseSourceData = RestHelper.Get( context.GetJobProfileApiBaseUrl() + "/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
 
                 //  get test subject job profile data
                 string unslug = char.ToUpper(jobProfile.title[0]) + jobProfile.title.Replace("-", " ").Substring(1);
@@ -299,36 +300,61 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     string text = "???";
                     string cssFormat = tdInlineCss;
-                    string toolTip = "";
+                    string toolTip = "" ;
 
                     if (dict.ContainsKey(item.Key))
                     {
-                        toolTip = " Title=\"" + dict[item.Key].ComparisonDetail.Replace("\"", "&quot;") + "\" ";
-                        if (dict[item.Key].ContentMatch)
+                        toolTip = " Title=\"" + dict[item.Key].ComparisonId + ". [" + dict["Title"].Title + "]" + dict[item.Key].ComparisonDetail.Replace("\"", "&quot;") + "\" ";
+                        text = "";// item.Value.ComparisonId + ". "; 
+                        if (dict[item.Key].NewEmpty && dict[item.Key].OriginalEmpty)
                         {
-                            text = "ContentMatch";
-                            cssFormat = tdInlineCssGood;
+                            text += "BothEmpty";
+                            cssFormat = tdInlineCssGood.Replace("palegreen", "lightblue");
+                        }
+                        else if (dict[item.Key].ContentMatch)
+                        {
+                            text += "ContentMatch";
+                            cssFormat = ( dict[item.Key].SourceManipulated ? tdInlineCssGood.Replace("palegreen", "olive") :
+                                                        ( ! dict[item.Key].Manipulated ? tdInlineCssGood : tdInlineCssGood.Replace("palegreen", "darkgreen")  )
+                                                        );
+                        }
+                        else if (dict[item.Key].ToDo)
+                        {
+                            text += "TODO";
+                            cssFormat = tdInlineCssGood.Replace("palegreen", "red");
+                        }
+                        else if (dict[item.Key].NewEmpty && !dict[item.Key].OriginalEmpty)
+                        {
+                            text += "NewEmpty";
+                            cssFormat = tdInlineCssGood.Replace("palegreen", "lightsalmon");
+                        }
+
+                        else if (dict[item.Key].SizesDiffer)
+                        {
+                            text += "SizesDiffer";
+                            cssFormat = tdInlineCssGood.Replace("palegreen", "orange");
                         }
                         else if (dict[item.Key].FormatMatch)
                         {
-                            text = "StructureMatch";
+                            text += "StructureMatch";
                             cssFormat = tdInlineCssGood.Replace("palegreen", "lightyellow");
                         }
+ 
                         //else if ()
                         else if (!dict[item.Key].Included)
                         {
-                            text = "Missing";
+                            text += "Missing";
                             cssFormat = tdInlineCssGood.Replace("palegreen", "lightgrey");
                         }
                         else
                         {
                             cssFormat = tdInlineCssGood.Replace("palegreen", "lightsalmon");
-                            text = "Differs";
+                            text += "Differs";
                         }
                     }
                     else
                     {
-                        text = "Unknown";
+                        text += "Unknown";
                     }
 
 
@@ -432,6 +458,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 success = false;
             }
+
+            if (replacementsMade)
+            {
+                Console.WriteLine("123");
+            }
             return ( success ? (JToken)replacedValue : source );
         }
 
@@ -440,14 +471,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             public string Path { get; set; }
             public string Name { get; set; }
             public bool Manipulated { get; set; } = false;
+            public bool SourceManipulated { get; set; } = false;
             public bool Included { get; set; } = false;
             public bool FormatMatch { get; set; } = false;
             public bool ContentMatch { get; set; } = false;
             public bool OriginalEmpty { get; set; } = false;
             public bool NewEmpty { get; set; } = false;
+            public bool NewTruncated { get; set; } = false;
+            public bool SizesDiffer { get; set; } = false;
             public string OriginalFormat { get; set; }
             public string NewFormat { get; set; }
             public string ComparisonDetail { get; set; }
+            public int ComparisonId { get; set; }
+            public bool ToDo { get; set; }
+            public string Title { get; set; }
 
         }
 
@@ -483,7 +520,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
                 return diff;
             }
+            comparisonCount++;
 
+            if ( comparisonCount == 353)
+            {
+                Console.WriteLine("DEBUGBREAKPOINT");
+            }
+            comparison.ComparisonId = comparisonCount;
+            JToken originalModel = Model;
+            JToken originalCurrent = Current;
             if (Current.Type == JTokenType.Array)
             {
                 // is the current  empty
@@ -496,20 +541,35 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 comparison.OriginalEmpty = (Current.ToString().Length == 0);
                 currentSize = Current.ToString().Length;
                 comparison.OriginalFormat = "STRING";
+                comparison.Title = Current.ToString();
+            }
+            if (Current.Type == JTokenType.Array)
+            {
+                comparison.OriginalEmpty = (Current.Count() == 0);
+            }
+            else
+            {
+                comparison.OriginalEmpty = (Current.ToString().Length == 0);
             }
             if (Model.Type == JTokenType.Array)
             {
                 // is the  model empty
-                comparison.NewEmpty = (Model.ToString().Length < 2);
+                comparison.NewEmpty = (Model.Count() == 0);
+                comparison.NewTruncated = ( Model.Count() > 0 ? Current.Count() > Model.Count() : false );
                 modelSize = Current.Count();
                 comparison.NewFormat = "ARRAY";
+                comparison.ToDo = (Model.Count() > 0 ? Model[0].ToString().ToLower() == "todo" : false);
             }
             else
             {
+                comparison.ToDo = (originalModel.ToString().ToLower() == "todo");
                 comparison.NewEmpty = (Model.ToString().Length == 0);
+                comparison.NewTruncated = (Model.ToString().Length > 0 ?  Current.ToString().Length / Model.ToString().Length > 2 : false);
                 modelSize = Current.ToString().Length;
                 comparison.NewFormat = "STRING";
             }
+
+            comparison.SizesDiffer = Model.ToString().Length != Current.ToString().Length;
 
             // does the new and old type match
             comparison.FormatMatch = ( Current.Type == Model.Type );
@@ -532,6 +592,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         newCurrent.Add((JToken)singleItem);
                         diff["SINGLEARRAYITEM"] = newCurrent;
                         Current = newCurrent;
+                        comparison.SourceManipulated = true;
                     }
                 break;
                 default:
@@ -584,22 +645,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     break;
             }
 
+            if ( Current.Type == JTokenType.Array && Model.Type != JTokenType.Array)
+            {
+                JArray newModel = new JArray();
+                newModel.Add(Model.ToString());
+                Model = newModel;
+                comparison.Manipulated = true;
+            }
+
+
+
             // do they match
             comparison.ContentMatch = JToken.DeepEquals(Current, Model);
+
+           
+            
 
             StringBuilder message = new StringBuilder();
 
             message.Append(path + "\n");
             message.Append("-------------------------------------------\n");
-            message.Append($"Source Format: {comparison.OriginalFormat}({currentSize})\n");
-            message.Append($"New Format   : {comparison.NewFormat}({modelSize})\n");
-            message.Append($"Content transformed: {comparison.Manipulated}\n");
+            message.Append($"Source Format: {comparison.OriginalFormat}({currentSize}) ");
+            message.Append($"New Format   : {comparison.NewFormat}({modelSize}) ");
+            message.Append($"source transformed: {comparison.SourceManipulated} ");
+            message.Append($"Content transformed: {comparison.Manipulated} ");
             message.Append($"Content Match: {comparison.ContentMatch}\n");
             message.Append("\n");
+
+
             message.Append("Original:\n");
-            message.Append($"{Current.ToString()}\n");
+            message.Append($"{originalCurrent.ToString()}\n");
+            if (comparison.SourceManipulated)
+            {
+                message.Append("Original (transformed):\n");
+                message.Append($"{Current.ToString()}\n");
+            }
             message.Append("New:\n");
-            message.Append($"{Model.ToString()}\n");
+            message.Append($"{originalModel.ToString()}\n");
+            if (comparison.Manipulated)
+            {
+                message.Append("New (tranformed):\n");
+                message.Append($"{Model.ToString()}\n");
+            }
 
             comparison.ComparisonDetail = message.ToString();
             comparisons.Add(path, comparison);
