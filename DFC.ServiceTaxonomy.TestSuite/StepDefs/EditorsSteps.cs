@@ -62,7 +62,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly ScenarioContext _scenarioContext;
         private LogonScreen _logonScreen;
         private StartPage _startPage;
-        private AddActivity _addActivity;
+ //       private AddActivity _addActivity;
         private AddContentItemBase _addContentItemBase;
         private AddLinkItem _addLinkItem;
         private ManageContent _manageContent;
@@ -77,7 +77,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext = scenarioContext;
             _logonScreen = new LogonScreen(scenarioContext);
             _startPage = new StartPage(scenarioContext);
-            _addActivity = new AddActivity(scenarioContext);
+  //          _addActivity = new AddActivity(scenarioContext);
             _addContentItemBase = new AddContentItemBase(scenarioContext);
             _addLinkItem = new AddLinkItem(scenarioContext);
             _manageContent = new ManageContent(scenarioContext);
@@ -130,8 +130,29 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I capture the generated URI")]
         public void GivenICaptureTheGeneratedURIGraph_UriId_Text()
         {
-            _scenarioContext.Set( _addActivity.GetGeneratedURI(), keyGeneratedUri );
+            //  _scenarioContext.Set( _addActivity.GetGeneratedURI(), keyGeneratedUri );
+            // change to store each captured uri in list
+            _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
+
+            
+            
         }
+
+        [Given(@"I record the new documentId")]
+        public void GivenIRecordTheNewDocumentId()
+        {
+            string displayName = (string)_scenarioContext["Title"];
+            string contentType = (string)_scenarioContext["ContentType"];
+            string prefix =  (string)_scenarioContext["prefix"];
+
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+
+            // get initial record count
+            var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", "DisplayText = '" + prefix + displayName + "' and ContentType = '" + contentType + "'");
+            _scenarioContext.StoreRecordId(result);
+        }
+
 
         [Given(@"I Enter the following form data")]
         public void GivenIEnterTheFollowingFormData(Table table)
@@ -163,6 +184,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _addContentItemBase.SetFieldValueFromType( item.value.Key, item.value.Value,"Title");
 
                          }*/
+        }
+
+        [Given(@"I allow multiple items to be selected")]
+        public void GivenIAllowMultipleItemsToBeSelected()
+        {
+            string contentType = (string)_scenarioContext["ContentType"];
+            string FieldName = (string)_scenarioContext["FieldName"];
+            _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
         }
 
 
@@ -226,6 +255,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     break;
             }
 
+            _scenarioContext["ContentType"] = p0;
 
             Dictionary<string, string> vars = new Dictionary<string, string>();
             foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
@@ -260,7 +290,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         //content type
         [Given(@"I add a new contentType called ""(.*)""")]
-        public void GivenIAddANewContentTypeCalled(string p0)
+        public void GivenIAddANewContentTypeCalled(string p0 )
         {
             // navigate to /Admin/ContentTypes/List
             _scenarioContext["ContentType"] = p0;
@@ -271,11 +301,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I add a new graph contentType called ""(.*)""")]
         public void GivenIAddANewGraphContentTypeCalled(string p0)
         {
-            GivenIAddANewContentTypeCalled(p0);
+            _scenarioContext["ContentType"] = p0;
+            _addContentType.AddNew(p0);
+
             // now add graph sync item with default settings
             GivenIEditThePart("Graph Sync");
-            _GraphSyncPart.SetFieldValues(p0,_scenarioContext.GetGraphSyncPartSettings());
+            _GraphSyncPart.SelectSyncType();
+          //  _GraphSyncPart.SetFieldValues(p0,_scenarioContext.GetGraphSyncPartSettings());
             _GraphSyncPart.SaveChanges();
+        }
+
+        [Given(@"I add a new graph contentType with bag called ""(.*)""")]
+        public void GivenIAddANewGraphContentTypeWithBagCalled(string p0, Table table)
+        {
+            _scenarioContext["ContentType"] = p0;
+            var stringArray = new string[] { "Bag" };
+            _addContentType.AddNew(p0, stringArray);
+
+            // edit bag part and select content type from table
+
+            foreach (var row in table.Rows)
+            {
+                _addContentType.SelectBagContent(p0, row[0]);
+            }
+            _addContentType.SaveChanges();
+
+            // now add graph sync item with default settings
+            GivenIEditThePart("Graph Sync");
+            _GraphSyncPart.SetFieldValues(p0, _scenarioContext.GetGraphSyncPartSettings());
+            _GraphSyncPart.SaveChanges();
+        }
+
+        [Given(@"I select the following items from the displayed list")]
+        public void GivenISelectTheFollowingItemsFromTheDisplayedList(Table table)
+        {
+
+            string contentType = (string)_scenarioContext["ContentType"];
+      
+            foreach (var row in table.Rows)
+            {
+                _addContentType.SelectContentPickerItems( row[0]);
+            }
+            _addContentType.SaveChanges();
         }
 
 
@@ -285,6 +352,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string contentType = (string)_scenarioContext["ContentType"];
             _addContentType.EditPart(contentType, p0);
+        }
+
+        [Given(@"I edit the ""(.*)"" field")]
+        public void GivenIEditTheField(string p0)
+        {
+            string contentType = (string)_scenarioContext["ContentType"];
+            _addContentType.EditField(contentType, p0);
+            _scenarioContext["FieldName"] = p0;
         }
 
         //content type
@@ -334,17 +409,56 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIAddTheFollowingFields(Table table)
         {
             string contentType = (string)_scenarioContext["ContentType"];
-            var dictionary = new Dictionary<string, string>();
+//            var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
                 _addContentType.AddField(contentType, row[0], row[1], ( row[2].Length>0? row[2] : null ) );
-                dictionary.Add(row[0], row[1]);
-            }
-            foreach (var item in dictionary)
-            {
-                _addContentType.AddField(contentType, item.Key, item.Value);
+//                dictionary.Add(row[0], row[1]);
             }
         }
+
+        [Given(@"I add a bag part containing the following content types")]
+        public void GivenIAddABagPartContainingTheFollowingContentTypes(Table table)
+        {
+        //    _addContentType.AddPart("Bag");
+            ScenarioContext.Current.Pending();
+        }
+
+        [Given(@"I pick content")]
+        public void GivenIPickContent(Table table)
+        {
+            string prefix = (string)_scenarioContext["prefix"];
+            foreach (var row in table.Rows)
+            {
+                _scenarioContext.GetWebDriver().SelectDropListItemByClass("multiselect__input", prefix + row[0]);
+            }
+
+            
+        }
+
+        [Given(@"I replace tokens in and then run the following graph update statement")]
+        public void GivenIReplaceTokensInAndThenRunTheFollowingGraphUpdateStatement(string multilineText)
+        {
+            string token = "";
+            string replaceString = "";
+            string cypherStatement = multilineText;
+            for (int i = 0; i < _scenarioContext.GetNumberOfStoredUris(); i++)
+            {
+                token = "@URI" + (i + 1) + "@";
+                replaceString = _scenarioContext.GetUri(i);
+                cypherStatement = cypherStatement.Replace(token, replaceString);
+
+            }
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                    _scenarioContext.GetEnv().neo4JUid,
+                                    _scenarioContext.GetEnv().neo4JPassword);
+            neo4JHelper.ExecuteTableQuery(cypherStatement, null);
+        }
+
+
+
 
 
         [Given(@"My Test Step")]
@@ -764,7 +878,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I publish the item")]
         public void WhenIPublishTheItem()
         {
-            _addActivity.PublishActivity();
+            _addContentItemBase.PublishActivity();
         }
 
         [When(@"I delete the item")]
@@ -784,7 +898,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the add action completes succesfully")]
         public void ThenTheAddActionCompletesSuccesfully()
         {
-            _addActivity.ConfirmSuccess().Should().BeTrue();
+            _addContentItemBase.ConfirmSuccess().Should().BeTrue();
         }
 
         [Then(@"the edit action completes succesfully")]
@@ -848,6 +962,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             return match;
         }
+
 
 
         [Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
@@ -922,6 +1037,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);
         }
 
+        [Given(@"I generate and store a new URI")]
+        public void GivenIGenerateAndStoreANewURI()
+        {
+            string newUri = Guid.NewGuid().ToString();
+            _scenarioContext.StoreUri(newUri);
+        }
+
+
 
         [Then(@"the new data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
@@ -974,6 +1097,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             var activities = neo4JHelper.GetResultsList<DFC.ServiceTaxonomy.TestSuite.Models.Activity>(statementTemplate, statementParameters);
             activities.Count.Should().Be(0);
+        }
+
+        [Then(@"the following graph query returns (.*) record")]
+        public void ThenTheFollowingGraphQueryReturnsRecord(int p0, string multilineText)
+        {
+            string token = "";
+            string replaceString = "";
+            string cypherStatement = multilineText;
+            for (int i = 0; i < _scenarioContext.GetNumberOfStoredUris(); i++)
+            {
+                token = "@URI" + (i + 1) + "@";
+                replaceString = _scenarioContext.GetUri(i);
+                cypherStatement = cypherStatement.Replace(token, replaceString);
+
+            }
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                    _scenarioContext.GetEnv().neo4JUid,
+                                    _scenarioContext.GetEnv().neo4JPassword);
+            int count = neo4JHelper.ExecuteCountQuery(cypherStatement, null);
+            count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
 
         #endregion

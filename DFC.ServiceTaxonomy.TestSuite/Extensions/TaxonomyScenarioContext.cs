@@ -70,7 +70,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 { "NodeNameTransform", @"$""ncs__{ContentType}"""},
                 { "PropertyNameTransform",@"$""ncs__{Value}"""},
                 { "IDPropertyName", "uri" },
-                { "GenerateIDValue", @"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid():D}" }
+                { "GenerateIDValue", @"$""http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid()}""" }
             };
         }
 
@@ -128,6 +128,75 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static void SetOccupationListData(this ScenarioContext context, IList<Occupation> occupations)
         {
             context.Set<IList<Occupation>>(occupations, keyOccupationData);
+        }
+
+        public static void StoreUri(this ScenarioContext context, string newUri)
+        {
+            List<string> uris;
+            int count = (context.ContainsKey("uriCount") ? (int)context["uriCount"] : 0);
+            if (count == 0)
+            {
+                //initialise
+                uris = new List<string>();
+            }
+            else
+            {
+                //retreive
+                uris = (List<string>)context["uris"];
+            }
+            uris.Add(newUri);
+            count++;
+            context["uriCount"] = count;
+            context["uris"] = uris;
+        }
+
+        public static string GetUri(this ScenarioContext context, int index)
+        {
+            //expect zero based index
+            List<string> uris = (context.ContainsKey("uris") ? (List<string>)context["uris"] : new List<string>());
+
+            if (uris.Count < index - 1)
+            {
+                return "";
+            }
+            return uris[index];
+        }
+
+        public static void StoreRecordId(this ScenarioContext context, string newId)
+        {
+            List<string> ids;
+            int count = (context.ContainsKey("idCount") ? (int)context["idCount"] : 0);
+            if (count == 0)
+            {
+                //initialise
+                ids = new List<string>();
+            }
+            else
+            {
+                //retreive
+                ids = (List<string>)context["ids"];
+            }
+            ids.Add(newId);
+            count++;
+            context["idCount"] = count;
+            context["ids"] = ids;
+        }
+
+        public static string GetId(this ScenarioContext context, int index)
+        {
+            //expect zero based index
+            List<string> ids = (context.ContainsKey("ids") ? (List<string>)context["ids"] : new List<string>());
+
+            if (ids.Count < index + 1 )
+            {
+                return "";
+            }
+            return ids[index];
+        }
+
+        public static int GetNumberOfStoredUris(this ScenarioContext context)
+        {
+           return (context.ContainsKey("uriCount") ? (int)context["uriCount"] : 0);
         }
 
         public static IList<Occupation> GetOccupationListData(this ScenarioContext context)

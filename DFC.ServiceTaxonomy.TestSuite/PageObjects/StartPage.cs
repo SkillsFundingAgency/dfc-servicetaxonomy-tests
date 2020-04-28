@@ -28,11 +28,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
 
-        public AddActivity NavigateToNewActivity()
-        {
-            _scenarioContext.GetWebDriver().Url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentTypes/Activity/Create";
-            return new AddActivity (_scenarioContext);
-        }
+        //public AddActivity NavigateToNewActivity()
+        //{
+        //    _scenarioContext.GetWebDriver().Url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentTypes/Activity/Create";
+        //    return new AddActivity (_scenarioContext);
+        //}
 
     }
 }

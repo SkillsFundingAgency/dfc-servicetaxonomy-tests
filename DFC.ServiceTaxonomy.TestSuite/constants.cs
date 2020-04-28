@@ -6,7 +6,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 {
     public static class constants
     {
-        public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' delete i";
+        public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";
 
         public const string sql_ClearDownAllContentItemsOfType =
                                                                @"begin transaction t1

@@ -59,6 +59,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public GraphSyncPart SelectSyncType(string syncType = "NCS")
+        {
+
+            try
+            {
+                _scenarioContext.GetWebDriver().SelectDropListItemById("ddlSelectSettings", syncType);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+     
+           return this;
+        }
+
         public GraphSyncPart SaveChanges()
         {
             try

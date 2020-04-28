@@ -56,7 +56,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
             foreach (IRecord record in result)
             {
-                string a = record.Values["count(a)"].ToString(); ;
+                string a = record.Values[record.Keys[0]].ToString(); ;  
                 int.TryParse(a, out recordCount);
             }
             return recordCount;

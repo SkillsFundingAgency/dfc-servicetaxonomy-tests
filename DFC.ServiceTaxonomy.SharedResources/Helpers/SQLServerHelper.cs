@@ -125,6 +125,35 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return ds;
         }
 
+        public string GetFieldValueFromRecord(string field, string table, string whereClause = "")
+        {
+            DataSet ds = new DataSet(table);
+            string sql = @"select " + field + " from[" + table + "] where " + whereClause + ";"  ;
+            string returnValue = "";
+
+            Console.WriteLine("SQLHelper: GetRecord. Table: " + table + " where: " + whereClause);
+            Console.WriteLine("SQLHelper: sql: " + sql);
+            if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql, Connection))
+                    {
+
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        returnValue = cmd.ExecuteScalar().ToString(); ;
+                        //da.SelectCommand = cmd;
+                        //da.Fill(ds);
+                    }
+                }
+                catch (SqlException se)
+                {
+                    Console.WriteLine(se);
+                }
+            }
+            return returnValue;
+        }
+
 
         public long GetRecordCount(string table, string recordId )
         {
