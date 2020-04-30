@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];
 
         public string editorBaseUrl => Configuration["Editor:BaseUrl"];
-        public string editorUid => Configuration["Editor:UserName"];
+        public string editorUid => Configuration["Editor:Uid"];
         public string editorPassword => Configuration["Editor:Password"];
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
