@@ -11,6 +11,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
         public string skill { get; set; }
         public string[] alternativeLabels { get; set; }
         public string uri { get; set; }
+		public string type { get; set; }
+		public string skillResuability { get; set; }
 
         /* Sample response 
          * 

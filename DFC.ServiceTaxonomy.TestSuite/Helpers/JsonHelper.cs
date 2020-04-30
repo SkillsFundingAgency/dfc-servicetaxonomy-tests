@@ -26,8 +26,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             }
             catch
             {
-                // assume not an array, so has count of 1
-                count = 1;
+                // reyurn error
+                count = -1;
             }
             return count;
         }
@@ -145,6 +145,37 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             jsonSerializerSettings.DateParseHandling = DateParseHandling.None;
             var obj = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(json, jsonSerializerSettings);
             return (obj.ContainsKey(property) ? obj.Property(property).Value.ToString() : string.Empty);
+        }
+
+        public static int GetDocumentCountInCollection( string json, string property )
+        {
+            string collectionJson = GetPropertyFromJsonString(json, property);
+            return DocumentCount(collectionJson);
+        }
+
+        public static List<dynamic> GetCollectionPropertyFromJson( string json, string property)
+        {
+            JArray array;
+            string collectionJson = GetPropertyFromJsonString(json, property);
+            try
+            {
+                array = JArray.Parse(collectionJson);
+            }
+            catch
+            {
+                return null;
+            }
+            return array.ToList<dynamic>();
+        }
+
+        public static bool CompareJsonString( string json1, string json2)
+        {
+            JObject o1 = JObject.Parse(json1);
+            JObject o2 = JObject.Parse(json2);
+
+            return JToken.DeepEquals(o1, o2);
+
+            //return JToken.ReferenceEquals(o1, o2);
         }
     }
 }

@@ -24,33 +24,54 @@ namespace DFC.ServiceTaxonomy.TestSuite
             var configurationBuilder = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory());
 
-            Console.WriteLine("------------- Configuring Runtime Params--------------");
-            if (IsRunningInTfsPipeline)
+            if (File.Exists(@"appsettings.local.json"))
             {
-                Console.WriteLine("Pipeline run detected - Loading tokenised app settings");
                 configurationBuilder
-                    .AddJsonFile("appsettings.json", false, true);
+                    .AddJsonFile("appsettings.local.json", false, true);
             }
             else
             {
-                var homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
-                                Environment.OSVersion.Platform == PlatformID.MacOSX)
-                                ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-
-                var customAppSettingsPath =
-                    Environment.ExpandEnvironmentVariables(homePath + $@"\taxonomy\appsettings.local.json");
-                Console.WriteLine("Loading local app settings: " + customAppSettingsPath);
-
                 configurationBuilder
-                    .AddJsonFile(customAppSettingsPath, false, true);
+                   .AddJsonFile("appsettings.json", false, true);
             }
-
-            Console.WriteLine("-----------------------------------------------------");
-
 
             return configurationBuilder.Build();
 
         }
+
+        //public IConfiguration BuildConfiguration()
+        //{
+
+        //    var configurationBuilder = new ConfigurationBuilder()
+        //       .SetBasePath(Directory.GetCurrentDirectory());
+
+        //    Console.WriteLine("------------- Configuring Runtime Params--------------");
+        //    if (IsRunningInTfsPipeline)
+        //    {
+        //        Console.WriteLine("Pipeline run detected - Loading tokenised app settings");
+        //        configurationBuilder
+        //            .AddJsonFile("appsettings.json", false, true);
+        //    }
+        //    else
+        //    {
+        //        var homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
+        //                        Environment.OSVersion.Platform == PlatformID.MacOSX)
+        //                        ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+
+        //        var customAppSettingsPath =
+        //            Environment.ExpandEnvironmentVariables(homePath + $@"\Automation\dfc-servicetaxonomy-tests\DFC.ServiceTaxonomy.TestSuite\appsettings.local.json");
+        //        Console.WriteLine("Loading local app settings: " + customAppSettingsPath);
+
+        //        configurationBuilder
+        //            .AddJsonFile(customAppSettingsPath, false, true);
+        //    }
+
+        //    Console.WriteLine("-----------------------------------------------------");
+
+
+        //    return configurationBuilder.Build();
+
+        //}
 
         private static bool GetIsRunningInTfsPipeline() => Environment.GetEnvironmentVariables()
             .Cast<DictionaryEntry>()
