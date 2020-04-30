@@ -191,10 +191,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             JobProfileSummary jps = new JobProfileSummary();
 
             // jps = new JobProfileSummary();  jps.title ="admin-assistant"; allJobProfiles.Add(jps);
-            jps = new JobProfileSummary(); jps.title = "admin-assistant"; allJobProfiles.Add(jps);
+            //jps = new JobProfileSummary(); jps.title = "admin-assistant"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "border-force-officer"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "cabin-crew"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "care-worker"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "chief-executive"; allJobProfiles.Add(jps);
+            jps = new JobProfileSummary(); jps.title = "civil-engineer"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "construction-labourer"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "electrician"; allJobProfiles.Add(jps);
             jps = new JobProfileSummary(); jps.title = "emergency-medical-dispatcher"; allJobProfiles.Add(jps);
