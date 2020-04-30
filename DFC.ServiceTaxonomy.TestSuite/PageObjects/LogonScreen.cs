@@ -39,9 +39,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public StartPage SubmitLogonDetails ()
         {
-            navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
-            enterUsername(_scenarioContext.GetEnv().editorUid);
-            enterPassword(_scenarioContext.GetEnv().editorPassword);
+            Console.WriteLine("Attempt to logon");
+            Console.WriteLine("----------------");
+            Console.WriteLine("URL: " + _scenarioContext.GetEnv().editorBaseUrl);
+            Console.WriteLine("UID: " + _scenarioContext.GetEnv().editorUid);
+            Console.WriteLine("PWD (length): " + _scenarioContext.GetEnv().editorPassword.Length);
+            try
+            {
+                navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
+                enterUsername(_scenarioContext.GetEnv().editorUid);
+                enterPassword(_scenarioContext.GetEnv().editorPassword);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(@"Logon failed:"+ e.Message);
+                throw e;
+            }
             return new StartPage(_scenarioContext);
         }
     }
