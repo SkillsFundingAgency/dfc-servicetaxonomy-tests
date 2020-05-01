@@ -49,6 +49,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
                 enterUsername(_scenarioContext.GetEnv().editorUid);
                 enterPassword(_scenarioContext.GetEnv().editorPassword);
+
+                var url = _scenarioContext.GetWebDriver().Url;
+                var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
+
+                if (url.ToLower().Contains("login") || error.Count > 0)
+                {
+                    Console.WriteLine("Login Failed: Errors " + error.ToString());
+                    throw new Exception("Login Failed");
+                }
             }
             catch (Exception e)
             {
