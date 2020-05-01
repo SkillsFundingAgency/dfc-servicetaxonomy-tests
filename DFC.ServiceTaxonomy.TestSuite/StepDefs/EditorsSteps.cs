@@ -1049,8 +1049,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the new data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
         {
-            var statementTemplate = (string)_scenarioContext["CypherQuery"]; 
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.Get<string>( keyGeneratedUri ) } };
+            var statementTemplate = (string)_scenarioContext["CypherQuery"];
+            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };// _scenarioContext.Get<string>( keyGeneratedUri ) } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,

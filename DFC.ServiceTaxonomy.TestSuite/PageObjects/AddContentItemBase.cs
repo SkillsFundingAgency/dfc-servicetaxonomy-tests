@@ -152,7 +152,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public bool ConfirmSuccess()
         {
-            return _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/div")).Text.Contains("Your Activity has been published.") ;
+            //return _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/div")).Text.Contains("Your Activity has been published.") ;
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been published.')]]"));
+            return ( elements.Count == 1 );
+            //return _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[2]/div[3]/div[1]")).Text.Contains("has been published.");
+           
         }
     }
 }
