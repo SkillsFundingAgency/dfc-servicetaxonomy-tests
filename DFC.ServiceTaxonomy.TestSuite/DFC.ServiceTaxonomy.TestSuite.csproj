@@ -83,7 +83,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="chromedriver.exe">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Recipes\create_neo4j_content.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
