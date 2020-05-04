@@ -32,7 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 case "PropertyNameTransform":
                     return By.Id(contentType + "_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_PropertyNameTransform");
                 case "CreateRelationshipType":
-                    return By.Id(contentType + "_GraphSyncPart_GraphSyncPartSettingsDisplayDriver__CreateRelationshipType");
+                    return By.Id(contentType + "_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_CreateRelationshipType");
                 case "IDPropertyName":
                     return By.Id(contentType + "_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_IdPropertyName");
                 case "GenerateIDValue":
@@ -52,7 +52,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 }
                 catch ( Exception e)
                 {
-                    Console.WriteLine(e);
+                    Console.WriteLine($"Error setting field value\n{ e.Message}");
 
                 }
             }

@@ -41,9 +41,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("Failed to create new content type called {name}.\nException: {e.message}");
             }
-
+            Console.WriteLine($"new content type created called {name}");
             try
             {
                 SelectPart("Title");
@@ -60,10 +60,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("Failed to add default parts to {name}.\nException: {e.message}");
             }
+            Console.WriteLine($"default parts added to {name}");
 
-           
+
             return this;
         }
 

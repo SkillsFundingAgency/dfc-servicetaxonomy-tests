@@ -412,7 +412,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 //            var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
-                _addContentType.AddField(contentType, row[0], row[1], ( row[2].Length>0? row[2] : null ) );
+                _addContentType.AddField(contentType, row[0], row[1], ( row.Count > 2 && row[2].Length>0? row[2] : null ) );
 //                dictionary.Add(row[0], row[1]);
             }
         }
