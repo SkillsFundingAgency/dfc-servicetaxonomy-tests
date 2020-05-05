@@ -1,0 +1,20 @@
+﻿{
+  "name": "",
+  "displayName": "",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "CypherCommand",
+      "commands": [
+        "create (n:test__CypherItem { uri: 'uri::thing1', test__Name: '@PREFIX@Test Thing 1', test__Description: 'test description'})",
+        "create (n:test__CypherItem { uri: 'uri::thing2', test__Name: '@PREFIX@Test Thing 2', test__Description: 'test description'})"
+      ]
+    }
+  ]
+}

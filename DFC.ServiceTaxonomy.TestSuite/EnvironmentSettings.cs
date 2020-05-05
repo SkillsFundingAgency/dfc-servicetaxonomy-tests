@@ -13,15 +13,21 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string taxonomyApiBaseUrl => Configuration["TaxonomyApi:BaseUrl"];
         public string taxonomySubscriptionKey => Configuration["TaxonomyApi:SubscriptionKey"];
 
+        public string jobProfileApiBaseUrl => Configuration["JobProfileApi:BaseUrl"];
+        public string jobProfileSubscriptionKey => Configuration["JobProfileApi:SubscriptionKey"];
+
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];
 
-        public string editorBaseUrl => Configuration["EscoApi:BaseUrl"];
-        public string editorUid => Configuration["Editor:UserName"];
+        public string editorBaseUrl => Configuration["Editor:BaseUrl"];
+        public string editorUid => Configuration["Editor:Uid"];
         public string editorPassword => Configuration["Editor:Password"];
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
+
+        public string sqlServerConnectionString = Configuration["SqlServer:ConnectionString"];
+
 
     }
 }

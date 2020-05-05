@@ -11,6 +11,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
         public string[] alternativeLabels { get; set; }
         public string lastModified { get; set; }
         public string uri { get; set; }
+        public Skill[] skills { get; set; }
     /*SAMPLE RESPONSE
      * "occupation": [
     {
