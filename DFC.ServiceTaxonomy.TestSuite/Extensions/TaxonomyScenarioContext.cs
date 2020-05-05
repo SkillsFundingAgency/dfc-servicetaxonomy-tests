@@ -199,6 +199,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
            return (context.ContainsKey("uriCount") ? (int)context["uriCount"] : 0);
         }
 
+        public static void StoreToken(this ScenarioContext context, string token, string value)
+        {
+            Dictionary<string,string> tokens;
+            int count = (context.ContainsKey("tokenCount") ? (int)context["tokenCount"] : 0);
+            if (count == 0)
+            {
+                //initialise
+                tokens = new Dictionary<string, string>();
+            }
+            else
+            {
+                //retreive
+                tokens = (Dictionary<string, string>)context["tokens"];
+            }
+            tokens.Add(token, value);
+            count++;
+            context["tokenCount"] = count;
+            context["tokens"] = tokens;
+        }
+
+        public static Dictionary<string, string> GetTokens(this ScenarioContext context)
+        {
+            Dictionary<string, string> tokens = (context.ContainsKey("tokens") ? (Dictionary<string, string>)context["tokens"] : new Dictionary<string, string>());
+            return tokens;
+        }
+        //todo - improve code reuse for above methods
+
         public static IList<Occupation> GetOccupationListData(this ScenarioContext context)
         {
             return (context.ContainsKey(keyOccupationData) ? context.Get<IList<Occupation>>(keyOccupationData) : null);

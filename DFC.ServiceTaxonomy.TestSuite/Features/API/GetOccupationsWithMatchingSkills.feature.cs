@@ -85,25 +85,27 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
  testRunner.Given("I make a request to the service taxonomy API \"GetOccupationsWithMatchingSkills\" w" +
                     "ith request body", "{\r\n   \"minimumMatchingSkills\":1,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
-                    "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                    "ll/74be20a7-fcfe-4715-bb62-8937a547a982\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 15
+    testRunner.And("I look up the job profile Uri for \"actor/actress\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 16
+#line 17
  testRunner.And("the response json matches:", @"{
 ""matchingOccupations"": [
     {
         ""matchingOptionalSkills"": 1,
-        ""occupation"": ""microbiologist"",
-        ""jobProfileDescription"": ""<p>Microbiologists study micro-organisms like bacteria, viruses, fungi and algae.</p>"",
-        ""totalOccupationOptionalSkills"": 30,
-        ""jobProfileTitle"": ""Microbiologist"",
-        ""totalOccupationEssentialSkills"": 19,
+        ""occupation"": ""actor/actress"",
+        ""jobProfileDescription"": ""<p>Actors use speech, movement and expression to bring characters to life in theatre, film, television and radio.</p>"",
+        ""totalOccupationOptionalSkills"": 40,
+        ""jobProfileTitle"": ""Actor"",
+        ""totalOccupationEssentialSkills"": 23,
         ""matchingEssentialSkills"": 0,
-        ""lastModified"": ""2017-01-17T14:18:17Z"",
-        ""jobProfileUri"": ""http://nationalcareers.service.gov.uk/jobprofile/a9d9a3fd-cb00-4f94-966d-d9e71ca4131a"",
-        ""uri"": ""http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c"",
-        ""socCode"": ""2112""
+        ""lastModified"": ""2017-01-17T13:01:57Z"",
+        ""jobProfileUri"": ""@JobProfileUri@"",
+        ""uri"": ""http://data.europa.eu/esco/occupation/26171f39-e85a-448f-bd28-a73a5a99927f"",
+        ""socCode"": ""3413""
     }
 ]
 }", ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -122,18 +124,18 @@ this.ScenarioInitialize(scenarioInfo);
                     "of matches", null, new string[] {
                         "GetOccupationsWithMatchingSkills",
                         "todo"});
-#line 41
+#line 42
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line hidden
-#line 42
+#line 43
  testRunner.Given("I make a request to the service taxonomy API \"GetOccupationsWithMatchingSkills\" w" +
                     "ith request body", "{\r\n   \"minimumMatchingSkills\":2,\r\n   \"skillList\":[\"http://data.europa.eu/esco/ski" +
                     "ll/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa\"]\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 49
+#line 50
  testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 50
+#line 51
  testRunner.And("the response json matches:", "{\r\n\"matchingOccupations\": []\r\n}", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

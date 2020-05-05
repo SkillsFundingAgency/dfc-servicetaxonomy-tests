@@ -5,7 +5,6 @@
 Background: 
 	Given I have made sure that "occupations" with related job profiles are present in the graph datastore
 
-@GetSkillById @ignore @todo
 @GetSkillById 
 Scenario: Get skill classified as Knowledge and cross-sectoral
 	Given I make a request to the service taxonomy API "getskillbyid"
@@ -14,7 +13,7 @@ Scenario: Get skill classified as Knowledge and cross-sectoral
 	Then the response json matches:
 	"""
 	{
-    "skillType": "knowledge",
+    "skillType": "competency",
     "skill": "types of wood materials",
     "lastModified": "2017-02-15T12:22:24Z",
     "alternativeLabels": [
@@ -29,7 +28,7 @@ Scenario: Get skill classified as Knowledge and cross-sectoral
 	}
 	"""
 
-@GetSkillById @ignore @todo
+@GetSkillById 
 Scenario: Get skill classified as Competency and Sector Specific
 	Given I make a request to the service taxonomy API "getskillbyid"
 	| dataItem | value                                                                 |
@@ -52,7 +51,7 @@ Scenario: Get skill classified as Competency and Sector Specific
 }
 	"""
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Get skill classified as occupation-specific
 	Given I make a request to the service taxonomy API "getskillbyid"
 	| dataItem | value                                                                 |
@@ -76,7 +75,7 @@ Scenario: Get skill classified as occupation-specific
 }
 	"""
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Get skill classified as Transveral with no alternate labels
 	Given I make a request to the service taxonomy API "getskillbyid"
 	| dataItem | value                                                                 |
@@ -93,7 +92,7 @@ Scenario: Get skill classified as Transveral with no alternate labels
 }
 	"""
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Unknown skill is supplied
 	Given I make a request to the service taxonomy API "getskillbyid"
 	| dataItem | value                                                                 |
@@ -102,7 +101,7 @@ Scenario: Unknown skill is supplied
 
 
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: No body is supplied
 	Given I make a request to the service taxonomy API "getskillbyid"
     	| dataItem | value  |
@@ -110,7 +109,7 @@ Scenario: No body is supplied
     And the the response message is "Unable to process supplied parameters"
 
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Invalid body is supplied
 	Given I make a request to the service taxonomy API "getskillbyid"
     	| dataItem | value                                                                 |
@@ -120,7 +119,7 @@ Scenario: Invalid body is supplied
 
 
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Invalid security header is supplied
     Given I want to supply an invalid security header
 	And I make a request to the service taxonomy API "getskillbyid"
@@ -136,7 +135,7 @@ Scenario: Invalid security header is supplied
     """
 
 
-@GetSkillById @ignore @todo
+@GetSkillById
 Scenario: Missing security header
     Given I want to fail to send a security header
 	And I make a request to the service taxonomy API "getskillbyid"

@@ -109,6 +109,7 @@ Scenario: Get skills for a valid occupation
 	| dataItem | value                                                                      |
 	| uri      | http://data.europa.eu/esco/occupation/b633af32-c8c0-4481-9971-7932ea4b16b5 |
     Then the response code is 200
+    #TODO change approach to this test
 	And the response json matches:
 	"""
 {
@@ -304,22 +305,6 @@ Scenario: Get skills for a valid occupation
         },
         {
             "relationshipType": "essential",
-            "skill": "liaise with managers",
-            "lastModified": "2016-12-20T19:08:26Z",
-            "alternativeLabels": [
-                "liaise with a manager",
-                "cooperate with managers",
-                "liaising with managers",
-                "collaborate with managers",
-                "work together with managers",
-                "work with managers"
-            ],
-            "type": "competency",
-            "uri": "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e",
-            "skillReusability": "cross-sectoral"
-        },
-        {
-            "relationshipType": "essential",
             "skill": "meet deadlines",
             "lastModified": "2016-12-20T19:02:39Z",
             "alternativeLabels": [
@@ -335,18 +320,18 @@ Scenario: Get skills for a valid occupation
         },
         {
             "relationshipType": "essential",
-            "skill": "develop manufacturing policies",
-            "lastModified": "2016-12-20T18:15:34Z",
+            "skill": "liaise with managers",
+            "lastModified": "2016-12-20T19:08:26Z",
             "alternativeLabels": [
-                "drafting manufacturing policies",
-                "developing manufacturing policies",
-                "manufacturing policies developing",
-                "developing of manufacturing policies",
-                "draft manufacturing policies",
-                "manufacturing policies drafting"
+                "liaise with a manager",
+                "cooperate with managers",
+                "liaising with managers",
+                "collaborate with managers",
+                "work together with managers",
+                "work with managers"
             ],
             "type": "competency",
-            "uri": "http://data.europa.eu/esco/skill/764db027-9063-4468-acb3-c73ecfc76f35",
+            "uri": "http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97e",
             "skillReusability": "cross-sectoral"
         },
         {
@@ -365,6 +350,22 @@ Scenario: Get skills for a valid occupation
             ],
             "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/020b3c27-bae1-4b85-9d6f-eccee0f5ed99",
+            "skillReusability": "cross-sectoral"
+        },
+        {
+            "relationshipType": "essential",
+            "skill": "develop manufacturing policies",
+            "lastModified": "2016-12-20T18:15:34Z",
+            "alternativeLabels": [
+                "drafting manufacturing policies",
+                "developing manufacturing policies",
+                "manufacturing policies developing",
+                "developing of manufacturing policies",
+                "draft manufacturing policies",
+                "manufacturing policies drafting"
+            ],
+            "type": "competency",
+            "uri": "http://data.europa.eu/esco/skill/764db027-9063-4468-acb3-c73ecfc76f35",
             "skillReusability": "cross-sectoral"
         },
         {
@@ -517,7 +518,7 @@ Scenario: Get skills for a valid occupation
                 "sorts of wood materials",
                 "categories of wood materials"
             ],
-            "type": "knowledge",
+            "type": "competency",
             "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
             "skillReusability": "cross-sectoral"
         },
@@ -532,7 +533,7 @@ Scenario: Get skills for a valid occupation
                 "sorts of wood materials",
                 "categories of wood materials"
             ],
-            "type": "competency",
+            "type": "knowledge",
             "uri": "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7",
             "skillReusability": "cross-sectoral"
         },

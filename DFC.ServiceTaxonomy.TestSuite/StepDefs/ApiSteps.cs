@@ -21,9 +21,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     public sealed class ApiSteps
     {
         #region consts
+        private const string tokenChar = "@";
+        private const string tokenName = "@NAME@";
         private const string cypher_skillWithRelatedJobProfile = "MATCH (s:esco__Skill) --> (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN distinct s.uri";
         private const string cypher_AddJobProfileAndRelationToOccupation = "to define";
         private const string cypher_occupationWithRelatedJobProfile = "MATCH (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN o.uri";
+        private string cypher_jobProfileUriFromOccupationName = $"MATCH (o:esco__Occupation) -- (j:ncs__JobProfile) WHERE o.skos__prefLabel ='{tokenName}' RETURN  j.uri as uri";
         #endregion
 
 
@@ -240,6 +243,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.SetExpectedRecordCount(numberOfRecords);
         }
 
+        [Given(@"I look up the job profile Uri for ""(.*)""")]
+        public void GivenILookUpTheJobProfileUriFor(string p0)
+        {
+            string uri = "";
+            var statementTemplate = cypher_jobProfileUriFromOccupationName.Replace(tokenName, p0);
+                                                                          
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+            try
+            {
+                uri = neo4JHelper.GetSingleRowAsDictionary(statementTemplate)["uri"];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to look up job profile Uri:\n{e.Message}");
+            }
+            //todo deal with hardcoded string values?
+            context.StoreToken("JobProfileUri", uri);
+        }
 
 
 
@@ -444,6 +469,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json matches:")]
         public void ThenTheResponseJsonMatches(string multilineText)
         {
+            // replace any tokens in the expected response
+            foreach ( var item in context.GetTokens())
+            {
+                multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
+            }
             JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
 
         }
