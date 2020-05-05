@@ -44,9 +44,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             }
             else
             {
-                _scenarioContext.SetWebDriver(new ChromeDriver(Environment.CurrentDirectory));
+               // _scenarioContext.SetWebDriver(new ChromeDriver(Environment.CurrentDirectory));
                 //  _scenarioContext.SetWebDriver ( ChromeDriver(new List<string>()) );
-                //_scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
+                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
             }
         }
 
