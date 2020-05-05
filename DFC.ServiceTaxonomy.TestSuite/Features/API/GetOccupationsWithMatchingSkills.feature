@@ -9,9 +9,10 @@ Scenario: Skill list is supplied that matches one occupation
 	"""
 {
     "minimumMatchingSkills":1,
-    "skillList":["http://data.europa.eu/esco/skill/b3f74d7d-82d6-48e0-8460-219b4aa5dcaa"]
+    "skillList":["http://data.europa.eu/esco/skill/74be20a7-fcfe-4715-bb62-8937a547a982"]
 }
 	"""
+    And I look up the job profile Uri for "actor/actress" 
 	Then the response code is 200
 	And the response json matches:
     """
@@ -19,16 +20,16 @@ Scenario: Skill list is supplied that matches one occupation
     "matchingOccupations": [
         {
             "matchingOptionalSkills": 1,
-            "occupation": "microbiologist",
-            "jobProfileDescription": "<p>Microbiologists study micro-organisms like bacteria, viruses, fungi and algae.</p>",
-            "totalOccupationOptionalSkills": 30,
-            "jobProfileTitle": "Microbiologist",
-            "totalOccupationEssentialSkills": 19,
+            "occupation": "actor/actress",
+            "jobProfileDescription": "<p>Actors use speech, movement and expression to bring characters to life in theatre, film, television and radio.</p>",
+            "totalOccupationOptionalSkills": 40,
+            "jobProfileTitle": "Actor",
+            "totalOccupationEssentialSkills": 23,
             "matchingEssentialSkills": 0,
-            "lastModified": "2017-01-17T14:18:17Z",
-            "jobProfileUri": "http://nationalcareers.service.gov.uk/jobprofile/a9d9a3fd-cb00-4f94-966d-d9e71ca4131a",
-            "uri": "http://data.europa.eu/esco/occupation/a7a74a05-3dd0-46c6-99af-92df8042520c",
-            "socCode": "2112"
+            "lastModified": "2017-01-17T13:01:57Z",
+            "jobProfileUri": "@JobProfileUri@",
+            "uri": "http://data.europa.eu/esco/occupation/26171f39-e85a-448f-bd28-a73a5a99927f",
+            "socCode": "3413"
         }
     ]
 }

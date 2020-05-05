@@ -386,38 +386,38 @@ this.ScenarioInitialize(scenarioInfo);
                     "commercial setting\"\r\n           ],\r\n           \"type\": \"competency\",\r\n          " +
                     " \"uri\": \"http://data.europa.eu/esco/skill/04dd3f36-7056-4824-9eee-b0312d4a25b7\"," +
                     "\r\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n        " +
-                    "   \"relationshipType\": \"essential\",\r\n           \"skill\": \"liaise with managers\"," +
-                    "\r\n           \"lastModified\": \"2016-12-20T19:08:26Z\",\r\n           \"alternativeLab" +
-                    "els\": [\r\n               \"liaise with a manager\",\r\n               \"cooperate with" +
-                    " managers\",\r\n               \"liaising with managers\",\r\n               \"collabora" +
-                    "te with managers\",\r\n               \"work together with managers\",\r\n             " +
-                    "  \"work with managers\"\r\n           ],\r\n           \"type\": \"competency\",\r\n       " +
-                    "    \"uri\": \"http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-520005f8a97" +
-                    "e\",\r\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n     " +
-                    "      \"relationshipType\": \"essential\",\r\n           \"skill\": \"meet deadlines\",\r\n " +
-                    "          \"lastModified\": \"2016-12-20T19:02:39Z\",\r\n           \"alternativeLabels" +
-                    "\": [\r\n               \"complete deadlines\",\r\n               \"make deadlines\",\r\n  " +
-                    "             \"meet a deadline\",\r\n               \"conform with deadlines\",\r\n     " +
-                    "          \"achieve deadlines\"\r\n           ],\r\n           \"type\": \"competency\",\r\n" +
-                    "           \"uri\": \"http://data.europa.eu/esco/skill/91abe492-18be-4cce-93c7-0dca" +
-                    "07072363\",\r\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {" +
-                    "\r\n           \"relationshipType\": \"essential\",\r\n           \"skill\": \"develop manu" +
-                    "facturing policies\",\r\n           \"lastModified\": \"2016-12-20T18:15:34Z\",\r\n      " +
-                    "     \"alternativeLabels\": [\r\n               \"drafting manufacturing policies\",\r\n" +
-                    "               \"developing manufacturing policies\",\r\n               \"manufacturi" +
-                    "ng policies developing\",\r\n               \"developing of manufacturing policies\"," +
-                    "\r\n               \"draft manufacturing policies\",\r\n               \"manufacturing " +
-                    "policies drafting\"\r\n           ],\r\n           \"type\": \"competency\",\r\n           " +
-                    "\"uri\": \"http://data.europa.eu/esco/skill/764db027-9063-4468-acb3-c73ecfc76f35\",\r" +
-                    "\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n         " +
-                    "  \"relationshipType\": \"essential\",\r\n           \"skill\": \"manage supplies\",\r\n    " +
-                    "       \"lastModified\": \"2016-12-20T20:31:51Z\",\r\n           \"alternativeLabels\": " +
-                    "[\r\n               \"plan supplies\",\r\n               \"control and monitor supplies" +
-                    "\",\r\n               \"monitor and control supplies\",\r\n               \"supply chain" +
-                    " management\",\r\n               \"supplies planning\",\r\n               \"supplies man" +
-                    "aging\",\r\n               \"manage supply chain\",\r\n               \"supplies managem" +
-                    "ent\"\r\n           ],\r\n           \"type\": \"competency\",\r\n           \"uri\": \"http:/" +
-                    "/data.europa.eu/esco/skill/020b3c27-bae1-4b85-9d6f-eccee0f5ed99\",\r\n           \"s" +
+                    "   \"relationshipType\": \"essential\",\r\n           \"skill\": \"meet deadlines\",\r\n    " +
+                    "       \"lastModified\": \"2016-12-20T19:02:39Z\",\r\n           \"alternativeLabels\": " +
+                    "[\r\n               \"complete deadlines\",\r\n               \"make deadlines\",\r\n     " +
+                    "          \"meet a deadline\",\r\n               \"conform with deadlines\",\r\n        " +
+                    "       \"achieve deadlines\"\r\n           ],\r\n           \"type\": \"competency\",\r\n   " +
+                    "        \"uri\": \"http://data.europa.eu/esco/skill/91abe492-18be-4cce-93c7-0dca070" +
+                    "72363\",\r\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n " +
+                    "          \"relationshipType\": \"essential\",\r\n           \"skill\": \"liaise with man" +
+                    "agers\",\r\n           \"lastModified\": \"2016-12-20T19:08:26Z\",\r\n           \"alterna" +
+                    "tiveLabels\": [\r\n               \"liaise with a manager\",\r\n               \"coopera" +
+                    "te with managers\",\r\n               \"liaising with managers\",\r\n               \"co" +
+                    "llaborate with managers\",\r\n               \"work together with managers\",\r\n      " +
+                    "         \"work with managers\"\r\n           ],\r\n           \"type\": \"competency\",\r\n" +
+                    "           \"uri\": \"http://data.europa.eu/esco/skill/f14ff4b7-be1e-4b55-b39b-5200" +
+                    "05f8a97e\",\r\n           \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {" +
+                    "\r\n           \"relationshipType\": \"essential\",\r\n           \"skill\": \"manage suppl" +
+                    "ies\",\r\n           \"lastModified\": \"2016-12-20T20:31:51Z\",\r\n           \"alternati" +
+                    "veLabels\": [\r\n               \"plan supplies\",\r\n               \"control and monit" +
+                    "or supplies\",\r\n               \"monitor and control supplies\",\r\n               \"s" +
+                    "upply chain management\",\r\n               \"supplies planning\",\r\n               \"s" +
+                    "upplies managing\",\r\n               \"manage supply chain\",\r\n               \"suppl" +
+                    "ies management\"\r\n           ],\r\n           \"type\": \"competency\",\r\n           \"ur" +
+                    "i\": \"http://data.europa.eu/esco/skill/020b3c27-bae1-4b85-9d6f-eccee0f5ed99\",\r\n  " +
+                    "         \"skillReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n           \"" +
+                    "relationshipType\": \"essential\",\r\n           \"skill\": \"develop manufacturing poli" +
+                    "cies\",\r\n           \"lastModified\": \"2016-12-20T18:15:34Z\",\r\n           \"alternat" +
+                    "iveLabels\": [\r\n               \"drafting manufacturing policies\",\r\n              " +
+                    " \"developing manufacturing policies\",\r\n               \"manufacturing policies de" +
+                    "veloping\",\r\n               \"developing of manufacturing policies\",\r\n            " +
+                    "   \"draft manufacturing policies\",\r\n               \"manufacturing policies draft" +
+                    "ing\"\r\n           ],\r\n           \"type\": \"competency\",\r\n           \"uri\": \"http:/" +
+                    "/data.europa.eu/esco/skill/764db027-9063-4468-acb3-c73ecfc76f35\",\r\n           \"s" +
                     "killReusability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n           \"relationshi" +
                     "pType\": \"essential\",\r\n           \"skill\": \"timber products\",\r\n           \"lastMo" +
                     "dified\": \"2017-01-05T14:55:52Z\",\r\n           \"alternativeLabels\": [\r\n           " +
@@ -504,15 +504,15 @@ this.ScenarioInitialize(scenarioInfo);
                     "ativeLabels\": [\r\n               \"type of wood material\",\r\n               \"variet" +
                     "ies of wood materials\",\r\n               \"kinds of wood materials\",\r\n            " +
                     "   \"sorts of wood materials\",\r\n               \"categories of wood materials\"\r\n  " +
-                    "         ],\r\n           \"type\": \"knowledge\",\r\n           \"uri\": \"http://data.eur" +
-                    "opa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7\",\r\n           \"skillReusa" +
-                    "bility\": \"cross-sectoral\"\r\n       },\r\n       {\r\n           \"relationshipType\": \"" +
-                    "essential\",\r\n           \"skill\": \"types of wood materials\",\r\n           \"lastMod" +
-                    "ified\": \"2017-02-15T12:22:24Z\",\r\n           \"alternativeLabels\": [\r\n            " +
-                    "   \"type of wood material\",\r\n               \"varieties of wood materials\",\r\n    " +
-                    "           \"kinds of wood materials\",\r\n               \"sorts of wood materials\"," +
-                    "\r\n               \"categories of wood materials\"\r\n           ],\r\n           \"type" +
-                    "\": \"competency\",\r\n           \"uri\": \"http://data.europa.eu/esco/skill/fb6f5f61-f" +
+                    "         ],\r\n           \"type\": \"competency\",\r\n           \"uri\": \"http://data.eu" +
+                    "ropa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7\",\r\n           \"skillReus" +
+                    "ability\": \"cross-sectoral\"\r\n       },\r\n       {\r\n           \"relationshipType\": " +
+                    "\"essential\",\r\n           \"skill\": \"types of wood materials\",\r\n           \"lastMo" +
+                    "dified\": \"2017-02-15T12:22:24Z\",\r\n           \"alternativeLabels\": [\r\n           " +
+                    "    \"type of wood material\",\r\n               \"varieties of wood materials\",\r\n   " +
+                    "            \"kinds of wood materials\",\r\n               \"sorts of wood materials\"" +
+                    ",\r\n               \"categories of wood materials\"\r\n           ],\r\n           \"typ" +
+                    "e\": \"knowledge\",\r\n           \"uri\": \"http://data.europa.eu/esco/skill/fb6f5f61-f" +
                     "3b8-40ba-8363-c8d762325ff7\",\r\n           \"skillReusability\": \"cross-sectoral\"\r\n " +
                     "      },\r\n       {\r\n           \"relationshipType\": \"essential\",\r\n           \"ski" +
                     "ll\": \"oversee quality control\",\r\n           \"lastModified\": \"2016-12-21T11:46:15" +
