@@ -40,31 +40,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             string DriverPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (_WebdriverTimeoutSeconds > 0)
             {
-                _scenarioContext.SetWebDriver(new ChromeDriver(Environment.CurrentDirectory, new ChromeOptions(), TimeSpan.FromSeconds(_WebdriverTimeoutSeconds)));
+                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService(), new ChromeOptions(), TimeSpan.FromSeconds(_WebdriverTimeoutSeconds)));
             }
             else
             {
-               // _scenarioContext.SetWebDriver(new ChromeDriver(Environment.CurrentDirectory));
-                //  _scenarioContext.SetWebDriver ( ChromeDriver(new List<string>()) );
                 _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
             }
         }
-
-        //private ChromeDriver ChromeDriver(List<string> arguments)
-        //{
-        //    arguments.Add("no-sandbox");
-        //    return new ChromeDriver(FindDriverService(),
-        //                                         AddArguments(arguments)//,
-        //                                         //TimeSpan.FromMinutes(_frameworkConfig.TimeOutConfig.CommandTimeout)
-        //                                         );
-        //}
-
-        //private ChromeOptions AddArguments(List<string> arguments)
-        //{
-        //    var chromeOptions = new ChromeOptions();
-        //    arguments.ForEach((x) => chromeOptions.AddArgument(x));
-        //    return chromeOptions;
-        //}
 
         private string FindDriverService()
         {

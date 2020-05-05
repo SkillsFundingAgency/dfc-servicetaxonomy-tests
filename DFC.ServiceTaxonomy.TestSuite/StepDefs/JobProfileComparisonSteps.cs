@@ -384,11 +384,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 string createText = "Hello and Welcome" + Environment.NewLine;
                 File.WriteAllText(path, sb.ToString());
             }
-
-
         }
-
-
 
         [Given(@"I compare actor")]
         public void GivenICompareActor()
@@ -397,10 +393,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string url = context.GetJobProfileApiBaseUrl()  +"/actor";
             var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
 
-
             Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
-
-            
             var responseTestData = RestHelper.Get( context.GetTaxonomyApiBaseUrl() + "/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
 
             // compare data
@@ -415,7 +408,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine(item.Key + "," + item.Value.ContentMatch);
             }
         }
-
 
         private JToken ReplaceTags( JToken source, out bool replacementsMade) 
         {
@@ -489,8 +481,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             public string Title { get; set; }
 
         }
-
-
 
         public JObject FindDiff(JToken Current, JToken Model, Dictionary<string, comparedItem> comparisons, string key = "", string path = "")
         {
@@ -660,9 +650,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // do they match
             comparison.ContentMatch = JToken.DeepEquals(Current, Model);
 
-           
-            
-
             StringBuilder message = new StringBuilder();
 
             message.Append(path + "\n");
@@ -695,10 +682,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             return diff;
         } 
-                                   
-     
-
-
+  
         [Given(@"mock test step")]
         public void GivenMockTestStep(string multilineText)
         {
@@ -747,9 +731,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var htmlResult = dataList.ToHtmlTable(headerList, customTableStyle, x => x.Name, x => x.Lastname, x => $"{x.Name} {x.Lastname}");
             Console.WriteLine(htmlResult);
         }
-
-
-
     }
 
     public class TestDataClass

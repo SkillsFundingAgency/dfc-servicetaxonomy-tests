@@ -62,7 +62,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly ScenarioContext _scenarioContext;
         private LogonScreen _logonScreen;
         private StartPage _startPage;
- //       private AddActivity _addActivity;
         private AddContentItemBase _addContentItemBase;
         private AddLinkItem _addLinkItem;
         private ManageContent _manageContent;
@@ -77,7 +76,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext = scenarioContext;
             _logonScreen = new LogonScreen(scenarioContext);
             _startPage = new StartPage(scenarioContext);
-  //          _addActivity = new AddActivity(scenarioContext);
             _addContentItemBase = new AddContentItemBase(scenarioContext);
             _addLinkItem = new AddLinkItem(scenarioContext);
             _manageContent = new ManageContent(scenarioContext);
@@ -113,11 +111,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
         }
 
-
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
-
             _logonScreen.SubmitLogonDetails();
         }
 
@@ -130,12 +126,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I capture the generated URI")]
         public void GivenICaptureTheGeneratedURIGraph_UriId_Text()
         {
-            //  _scenarioContext.Set( _addActivity.GetGeneratedURI(), keyGeneratedUri );
-            // change to store each captured uri in list
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
-
-            
-            
         }
 
         [Given(@"I record the new documentId")]
@@ -152,7 +143,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", "DisplayText = '" + prefix + displayName + "' and ContentType = '" + contentType + "'");
             _scenarioContext.StoreRecordId(result);
         }
-
 
         [Given(@"I Enter the following form data")]
         public void GivenIEnterTheFollowingFormData(Table table)
@@ -174,16 +164,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext["CypherQuery"] = cypher.Replace("@CONTENTTYPE@", contentType);
             _scenarioContext["ResponseType"] = typeof(TestContent);
             _scenarioContext["RequestVariables"] = expectedData;
-            /*            foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
-                        {
-                            if (item.index == 0)
-                            {
-                                // store first field in scenario context
-                                _scenarioContext.Set(item.value.Value, item.value.Key);
-                            }
-                            _addContentItemBase.SetFieldValueFromType( item.value.Key, item.value.Value,"Title");
-
-                         }*/
         }
 
         [Given(@"I allow multiple items to be selected")]
@@ -193,8 +173,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string FieldName = (string)_scenarioContext["FieldName"];
             _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
         }
-
-
 
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
@@ -216,9 +194,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I Enter the following form data for ""(.*)""")]
         public void GivenIEnterTheFollowingFormDataFor(string p0, Table table)
         {
-           // AddContentItemBase addItem = _addContentItemBase;
             IEditorContentItem iAddItem = _addContentItemBase;
-
 
             switch (p0)
             {
@@ -251,7 +227,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     _scenarioContext["ResponseType"] = typeof(GenericContent);
                     _scenarioContext["CypherQuery"] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", p0);
-                    //addItem = _addDayToDayTask;
                     break;
             }
 
@@ -271,10 +246,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
             _scenarioContext["RequestVariables"] = vars;
-
-
         }
-
 
         [Given(@"I search for the ""(.*)""")]
         public void GivenISearchForThe(string searchTerm)
@@ -319,7 +291,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentType.AddNew(p0, stringArray);
 
             // edit bag part and select content type from table
-
             foreach (var row in table.Rows)
             {
                 _addContentType.SelectBagContent(p0, row[0]);
@@ -335,7 +306,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I select the following items from the displayed list")]
         public void GivenISelectTheFollowingItemsFromTheDisplayedList(Table table)
         {
-
             string contentType = (string)_scenarioContext["ContentType"];
       
             foreach (var row in table.Rows)
@@ -344,7 +314,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             _addContentType.SaveChanges();
         }
-
 
         //content type
         [Given(@"I edit the ""(.*)"" part")]
@@ -376,8 +345,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.DeleteAllItemsOfType(p0);
         }
 
-
-
         [Given(@"I set the following field values")]
         public void GivenISetTheFollowingFieldValues(Table table)
         {
@@ -387,11 +354,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 dictionary.Add(row[0], row[1]);
             }
-           // _scenarioContext["ResponseType"] = typeof(TestContent);
-           // _scenarioContext["CypherQuery"] = cypher_TestItem;
             _GraphSyncPart.SetFieldValues(contentType, dictionary);
         }
-
 
         [Given(@"I save the edited part")]
         public void GivenISaveTheEditedPart()
@@ -409,11 +373,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIAddTheFollowingFields(Table table)
         {
             string contentType = (string)_scenarioContext["ContentType"];
-//            var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
                 _addContentType.AddField(contentType, row[0], row[1], ( row.Count > 2 && row[2].Length>0? row[2] : null ) );
-//                dictionary.Add(row[0], row[1]);
             }
         }
 
@@ -432,8 +394,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.GetWebDriver().SelectDropListItemByClass("multiselect__input", prefix + row[0]);
             }
-
-            
         }
 
         [Given(@"I replace tokens in and then run the following graph update statement")]
@@ -457,32 +417,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             neo4JHelper.ExecuteTableQuery(cypherStatement, null);
         }
 
-
-
-
-
-        [Given(@"My Test Step")]
-        public void GivenMyTestStep()
-        {
-            try
-            {
-                var item = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
-                var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
-                webElement.SendKeys(@"F:\recipeFiles\20200326\14. QCFLevels0.zip");
-                _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[contains(text(),'Import']"));
-                item.Click();
-            }
-            catch
-            {
-
-            }
-        }
-
-
         [Given(@"Load the file ""(.*)""")]
         public void GivenLoadTheFile(string p0)
         {
-            bool successIntitiating = true;
             string error = "";
             try
             {
@@ -517,56 +454,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             catch (Exception e)
             {
-                successIntitiating = false;
                 error = e.Message;
                 Console.WriteLine(e);
             }
-     /*       bool finished = false;
-            int count = 0;
-            while (!finished)
-            {
-                count++;
-                try
-                {
-
-
-                    var checksafter = _scenarioContext.GetWebDriver().FindElements(By.XPath(@"//*[@id='content']/div/fieldset/h2"));
-                    var checksafter2 = _scenarioContext.GetWebDriver().FindElements(By.XPath("/html/body/div[1]/div[3]/div"));
-                    var checksafter3 = _scenarioContext.GetWebDriver().FindElements(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
-                    bool failScreen = false;
-                    if (checksafter2.Count > 0)
-                    {
-                        failScreen = checksafter2[0].Text.Contains("Deployment package imported");
-                    }
-                    if (!failScreen && checksafter3.Count > 0)
-                    {
-                        var text = checksafter3[0].Text;
-                        failScreen = checksafter3[0].Text.Contains("");
-                    }
-
-                    if (checksafter.Count > 0)
-                    {
-                        finished = true;
-                    }
-                    if (failScreen)
-                    {
-                        finished = true;
-                    }
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine(e);
-                }
-                if (!finished)
-                {
-                    Thread.Sleep(10000);
-                }
-                if ( count > 40 )
-                {
-                    Console.WriteLine("");
-                }
-            }*/
             Console.WriteLine("Finished import");
         }
 
@@ -586,12 +476,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int counter = 0;
             string line;
             string filename;
-            string recordCountString;
             int recordCount = 0;
             bool fileInfoRow = true;
-            bool summaryInfoRow = false;
             Dictionary<string, int> tallies = new Dictionary<string, int>();
-
             string path = @"F:\temp\output.log";
             // This text is added only once to the file.
             if (!File.Exists(path))
@@ -667,7 +554,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string path = @"F:\temp\output.log";
             int returnStatus = 0;
             Stopwatch timer = new Stopwatch();
-            bool successIntitiating = true;
             bool done = false;
             string error = "";
             string loadMessage = "";
@@ -676,7 +562,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             SQLServerHelper sqlInstance = new SQLServerHelper();
             sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-
 
             // get table name
             var pattern = "[a-zA-Z]+";
@@ -715,36 +600,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }*/
                 else if (successMessage.Count > 0)
                 {
-                   // Console.WriteLine("Page returned message: " + successMessage[0].Text);
                     loadMessage = "Page returned message: " + successMessage[0].Text;
                     returnStatus = 0;
                 }
                 else
                 {
-                    //Console.WriteLine("Unhandled situation");
                     loadMessage = "Unhandled return";
                     returnStatus = 2;
-                    //throw new Exception("Unhandled situation");
                 }
                 returnedAfterSeconds = (int)timer.Elapsed.TotalSeconds;
 
             }
             catch (Exception e)
             {
-                successIntitiating = false;
                 error = e.Message;
                 loadMessage = "Error thrown: " + e.Message;
                 Console.WriteLine(e);
             }
 
             // now need to check that / wait until all the records have arrived in sql database
-
-
-            int count = 0;
             int tmMod = 5;
-            bool status = true;
             int maxRecords = 0;
-            
+           
             if (recordCount == 0)
             {
                 // dont have stats to perhaps just pause for x minutes??
@@ -771,7 +648,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         // give up
                         done = true;
-                        status = false;
                         returnStatus = 3;
                     }
                     else
@@ -786,7 +662,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
 
             }
-
             verifiedSqlCountAfterSeconds = (int) timer.Elapsed.TotalSeconds;
 
             // now check all neo4j records have been synced
@@ -803,13 +678,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                     _scenarioContext.GetEnv().neo4JUid,
                                     _scenarioContext.GetEnv().neo4JPassword);
-                    /* var countInfo = neo4JHelper.ExecuteTableQuery(cypher,null);
-                     var returnObject = neo4JHelper.GetRecordCount(cypher, null);
-                     foreach (IRecord record in countInfo)
-                     {
-                         string a = record.Values["count(a)"].ToString(); ;
-                         int.TryParse(a, out neo4jRecordCount);
-                     }*/
                     neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
                 }
                 catch 
@@ -831,7 +699,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         // give up
                         done = true;
-                        status = false;
                         returnStatus = 4;
                     }
                     else
@@ -839,9 +706,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         Thread.Sleep(30000);
                     }
                 }
-
             }
-
             timer.Stop();
 
             if (tallies.ContainsKey(table))
@@ -943,7 +808,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
 
-            public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
+        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
         {
             bool match;
             message = "";
@@ -962,8 +827,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             return match;
         }
-
-
 
         [Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
         public void GivenIConfirmTheFollowingDataIsPresetInTheGraphDatabase(string p0, Table table)
@@ -1003,9 +866,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
                 match.Should().BeTrue();
             }
-
         }
-
 
         [Then(@"I can navigate to the content item ""(.*)"" in Orchard Core core")]
         public void ThenICanNavigateToTheContentItemInOrchardCoreCore(string p0)
@@ -1043,8 +904,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string newUri = Guid.NewGuid().ToString();
             _scenarioContext.StoreUri(newUri);
         }
-
-
 
         [Then(@"the new data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
