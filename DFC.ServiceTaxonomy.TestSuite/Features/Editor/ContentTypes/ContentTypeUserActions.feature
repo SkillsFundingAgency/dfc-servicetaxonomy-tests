@@ -41,9 +41,9 @@ Scenario: Add a new content type with Title Part
 	| ValueField | 25        | Numeric Field |
 	When I publish the item
 	Then the add action completes succesfully
-	And the new data is present in the Graph databases
+	And the data is present in the Graph databases
 	When I publish the item
 #	Then the graph item matches the one in the editor
-	Then the new data is present in the Graph databases
+	Then the data is present in the Graph databases
 #	And the graph item matches the one in the editorTODO
 	

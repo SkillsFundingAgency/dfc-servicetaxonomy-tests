@@ -32,8 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UniversityLink", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UniversityLink", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -74,8 +73,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         public virtual void FeatureBackground()
         {
-#line 7
-#line 8
+#line 4
+#line 5
  testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -87,34 +86,34 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new UniversityLink", null, new string[] {
                         "Editor"});
-#line 11
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 7
+#line 4
 this.FeatureBackground();
-#line 12
+#line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
+#line 10
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/UniversityLink/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table65 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table68 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Url",
                         "LinkText"});
-            table65.AddRow(new string[] {
+            table68.AddRow(new string[] {
                         "My Test UniversityLink",
                         "http://test.com",
                         "more info ho!"});
+#line 13
+ testRunner.And("I Enter the following form data for \"UniversityLink\"", ((string)(null)), table68, "And ");
 #line 16
- testRunner.And("I Enter the following form data for \"UniversityLink\"", ((string)(null)), table65, "And ");
-#line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 20
+#line 17
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
- testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

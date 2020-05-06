@@ -1,8 +1,5 @@
 ﻿@webtest
 Feature: GraphEditor
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
 
 @ignore
 Scenario: Add, edit and remove an activity in the editor
@@ -15,7 +12,7 @@ Scenario: Add, edit and remove an activity in the editor
 	| My new activity |
 	When I publish the item
 	Then the add action completes succesfully
-	And the new data is present in the Graph databases
+	And the data is present in the Graph databases
 
 #Scenario: Edit the new activity
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -26,9 +23,9 @@ Scenario: Add, edit and remove an activity in the editor
          | New activity title |
 	When I publish the item
 	Then the edit action completes succesfully
-	And the new data is present in the Graph databases
+	And the data is present in the Graph databases
 
-#Scenario: Edit the new activity
+#Scenario: Delete the new activity
 	Given I search for the "Title"
 	When I delete the item
 	And I confirm the delete action
