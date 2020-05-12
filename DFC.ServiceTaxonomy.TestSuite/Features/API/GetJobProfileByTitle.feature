@@ -11,6 +11,7 @@ Feature: Get Job Profile by Title API
 	And I load recipe file "test_data.json"
 	And I have completed the background section
 
+@Ignore
 @GetJobProfileByTitle
 Scenario: Get valid Job profile
 	Given I make a request to the service taxonomy API "getjobprofilebytitle"
@@ -121,7 +122,7 @@ Scenario: Get valid Job profile
 }
 	"""
 
-
+@Ignore
 @GetJobProfileByTitle
 Scenario: A body is supplied
 	Given I make a request to the service taxonomy API "getjobprofilebytitle"
@@ -130,7 +131,7 @@ Scenario: A body is supplied
     	| bodyField | Some text       |
     Then the response code is 200
 
-
+@Ignore
 @GetJobProfileByTitle
 Scenario: Invalid security header is supplied
     Given I want to supply an invalid security header
@@ -147,6 +148,7 @@ Scenario: Invalid security header is supplied
     """
 
 
+@Ignore
 @GetJobProfileByTitle
 Scenario: Missing security header
     Given I want to fail to send a security header
