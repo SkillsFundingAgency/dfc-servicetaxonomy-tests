@@ -99,20 +99,20 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table45.AddRow(new string[] {
+            table48.AddRow(new string[] {
                         "My Test SOCCode",
                         "My test description"});
 #line 16
- testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table45, "And ");
+ testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table48, "And ");
 #line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 21
- testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

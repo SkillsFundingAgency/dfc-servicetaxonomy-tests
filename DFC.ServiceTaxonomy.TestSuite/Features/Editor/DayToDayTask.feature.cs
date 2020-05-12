@@ -32,8 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DayToDayTasks", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DayToDayTasks", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -74,8 +73,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         public virtual void FeatureBackground()
         {
-#line 7
-#line 8
+#line 4
+#line 5
  testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
@@ -87,16 +86,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new DayToDayTask", null, new string[] {
                         "Editor"});
-#line 11
+#line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 7
+#line 4
 this.FeatureBackground();
-#line 12
+#line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
+#line 10
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/DayToDayTask/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 15
+#line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
@@ -105,14 +104,14 @@ this.FeatureBackground();
             table32.AddRow(new string[] {
                         "My Test Day to Day task",
                         "My test description"});
-#line 16
+#line 13
  testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table32, "And ");
-#line 19
+#line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 20
+#line 17
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 21
- testRunner.And("the new data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

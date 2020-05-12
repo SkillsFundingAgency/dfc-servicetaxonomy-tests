@@ -40,6 +40,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private const string cypher_OtherRequirementByUri = "match(a:ncs__OtherRequirement { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
         private const string cypher_FurtherInfoByUri = "match(a:ncs__FurtherInfo { uri: { uri} }) return a.skos__prefLabel as Title, a.ncs__Link_url as Url, a.ncs__Link_text as LinkText";
         private const string cypher_UniverstyLinkByUri = "match(a:ncs__UniversityLink { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Url as Description, a.ncs__Link_url as Url, a.ncs__Link_text as LinkText";
+        private const string cypher_SharedContentByUri = "match(a:ncs__SharedContent { uri: { uri} }) return a.skos__prefLabel as Title, a.ncs__Content as Content";
         private const string cypher_GenericItemWithDescriptionByUri = "match(a:ncs__@CONTENTTYPE@ { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
         private const string cypher_GenericItemWithTextByUri = "match(a:ncs__@CONTENTTYPE@ { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Text as Text";
         private const string cypher_TestItem = "match(a:ncs__@CONTENTTYPE@ { uri: { uri} }) return a.skos__prefLabel as Title, a.uri as Uri @FIELDLIST";
@@ -64,6 +65,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private StartPage _startPage;
         private AddContentItemBase _addContentItemBase;
         private AddLinkItem _addLinkItem;
+        private AddSharedContentItem _addSharedContent;
         private ManageContent _manageContent;
         private ModalOKCancel _modalOkCancel;
         private AddContentTypeBaseItem _addContentType;
@@ -78,14 +80,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _startPage = new StartPage(scenarioContext);
             _addContentItemBase = new AddContentItemBase(scenarioContext);
             _addLinkItem = new AddLinkItem(scenarioContext);
+            _addSharedContent = new AddSharedContentItem(scenarioContext);
             _manageContent = new ManageContent(scenarioContext);
             _modalOkCancel = new ModalOKCancel(scenarioContext);
             _addContentType = new AddContentTypeBaseItem(scenarioContext);
             _GraphSyncPart = new GraphSyncPart(scenarioContext);
             _editContentType = new EditContentType(scenarioContext);
         }
-
-        #region given steps
 
         private static Random random = new Random();
         public static string RandomString(int length)
@@ -94,6 +95,46 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        private IEditorContentItem SetContentType(string contentType)
+        {
+            _scenarioContext["ContentType"] = contentType;
+            switch (contentType)
+            {
+                case "DayToDayTask":
+                    _scenarioContext["ResponseType"] = typeof(DayToDayTask);
+                    _scenarioContext["CypherQuery"] = cypher_DayToDayTaskByUri;
+                    return _addContentItemBase;
+                case "FurtherInfo":
+                    _scenarioContext["ResponseType"] = typeof(FurtherInfo);
+                    _scenarioContext["CypherQuery"] = cypher_FurtherInfoByUri;
+                    return _addLinkItem;
+                case "Activity":
+                    _scenarioContext["ResponseType"] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
+                    _scenarioContext["CypherQuery"] = cypher_activityByUri;
+                    return _addLinkItem;
+                case "UniversityLink":
+                    _scenarioContext["ResponseType"] = typeof(UniversityLink);
+                    _scenarioContext["CypherQuery"] = cypher_UniverstyLinkByUri;
+                    return _addLinkItem;
+                case "RequirementsPrefix":
+                case "UniversityRequirement":
+                    _scenarioContext["ResponseType"] = typeof(GenericContent);
+                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", contentType);
+                    return _addContentItemBase;
+                case "SharedContent":
+                    _scenarioContext["ResponseType"] = typeof(SharedContent);
+                    _scenarioContext["CypherQuery"] = cypher_SharedContentByUri;
+                    return _addSharedContent;
+                case "Restriction":
+                default:
+                    _scenarioContext["ResponseType"] = typeof(GenericContent);
+                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", contentType);
+                    return _addContentItemBase;
+            }
+        }
+
+        #region given steps
 
         [Given(@"I set up a data prefix for ""(.*)""")]
         public void GivenISetUpADataPrefixFor(string p0)
@@ -129,6 +170,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
         }
 
+        [Given(@"I set the content type to be ""(.*)""")]
+        public void GivenISetTheContentTypeToBe(string p0)
+        {
+            SetContentType(p0);
+        }
+
+
         [Given(@"I record the new documentId")]
         public void GivenIRecordTheNewDocumentId()
         {
@@ -140,7 +188,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
 
             // get initial record count
-            var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", "DisplayText = '" + prefix + displayName + "' and ContentType = '" + contentType + "'");
+            var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
             _scenarioContext.StoreRecordId(result);
         }
 
@@ -177,6 +225,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
         {
+            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
             foreach (var row in table.Rows)
             {
                foreach (var item in row)
@@ -186,52 +235,45 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         newValue = (string)_scenarioContext["prefix"] + newValue;
                     }
-                    newValue.Should().Be(_editContentType.GetFieldValue( item.Key));
+                    newValue.Should().Be(_editContentType.GetFieldValue( contentType,  item.Key));
                 }
             }
         }
 
+        [Then(@"the values displayed in the editor match the following values and types")]
+        public void ThenTheValuesDisplayedInTheEditorMatchTheFollowingValuesAndTypes(Table table)
+        {
+            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
+            Dictionary<string, string> vars = new Dictionary<string, string>();
+            foreach (var row in table.Rows)
+            {
+                string value = _editContentType.GetFieldValue(contentType,row[1], row[0]);
+                value.Should().Be(row[2]);
+                vars.Add(row[0], row[2]);
+            }
+            _scenarioContext["RequestVariables"] = vars;
+        }
+
+
+
+
+        [Then(@"the editor field ""(.*)"" matches")]
+        public void ThenTheEditorFieldMatches(string p0, string multilineText)
+        {
+            Dictionary<string, string> vars = _scenarioContext.ContainsKey("RequestVariables") ?  (Dictionary<string, string>)_scenarioContext["RequestVariables"] : new Dictionary<string, string>();
+            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
+            
+            multilineText.Should().Be(_editContentType.GetFieldValue(contentType,"Html",p0));
+
+            vars.Add(p0, multilineText);
+            _scenarioContext["RequestVariables"] = vars;
+        }
+
+
         [Given(@"I Enter the following form data for ""(.*)""")]
         public void GivenIEnterTheFollowingFormDataFor(string p0, Table table)
         {
-            IEditorContentItem iAddItem = _addContentItemBase;
-
-            switch (p0)
-            {
-                case "DayToDayTask":
-                    _scenarioContext["ResponseType"] = typeof(DayToDayTask);
-                    _scenarioContext["CypherQuery"] = cypher_DayToDayTaskByUri;
-                    iAddItem = _addContentItemBase;
-                    break;
-                case "FurtherInfo":
-                    _scenarioContext["ResponseType"] = typeof(FurtherInfo);
-                    _scenarioContext["CypherQuery"] = cypher_FurtherInfoByUri;
-                    iAddItem = _addLinkItem;
-                    break;
-                case "Activity":
-                    _scenarioContext["ResponseType"] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
-                    _scenarioContext["CypherQuery"] = cypher_activityByUri;
-                    iAddItem = _addLinkItem;
-                    break;
-                case "UniversityLink":
-                    _scenarioContext["ResponseType"] = typeof(UniversityLink);
-                    _scenarioContext["CypherQuery"] = cypher_UniverstyLinkByUri;
-                    iAddItem = _addLinkItem;
-                    break;
-                case "RequirementsPrefix":
-                case "UniversityRequirement":
-                    _scenarioContext["ResponseType"] = typeof(GenericContent);
-                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", p0);
-                    break;
-                case "Restriction":
-                default:
-                    _scenarioContext["ResponseType"] = typeof(GenericContent);
-                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", p0);
-                    break;
-            }
-
-            _scenarioContext["ContentType"] = p0;
-
+            IEditorContentItem iAddItem = SetContentType(p0);
             Dictionary<string, string> vars = new Dictionary<string, string>();
             foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
             {
@@ -240,7 +282,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     newValue = ( _scenarioContext.ContainsKey("prefix") ? _scenarioContext["prefix"] : "" ) + newValue;
                     // store first field in scenario context
-                    _scenarioContext.Set(item.value.Value, item.value.Key);
+                    _scenarioContext.Set(newValue, item.value.Key);
                 }
                 vars.Add(item.value.Key, newValue);
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
@@ -905,11 +947,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(newUri);
         }
 
-        [Then(@"the new data is present in the Graph databases")]
+        [Then(@"the data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
         {
             var statementTemplate = (string)_scenarioContext["CypherQuery"];
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };// _scenarioContext.Get<string>( keyGeneratedUri ) } };
+            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
@@ -934,9 +976,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 catch ( Exception e ){
                     Console.WriteLine(e.Message);
                 }
-                
-                string rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                
+
+                string rawValue = varValue;
+                //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                switch (var.Key)
+                {
+                    case "Content":
+                        break;
+                    default:
+                        rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                        break;
+                }
                 var.Value.Should().Be(rawValue);
 
             }
@@ -945,17 +995,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
         {
-            var statementTemplate = cypher_activityByUri;
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.Get<string>( keyGeneratedUri ) } };
-
+            var statementTemplate = (string)_scenarioContext["CypherQuery"];
+            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
 
-            var activities = neo4JHelper.GetResultsList<DFC.ServiceTaxonomy.TestSuite.Models.Activity>(statementTemplate, statementParameters);
-            activities.Count.Should().Be(0);
+            var results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
+            int count = results.Count();
+            count.Should().Be(0, "Because the record should not be present in the graph database");
         }
 
         [Then(@"the following graph query returns (.*) record")]

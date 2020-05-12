@@ -95,22 +95,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public ManageContent SelectFirstItem()
         {
-            _scenarioContext.GetWebDriver().FindElement(By.ClassName("list-group-item"))
-                                           .FindElement(By.LinkText("Edit"))
-                                           .Click();
-            //// RemoteWebElement list  _scenarioContext.GetWebDriver().FindElements(By.ClassName("list-group"));
-            //IWebElement element  = _scenarioContext.GetWebDriver().FindElement(By.ClassName("list-group-item"));
+            try
+            {
+                // should just get first Edit button in list
+                _scenarioContext.GetWebDriver().ClickButton("Edit");
+                //_scenarioContext.GetWebDriver().FindElement(By.ClassName("list-group-item"))
+                //                           .FindElement(By.LinkText("Edit"))
+                //                           .Click();
 
-            //try
-            //{
-            //    IWebElement element2 = element.FindElement(By.LinkText("Edit"));
-            //    element.FindElement(By.LinkText("Edit")).Click();
-            //}
-            //catch
-            //{
+            }
+            catch
+            {
 
-            //}
-            ////.FindElement(By.ClassName("btn btn - primary btn - sm")).Click();
+            }
+
             return this;
         }
 
@@ -119,7 +117,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
             try
             {
-                _scenarioContext.GetWebDriver().ClickButton(".btn-group:nth-child(3) > .btn");
+                var actionButtons = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".btn-secondary"));
+                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
                 _scenarioContext.GetWebDriver().ClickButton("Delete");
                 _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
 
@@ -148,11 +147,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool ConfirmActionSuccess(string action)
         {
             bool returnValue = false;
-
             try
             {
-                returnValue = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/div")).Text
-                                                             .EndsWith("has been " + action + ".");
+                var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been " + action + ".')]]"));
+                returnValue = ( elements.Count == 1 );
             }
             catch
             {

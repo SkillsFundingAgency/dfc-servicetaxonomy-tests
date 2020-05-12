@@ -3,6 +3,8 @@ using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -15,6 +17,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
     class AddContentItemBase : IEditorContentItem
     {
         protected ScenarioContext _scenarioContext;
+        protected bool _htmlView = false;
 
         public AddContentItemBase(ScenarioContext context)//IWebDriver driver, ScenarioContext context)
         {
@@ -55,6 +58,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public By getLocator(string field)
         {
             return getLocatorBase(field);
+        }
+
+        public By getLocator(string contentType, string fieldType, string fieldName)
+        {
+            switch (fieldType)
+            {
+                case "Text":
+                case "Html":
+                    return By.Id($"{contentType}_{fieldName.Replace(" ","")}_{fieldType}");
+                default:
+                    return getLocatorBase(fieldName);
+            }
         }
 
         public string GetGeneratedURI()
@@ -111,8 +126,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             IWebElement item = null;
             try
             {
+                if (_htmlView)
+                {
+                   item = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-viewHTML-button > svg"));
+                   item.Click();
+                }
                 item = _scenarioContext.GetWebDriver().FindElement(locator);
-                // item = _scenarioContext.GetWebDriver().FindElement( OverrideLocator(field) ?? getLocatorBase(field));
                 item.Click();
                 item.Clear();
                 item.SendKeys(value);
@@ -125,7 +144,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public string GetFieldValue(string fieldName)
+        public string GetFieldValue(string contentType, string fieldName)
         {
             //only currently works with base types
             string value = "";
@@ -139,6 +158,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return value;
 
         }
+        public string GetFieldValue(string contentType, string fieldType, string fieldName)
+        {
+            string value = "";
+            try
+            {
+                value = _scenarioContext.GetWebDriver().FindElement(getLocator(contentType, fieldType, fieldName)).GetAttribute("value");
+            }
+            catch
+            {
+            }
+            return value;
+
+        }
+
 
         public void SetFieldValue(string type, string field, string value)//, Func <String, By> OverrideLocator)
         {

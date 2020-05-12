@@ -15,4 +15,4 @@ Scenario: Add a new FurtherInfo content item
 	| My Test FurtherInfo item |  http://testcom | more info here |
 	When I publish the item
 	Then the add action completes succesfully
-	And the new data is present in the Graph databases
+	And the data is present in the Graph databases

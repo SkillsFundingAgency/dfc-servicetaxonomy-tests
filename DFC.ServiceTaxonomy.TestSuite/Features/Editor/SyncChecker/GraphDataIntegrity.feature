@@ -56,7 +56,7 @@ Background:
 	Then the add action completes succesfully
 
 
-@docker
+@Editor
 Scenario: Extra relationship
 		
 	# Add content the collection type, only relating the first item @URi3#
@@ -98,7 +98,7 @@ and b.uri = '@URI2@'
 RETURN count(a)
 	"""
 
-
+@Editor
 Scenario: Missing relationship
 		
 	# Add content the collection type, only relating the first item
@@ -129,8 +129,8 @@ DELETE r
 		And the sync completes succesfully
 		And I get the results
 		Then document 1 appears in the "Validated" section
-		Then document 2 appears in the "Validated" section with message "expecting 1 relationships of type hasTestContentPicker1 in graph, but found 0"
-		And document 3 appears in the "Failed Validation" section
+		Then document 2 appears in the "Validated" section
+		And document 3 appears in the "Failed Validation" section with message "PickContent ContentPickerField did not validate: expecting 2 relationships of type hasTestContentPicker1 in graph, but found 1"
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 1 record
 	"""
@@ -140,6 +140,7 @@ and b.uri = '@URI2@'
 RETURN count(a)
 	"""
 
+@Editor
 Scenario: Mistmatched label
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -167,16 +168,18 @@ Scenario: Mistmatched label
 		And I get the results
 		Then document 1 appears in the "Validated" section
 		Then document 2 appears in the "Validated" section
-		And document 3 appears in the "Failed Validation" section with message "Description HtmlField did not validate"
+		And document 3 appears in the "Failed Validation" section 
+		#with message "Description HtmlField did not validate"
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 1 record
 	"""
-	MATCH (a:ncs__TestContentPicker1)
-	WHERE a.uri = '@URI2@'
-	And a.ncs__Description = 'My test description'
+	MATCH (a:ncs__TestCollectionOfTypes)
+	WHERE a.uri = '@URI3@'
+	And a.ncs__Description = '<p>My test description</p>'
 	return count(a)
 	"""
 
+@Editor
 Scenario: Missing label
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -214,6 +217,7 @@ Scenario: Missing label
 	return count(a)
 	"""
 
+@Editor
 Scenario: Missing Node
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -250,7 +254,7 @@ Scenario: Missing Node
 	WHERE a.uri = '@URI2@'
 	return count(a)
 	"""
-
+@Editor
 Scenario: Missing Node and relationship
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -292,6 +296,7 @@ Scenario: Missing Node and relationship
 	RETURN count(b)
 	"""
 
+@Editor
 Scenario: Missing parent and child Nodes and relationship
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -331,6 +336,8 @@ Scenario: Missing parent and child Nodes and relationship
 	and b.uri = '@URI1@'
 	RETURN count (b)
 	"""
+
+@ignore
 Scenario: Extra node
 
 	Given I generate and store a new URI
