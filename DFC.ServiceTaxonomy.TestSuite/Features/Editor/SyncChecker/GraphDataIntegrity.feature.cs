@@ -170,11 +170,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Extra relationship")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void ExtraRelationship()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Extra relationship", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 60
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -236,11 +238,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing relationship")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MissingRelationship()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing relationship", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 102
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -304,11 +308,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Mistmatched label")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MistmatchedLabel()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Mistmatched label", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 144
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -368,11 +374,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing label")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MissingLabel()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing label", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 183
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -434,11 +442,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing Node")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MissingNode()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing Node", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 221
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -497,11 +507,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing Node and relationship")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MissingNodeAndRelationship()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing Node and relationship", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 258
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -567,11 +579,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Missing parent and child Nodes and relationship")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.CategoryAttribute("Editor")]
         public virtual void MissingParentAndChildNodesAndRelationship()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing parent and child Nodes and relationship", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "Ignore"});
 #line 300
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
