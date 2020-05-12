@@ -13,7 +13,6 @@ Scenario: Content for "Get help using this service" is available
 	Then the values displayed in the editor match the following values and types
     | Name          | Type | Value      |
     | Title         | Base | Contact us |
-    | CanonicalName | Text | contact-us |
     And the editor field "Content" matches
 """
 <div class="sfContentBlock sf-Long-text">
@@ -35,8 +34,8 @@ Scenario: Add a new shared content item
 	#And I have ensured the activity I intend to add doesn't exist
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
-	| Title              | CanonicalName      | Content          |
-	| New Shared Content | new-shared-content | <p>Here it is<p> |
+	| Title              |  Content          |
+	| New Shared Content |  <p>Here it is<p> |
 	When I publish the item
 	Then the add action completes succesfully
 	And the data is present in the Graph databases
@@ -46,8 +45,8 @@ Scenario: Add a new shared content item
 	And I search for the "Title"
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
-	| Title                  | CanonicalName          | Content              |
-	| updated Shared Content | updated-shared-content | <p>Here it is now<p> |
+	| Title                  | Content              |
+	| updated Shared Content | <p>Here it is now<p> |
 	When I publish the item
 	Then the edit action completes succesfully
 	And the data is present in the Graph databases

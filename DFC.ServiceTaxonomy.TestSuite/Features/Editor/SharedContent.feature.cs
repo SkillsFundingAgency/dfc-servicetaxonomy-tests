@@ -106,14 +106,10 @@ this.FeatureBackground();
                         "Title",
                         "Base",
                         "Contact us"});
-            table45.AddRow(new string[] {
-                        "CanonicalName",
-                        "Text",
-                        "contact-us"});
 #line 13
  testRunner.Then("the values displayed in the editor match the following values and types", ((string)(null)), table45, "Then ");
 #line hidden
-#line 17
+#line 16
     testRunner.And("the editor field \"Content\" matches", @"<div class=""sfContentBlock sf-Long-text"">
   <h2 class=""heading-medium"">Get help using this service</h2>
   <p class=""font-small"" style=""margin-bottom:0px;""><span class=""bold-small"">Call&nbsp;</span>0800 100 900 or <a style=""white-space:nowrap;"" href=""/webchat/chat/"" target=""'_blank'"">use webchat</a>
@@ -122,7 +118,7 @@ this.FeatureBackground();
   <p>More ways to <a href=""/contact-us"">contact us</a>
   </p>
 </div>", ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 27
    testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -135,64 +131,60 @@ this.FeatureBackground();
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new shared content item", null, new string[] {
                         "Editor"});
-#line 32
+#line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 4
 this.FeatureBackground();
-#line 33
+#line 32
  testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 34
+#line 33
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/SharedContent/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 35
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
-                        "CanonicalName",
                         "Content"});
             table46.AddRow(new string[] {
                         "New Shared Content",
-                        "new-shared-content",
                         "<p>Here it is<p>"});
-#line 37
+#line 36
  testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table46, "And ");
-#line 40
+#line 39
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 41
+#line 40
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 42
+#line 41
  testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
+#line 44
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 46
+#line 45
  testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 46
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
-                        "CanonicalName",
                         "Content"});
             table47.AddRow(new string[] {
                         "updated Shared Content",
-                        "updated-shared-content",
                         "<p>Here it is now<p>"});
-#line 48
+#line 47
  testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table47, "And ");
-#line 51
+#line 50
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 52
+#line 51
  testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 53
+#line 52
  testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 56
+#line 55
  testRunner.Given("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 57
+#line 56
  testRunner.When("I delete the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 59
+#line 58
  testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 60
+#line 59
  testRunner.And("the data is not present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
