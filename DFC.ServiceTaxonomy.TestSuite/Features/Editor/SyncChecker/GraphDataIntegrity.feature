@@ -56,7 +56,7 @@ Background:
 	Then the add action completes succesfully
 
 
-@Editor
+@Editor @Ignore
 Scenario: Extra relationship
 		
 	# Add content the collection type, only relating the first item @URi3#
@@ -98,7 +98,7 @@ and b.uri = '@URI2@'
 RETURN count(a)
 	"""
 
-@Editor
+@Editor @Ignore
 Scenario: Missing relationship
 		
 	# Add content the collection type, only relating the first item
@@ -140,7 +140,7 @@ and b.uri = '@URI2@'
 RETURN count(a)
 	"""
 
-@Editor
+@Editor @Ignore
 Scenario: Mistmatched label
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -179,7 +179,7 @@ Scenario: Mistmatched label
 	return count(a)
 	"""
 
-@Editor
+@Editor @Ignore
 Scenario: Missing label
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -217,7 +217,7 @@ Scenario: Missing label
 	return count(a)
 	"""
 
-@Editor
+@Editor @Ignore
 Scenario: Missing Node
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -254,7 +254,7 @@ Scenario: Missing Node
 	WHERE a.uri = '@URI2@'
 	return count(a)
 	"""
-@Editor
+@Editor @Ignore
 Scenario: Missing Node and relationship
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
@@ -296,7 +296,7 @@ Scenario: Missing Node and relationship
 	RETURN count(b)
 	"""
 
-@Editor
+@Editor @Ignore
 Scenario: Missing parent and child Nodes and relationship
 	# Add content the collection type, only relating the first item
 		Given I Navigate to "/Admin/Contents/ContentTypes/TestCollectionOfTypes/Create" 
