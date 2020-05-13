@@ -1,4 +1,4 @@
-﻿@webtest
+﻿@notwebtest
 Feature: GraphEditor
 
 @ignore

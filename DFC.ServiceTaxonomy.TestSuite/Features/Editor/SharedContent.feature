@@ -1,11 +1,11 @@
-﻿@webtest
+﻿@notwebtest
 Feature: SharedContent
 
 Background:
     Given I set the content type to be "SharedContent" 
 	Given I logon to the editor
 
-@Editor
+@NotEditor
 Scenario: Content for "Get help using this service" is available
 
 	Then I can navigate to the content item "Contact us" in Orchard Core core
@@ -27,7 +27,7 @@ Scenario: Content for "Get help using this service" is available
    And the data is present in the Graph databases
 
 
-@Editor
+@NotEditor
 Scenario: Add a new shared content item
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 

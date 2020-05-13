@@ -1,10 +1,10 @@
-﻿@webtest
+﻿@notwebtest
 Feature: UniversityLink
 
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@NotEditor
 Scenario: Add a new UniversityLink
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/UniversityLink/Create" 

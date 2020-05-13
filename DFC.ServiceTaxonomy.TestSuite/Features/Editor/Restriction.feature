@@ -1,10 +1,10 @@
-﻿@webtest
+﻿@notwebtest
 Feature: Restriction
 
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@NotEditor
 Scenario: Add a new Restriction
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Restriction/Create" 

@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("UniversityLink")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class UniversityLinkFeature
     {
         
@@ -33,7 +33,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UniversityLink", null, ProgrammingLanguage.CSharp, new string[] {
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,11 +81,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new UniversityLink")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void AddANewUniversityLink()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new UniversityLink", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

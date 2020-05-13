@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.ContentTypes
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("ContentTypeUserActions")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class ContentTypeUserActionsFeature
     {
         
@@ -33,7 +33,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.ContentTypes
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ContentTypeUserActions", null, ProgrammingLanguage.CSharp, new string[] {
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -83,11 +83,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.ContentTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new content type with Title Part")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void AddANewContentTypeWithTitlePart()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new content type with Title Part", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

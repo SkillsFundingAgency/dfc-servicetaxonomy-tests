@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("SOCCode")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class SOCCodeFeature
     {
         
@@ -34,7 +34,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SOCCode", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
                     "f two numbers", ProgrammingLanguage.CSharp, new string[] {
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -82,11 +82,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new SOCCode")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void AddANewSOCCode()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new SOCCode", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 11
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

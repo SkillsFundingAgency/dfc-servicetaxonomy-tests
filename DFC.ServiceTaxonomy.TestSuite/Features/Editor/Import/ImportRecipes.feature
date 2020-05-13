@@ -1,4 +1,4 @@
-﻿@longrunning @webtest
+﻿@longrunning @notwebtest
 Feature: ImportRecipes
 
 

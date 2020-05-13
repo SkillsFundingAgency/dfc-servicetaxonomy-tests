@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("SharedContent")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class SharedContentFeature
     {
         
@@ -33,7 +33,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SharedContent", null, ProgrammingLanguage.CSharp, new string[] {
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -83,11 +83,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Content for \"Get help using this service\" is available")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void ContentForGetHelpUsingThisServiceIsAvailable()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Content for \"Get help using this service\" is available", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -126,11 +126,11 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new shared content item")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void AddANewSharedContentItem()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new shared content item", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

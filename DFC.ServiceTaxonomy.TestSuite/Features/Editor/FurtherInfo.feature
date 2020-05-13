@@ -1,10 +1,10 @@
-﻿@webtest
+﻿@notwebtest
 Feature: FurtherInfo
 
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@NotEditor
 Scenario: Add a new FurtherInfo content item
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/FurtherInfo/Create" 

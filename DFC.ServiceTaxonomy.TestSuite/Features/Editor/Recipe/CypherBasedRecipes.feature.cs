@@ -19,7 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Recipe
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("CypherBasedRecipes")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class CypherBasedRecipesFeature
     {
         
@@ -33,7 +33,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Recipe
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "CypherBasedRecipes", "\tThis feature covers Content from cypher recipe and  Update neo4j recipe", ProgrammingLanguage.CSharp, new string[] {
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -134,11 +134,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Recipe
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("I use recipes to create neo4j content and import it into orchard core")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("NotEditor")]
         public virtual void IUseRecipesToCreateNeo4JContentAndImportItIntoOrchardCore()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I use recipes to create neo4j content and import it into orchard core", null, new string[] {
-                        "Editor"});
+                        "NotEditor"});
 #line 31
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

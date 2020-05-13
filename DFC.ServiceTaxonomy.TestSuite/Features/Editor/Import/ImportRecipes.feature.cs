@@ -20,7 +20,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Import
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("ImportRecipes")]
     [NUnit.Framework.CategoryAttribute("longrunning")]
-    [NUnit.Framework.CategoryAttribute("webtest")]
+    [NUnit.Framework.CategoryAttribute("notwebtest")]
     public partial class ImportRecipesFeature
     {
         
@@ -35,7 +35,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Import
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ImportRecipes", null, ProgrammingLanguage.CSharp, new string[] {
                         "longrunning",
-                        "webtest"});
+                        "notwebtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

@@ -1,4 +1,4 @@
-﻿@webtest
+﻿@notwebtest
 Feature: SOCCode
 	In order to avoid silly mistakes
 	As a math idiot
@@ -7,7 +7,7 @@ Feature: SOCCode
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@NotEditor
 Scenario: Add a new SOCCode
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/SOCCode/Create" 

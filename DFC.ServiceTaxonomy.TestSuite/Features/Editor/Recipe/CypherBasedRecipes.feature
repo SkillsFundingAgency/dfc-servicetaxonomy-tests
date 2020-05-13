@@ -1,4 +1,4 @@
-﻿@webtest
+﻿@notwebtest
 Feature: CypherBasedRecipes
 	This feature covers Content from cypher recipe and  Update neo4j recipe
 
@@ -27,7 +27,7 @@ Feature: CypherBasedRecipes
 	| TextField    | Text Field    |
 	| ValueField   | Numeric Field |
 
-@Editor
+@NotEditor
 Scenario: I use recipes to create neo4j content and import it into orchard core
 #CypherCommand
 	Given I load recipe file "create_neo4j_content.json"
