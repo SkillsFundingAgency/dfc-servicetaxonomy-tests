@@ -1,5 +1,5 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite;
-using OpenQA.Selenium;
+//using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,15 +14,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         private const string EnvSettingsKey = "envsettings";
         #endregion
 
-        public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
-        {
-            Set(context, webDriver, WebDriverKey);
-        }
+        //public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
+        //{
+        //    Set(context, webDriver, WebDriverKey);
+        //}
 
-        public static IWebDriver GetWebDriver(this ScenarioContext context)
-        {
-            return Get<IWebDriver>(context, WebDriverKey);
-        }
+        //public static IWebDriver GetWebDriver(this ScenarioContext context)
+        //{
+        //    return Get<IWebDriver>(context, WebDriverKey);
+        //}
 
         public static void SetEnv(this ScenarioContext context, EnvironmentSettings envSettings)
         {
