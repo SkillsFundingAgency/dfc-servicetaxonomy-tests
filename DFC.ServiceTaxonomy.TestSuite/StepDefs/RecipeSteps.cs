@@ -10,7 +10,7 @@ using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
-//using OrchardCore.Infrastructure;
+using OrchardCore.Entities;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -20,10 +20,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext _scenarioContext;
-
+        private OrchardCore.Entities.DefaultIdGenerator _IdGenerator;
         public RecipeSteps(ScenarioContext context)
         {
             _scenarioContext = context;
+            _IdGenerator = new OrchardCore.Entities.DefaultIdGenerator();
         }
 
         private static Random random = new Random();
@@ -48,6 +49,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 prefix = RandomString(5);
                 _scenarioContext["prefix"] = prefix;
+                //todo change to constant
                 _scenarioContext["prefixField"] = "skos__prefLabel";
                 //_scenarioContext["prefixField"] = p0;
             }
@@ -70,10 +72,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             // replace ID tokens
             int id = 1;
-            while (_scenarioContext.ReplaceTokensInDirectory($"{Directory.GetCurrentDirectory()}/{prefix}", $"TESTCONTENTID_{id}", (string)_scenarioContext["prefix"]))
+            //todo sort out a way of detecting last token while not stopping on gaps
+            while (id < 800)
             {
+                _scenarioContext.ReplaceTokensInDirectory($"{Directory.GetCurrentDirectory()}/{prefix}", $"TESTCONTENTID_{id}\"", $"{_IdGenerator.GenerateUniqueId()}\"");
                 id++;
             }
+            Console.WriteLine($"Finished replacing tokens.{id} distinct content ids detected");
         }
 
         [Given(@"I load the test recipes")]
@@ -92,6 +97,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
 
             // delete directory
+            diSource.Delete(true);
 
         }
 
@@ -99,7 +105,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string error = "";
             try
-            {
+            { 
+                Console.WriteLine($"Loading recipe file: {p0}");
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/OrchardCore.Deployment/Import/Index");
                 var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
                 webElement.SendKeys(p0);
