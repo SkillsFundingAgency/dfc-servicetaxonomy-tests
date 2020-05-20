@@ -1,0 +1,66 @@
+{
+  "name": "TestData_WorkingUniforms0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "displayName": "TestData_WorkingUniforms0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Protective Clothing"
+    },
+    "WorkingUniform": {
+      "Description": {
+        "Html": "\u003Cp\u003Eprotective clothing\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_workinguniform/d82e032c-0f5b-49d1-b688-342b2ab1dc03"
+    },
+    "ContentItemId": "TESTCONTENTID_207",
+    "ContentItemVersionId": "TESTCONTENTID_207",
+    "ContentType": "WorkingUniform",
+    "DisplayText": "@PREFIX@_Protective Clothing",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Uniform"
+    },
+    "WorkingUniform": {
+      "Description": {
+        "Html": "\u003Cp\u003Ea uniform\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_workinguniform/a6e48274-a2b3-4b0f-9872-ee7c9334838d"
+    },
+    "ContentItemId": "TESTCONTENTID_104",
+    "ContentItemVersionId": "TESTCONTENTID_104",
+    "ContentType": "WorkingUniform",
+    "DisplayText": "@PREFIX@_Uniform",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

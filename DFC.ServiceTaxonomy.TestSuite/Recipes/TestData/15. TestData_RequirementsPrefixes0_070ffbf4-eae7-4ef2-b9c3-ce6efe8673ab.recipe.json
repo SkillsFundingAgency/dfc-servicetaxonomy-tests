@@ -1,0 +1,162 @@
+{
+  "name": "TestData_RequirementsPrefixes0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "displayName": "TestData_RequirementsPrefixes0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_To do this apprenticeship, you\u0027ll need:"
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003ETo do this apprenticeship, you\u0027ll need:\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/548b19fe-0bb6-4a45-b26f-5d3bf9836a42"
+    },
+    "ContentItemId": "TESTCONTENTID_106",
+    "ContentItemVersionId": "TESTCONTENTID_106",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_To do this apprenticeship, you\u0027ll need:",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_There are no set entry requirements for this route."
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003EThere are no set entry requirements for this route.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/f4550175-5fde-4270-a302-0a6e45cf394b"
+    },
+    "ContentItemId": "TESTCONTENTID_294",
+    "ContentItemVersionId": "TESTCONTENTID_294",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_There are no set entry requirements for this route.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Employers will set their own entry requirements."
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003EEmployers will set their own entry requirements.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/e730f220-239a-4a74-af43-2e343da15eed"
+    },
+    "ContentItemId": "TESTCONTENTID_290",
+    "ContentItemVersionId": "TESTCONTENTID_290",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_Employers will set their own entry requirements.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_You may need:"
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003EYou may need:\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/b67480b3-7bfb-4f22-9c69-c690eddb6c71"
+    },
+    "ContentItemId": "TESTCONTENTID_136",
+    "ContentItemVersionId": "TESTCONTENTID_136",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_You may need:",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_There are no set entry requirements but it may help you to get in if you have:"
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003EThere are no set entry requirements but it may help you to get in if you have:\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/6a32a32b-5227-4b02-b1d2-cb32d12f567e"
+    },
+    "ContentItemId": "TESTCONTENTID_159",
+    "ContentItemVersionId": "TESTCONTENTID_159",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_There are no set entry requirements but it may help you to get in if you have:",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_You\u0027ll usually need:"
+    },
+    "RequirementsPrefix": {
+      "Description": {
+        "Html": "\u003Cp\u003EYou\u0027ll usually need:\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_requirementsprefix/3a4ca703-aa1a-4251-b1d3-0baa8eaa4785"
+    },
+    "ContentItemId": "TESTCONTENTID_43",
+    "ContentItemVersionId": "TESTCONTENTID_43",
+    "ContentType": "RequirementsPrefix",
+    "DisplayText": "@PREFIX@_You\u0027ll usually need:",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

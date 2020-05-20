@@ -1,0 +1,186 @@
+{
+  "name": "TestData_OtherRequirements0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "displayName": "TestData_OtherRequirements0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_You\u0027ll usually need your own transport to get to and from work, as you may not be able to get public transport to suit your shift times."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003EYou\u0027ll usually need your own transport to get to and from work, as you may not be able to get public transport to suit your shift times.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/d6981789-c2f1-4bfb-8953-ae50c8e38ef6"
+    },
+    "ContentItemId": "TESTCONTENTID_425",
+    "ContentItemVersionId": "TESTCONTENTID_425",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_You\u0027ll usually need your own transport to get to and from work, as you may not be able to get public transport to suit your shift times.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Certain people are not allowed to stand as an MP, for example someone convicted of electoral fraud. You can check with the [Electoral Commission] for more information about this."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003ECertain people are not allowed to stand as an MP, for example someone convicted of electoral fraud. You can check with the \u003Ca href=\u0022https://www.electoralcommission.org.uk/i-am-a/candidate-or-agent\u0022\u003EElectoral Commission\u003C/a\u003E for more information about this.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/f0f5097e-4264-40bc-8a62-ce72dedbc7de"
+    },
+    "ContentItemId": "TESTCONTENTID_341",
+    "ContentItemVersionId": "TESTCONTENTID_341",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_Certain people are not allowed to stand as an MP, for example someone convicted of electoral fraud. You can check with the [Electoral Commission] for more information about this.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_To work with plant machinery like excavators or dumper trucks, you\u0027ll need to be 18 or over and have a driving licence."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003ETo work with plant machinery like excavators or dumper trucks, you\u0027ll need to be 18 or over and have a driving licence.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/7134bea2-ebe2-4046-9b3d-62a62c03af5f"
+    },
+    "ContentItemId": "TESTCONTENTID_238",
+    "ContentItemVersionId": "TESTCONTENTID_238",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_To work with plant machinery like excavators or dumper trucks, you\u0027ll need to be 18 or over and have a driving licence.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_There are rules about height and weight - these vary between airlines. As a general guide, most look for people between 5ft 2in (157cm) and 6ft 2in (188cm) with weight in proportion to height."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003EThere are rules about height and weight - these vary between airlines. As a general guide, most look for people between 5ft 2in (157cm) and 6ft 2in (188cm) with weight in proportion to height.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/b6f64356-a12d-4b97-8f35-81ec1f0b47a8"
+    },
+    "ContentItemId": "TESTCONTENTID_126",
+    "ContentItemVersionId": "TESTCONTENTID_126",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_There are rules about height and weight - these vary between airlines. As a general guide, most look for people between 5ft 2in (157cm) and 6ft 2in (188cm) with weight in proportion to height.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Many airlines also ask that you\u0027re able to swim up to 25 metres."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003EMany airlines also ask that you\u0027re able to swim up to 25 metres.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/1de14a61-69b1-4658-9794-cf773e21fa6c"
+    },
+    "ContentItemId": "TESTCONTENTID_125",
+    "ContentItemVersionId": "TESTCONTENTID_125",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_Many airlines also ask that you\u0027re able to swim up to 25 metres.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_You may need a driving licence for some jobs."
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003EYou may need a driving licence for some jobs.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/62c86b8a-9439-4d8b-8c61-dd421d6aac30"
+    },
+    "ContentItemId": "TESTCONTENTID_426",
+    "ContentItemVersionId": "TESTCONTENTID_426",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_You may need a driving licence for some jobs.",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Usually you\u0027ll also be expected to:have a smart appearance; have a valid passport with no restrictions for the countries the airline travels to; live within 90 minutes of your base"
+    },
+    "OtherRequirement": {
+      "Description": {
+        "Html": "\u003Cp\u003EUsually you\u0027ll also be expected to:\u003Cul\u003E\u003Cli\u003Ehave a smart appearance\u003C/li\u003E\u003Cli\u003Ehave a valid passport with no restrictions for the countries the airline travels to\u003C/li\u003E\u003Cli\u003Elive within 90 minutes of your base\u003C/li\u003E\u003C/ul\u003E\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_otherrequirement/3c5db7ff-654d-42e7-b8d7-2b7cfbaa9865"
+    },
+    "ContentItemId": "TESTCONTENTID_124",
+    "ContentItemVersionId": "TESTCONTENTID_124",
+    "ContentType": "OtherRequirement",
+    "DisplayText": "@PREFIX@_Usually you\u0027ll also be expected to:have a smart appearance; have a valid passport with no restrictions for the countries the airline travels to; live within 90 minutes of your base",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

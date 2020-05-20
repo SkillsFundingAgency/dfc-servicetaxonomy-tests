@@ -42,12 +42,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static bool ReplaceTokensInDirectory(this ScenarioContext context, string directory, string token, string replacement)
         {
+            bool found = false;
             string[] files = Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories);
             foreach (string file in files)
             {
                 try
                 {
                     string contents = File.ReadAllText(file);
+                    if (contents.Contains(token))
+                    {
+                        found = true;
+                    }
                     contents = contents.Replace(token, replacement);
                     // Make files writable
                     File.SetAttributes(file, FileAttributes.Normal);
@@ -59,7 +64,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                     Console.WriteLine(ex.Message);
                 }
             }
-            return true;
+            return found;
         }
 
     }

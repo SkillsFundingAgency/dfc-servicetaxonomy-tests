@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿  <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseAppHost>true</UseAppHost>
     <ApplicationIcon />
     <Win32Resource />
@@ -33,8 +33,9 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
-    <PackageReference Include="SpecFlow.NUnit" Version="3.0.225" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.0.225" />
+    <PackageReference Include="SpecFlow" Version="3.3.16-beta" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.3.16-beta" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.3.16-beta" />
   </ItemGroup>
 
   <ItemGroup>
@@ -89,6 +90,69 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Recipes\import_neo4j_data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\12. TestData_QCFLevels0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\13. TestData_ApprenticeshipStandardRoutes0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\14. TestData_ApprenticeshipStandards0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\15. TestData_RequirementsPrefixes0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\16. TestData_ApprenticeshipLinks0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\17. TestData_ApprenticeshipRequirements0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\18. TestData_CollegeLinks0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\19. TestData_CollegeRequirements0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\20. TestData_UniversityLinks0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\21. TestData_UniversityRequirements0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\22. TestData_DayToDayTasks0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\23. TestData_OtherRequirements0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\24. TestData_Registrations0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\25. TestData_Restrictions0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\26. TestData_SocCodes0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\27. TestData_ONetOccupationalCodes0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\28. TestData_WorkingEnvironments0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\29. TestData_WorkingLocations0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\30. TestData_WorkingUniforms0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\31. TestData_JobProfiles0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Recipes\TestData\32. TestData_JobCategories0_a7be82e7-a833-4ef3-9347-27ab0163e089.recipe.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
