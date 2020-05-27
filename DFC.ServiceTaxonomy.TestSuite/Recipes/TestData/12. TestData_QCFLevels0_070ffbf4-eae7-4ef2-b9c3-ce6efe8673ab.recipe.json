@@ -19,13 +19,13 @@
       }
     },
     "TitlePart": {
-      "Title": "@PREFIX@_0"
+      "Title": "__PREFIX___0"
     },
     "GraphSyncPart": {
       "Text": "http://ncs.test/@PREFIX@/test_qcflevel/86194e0e-ffef-4ee9-a0ce-38801dc5f993"
     },
-    "ContentItemId": "TESTCONTENTID_573",
-    "ContentItemVersionId": "TESTCONTENTID_573",
+    "ContentItemId": "__TESTCONTENTID_573__",
+    "ContentItemVersionId": "__TESTCONTENTID_573__",
     "ContentType": "QCFLevel",
     "DisplayText": "@PREFIX@_0",
     "Latest": true,
@@ -48,8 +48,8 @@
     "GraphSyncPart": {
       "Text": "http://ncs.test/@PREFIX@/test_qcflevel/5c68c879-54ed-42fc-b68a-a5fc7244b461"
     },
-    "ContentItemId": "TESTCONTENTID_574",
-    "ContentItemVersionId": "TESTCONTENTID_574",
+    "ContentItemId": "__TESTCONTENTID_574__",
+    "ContentItemVersionId": "__TESTCONTENTID_574__",
     "ContentType": "QCFLevel",
     "DisplayText": "@PREFIX@_1",
     "Latest": true,
@@ -72,8 +72,8 @@
     "GraphSyncPart": {
       "Text": "http://ncs.test/@PREFIX@/test_qcflevel/dfdf1e40-7da1-40cb-ba03-62e4039433fe"
     },
-    "ContentItemId": "TESTCONTENTID_575",
-    "ContentItemVersionId": "TESTCONTENTID_575",
+    "ContentItemId": "__TESTCONTENTID_575__",
+    "ContentItemVersionId": "__TESTCONTENTID_575__",
     "ContentType": "QCFLevel",
     "DisplayText": "@PREFIX@_2",
     "Latest": true,
@@ -96,8 +96,8 @@
     "GraphSyncPart": {
       "Text": "http://ncs.test/@PREFIX@/test_qcflevel/1f2017a2-a287-4344-aa1a-8289361e96f9"
     },
-    "ContentItemId": "TESTCONTENTID_576",
-    "ContentItemVersionId": "TESTCONTENTID_576",
+    "ContentItemId": "__TESTCONTENTID_576__",
+    "ContentItemVersionId": "__TESTCONTENTID_576__",
     "ContentType": "QCFLevel",
     "DisplayText": "@PREFIX@_3",
     "Latest": true,

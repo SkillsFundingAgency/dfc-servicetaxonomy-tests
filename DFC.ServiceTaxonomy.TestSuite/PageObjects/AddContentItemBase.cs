@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 
@@ -16,6 +17,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class AddContentItemBase : IEditorContentItem
     {
+        private const string emptyFieldValidationMessage = "A value is required for ";
+
         protected ScenarioContext _scenarioContext;
         protected bool _htmlView = false;
 
@@ -79,6 +82,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             
         }
 
+        public string ContentItemIdFromUrl()
+        {
+            string pattern = @"[a-zA-Z0-9]{26}";
+            string url = _scenarioContext.GetWebDriver().Url;
+            Match m = Regex.Match(url, pattern);
+            if (m.Success)
+            {
+                return m.Value;
+            }
+            return "";
+        }
+
         //public AddContentItemBase SetFieldValue( string field, string value, string itemType = "")
         //{
         //    string id;
@@ -117,6 +132,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public AddContentItemBase PublishActivity()
         {
             _scenarioContext.GetWebDriver().FindElement(By.Name("submit.Publish")).Click();
+            //.XPath("/html/body/div[1]/div[3]/form/div[2]/div/div[3]/div/button[1]")).Click();
+            return this;
+        }
+
+        public AddContentItemBase SaveActivity()
+        {
+            _scenarioContext.GetWebDriver().FindElement(By.Name("submit.Save")).Click();
             //.XPath("/html/body/div[1]/div[3]/form/div[2]/div/div[3]/div/button[1]")).Click();
             return this;
         }
@@ -185,11 +207,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public bool ConfirmSuccess()
         {
-            //return _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/div")).Text.Contains("Your Activity has been published.") ;
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been published.')]]"));
             return ( elements.Count == 1 );
-            //return _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[2]/div[3]/div[1]")).Text.Contains("has been published.");
-           
         }
+
+        public bool ConfirmEmptyFieldError(string field)
+        {
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{emptyFieldValidationMessage}{field}')]]"));
+            return (elements.Count == 1);
+         }
     }
 }

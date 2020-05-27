@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Threading;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
@@ -168,6 +170,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenICaptureTheGeneratedURIGraph_UriId_Text()
         {
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
+            
         }
 
         [Given(@"I set the content type to be ""(.*)""")]
@@ -220,6 +223,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string contentType = (string)_scenarioContext["ContentType"];
             string FieldName = (string)_scenarioContext["FieldName"];
             _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
+        }
+
+        [Given(@"I save the draft item")]
+        public void GivenISaveTheDraftItem()
+        {
+            _addContentItemBase.SaveActivity();
+            _scenarioContext.StoreContentItemId(_addContentItemBase.ContentItemIdFromUrl());
         }
 
         [Then(@"the values displayed in the editor match")]
@@ -280,7 +290,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 string newValue = item.value.Value;
                 if (item.index == 0)
                 {
-                    newValue = ( _scenarioContext.ContainsKey("prefix") ? _scenarioContext["prefix"] : "" ) + newValue;
+                    newValue = ( _scenarioContext.ContainsKey("prefix") && newValue.Length > 0 ? _scenarioContext["prefix"] : "" ) + newValue;
                     // store first field in scenario context
                     _scenarioContext.Set(newValue, item.value.Key);
                 }
@@ -299,7 +309,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I select the first item that is found")]
         public void GivenISelectTheFirstItemThatIsFound()
         {
-            _manageContent.SelectFirstItem();
+            _manageContent.EditFirstItem();
+            _scenarioContext.StoreContentItemId(_addContentItemBase.ContentItemIdFromUrl());
         }
 
         //content type
@@ -568,6 +579,27 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         }
 
+        [Given(@"I select the ""(.*)"" option first item that is found")]
+        public void GivenISelectTheOptionFirstItemThatIsFound(string p0)
+        {
+            switch (p0.ToLower())
+            {
+                case "publish":
+                    _manageContent.PublishFirstItem();
+                    break;
+                case "clone":
+                    _manageContent.CloneFirstItem();
+                    break;
+                case "delete":
+                    _manageContent.DeleteFirstItem();
+                    break;
+                default:
+                    throw new Exception($"Action first item in list - Unsupported operation: {p0}");
+            }
+            
+        }
+
+
         public string TransformTableName( string source)
         {
             string fileName = "";
@@ -780,6 +812,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return returnStatus;
         }
 
+
+
         #endregion
             #region when steps
         [When(@"I publish the item")]
@@ -787,6 +821,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _addContentItemBase.PublishActivity();
         }
+
+        [When(@"I save the draft item")]
+        public void WhenISaveTheDraftItem()
+        {
+           
+            _addContentItemBase.SaveActivity();
+        }
+
+
+
 
         [When(@"I delete the item")]
         public void WhenIDeleteTheItem()
@@ -808,11 +852,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentItemBase.ConfirmSuccess().Should().BeTrue();
         }
 
+        [Then(@"a validation error is shown")]
+        public void ThenAValidationErrorIsShown()
+        {
+            _addContentItemBase.ConfirmSuccess().Should().BeTrue();
+            //            ScenarioContext.Current.Pending();
+            //<div class="validation-summary-errors" data-valmsg-summary="true"><ul><li>A value is required for Title.</li>
+
+        }
+
+        [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
+        public void ThenAnValidationErrorIsShownFor(string validationType, string field)
+        {
+            switch (validationType)
+            {
+                case "EmptyField":
+                    _addContentItemBase.ConfirmEmptyFieldError(field).Should().BeTrue();
+                    break;
+                default:
+                    throw new Exception($"Unhandled validationType {validationType}");
+            }
+        }
+
+
+
         [Then(@"the edit action completes succesfully")]
         public void ThenTheEditActionCompletesSuccesfully()
         {
             _manageContent.ConfirmPublishedSuccessfully().Should().BeTrue();
         }
+
+        [Then(@"the save action completes succesfully")]
+        public void ThenTheSaveActionCompletesSuccesfully()
+        {
+            _manageContent.ConfirmSavedSuccessfully().Should().BeTrue();
+        }
+
+        [Then(@"the clone action completes succesfully")]
+        public void ThenTheCloneActionCompletesSuccesfully()
+        {
+            _manageContent.ConfirmClonedSuccessfully().Should().BeTrue();
+        }
+
 
         [Then(@"the delete action completes succesfully")]
         public void ThenTheDeleteActionCompletesSuccesfully()
@@ -829,9 +910,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var thisKeys = thisItems.Keys;
             foreach (var key in thisKeys)
             {
-                if (!(otherItems.TryGetValue(key, out var value)
-                     && string.Equals(thisItems[key], value, StringComparison.OrdinalIgnoreCase))
-                    )
+                if (!(otherItems.TryGetValue(key, out var value) && string.Equals(thisItems[key], value, StringComparison.OrdinalIgnoreCase)) )
                 {
                     return false;
                 }
@@ -1030,6 +1109,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
 
-        #endregion
+  
+    #endregion
     }
 }

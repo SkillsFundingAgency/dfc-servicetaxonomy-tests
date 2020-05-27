@@ -1,11 +1,6 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.PageObjects;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects 
@@ -15,11 +10,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         #region constants
         const string remove = "removed";
         const string publish = "published";
+        const string save = "saved";
+        const string actionPlaceHolder = "{action}";
+        const string confirmationMessage = "has been {action}.";
+        const string confirmationMessageClone = "Successfully cloned.";
 
         #endregion
         ScenarioContext _scenarioContext;
 
-        public ManageContent(ScenarioContext context)// : base(context)
+        public ManageContent(ScenarioContext context)
         {
             _scenarioContext = context;
         }
@@ -92,74 +91,87 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public ManageContent ActionFirstItem( string action )
+        {
+            try
+            {
+                //_scenarioContext.GetWebDriver().SelectButtonGroupClass("btn-group", 3);
+                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
+                _scenarioContext.GetWebDriver().ClickButton(action);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to {action} first item. {e.Message}");
+            }
+            return this;
+        }
 
-        public ManageContent SelectFirstItem()
+        public ManageContent PublishFirstItem()
+        {
+            return ActionFirstItem("Publish Draft");
+        }
+
+        public ManageContent CloneFirstItem()
+        {
+            return ActionFirstItem("Clone");
+        }
+
+        public ManageContent DeleteFirstItem()
+        {
+            ActionFirstItem("Delete");
+            _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
+            if (!ConfirmRemovedSuccessfully())
+            {
+                throw new Exception("Unable to confirm the item has been removed");
+            }
+             return this;
+        }
+
+        public ManageContent EditFirstItem()
         {
             try
             {
                 // should just get first Edit button in list
                 _scenarioContext.GetWebDriver().ClickButton("Edit");
-                //_scenarioContext.GetWebDriver().FindElement(By.ClassName("list-group-item"))
-                //                           .FindElement(By.LinkText("Edit"))
-                //                           .Click();
-
-            }
-            catch
-            {
-
-            }
-
-            return this;
-        }
-
-        public ManageContent DeleteFirstItem()
-        {
-
-            try
-            {
-                var actionButtons = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".btn-secondary"));
-                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
-                _scenarioContext.GetWebDriver().ClickButton("Delete");
-                _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
-
-                if (! ConfirmRemovedSuccessfully() )
-                {
-                    throw new Exception("Unable to confirm the item has been removed");
-                }
             }
             catch ( Exception e)
             {
-                Console.WriteLine(e);
+                throw new Exception($"Unable to Edit first item. {e.Message}");
             }
             return this;
         }
-
         public bool ConfirmRemovedSuccessfully()
         {
-            return ConfirmActionSuccess(remove);
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder,remove));
         }
 
         public bool ConfirmPublishedSuccessfully()
         {
-            return ConfirmActionSuccess(publish);
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, publish));
         }
 
-        public bool ConfirmActionSuccess(string action)
+        public bool ConfirmSavedSuccessfully()
+        {
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, save));
+        }
+
+        public bool ConfirmClonedSuccessfully()
+        {
+            return ConfirmActionSuccess(confirmationMessageClone);
+        }
+
+        public bool ConfirmActionSuccess(string message)
         {
             bool returnValue = false;
             try
             {
-                var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been " + action + ".')]]"));
+                var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{message}')]]"));
                 returnValue = ( elements.Count == 1 );
             }
             catch
-            {
-
-            }
+            {}
             return returnValue;
         }
-
-
     }
 }
       
