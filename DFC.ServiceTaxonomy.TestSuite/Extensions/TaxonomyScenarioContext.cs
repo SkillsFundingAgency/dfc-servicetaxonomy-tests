@@ -162,6 +162,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return uris[index];
         }
 
+        public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
+        {
+            context["contentItemIndexes"] = list;
+        }
+
+        public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
+        {
+            return (List<ContentItemIndexRow>)context["contentItemIndexes"];
+        }
+
         public static void StoreContentItemId(this ScenarioContext context, string newId)
         {
             List<string> uris;

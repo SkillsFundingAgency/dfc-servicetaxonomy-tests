@@ -27,12 +27,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(string eventType)
         {
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
+            List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
+
+            indexes.Count.Should().BeGreaterThan(1, "Because otherwise no data has been stored to check against");
+
             int numberOfEvents = _scenarioContext.ContainsKey($"countOf{eventType}Events") ? (int)_scenarioContext[$"countOf{eventType}Events"] : 0;
             // mock the response until event store is up and running
             MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
             List<ContentEvent> list = GetMatchingDocuments(id, eventType);
             list.Count().Should().Be(numberOfEvents +1, "Because a cosmos document relating to the event message should have been found");
+
+            //TODO incorporate check of dates and contentitemversion
         }
 
         [Then(@"an event has been published to notify consumers of the change")]

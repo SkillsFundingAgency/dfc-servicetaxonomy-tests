@@ -47,6 +47,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private const string cypher_GenericItemWithTextByUri = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Text as Text";
         private const string cypher_TestItem = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri @FIELDLIST";
 
+        private const string sql_ContentItemIdPlaceholder = "__ContentItemId__";
+        private const string sql_ContentItemIndexes = "select * from dbo.contentitemindex a where a.ContentItemId = '__ContentItemId__' order by ModifiedUtc desc ";
+
         private const string keyGeneratedUri = "GeneratedURI";
         private const string keyEditorDescriptionField = "Title";
 
@@ -229,7 +232,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenISaveTheDraftItem()
         {
             _addContentItemBase.SaveActivity();
-            _scenarioContext.StoreContentItemId(_addContentItemBase.ContentItemIdFromUrl());
+            string id = _addContentItemBase.ContentItemIdFromUrl();
+            _scenarioContext.StoreContentItemId(id);
+            
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+
         }
 
         [Then(@"the values displayed in the editor match")]
@@ -579,7 +588,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         }
 
-        [Given(@"I select the ""(.*)"" option first item that is found")]
+        [Given(@"I select the ""(.*)"" option for the first item that is found")]
         public void GivenISelectTheOptionFirstItemThatIsFound(string p0)
         {
             switch (p0.ToLower())
@@ -592,6 +601,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     break;
                 case "delete":
                     _manageContent.DeleteFirstItem();
+                    break;
+                case "unpublish":
+                    _manageContent.UnpublishFirstItem();
                     break;
                 default:
                     throw new Exception($"Action first item in list - Unsupported operation: {p0}");
@@ -820,13 +832,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void WhenIPublishTheItem()
         {
             _addContentItemBase.PublishActivity();
+            string id = _addContentItemBase.ContentItemIdFromUrl();
+            _scenarioContext.StoreContentItemId(id);
+
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            _scenarioContext.StoreContentItemIndexList(
+                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                       ).ToList());
+
         }
 
         [When(@"I save the draft item")]
         public void WhenISaveTheDraftItem()
         {
-           
             _addContentItemBase.SaveActivity();
+            string id = _addContentItemBase.ContentItemIdFromUrl();
+            _scenarioContext.StoreContentItemId(id);
+
+            SQLServerHelper sqlInstance = new SQLServerHelper();
+            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            _scenarioContext.StoreContentItemIndexList(
+                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                       ).ToList());
+
         }
 
 
@@ -893,6 +922,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _manageContent.ConfirmClonedSuccessfully().Should().BeTrue();
         }
+
+        [Then(@"the unpublish action completes succesfully")]
+        public void ThenTheUnpublishActionCompletesSuccesfully()
+        {
+            _manageContent.ConfirmUnpublishedSuccessfully().Should().BeTrue();
+        }
+
+        [Then(@"the discard action completes succesfully")]
+        public void ThenTheDiscardActionCompletesSuccesfully()
+        {
+            _manageContent.ConfirmDiscardedSuccessfully().Should().BeTrue();
+        }
+
 
 
         [Then(@"the delete action completes succesfully")]

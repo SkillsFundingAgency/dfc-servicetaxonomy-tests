@@ -10,6 +10,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         #region constants
         const string remove = "removed";
         const string publish = "published";
+        const string unpublish = "unpublished";
+        const string discard = "discarded";
         const string save = "saved";
         const string actionPlaceHolder = "{action}";
         const string confirmationMessage = "has been {action}.";
@@ -127,6 +129,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
              return this;
         }
 
+        public ManageContent UnpublishFirstItem()
+        {
+            ActionFirstItem("Unpublish");
+            _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
+            if (!ConfirmUnpublishedSuccessfully())
+            {
+                throw new Exception("Unable to confirm the item has been unpublished");
+            }
+            return this;
+        }
+
         public ManageContent EditFirstItem()
         {
             try
@@ -143,6 +156,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool ConfirmRemovedSuccessfully()
         {
             return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder,remove));
+        }
+
+        public bool ConfirmUnpublishedSuccessfully()
+        {
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, unpublish));
+        }
+
+        public bool ConfirmDiscardedSuccessfully()
+        {
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, discard));
         }
 
         public bool ConfirmPublishedSuccessfully()

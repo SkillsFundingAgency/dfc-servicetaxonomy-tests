@@ -20,9 +20,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("ContentChangeEvent for new draft")]
+    [NUnit.Framework.DescriptionAttribute("ContentChangeEvents_ExistingPublished")]
     [NUnit.Framework.CategoryAttribute("webtest")]
-    public partial class ContentChangeEventForNewDraftFeature
+    public partial class ContentChangeEvents_ExistingPublishedFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,14 +30,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         private string[] _featureTags = new string[] {
                 "webtest"};
         
-#line 1 "ContentChangeEvents_NewDraft.feature"
+#line 1 "ContentChangeEvents_ExistingPublished.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ContentChangeEvent for new draft", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ContentChangeEvents_ExistingPublished", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -95,17 +95,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Content"});
-            table33.AddRow(new string[] {
+            table42.AddRow(new string[] {
                         "New Shared Content",
                         "<p>Here it is<p>"});
 #line 13
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table33, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table42, "And ");
 #line hidden
 #line 16
- testRunner.And("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
  testRunner.Given("I check the number of events sent for this contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -113,11 +113,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("13. An update to an existing draft document is succesful")]
-        public virtual void _13_AnUpdateToAnExistingDraftDocumentIsSuccesful()
+        [NUnit.Framework.DescriptionAttribute("18. A new draft version of an existing, published content item is created")]
+        public virtual void _18_ANewDraftVersionOfAnExistingPublishedContentItemIsCreated()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("13. An update to an existing draft document is succesful", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("18. A new draft version of an existing, published content item is created", null, ((string[])(null)));
 #line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -150,14 +150,14 @@ this.FeatureBackground();
 #line 24
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table34.AddRow(new string[] {
+                table43.AddRow(new string[] {
                             "updated Shared Content",
                             "<p>Here it is now<p>"});
 #line 25
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table34, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table43, "And ");
 #line hidden
 #line 28
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -173,12 +173,14 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("14. An update to an existing draft document fails with validation issues")]
-        public virtual void _14_AnUpdateToAnExistingDraftDocumentFailsWithValidationIssues()
+        [NUnit.Framework.DescriptionAttribute("19. A new draft version of an existing, published content item has validation iss" +
+            "ues")]
+        public virtual void _19_ANewDraftVersionOfAnExistingPublishedContentItemHasValidationIssues()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("14. An update to an existing draft document fails with validation issues", null, ((string[])(null)));
-#line 34
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("19. A new draft version of an existing, published content item has validation iss" +
+                    "ues", null, ((string[])(null)));
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -200,145 +202,32 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 4
 this.FeatureBackground();
+#line hidden
+#line 34
+ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 35
- testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 36
- testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 37
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table35.AddRow(new string[] {
+                table44.AddRow(new string[] {
                             "",
                             "<p>Here it is now<p>"});
-#line 38
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table35, "And ");
+#line 37
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table44, "And ");
 #line hidden
-#line 41
+#line 40
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 42
- testRunner.Then("a validation error is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 43
- testRunner.And("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("15. An existing draft content item is succesfully published")]
-        public virtual void _15_AnExistingDraftContentItemIsSuccesfullyPublished()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("15. An existing draft content item is succesfully published", null, ((string[])(null)));
-#line 45
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 4
-this.FeatureBackground();
-#line hidden
-#line 46
- testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 47
- testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 48
- testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 49
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 50
- testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 51
- testRunner.And("an event of type \"Publish\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("16. An existing draft content item is updated and fails validation when published" +
-            "")]
-        public virtual void _16_AnExistingDraftContentItemIsUpdatedAndFailsValidationWhenPublished()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("16. An existing draft content item is updated and fails validation when published" +
-                    "", null, ((string[])(null)));
-#line 53
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 4
-this.FeatureBackground();
-#line hidden
-#line 54
- testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 55
- testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 56
- testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-                TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Content"});
-                table36.AddRow(new string[] {
-                            "",
-                            "<p>Here it is now<p>"});
-#line 57
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table36, "And ");
-#line hidden
-#line 60
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 61
+#line 41
  testRunner.Then("an \"EmptyField\" validation error is shown for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 62
+#line 42
  testRunner.And("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -346,12 +235,12 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("17. An existing draft content item is published from the content item list view")]
-        public virtual void _17_AnExistingDraftContentItemIsPublishedFromTheContentItemListView()
+        [NUnit.Framework.DescriptionAttribute("20. Updates to an existing published content item are published succesfully")]
+        public virtual void _20_UpdatesToAnExistingPublishedContentItemArePublishedSuccesfully()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("17. An existing draft content item is published from the content item list view", null, ((string[])(null)));
-#line 64
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("20. Updates to an existing published content item are published succesfully", null, ((string[])(null)));
+#line 44
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -374,32 +263,46 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 65
+#line 45
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 66
+#line 46
  testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 67
- testRunner.And("I select the \"Publish\" option first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 68
+                TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content"});
+                table45.AddRow(new string[] {
+                            "updated Shared Content",
+                            "<p>Here it is now<p>"});
+#line 48
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table45, "And ");
+#line hidden
+#line 51
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 52
  testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 69
- testRunner.And("an event of type \"Publish\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.And("an event of type \"Published\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("31. An existing draft content item is deleted from the content item list view")]
-        public virtual void _31_AnExistingDraftContentItemIsDeletedFromTheContentItemListView()
+        [NUnit.Framework.DescriptionAttribute("21. Updates to an existing published content item fails to publish with validatio" +
+            "n issues")]
+        public virtual void _21_UpdatesToAnExistingPublishedContentItemFailsToPublishWithValidationIssues()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("31. An existing draft content item is deleted from the content item list view", null, ((string[])(null)));
-#line 71
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("21. Updates to an existing published content item fails to publish with validatio" +
+                    "n issues", null, ((string[])(null)));
+#line 55
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -421,33 +324,98 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 4
 this.FeatureBackground();
+#line hidden
+#line 56
+ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 57
+ testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 58
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content"});
+                table46.AddRow(new string[] {
+                            "",
+                            "<p>Here it is now<p>"});
+#line 59
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table46, "And ");
+#line hidden
+#line 62
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 63
+ testRunner.Then("an \"EmptyField\" validation error is shown for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 64
+ testRunner.And("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("28. A published item is unpublished from the content item list view")]
+        public virtual void _28_APublishedItemIsUnpublishedFromTheContentItemListView()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("28. A published item is unpublished from the content item list view", null, ((string[])(null)));
+#line 66
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
+#line 67
+ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 68
+ testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 69
+ testRunner.And("I select the \"Unpublish\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 70
+ testRunner.Then("the unpublish action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 71
+ testRunner.And("an event of type \"Unpublished\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 72
- testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 73
- testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 74
- testRunner.And("I select the \"Delete\" option first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 75
- testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 76
- testRunner.And("an event of type \"Delete\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("an event of type \"Draft\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("34. An existing published content item is cloned from the content item list view")]
-        public virtual void _34_AnExistingPublishedContentItemIsClonedFromTheContentItemListView()
+        [NUnit.Framework.DescriptionAttribute("32. An existing published content item is deleted from the content item list view" +
+            "")]
+        public virtual void _32_AnExistingPublishedContentItemIsDeletedFromTheContentItemListView()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("34. An existing published content item is cloned from the content item list view", null, ((string[])(null)));
-#line 79
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("32. An existing published content item is deleted from the content item list view" +
+                    "", null, ((string[])(null)));
+#line 74
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -470,23 +438,71 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 80
+#line 75
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 81
+#line 76
  testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 77
+ testRunner.And("I select the \"Delete\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 78
+ testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 79
+ testRunner.And("an event of type \"Deleted\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("35. An existing draft content item is cloned from the content item list view")]
+        public virtual void _35_AnExistingDraftContentItemIsClonedFromTheContentItemListView()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("35. An existing draft content item is cloned from the content item list view", null, ((string[])(null)));
+#line 81
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
 #line 82
- testRunner.And("I select the \"Clone\" option first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 83
- testRunner.Then("the clone action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I search for the \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 84
+ testRunner.And("I select the \"Clone\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 85
+ testRunner.Then("the clone action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 86
  testRunner.Given("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 87
- testRunner.Then("an event of type \"Clone\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
