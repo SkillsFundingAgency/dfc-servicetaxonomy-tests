@@ -162,6 +162,56 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return uris[index];
         }
 
+        public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
+        {
+            context["contentItemIndexes"] = list;
+        }
+
+        public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
+        {
+            return (List<ContentItemIndexRow>)context["contentItemIndexes"];
+        }
+
+        public static void StoreContentItemId(this ScenarioContext context, string newId)
+        {
+            List<string> uris;
+            int count = (context.ContainsKey("contentIdCount") ? (int)context["contentIdCount"] : 0);
+            if (count == 0)
+            {
+                //initialise
+                uris = new List<string>();
+            }
+            else
+            {
+                //retreive
+                uris = (List<string>)context["contentIds"];
+            }
+            uris.Add(newId);
+            count++;
+            context["contentIdCount"] = count;
+            context["contentIds"] = uris;
+        }
+
+        public static string GetContentItemId(this ScenarioContext context, int index)
+        {
+            //expect zero based index
+            List<string> ids = (context.ContainsKey("contentIds") ? (List<string>)context["contentIds"] : new List<string>());
+
+            if (ids.Count < index - 1)
+            {
+                return "";
+            }
+            return ids[index];
+        }
+
+        public static int GetNumberOfStoredContentIds(this ScenarioContext context)
+        {
+            //expect zero based index
+            List<string> ids = (context.ContainsKey("contentIds") ? (List<string>)context["contentIds"] : new List<string>());
+            return ids.Count;
+        }
+
+
         public static void StoreRecordId(this ScenarioContext context, string newId)
         {
             List<string> ids;

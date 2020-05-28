@@ -1,0 +1,3005 @@
+{
+  "name": "TestData_ApprenticeshipStandards0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "displayName": "TestData_ApprenticeshipStandards0_070ffbf4-eae7-4ef2-b9c3-ce6efe8673ab",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Adult care worker"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0005"
+      },
+      "MaximumFunding": {
+        "Value": 3000
+      },
+      "LARSCode": {
+        "Value": 119
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_583"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_575"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/18d863b7-5e4a-4928-9428-51546ddcac47"
+    },
+    "ContentItemId": "TESTCONTENTID_593",
+    "ContentItemVersionId": "TESTCONTENTID_593",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Adult care worker",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Business administrator"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0070"
+      },
+      "MaximumFunding": {
+        "Value": 5000
+      },
+      "LARSCode": {
+        "Value": 196
+      },
+      "Duration": {
+        "Value": 18
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_584"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_576"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/c5f6b6d5-dd7d-46f8-8344-bda444854c4b"
+    },
+    "ContentItemId": "TESTCONTENTID_594",
+    "ContentItemVersionId": "TESTCONTENTID_594",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Business administrator",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Civil engineer"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0417"
+      },
+      "MaximumFunding": {
+        "Value": 27000
+      },
+      "LARSCode": {
+        "Value": 200
+      },
+      "Duration": {
+        "Value": 66
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_585"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_579"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/ced37a2d-2cd7-41ea-9f61-c5ec8c4bf238"
+    },
+    "ContentItemId": "TESTCONTENTID_595",
+    "ContentItemVersionId": "TESTCONTENTID_595",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Civil engineer",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Emergency service contact handling"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0483"
+      },
+      "MaximumFunding": {
+        "Value": 9000
+      },
+      "LARSCode": {
+        "Value": 262
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_586"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_576"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/39fb767b-5726-4fcf-953f-f65da6a07b7f"
+    },
+    "ContentItemId": "TESTCONTENTID_596",
+    "ContentItemVersionId": "TESTCONTENTID_596",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Emergency service contact handling",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Express delivery operative"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0103"
+      },
+      "MaximumFunding": {
+        "Value": 4000
+      },
+      "LARSCode": {
+        "Value": 338
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_587"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_575"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/8f778a1d-2309-4ef1-b24a-9e218092eac6"
+    },
+    "ContentItemId": "TESTCONTENTID_597",
+    "ContentItemVersionId": "TESTCONTENTID_597",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Express delivery operative",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Groundworker"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0513"
+      },
+      "MaximumFunding": {
+        "Value": 7000
+      },
+      "LARSCode": {
+        "Value": 388
+      },
+      "Duration": {
+        "Value": 18
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_585"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_575"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/f464c110-d907-44e5-94ea-267ebbf4bcab"
+    },
+    "ContentItemId": "TESTCONTENTID_598",
+    "ContentItemVersionId": "TESTCONTENTID_598",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Groundworker",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Lead adult care worker"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0006"
+      },
+      "MaximumFunding": {
+        "Value": 3000
+      },
+      "LARSCode": {
+        "Value": 118
+      },
+      "Duration": {
+        "Value": 18
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_583"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_576"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/e88b6067-fe46-4277-bce0-c03cab92b72a"
+    },
+    "ContentItemId": "TESTCONTENTID_599",
+    "ContentItemVersionId": "TESTCONTENTID_599",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Lead adult care worker",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Plumbing and domestic heating technician"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0303"
+      },
+      "MaximumFunding": {
+        "Value": 21000
+      },
+      "LARSCode": {
+        "Value": 225
+      },
+      "Duration": {
+        "Value": 48
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_585"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_576"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/b8935517-ba26-4d45-86fe-e920516b7a08"
+    },
+    "ContentItemId": "TESTCONTENTID_600",
+    "ContentItemVersionId": "TESTCONTENTID_600",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Plumbing and domestic heating technician",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Police constable"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0304"
+      },
+      "MaximumFunding": {
+        "Value": 24000
+      },
+      "LARSCode": {
+        "Value": 256
+      },
+      "Duration": {
+        "Value": 36
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_586"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_579"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/78a0ddad-7271-4f94-9a1a-64ac190052e7"
+    },
+    "ContentItemId": "TESTCONTENTID_601",
+    "ContentItemVersionId": "TESTCONTENTID_601",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Police constable",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Retailer"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0327"
+      },
+      "MaximumFunding": {
+        "Value": 4000
+      },
+      "LARSCode": {
+        "Value": 101
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_588",
+          "TESTCONTENTID_589"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_575"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/8c6d7d17-c580-4954-b94b-fa78010b16aa"
+    },
+    "ContentItemId": "TESTCONTENTID_602",
+    "ContentItemVersionId": "TESTCONTENTID_602",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Retailer",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Senior leader"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0480"
+      },
+      "MaximumFunding": {
+        "Value": 18000
+      },
+      "LARSCode": {
+        "Value": 236
+      },
+      "Duration": {
+        "Value": 24
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_584"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_580"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/2d04d725-15b0-45ed-91ea-7c0ab146cf7d"
+    },
+    "ContentItemId": "TESTCONTENTID_603",
+    "ContentItemVersionId": "TESTCONTENTID_603",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Senior leader",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Social worker"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0510"
+      },
+      "MaximumFunding": {
+        "Value": 23000
+      },
+      "LARSCode": {
+        "Value": 381
+      },
+      "Duration": {
+        "Value": 36
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_583"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_579"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/a840ba68-0950-412a-8687-15068559d59e"
+    },
+    "ContentItemId": "TESTCONTENTID_604",
+    "ContentItemVersionId": "TESTCONTENTID_604",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Social worker",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Stockperson"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0017"
+      },
+      "MaximumFunding": {
+        "Value": 10000
+      },
+      "LARSCode": {
+        "Value": 344
+      },
+      "Duration": {
+        "Value": 18
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_590",
+          "TESTCONTENTID_591"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_575"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/9ca64638-c65c-4e42-ad45-206b14fbcfc0"
+    },
+    "ContentItemId": "TESTCONTENTID_605",
+    "ContentItemVersionId": "TESTCONTENTID_605",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Stockperson",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Teacher"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0490"
+      },
+      "MaximumFunding": {
+        "Value": 9000
+      },
+      "LARSCode": {
+        "Value": 203
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_592"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_579"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/09fcf32d-94de-43c1-939f-a9f97f036488"
+    },
+    "ContentItemId": "TESTCONTENTID_606",
+    "ContentItemVersionId": "TESTCONTENTID_606",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Teacher",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Train driver"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": "ST0645"
+      },
+      "MaximumFunding": {
+        "Value": 21000
+      },
+      "LARSCode": {
+        "Value": 285
+      },
+      "Duration": {
+        "Value": 12
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": [
+          "TESTCONTENTID_587"
+        ]
+      },
+      "QCFLevel": {
+        "ContentItemIds": [
+          "TESTCONTENTID_576"
+        ]
+      },
+      "Type": {
+        "Text": "Standard"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/7abb7e25-9521-44f5-90ae-4ef81d7cb566"
+    },
+    "ContentItemId": "TESTCONTENTID_607",
+    "ContentItemVersionId": "TESTCONTENTID_607",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Train driver",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Community Arts"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/30f9fba9-85a9-47e9-8e7f-0b775015f847"
+    },
+    "ContentItemId": "TESTCONTENTID_608",
+    "ContentItemVersionId": "TESTCONTENTID_608",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Community Arts",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Sporting Excellence"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/582fff13-4c79-47cc-a99f-f889be6ff20c"
+    },
+    "ContentItemId": "TESTCONTENTID_609",
+    "ContentItemVersionId": "TESTCONTENTID_609",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Sporting Excellence",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Vehicle Parts"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/1ec23696-3750-4b81-b38e-03fc61a8191f"
+    },
+    "ContentItemId": "TESTCONTENTID_610",
+    "ContentItemVersionId": "TESTCONTENTID_610",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Vehicle Parts",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Catering and Professional Chefs"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/8891c7fa-3fb6-457a-a775-e3b9f2e9879a"
+    },
+    "ContentItemId": "TESTCONTENTID_611",
+    "ContentItemVersionId": "TESTCONTENTID_611",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Catering and Professional Chefs",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Maritime Occupations"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/d1d3865c-bc41-4d06-b14a-ffa978502dad"
+    },
+    "ContentItemId": "TESTCONTENTID_612",
+    "ContentItemVersionId": "TESTCONTENTID_612",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Maritime Occupations",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Fashion and Textiles"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/47cce6cd-96e2-4e83-b14f-696897a8226b"
+    },
+    "ContentItemId": "TESTCONTENTID_613",
+    "ContentItemVersionId": "TESTCONTENTID_613",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Fashion and Textiles",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Photo Imaging"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/11de6dbe-063c-48f4-a2ad-8cd4e448093a"
+    },
+    "ContentItemId": "TESTCONTENTID_614",
+    "ContentItemVersionId": "TESTCONTENTID_614",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Photo Imaging",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Live Events and Promotion"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/7c60d055-57fb-4280-8785-a674d5b6dbd9"
+    },
+    "ContentItemId": "TESTCONTENTID_615",
+    "ContentItemVersionId": "TESTCONTENTID_615",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Live Events and Promotion",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Creative and Digital Media"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/dabf8626-9055-4030-9d2e-4ad737a4ff5e"
+    },
+    "ContentItemId": "TESTCONTENTID_616",
+    "ContentItemVersionId": "TESTCONTENTID_616",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Creative and Digital Media",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Sustainable Resource Management"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/04e8cca5-826d-4a0f-8148-b4b9078fa4db"
+    },
+    "ContentItemId": "TESTCONTENTID_617",
+    "ContentItemVersionId": "TESTCONTENTID_617",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Sustainable Resource Management",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Animal Care"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/30c4adf3-6ec5-42cf-821d-c17ff5e7ea03"
+    },
+    "ContentItemId": "TESTCONTENTID_618",
+    "ContentItemVersionId": "TESTCONTENTID_618",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Animal Care",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Children and Young People\u0027s Workforce"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/91027a32-9d0a-4368-8b0c-4bf62e84d858"
+    },
+    "ContentItemId": "TESTCONTENTID_619",
+    "ContentItemVersionId": "TESTCONTENTID_619",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Children and Young People\u0027s Workforce",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Technical Theatre Lighting Sound and Stage (Level 3)"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/fef7147f-5744-4321-a39b-752079b48d18"
+    },
+    "ContentItemId": "TESTCONTENTID_620",
+    "ContentItemVersionId": "TESTCONTENTID_620",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Technical Theatre Lighting Sound and Stage (Level 3)",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Business and Administration"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/a63ca1a8-68af-47bc-8620-40707cb192d5"
+    },
+    "ContentItemId": "TESTCONTENTID_621",
+    "ContentItemVersionId": "TESTCONTENTID_621",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Business and Administration",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_IT Application Specialist"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/032cb64f-fd56-4b74-bf15-e3c0680d460f"
+    },
+    "ContentItemId": "TESTCONTENTID_622",
+    "ContentItemVersionId": "TESTCONTENTID_622",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_IT Application Specialist",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Print and Printed Packaging"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/5870d79c-6d0a-4d67-9f8a-adc8b6b26cad"
+    },
+    "ContentItemId": "TESTCONTENTID_623",
+    "ContentItemVersionId": "TESTCONTENTID_623",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Print and Printed Packaging",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Legal Services"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/1e426f24-38a0-43f5-aa3a-f04eea531e38"
+    },
+    "ContentItemId": "TESTCONTENTID_624",
+    "ContentItemVersionId": "TESTCONTENTID_624",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Legal Services",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Equine"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/49fdd0cd-90fc-4190-84f4-411f435340fb"
+    },
+    "ContentItemId": "TESTCONTENTID_625",
+    "ContentItemVersionId": "TESTCONTENTID_625",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Equine",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Cleaning and Environmental Support Services"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/a2ccb259-0879-4b8b-a925-6b86f21f537d"
+    },
+    "ContentItemId": "TESTCONTENTID_626",
+    "ContentItemVersionId": "TESTCONTENTID_626",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Cleaning and Environmental Support Services",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Game and Wildlife Management"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/06bc09b2-a4fa-4649-830b-d0e3426bc968"
+    },
+    "ContentItemId": "TESTCONTENTID_627",
+    "ContentItemVersionId": "TESTCONTENTID_627",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Game and Wildlife Management",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Signmaking"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/f7af8c0b-b60e-4d5f-bc31-7de71a651c36"
+    },
+    "ContentItemId": "TESTCONTENTID_628",
+    "ContentItemVersionId": "TESTCONTENTID_628",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Signmaking",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Providing Security Services"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/ba2b6a3b-e939-4ce0-8a48-dd5dcf8ba6ad"
+    },
+    "ContentItemId": "TESTCONTENTID_629",
+    "ContentItemVersionId": "TESTCONTENTID_629",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Providing Security Services",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Construction Technical and Professional"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/2dc15819-546f-489b-8f4f-5f0782b88e81"
+    },
+    "ContentItemId": "TESTCONTENTID_630",
+    "ContentItemVersionId": "TESTCONTENTID_630",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Construction Technical and Professional",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Design"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/aac8a879-4aca-44b9-b037-e1e16d26bfaf"
+    },
+    "ContentItemId": "TESTCONTENTID_631",
+    "ContentItemVersionId": "TESTCONTENTID_631",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Design",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Agriculture"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/02bf46c4-590d-4acf-b8e3-c77ac2ec48d9"
+    },
+    "ContentItemId": "TESTCONTENTID_632",
+    "ContentItemVersionId": "TESTCONTENTID_632",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Agriculture",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Engineering Manufacture"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/bd583e5f-32c7-4300-a1ac-95db36f6f401"
+    },
+    "ContentItemId": "TESTCONTENTID_633",
+    "ContentItemVersionId": "TESTCONTENTID_633",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Engineering Manufacture",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Playwork"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/5a376f74-65ee-4435-b6ed-31a76604f83d"
+    },
+    "ContentItemId": "TESTCONTENTID_634",
+    "ContentItemVersionId": "TESTCONTENTID_634",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Playwork",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Jewellery"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/3f0ccac2-a6a4-49dc-8936-88fbb104c310"
+    },
+    "ContentItemId": "TESTCONTENTID_635",
+    "ContentItemVersionId": "TESTCONTENTID_635",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Jewellery",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_ Silversmithing and Allied Trades"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/c1b32e69-3cf2-4aa8-a42d-3b793c594a36"
+    },
+    "ContentItemId": "TESTCONTENTID_636",
+    "ContentItemVersionId": "TESTCONTENTID_636",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_ Silversmithing and Allied Trades",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Environmental Conservation"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/98c57e42-1a60-4570-9340-2e53ce11f697"
+    },
+    "ContentItemId": "TESTCONTENTID_637",
+    "ContentItemVersionId": "TESTCONTENTID_637",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Environmental Conservation",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Vehicle Sales"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/b2e283b0-a80f-41b2-b4dc-e8da14a832aa"
+    },
+    "ContentItemId": "TESTCONTENTID_638",
+    "ContentItemVersionId": "TESTCONTENTID_638",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Vehicle Sales",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Construction Specialist"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/cf879479-4b4b-457e-a11c-d3c7c29ff8c1"
+    },
+    "ContentItemId": "TESTCONTENTID_639",
+    "ContentItemVersionId": "TESTCONTENTID_639",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Construction Specialist",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Glass Industry"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/f24ccb9b-f5d0-4a2f-a55e-760353a9a935"
+    },
+    "ContentItemId": "TESTCONTENTID_640",
+    "ContentItemVersionId": "TESTCONTENTID_640",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Glass Industry",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Supporting Teaching and Learning in Schools"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/0533fda3-f57d-45a9-8f3f-c8fdd80ad41f"
+    },
+    "ContentItemId": "TESTCONTENTID_641",
+    "ContentItemVersionId": "TESTCONTENTID_641",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Supporting Teaching and Learning in Schools",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Floristry"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/e354dd7f-5bf2-49b3-a6b3-1aee68a5ec62"
+    },
+    "ContentItemId": "TESTCONTENTID_642",
+    "ContentItemVersionId": "TESTCONTENTID_642",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Floristry",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Vehicle Maintenance and Repair"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/e3d85e59-3f70-4066-bf07-448ccd3b7ce5"
+    },
+    "ContentItemId": "TESTCONTENTID_643",
+    "ContentItemVersionId": "TESTCONTENTID_643",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Vehicle Maintenance and Repair",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Beauty Therapy"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/6f194a48-a269-4d93-b5dd-09e9437cfdc0"
+    },
+    "ContentItemId": "TESTCONTENTID_644",
+    "ContentItemVersionId": "TESTCONTENTID_644",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Beauty Therapy",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Learning and Development"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/46708c6d-9236-4c74-bef4-e8ffe0c0ba25"
+    },
+    "ContentItemId": "TESTCONTENTID_645",
+    "ContentItemVersionId": "TESTCONTENTID_645",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Learning and Development",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Youth Work"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/40da159c-56f2-4a23-85ef-e1250e4e2f1b"
+    },
+    "ContentItemId": "TESTCONTENTID_646",
+    "ContentItemVersionId": "TESTCONTENTID_646",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Youth Work",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Construction Building"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/b3a53d7f-d399-47a6-9d5e-e00b4c3cf473"
+    },
+    "ContentItemId": "TESTCONTENTID_647",
+    "ContentItemVersionId": "TESTCONTENTID_647",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Construction Building",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Business and Professional Administration"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/a280d53a-50ab-4664-b180-253ec6c59004"
+    },
+    "ContentItemId": "TESTCONTENTID_648",
+    "ContentItemVersionId": "TESTCONTENTID_648",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Business and Professional Administration",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Construction Management"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/423a6d2a-2e2f-493e-968f-83003e66a684"
+    },
+    "ContentItemId": "TESTCONTENTID_649",
+    "ContentItemVersionId": "TESTCONTENTID_649",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Construction Management",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Cultural and Heritage Venue operations"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/8d2f1268-b146-47de-aac5-35330db9a71d"
+    },
+    "ContentItemId": "TESTCONTENTID_650",
+    "ContentItemVersionId": "TESTCONTENTID_650",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Cultural and Heritage Venue operations",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Marketing"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/281cc61c-1531-4fe3-ac1f-c1179fc591e5"
+    },
+    "ContentItemId": "TESTCONTENTID_651",
+    "ContentItemVersionId": "TESTCONTENTID_651",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Marketing",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Warehousing and Storage"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/da10e127-7df8-407e-b331-4866f0fa16ab"
+    },
+    "ContentItemId": "TESTCONTENTID_652",
+    "ContentItemVersionId": "TESTCONTENTID_652",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Warehousing and Storage",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Coaching"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/1efc2a4f-9582-4e0e-9dc1-aaa6fc426ba8"
+    },
+    "ContentItemId": "TESTCONTENTID_653",
+    "ContentItemVersionId": "TESTCONTENTID_653",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Coaching",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Exercise and Fitness"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/0e5a3e67-7972-4799-9543-e2b2ecbfc68d"
+    },
+    "ContentItemId": "TESTCONTENTID_654",
+    "ContentItemVersionId": "TESTCONTENTID_654",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Exercise and Fitness",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Social Media and Digital Marketing"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/f7fba58e-4cdc-47ad-8ff6-cffaa249e3f2"
+    },
+    "ContentItemId": "TESTCONTENTID_655",
+    "ContentItemVersionId": "TESTCONTENTID_655",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Social Media and Digital Marketing",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Operations and Quality Improvement"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/7ea69e95-d6fc-4dcb-8a82-7f6aadc2899f"
+    },
+    "ContentItemId": "TESTCONTENTID_656",
+    "ContentItemVersionId": "TESTCONTENTID_656",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Operations and Quality Improvement",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "@PREFIX@_Construction Civil Engineering"
+    },
+    "ApprenticeshipStandard": {
+      "Description": {
+        "Html": null
+      },
+      "Reference": {
+        "Text": null
+      },
+      "MaximumFunding": {
+        "Value": 0
+      },
+      "LARSCode": {
+        "Value": 0
+      },
+      "Duration": {
+        "Value": 0
+      },
+      "ApprenticeshipStandardRoutes": {
+        "ContentItemIds": []
+      },
+      "QCFLevel": {
+        "ContentItemIds": []
+      },
+      "Type": {
+        "Text": "Framework"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "http://ncs.test/@PREFIX@/test_apprenticeshipstandard/bcafac80-1620-46de-bbae-0b0d85cf8fe7"
+    },
+    "ContentItemId": "TESTCONTENTID_657",
+    "ContentItemVersionId": "TESTCONTENTID_657",
+    "ContentType": "ApprenticeshipStandard",
+    "DisplayText": "@PREFIX@_Construction Civil Engineering",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-05-20T10:50:31.2557947Z",
+    "PublishedUtc": "2020-05-20T10:50:31.2557947Z",
+    "CreatedUtc": "2020-05-20T10:50:31.2557947Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 
 
 
@@ -255,6 +256,49 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return ds;
         }
 
+        public IEnumerable<T> ExecuteObject<T>(string sqlString) where T : class, new()
+        {
+            List<T> items = new List<T>();
+            DataSet ds = new DataSet();
+            if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
+            {
+                try
+                {
+                    SqlCommand myCommand = new SqlCommand(sqlString, Connection);
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = myCommand;
+                    da.Fill(ds);
+
+                    foreach (var row in ds.Tables[0].AsEnumerable())
+                    {
+                        T obj = new T();
+
+                        foreach (var prop in obj.GetType().GetProperties())
+                        {
+                            try
+                            {
+                                PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
+                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+                        }
+
+
+                        //T item = (T)Activator.CreateInstance(typeof(T), row);
+                        items.Add(obj);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+            return items;
+        }
+
         public int ExecuteNonQuery(string commandText, string[] parameters)
         {
             string paramsString = "";
@@ -358,6 +402,10 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return success;
         }
+
+
+
+
         public string GetParameterValue(string table, string parameterName)
         {
             //todo

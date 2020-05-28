@@ -125,6 +125,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 return false;
             }
         }
+
+        public static bool SelectButtonGroupClass(this IWebDriver driver, string classId, int index)
+        {
+            // first index is 1
+            try
+            {
+                var elements = driver.FindElements(By.ClassName(classId));
+
+                if (elements.Count >= index)
+                {
+                    Actions builder = new Actions(driver);
+                    var mouseUp = builder.MoveToElement(elements[index-1])
+                                         .Click()
+                                         .Build(); ;
+                    mouseUp.Perform();
+
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }
 
