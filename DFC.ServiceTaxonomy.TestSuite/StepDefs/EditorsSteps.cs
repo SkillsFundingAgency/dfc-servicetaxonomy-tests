@@ -605,6 +605,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "unpublish":
                     _manageContent.UnpublishFirstItem();
                     break;
+                case "discard draft":
+                    _manageContent.DiscardDraftOfFirstItem();
+                    break;
                 default:
                     throw new Exception($"Action first item in list - Unsupported operation: {p0}");
             }
@@ -879,15 +882,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheAddActionCompletesSuccesfully()
         {
             _addContentItemBase.ConfirmSuccess().Should().BeTrue();
-        }
-
-        [Then(@"a validation error is shown")]
-        public void ThenAValidationErrorIsShown()
-        {
-            _addContentItemBase.ConfirmSuccess().Should().BeTrue();
-            //            ScenarioContext.Current.Pending();
-            //<div class="validation-summary-errors" data-valmsg-summary="true"><ul><li>A value is required for Title.</li>
-
         }
 
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]

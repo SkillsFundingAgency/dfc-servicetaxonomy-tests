@@ -28,6 +28,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
         public string sqlServerConnectionString = Configuration["SqlServer:ConnectionString"];
 
+        public bool checkEvents = Configuration["EventStore:CheckEvents"].ToLower() == "true";
         public string eventStoreEndPoint = Configuration["EventStore:BaseUrl"];
         public string eventStoreKey = Configuration["EventStore:Key"];
     }

@@ -35,25 +35,26 @@ Scenario: 23. Updates are made to an existing draft version of a published conte
 	| Title                        | Content                |
 	| Newly updated Shared Content | <p>Here it is again<p> |
 	When I save the draft item
-	Then the edit action completes succesfully
+	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
 
 Scenario: 24. Updates with validation issues  are made to an existing draft version of a published content item
 	Given I search for the "Title"
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
-	| Title                        | Content                |
-	| Newly updated Shared Content | <p>Here it is again<p> |
+	| Title | Content                |
+	|       | <p>Here it is again<p> |
 	When I save the draft item
-	Then the edit action completes succesfully
+	Then the save action completes succesfully
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
+	And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 25. An existing draft version of a published content item is published succesfully
 	Given I search for the "Title"
 	And I select the first item that is found
 	When I publish the item
-	Then the save action completes succesfully
+	Then the edit action completes succesfully
 	And an event of type "Publish" has been issued to notify consumers of the change
 	And an event of type "Draft-discarded" has been issued to notify consumers of the change
 
@@ -65,7 +66,8 @@ Scenario: 26. An existing draft version of a published content item is edited so
 	|       | <p>Here it is again<p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
+	And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 27. An existing draft version of a published content item is published succesfully from the content item list view
 	Given I search for the "Title"

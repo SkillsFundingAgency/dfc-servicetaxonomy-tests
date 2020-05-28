@@ -26,6 +26,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change")]
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(string eventType)
         {
+            
+            if (!_scenarioContext.GetEnv().checkEvents)
+            {
+                Console.WriteLine("Event store checks are disabled in App Settings");
+                return;
+            }
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
             List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
 
@@ -40,6 +46,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             //TODO incorporate check of dates and contentitemversion
         }
+
+        [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change and (.*) others")]
+        public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChangeAndOthers(string p0, int p1)
+        {
+            //TODO also check that no unintended events have been published
+        }
+
+
 
         [Then(@"an event has been published to notify consumers of the change")]
         public void ThenAnEventHasBeenPublishedToNotifyConsumersOfTheChange()
@@ -93,6 +107,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"no event is issued")]
         public void ThenNoEventIsIssued()
         {
+            if (!_scenarioContext.GetEnv().checkEvents)
+            {
+                Console.WriteLine("Event store checks are disabled in App Settings");
+                return;
+            }
             string id = _scenarioContext.GetContentItemId(0);
             int numberOfEvents = _scenarioContext.ContainsKey("TotalEvents") ? (int)_scenarioContext["TotalEvents"] : 0 ;
 
@@ -116,6 +135,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I check the number of events sent for this contentItem")]
         public void GivenICheckTheNumberOfEventsSentForThisContentItem()
         {
+            if (!_scenarioContext.GetEnv().checkEvents)
+            {
+                Console.WriteLine("Event store checks are disabled in App Settings");
+                return;
+            }
             string id = _scenarioContext.GetContentItemId(0);
 
             List<ContentEvent> list = GetMatchingDocuments(id);

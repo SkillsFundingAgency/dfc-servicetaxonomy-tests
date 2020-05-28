@@ -38,8 +38,9 @@ Scenario: 14. An update to an existing draft document fails with validation issu
 	| Title | Content              |
 	|       | <p>Here it is now<p> |
 	When I save the draft item
-	Then a validation error is shown
-	And no event is issued
+	Then an "EmptyField" validation error is shown for "Title"
+	And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 15. An existing draft content item is succesfully published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -48,6 +49,7 @@ Scenario: 15. An existing draft content item is succesfully published
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Draft Discarded" has been issued to notify consumers of the change
 
 Scenario: 16. An existing draft content item is updated and fails validation when published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -58,7 +60,8 @@ Scenario: 16. An existing draft content item is updated and fails validation whe
 	|       | <p>Here it is now<p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
+	And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 17. An existing draft content item is published from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 

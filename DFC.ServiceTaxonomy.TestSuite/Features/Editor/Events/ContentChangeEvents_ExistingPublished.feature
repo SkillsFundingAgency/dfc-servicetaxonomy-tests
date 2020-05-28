@@ -39,7 +39,8 @@ Scenario: 19. A new draft version of an existing, published content item has val
 	|       | <p>Here it is now<p> |
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
+		And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 20. Updates to an existing published content item are published succesfully
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -61,7 +62,8 @@ Scenario: 21. Updates to an existing published content item fails to publish wit
 	|       | <p>Here it is now<p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
+	And an event of type "Draft" has been issued to notify consumers of the change
+	# FALSE POSITIVE CHECK OUTCOME
 
 Scenario: 28. A published item is unpublished from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 

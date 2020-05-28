@@ -11,7 +11,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         const string remove = "removed";
         const string publish = "published";
         const string unpublish = "unpublished";
-        const string discard = "discarded";
         const string save = "saved";
         const string actionPlaceHolder = "{action}";
         const string confirmationMessage = "has been {action}.";
@@ -140,6 +139,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public ManageContent DiscardDraftOfFirstItem()
+        {
+            ActionFirstItem("Discard Draft");
+            _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
+            if (!ConfirmDiscardedSuccessfully())
+            {
+                throw new Exception("Unable to confirm the draft item has been removed");
+            }
+            return this;
+        }
+
+        
         public ManageContent EditFirstItem()
         {
             try
@@ -165,7 +176,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public bool ConfirmDiscardedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, discard));
+            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, remove));
         }
 
         public bool ConfirmPublishedSuccessfully()
@@ -179,6 +190,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         public bool ConfirmClonedSuccessfully()
+        {
+            return ConfirmActionSuccess(confirmationMessageClone);
+        }
+
+        public bool ConfirmDraftDiscardedSuccessfully()
         {
             return ConfirmActionSuccess(confirmationMessageClone);
         }
