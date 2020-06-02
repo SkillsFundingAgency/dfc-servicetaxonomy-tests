@@ -103,38 +103,38 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private IEditorContentItem SetContentType(string contentType)
         {
-            _scenarioContext["ContentType"] = contentType;
+            _scenarioContext[constants.ContentType] = contentType;
             switch (contentType)
             {
                 case "DayToDayTask":
-                    _scenarioContext["ResponseType"] = typeof(DayToDayTask);
-                    _scenarioContext["CypherQuery"] = cypher_DayToDayTaskByUri;
+                    _scenarioContext[constants.responseType] = typeof(DayToDayTask);
+                    _scenarioContext[constants.cypherQuery] = cypher_DayToDayTaskByUri;
                     return _addContentItemBase;
                 case "FurtherInfo":
-                    _scenarioContext["ResponseType"] = typeof(FurtherInfo);
-                    _scenarioContext["CypherQuery"] = cypher_FurtherInfoByUri;
+                    _scenarioContext[constants.responseType] = typeof(FurtherInfo);
+                    _scenarioContext[constants.cypherQuery] = cypher_FurtherInfoByUri;
                     return _addLinkItem;
                 case "Activity":
-                    _scenarioContext["ResponseType"] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
-                    _scenarioContext["CypherQuery"] = cypher_activityByUri;
+                    _scenarioContext[constants.responseType] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
+                    _scenarioContext[constants.cypherQuery] = cypher_activityByUri;
                     return _addLinkItem;
                 case "UniversityLink":
-                    _scenarioContext["ResponseType"] = typeof(UniversityLink);
-                    _scenarioContext["CypherQuery"] = cypher_UniverstyLinkByUri;
+                    _scenarioContext[constants.responseType] = typeof(UniversityLink);
+                    _scenarioContext[constants.cypherQuery] = cypher_UniverstyLinkByUri;
                     return _addLinkItem;
                 case "RequirementsPrefix":
                 case "UniversityRequirement":
-                    _scenarioContext["ResponseType"] = typeof(GenericContent);
-                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", contentType);
+                    _scenarioContext[constants.responseType] = typeof(GenericContent);
+                    _scenarioContext[constants.cypherQuery] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", contentType);
                     return _addContentItemBase;
                 case "SharedContent":
-                    _scenarioContext["ResponseType"] = typeof(SharedContent);
-                    _scenarioContext["CypherQuery"] = cypher_SharedContentByUri;
+                    _scenarioContext[constants.responseType] = typeof(SharedContent);
+                    _scenarioContext[constants.cypherQuery] = cypher_SharedContentByUri;
                     return _addSharedContent;
                 case "Restriction":
                 default:
-                    _scenarioContext["ResponseType"] = typeof(GenericContent);
-                    _scenarioContext["CypherQuery"] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", contentType);
+                    _scenarioContext[constants.responseType] = typeof(GenericContent);
+                    _scenarioContext[constants.cypherQuery] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", contentType);
                     return _addContentItemBase;
             }
         }
@@ -144,16 +144,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I set up a data prefix for ""(.*)""")]
         public void GivenISetUpADataPrefixFor(string p0)
         {
-            _scenarioContext["prefix"] = RandomString(5) + "_";
-            _scenarioContext["prefixField"] = p0;
+            _scenarioContext[constants.prefix] = RandomString(5) + "_";
+            _scenarioContext[constants.prefixField] = p0;
         }
 
         [Given(@"I get the recipe files ready")]
         public void GivenIGetTheRecipeFilesReady()
         {
-            if (_scenarioContext.ContainsKey("prefix"))
+            if (_scenarioContext.ContainsKey(constants.prefix))
             {
-                _scenarioContext.ReplaceTokensInDirectory(Directory.GetCurrentDirectory() + "/Recipes/" ,"@PREFIX@",(string)_scenarioContext["prefix"] );
+                _scenarioContext.ReplaceTokensInDirectory(Directory.GetCurrentDirectory() + "/Recipes/" ,"@PREFIX@",(string)_scenarioContext[constants.prefix] );
             }
         }
 
@@ -186,9 +186,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I record the new documentId")]
         public void GivenIRecordTheNewDocumentId()
         {
-            string displayName = (string)_scenarioContext["Title"];
-            string contentType = (string)_scenarioContext["ContentType"];
-            string prefix =  (string)_scenarioContext["prefix"];
+            string displayName = (string)_scenarioContext[constants.Title];
+            string contentType = (string)_scenarioContext[constants.ContentType];
+            string prefix =  (string)_scenarioContext[constants.prefix];
 
             SQLServerHelper sqlInstance = new SQLServerHelper();
             sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
@@ -201,9 +201,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I Enter the following form data")]
         public void GivenIEnterTheFollowingFormData(Table table)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
             string cypher = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri";
-            //_scenarioContext["ResponseType"] = typeof(DayToDayTask);
+            //_scenarioContext[constants.responseType] = typeof(DayToDayTask);
 
             Dictionary<string, string> expectedData = new Dictionary<string, string>();
             foreach (var row in table.Rows)
@@ -215,16 +215,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
                 expectedData.Add(row[0], row[1]);
             }
-            _scenarioContext["CypherQuery"] = cypher.Replace("@CONTENTTYPE@", contentType);
-            _scenarioContext["ResponseType"] = typeof(TestContent);
-            _scenarioContext["RequestVariables"] = expectedData;
+            _scenarioContext[constants.cypherQuery] = cypher.Replace("@CONTENTTYPE@", contentType);
+            _scenarioContext[constants.responseType] = typeof(TestContent);
+            _scenarioContext[constants.requestVariables] = expectedData;
         }
 
         [Given(@"I allow multiple items to be selected")]
         public void GivenIAllowMultipleItemsToBeSelected()
         {
-            string contentType = (string)_scenarioContext["ContentType"];
-            string FieldName = (string)_scenarioContext["FieldName"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
+            string FieldName = (string)_scenarioContext[constants.FieldName];
             _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
         }
 
@@ -244,15 +244,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
         {
-            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
+            string contentType = _scenarioContext.ContainsKey(constants.ContentType) ? (string)_scenarioContext[constants.ContentType] : "";
             foreach (var row in table.Rows)
             {
                foreach (var item in row)
                 {
                     string newValue = item.Value;
-                    if (_scenarioContext.ContainsKey("prefix") && item.Key.Equals("Title") )
+                    if (_scenarioContext.ContainsKey(constants.prefix) && item.Key.Equals("Title") )
                     {
-                        newValue = (string)_scenarioContext["prefix"] + newValue;
+                        newValue = (string)_scenarioContext[constants.prefix] + newValue;
                     }
                     newValue.Should().Be(_editContentType.GetFieldValue( contentType,  item.Key));
                 }
@@ -262,7 +262,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the values displayed in the editor match the following values and types")]
         public void ThenTheValuesDisplayedInTheEditorMatchTheFollowingValuesAndTypes(Table table)
         {
-            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
+            string contentType = _scenarioContext.ContainsKey(constants.ContentType) ? (string)_scenarioContext[constants.ContentType] : "";
             Dictionary<string, string> vars = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
@@ -270,7 +270,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 value.Should().Be(row[2]);
                 vars.Add(row[0], row[2]);
             }
-            _scenarioContext["RequestVariables"] = vars;
+            _scenarioContext[constants.requestVariables] = vars;
         }
 
 
@@ -279,13 +279,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the editor field ""(.*)"" matches")]
         public void ThenTheEditorFieldMatches(string p0, string multilineText)
         {
-            Dictionary<string, string> vars = _scenarioContext.ContainsKey("RequestVariables") ?  (Dictionary<string, string>)_scenarioContext["RequestVariables"] : new Dictionary<string, string>();
-            string contentType = _scenarioContext.ContainsKey("ContentType") ? (string)_scenarioContext["ContentType"] : "";
+            Dictionary<string, string> vars = _scenarioContext.ContainsKey(constants.requestVariables) ?  (Dictionary<string, string>)_scenarioContext[constants.requestVariables] : new Dictionary<string, string>();
+            string contentType = _scenarioContext.ContainsKey(constants.ContentType) ? (string)_scenarioContext[constants.ContentType] : "";
             
             multilineText.Should().Be(_editContentType.GetFieldValue(contentType,"Html",p0));
 
             vars.Add(p0, multilineText);
-            _scenarioContext["RequestVariables"] = vars;
+            _scenarioContext[constants.requestVariables] = vars;
         }
 
 
@@ -299,14 +299,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 string newValue = item.value.Value;
                 if (item.index == 0)
                 {
-                    newValue = ( _scenarioContext.ContainsKey("prefix") && newValue.Length > 0 ? _scenarioContext["prefix"] : "" ) + newValue;
+                    newValue = ( _scenarioContext.ContainsKey(constants.prefix) && newValue.Length > 0 ? _scenarioContext[constants.prefix] : "" ) + newValue;
                     // store first field in scenario context
                     _scenarioContext.Set(newValue, item.value.Key);
                 }
                 vars.Add(item.value.Key, newValue);
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
-            _scenarioContext["RequestVariables"] = vars;
+            _scenarioContext[constants.requestVariables] = vars;
         }
 
         [Given(@"I search for the ""(.*)""")]
@@ -327,7 +327,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIAddANewContentTypeCalled(string p0 )
         {
             // navigate to /Admin/ContentTypes/List
-            _scenarioContext["ContentType"] = p0;
+            _scenarioContext[constants.ContentType] = p0;
             _addContentType.AddNew(p0);
  
         }
@@ -335,7 +335,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I add a new graph contentType called ""(.*)""")]
         public void GivenIAddANewGraphContentTypeCalled(string p0)
         {
-            _scenarioContext["ContentType"] = p0;
+            _scenarioContext[constants.ContentType] = p0;
             _addContentType.AddNew(p0);
 
             // now add graph sync item with default settings
@@ -348,7 +348,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I add a new graph contentType with bag called ""(.*)""")]
         public void GivenIAddANewGraphContentTypeWithBagCalled(string p0, Table table)
         {
-            _scenarioContext["ContentType"] = p0;
+            _scenarioContext[constants.ContentType] = p0;
             var stringArray = new string[] { "Bag" };
             _addContentType.AddNew(p0, stringArray);
 
@@ -368,7 +368,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I select the following items from the displayed list")]
         public void GivenISelectTheFollowingItemsFromTheDisplayedList(Table table)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
       
             foreach (var row in table.Rows)
             {
@@ -381,16 +381,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I edit the ""(.*)"" part")]
         public void GivenIEditThePart(string p0)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
             _addContentType.EditPart(contentType, p0);
         }
 
         [Given(@"I edit the ""(.*)"" field")]
         public void GivenIEditTheField(string p0)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
             _addContentType.EditField(contentType, p0);
-            _scenarioContext["FieldName"] = p0;
+            _scenarioContext[constants.FieldName] = p0;
         }
 
         //content type
@@ -410,7 +410,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I set the following field values")]
         public void GivenISetTheFollowingFieldValues(Table table)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
             var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
@@ -434,7 +434,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I add the following fields")]
         public void GivenIAddTheFollowingFields(Table table)
         {
-            string contentType = (string)_scenarioContext["ContentType"];
+            string contentType = (string)_scenarioContext[constants.ContentType];
             foreach (var row in table.Rows)
             {
                 _addContentType.AddField(contentType, row[0], row[1], ( row.Count > 2 && row[2].Length>0? row[2] : null ) );
@@ -451,7 +451,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I pick content")]
         public void GivenIPickContent(Table table)
         {
-            string prefix = (string)_scenarioContext["prefix"];
+            string prefix = (string)_scenarioContext[constants.prefix];
             foreach (var row in table.Rows)
             {
                 _scenarioContext.GetWebDriver().SelectDropListItemByClass("multiselect__input", prefix + row[0]);
@@ -662,7 +662,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
             // get initial record count
-            var ds = sqlInstance.GetRecordCount("ContentItemIndex", "ContentType", table);
+            var ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
             int startingSQLRecordCount = (int)ds;
 
             try
@@ -724,7 +724,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             while (!done)
             {
-                ds = sqlInstance.GetRecordCount("ContentItemIndex", "ContentType", table);
+                ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
                 discoveredRows = (int)ds;
                 if (ds.Equals(recordCount + startingSQLRecordCount))
                 {
@@ -988,7 +988,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
         public void GivenIConfirmTheFollowingDataIsPresetInTheGraphDatabase(string p0, Table table)
         {
-            bool addPrefix = _scenarioContext.ContainsKey("prefixField");
+            bool addPrefix = _scenarioContext.ContainsKey(constants.prefixField);
             foreach ( var r in table.Rows)
             {
                 Dictionary<string, string> rowData = new Dictionary<string, string>();
@@ -998,9 +998,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 foreach ( var i in r)
                 {
                     string newValue = i.Value;
-                    if (addPrefix && i.Key == (string)_scenarioContext["prefixField"] ) 
+                    if (addPrefix && i.Key == (string)_scenarioContext[constants.prefixField] ) 
                     {
-                        newValue = (string)_scenarioContext["prefix"] + newValue;
+                        newValue = (string)_scenarioContext[constants.prefix] + newValue;
                     }
                     count++;
                     rowData.Add(i.Key, newValue);
@@ -1065,19 +1065,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the data is present in the Graph databases")]
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
         {
-            var statementTemplate = (string)_scenarioContext["CypherQuery"];
+            var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
             var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
-            Type requiredType = (Type)_scenarioContext["ResponseType"];
+            Type requiredType = (Type)_scenarioContext[constants.responseType];
             var returnObject = neo4JHelper.GetResultsList(requiredType, statementTemplate, statementParameters);
 
             object first = returnObject[0];
-  
-            Dictionary<string, string> vars = ( Dictionary<string, string> )_scenarioContext["RequestVariables"];
+
+            Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
 
             foreach ( var var in vars)
             {
@@ -1110,7 +1110,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
         {
-            var statementTemplate = (string)_scenarioContext["CypherQuery"];
+            var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
             var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();

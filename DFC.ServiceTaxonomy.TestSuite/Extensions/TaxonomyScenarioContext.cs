@@ -1,6 +1,7 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
 
@@ -9,6 +10,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     public static class TaxonomyScenarioContextExtension
     {
         #region contants
+
+        const string GetAllOccupations = "getalloccupations";
+        const string GetAllSkills = "getallskills";
+        const string GetSkillById = "getskillbyid";
+        const string GetSkillsForOccupation = "getskillsforoccupation";
+        const string GetSkillsGapForOccupationAndGivenSkills = "getskillsgapforoccupationandgivenskills";
+        const string GetJobProfileDetail = "jobprofiledetail";
+        const string GetSkillByLabelSearch = "getskillsbylabelsearch";
+        const string GetOccupationByLabelSearch = "getoccupationsbylabelsearch";
+        const string GetOccupationsWithMatchingSkills = "getoccupationswithmatchingskills";
+        const string GetJobProfileSummary = "getjobprofilesummary";
+
         const string UriGetAllOccupations = "GetAllOccupations/Execute/";
         const string UriGetAllSkills = "GetAllSkills/Execute/";
         const string UriGetSkillById = "GetSkillById/Execute";
@@ -16,7 +29,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string UriGetSkillsGapForOccupationAndGivenSkills = "GetSkillsGapForOccupationAndGivenSkills/Execute";
         const string UriGetJobProfileDetail = "GetJobProfileByTitle/Execute/";
         const string UriGetSkillByLabelSearch = "GetSkillsByLabel/Execute/";
-        const string UriGetOCcupationByLabelSearch = "GetOccupationsByLabel/Execute/";
+        const string UriGetOccupationByLabelSearch = "GetOccupationsByLabel/Execute/";
         const string UriGetOccupationsWithMatchingSkills = "GetOccupationsWithMatchingSkills/Execute/";
         const string UriGetSTAXJobProfileSummary = "GetJobProfilesSummary/Execute/";
 
@@ -29,35 +42,37 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keyExpectedRecordCount = "ExpectedRecordCount";
         #endregion
 
-        //public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
-        //{
-        //    Set(context, webDriver, WebDriverKey);
-        //}
+        private static List<_DataItem> dataItems;
 
+        static TaxonomyScenarioContextExtension()
+        {
+            dataItems = new List<_DataItem>();
+        }
+ 
         public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
             {
-                case "getallskills":
-                    return context.GetEnv().taxonomyApiBaseUrl +"/" + UriGetAllSkills;
-                case "getalloccupations":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetAllOccupations;
-                case "getskillbyid":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillById;
-                case "getskillsforoccupation":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillsForOccupation;
-                case "getskillsgapforoccupationandgivenskills":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillsGapForOccupationAndGivenSkills;
-                case "jobprofiledetail":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetJobProfileDetail + "/" + param;
-                case "getskillsbylabelsearch":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSkillByLabelSearch + "/" + param;
-                case "getoccupationsbylabelsearch":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetOCcupationByLabelSearch + "/" + param;
-                case "getoccupationswithmatchingskills":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetOccupationsWithMatchingSkills + "/" + param;
-                case "getjobprofilesummary":
-                    return context.GetEnv().taxonomyApiBaseUrl + "/" + UriGetSTAXJobProfileSummary + "/" + param;
+                case GetAllSkills:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllSkills}";
+                case GetAllOccupations:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllOccupations}";
+                case GetSkillById:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillById}";
+                case GetSkillsForOccupation:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsForOccupation}";
+                case GetSkillsGapForOccupationAndGivenSkills:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsGapForOccupationAndGivenSkills}";
+                case GetJobProfileDetail:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetJobProfileDetail}/{param}";
+                case GetSkillByLabelSearch:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillByLabelSearch}/{param}";
+                case GetOccupationByLabelSearch:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationByLabelSearch}/{param}";
+                case GetOccupationsWithMatchingSkills:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationsWithMatchingSkills}/{param}";
+                case GetJobProfileSummary:
+                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSTAXJobProfileSummary}/{param}";
                 default:
                     return "";
             }
@@ -74,7 +89,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             };
         }
 
-
         public static string GetJobProfileUri(this ScenarioContext context, string resource)
         {
             switch (resource.ToLower())
@@ -85,7 +99,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                     return context.GetEnv().jobProfileApiBaseUrl + "/" + resource;
             }
         }
-
 
         #region envsettings
         public static string GetEscoApiBaseUrl(this ScenarioContext context) { return context.GetEnv().escoApiBaseUrl; }
@@ -130,52 +143,63 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set<IList<Occupation>>(occupations, keyOccupationData);
         }
 
-        public static void StoreUri(this ScenarioContext context, string newUri)
+        public static void StoreUri(this ScenarioContext context, string newUri, TeardownOption teardownOption = TeardownOption.None)
         {
-            List<string> uris;
-            int count = (context.ContainsKey("uriCount") ? (int)context["uriCount"] : 0);
-            if (count == 0)
-            {
-                //initialise
-                uris = new List<string>();
-            }
-            else
-            {
-                //retreive
-                uris = (List<string>)context["uris"];
-            }
-            uris.Add(newUri);
-            count++;
-            context["uriCount"] = count;
-            context["uris"] = uris;
+            dataItems.Add(new _DataItem(newUri, teardownOption) );
+            context[constants.dataItems] = dataItems;
         }
+
+        public static List <_DataItem> GetDataItems(this ScenarioContext context)
+        {
+            return dataItems;
+        }
+
+        public static string GetLatestUri(this ScenarioContext context)
+        {
+            if (dataItems.Count == 0)
+                return "";
+
+            return dataItems.Last().Uri;
+        }
+
 
         public static string GetUri(this ScenarioContext context, int index)
         {
-            //expect zero based index
-            List<string> uris = (context.ContainsKey("uris") ? (List<string>)context["uris"] : new List<string>());
-
-            if (uris.Count < index - 1)
-            {
+            if (dataItems.Count < index - 1)
                 return "";
-            }
-            return uris[index];
+
+            return dataItems[index].Uri;
+        }
+
+        public static int GetNumberOfStoredUris(this ScenarioContext context)
+        {
+            return dataItems.Count;
+        }
+
+        public static string GenerateUri(this ScenarioContext context, string contentType)
+        {
+            return $"{context.GetEnv().taxonomyApiBaseUrl}/{contentType}/{Guid.NewGuid().ToString()}";
+        }
+
+        public static string GetContentUri(this ScenarioContext context, string contentType)
+        {
+            return $"{context.GetEnv().taxonomyApiBaseUrl}/{contentType}";
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
         {
-            context["contentItemIndexes"] = list;
+            context[constants.contentItemIndexes] = list;
         }
 
         public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
         {
-            return (List<ContentItemIndexRow>)context["contentItemIndexes"];
+            return (List<ContentItemIndexRow>)context[constants.contentItemIndexes];
         }
 
         public static void StoreContentItemId(this ScenarioContext context, string newId)
         {
             List<string> uris;
-            int count = (context.ContainsKey("contentIdCount") ? (int)context["contentIdCount"] : 0);
+            int count = (context.ContainsKey(constants.contentIdCount) ? (int)context[constants.contentIdCount] : 0);
             if (count == 0)
             {
                 //initialise
@@ -184,18 +208,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             else
             {
                 //retreive
-                uris = (List<string>)context["contentIds"];
+                uris = (List<string>)context[constants.contentIds];
             }
             uris.Add(newId);
             count++;
-            context["contentIdCount"] = count;
-            context["contentIds"] = uris;
+            context[constants.contentIdCount] = count;
+            context[constants.contentIds] = uris;
         }
 
         public static string GetContentItemId(this ScenarioContext context, int index)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey("contentIds") ? (List<string>)context["contentIds"] : new List<string>());
+            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
 
             if (ids.Count < index - 1)
             {
@@ -207,15 +231,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static int GetNumberOfStoredContentIds(this ScenarioContext context)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey("contentIds") ? (List<string>)context["contentIds"] : new List<string>());
+            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
             return ids.Count;
         }
-
 
         public static void StoreRecordId(this ScenarioContext context, string newId)
         {
             List<string> ids;
-            int count = (context.ContainsKey("idCount") ? (int)context["idCount"] : 0);
+            int count = (context.ContainsKey(constants.recordIdCount) ? (int)context[constants.recordIdCount] : 0);
             if (count == 0)
             {
                 //initialise
@@ -224,18 +247,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             else
             {
                 //retreive
-                ids = (List<string>)context["ids"];
+                ids = (List<string>)context[constants.recordIds];
             }
             ids.Add(newId);
             count++;
-            context["idCount"] = count;
-            context["ids"] = ids;
+            context[constants.recordIdCount] = count;
+            context[constants.recordIds] = ids;
         }
 
         public static string GetId(this ScenarioContext context, int index)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey("ids") ? (List<string>)context["ids"] : new List<string>());
+            List<string> ids = (context.ContainsKey(constants.recordIds) ? (List<string>)context[constants.recordIds] : new List<string>());
 
             if (ids.Count < index + 1 )
             {
@@ -243,38 +266,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return ids[index];
         }
-
-        public static int GetNumberOfStoredUris(this ScenarioContext context)
-        {
-           return (context.ContainsKey("uriCount") ? (int)context["uriCount"] : 0);
-        }
-
-        public static void StoreToken(this ScenarioContext context, string token, string value)
-        {
-            Dictionary<string,string> tokens;
-            int count = (context.ContainsKey("tokenCount") ? (int)context["tokenCount"] : 0);
-            if (count == 0)
-            {
-                //initialise
-                tokens = new Dictionary<string, string>();
-            }
-            else
-            {
-                //retreive
-                tokens = (Dictionary<string, string>)context["tokens"];
-            }
-            tokens.Add(token, value);
-            count++;
-            context["tokenCount"] = count;
-            context["tokens"] = tokens;
-        }
-
-        public static Dictionary<string, string> GetTokens(this ScenarioContext context)
-        {
-            Dictionary<string, string> tokens = (context.ContainsKey("tokens") ? (Dictionary<string, string>)context["tokens"] : new Dictionary<string, string>());
-            return tokens;
-        }
-        //todo - improve code reuse for above methods
 
         public static IList<Occupation> GetOccupationListData(this ScenarioContext context)
         {
@@ -310,37 +301,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             return (context.ContainsKey(keyExpectedRecordCount) ? context.Get<int>(keyExpectedRecordCount) : 0);
         }
-
         
-        //public static void SetStringListData(this ScenarioContext context, IList<string> strings)
-        //{
-        //    context.Set<IList<string>>(strings, keyListOfStrings);
-        //}
-
-        //public static IList<string> GetListDataData(this ScenarioContext context)
-        //{
-        //    return (context.ContainsKey(keyListOfStrings) ? context.Get<IList<string>>(keyListOfStrings) : null);
-        //}
-
-        //public static int GetStringListCount(this ScenarioContext context)
-        //{
-        //    return (context.ContainsKey(keyListOfStrings) ? context.Get<IList<string>>(keyListOfStrings).Count : 0);
-        //}
-
-        //public static void ClearStringList(this ScenarioContext context)
-        //{
-        //    if (context.ContainsKey(keyListOfStrings))
-        //    {
-        //        context.Get<IList<string>>(keyListOfStrings).Clear();
-        //    }
-        //}
-
         public static Dictionary<string,string> GetTaxonomyApiHeaders(this ScenarioContext context)
         {
-            return new Dictionary<string, string>(){
-                                                        { "Content-Type", "application/json" }, 
-                                                        { "Ocp-Apim-Subscription-Key", context.GetTaxonomySubscriptionKey() } 
-                                                   };
+            return context.ContainsKey(constants.securityHeader) ? 
+                        (Dictionary < string,string >) context[constants.securityHeader] :
+                        new Dictionary<string, string>(){
+                                  { "Content-Type", "application/json" }, 
+                                  { "Ocp-Apim-Subscription-Key", context.ContainsKey(constants.securityHeader)? (string) context[constants.securityHeader] : context.GetTaxonomySubscriptionKey() } 
+                             };
         }
 
         public static Dictionary<string, string> GetJobProfileApiHeaders(this ScenarioContext context)

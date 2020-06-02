@@ -14,6 +14,8 @@ using System.Net;
 using System.Text;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using AngleSharp.Io;
+using AngleSharp.Common;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -37,52 +39,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context = injectedContext;
         }
 
-        public void GetEscoSearchResults(string type, int limit)
+        [Given(@"I define a test type and call it ""(.*)""")]
+        public void GivenIDefineATestTypeAndCallIt(string p0)
         {
-            int totalValues = 0;
-            int offset = 0;
-            bool gotAll = false;
-            IList<EscoDataItem> escoData = new List<EscoDataItem>();
-
-            while (!gotAll)
-            {
-                // make call to esco api. 
-                var response = RestHelper.Get( context.GetEscoApiBaseUrl() + "/search?language=en&type=" + type + "&limit=" + limit.ToString() + (offset == 0 ? "" : "&offset=" + offset) );
-
-                // confirm response was ok
-                response.StatusCode.Should().Be( HttpStatusCode.OK );
-
-                // parse the response data as json
-                JObject escoResults = JObject.Parse( response.Content );
-
-                int.TryParse( escoResults.GetValue("total").ToString(),out totalValues );
-                offset++;
-                //extract the data that we are interested in to a list
-                IList<JToken> results = escoResults["_embedded"]["results"].Children().ToList();
-                //convert to a list of escoDataItems
-                foreach (JToken result in results)
-                {
-                    EscoDataItem escoDataItem = result.ToObject<EscoDataItem>();
-                    escoData.Add(escoDataItem);
-                }
-                gotAll = (totalValues <= escoData.Count);
-            }
-            context.SetEscoItemListData( escoData );
+            context.StoreToken(p0, context.RandomString(10));
         }
 
-        [Given(@"I get a list of occupations from esco")]
-        public void GivenIGetAListOfOccupationsFromEsco()
+        private void InsertSharedContent( string name, Table dataTable)
         {
-            // get esco data. currently less that 3000 returned results so limit of 10000 is ample
-            GetEscoSearchResults( "occupation", 10000 );
+            SharedContent newItem = dataTable.CreateInstance<SharedContent>();
+            newItem.uri = context.GenerateUri(name);
+            String cypher = CypherHelper.GenerateCypher<SharedContent>(newItem, name);
+
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+
+            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
+
+            context.StoreUri(newItem.uri, TeardownOption.Graph);
         }
 
-        [Given(@"I get a list of skills from esco")]
-        public void GivenIGetAListOfSkillsFromEsco()
+        [Given(@"I create a shared content item with the following data")]
+        public void GivenICreateASharedContentItemWithTheFollowingData(Table table)
         {
-            // get esco data. currently less that 15000 returned results so limit of 20000 is ample
-            GetEscoSearchResults( "skill", 10000 );
+            InsertSharedContent("sharedcontent", table);
         }
+
+        [Given(@"I create a ""(.*)"" item with the following data")]
+        public void GivenICreateAItemWithTheFollowingData(string p0, Table table)
+        {
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            InsertSharedContent(contentTypeName, table);
+        }
+
 
         [Given(@"I request all occupations from the NCS API")]
         public void GivenIRequestAllOccupationsFromTheNCSAPI()
@@ -122,59 +114,68 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.SetOccupationListData(occupations);
         }
 
-        public static Dictionary<string, string> ToDictionary(Table table)
-        {
-            var dictionary = new Dictionary<string, string>();
-            foreach (var row in table.Rows)
-            {
-                dictionary.Add(row[0], row[1]);
-            }
-            return dictionary;
-        }
-
         [Given(@"I want to supply an invalid security header")]
         public void GivenIWantToSupplyAnInvalidSecurityHeader()
         {
-            context["securityHeader"] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
+            context[constants.securityHeader] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
         }
 
         [Given(@"I want to fail to send a security header")]
         public void GivenIWantToFailToSendASecurityHeader()
         {
-            context["securityHeader"] = new Dictionary<string, string>() ;
+            context[constants.securityHeader] = new Dictionary<string, string>() ;
         }
 
         [Given(@"I want to supply ""(.*)"" as a parameter in the following request")]
         public void GivenIWantToSupplyAsAParameterInTheFollowingRequest(string p0)
         {
-            context["requestParam"] = p0;
+            context[constants.requestParam] = p0;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)""")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
         {
             string requestBody = "{}";
-            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
-            var requestItems = ToDictionary(table);
+            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            var requestItems = table.ToSimpleDictionary();
             foreach ( var item in requestItems )
             {
                requestBody = JsonHelper.AddPropertyToJsonString(requestBody, item.Key, item.Value);
             }
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, ( context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders() ) );
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, context.GetTaxonomyApiHeaders());
             //response.StatusCode.Should().Be(HttpStatusCode.OK);
-            context["responseStatus"] = response.StatusCode;
-            context["responseBody"] = response.Content;
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)"" with request body")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPIWithRequestBody(string p0, string multilineText)
         {
-            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, (context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders()));
-            //response.StatusCode.Should().Be(HttpStatusCode.OK);
-            context["responseStatus"] = response.StatusCode;
-            context["responseBody"] = response.Content;
+            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, context.GetTaxonomyApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
         }
+
+        [Given(@"I make a request to the content API")]
+        public void GivenIMakeARequestToTheContentAPI()
+        {
+            string uri = context.GetLatestUri();
+            var response = RestHelper.Get(uri, context.GetTaxonomyApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+        }
+
+        [Given(@"I make a request to the content API to retrive all ""(.*)"" items")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string p0)
+        {
+            string uri = context.GetContentUri(p0);
+            var response = RestHelper.Get(uri,context.GetTaxonomyApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+        }
+
+
 
 
         [Given(@"I request all skills from the NCS API")]
@@ -350,6 +351,37 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             match.Should().BeTrue();
         }
 
+        [Then(@"the response matches the created item")]
+        public void ThenTheResponseMatchesTheCreatedItem()
+        {
+            var createdItem = context.GetDataItems().Last();
+            string responseJson = (string)context[constants.responseContent];
+            string itemJson = JsonConvert.SerializeObject(createdItem);
+            itemJson = JsonHelper.AddPropertyToJsonString(itemJson,"_links", "[{}]");
+
+            var result = JsonHelper.CompareJsonString(itemJson, responseJson);
+            result.Should().BeTrue("Because the data returned should match the created item");
+        }
+
+        [Then(@"the response includes all items of type ""(.*)""")]
+        public void ThenTheResponseIncludesAllItemsOfType(string p0)
+        {
+            string responses = "";
+            int numberOfItems = context.GetDataItems().Count;
+            int itemCount = 0;
+            foreach ( var item in context.GetDataItems())
+            {
+                bool lastItem = ++itemCount == numberOfItems;
+                responses += $"{JsonConvert.SerializeObject(item)}{(lastItem ? "" : ",")}";
+            }
+            string itemJson = $"[{responses}]";
+            string responseJson = (string)context[constants.responseContent];
+
+            var result = JsonHelper.CompareJsonString(itemJson, responseJson);
+            result.Should().BeTrue("Because the data returned should include all the created items");
+        }
+
+
 
         [Then(@"the alternate labels listed for first Occupation returned matches esco data")]
         public void ThenTheAlternateLabelsListedForFirstOccupationReturnedMatchesEscoData()
@@ -474,7 +506,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
             }
-            JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
+            JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseBody]).Should().BeTrue();
 
         }
 
@@ -482,7 +514,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)
         {
             bool bMatch = false;
-            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context["responseBody"]);
+            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[constants.responseBody]);
             dynamic includedCollection = responseJson[p0];
             foreach ( var item in includedCollection)
             {
@@ -497,7 +529,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with element ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementRemovedMatches(string p0, string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseBody];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
         }
@@ -505,7 +537,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with elements ""(.*)"" and ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementsAndRemovedMatches(string p0, string p1, string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseBody];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             strippedResonse = JsonHelper.RemovePropertyFromJsonString(strippedResonse, p1);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
@@ -516,7 +548,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheElementInTheCollectionHasDistinctValues(string p0, string p1)
         {
             Dictionary<string, string> distinctValues = new Dictionary<string, string>();
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseBody];
             var collection = JsonHelper.GetCollectionPropertyFromJson(response, p1);
             
             foreach ( var item in collection)
@@ -538,7 +570,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the count of collection ""(.*)"" is (.*)")]
         public void ThenTheCountOfCollectionIs(string p0, int p1)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseBody];
             JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
         }
 
@@ -548,13 +580,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response value for ""(.*)"" is an empty array")]
         public void ThenTheValueForIsAnEmptyArray(string p0)
         {
-            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context["responseBody"]);
+            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[constants.responseBody]);
         }
 
         [Then(@"the response body includes the text:")]
         public void ThenTheResponseBodyIncludesTheText(string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseBody];
             bool check = response.Contains(multilineText);
             check.Should().BeTrue();
         }
@@ -563,13 +595,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response code is (.*)")]
         public void ThenTheResponseCodeIs(int p0)
         {
-            context["responseStatus"].Should().Be(p0);
+            context[constants.responseStatus].Should().Be(p0);
         }
 
         [Then(@"the the response message is (.*)")]
         public void ThenTheTheResponseMessageIs(string p0)
         {
-            context["responseBody"].Should().Be(p0);
+            context[constants.responseBody].Should().Be(p0);
          }
 
 

@@ -5,13 +5,18 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
+using AngleSharp.Dom;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
     public static class DataManagementExtension
     {
+        private static Random random = new Random();
+        private static Dictionary<string, string> tokens = new Dictionary<string,string>();
+
         public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
             //todo error handling
@@ -37,6 +42,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             
             neo4JHelper.ExecuteTableQuery(cypher, null);
             
+            return true;
+        }
+
+        public static bool DeleteGraphNodesWithUri(this ScenarioContext context, string uri)
+        {
+            //todo error handling
+            string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                context.GetEnv().neo4JUid,
+                                context.GetEnv().neo4JPassword);
+
+            neo4JHelper.ExecuteTableQuery(cypher, null);
+
             return true;
         }
 
@@ -67,5 +86,40 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return found;
         }
 
+
+        public static string RandomString(this ScenarioContext context, int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static void StoreToken(this ScenarioContext context, string token, string value)
+        {
+           if (!tokens.ContainsKey(token))
+           {
+                tokens.Add(token, value);
+           }
+           else
+           {
+                tokens[token] = value;
+           }
+           context[constants.tokens] = tokens;
+        }
+
+        public static Dictionary<string, string> GetTokens(this ScenarioContext context)
+        {
+           return tokens;
+        }
+
+        public static string ReplaceTokensInString(this ScenarioContext context, string text)
+        {
+            string newText = text;
+            foreach ( var token in tokens)
+            {
+                newText = newText.Replace(token.Key, token.Value);
+            }
+            return newText;
+        }
     }
 }

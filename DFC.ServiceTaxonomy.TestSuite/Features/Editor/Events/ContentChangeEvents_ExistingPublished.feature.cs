@@ -95,14 +95,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Content"});
-            table42.AddRow(new string[] {
+            table46.AddRow(new string[] {
                         "New Shared Content",
                         "<p>Here it is<p>"});
 #line 13
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table42, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table46, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -150,14 +150,14 @@ this.FeatureBackground();
 #line 24
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table43.AddRow(new string[] {
+                table47.AddRow(new string[] {
                             "updated Shared Content",
                             "<p>Here it is now<p>"});
 #line 25
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table43, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table47, "And ");
 #line hidden
 #line 28
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -212,14 +212,14 @@ this.FeatureBackground();
 #line 36
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table44.AddRow(new string[] {
+                table48.AddRow(new string[] {
                             "",
                             "<p>Here it is now<p>"});
 #line 37
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table44, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table48, "And ");
 #line hidden
 #line 40
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -272,14 +272,14 @@ this.FeatureBackground();
 #line 48
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table45.AddRow(new string[] {
+                table49.AddRow(new string[] {
                             "updated Shared Content",
                             "<p>Here it is now<p>"});
 #line 49
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table45, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table49, "And ");
 #line hidden
 #line 52
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -334,14 +334,14 @@ this.FeatureBackground();
 #line 59
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
-                table46.AddRow(new string[] {
+                table50.AddRow(new string[] {
                             "",
                             "<p>Here it is now<p>"});
 #line 60
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table46, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table50, "And ");
 #line hidden
 #line 63
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
+namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,9 +20,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("DayToDayTasks")]
+    [NUnit.Framework.DescriptionAttribute("OtherRequirement")]
     [NUnit.Framework.CategoryAttribute("webtest")]
-    public partial class DayToDayTasksFeature
+    public partial class OtherRequirementFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,14 +30,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
         private string[] _featureTags = new string[] {
                 "webtest"};
         
-#line 1 "DayToDayTask.feature"
+#line 1 "OtherRequirement.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DayToDayTasks", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "OtherRequirement", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -81,18 +81,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor
 #line 4
 #line hidden
 #line 5
- testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add a new DayToDayTask")]
+        [NUnit.Framework.DescriptionAttribute("Add a new FurtherInfo content item")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        public virtual void AddANewDayToDayTask()
+        public virtual void AddANewFurtherInfoContentItem()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new DayToDayTask", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new FurtherInfo content item", null, new string[] {
                         "Editor"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
@@ -121,19 +121,19 @@ this.FeatureBackground();
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
- testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/DayToDayTask/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/OtherRequirement/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table69 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table32.AddRow(new string[] {
-                            "My Test Day to Day task",
+                table69.AddRow(new string[] {
+                            "My Test Other Requirement",
                             "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table32, "And ");
+ testRunner.And("I Enter the following form data for \"OtherRequirement\"", ((string)(null)), table69, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
