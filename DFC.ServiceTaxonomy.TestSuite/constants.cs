@@ -12,7 +12,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string securityHeader = "securityHeader";
         public const string responseStatus = "responseStatus";
         public const string responseContent = "responseContent";
-        public const string responseBody = "responseBody";
+        //public const string responseBody = "responseBody";
         public const string responseType = "responseType";
         public const string requestParam = "requestParam";
         public const string requestVariables = "requestVariables";

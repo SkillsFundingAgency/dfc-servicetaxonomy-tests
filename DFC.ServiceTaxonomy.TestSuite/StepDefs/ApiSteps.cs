@@ -506,7 +506,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
             }
-            JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseBody]).Should().BeTrue();
+            JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseContent]).Should().BeTrue();
 
         }
 
@@ -514,7 +514,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)
         {
             bool bMatch = false;
-            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[constants.responseBody]);
+            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[constants.responseContent]);
             dynamic includedCollection = responseJson[p0];
             foreach ( var item in includedCollection)
             {
@@ -529,7 +529,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with element ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementRemovedMatches(string p0, string multilineText)
         {
-            string response = (string)context[constants.responseBody];
+            string response = (string)context[constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
         }
@@ -537,7 +537,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with elements ""(.*)"" and ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementsAndRemovedMatches(string p0, string p1, string multilineText)
         {
-            string response = (string)context[constants.responseBody];
+            string response = (string)context[constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             strippedResonse = JsonHelper.RemovePropertyFromJsonString(strippedResonse, p1);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
@@ -548,7 +548,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheElementInTheCollectionHasDistinctValues(string p0, string p1)
         {
             Dictionary<string, string> distinctValues = new Dictionary<string, string>();
-            string response = (string)context[constants.responseBody];
+            string response = (string)context[constants.responseContent];
             var collection = JsonHelper.GetCollectionPropertyFromJson(response, p1);
             
             foreach ( var item in collection)
@@ -570,7 +570,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the count of collection ""(.*)"" is (.*)")]
         public void ThenTheCountOfCollectionIs(string p0, int p1)
         {
-            string response = (string)context[constants.responseBody];
+            string response = (string)context[constants.responseContent];
             JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
         }
 
@@ -580,13 +580,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response value for ""(.*)"" is an empty array")]
         public void ThenTheValueForIsAnEmptyArray(string p0)
         {
-            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[constants.responseBody]);
+            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[constants.responseContent]);
         }
 
         [Then(@"the response body includes the text:")]
         public void ThenTheResponseBodyIncludesTheText(string multilineText)
         {
-            string response = (string)context[constants.responseBody];
+            string response = (string)context[constants.responseContent];
             bool check = response.Contains(multilineText);
             check.Should().BeTrue();
         }
@@ -601,7 +601,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the the response message is (.*)")]
         public void ThenTheTheResponseMessageIs(string p0)
         {
-            context[constants.responseBody].Should().Be(p0);
+            context[constants.responseContent].Should().Be(p0);
          }
 
 
