@@ -5,7 +5,8 @@ Background:
     Given I set the content type to be "SharedContent" 
 	Given I logon to the editor
 
-@Editor
+@Editor @Ignore 
+# this should not be run in dev as dependant on imported data. consider running in sit / pp
 Scenario: Content for "Get help using this service" is available
 
 	Then I can navigate to the content item "Contact us" in Orchard Core core
@@ -35,7 +36,7 @@ Scenario: Add a new shared content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
-	| New Shared Content |  <p>Here it is<p> |
+	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the add action completes succesfully
 	And the data is present in the Graph databases
@@ -47,7 +48,7 @@ Scenario: Add a new shared content item
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
-	| updated Shared Content | <p>Here it is now<p> |
+	| updated Shared Content | <p>Here it is now</p> |
 	When I publish the item
 	Then the edit action completes succesfully
 	And the data is present in the Graph databases

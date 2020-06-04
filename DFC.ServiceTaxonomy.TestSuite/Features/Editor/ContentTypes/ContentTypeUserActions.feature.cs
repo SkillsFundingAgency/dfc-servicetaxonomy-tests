@@ -134,10 +134,10 @@ this.FeatureBackground();
                             ""});
                 table29.AddRow(new string[] {
                             "NodeNameTransform",
-                            "$\"ncs__{Value}\""});
+                            "$\"{Value}\""});
                 table29.AddRow(new string[] {
                             "PropertyNameTransform",
-                            "$\"ncs__{Value}\""});
+                            "$\"{Value}\""});
                 table29.AddRow(new string[] {
                             "CreateRelationshipType",
                             ""});

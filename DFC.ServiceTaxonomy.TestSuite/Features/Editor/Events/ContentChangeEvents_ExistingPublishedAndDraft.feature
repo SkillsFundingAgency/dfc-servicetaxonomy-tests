@@ -12,7 +12,7 @@ Background:
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
-	| New Shared Content |  <p>Here it is<p> |
+	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the edit action completes succesfully
 	#Then an event of type "draft" has been issued to notify consumers of the change
@@ -23,17 +23,17 @@ Background:
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title                 | Content                |
-	| Update Shared Content | <p>Here it is again<p> |
+	| Update Shared Content | <p>Here it is again</p> |
 	When I save the draft item
 	Then the save action completes succesfully
 	Given I check the number of events sent for this contentItem
-
+	
 Scenario: 23. Updates are made to an existing draft version of a published content item 
 	Given I search for the "Title"
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title                        | Content                |
-	| Newly updated Shared Content | <p>Here it is again<p> |
+	| Newly updated Shared Content | <p>Here it is again</p> |
 	When I save the draft item
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -43,12 +43,13 @@ Scenario: 24. Updates with validation issues  are made to an existing draft vers
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title | Content                |
-	|       | <p>Here it is again<p> |
+	|       | <p>Here it is again</p> |
 	When I save the draft item
-	Then the save action completes succesfully
 	Then an "EmptyField" validation error is shown for "Title"
 	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
+
+
 
 Scenario: 25. An existing draft version of a published content item is published succesfully
 	Given I search for the "Title"
@@ -63,7 +64,7 @@ Scenario: 26. An existing draft version of a published content item is edited so
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title | Content                |
-	|       | <p>Here it is again<p> |
+	|       | <p>Here it is again</p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 	And an event of type "Draft" has been issued to notify consumers of the change
