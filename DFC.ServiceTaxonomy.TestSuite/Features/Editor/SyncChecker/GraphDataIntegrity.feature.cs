@@ -260,9 +260,8 @@ this.FeatureBackground();
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 77
- testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:ncs__TestCollectionOfTypes),(b:ncs__TestContentPicker1)\r\nWHERE a.uri = \'" +
-                        "@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nCREATE (a)-[r:hasTestContentPicker1]->(b)\r\nRETURN" +
-                        " type(r)", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes),(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\na" +
+                        "nd b.uri = \'@URI2@\'\r\nCREATE (a)-[r:hasTestContentPicker1]->(b)\r\nRETURN type(r)", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 86
   testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -287,8 +286,8 @@ this.FeatureBackground();
   testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 93
-  testRunner.And("the following graph query returns 0 record", "MATCH (a:ncs__TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:ncs__TestConte" +
-                        "ntPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the following graph query returns 0 record", "MATCH (a:TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:TestContentPicker1)" +
+                        "\r\nWHERE a.uri = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -363,8 +362,8 @@ this.FeatureBackground();
  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 120
- testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)\r\nWHERE a.uri" +
-                        " = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nDELETE r", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
+                        "\'\r\nand b.uri = \'@URI2@\'\r\nDELETE r", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 128
   testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -390,8 +389,8 @@ this.FeatureBackground();
   testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 135
-  testRunner.And("the following graph query returns 1 record", "MATCH (a:ncs__TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:ncs__TestConte" +
-                        "ntPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the following graph query returns 1 record", "MATCH (a:TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:TestContentPicker1)" +
+                        "\r\nWHERE a.uri = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -464,8 +463,8 @@ this.FeatureBackground();
   testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 160
-  testRunner.Given("I replace tokens in and then run the following graph update statement", "   MERGE (a:ncs__TestCollectionOfTypes {uri: \'@URI3@\'})\r\n   SET a.ncs__Descriptio" +
-                        "n = \'update value\'\r\n   RETURN a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("I replace tokens in and then run the following graph update statement", "   MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n   SET a.Description = \'updat" +
+                        "e value\'\r\n   RETURN a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 166
   testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -489,8 +488,8 @@ this.FeatureBackground();
   testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 174
-  testRunner.And("the following graph query returns 1 record", "MATCH (a:ncs__TestCollectionOfTypes)\r\nWHERE a.uri = \'@URI3@\'\r\nAnd a.ncs__Descript" +
-                        "ion = \'<p>My test description</p>\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the following graph query returns 1 record", "MATCH (a:TestCollectionOfTypes)\r\nWHERE a.uri = \'@URI3@\'\r\nAnd a.Description = \'<p>" +
+                        "My test description</p>\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -563,8 +562,8 @@ this.FeatureBackground();
   testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 199
-  testRunner.Given("I replace tokens in and then run the following graph update statement", "MERGE (a:ncs__TestCollectionOfTypes {uri: \'@URI3@\'})\r\n  SET a = { uri :\'@URI3@\', " +
-                        "skos__prefLabel : \'My Test content\' }\r\n  RETURN a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("I replace tokens in and then run the following graph update statement", "MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n  SET a = { uri :\'@URI3@\', skos_" +
+                        "_prefLabel : \'My Test content\' }\r\n  RETURN a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 205
   testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -590,8 +589,8 @@ this.FeatureBackground();
   testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 212
-  testRunner.And("the following graph query returns 0 record", "MATCH (a:ncs__TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nAnd a.ncs__Description" +
-                        "2 = \'new value\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("the following graph query returns 0 record", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nAnd a.Description2 = \'new v" +
+                        "alue\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -664,7 +663,7 @@ this.FeatureBackground();
   testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 237
-  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:ncs__TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nDELETE a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nDELETE a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 244
    testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -689,7 +688,7 @@ this.FeatureBackground();
    testRunner.And("document 2 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 251
-   testRunner.And("the following graph query returns 1 record", "MATCH (a:ncs__TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("the following graph query returns 1 record", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nreturn count(a)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -764,8 +763,8 @@ this.FeatureBackground();
   testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 275
-  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)\r\nWHERE a.uri" +
-                        " = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nDELETE b,r", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
+                        "\'\r\nand b.uri = \'@URI2@\'\r\nDELETE b,r", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 283
    testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -794,8 +793,8 @@ this.FeatureBackground();
    testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 291
-   testRunner.And("the following graph query returns 1 record", "MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)\r\nWHERE a.uri" +
-                        " = \'@URI3@\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("the following graph query returns 1 record", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
+                        "\'\r\nand b.uri = \'@URI2@\'\r\nRETURN count(b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -868,8 +867,8 @@ this.FeatureBackground();
   testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 316
-  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)\r\nWHERE a.uri" +
-                        " = \'@URI3@\'\r\nand b.uri = \'@URI1@\'\r\nDETACH DELETE a,b", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
+                        "\'\r\nand b.uri = \'@URI1@\'\r\nDETACH DELETE a,b", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 324
    testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -898,8 +897,8 @@ this.FeatureBackground();
    testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 332
-   testRunner.And("the following graph query returns 1 record", "MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)\r\nWHERE a.uri" +
-                        " = \'@URI3@\'\r\nand b.uri = \'@URI1@\'\r\nRETURN count (b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And("the following graph query returns 1 record", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
+                        "\'\r\nand b.uri = \'@URI1@\'\r\nRETURN count (b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -941,8 +940,8 @@ this.FeatureBackground();
  testRunner.Given("I generate and store a new URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 344
- testRunner.Given("I replace tokens in and then run the following graph update statement", "CREATE (a:ncs__TestContentPicker1 { uri: \'@URI3@\' , skos__prefLabel : \'Extra item" +
-                        "\', ncs__Description : \'Test Description\'})\r\nRETURN a.name", ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I replace tokens in and then run the following graph update statement", "CREATE (a:TestContentPicker1 { uri: \'@URI3@\' , skos__prefLabel : \'Extra item\', De" +
+                        "scription : \'Test Description\'})\r\nRETURN a.name", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 349
  testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -966,7 +965,7 @@ this.FeatureBackground();
  testRunner.And("document 3 appears in the \"Repaired\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 357
- testRunner.And("the following graph query returns 0 record", "MATCH (a:ncs__TestContentPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\nRETURN count (b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the following graph query returns 0 record", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\nRETURN count (b)", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

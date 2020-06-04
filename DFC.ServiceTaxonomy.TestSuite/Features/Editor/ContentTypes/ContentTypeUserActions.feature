@@ -17,8 +17,8 @@ Scenario: Add a new content type with Title Part
 	And I set the following field values
 	| Field                  | Value                                                                                  |
 	| RelationshipType       |                                                                                        |
-	| NodeNameTransform      | $"ncs__{Value}"                                                                        |
-	| PropertyNameTransform  | $"ncs__{Value}"                                                                        |
+	| NodeNameTransform      | $"{Value}"                                                                        |
+	| PropertyNameTransform  | $"{Value}"                                                                        |
 	| CreateRelationshipType |                                                                                        |
 	| IDPropertyName         | uri                                                                                    |
 	| GenerateIDValue        | $"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid():D}" |

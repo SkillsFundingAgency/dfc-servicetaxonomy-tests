@@ -23,10 +23,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         #region consts
         private const string tokenChar = "@";
         private const string tokenName = "@NAME@";
-        private const string cypher_skillWithRelatedJobProfile = "MATCH (s:esco__Skill) --> (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN distinct s.uri";
+        private const string cypher_skillWithRelatedJobProfile = "MATCH (s:esco__Skill) --> (o:esco__Occupation) -- (j:JobProfile) RETURN distinct s.uri";
         private const string cypher_AddJobProfileAndRelationToOccupation = "to define";
-        private const string cypher_occupationWithRelatedJobProfile = "MATCH (o:esco__Occupation) -- (j:ncs__JobProfile) RETURN o.uri";
-        private string cypher_jobProfileUriFromOccupationName = $"MATCH (o:esco__Occupation) -- (j:ncs__JobProfile) WHERE o.skos__prefLabel ='{tokenName}' RETURN  j.uri as uri";
+        private const string cypher_occupationWithRelatedJobProfile = "MATCH (o:esco__Occupation) -- (j:JobProfile) RETURN o.uri";
+        private string cypher_jobProfileUriFromOccupationName = $"MATCH (o:esco__Occupation) -- (j:JobProfile) WHERE o.skos__prefLabel ='{tokenName}' RETURN  j.uri as uri";
         #endregion
 
 

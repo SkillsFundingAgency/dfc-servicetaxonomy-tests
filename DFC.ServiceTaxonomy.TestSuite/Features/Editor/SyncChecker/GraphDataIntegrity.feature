@@ -76,7 +76,7 @@ Scenario: Extra relationship
 	# Modify neo4J data directly to relate to the second item
 	Given I replace tokens in and then run the following graph update statement
 """
-MATCH (a:ncs__TestCollectionOfTypes),(b:ncs__TestContentPicker1)
+MATCH (a:TestCollectionOfTypes),(b:TestContentPicker1)
 WHERE a.uri = '@URI3@'
 and b.uri = '@URI2@'
 CREATE (a)-[r:hasTestContentPicker1]->(b)
@@ -92,7 +92,7 @@ RETURN type(r)
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 0 record
 	"""
-MATCH (a:ncs__TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:ncs__TestContentPicker1)
+MATCH (a:TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:TestContentPicker1)
 WHERE a.uri = '@URI3@'
 and b.uri = '@URI2@'
 RETURN count(a)
@@ -119,7 +119,7 @@ Scenario: Missing relationship
 	# Modify neo4J data directly to relate to the second item
 	Given I replace tokens in and then run the following graph update statement
 """
-MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)
+MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)
 WHERE a.uri = '@URI3@'
 and b.uri = '@URI2@'
 DELETE r
@@ -134,7 +134,7 @@ DELETE r
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 1 record
 	"""
-MATCH (a:ncs__TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:ncs__TestContentPicker1)
+MATCH (a:TestCollectionOfTypes)-[r:hasTestContentPicker1]->(b:TestContentPicker1)
 WHERE a.uri = '@URI3@'
 and b.uri = '@URI2@'
 RETURN count(a)
@@ -159,8 +159,8 @@ Scenario: Mistmatched label
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
 	"""
-    MERGE (a:ncs__TestCollectionOfTypes {uri: '@URI3@'})
-    SET a.ncs__Description = 'update value'
+    MERGE (a:TestCollectionOfTypes {uri: '@URI3@'})
+    SET a.Description = 'update value'
     RETURN a
 	"""
 		Given I run the sync check
@@ -173,9 +173,9 @@ Scenario: Mistmatched label
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 1 record
 	"""
-	MATCH (a:ncs__TestCollectionOfTypes)
+	MATCH (a:TestCollectionOfTypes)
 	WHERE a.uri = '@URI3@'
-	And a.ncs__Description = '<p>My test description</p>'
+	And a.Description = '<p>My test description</p>'
 	return count(a)
 	"""
 
@@ -198,7 +198,7 @@ Scenario: Missing label
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
 	"""
-	MERGE (a:ncs__TestCollectionOfTypes {uri: '@URI3@'})
+	MERGE (a:TestCollectionOfTypes {uri: '@URI3@'})
    SET a = { uri :'@URI3@', skos__prefLabel : 'My Test content' }
    RETURN a
 	"""
@@ -211,9 +211,9 @@ Scenario: Missing label
 		And document 3 appears in the "Repaired" section
 		And the following graph query returns 0 record
 	"""
-	MATCH (a:ncs__TestContentPicker1)
+	MATCH (a:TestContentPicker1)
 	WHERE a.uri = '@URI2@'
-	And a.ncs__Description2 = 'new value'
+	And a.Description2 = 'new value'
 	return count(a)
 	"""
 
@@ -236,7 +236,7 @@ Scenario: Missing Node
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
 	"""
-	MATCH (a:ncs__TestContentPicker1)
+	MATCH (a:TestContentPicker1)
 	WHERE a.uri = '@URI2@'
 	DELETE a
 	"""
@@ -250,7 +250,7 @@ Scenario: Missing Node
 			And document 2 appears in the "Repaired" section
 			And the following graph query returns 1 record
 	"""
-	MATCH (a:ncs__TestContentPicker1)
+	MATCH (a:TestContentPicker1)
 	WHERE a.uri = '@URI2@'
 	return count(a)
 	"""
@@ -274,7 +274,7 @@ Scenario: Missing Node and relationship
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
 	"""
-	MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)
+	MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)
 	WHERE a.uri = '@URI3@'
 	and b.uri = '@URI2@'
 	DELETE b,r
@@ -290,7 +290,7 @@ Scenario: Missing Node and relationship
 			And document 3 appears in the "Repaired" section
 			And the following graph query returns 1 record
 	"""
-	MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)
+	MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)
 	WHERE a.uri = '@URI3@'
 	and b.uri = '@URI2@'
 	RETURN count(b)
@@ -315,7 +315,7 @@ Scenario: Missing parent and child Nodes and relationship
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
 	"""
-	MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)
+	MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)
 	WHERE a.uri = '@URI3@'
 	and b.uri = '@URI1@'
 	DETACH DELETE a,b
@@ -331,7 +331,7 @@ Scenario: Missing parent and child Nodes and relationship
 			And document 3 appears in the "Repaired" section
 			And the following graph query returns 1 record
 	"""
-	MATCH (a:ncs__TestCollectionOfTypes)-[r]-(b:ncs__TestContentPicker1)
+	MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)
 	WHERE a.uri = '@URI3@'
 	and b.uri = '@URI1@'
 	RETURN count (b)
@@ -343,7 +343,7 @@ Scenario: Extra node
 	Given I generate and store a new URI
 	Given I replace tokens in and then run the following graph update statement
 	"""
-	CREATE (a:ncs__TestContentPicker1 { uri: '@URI3@' , skos__prefLabel : 'Extra item', ncs__Description : 'Test Description'})
+	CREATE (a:TestContentPicker1 { uri: '@URI3@' , skos__prefLabel : 'Extra item', Description : 'Test Description'})
 	RETURN a.name
 	"""
 	Given I run the sync check
@@ -356,7 +356,7 @@ Scenario: Extra node
 	And document 3 appears in the "Repaired" section
 	And the following graph query returns 0 record
 	"""
-	MATCH (a:ncs__TestContentPicker1)
+	MATCH (a:TestContentPicker1)
 	WHERE a.uri = '@URI3@'
 	RETURN count (b)
 	"""
