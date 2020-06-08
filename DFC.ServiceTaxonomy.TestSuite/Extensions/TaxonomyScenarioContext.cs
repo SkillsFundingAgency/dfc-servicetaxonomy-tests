@@ -67,8 +67,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             return new Dictionary<string, string>()
             {
-                { "NodeNameTransform", @"$""{ContentType}"""},
-                { "PropertyNameTransform",@"$""{Value}"""},
+                { "NodeNameTransform", "ContentType"},
+                { "PropertyNameTransform","Value"},
                 { "IDPropertyName", "uri" },
                 { "GenerateIDValue", @"$""http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid()}""" }
             };
