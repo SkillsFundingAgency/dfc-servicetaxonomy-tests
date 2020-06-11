@@ -41,7 +41,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         [AfterScenario("webtest", Order = 20)]
         public void CLoseWebDriver()
         {
-            _scenarioContext.GetWebDriver().Close();
+            //_scenarioContext.GetWebDriver().Close();
+            _scenarioContext.GetWebDriver().Quit();
         }
     }
 }

@@ -277,10 +277,10 @@ this.FeatureBackground();
  testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 51
- testRunner.And("an event of type \"Publish\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("an event of type \"Published\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 52
- testRunner.And("an event of type \"Draft Discarded\" has been issued to notify consumers of the cha" +
+ testRunner.And("an event of type \"Draft-Discarded\" has been issued to notify consumers of the cha" +
                         "nge", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

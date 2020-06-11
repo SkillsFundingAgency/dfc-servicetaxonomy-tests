@@ -174,6 +174,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void StoreContentItemId(this ScenarioContext context, string newId)
         {
+            if (newId == string.Empty)
+                return;
             List<string> uris;
             int count = (context.ContainsKey("contentIdCount") ? (int)context["contentIdCount"] : 0);
             if (count == 0)
@@ -186,10 +188,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 //retreive
                 uris = (List<string>)context["contentIds"];
             }
-            uris.Add(newId);
-            count++;
-            context["contentIdCount"] = count;
-            context["contentIds"] = uris;
+            if (!uris.Contains(newId))
+            {
+                uris.Add(newId);
+                count++;
+                context["contentIdCount"] = count;
+                context["contentIds"] = uris;
+            }
         }
 
         public static string GetContentItemId(this ScenarioContext context, int index)
@@ -197,11 +202,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             //expect zero based index
             List<string> ids = (context.ContainsKey("contentIds") ? (List<string>)context["contentIds"] : new List<string>());
 
-            if (ids.Count < index - 1)
+            if (ids.Count == 0 || ids.Count < index - 1)
             {
                 return "";
             }
             return ids[index];
+        }
+
+        public static string GetLatestContentItemId(this ScenarioContext context)
+        {
+            return GetContentItemId(context, GetNumberOfStoredContentIds(context) - 1);
         }
 
         public static int GetNumberOfStoredContentIds(this ScenarioContext context)

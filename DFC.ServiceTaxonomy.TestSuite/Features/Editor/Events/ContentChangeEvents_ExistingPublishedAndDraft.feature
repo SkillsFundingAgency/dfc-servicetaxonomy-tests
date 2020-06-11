@@ -56,7 +56,7 @@ Scenario: 25. An existing draft version of a published content item is published
 	And I select the first item that is found
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 	And an event of type "Draft-discarded" has been issued to notify consumers of the change
 
 Scenario: 26. An existing draft version of a published content item is edited so validation errors exists and publishing fails
@@ -74,7 +74,7 @@ Scenario: 27. An existing draft version of a published content item is published
 	Given I search for the "Title"
 	And I select the "Publish" option for the first item that is found
 	Then the edit action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 	And an event of type "Draft-discarded" has been issued to notify consumers of the change
 
 
@@ -82,7 +82,7 @@ Scenario: 29. A published item with a draft version is unpublished from the cont
 	Given I search for the "Title"
 	And I select the "Unpublish" option for the first item that is found
 	Then the unpublish action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 
 Scenario: 30. An existing draft version of a published content item is discarded from the content item list view
 	Given I search for the "Title"

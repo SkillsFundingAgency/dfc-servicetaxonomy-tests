@@ -48,8 +48,8 @@ Scenario: 15. An existing draft content item is succesfully published
 	And I select the first item that is found
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
-	And an event of type "Draft Discarded" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
+	And an event of type "Draft-Discarded" has been issued to notify consumers of the change
 
 Scenario: 16. An existing draft content item is updated and fails validation when published
 	Given I Navigate to "/Admin/Contents/ContentItems" 

@@ -37,7 +37,7 @@ Scenario: 7. A new content item is published succesfully
 	| New Shared Content |  <p>Here it is<p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 
 Scenario: 8. A new content item is published with validation issues
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 

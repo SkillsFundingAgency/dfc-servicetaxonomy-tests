@@ -10,6 +10,7 @@ using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using System.Threading;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -26,7 +27,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change")]
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(string eventType)
         {
-            
+            Thread.Sleep(15000);
             if (!_scenarioContext.GetEnv().checkEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
@@ -35,13 +36,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
             List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
 
-            indexes.Count.Should().BeGreaterThan(1, "Because otherwise no data has been stored to check against");
+            indexes.Count.Should().BeGreaterThan(0, "Because otherwise no data has been stored to check against");
 
             int numberOfEvents = _scenarioContext.ContainsKey($"countOf{eventType}Events") ? (int)_scenarioContext[$"countOf{eventType}Events"] : 0;
             // mock the response until event store is up and running
             MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
-            List<ContentEvent> list = GetMatchingDocuments(id, eventType);
+            //List<ContentEvent> list = RetryHelper.RetryOnEmptyList<ContentEvent>(3, new TimeSpan(3000), GetMatchingDocuments(id, eventType ));
+            List<ContentEvent> list = GetMatchingDocuments(id, eventType, indexes.Last().ContentItemVersionId);
+            //list = GetMatchingDocuments(id, eventType,indexes.Last().ContentItemVersionId);
             list.Count().Should().Be(numberOfEvents +1, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion
@@ -96,14 +99,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private List<ContentEvent> GetMatchingDocuments(string id, string eventType = "")
         {
-            string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType}'";
-            string query = $"SELECT * FROM c where  c.data.itemId = '{id}'{additionalClause}";
+            string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}'";
+            string query = $"SELECT * FROM c where  c.id = '{id}'{additionalClause}";
 
             CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
-            List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("EventStore", "events", query);
+            List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
 
             return list;
         }
+
+        private List<ContentEvent> GetMatchingDocuments(string id, string eventType, string contentVersionId)
+        {
+            string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}' and c.data.versionId = '{contentVersionId}'";
+            string query = $"SELECT * FROM c where  c.id = '{id}'{additionalClause}";
+
+            CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
+            List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
+
+            return list;
+        }
+
         [Then(@"no event is issued")]
         public void ThenNoEventIsIssued()
         {
@@ -112,9 +127,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
-            string id = _scenarioContext.GetContentItemId(0);
+            string id = _scenarioContext.GetLatestContentItemId();
             int numberOfEvents = _scenarioContext.ContainsKey("TotalEvents") ? (int)_scenarioContext["TotalEvents"] : 0 ;
-
             List<ContentEvent> list = GetMatchingDocuments(id);
 
             list.Count().Should().Be(numberOfEvents, "Because no more events should have been raised");
@@ -148,15 +162,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             foreach (var item in list)
             {
                 int val = tallys.ContainsKey(item.eventType) ? tallys[item.eventType] : 0;
-                tallys[item.eventType] = val;
+                tallys[item.eventType] = val + 1;
             }
 
             int numberOfEvents = 0;
             foreach ( var item in tallys)
             {
                 Console.WriteLine($"{item.Value} messages of type {item.Key} detected for document {id}");
-                _scenarioContext[$"countOf{item.Key}Events"] = item.Value;
                 numberOfEvents += item.Value;
+                _scenarioContext[$"countOf{item.Key}Events"] = numberOfEvents;
             }
             Console.WriteLine($"Total {numberOfEvents} messages detected for document {id}");
             _scenarioContext["TotalEvents"] = numberOfEvents;
