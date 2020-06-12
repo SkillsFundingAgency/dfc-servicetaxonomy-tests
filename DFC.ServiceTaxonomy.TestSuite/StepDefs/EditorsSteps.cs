@@ -864,8 +864,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I save the draft item")]
         public void WhenISaveTheDraftItem()
         {
-            _addContentItemBase.SaveActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
+            _addContentItemBase.SaveActivity();
+
+            if (id.Length == 0)
+                id = _addContentItemBase.ContentItemIdFromUrl();
 
             if (id.Length > 0)
             {

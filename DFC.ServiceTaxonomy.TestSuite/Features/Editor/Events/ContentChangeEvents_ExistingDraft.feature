@@ -5,19 +5,15 @@ Background:
 	Given I logon to the editor
 	Given I set the content type to be "SharedContent" 
 	Given I set up a data prefix for "Title"
-
-	#Given the test is tagged with ""
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	#And I have ensured the activity I intend to add doesn't exist
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is<p> |
 	And I save the draft item
-	#Then an event of type "draft" has been issued to notify consumers of the change
-	#Given I check time of the latest event message
 	Given I check the number of events sent for this contentItem
 
+@Editor 
 Scenario: 13. An update to an existing draft document is succesful
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -29,7 +25,7 @@ Scenario: 13. An update to an existing draft document is succesful
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
 
-
+@Editor 
 Scenario: 14. An update to an existing draft document fails with validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -42,6 +38,7 @@ Scenario: 14. An update to an existing draft document fails with validation issu
 	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
 
+@Editor 
 Scenario: 15. An existing draft content item is succesfully published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -52,9 +49,8 @@ Scenario: 15. An existing draft content item is succesfully published
 	| EventType       |
 	| Published       |
 	| Draft-Discarded |
-	##And an event of type "Published" has been issued to notify consumers of the change
-	##And an event of type "Draft-Discarded" has been issued to notify consumers of the change
 
+@Editor 
 Scenario: 16. An existing draft content item is updated and fails validation when published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -67,6 +63,7 @@ Scenario: 16. An existing draft content item is updated and fails validation whe
 	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
 
+@Editor 
 Scenario: 17. An existing draft content item is published from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -74,6 +71,7 @@ Scenario: 17. An existing draft content item is published from the content item 
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
 
+@Editor 
 Scenario: 31. An existing draft content item is deleted from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -82,6 +80,7 @@ Scenario: 31. An existing draft content item is deleted from the content item li
 	And an event of type "Deleted" has been issued to notify consumers of the change
 
 
+@Editor 
 Scenario: 34. An existing published content item is cloned from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"

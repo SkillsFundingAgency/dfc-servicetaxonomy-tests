@@ -89,10 +89,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
 #line 7
  testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 10
+#line 8
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/SharedContent/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 12
+#line 9
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
@@ -101,13 +101,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
             table33.AddRow(new string[] {
                         "",
                         "<p>Here it is<p>"});
-#line 13
+#line 10
  testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table33, "And ");
 #line hidden
-#line 16
+#line 13
  testRunner.And("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 17
+#line 14
  testRunner.Then("an \"EmptyField\" validation error is shown for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
@@ -121,7 +121,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
                     "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3. A succesful correction is made to a new draft with validation issues", null, new string[] {
                         "Editor"});
-#line 20
+#line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -150,16 +150,16 @@ this.FeatureBackground();
                 table34.AddRow(new string[] {
                             "Title Added",
                             "<p>Here it is<p>"});
-#line 21
+#line 18
  testRunner.Given("I Enter the following form data for \"SharedContent\"", ((string)(null)), table34, "Given ");
 #line hidden
-#line 24
+#line 21
  testRunner.And("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 25
+#line 22
  testRunner.Then("the save action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 26
+#line 23
  testRunner.And("an event of type \"Draft\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -175,7 +175,7 @@ this.FeatureBackground();
                     "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4. An unsuccesful  correction is made to a new draft with validation issues", null, new string[] {
                         "Editor"});
-#line 29
+#line 26
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -204,16 +204,16 @@ this.FeatureBackground();
                 table35.AddRow(new string[] {
                             "",
                             "<p>Change this to this<p>"});
-#line 30
+#line 27
  testRunner.Given("I Enter the following form data for \"SharedContent\"", ((string)(null)), table35, "Given ");
 #line hidden
-#line 33
+#line 30
  testRunner.And("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 34
+#line 31
  testRunner.Then("an \"EmptyField\" validation error is shown for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 35
+#line 32
  testRunner.And("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -231,7 +231,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("9. A succesful Publishing of new content item which had validation issues on save" +
                     " to draft", null, new string[] {
                         "Editor"});
-#line 38
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -260,16 +260,16 @@ this.FeatureBackground();
                 table36.AddRow(new string[] {
                             "Title Added",
                             "<p>Here it is<p>"});
-#line 39
+#line 36
  testRunner.Given("I Enter the following form data for \"SharedContent\"", ((string)(null)), table36, "Given ");
 #line hidden
-#line 42
+#line 39
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 43
+#line 40
  testRunner.Then("the edit action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 44
+#line 41
  testRunner.And("an event of type \"Published\" has been issued to notify consumers of the change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -287,7 +287,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("10. An unsuccesful Publishing of new content item which had validation issues on " +
                     "save to draft", null, new string[] {
                         "Editor"});
-#line 47
+#line 44
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -316,16 +316,16 @@ this.FeatureBackground();
                 table37.AddRow(new string[] {
                             "",
                             "<p>Change this to this<p>"});
-#line 48
+#line 45
  testRunner.Given("I Enter the following form data for \"SharedContent\"", ((string)(null)), table37, "Given ");
 #line hidden
-#line 51
+#line 48
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 52
+#line 49
  testRunner.Then("an \"EmptyField\" validation error is shown for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 53
+#line 50
  testRunner.And("no event is issued", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

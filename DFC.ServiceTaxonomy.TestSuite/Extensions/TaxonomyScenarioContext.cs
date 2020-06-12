@@ -165,7 +165,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static List<ContentEvent> GetCapturedEvents(this ScenarioContext context)
         {
-            return (List < ContentEvent > )context[keyCapturedEvents];
+            return context.ContainsKey(keyCapturedEvents) ? (List < ContentEvent > )context[keyCapturedEvents] : new List<ContentEvent> ();
         }
 
         public static void SetCapturedEvents(this ScenarioContext context, List<ContentEvent> events)
