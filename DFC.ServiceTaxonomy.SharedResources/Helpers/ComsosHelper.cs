@@ -89,6 +89,27 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return doc;
         }
 
+        public static string BuildQuery(string[] fields, Dictionary<string,string> args)
+        {
+            string fieldList = fields.Count()==0 ? "*" : string.Empty;
+            string whereClause = "WHERE ";
+            string and = string.Empty;
+            string comma = string.Empty;
+
+            foreach ( var field in fields)
+            {
+                fieldList += $"{comma} c.{field}";
+                comma = " ,";
+            }
+
+            foreach (var arg in args)
+            {
+                whereClause += $"{and} c.{arg.Key} = '{arg.Value}'";
+                and = " AND";
+            }
+            return $"SELECT {fieldList} FROM c {whereClause} ";
+        }
+
         public static List<T> SearchForDocuments<T>(string database, string collection, string query)
         {
             List<T> list = null;

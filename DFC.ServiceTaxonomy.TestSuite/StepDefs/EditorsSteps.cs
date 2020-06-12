@@ -603,7 +603,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     _manageContent.PublishFirstItem();
                     break;
                 case "clone":
-                    _scenarioContext["TotalEvents"] = 0;
+                    _scenarioContext.ClearCapturedEvents();
                     _manageContent.CloneFirstItem();
                     break;
                 case "delete":

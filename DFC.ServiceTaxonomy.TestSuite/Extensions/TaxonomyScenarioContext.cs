@@ -27,6 +27,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keySkillData = "EscoSkillList";
         const string keyListOfStrings = "EscoListOfStrings";
         const string keyExpectedRecordCount = "ExpectedRecordCount";
+        const string keyCapturedEvents = "CapturedEvents";
         #endregion
 
         //public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
@@ -160,6 +161,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 return "";
             }
             return uris[index];
+        }
+
+        public static List<ContentEvent> GetCapturedEvents(this ScenarioContext context)
+        {
+            return (List < ContentEvent > )context[keyCapturedEvents];
+        }
+
+        public static void SetCapturedEvents(this ScenarioContext context, List<ContentEvent> events)
+        {
+            context[keyCapturedEvents] = events;
+        }
+
+        public static void ClearCapturedEvents(this ScenarioContext context)
+        {
+            var list = GetCapturedEvents(context) ;
+            list.Clear();
+            SetCapturedEvents(context, list);
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)

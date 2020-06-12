@@ -15,9 +15,9 @@ Background:
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	#Then an event of type "draft" has been issued to notify consumers of the change
+	And an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
-	Given I check the number of events sent for this contentItem
+	#Given I check the number of events sent for this contentItem is 1
 
 	Given I search for the "Title"
 	And I select the first item that is found
@@ -56,8 +56,10 @@ Scenario: 25. An existing draft version of a published content item is published
 	And I select the first item that is found
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Published" has been issued to notify consumers of the change
-	And an event of type "Draft-discarded" has been issued to notify consumers of the change
+	And the following new events have been issued to notify consumers of the change
+	| EventType       |
+	| Published       |
+	| Draft-discarded |
 
 Scenario: 26. An existing draft version of a published content item is edited so validation errors exists and publishing fails
 	Given I search for the "Title"
@@ -74,9 +76,10 @@ Scenario: 27. An existing draft version of a published content item is published
 	Given I search for the "Title"
 	And I select the "Publish" option for the first item that is found
 	Then the edit action completes succesfully
-	And an event of type "Published" has been issued to notify consumers of the change
-	And an event of type "Draft-discarded" has been issued to notify consumers of the change
-
+	And the following new events have been issued to notify consumers of the change
+	| EventType       |
+	| Published       |
+	| Draft-discarded |
 
 Scenario: 29. A published item with a draft version is unpublished from the content item list view
 	Given I search for the "Title"
