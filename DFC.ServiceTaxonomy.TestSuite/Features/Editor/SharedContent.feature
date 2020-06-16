@@ -40,7 +40,7 @@ Scenario: Add a new shared content item
 	When I publish the item
 	Then the add action completes succesfully
 	And the data is present in the Graph databases
-	And an event has been published to notify consumers of the change
+	#And an event has been published to notify consumers of the change
 
 #Scenario: Edit the new activity
 	Given I Navigate to "/Admin/Contents/ContentItems" 
