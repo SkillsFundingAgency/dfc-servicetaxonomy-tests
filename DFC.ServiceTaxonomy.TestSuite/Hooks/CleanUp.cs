@@ -36,6 +36,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
                 Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
             }
+
+        }
+
+        [AfterScenario( Order = 1)]
+        public void TearDownDataItems()
+        {
+            // clear down based on stored uri
+            foreach (var item in _scenarioContext.GetDataItems().Where(x => x.TearDownGraph))
+            {
+                //clear graph based on URI
+                bool result = _scenarioContext.DeleteGraphNodesWithUri(item.Uri);
+                Console.WriteLine($"CLEANUP: Succesfully deleted GRAPH items with uri {item.Uri}");
+
+            }
+            foreach (var item in _scenarioContext.GetDataItems().Where(x => x.TearDownSql))
+            {
+                //clear SQL based on URI
+                Console.WriteLine("CLEANUP: Sql clear down based on URI not yet implemented");
+
+            }
         }
 
         [AfterScenario("webtest", Order = 20)]

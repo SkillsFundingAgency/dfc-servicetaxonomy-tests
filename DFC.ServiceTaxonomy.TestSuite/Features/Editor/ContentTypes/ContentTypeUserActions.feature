@@ -29,16 +29,16 @@ Scenario: Add a new content type with Title Part
 	| ValueField   | Numeric Field |
 
 	And I save the contentItem
-#? check in sql ? not necessary as stock functionality? 
+#TODO check in sql datastore
 #New Type is saved
 	And I Navigate to "/Admin/Contents/ContentTypes/AutomatedTestItem/Create" 
 	#And I have ensured the activity I intend to add doesn't exist
 	And I capture the generated URI
 	And I Enter the following form data 
-	| Field      | Value     | Type          |
-	| Title      | TestItem  | Title         |
-	| TextField  | Test text | Text Field    |
-	| ValueField | 25        | Numeric Field |
+	| Field      | Value     | Type           |
+	| Title      | TestItem  | Title          |
+	| TextField  | Test text | Text Field     |
+	| ValueField | 26        | Numeric Field  |
 	When I publish the item
 	Then the add action completes succesfully
 	And the data is present in the Graph databases
