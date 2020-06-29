@@ -149,13 +149,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Recipe
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("I use recipes to create neo4j content and import it into orchard core")]
         [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("ignore")]
         public virtual void IUseRecipesToCreateNeo4JContentAndImportItIntoOrchardCore()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "Editor",
+                    "ignore"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I use recipes to create neo4j content and import it into orchard core", null, new string[] {
-                        "Editor"});
-#line 31
+                        "Editor",
+                        "ignore"});
+#line 32
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -178,7 +181,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
  this.FeatureBackground();
 #line hidden
-#line 33
+#line 34
  testRunner.Given("I load recipe file \"create_neo4j_content.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table92 = new TechTalk.SpecFlow.Table(new string[] {
@@ -193,13 +196,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "uri::thing2",
                             "Test Thing 2",
                             "test description"});
-#line 34
+#line 35
  testRunner.And("I confirm the following \"test__CypherItem\" data is preset in the Graph Database", ((string)(null)), table92, "And ");
 #line hidden
-#line 41
+#line 42
  testRunner.And("I load recipe file \"import_neo4j_data.json\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 42
+#line 43
  testRunner.Then("I can navigate to the content item \"Test Thing 1\" in Orchard Core core", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table93 = new TechTalk.SpecFlow.Table(new string[] {
@@ -208,7 +211,7 @@ this.ScenarioInitialize(scenarioInfo);
                 table93.AddRow(new string[] {
                             "uri::thing1",
                             "Test Thing 1"});
-#line 43
+#line 44
  testRunner.And("the values displayed in the editor match", ((string)(null)), table93, "And ");
 #line hidden
             }
