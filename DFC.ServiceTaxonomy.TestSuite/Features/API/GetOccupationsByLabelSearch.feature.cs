@@ -119,9 +119,9 @@ testRunner.Then("the response json matches:", @"{
         ""occupation"": ""dietitian"",
         ""lastModified"": ""2016-09-22T13:31:57Z"",
         ""alternativeLabels"": [
-            ""dietician"",
-            ""public health nutritionist"",
-            ""specialist dietician""
+""public health nutritionist"",
+""specialist dietician"",
+""dietician""
         ],
         ""uri"": ""http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f"",
         ""matches"": {
@@ -471,25 +471,25 @@ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsb
 #line hidden
 #line 187
     testRunner.And("the response json matches:", @"{
-    ""occupations"": [
-        {
-            ""occupation"": ""dietitian"",
-            ""lastModified"": ""2016-09-22T13:31:57Z"",
-            ""alternativeLabels"": [
-                ""dietician"",
-                ""public health nutritionist"",
-                ""specialist dietician""
-            ],
-            ""uri"": ""http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f"",
-            ""matches"": {
-                ""occupation"": [],
-                ""alternativeLabels"": [
-                    ""dietician"",
-                    ""specialist dietician""
-                ]
-            }
-        }
-    ]
+	""occupations"": [
+		{
+			""occupation"": ""dietitian"",
+			""lastModified"": ""2016-09-22T13:31:57Z"",
+			""alternativeLabels"": [
+				""public health nutritionist"",
+				""specialist dietician"",
+				""dietician""
+			],
+			""uri"": ""http://data.europa.eu/esco/occupation/8a53f8d3-d995-4c7b-a70d-d79f76bdcb3f"",
+			""matches"": {
+				""occupation"": [],
+				""alternativeLabels"": [
+					""specialist dietician"",
+					""dietician""
+				]
+			}
+		}
+	]
 }", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -531,11 +531,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
 #line 216
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table1, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table16, "Given ");
 #line hidden
 #line 218
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -582,14 +582,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table2.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 224
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table2, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table17, "Given ");
 #line hidden
 #line 227
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -639,14 +639,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 234
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table3.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 235
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table3, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table18, "And ");
 #line hidden
 #line 238
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -697,14 +697,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 250
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table4.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 251
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table4, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table19, "And ");
 #line hidden
 #line 254
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

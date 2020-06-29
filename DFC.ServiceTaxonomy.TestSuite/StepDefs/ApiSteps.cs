@@ -14,6 +14,9 @@ using System.Net;
 using System.Text;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using AngleSharp.Io;
+using AngleSharp.Common;
+using System.Text.RegularExpressions;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -37,52 +40,157 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context = injectedContext;
         }
 
-        public void GetEscoSearchResults(string type, int limit)
+        public string getNth(string str, char splitChar, int n)
         {
-            int totalValues = 0;
-            int offset = 0;
-            bool gotAll = false;
-            IList<EscoDataItem> escoData = new List<EscoDataItem>();
-
-            while (!gotAll)
+            int idx;
+            string newString = "";
+            var count = 0;
+            do
             {
-                // make call to esco api. 
-                var response = RestHelper.Get( context.GetEscoApiBaseUrl() + "/search?language=en&type=" + type + "&limit=" + limit.ToString() + (offset == 0 ? "" : "&offset=" + offset) );
+                idx = str.IndexOf(splitChar);
+                newString += $"{str.Substring(0, idx)}{(++count < n ? splitChar.ToString() : string.Empty)}";
+                str = str.Substring(idx + 1);
+            } while (count < n);
+            return newString;
+        }
 
-                // confirm response was ok
-                response.StatusCode.Should().Be( HttpStatusCode.OK );
+        public string addLinksToJson(string json, _DataItem item)
+        {
+            int count = item.Uri.Count(f => f == '/');
+            string curie = getNth(item.Uri, '/', count - 1);
+            string id = item.Uri.Substring(item.Uri.LastIndexOf("/")+1);
 
-                // parse the response data as json
-                JObject escoResults = JObject.Parse( response.Content );
 
-                int.TryParse( escoResults.GetValue("total").ToString(),out totalValues );
-                offset++;
-                //extract the data that we are interested in to a list
-                IList<JToken> results = escoResults["_embedded"]["results"].Children().ToList();
-                //convert to a list of escoDataItems
-                foreach (JToken result in results)
-                {
-                    EscoDataItem escoDataItem = result.ToObject<EscoDataItem>();
-                    escoData.Add(escoDataItem);
-                }
-                gotAll = (totalValues <= escoData.Count);
+            JObject linkDetails = new JObject();
+
+            var groups = item.linkedItems.Select(x => x.RelationshipType)
+                                         .GroupBy(r => r)
+                                         .Select(g => new { Name = g.Key.ToString(), Count = g.Count() })
+                                         .OrderBy( o => o.Name);
+
+            if (groups.Count() > 0)
+            {
+                linkDetails.Add(new JProperty("self", item.Uri));
+                linkDetails.Add(new JProperty("curies",
+                                    new JArray(
+                                        new JObject(
+                                            new JProperty("name", "cont"),
+                                            new JProperty("href", curie)
+                                                   )
+                                              )
+                                       )
+                               );
             }
-            context.SetEscoItemListData( escoData );
+
+            foreach ( var group in groups)
+            {
+                bool asArray = group.Count > 1;
+                JContainer groupMembers = linkDetails;
+                if (asArray)
+                    groupMembers = new JArray();
+
+                foreach (var linkItem in item.linkedItems.Where( x => x.RelationshipType == group.Name).OrderByDescending(x => x.Title))
+                {
+                    JObject link = new JObject(
+                                        new JProperty("href", linkItem.RelatedItem.Uri.Replace(curie, string.Empty)),
+                                        new JProperty("title", linkItem.Title),
+                                        new JProperty("contentType", linkItem.RelatedItem.TypeName)
+                                        );
+                    if (asArray)
+                    {
+                        groupMembers.Add(link);
+                    }
+                    else
+                    {
+                        groupMembers.Add(new JProperty($"cont:{linkItem.RelationshipType}", link));
+                    }
+                    
+                }
+                if (asArray)
+                {
+                    linkDetails.Add(new JProperty($"cont:{group.Name}", groupMembers));
+                }
+            }
+            json = JsonHelper.AddPropertyToJsonString(json, "id", id);
+            json = JsonHelper.AddPropertyToJsonString(json, "_links", linkDetails);
+            return json;
         }
 
-        [Given(@"I get a list of occupations from esco")]
-        public void GivenIGetAListOfOccupationsFromEsco()
+
+        [Given(@"I define a test type and call it ""(.*)""")]
+        public void GivenIDefineATestTypeAndCallIt(string p0)
         {
-            // get esco data. currently less that 3000 returned results so limit of 10000 is ample
-            GetEscoSearchResults( "occupation", 10000 );
+            context.StoreToken(p0, context.RandomString(10).ToLower());
         }
 
-        [Given(@"I get a list of skills from esco")]
-        public void GivenIGetAListOfSkillsFromEsco()
+        private SharedContent InsertSharedContent( string name, Table dataTable)
         {
-            // get esco data. currently less that 15000 returned results so limit of 20000 is ample
-            GetEscoSearchResults( "skill", 10000 );
+            SharedContent newItem = dataTable.CreateInstance<SharedContent>();
+            newItem.uri = context.GenerateUri(name);
+            String cypher = CypherHelper.GenerateCypher<SharedContent>(newItem, name);
+
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+
+            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
+
+            context.StoreUri(newItem.uri, name, newItem, TeardownOption.Graph);
+            context.StoreToken($"__URI{context.GetNumberOfStoredUris()}__", newItem.uri);
+            return newItem;
         }
+
+        private void AddRelationship( string uri1, string uri2, string relationshipName)
+        {
+            String cypher = CypherHelper.AddRelationship("uri", uri1, uri2, relationshipName);
+
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+
+            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
+
+        }
+
+         [Given(@"I create a shared content item with the following data")]
+        public void GivenICreateASharedContentItemWithTheFollowingData(Table table)
+        {
+            InsertSharedContent("sharedcontent", table);
+        }
+
+        [Given(@"I create a ""(.*)"" item with the following data")]
+        public void GivenICreateAItemWithTheFollowingData(string p0, Table table)
+        {
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            InsertSharedContent(contentTypeName, table);
+        }
+
+        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
+        public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
+        {
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            InsertSharedContent(contentTypeName, table);
+
+            AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
+        }
+
+        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" to item (.*) with the following data")]
+        public void GivenICreateAnItemOfRelatedByToItemWithTheFollowingData(string p0, string p1, int p2, Table table)
+        {
+            // assume non zero based index is supplied
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            var item = InsertSharedContent(contentTypeName, table);
+
+            _DataItem parentItem = context.GetDataItems()[p2 - 1];
+
+            AddRelationship(context.GetUri(p2 -1), context.GetLatestUri(), p1);
+            context.RelateDataItems(p2 - 1, context.GetNumberOfStoredUris() - 1, item.Title, p1);
+        }
+
 
         [Given(@"I request all occupations from the NCS API")]
         public void GivenIRequestAllOccupationsFromTheNCSAPI()
@@ -122,58 +230,111 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.SetOccupationListData(occupations);
         }
 
-        public static Dictionary<string, string> ToDictionary(Table table)
-        {
-            var dictionary = new Dictionary<string, string>();
-            foreach (var row in table.Rows)
-            {
-                dictionary.Add(row[0], row[1]);
-            }
-            return dictionary;
-        }
-
         [Given(@"I want to supply an invalid security header")]
         public void GivenIWantToSupplyAnInvalidSecurityHeader()
         {
-            context["securityHeader"] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
+            context[constants.securityHeader] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
         }
 
         [Given(@"I want to fail to send a security header")]
         public void GivenIWantToFailToSendASecurityHeader()
         {
-            context["securityHeader"] = new Dictionary<string, string>() ;
+            context[constants.securityHeader] = new Dictionary<string, string>() ;
         }
 
         [Given(@"I want to supply ""(.*)"" as a parameter in the following request")]
         public void GivenIWantToSupplyAsAParameterInTheFollowingRequest(string p0)
         {
-            context["requestParam"] = p0;
+            context[constants.requestParam] = p0;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)""")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
         {
             string requestBody = "{}";
-            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
-            var requestItems = ToDictionary(table);
+            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            var requestItems = table.ToSimpleDictionary();
             foreach ( var item in requestItems )
             {
                requestBody = JsonHelper.AddPropertyToJsonString(requestBody, item.Key, item.Value);
             }
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, ( context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders() ) );
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, context.GetTaxonomyApiHeaders());
             //response.StatusCode.Should().Be(HttpStatusCode.OK);
-            context["responseStatus"] = response.StatusCode;
-            context["responseBody"] = response.Content;
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)"" with request body")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPIWithRequestBody(string p0, string multilineText)
         {
-            string param = (context.ContainsKey("requestParam") ? context["requestParam"].ToString() : "");
-            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, (context.ContainsKey("securityHeader") ? (Dictionary<string, string>)context["securityHeader"] : context.GetTaxonomyApiHeaders()));
-            //response.StatusCode.Should().Be(HttpStatusCode.OK);
-            context["responseStatus"] = response.StatusCode;
-            context["responseBody"] = response.Content;
+            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, context.GetTaxonomyApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+        }
+
+        [Given(@"I make a request to the content API")]
+        public void GivenIMakeARequestToTheContentAPI()
+        {
+            string uri = context.GetLatestUri();
+            var response = RestHelper.Get(uri, context.GetTaxonomyApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSingle;
+        }
+
+        [Given(@"I make a request to the content API to retrive all ""(.*)"" items")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string p0)
+        {
+            string uri = context.GetContentUri(context.ReplaceTokensInString(p0));
+            var response = RestHelper.Get(uri,context.GetContentApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSummary;
+        }
+
+        [Given(@"I make a request to the content API to retrive item (.*)")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveItem(int p0)
+        {
+            string uri = context.GetUri(p0-1);
+            var response = RestHelper.Get(uri, context.GetContentApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSingle;
+        }
+
+
+        [When(@"I build the expected response for item (.*)")]
+        public void WhenIBuildTheExpectedResponseForItem(int p0)
+        {
+            bool singleResponse = (string)context[constants.responseScope] == constants.resultSingle;
+            string json = "";
+
+            if (singleResponse)
+            {
+                string uri = context.GetUri(p0 - 1);
+                _DataItem requestedItem = context.GetDataItems()[p0 - 1];
+
+                json = JsonConvert.SerializeObject(requestedItem.model);
+
+                json = addLinksToJson(json, requestedItem);
+            }
+            else
+            {
+                JArray newArray = new JArray();
+                string jsonItem = "";
+                // assume for now that all data items are of the requested type
+                foreach( var item in context.GetDataItems())
+                {
+                    jsonItem = JsonConvert.SerializeObject(item.model);
+                    //TODO remove properties that aren't in expected summary
+                    //FORNOW assume it is going to be a sharecontent item and just remove "content"
+                    jsonItem = JsonHelper.RemovePropertyFromJsonString(jsonItem,"Content");
+                    newArray.Add(new JObject(JObject.Parse(jsonItem) ));
+                }
+                json = newArray.ToString();
+            }
+            context["expectedResult"] = json;
         }
 
 
@@ -350,6 +511,37 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             match.Should().BeTrue();
         }
 
+        [Then(@"the response matches the created item")]
+        public void ThenTheResponseMatchesTheCreatedItem()
+        {
+            var createdItem = context.GetDataItems().Last();
+            string responseJson = (string)context[constants.responseContent];
+            string itemJson = JsonConvert.SerializeObject(createdItem);
+            itemJson = JsonHelper.AddPropertyToJsonString(itemJson,"_links", "[{}]");
+
+            var result = JsonHelper.CompareJsonString(itemJson, responseJson);
+            result.Should().BeTrue("Because the data returned should match the created item");
+        }
+
+        [Then(@"the response includes all items of type ""(.*)""")]
+        public void ThenTheResponseIncludesAllItemsOfType(string p0)
+        {
+            string responses = "";
+            int numberOfItems = context.GetDataItems().Count;
+            int itemCount = 0;
+            foreach ( var item in context.GetDataItems())
+            {
+                bool lastItem = ++itemCount == numberOfItems;
+                responses += $"{JsonConvert.SerializeObject(item)}{(lastItem ? "" : ",")}";
+            }
+            string itemJson = $"[{responses}]";
+            string responseJson = (string)context[constants.responseContent];
+
+            var result = JsonHelper.CompareJsonString(itemJson, responseJson);
+            result.Should().BeTrue("Because the data returned should include all the created items");
+        }
+
+
 
         [Then(@"the alternate labels listed for first Occupation returned matches esco data")]
         public void ThenTheAlternateLabelsListedForFirstOccupationReturnedMatchesEscoData()
@@ -466,23 +658,45 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.GetSkillListData().Count.Should().Be(context.GetExpectedRecordCount());
         }
 
+        [Then(@"the response matches the expectation")]
+        public void ThenTheResponseMatchesTheExpectation()
+        {
+            string message = "";
+            string expectedResult = (string)context["expectedResult"];
+
+            bool match = JsonHelper.CompareJsonString(expectedResult, (string)context[constants.responseContent], out message);
+            match.Should().BeTrue(message);
+        }
+
+
         [Then(@"the response json matches:")]
         public void ThenTheResponseJsonMatches(string multilineText)
         {
             // replace any tokens in the expected response
             foreach ( var item in context.GetTokens())
             {
-                multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
+                //TODO standardise token use
+                if (item.Key.Contains("__"))
+                {
+                    multilineText = multilineText.Replace($"{item.Key}", item.Value);
+                }
+                else
+                {
+                    multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
+                }
             }
-            JsonHelper.CompareJsonString(multilineText, (string)context["responseBody"]).Should().BeTrue();
+            string message = "";
+            bool match = JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseContent], out message);
+            match.Should().BeTrue(message);
 
         }
+
 
         [Then(@"the response json has collection ""(.*)"" with an item matching")]
         public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)
         {
             bool bMatch = false;
-            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context["responseBody"]);
+            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[constants.responseContent]);
             dynamic includedCollection = responseJson[p0];
             foreach ( var item in includedCollection)
             {
@@ -497,7 +711,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with element ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementRemovedMatches(string p0, string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
         }
@@ -505,7 +719,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with elements ""(.*)"" and ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementsAndRemovedMatches(string p0, string p1, string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             strippedResonse = JsonHelper.RemovePropertyFromJsonString(strippedResonse, p1);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
@@ -516,7 +730,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheElementInTheCollectionHasDistinctValues(string p0, string p1)
         {
             Dictionary<string, string> distinctValues = new Dictionary<string, string>();
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseContent];
             var collection = JsonHelper.GetCollectionPropertyFromJson(response, p1);
             
             foreach ( var item in collection)
@@ -538,7 +752,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the count of collection ""(.*)"" is (.*)")]
         public void ThenTheCountOfCollectionIs(string p0, int p1)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseContent];
             JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
         }
 
@@ -548,13 +762,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response value for ""(.*)"" is an empty array")]
         public void ThenTheValueForIsAnEmptyArray(string p0)
         {
-            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context["responseBody"]);
+            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[constants.responseContent]);
         }
 
         [Then(@"the response body includes the text:")]
         public void ThenTheResponseBodyIncludesTheText(string multilineText)
         {
-            string response = (string)context["responseBody"];
+            string response = (string)context[constants.responseContent];
             bool check = response.Contains(multilineText);
             check.Should().BeTrue();
         }
@@ -563,13 +777,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response code is (.*)")]
         public void ThenTheResponseCodeIs(int p0)
         {
-            context["responseStatus"].Should().Be(p0);
+            context[constants.responseStatus].Should().Be(p0);
         }
 
         [Then(@"the the response message is (.*)")]
         public void ThenTheTheResponseMessageIs(string p0)
         {
-            context["responseBody"].Should().Be(p0);
+            context[constants.responseContent].Should().Be(p0);
          }
 
 

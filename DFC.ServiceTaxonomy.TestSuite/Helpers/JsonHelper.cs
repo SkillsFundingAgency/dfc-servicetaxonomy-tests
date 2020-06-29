@@ -132,6 +132,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             return obj.ToString();
         }
 
+        public static string AddPropertyToJsonString(string json, string property, JObject value)
+        {
+            //if (CheckJsonPropertyIsPresent(json, property))
+            //{
+            //    return SetPropertyInJsonString(json, property, value);
+            //}
+            var obj = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(json);
+            obj.Add(property, value);
+            return obj.ToString();
+        }
+
         public static string SetPropertyInJsonString(string json, string property, string value)
         {
             var obj = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(json);
@@ -168,14 +179,72 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             return array.ToList<dynamic>();
         }
 
+        public static bool CompareJsonString(string json1, string json2, out string message)
+        {
+            message = "";
+            JObject o1 = null; 
+            JObject o2 = null;
+            bool match = false;
+            try
+            {
+                o1 = JObject.Parse(json1);
+                o2 = JObject.Parse(json2);
+
+                match = JToken.DeepEquals(o1, o2);
+                if (!match)
+                {
+                    foreach (KeyValuePair<string, JToken> sourceProperty in o1)
+                    {
+
+
+                        if (o2.ContainsKey(sourceProperty.Key))
+                        {
+                            JProperty targetProp = o2.Property(sourceProperty.Key);
+                            if (!JToken.DeepEquals(sourceProperty.Value, targetProp.Value))
+                            {
+                                message += string.Format("Item 1: {0} property value mismatch", sourceProperty.Key);
+                                message += $"\n From 1: \n{sourceProperty.Value}";
+                                message += $"\n From 2: \n{targetProp.Value}";
+                            }
+                        }
+                        else
+                        {
+                            message += string.Format("Item 1: {0} property missing", sourceProperty.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, JToken> sourceProperty in o2)
+                    {
+                        if (!o1.ContainsKey(sourceProperty.Key))
+                        {
+                            message += string.Format("Item 2: {0} property missing", sourceProperty.Key);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("Current JsonReader item is not an object"))
+                {
+                    // try and process as array
+                    JArray j1 = JArray.Parse(json1);
+                    JArray j2 = JArray.Parse(json2);
+
+                    match = JToken.DeepEquals(o1, o2);
+                    if (!match)
+                    {
+                        message = "JSON arrays do not match. This could be due to mismatch in items or ordering of those items";
+                    }
+                }
+                else throw (e);
+            }
+            return match;
+        }
+
         public static bool CompareJsonString( string json1, string json2)
         {
-            JObject o1 = JObject.Parse(json1);
-            JObject o2 = JObject.Parse(json2);
-
-            return JToken.DeepEquals(o1, o2);
-
-            //return JToken.ReferenceEquals(o1, o2);
+            string message;
+            return CompareJsonString(json1, json2, out message);
         }
     }
 }
