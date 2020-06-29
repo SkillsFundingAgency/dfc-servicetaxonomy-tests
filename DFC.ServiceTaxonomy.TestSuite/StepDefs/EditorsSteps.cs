@@ -13,6 +13,8 @@ using TechTalk.SpecFlow.Assist;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -37,15 +39,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     public sealed class EditorsSteps
     {
         #region consts
-        private const string cypher_activityByUri = "match(a:ncs__Activity { uri: $uri }) return a.skos__prefLabel as Title, a.uri as uri";
-        private const string cypher_DayToDayTaskByUri = "match(a:ncs__DayToDayTask { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
-        private const string cypher_OtherRequirementByUri = "match(a:ncs__OtherRequirement { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
-        private const string cypher_FurtherInfoByUri = "match(a:ncs__FurtherInfo { uri: $uri }) return a.skos__prefLabel as Title, a.ncs__Link_url as Url, a.ncs__Link_text as LinkText";
-        private const string cypher_UniverstyLinkByUri = "match(a:ncs__UniversityLink { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Url as Description, a.ncs__Link_url as Url, a.ncs__Link_text as LinkText";
-        private const string cypher_SharedContentByUri = "match(a:ncs__SharedContent { uri: $uri }) return a.skos__prefLabel as Title, a.ncs__Content as Content";
-        private const string cypher_GenericItemWithDescriptionByUri = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Description as Description";
-        private const string cypher_GenericItemWithTextByUri = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.ncs__Text as Text";
-        private const string cypher_TestItem = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri @FIELDLIST";
+        private const string cypher_activityByUri = "match(a:Activity { uri: $uri }) return a.skos__prefLabel as Title, a.uri as uri";
+        private const string cypher_DayToDayTaskByUri = "match(a:DayToDayTask { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.Description as Description";
+        private const string cypher_OtherRequirementByUri = "match(a:OtherRequirement { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.Description as Description";
+        private const string cypher_FurtherInfoByUri = "match(a:FurtherInfo { uri: $uri }) return a.skos__prefLabel as Title, a.Link_url as Url, a.Link_text as LinkText";
+        private const string cypher_UniverstyLinkByUri = "match(a:UniversityLink { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.Url as Description, a.Link_url as Url, a.Link_text as LinkText";
+        private const string cypher_SharedContentByUri = "match(a:SharedContent { uri: $uri }) return a.skos__prefLabel as Title, a.Content as Content";
+        private const string cypher_GenericItemWithDescriptionByUri = "match(a:@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.Description as Description";
+        private const string cypher_GenericItemWithTextByUri = "match(a:@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri, a.Text as Text";
+        private const string cypher_TestItem = "match(a:@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri @FIELDLIST";
 
         private const string sql_ContentItemIdPlaceholder = "__ContentItemId__";
         private const string sql_ContentItemIndexes = "select * from dbo.contentitemindex a where a.ContentItemId = '__ContentItemId__' order by ModifiedUtc desc ";
@@ -202,7 +204,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIEnterTheFollowingFormData(Table table)
         {
             string contentType = (string)_scenarioContext[constants.ContentType];
-            string cypher = "match(a:ncs__@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri";
+            string cypher = "match(a:@CONTENTTYPE@ { uri: $uri }) return a.skos__prefLabel as Title, a.uri as Uri";
             //_scenarioContext[constants.responseType] = typeof(DayToDayTask);
 
             Dictionary<string, string> expectedData = new Dictionary<string, string>();
@@ -211,7 +213,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 _addContentItemBase.SetFieldValueFromType(contentType, row[0], row[1], row[2]);
                 if (row[0] != "Title")
                 {
-                    cypher += ", a.ncs__" + row[0] + " as " + row[0];
+                    cypher += ", a." + row[0] + " as " + row[0];
                 }
                 expectedData.Add(row[0], row[1]);
             }
@@ -424,6 +426,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _GraphSyncPart.SaveChanges();
         }
+
+        [Given(@"I click the Display Id checkbox")]
+        public void GivenIClickTheDisplayIdCheckbox()
+        {
+            try
+            {
+
+                var element = _scenarioContext.GetWebDriver().FindElement(By.Id("AutomatedTestItem_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_DisplayId"));
+
+                Actions builder = new Actions(_scenarioContext.GetWebDriver());
+                var mouseUp = builder.MoveToElement(element)
+                                         .Click()
+                                         .Build(); ;
+                mouseUp.Perform();
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
 
         [Given(@"I save the contentItem")]
         public void GivenISaveTheContentItem()
@@ -755,7 +779,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             // now check all neo4j records have been synced
             done = false;
-            string cypher = "match(a:ncs__" + table + ") return count(a)";
+            string cypher = "match(a:" + table + ") return count(a)";
             int neo4jRecordCount = 0;
             bool tmModExtended = false;
             while (!done)

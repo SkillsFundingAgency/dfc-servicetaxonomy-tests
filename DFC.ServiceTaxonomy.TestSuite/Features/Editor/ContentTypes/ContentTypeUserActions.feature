@@ -22,6 +22,7 @@ Scenario: Add a new content type with Title Part
 	| CreateRelationshipType |                                                                                        |
 	| IDPropertyName         | uri                                                                                    |
 	| GenerateIDValue        | $"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid():D}" |
+	And I click the Display Id checkbox
 	And I save the edited part
 	And I add the following fields
 	| Display Name | Type          |
