@@ -4,8 +4,16 @@ using System.Text;
 
 namespace DFC.ServiceTaxonomy.TestSuite
 {
+    public enum TeardownOption
+    {
+        None,
+        Sql,
+        Graph,
+        All
+    }
     public static class constants
     {
+
         // scenario context storage tags
         public const string tokens = "tokens";
         public const string dataItems = "dataItems";
@@ -14,6 +22,10 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string responseContent = "responseContent";
         //public const string responseBody = "responseBody";
         public const string responseType = "responseType";
+        public const string responseScope = "responseScope";
+        public const string resultSummary = "resultSummary";
+        public const string resultSingle = "resultSingle";
+
         public const string requestParam = "requestParam";
         public const string requestVariables = "requestVariables";
         public const string contentItemIndexes = "contentItemIndexes";
@@ -27,8 +39,6 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string ContentType = "contentType";
         public const string Title = "Title";
         public const string FieldName = "FieldName";
-
-
 
         //cypher query template
         public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";

@@ -1036,7 +1036,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIDeleteGraphDataForContentType(string p0)
         {
             //todo make use of extension method
-            string cypher = "match (n) where any(l in labels(n) where l starts with '" + p0 + "') detach delete n";
+            string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(p0) + "') detach delete n";
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                 _scenarioContext.GetEnv().neo4JUid,

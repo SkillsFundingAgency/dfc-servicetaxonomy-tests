@@ -15,7 +15,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     public static class DataManagementExtension
     {
         private static Random random = new Random();
-        private static Dictionary<string, string> tokens = new Dictionary<string,string>();
+       
 
         public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
@@ -89,13 +89,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static string RandomString(this ScenarioContext context, int length)
         {
-            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public static void StoreToken(this ScenarioContext context, string token, string value)
         {
+           var tokens = GetTokens(context);
            if (!tokens.ContainsKey(token))
            {
                 tokens.Add(token, value);
@@ -109,11 +110,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static Dictionary<string, string> GetTokens(this ScenarioContext context)
         {
-           return tokens;
+            Dictionary<string, string> tokens = context.ContainsKey(constants.tokens) ? (Dictionary<String, string>)context[constants.tokens] : new Dictionary<string, string>();
+            return tokens;
         }
 
         public static string ReplaceTokensInString(this ScenarioContext context, string text)
         {
+            var tokens = GetTokens(context);
             string newText = text;
             foreach ( var token in tokens)
             {

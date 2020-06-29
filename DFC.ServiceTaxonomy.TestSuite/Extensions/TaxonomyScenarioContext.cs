@@ -1,7 +1,9 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using TechTalk.SpecFlow;
 
@@ -42,13 +44,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keyExpectedRecordCount = "ExpectedRecordCount";
         #endregion
 
-        private static List<_DataItem> dataItems;
 
-        static TaxonomyScenarioContextExtension()
-        {
-            dataItems = new List<_DataItem>();
-        }
- 
+
         public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
@@ -143,19 +140,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set<IList<Occupation>>(occupations, keyOccupationData);
         }
 
-        public static void StoreUri(this ScenarioContext context, string newUri, TeardownOption teardownOption = TeardownOption.None)
+        public static void StoreUri(this ScenarioContext context, string newUri, string type,  Object model , TeardownOption teardownOption)
         {
-            dataItems.Add(new _DataItem(newUri, teardownOption) );
+            var dataItems = GetDataItems(context);
+            dataItems.Add(new _DataItem(newUri, type, model, teardownOption) );
             context[constants.dataItems] = dataItems;
+        }
+
+        public static void StoreUri(this ScenarioContext context, string newUri)
+        {
+            StoreUri(context, string.Empty, newUri, null, TeardownOption.None);
+        }
+
+        public static bool RelateDataItems(this ScenarioContext context, int parentRef, int childRef, string title, string relationshipType)
+        {
+            var dataItems = GetDataItems(context);
+            try
+            {
+                dataItems[parentRef].linkedItems.Add(new _LinkedItem( title, relationshipType, dataItems[childRef]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to add relationship: {e.Message}");
+                
+            }
+            return true;
         }
 
         public static List <_DataItem> GetDataItems(this ScenarioContext context)
         {
+            List<_DataItem> dataItems = context.ContainsKey(constants.dataItems) ? (List<_DataItem>)context[constants.dataItems] : new List<_DataItem>(); ;
             return dataItems;
         }
 
         public static string GetLatestUri(this ScenarioContext context)
         {
+            var dataItems = GetDataItems(context);
             if (dataItems.Count == 0)
                 return "";
 
@@ -165,6 +185,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static string GetUri(this ScenarioContext context, int index)
         {
+            var dataItems = GetDataItems(context);
             if (dataItems.Count < index - 1)
                 return "";
 
@@ -173,17 +194,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static int GetNumberOfStoredUris(this ScenarioContext context)
         {
+            var dataItems = GetDataItems(context);
             return dataItems.Count;
         }
 
         public static string GenerateUri(this ScenarioContext context, string contentType)
         {
-            return $"{context.GetEnv().taxonomyApiBaseUrl}/{contentType}/{Guid.NewGuid().ToString()}";
+            return $"{context.GetEnv().contentApiBaseUrl}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
         }
 
         public static string GetContentUri(this ScenarioContext context, string contentType)
         {
-            return $"{context.GetEnv().taxonomyApiBaseUrl}/{contentType}";
+            return $"{context.GetEnv().contentApiBaseUrl}/{contentType}";
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
@@ -216,10 +238,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context[constants.contentIds] = uris;
         }
 
+        private static List<string> GetIds(this ScenarioContext context)
+        {
+            //expect zero based index
+            List<string> ids = (context.ContainsKey(constants.recordIds) ? (List<string>)context[constants.recordIds] : new List<string>());
+            return ids;
+        }
+
         public static string GetContentItemId(this ScenarioContext context, int index)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
+            var ids = GetIds(context);
 
             if (ids.Count < index - 1)
             {
@@ -231,24 +260,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static int GetNumberOfStoredContentIds(this ScenarioContext context)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
+            var ids = GetIds(context);
             return ids.Count;
         }
 
         public static void StoreRecordId(this ScenarioContext context, string newId)
         {
-            List<string> ids;
             int count = (context.ContainsKey(constants.recordIdCount) ? (int)context[constants.recordIdCount] : 0);
-            if (count == 0)
-            {
-                //initialise
-                ids = new List<string>();
-            }
-            else
-            {
-                //retreive
-                ids = (List<string>)context[constants.recordIds];
-            }
+            var ids = GetIds(context);
             ids.Add(newId);
             count++;
             context[constants.recordIdCount] = count;
@@ -258,7 +277,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static string GetId(this ScenarioContext context, int index)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey(constants.recordIds) ? (List<string>)context[constants.recordIds] : new List<string>());
+            var ids = GetIds(context);
 
             if (ids.Count < index + 1 )
             {
@@ -318,6 +337,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                                         { "Content-Type", "application/json" },
                                                         { "Ocp-Apim-Subscription-Key", context.GetJobProfileSubscriptionKey() },
                                                         { "version", "v1" }
+                                                   };
+        }
+
+        public static Dictionary<string, string> GetContentApiHeaders(this ScenarioContext context)
+        {
+            return new Dictionary<string, string>(){
+                                                        { "Content-Type", "application/json" },
+                                                        { "Ocp-Apim-Subscription-Key", context.GetEnv().contentApiSubscriptionKey }
                                                    };
         }
 

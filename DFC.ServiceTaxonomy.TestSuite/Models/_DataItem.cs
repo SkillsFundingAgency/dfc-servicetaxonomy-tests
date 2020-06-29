@@ -4,21 +4,17 @@ using System.Text;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Models
 {
-    public enum TeardownOption
-    {
-        None,
-        Sql,
-        Graph,
-        All
-    }
+
     public class _DataItem
     {
+        public List<_LinkedItem> linkedItems = new List<_LinkedItem>();
         public string Uri { get; }
         public TeardownOption TearDownOption { get; }
         public bool TearDownSql { get; }
         public bool TearDownGraph { get; }
-
-        public _DataItem(string uri, TeardownOption option)
+        public object model { get; set; }
+        public string TypeName { get; set; }
+        public _DataItem(string uri, string type, object m, TeardownOption option)
         {
             Uri = uri;
             switch (option)
@@ -40,6 +36,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
                     TearDownGraph = false;
                     break;
             }
+            model = m;
+            TypeName = type;
         }
     }
 

@@ -16,6 +16,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using AngleSharp.Io;
 using AngleSharp.Common;
+using System.Text.RegularExpressions;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -39,13 +40,90 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context = injectedContext;
         }
 
+        public string getNth(string str, char splitChar, int n)
+        {
+            int idx;
+            string newString = "";
+            var count = 0;
+            do
+            {
+                idx = str.IndexOf(splitChar);
+                newString += $"{str.Substring(0, idx)}{(++count < n ? splitChar.ToString() : string.Empty)}";
+                str = str.Substring(idx + 1);
+            } while (count < n);
+            return newString;
+        }
+
+        public string addLinksToJson(string json, _DataItem item)
+        {
+            int count = item.Uri.Count(f => f == '/');
+            string curie = getNth(item.Uri, '/', count - 1);
+            string id = item.Uri.Substring(item.Uri.LastIndexOf("/")+1);
+
+
+            JObject linkDetails = new JObject();
+
+            var groups = item.linkedItems.Select(x => x.RelationshipType)
+                                         .GroupBy(r => r)
+                                         .Select(g => new { Name = g.Key.ToString(), Count = g.Count() })
+                                         .OrderBy( o => o.Name);
+
+            if (groups.Count() > 0)
+            {
+                linkDetails.Add(new JProperty("self", item.Uri));
+                linkDetails.Add(new JProperty("curies",
+                                    new JArray(
+                                        new JObject(
+                                            new JProperty("name", "cont"),
+                                            new JProperty("href", curie)
+                                                   )
+                                              )
+                                       )
+                               );
+            }
+
+            foreach ( var group in groups)
+            {
+                bool asArray = group.Count > 1;
+                JContainer groupMembers = linkDetails;
+                if (asArray)
+                    groupMembers = new JArray();
+
+                foreach (var linkItem in item.linkedItems.Where( x => x.RelationshipType == group.Name).OrderByDescending(x => x.Title))
+                {
+                    JObject link = new JObject(
+                                        new JProperty("href", linkItem.RelatedItem.Uri.Replace(curie, string.Empty)),
+                                        new JProperty("title", linkItem.Title),
+                                        new JProperty("contentType", linkItem.RelatedItem.TypeName)
+                                        );
+                    if (asArray)
+                    {
+                        groupMembers.Add(link);
+                    }
+                    else
+                    {
+                        groupMembers.Add(new JProperty($"cont:{linkItem.RelationshipType}", link));
+                    }
+                    
+                }
+                if (asArray)
+                {
+                    linkDetails.Add(new JProperty($"cont:{group.Name}", groupMembers));
+                }
+            }
+            json = JsonHelper.AddPropertyToJsonString(json, "id", id);
+            json = JsonHelper.AddPropertyToJsonString(json, "_links", linkDetails);
+            return json;
+        }
+
+
         [Given(@"I define a test type and call it ""(.*)""")]
         public void GivenIDefineATestTypeAndCallIt(string p0)
         {
-            context.StoreToken(p0, context.RandomString(10));
+            context.StoreToken(p0, context.RandomString(10).ToLower());
         }
 
-        private void InsertSharedContent( string name, Table dataTable)
+        private SharedContent InsertSharedContent( string name, Table dataTable)
         {
             SharedContent newItem = dataTable.CreateInstance<SharedContent>();
             newItem.uri = context.GenerateUri(name);
@@ -59,10 +137,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             var response = neo4JHelper.ExecuteTableQuery(cypher, null);
 
-            context.StoreUri(newItem.uri, TeardownOption.Graph);
+            context.StoreUri(newItem.uri, name, newItem, TeardownOption.Graph);
+            context.StoreToken($"__URI{context.GetNumberOfStoredUris()}__", newItem.uri);
+            return newItem;
         }
 
-        [Given(@"I create a shared content item with the following data")]
+        private void AddRelationship( string uri1, string uri2, string relationshipName)
+        {
+            String cypher = CypherHelper.AddRelationship("uri", uri1, uri2, relationshipName);
+
+
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+
+            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
+
+        }
+
+         [Given(@"I create a shared content item with the following data")]
         public void GivenICreateASharedContentItemWithTheFollowingData(Table table)
         {
             InsertSharedContent("sharedcontent", table);
@@ -73,6 +167,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string contentTypeName = context.ReplaceTokensInString(p0);
             InsertSharedContent(contentTypeName, table);
+        }
+
+        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
+        public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
+        {
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            InsertSharedContent(contentTypeName, table);
+
+            AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
+        }
+
+        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" to item (.*) with the following data")]
+        public void GivenICreateAnItemOfRelatedByToItemWithTheFollowingData(string p0, string p1, int p2, Table table)
+        {
+            // assume non zero based index is supplied
+            string contentTypeName = context.ReplaceTokensInString(p0);
+            var item = InsertSharedContent(contentTypeName, table);
+
+            _DataItem parentItem = context.GetDataItems()[p2 - 1];
+
+            AddRelationship(context.GetUri(p2 -1), context.GetLatestUri(), p1);
+            context.RelateDataItems(p2 - 1, context.GetNumberOfStoredUris() - 1, item.Title, p1);
         }
 
 
@@ -164,18 +280,62 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var response = RestHelper.Get(uri, context.GetTaxonomyApiHeaders());
             context[constants.responseStatus] = response.StatusCode;
             context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSingle;
         }
 
         [Given(@"I make a request to the content API to retrive all ""(.*)"" items")]
         public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string p0)
         {
-            string uri = context.GetContentUri(p0);
-            var response = RestHelper.Get(uri,context.GetTaxonomyApiHeaders());
+            string uri = context.GetContentUri(context.ReplaceTokensInString(p0));
+            var response = RestHelper.Get(uri,context.GetContentApiHeaders());
             context[constants.responseStatus] = response.StatusCode;
             context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSummary;
+        }
+
+        [Given(@"I make a request to the content API to retrive item (.*)")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveItem(int p0)
+        {
+            string uri = context.GetUri(p0-1);
+            var response = RestHelper.Get(uri, context.GetContentApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSingle;
         }
 
 
+        [When(@"I build the expected response for item (.*)")]
+        public void WhenIBuildTheExpectedResponseForItem(int p0)
+        {
+            bool singleResponse = (string)context[constants.responseScope] == constants.resultSingle;
+            string json = "";
+
+            if (singleResponse)
+            {
+                string uri = context.GetUri(p0 - 1);
+                _DataItem requestedItem = context.GetDataItems()[p0 - 1];
+
+                json = JsonConvert.SerializeObject(requestedItem.model);
+
+                json = addLinksToJson(json, requestedItem);
+            }
+            else
+            {
+                JArray newArray = new JArray();
+                string jsonItem = "";
+                // assume for now that all data items are of the requested type
+                foreach( var item in context.GetDataItems())
+                {
+                    jsonItem = JsonConvert.SerializeObject(item.model);
+                    //TODO remove properties that aren't in expected summary
+                    //FORNOW assume it is going to be a sharecontent item and just remove "content"
+                    jsonItem = JsonHelper.RemovePropertyFromJsonString(jsonItem,"Content");
+                    newArray.Add(new JObject(JObject.Parse(jsonItem) ));
+                }
+                json = newArray.ToString();
+            }
+            context["expectedResult"] = json;
+        }
 
 
         [Given(@"I request all skills from the NCS API")]
@@ -498,17 +658,39 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.GetSkillListData().Count.Should().Be(context.GetExpectedRecordCount());
         }
 
+        [Then(@"the response matches the expectation")]
+        public void ThenTheResponseMatchesTheExpectation()
+        {
+            string message = "";
+            string expectedResult = (string)context["expectedResult"];
+
+            bool match = JsonHelper.CompareJsonString(expectedResult, (string)context[constants.responseContent], out message);
+            match.Should().BeTrue(message);
+        }
+
+
         [Then(@"the response json matches:")]
         public void ThenTheResponseJsonMatches(string multilineText)
         {
             // replace any tokens in the expected response
             foreach ( var item in context.GetTokens())
             {
-                multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
+                //TODO standardise token use
+                if (item.Key.Contains("__"))
+                {
+                    multilineText = multilineText.Replace($"{item.Key}", item.Value);
+                }
+                else
+                {
+                    multilineText = multilineText.Replace($"{tokenChar}{item.Key}{tokenChar}", item.Value);
+                }
             }
-            JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseContent]).Should().BeTrue();
+            string message = "";
+            bool match = JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseContent], out message);
+            match.Should().BeTrue(message);
 
         }
+
 
         [Then(@"the response json has collection ""(.*)"" with an item matching")]
         public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)

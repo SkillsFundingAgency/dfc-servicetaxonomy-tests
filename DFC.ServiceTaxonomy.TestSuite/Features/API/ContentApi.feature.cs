@@ -73,40 +73,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 3
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Title",
-                        "Content"});
-            table1.AddRow(new string[] {
-                        "First Item",
-                        "<p>Something</p>"});
-#line 5
-testRunner.Given("I create a shared content item with the following data", ((string)(null)), table1, "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Title",
-                        "Content"});
-            table2.AddRow(new string[] {
-                        "Second Item",
-                        "<p>Something</p>"});
-#line 8
-testRunner.Given("I create a shared content item with the following data", ((string)(null)), table2, "Given ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Request an NCS item by id")]
+        [NUnit.Framework.DescriptionAttribute("Request an NCS item by invalid Type")]
         [NUnit.Framework.CategoryAttribute("ContentApi")]
-        public virtual void RequestAnNCSItemById()
+        public virtual void RequestAnNCSItemByInvalidType()
         {
             string[] tagsOfScenario = new string[] {
                     "ContentApi"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an NCS item by id", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an NCS item by invalid Type", null, new string[] {
                         "ContentApi"});
-#line 13
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -126,29 +102,29 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 3
-this.FeatureBackground();
+#line 7
+ testRunner.Given("I define a test type and call it \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 14
- testRunner.Given("I make a request to the content API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 8
+ testRunner.Given("I make a request to the content API to retrive all \"__TYPE__\" items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 15
- testRunner.Then("the response matches the created item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 9
+ testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Request an NCS item by invalid id")]
+        [NUnit.Framework.DescriptionAttribute("Request an NCS item by invalid Id")]
         [NUnit.Framework.CategoryAttribute("ContentApi")]
         public virtual void RequestAnNCSItemByInvalidId()
         {
             string[] tagsOfScenario = new string[] {
                     "ContentApi"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an NCS item by invalid id", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an NCS item by invalid Id", null, new string[] {
                         "ContentApi"});
-#line 18
+#line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -168,8 +144,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 3
-this.FeatureBackground();
+#line 13
+ testRunner.Given("I define a test type and call it \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content"});
+                table1.AddRow(new string[] {
+                            "First Item",
+                            "<p>Something</p>"});
+#line 14
+ testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table1, "And ");
+#line hidden
+#line 17
+ testRunner.And("I delete Graph data for content type \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 18
+ testRunner.Given("I make a request to the content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 19
+ testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -184,7 +178,7 @@ this.FeatureBackground();
                     "ContentApi"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request all NCS items of a type", null, new string[] {
                         "ContentApi"});
-#line 21
+#line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -204,44 +198,389 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 3
-this.FeatureBackground();
-#line hidden
-#line 22
+#line 23
  testRunner.Given("I define a test type and call it \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content"});
+                table2.AddRow(new string[] {
+                            "First Item",
+                            "<p>Something</p>"});
+#line 24
+ testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table2, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
                 table3.AddRow(new string[] {
-                            "First Item",
-                            "<p>Something</p>"});
-#line 23
+                            "2nd Item",
+                            "<p>Something else</p>"});
+#line 27
  testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table3, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Content"});
                 table4.AddRow(new string[] {
-                            "2nd Item",
-                            "<p>Something else</p>"});
-#line 26
+                            "3rd Item",
+                            "<p>Something more</p>"});
+#line 30
  testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table4, "And ");
+#line hidden
+#line 36
+ testRunner.Given("I make a request to the content API to retrive all \"__TYPE__\" items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 37
+ testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 38
+ testRunner.Then("the response matches the expectation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Request an item with a related item")]
+        [NUnit.Framework.CategoryAttribute("ContentApi")]
+        public virtual void RequestAnItemWithARelatedItem()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ContentApi"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an item with a related item", null, new string[] {
+                        "ContentApi"});
+#line 44
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 45
+ testRunner.Given("I define a test type and call it \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
-                            "Content"});
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
                 table5.AddRow(new string[] {
-                            "3rd Item",
-                            "<p>Something more</p>"});
-#line 29
+                            "First Item",
+                            "<p>Something</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 46
  testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table5, "And ");
 #line hidden
-#line 35
- testRunner.Given("I make a request to the content API to retrive all \"__TYPE__\" items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table6.AddRow(new string[] {
+                            "2nd Item",
+                            "<p>Something else</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 49
+ testRunner.And("I create an item of \"__TYPE__\" related by \"hasRelationship\" to item 1 with the fo" +
+                        "llowing data", ((string)(null)), table6, "And ");
 #line hidden
-#line 36
- testRunner.Then("the response includes all items of type \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 52
+ testRunner.Given("I make a request to the content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 53
+ testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 54
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 55
+ testRunner.Then("the response matches the expectation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Request an item with a number of related items")]
+        [NUnit.Framework.CategoryAttribute("ContentApi")]
+        public virtual void RequestAnItemWithANumberOfRelatedItems()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ContentApi"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an item with a number of related items", null, new string[] {
+                        "ContentApi"});
+#line 59
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 60
+ testRunner.Given("I define a test type and call it \"typea\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table7.AddRow(new string[] {
+                            "First Item",
+                            "<p>Something</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 61
+ testRunner.And("I create a \"__TYPEA__\" item with the following data", ((string)(null)), table7, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table8.AddRow(new string[] {
+                            "2nd Item",
+                            "<p>Something else</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 64
+ testRunner.And("I create an item of \"__TYPEA__\" related by \"hasRelationship\" to item 1 with the f" +
+                        "ollowing data", ((string)(null)), table8, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table9.AddRow(new string[] {
+                            "3rd Item",
+                            "<p>Something more</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 67
+ testRunner.And("I create an item of \"__TYPEA__\" related by \"hasOtherRelationship\" to item 1 with " +
+                        "the following data", ((string)(null)), table9, "And ");
+#line hidden
+#line 70
+ testRunner.Given("I make a request to the content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 71
+ testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 72
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 73
+ testRunner.Then("the response matches the expectation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Request an item with a number of related items of different types")]
+        [NUnit.Framework.CategoryAttribute("ContentApi")]
+        public virtual void RequestAnItemWithANumberOfRelatedItemsOfDifferentTypes()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ContentApi"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an item with a number of related items of different types", null, new string[] {
+                        "ContentApi"});
+#line 77
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 78
+ testRunner.Given("I define a test type and call it \"__TYPEA__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 79
+ testRunner.And("I define a test type and call it \"__TYPEB__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table10.AddRow(new string[] {
+                            "First Item",
+                            "<p>Something</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 80
+ testRunner.And("I create a \"__TYPEA__\" item with the following data", ((string)(null)), table10, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table11.AddRow(new string[] {
+                            "2nd Item",
+                            "<p>Something else</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 83
+ testRunner.And("I create an item of \"__TYPEA__\" related by \"hasRelationship\" to item 1 with the f" +
+                        "ollowing data", ((string)(null)), table11, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table12.AddRow(new string[] {
+                            "3rd Item",
+                            "<p>Something more</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 86
+ testRunner.And("I create an item of \"__TYPEA__\" related by \"hasRelationship\" to item 1 with the f" +
+                        "ollowing data", ((string)(null)), table12, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table13.AddRow(new string[] {
+                            "4th Item",
+                            "<p>Something different</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 89
+ testRunner.And("I create an item of \"__TYPEB__\" related by \"hasOtherRelationship\" to item 1 with " +
+                        "the following data", ((string)(null)), table13, "And ");
+#line hidden
+#line 92
+ testRunner.Given("I make a request to the content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 93
+ testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 94
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 95
+ testRunner.Then("the response matches the expectation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Request an item with an incoming relationship")]
+        [NUnit.Framework.CategoryAttribute("ContentApi")]
+        public virtual void RequestAnItemWithAnIncomingRelationship()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "ContentApi"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Request an item with an incoming relationship", null, new string[] {
+                        "ContentApi"});
+#line 99
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 100
+ testRunner.Given("I define a test type and call it \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table14.AddRow(new string[] {
+                            "First Item",
+                            "<p>Something</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 101
+ testRunner.And("I create a \"__TYPE__\" item with the following data", ((string)(null)), table14, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Content",
+                            "CreatedDate",
+                            "ModifiedDate"});
+                table15.AddRow(new string[] {
+                            "2nd Item",
+                            "<p>Something else</p>",
+                            "2020-06-17T16:04:41.68Z",
+                            "2020-06-17T16:04:41.68Z"});
+#line 104
+ testRunner.And("I create an item of \"__TYPE__\" related by \"hasRelationship\" to item 1 with the fo" +
+                        "llowing data", ((string)(null)), table15, "And ");
+#line hidden
+#line 107
+ testRunner.Given("I make a request to the content API to retrive item 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 108
+ testRunner.When("I build the expected response for item 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 109
+ testRunner.Then("the response code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 110
+ testRunner.Then("the response matches the expectation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

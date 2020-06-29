@@ -126,16 +126,16 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table66 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table76 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Url",
                             "LinkText"});
-                table66.AddRow(new string[] {
+                table76.AddRow(new string[] {
                             "My Test FurtherInfo item",
                             "http://testcom",
                             "more info here"});
 #line 13
- testRunner.And("I Enter the following form data for \"FurtherInfo\"", ((string)(null)), table66, "And ");
+ testRunner.And("I Enter the following form data for \"FurtherInfo\"", ((string)(null)), table76, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

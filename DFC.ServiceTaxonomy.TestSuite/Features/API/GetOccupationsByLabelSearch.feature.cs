@@ -531,11 +531,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
 #line 216
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table6, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table16, "Given ");
 #line hidden
 #line 218
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -582,14 +582,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table7.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 224
- testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table7, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table17, "Given ");
 #line hidden
 #line 227
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -639,14 +639,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 234
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table8.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 235
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table8, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table18, "And ");
 #line hidden
 #line 238
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -697,14 +697,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 250
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table9.AddRow(new string[] {
+                table19.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 251
- testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table9, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getoccupationsbylabelsearch\"", ((string)(null)), table19, "And ");
 #line hidden
 #line 254
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
