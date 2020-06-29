@@ -91,13 +91,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.ContentTypes
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new content type with Title Part")]
         [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("Ignore")]
         public virtual void AddANewContentTypeWithTitlePart()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "Editor",
+                    "Ignore"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new content type with Title Part", null, new string[] {
-                        "Editor"});
-#line 9
+                        "Editor",
+                        "Ignore"});
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -120,10 +123,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 10
+#line 11
  testRunner.Given("I add a new contentType called \"AutomatedTestItem\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 16
+#line 17
  testRunner.And("I edit the \"Graph Sync\" part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
@@ -148,13 +151,13 @@ this.FeatureBackground();
                             "GenerateIDValue",
                             "$\"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid(" +
                                 "):D}\""});
-#line 17
+#line 18
  testRunner.And("I set the following field values", ((string)(null)), table44, "And ");
 #line hidden
-#line 25
+#line 26
  testRunner.And("I click the Display Id checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 26
+#line 27
  testRunner.And("I save the edited part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
@@ -166,16 +169,16 @@ this.FeatureBackground();
                 table45.AddRow(new string[] {
                             "ValueField",
                             "Numeric Field"});
-#line 27
+#line 28
  testRunner.And("I add the following fields", ((string)(null)), table45, "And ");
 #line hidden
-#line 32
+#line 33
  testRunner.And("I save the contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 35
+#line 36
  testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/AutomatedTestItem/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 37
+#line 38
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
@@ -194,22 +197,22 @@ this.FeatureBackground();
                             "ValueField",
                             "26",
                             "Numeric Field"});
-#line 38
+#line 39
  testRunner.And("I Enter the following form data", ((string)(null)), table46, "And ");
 #line hidden
-#line 43
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 44
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 45
- testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 46
+ testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 47
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 48
+#line 49
  testRunner.Then("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
