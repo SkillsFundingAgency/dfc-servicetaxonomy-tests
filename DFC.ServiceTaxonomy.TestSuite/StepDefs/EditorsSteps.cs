@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -430,22 +429,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I click the Display Id checkbox")]
         public void GivenIClickTheDisplayIdCheckbox()
         {
-            try
-            {
-
-                var element = _scenarioContext.GetWebDriver().FindElement(By.Id("AutomatedTestItem_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_DisplayId"));
-
-                Actions builder = new Actions(_scenarioContext.GetWebDriver());
-                var mouseUp = builder.MoveToElement(element)
-                                         .Click()
-                                         .Build(); ;
-                mouseUp.Perform();
-
-            }
-            catch (Exception e)
-            {
-
-            }
+            string contentType = (string)_scenarioContext[constants.ContentType];
+            _GraphSyncPart.SetDisplayIdCheckbox(contentType);
         }
 
 

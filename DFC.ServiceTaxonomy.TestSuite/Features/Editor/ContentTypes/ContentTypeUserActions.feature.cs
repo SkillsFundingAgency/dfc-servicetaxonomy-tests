@@ -91,15 +91,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.ContentTypes
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new content type with Title Part")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Ignore")]
         public virtual void AddANewContentTypeWithTitlePart()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor",
-                    "Ignore"};
+                    "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new content type with Title Part", null, new string[] {
-                        "Editor",
-                        "Ignore"});
+                        "Editor"});
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

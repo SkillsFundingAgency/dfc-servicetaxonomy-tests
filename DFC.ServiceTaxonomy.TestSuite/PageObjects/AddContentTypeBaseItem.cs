@@ -150,7 +150,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 // click Save button
                _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Save']")).Click();
 
-                if (editorType.Length > 0)
+                if ( editorType != null && editorType.Length > 0)
                 {
                     // also set the editor type
                     SetFieldEditorType(contentType, displayName, editorType);

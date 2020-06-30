@@ -2,6 +2,7 @@
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,32 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
      
            return this;
         }
+        public GraphSyncPart SetDisplayIdCheckbox(string contentType, bool selected = true)
+        {
+
+            try
+            {
+                var element = _scenarioContext.GetWebDriver().FindElement(By.Id($"{contentType}_GraphSyncPart_GraphSyncPartSettingsDisplayDriver_DisplayId"));
+                if (element.Selected != selected)
+                {
+
+                    Actions builder = new Actions(_scenarioContext.GetWebDriver());
+                    var mouseUp = builder.MoveToElement(element)
+                                             .Click()
+                                             .Build(); ;
+                    mouseUp.Perform();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return this;
+        }
+
+        
 
         public GraphSyncPart SaveChanges()
         {
