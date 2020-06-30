@@ -2,6 +2,7 @@
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -74,12 +75,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                _scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + partName + "')]")).Click();
+                var element = _scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + partName + "')]/preceding-sibling::*"));
+                if (!element.Selected)
+                {
+                    Console.WriteLine($"Attempt to select {partName}");
+                    Actions builder = new Actions(_scenarioContext.GetWebDriver());
+                    var mouseUp = builder.MoveToElement(element)
+                                             .Click()
+                                             .Build(); ;
+                    mouseUp.Perform();
+                }
+                else 
+                {
+                    Console.WriteLine($"{partName} already selected");
+                }
 
             }
             catch (Exception e)
             {
-                throw e;
+               throw e;
             }
             return true;
         }
