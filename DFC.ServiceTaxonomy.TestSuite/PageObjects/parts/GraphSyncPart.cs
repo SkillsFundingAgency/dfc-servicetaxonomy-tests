@@ -111,7 +111,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-               Console.WriteLine(e);
+                throw (new Exception($"Unable to save changes to graph sync part\n{e.Message}"));
             }
             return this;
         }

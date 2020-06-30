@@ -60,7 +60,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed to add default parts to {name}.\nException: {e.message}");
+                Console.WriteLine($"Failed to add default parts to {name}.\nException: {e.Message}");
             }
             Console.WriteLine($"default parts added to {name}");
 
