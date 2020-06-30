@@ -149,7 +149,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void StoreUri(this ScenarioContext context, string newUri)
         {
-            StoreUri(context, string.Empty, newUri, null, TeardownOption.None);
+            StoreUri(context, newUri, string.Empty, null, TeardownOption.None);
         }
 
         public static bool RelateDataItems(this ScenarioContext context, int parentRef, int childRef, string title, string relationshipType)
@@ -241,7 +241,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         private static List<string> GetIds(this ScenarioContext context)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey(constants.recordIds) ? (List<string>)context[constants.recordIds] : new List<string>());
+            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
             return ids;
         }
 
@@ -250,7 +250,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             //expect zero based index
             var ids = GetIds(context);
 
-            if (ids.Count < index - 1)
+            if (ids.Count < index + 1)
             {
                 return "";
             }

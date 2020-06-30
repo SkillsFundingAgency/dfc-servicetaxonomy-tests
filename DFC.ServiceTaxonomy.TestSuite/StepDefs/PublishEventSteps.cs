@@ -97,7 +97,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private List<ContentEvent> GetMatchingDocuments(string id, string eventType = "")
         {
             string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType}'";
-            string query = $"SELECT * FROM c where  c.data.itemId = '{id}'{additionalClause}";
+            string query = $"SELECT * FROM c where  c.data.workflowCorrelationId = '{id}'{additionalClause}";
 
             CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
             List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("EventStore", "events", query);
