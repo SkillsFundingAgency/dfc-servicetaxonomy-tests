@@ -1,6 +1,7 @@
 ﻿Feature: ContentApi
 
 
+#TODO_DRAFT  add test for draft content API
 
 @ContentApi 
 Scenario: Request an NCS item by invalid Type

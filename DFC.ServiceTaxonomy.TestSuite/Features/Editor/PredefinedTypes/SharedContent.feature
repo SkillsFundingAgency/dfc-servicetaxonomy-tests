@@ -25,7 +25,7 @@ Scenario: Content for "Get help using this service" is available
   </p>
 </div>
 """
-   And the data is present in the Graph databases
+   And the data is present in the PUBLISH Graph databases
 
 
 @Editor
@@ -39,7 +39,7 @@ Scenario: Add a new shared content item
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the add action completes succesfully
-	And the data is present in the Graph databases
+	And the data is present in the PUBLISH Graph databases
 	And an event has been published to notify consumers of the change
 
 #Scenario: Edit the new activity
@@ -51,7 +51,7 @@ Scenario: Add a new shared content item
 	| updated Shared Content | <p>Here it is now</p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	And the data is present in the Graph databases
+	And the data is present in the PUBLISH Graph databases
 
 #Scenario: Delete the new activity
 	Given I search for the "Title"
@@ -59,3 +59,12 @@ Scenario: Add a new shared content item
 #	And I confirm the delete action
 	Then the delete action completes succesfully
 	And the data is not present in the Graph databases
+
+#TODO_DRAFT
+#add draft checks
+#draft only test
+#publish from draft
+#new draft of published
+#re publish with latest draft
+#un publish
+#delete draft

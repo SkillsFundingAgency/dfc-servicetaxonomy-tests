@@ -46,3 +46,8 @@ Scenario: I use recipes to create neo4j content and import it into orchard core
 	| uri::thing1 | Test Thing 1 | 
 	
 
+
+#TODO_DRAFT 
+#add checks in draft database
+#review cleardown
+# review test coverage

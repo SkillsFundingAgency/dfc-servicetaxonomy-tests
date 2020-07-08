@@ -27,6 +27,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string editorPassword => Configuration["Editor:Password"];
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
+        public string neo4JUrlDraft => Configuration["Neo4j:UrlDraft"];
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
 

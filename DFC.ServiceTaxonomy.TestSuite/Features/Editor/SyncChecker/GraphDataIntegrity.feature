@@ -1,6 +1,12 @@
 ﻿@webtest
 Feature: GraphDataIntegritity
 
+#TODO_DRAFT 
+#add checks for missing data in draft
+#add check for missing draft data in published item
+#review teardown
+#review coverage
+
 
 Background:
 	Given I set up a data prefix for "skos__prefLabel"

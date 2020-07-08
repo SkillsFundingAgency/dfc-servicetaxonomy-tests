@@ -2,6 +2,9 @@
 Feature: ImportRecipes
 
 
+#TODO_DRAFT update recipe import tests to include draft / publish checks
+
+
 #Scenario: Load the files
 #	Given I logon to the editor
 #	Given I Navigate to "/Admin/DeploymentPlan/Import/Index"

@@ -18,4 +18,7 @@ Scenario: Add a new SOCCode
 	| My Test SOCCode | My test description |
 	When I publish the item
 	Then the add action completes succesfully
-	And the data is present in the Graph databases
+	And the data is present in the PUBLISH Graph databases
+
+
+#TODO_DRAFT draft checks

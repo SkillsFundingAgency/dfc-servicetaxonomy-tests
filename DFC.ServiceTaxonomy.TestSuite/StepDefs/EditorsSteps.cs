@@ -1071,24 +1071,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(newUri);
         }
 
-        [Then(@"the data is present in the Graph databases")]
-        public void ThenTheNewDataIsPresentInTheGraphDatabases()
+
+        //TODO_DRAFT move this to helper / extension?
+        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, object> parameters, Dictionary<string,string> compareValues, out string message)
         {
-            var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
+            bool match = true;
+            message = "";
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+
+            //TODO_DRAFT improve connection handling
+            switch (target)
+            {
+                case "draft":
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
+
+                    break;
+                case "published":
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                _scenarioContext.GetEnv().neo4JUid,
+                                _scenarioContext.GetEnv().neo4JPassword);
+
+                    break;
+                default:
+                    message = "target must be 'draft' or 'publish'";
+                    return false;
+            }
             Type requiredType = (Type)_scenarioContext[constants.responseType];
-            var returnObject = neo4JHelper.GetResultsList(requiredType, statementTemplate, statementParameters);
+            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters);
 
             object first = returnObject[0];
 
             Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
 
-            foreach ( var var in vars)
+            foreach (var var in vars)
             {
                 Type myType = returnObject[0].GetType();
                 PropertyInfo propertyInfo = myType.GetProperty(var.Key);
@@ -1097,7 +1115,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     varValue = (string)propertyInfo.GetValue(returnObject[0], null);
                 }
-                catch ( Exception e ){
+                catch (Exception e)
+                {
                     Console.WriteLine(e.Message);
                 }
 
@@ -1111,9 +1130,36 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
                         break;
                 }
-                var.Value.Should().Be(rawValue);
-
+                if (var.Value != rawValue)
+                {
+                    message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                    match = false;
+                }
             }
+            return match;
+        }
+
+        [Then(@"the data is present in the DRAFT Graph database")]
+        public void ThenTheDataIsPresentInTheDRAFTGraphDatabase()
+        {
+            string message;
+            CheckDataIsPresentInGraph("draft",
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+
+        [Then(@"the data is present in the PUBLISH Graph databases")]
+        public void ThenTheNewDataIsPresentInThePublishGraphDatabases()
+        {
+            string message;
+            CheckDataIsPresentInGraph("publish",
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
+                                      out message).Should().BeTrue($"because {message}");
         }
 
         [Then(@"the data is not present in the Graph databases")]

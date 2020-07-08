@@ -12,7 +12,7 @@ Scenario: Add, edit and remove an activity in the editor
 	| My new activity |
 	When I publish the item
 	Then the add action completes succesfully
-	And the data is present in the Graph databases
+	And the data is present in the PUBLISH Graph databases
 
 #Scenario: Edit the new activity
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -23,7 +23,7 @@ Scenario: Add, edit and remove an activity in the editor
          | New activity title |
 	When I publish the item
 	Then the edit action completes succesfully
-	And the data is present in the Graph databases
+	And the data is present in the PUBLISH Graph databases
 
 #Scenario: Delete the new activity
 	Given I search for the "Title"
@@ -31,3 +31,5 @@ Scenario: Add, edit and remove an activity in the editor
 	And I confirm the delete action
 	Then the delete action completes succesfully
 	And the data is not present in the Graph databases
+
+#TODO_DRAFT draft checks
