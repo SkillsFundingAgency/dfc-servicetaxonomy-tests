@@ -1,0 +1,42 @@
+{
+  "name": "TestData_WorkingLocations0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "displayName": "TestData_WorkingLocations0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "at a recording studio, in the community, in a theatre or on a film set"
+    },
+    "WorkingLocation": {
+      "Description": {
+        "Html": "\u003Cp\u003Eat a recording studio, in the community, in a theatre or on a film set\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/workinglocation/e41fb2b2-7b40-4e00-af7a-23d7ff83d65f\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID81__",
+    "ContentItemVersionId": "__TOKENISEDID401__",
+    "ContentType": "WorkingLocation",
+    "DisplayText": "at a recording studio, in the community, in a theatre or on a film set",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

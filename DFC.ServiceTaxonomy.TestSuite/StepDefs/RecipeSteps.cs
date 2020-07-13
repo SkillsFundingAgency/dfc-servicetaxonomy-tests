@@ -20,10 +20,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext _scenarioContext;
+        private readonly FeatureContext _featureContext;
         private OrchardCore.Entities.DefaultIdGenerator _IdGenerator;
-        public RecipeSteps(ScenarioContext context)
+
+
+        public RecipeSteps(ScenarioContext context, FeatureContext fContext)
         {
             _scenarioContext = context;
+            _featureContext = fContext;
             _IdGenerator = new OrchardCore.Entities.DefaultIdGenerator();
         }
 
@@ -70,6 +74,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // replace tokens
             _scenarioContext.ReplaceTokensInDirectory($"{Directory.GetCurrentDirectory()}/{prefix}", "@PREFIX@", (string)_scenarioContext["prefix"]);
 
+            _scenarioContext.ReplaceTokensInDirectory($"{Directory.GetCurrentDirectory()}/{prefix}", "__PREFIX__", (string)_scenarioContext["prefix"]);
             // replace ID tokens
             int id = 1;
             //todo sort out a way of detecting last token while not stopping on gaps

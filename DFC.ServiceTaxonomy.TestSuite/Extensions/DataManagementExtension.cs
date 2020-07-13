@@ -41,7 +41,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                 context.GetEnv().neo4JPassword);
             
             neo4JHelper.ExecuteTableQuery(cypher, null);
-            
+
+            neo4JHelper.connect(context.GetEnv().neo4JUrlDraft,
+                    context.GetEnv().neo4JUid,
+                    context.GetEnv().neo4JPassword);
+
+            neo4JHelper.ExecuteTableQuery(cypher, null);
+
             return true;
         }
 

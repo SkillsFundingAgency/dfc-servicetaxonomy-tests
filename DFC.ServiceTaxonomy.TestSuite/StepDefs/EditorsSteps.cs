@@ -161,6 +161,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
+
             _logonScreen.SubmitLogonDetails();
         }
 
@@ -1151,11 +1152,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
 
-        [Then(@"the data is present in the PUBLISH Graph databases")]
+        [Then(@"the data is present in the PUBLISH Graph database")]
         public void ThenTheNewDataIsPresentInThePublishGraphDatabases()
         {
             string message;
-            CheckDataIsPresentInGraph("publish",
+            CheckDataIsPresentInGraph("published",
                                       (string)_scenarioContext[constants.cypherQuery],
                                       new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
                                       (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
@@ -1175,6 +1176,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             var results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
             int count = results.Count();
+            count.Should().Be(0, "Because the record should not be present in the graph database");
+
+            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
+                    _scenarioContext.GetEnv().neo4JUid,
+                    _scenarioContext.GetEnv().neo4JPassword);
+
+            results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
+            count = results.Count();
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
 

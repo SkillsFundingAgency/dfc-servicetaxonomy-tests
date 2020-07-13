@@ -15,6 +15,7 @@ Scenario: Add a new FurtherInfo content item
 	| My Test Other Requirement | My test description |
 	When I publish the item
 	Then the add action completes succesfully
-	And the data is present in the PUBLISH Graph databases
+	And the data is present in the DRAFT Graph database
+	And the data is present in the PUBLISH Graph database
 
 #TODO_DRAFT draft checks

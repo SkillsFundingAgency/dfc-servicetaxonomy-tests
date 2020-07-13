@@ -47,17 +47,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
-                enterUsername(_scenarioContext.GetEnv().editorUid);
-                enterPassword(_scenarioContext.GetEnv().editorPassword);
 
-                var url = _scenarioContext.GetWebDriver().Url;
-                var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
-
-                if (url.ToLower().Contains("login") || error.Count > 0)
+                if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Begin by browsing the menu.')]]")).Count == 0)
                 {
-                    Console.WriteLine("Login Failed: Errors " + error.ToString());
-                    throw new Exception("Login Failed");
+                    enterUsername(_scenarioContext.GetEnv().editorUid);
+                    enterPassword(_scenarioContext.GetEnv().editorPassword);
+
+                    var url = _scenarioContext.GetWebDriver().Url;
+                    var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
+                    if (url.ToLower().Contains("login") || error.Count > 0)
+                    {
+                        Console.WriteLine("Login Failed: Errors " + error.ToString());
+                        throw new Exception("Login Failed");
+                    }
                 }
+                
             }
             catch (Exception e)
             {

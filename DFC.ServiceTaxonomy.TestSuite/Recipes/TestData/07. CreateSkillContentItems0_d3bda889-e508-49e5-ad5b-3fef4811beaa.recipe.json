@@ -1,0 +1,21 @@
+{
+    "name": "CreateSkillContentItems0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+    "displayName": "CreateSkillContentItems0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+    "description": "",
+    "author": "",
+    "website": "",
+    "version": "",
+    "issetuprecipe": false,
+    "categories": "",
+    "tags": [],
+    "steps": [
+        {
+            "name": "CypherToContent",
+            "queries": [
+                {
+                    "query": "MATCH  (o:esco__Occupation) --> (sk:esco__Skill)-[r:dct__description]-(s {esco__language: \"en\"})where o.uri in ['http://data.europa.eu/esco/occupation/26171f39-e85a-448f-bd28-a73a5a99927f'] with distinct sk, s\r\nreturn { ContentType: 'Skill', TitlePart:{Title:sk.skos__prefLabel}\r\n,GraphSyncPart:{Text:sk.uri},\r\nSkill:{Description:{Html:s.esco__nodeLiteral},AlternativeLabels:{ContentItemIds:[(sk)-[:hasAltLabel]->(l) | '[c#: await Content.GetContentItemIdByDisplayText(\"SkillLabel\", \"'+l.skos__prefLabel+'\")]']},PreferredLabel:{ContentItemIds:[(sk)-[:hasPrefLabel]->(l) | '[c#: await Content.GetContentItemIdByDisplayText(\"SkillLabel\", \"'+l.skos__prefLabel+'\")]']}}\r\n}\r\norder by sk.skos__prefLabel\r\nskip 0 limit 400"
+                }
+            ]
+        }
+    ]
+}
