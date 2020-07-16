@@ -142,6 +142,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         #region given steps
 
+        [Given(@"I run my testbed")]
+        public void GivenIRunMyTestbed()
+        {
+            while (true)
+            {
+                try
+                {
+                    IWebDriver driver = _scenarioContext.GetWebDriver();
+
+                    driver.ClickOnItem("Page_PageLocations_TermEntries_0__Selected");
+
+                    // click add button
+                    var element = driver.FindElement(By.XPath("//button[@title='Add Widget']"));
+                    element.Click();
+                    
+                    // add html
+                    element = driver.FindElement(By.LinkText("HTML"));
+                    element.Click();
+
+                    //send keys to first html field
+                    element = driver.FindElement(By.ClassName("trumbowyg-editor"));
+                    element.SendKeys("1234567890");
+                    //driver.ClickButton("Add Widget");
+
+                    driver.ClickButton("Publish");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+
+
+
         [Given(@"I set up a data prefix for ""(.*)""")]
         public void GivenISetUpADataPrefixFor(string p0)
         {
@@ -947,93 +983,93 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.ConfirmRemovedSuccessfully().Should().BeTrue();
         }
 
-        public bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
-        {
-            if (thisItems.Count != otherItems.Count)
-            {
-                return false;
-            }
-            var thisKeys = thisItems.Keys;
-            foreach (var key in thisKeys)
-            {
-                if (!(otherItems.TryGetValue(key, out var value) && string.Equals(thisItems[key], value, StringComparison.OrdinalIgnoreCase)) )
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        //public bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
+        //{
+        //    if (thisItems.Count != otherItems.Count)
+        //    {
+        //        return false;
+        //    }
+        //    var thisKeys = thisItems.Keys;
+        //    foreach (var key in thisKeys)
+        //    {
+        //        if (!(otherItems.TryGetValue(key, out var value) && string.Equals(thisItems[key], value, StringComparison.OrdinalIgnoreCase)) )
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
 
-        public string DictionaryToString(IDictionary<string, string> dict)
-        {
-            string output = "";
-            foreach ( var kp in dict)
-            {
-                output += kp.Key + " - " + kp.Value + "\n";
-            }
-            return output;
-        }
+        //public string DictionaryToString(IDictionary<string, string> dict)
+        //{
+        //    string output = "";
+        //    foreach ( var kp in dict)
+        //    {
+        //        output += kp.Key + " - " + kp.Value + "\n";
+        //    }
+        //    return output;
+        //}
 
 
-        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
-        {
-            bool match;
-            message = "";
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-           
-            var results = neo4JHelper.GetSingleRowAsDictionary(cypherQuery);
+        //public bool matchGraphQueryResultsWithDictionary(string cypherQuery, Dictionary<string, string> expectedresults, out string message)
+        //{
+        //    bool match;
+        //    message = "";
+        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
+        //    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+        //                        _scenarioContext.GetEnv().neo4JUid,
+        //                        _scenarioContext.GetEnv().neo4JPassword);
 
-            match = AreEqual(expectedresults, results);
-            if (!match)
-            {
-                message = "Expected: \n" + DictionaryToString(expectedresults) + "\n";
-                message += "Actual: \n" + DictionaryToString(results) + "\n";
-            }
-            return match;
-        }
+        //    var results = neo4JHelper.GetSingleRowAsDictionary(cypherQuery);
 
-        [Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
-        public void GivenIConfirmTheFollowingDataIsPresetInTheGraphDatabase(string p0, Table table)
-        {
-            bool addPrefix = _scenarioContext.ContainsKey(constants.prefixField);
-            foreach ( var r in table.Rows)
-            {
-                Dictionary<string, string> rowData = new Dictionary<string, string>();
-                int count = 0;
-                string cyperQuery = "match (i:" + p0 + ") where i.uri = '";
-                string message;
-                foreach ( var i in r)
-                {
-                    string newValue = i.Value;
-                    if (addPrefix && i.Key == (string)_scenarioContext[constants.prefixField] ) 
-                    {
-                        newValue = (string)_scenarioContext[constants.prefix] + newValue;
-                    }
-                    count++;
-                    rowData.Add(i.Key, newValue);
-                    if (count == 1)
-                    {
-                        cyperQuery += newValue + "' return i.uri as uri";
-                    }
-                    else
-                    {
-                        cyperQuery += " ,i." + i.Key + " as " + i.Key;
-                    }
+        //    match = DictionaryHelper.AreEqual(expectedresults, results);
+        //    if (!match)
+        //    {
+        //        message = "Expected: \n" + DictionaryHelper.DictionaryToString(expectedresults) + "\n";
+        //        message += "Actual: \n" + DictionaryHelper.DictionaryToString(results) + "\n";
+        //    }
+        //    return match;
+        //}
 
-                }
-                var match = matchGraphQueryResultsWithDictionary(cyperQuery, rowData, out message);
-                if (!match)
-                {
-                    Console.WriteLine("**confirm the following data is preset in the Graph Database**");
-                    Console.WriteLine("Mismatch between expected and actual results");
-                    Console.WriteLine(message);
-                }
-                match.Should().BeTrue();
-            }
-        }
+        //[Given(@"I confirm the following ""(.*)"" data is preset in the Graph Database")]
+        //public void GivenIConfirmTheFollowingDataIsPresetInTheGraphDatabase(string p0, Table table)
+        //{
+        //    bool addPrefix = _scenarioContext.ContainsKey(constants.prefixField);
+        //    foreach ( var r in table.Rows)
+        //    {
+        //        Dictionary<string, string> rowData = new Dictionary<string, string>();
+        //        int count = 0;
+        //        string cyperQuery = "match (i:" + p0 + ") where i.uri = '";
+        //        string message;
+        //        foreach ( var i in r)
+        //        {
+        //            string newValue = i.Value;
+        //            if (addPrefix && i.Key == (string)_scenarioContext[constants.prefixField] ) 
+        //            {
+        //                newValue = (string)_scenarioContext[constants.prefix] + newValue;
+        //            }
+        //            count++;
+        //            rowData.Add(i.Key, newValue);
+        //            if (count == 1)
+        //            {
+        //                cyperQuery += newValue + "' return i.uri as uri";
+        //            }
+        //            else
+        //            {
+        //                cyperQuery += " ,i." + i.Key + " as " + i.Key;
+        //            }
+
+        //        }
+        //        var match = matchGraphQueryResultsWithDictionary(cyperQuery, rowData, out message);
+        //        if (!match)
+        //        {
+        //            Console.WriteLine("**confirm the following data is preset in the Graph Database**");
+        //            Console.WriteLine("Mismatch between expected and actual results");
+        //            Console.WriteLine(message);
+        //        }
+        //        match.Should().BeTrue();
+        //    }
+        //}
 
         [Then(@"I can navigate to the content item ""(.*)"" in Orchard Core core")]
         public void ThenICanNavigateToTheContentItemInOrchardCoreCore(string p0)

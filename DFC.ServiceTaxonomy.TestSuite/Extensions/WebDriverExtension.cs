@@ -149,6 +149,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 return false;
             }
         }
+
+        public static bool ClickOnItem(this IWebDriver driver, string id)
+        {
+            try
+            {
+                var element = driver.FindElement(By.Id(id));
+                Actions builder = new Actions(driver);
+                var mouseUp = builder.MoveToElement(element)
+                                     .Click()
+                                     .Build(); ;
+                mouseUp.Perform();
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine($"Unable to click on item: {id} - {e.Message}");
+            }
+            return true;
+        }
     }
 }
 
