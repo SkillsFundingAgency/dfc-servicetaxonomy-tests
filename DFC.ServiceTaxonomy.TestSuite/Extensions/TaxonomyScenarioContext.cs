@@ -1,10 +1,7 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Models;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -182,6 +179,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems.Last().Uri;
         }
 
+        private static string ConvertUriToDraft(this ScenarioContext context, string uri)
+        {
+            return uri.Replace(context.GetEnv().contentApiBaseUrl, context.GetEnv().contentApiDraftBaseUrl);
+        }
 
         public static string GetUri(this ScenarioContext context, int index)
         {
@@ -190,6 +191,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 return "";
 
             return dataItems[index].Uri;
+        }
+
+        public static string GetDraftUri(this ScenarioContext context, int index)
+        {
+            return ConvertUriToDraft(context, GetUri(context, index));
         }
 
         public static int GetNumberOfStoredUris(this ScenarioContext context)
@@ -206,6 +212,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static string GetContentUri(this ScenarioContext context, string contentType)
         {
             return $"{context.GetEnv().contentApiBaseUrl}/{contentType}";
+        }
+
+        public static string GetDraftContentUri(this ScenarioContext context, string contentType)
+        {
+            return $"{context.GetEnv().contentApiDraftBaseUrl}/{contentType}";
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)

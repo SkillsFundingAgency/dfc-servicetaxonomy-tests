@@ -95,16 +95,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
 #line 19
  testRunner.Given("I add a new graph contentType called \"TestContentPicker1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
                         "Display Name",
                         "Type",
                         "Editor"});
-            table94.AddRow(new string[] {
+            table110.AddRow(new string[] {
                         "Description",
                         "Html Field",
                         "Wysiwyg editor"});
 #line 20
- testRunner.And("I add the following fields", ((string)(null)), table94, "And ");
+ testRunner.And("I add the following fields", ((string)(null)), table110, "And ");
 #line hidden
 #line 23
  testRunner.And("I save the contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -112,20 +112,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
 #line 27
  testRunner.Given("I add a new graph contentType called \"TestCollectionOfTypes\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table95 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
                         "Display Name",
                         "Type",
                         "Editor"});
-            table95.AddRow(new string[] {
+            table111.AddRow(new string[] {
                         "Description",
                         "Html Field",
                         "Wysiwyg editor"});
-            table95.AddRow(new string[] {
+            table111.AddRow(new string[] {
                         "PickContent",
                         "Content Picker Field",
                         ""});
 #line 31
- testRunner.And("I add the following fields", ((string)(null)), table95, "And ");
+ testRunner.And("I add the following fields", ((string)(null)), table111, "And ");
 #line hidden
 #line 35
  testRunner.And("I edit the \"PickContent\" field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -133,12 +133,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
 #line 36
  testRunner.And("I allow multiple items to be selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table112 = new TechTalk.SpecFlow.Table(new string[] {
                         "Content Type"});
-            table96.AddRow(new string[] {
+            table112.AddRow(new string[] {
                         "TestContentPicker1"});
 #line 37
- testRunner.And("I select the following items from the displayed list", ((string)(null)), table96, "And ");
+ testRunner.And("I select the following items from the displayed list", ((string)(null)), table112, "And ");
 #line hidden
 #line 40
  testRunner.And("I save the contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -149,14 +149,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
 #line 45
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table97.AddRow(new string[] {
+            table113.AddRow(new string[] {
                         "My Test content",
                         "My test description"});
 #line 46
- testRunner.And("I Enter the following form data for \"TestContentPicker1\"", ((string)(null)), table97, "And ");
+ testRunner.And("I Enter the following form data for \"TestContentPicker1\"", ((string)(null)), table113, "And ");
 #line hidden
 #line 49
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -165,7 +165,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 51
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 54
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentTypes/TestContentPicker1/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -173,14 +173,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
 #line 56
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table98 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table114 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Description"});
-            table98.AddRow(new string[] {
+            table114.AddRow(new string[] {
                         "My Test content2",
                         "My test description2"});
 #line 57
- testRunner.And("I Enter the following form data for \"TestContentPicker1\"", ((string)(null)), table98, "And ");
+ testRunner.And("I Enter the following form data for \"TestContentPicker1\"", ((string)(null)), table114, "And ");
 #line hidden
 #line 60
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -189,7 +189,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 62
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
         
@@ -234,21 +234,21 @@ this.FeatureBackground();
 #line 71
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table99 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table115 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table99.AddRow(new string[] {
+                table115.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 72
- testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table99, "And ");
+ testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table115, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table100 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table116 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table100.AddRow(new string[] {
+                table116.AddRow(new string[] {
                             "My Test content"});
 #line 75
- testRunner.And("I pick content", ((string)(null)), table100, "And ");
+ testRunner.And("I pick content", ((string)(null)), table116, "And ");
 #line hidden
 #line 78
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -257,7 +257,7 @@ this.FeatureBackground();
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 80
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 83
  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes),(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\na" +
@@ -334,23 +334,23 @@ this.FeatureBackground();
 #line 113
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table101 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table117 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table101.AddRow(new string[] {
+                table117.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 114
- testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table101, "And ");
+ testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table117, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table102 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table118 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table102.AddRow(new string[] {
+                table118.AddRow(new string[] {
                             "My Test content"});
-                table102.AddRow(new string[] {
+                table118.AddRow(new string[] {
                             "My Test content2"});
 #line 117
- testRunner.And("I pick content", ((string)(null)), table102, "And ");
+ testRunner.And("I pick content", ((string)(null)), table118, "And ");
 #line hidden
 #line 121
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -359,7 +359,7 @@ this.FeatureBackground();
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 123
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 126
  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
@@ -437,21 +437,21 @@ this.FeatureBackground();
 #line 154
   testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table103 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table119 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table103.AddRow(new string[] {
+                table119.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 155
-  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table103, "And ");
+  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table119, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table104 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table120 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table104.AddRow(new string[] {
+                table120.AddRow(new string[] {
                             "My Test content"});
 #line 158
-  testRunner.And("I pick content", ((string)(null)), table104, "And ");
+  testRunner.And("I pick content", ((string)(null)), table120, "And ");
 #line hidden
 #line 161
   testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -460,7 +460,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 163
-  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 166
   testRunner.Given("I replace tokens in and then run the following graph update statement", "   MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n   SET a.Description = \'updat" +
@@ -536,21 +536,21 @@ this.FeatureBackground();
 #line 193
   testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table105.AddRow(new string[] {
+                table121.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 194
-  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table105, "And ");
+  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table121, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table106 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table106.AddRow(new string[] {
+                table122.AddRow(new string[] {
                             "My Test content"});
 #line 197
-  testRunner.And("I pick content", ((string)(null)), table106, "And ");
+  testRunner.And("I pick content", ((string)(null)), table122, "And ");
 #line hidden
 #line 200
   testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -559,7 +559,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 202
-  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 205
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n  SET a = { uri :\'@URI3@\', skos_" +
@@ -637,21 +637,21 @@ this.FeatureBackground();
 #line 231
   testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table107 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table107.AddRow(new string[] {
+                table123.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 232
-  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table107, "And ");
+  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table123, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table108 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table108.AddRow(new string[] {
+                table124.AddRow(new string[] {
                             "My Test content"});
 #line 235
-  testRunner.And("I pick content", ((string)(null)), table108, "And ");
+  testRunner.And("I pick content", ((string)(null)), table124, "And ");
 #line hidden
 #line 238
   testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -660,7 +660,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 240
-  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 243
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nDELETE a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -735,23 +735,23 @@ this.FeatureBackground();
 #line 268
   testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table109 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table109.AddRow(new string[] {
+                table125.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 269
-  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table109, "And ");
+  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table125, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table126 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table110.AddRow(new string[] {
+                table126.AddRow(new string[] {
                             "My Test content"});
-                table110.AddRow(new string[] {
+                table126.AddRow(new string[] {
                             "My Test content2"});
 #line 272
-  testRunner.And("I pick content", ((string)(null)), table110, "And ");
+  testRunner.And("I pick content", ((string)(null)), table126, "And ");
 #line hidden
 #line 276
   testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -760,7 +760,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 278
-  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 281
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
@@ -841,21 +841,21 @@ this.FeatureBackground();
 #line 310
   testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table111.AddRow(new string[] {
+                table127.AddRow(new string[] {
                             "My Test content",
                             "My test description"});
 #line 311
-  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table111, "And ");
+  testRunner.And("I Enter the following form data for \"TestCollectionOfTypes\"", ((string)(null)), table127, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table112 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table128 = new TechTalk.SpecFlow.Table(new string[] {
                             "Content"});
-                table112.AddRow(new string[] {
+                table128.AddRow(new string[] {
                             "My Test content"});
 #line 314
-  testRunner.And("I pick content", ((string)(null)), table112, "And ");
+  testRunner.And("I pick content", ((string)(null)), table128, "And ");
 #line hidden
 #line 317
   testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -864,7 +864,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 319
-  testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 322
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +

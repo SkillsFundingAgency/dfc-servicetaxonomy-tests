@@ -123,7 +123,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.StoreToken(p0, context.RandomString(10).ToLower());
         }
 
-        private SharedContent InsertSharedContent( string name, Table dataTable)
+        private SharedContent InsertSharedContent( string name, Table dataTable, string graph = constants.publish)
         {
             SharedContent newItem = dataTable.CreateInstance<SharedContent>();
             newItem.uri = context.GenerateUri(name);
@@ -131,9 +131,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
-                                    context.GetEnv().neo4JUid,
-                                    context.GetEnv().neo4JPassword);
+            neo4JHelper.connect(graph == constants.publish ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrlDraft,
+                                context.GetEnv().neo4JUid,
+                                context.GetEnv().neo4JPassword);
 
             var response = neo4JHelper.ExecuteTableQuery(cypher, null);
 
@@ -162,12 +162,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             InsertSharedContent("sharedcontent", table);
         }
 
-        [Given(@"I create a ""(.*)"" item with the following data")]
-        public void GivenICreateAItemWithTheFollowingData(string p0, Table table)
+        [Given(@"I create a ""(.*)"" item in the ""(.*)"" graph with the following data")]
+        public void GivenICreateAItemInTheGraphWithTheFollowingData(string type, string graph, Table dataTable)
         {
-            string contentTypeName = context.ReplaceTokensInString(p0);
-            InsertSharedContent(contentTypeName, table);
+            graph = graph.ToLower();
+            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+
+            string contentTypeName = context.ReplaceTokensInString(type);
+            InsertSharedContent(contentTypeName, dataTable, graph);
         }
+
+        //[Given(@"I publish a ""(.*)"" item with the following values")]
+        //public void GivenIPublishAItemWithTheFollowingValues(string p0, Table table)
+        //{
+        //    string contentTypeName = context.ReplaceTokensInString(p0);
+        //    ScenarioContext.Current.Pending();
+        //}
+
+
 
         [Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
         public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
@@ -178,17 +190,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
         }
 
-        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" to item (.*) with the following data")]
-        public void GivenICreateAnItemOfRelatedByToItemWithTheFollowingData(string p0, string p1, int p2, Table table)
+        [Given(@"I create an item of ""(.*)"" in the ""(.*)"" graph related by ""(.*)"" to item (.*) with the following data")]
+        public void GivenICreateAnItemOfInTheGraphRelatedByToItemWithTheFollowingData(string type, string graph, string relationship, int itemRef, Table dataTable)
         {
             // assume non zero based index is supplied
-            string contentTypeName = context.ReplaceTokensInString(p0);
-            var item = InsertSharedContent(contentTypeName, table);
+            string contentTypeName = context.ReplaceTokensInString(type);
+            var item = InsertSharedContent(contentTypeName, dataTable);
 
-            _DataItem parentItem = context.GetDataItems()[p2 - 1];
+            _DataItem parentItem = context.GetDataItems()[itemRef - 1];
 
-            AddRelationship(context.GetUri(p2 -1), context.GetLatestUri(), p1);
-            context.RelateDataItems(p2 - 1, context.GetNumberOfStoredUris() - 1, item.Title, p1);
+            AddRelationship(context.GetUri(itemRef - 1), context.GetLatestUri(), relationship);
+            context.RelateDataItems(itemRef - 1, context.GetNumberOfStoredUris() - 1, item.Title, relationship);
         }
 
 
@@ -283,6 +295,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context[constants.responseScope] = constants.resultSingle;
         }
 
+        [Given(@"I make a request to the ""(.*)"" content API to retrive all ""(.*)"" items")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string graph, string type)
+        {
+            graph = graph.ToLower();
+            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+
+            string uri = (graph == constants.publish) ? context.GetContentUri(context.ReplaceTokensInString(type)) : 
+                                                        context.GetDraftContentUri(context.ReplaceTokensInString(type)) ;
+            var response = RestHelper.Get(uri, context.GetContentApiHeaders());
+            context[constants.responseStatus] = response.StatusCode;
+            context[constants.responseContent] = response.Content;
+            context[constants.responseScope] = constants.resultSummary;
+        }
+
+
         [Given(@"I make a request to the content API to retrive all ""(.*)"" items")]
         public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string p0)
         {
@@ -293,15 +320,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context[constants.responseScope] = constants.resultSummary;
         }
 
-        [Given(@"I make a request to the content API to retrive item (.*)")]
-        public void GivenIMakeARequestToTheContentAPIToRetriveItem(int p0)
+        [Given(@"I make a request to the ""(.*)"" content API to retrive item (.*)")]
+        public void GivenIMakeARequestToTheContentAPIToRetriveItem(string graph, int itemRef)
         {
-            string uri = context.GetUri(p0-1);
+            graph = graph.ToLower();
+            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+
+            string uri = (graph == constants.publish ) ? context.GetUri(itemRef - 1) :
+                                                         context.GetDraftUri(itemRef - 1);
             var response = RestHelper.Get(uri, context.GetContentApiHeaders());
             context[constants.responseStatus] = response.StatusCode;
             context[constants.responseContent] = response.Content;
             context[constants.responseScope] = constants.resultSingle;
         }
+
 
 
         [When(@"I build the expected response for item (.*)")]

@@ -39,7 +39,7 @@ Scenario: Add a new shared content item
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
-	Then the add action completes succesfully
+	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
 	And an event has been published to notify consumers of the change

@@ -23,7 +23,7 @@ using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using Neo4j.Driver.V1;
-
+using AngleSharp.Css.Dom;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -888,11 +888,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
         #endregion
         #region then steps
-        [Then(@"the add action completes succesfully")]
-        public void ThenTheAddActionCompletesSuccesfully()
+        [Then(@"the item is published succesfully")]
+        public void ThenTheItemIsPublishedSuccesfully()
         {
-            _addContentItemBase.ConfirmSuccess().Should().BeTrue();
+            _addContentItemBase.ConfirmPublishSuccess().Should().BeTrue();
         }
+
+        [Then(@"the item is saved succesfully")]
+        public void ThenTheAddTheItemIsSavedSuccesfully()
+        {
+            _addContentItemBase.ConfirmSaveDraftSuccess().Should().BeTrue();
+        }
+
 
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
         public void ThenAnValidationErrorIsShownFor(string validationType, string field)
@@ -1084,58 +1091,67 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //TODO_DRAFT improve connection handling
             switch (target)
             {
-                case "draft":
+                case constants.draft:
+                case constants.preview:
                     neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
 
                     break;
-                case "published":
+                case constants.publish:
+                case constants.published:
                     neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
 
                     break;
                 default:
-                    message = "target must be 'draft' or 'publish'";
+                    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
                     return false;
             }
             Type requiredType = (Type)_scenarioContext[constants.responseType];
             var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters);
 
-            object first = returnObject[0];
-
-            Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
-
-            foreach (var var in vars)
+            if (returnObject.Count > 0)
             {
-                Type myType = returnObject[0].GetType();
-                PropertyInfo propertyInfo = myType.GetProperty(var.Key);
-                string varValue = "";
-                try
-                {
-                    varValue = (string)propertyInfo.GetValue(returnObject[0], null);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                object first = returnObject[0];
 
-                string rawValue = varValue;
-                //Todo keep track of type so tags can only be removed for non html fields rather than by name
-                switch (var.Key)
+                Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
+
+                foreach (var var in vars)
                 {
-                    case "Content":
-                        break;
-                    default:
-                        rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                        break;
+                    Type myType = returnObject[0].GetType();
+                    PropertyInfo propertyInfo = myType.GetProperty(var.Key);
+                    string varValue = "";
+                    try
+                    {
+                        varValue = (string)propertyInfo.GetValue(returnObject[0], null);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                    string rawValue = varValue;
+                    //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                    switch (var.Key)
+                    {
+                        case "Content":
+                            break;
+                        default:
+                            rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                            break;
+                    }
+                    if (var.Value != rawValue)
+                    {
+                        message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                        match = false;
+                    }
                 }
-                if (var.Value != rawValue)
-                {
-                    message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
-                    match = false;
-                }
+            }
+            else
+            {
+                match = false;
             }
             return match;
         }
@@ -1144,7 +1160,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheDataIsPresentInTheDRAFTGraphDatabase()
         {
             string message;
-            CheckDataIsPresentInGraph("draft",
+            CheckDataIsPresentInGraph(constants.draft,
                                       (string)_scenarioContext[constants.cypherQuery],
                                       new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
                                       (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
@@ -1156,12 +1172,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheNewDataIsPresentInThePublishGraphDatabases()
         {
             string message;
-            CheckDataIsPresentInGraph("published",
+            CheckDataIsPresentInGraph(constants.publish,
                                       (string)_scenarioContext[constants.cypherQuery],
                                       new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
                                       (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
                                       out message).Should().BeTrue($"because {message}");
         }
+
+        private void AssertDataNotPresentInGraph( string graph)
+        {
+            string message;
+            graph = (graph == constants.published) ? constants.publish : graph;
+
+            CheckDataIsPresentInGraph( graph,
+                                       (string)_scenarioContext[constants.cypherQuery],
+                                        new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                       null,
+                                       out message).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
+            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
+                                _scenarioContext.GetEnv().neo4JUid,
+                                _scenarioContext.GetEnv().neo4JPassword); ;
+        }
+
+        [Then(@"the data is not present in the PUBLISH Graph database")]
+        public void ThenTheDataIsNotPresentInThePUBLISHGraphDatabase()
+        {
+            AssertDataNotPresentInGraph(constants.publish);
+        }
+
+        [Then(@"the data is not present in the DRAFT Graph database")]
+        public void ThenTheDataIsNotPresentInTheDraftGraphDatabase()
+        {
+            AssertDataNotPresentInGraph(constants.preview);
+        }
+
+
 
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
@@ -1186,6 +1232,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             count = results.Count();
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
+
+
 
         [Then(@"the following graph query returns (.*) record")]
         public void ThenTheFollowingGraphQueryReturnsRecord(int p0, string multilineText)

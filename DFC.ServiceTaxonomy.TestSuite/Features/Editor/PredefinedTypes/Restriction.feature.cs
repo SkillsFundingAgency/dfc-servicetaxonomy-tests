@@ -126,20 +126,20 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table99 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table83.AddRow(new string[] {
+                table99.AddRow(new string[] {
                             "My Test Restriction",
                             "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"Restriction\"", ((string)(null)), table83, "And ");
+ testRunner.And("I Enter the following form data for \"Restriction\"", ((string)(null)), table99, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 18
  testRunner.And("the data is present in the DRAFT Graph database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

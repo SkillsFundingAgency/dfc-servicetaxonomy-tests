@@ -115,14 +115,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table20.AddRow(new string[] {
+                table35.AddRow(new string[] {
                             "uri",
                             "http://data.europa.eu/esco/skill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7"});
 #line 10
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table20, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table35, "Given ");
 #line hidden
 #line 13
  testRunner.Then("the response json matches:", @"{
@@ -176,14 +176,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table21.AddRow(new string[] {
+                table36.AddRow(new string[] {
                             "uri",
                             "http://data.europa.eu/esco/skill/ffe198e3-3f51-40c1-8d43-6e559bb98c8d"});
 #line 33
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table21, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table36, "Given ");
 #line hidden
 #line 36
  testRunner.Then("the response json matches:", @"{
@@ -237,14 +237,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table22.AddRow(new string[] {
+                table37.AddRow(new string[] {
                             "uri",
                             "http://data.europa.eu/esco/skill/cb108a0a-88e6-4579-885d-b1e794ada512"});
 #line 56
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table22, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table37, "Given ");
 #line hidden
 #line 59
  testRunner.Then("the response json matches:", @"{
@@ -299,14 +299,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table23.AddRow(new string[] {
+                table38.AddRow(new string[] {
                             "uri",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 80
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table23, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table38, "Given ");
 #line hidden
 #line 83
  testRunner.Then("the response json matches:", @"{
@@ -354,14 +354,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table24.AddRow(new string[] {
+                table39.AddRow(new string[] {
                             "uri",
                             "http://data.europa.eu/esco/InvalidSkill/fb6f5f61-f3b8-40ba-8363-c8d762325ff7"});
 #line 97
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table24, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table39, "Given ");
 #line hidden
 #line 100
     testRunner.Then("the response code is 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -402,11 +402,11 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
 #line 106
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table25, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table40, "Given ");
 #line hidden
 #line 108
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -450,14 +450,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table26.AddRow(new string[] {
+                table41.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 114
- testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table26, "Given ");
+ testRunner.Given("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table41, "Given ");
 #line hidden
 #line 117
     testRunner.Then("the response code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -504,14 +504,14 @@ this.FeatureBackground();
 #line 124
     testRunner.Given("I want to supply an invalid security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table27.AddRow(new string[] {
+                table42.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 125
- testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table27, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table42, "And ");
 #line hidden
 #line 128
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -559,14 +559,14 @@ this.FeatureBackground();
 #line 140
     testRunner.Given("I want to fail to send a security header", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
                             "dataItem",
                             "value"});
-                table28.AddRow(new string[] {
+                table43.AddRow(new string[] {
                             "skill",
                             "http://data.europa.eu/esco/skill/4d97e3c3-f335-47cc-a4ee-0d779fd42222"});
 #line 141
- testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table28, "And ");
+ testRunner.And("I make a request to the service taxonomy API \"getskillbyid\"", ((string)(null)), table43, "And ");
 #line hidden
 #line 144
     testRunner.Then("the response code is 401", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

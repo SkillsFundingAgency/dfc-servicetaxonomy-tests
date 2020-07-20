@@ -17,7 +17,7 @@ Scenario: Add a new SOCCode
 	| Title           | Description         |
 	| My Test SOCCode | My test description |
 	When I publish the item
-	Then the add action completes succesfully
+	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
 

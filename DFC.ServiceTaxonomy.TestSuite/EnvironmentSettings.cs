@@ -18,6 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
 
         public string contentApiBaseUrl => Configuration["ContentApi:BaseUrl"];
+        public string contentApiDraftBaseUrl => Configuration["ContentApi:BaseUrlDraft"];
         public string contentApiSubscriptionKey => Configuration["ContentApi:SubscriptionKey"];
 
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];

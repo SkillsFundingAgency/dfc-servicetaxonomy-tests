@@ -114,18 +114,18 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table77 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table93 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title"});
-                table77.AddRow(new string[] {
+                table93.AddRow(new string[] {
                             "My new activity"});
 #line 10
- testRunner.And("I Enter the following form data for \"Activity\"", ((string)(null)), table77, "And ");
+ testRunner.And("I Enter the following form data for \"Activity\"", ((string)(null)), table93, "And ");
 #line hidden
 #line 13
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 14
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 15
  testRunner.And("the data is present in the DRAFT Graph database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -142,12 +142,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line 21
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table78 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title"});
-                table78.AddRow(new string[] {
+                table94.AddRow(new string[] {
                             "New activity title"});
 #line 22
- testRunner.And("I Enter the following form data", ((string)(null)), table78, "And ");
+ testRunner.And("I Enter the following form data", ((string)(null)), table94, "And ");
 #line hidden
 #line 25
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

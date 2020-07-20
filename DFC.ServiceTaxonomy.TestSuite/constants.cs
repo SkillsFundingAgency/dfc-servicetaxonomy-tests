@@ -37,6 +37,10 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string prefix = "prefix";
         public const string prefixField = "prefixField";
         public const string ContentType = "contentType";
+        public const string published = "published";
+        public const string publish = "publish";
+        public const string draft = "draft";
+        public const string preview = "preview";
         public const string Title = "Title";
         public const string FieldName = "FieldName";
 

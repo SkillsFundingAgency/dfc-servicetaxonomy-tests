@@ -11,7 +11,7 @@ Scenario: Add, edit and remove an activity in the editor
 	| Title           |
 	| My new activity |
 	When I publish the item
-	Then the add action completes succesfully
+	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
 
