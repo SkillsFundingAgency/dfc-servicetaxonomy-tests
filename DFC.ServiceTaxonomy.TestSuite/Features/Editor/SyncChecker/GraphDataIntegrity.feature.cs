@@ -165,7 +165,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 51
- testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 54
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentTypes/TestContentPicker1/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -189,7 +189,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 62
- testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
         
@@ -257,7 +257,7 @@ this.FeatureBackground();
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 80
- testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 83
  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes),(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@\'\r\na" +
@@ -359,7 +359,7 @@ this.FeatureBackground();
  testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 123
- testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 126
  testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
@@ -460,7 +460,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 163
-  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 166
   testRunner.Given("I replace tokens in and then run the following graph update statement", "   MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n   SET a.Description = \'updat" +
@@ -559,7 +559,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 202
-  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 205
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MERGE (a:TestCollectionOfTypes {uri: \'@URI3@\'})\r\n  SET a = { uri :\'@URI3@\', skos_" +
@@ -660,7 +660,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 240
-  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 243
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestContentPicker1)\r\nWHERE a.uri = \'@URI2@\'\r\nDELETE a", ((TechTalk.SpecFlow.Table)(null)), "Given ");
@@ -760,7 +760,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 278
-  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 281
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +
@@ -864,7 +864,7 @@ this.FeatureBackground();
   testRunner.Given("I record the new documentId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 319
-  testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 322
   testRunner.Given("I replace tokens in and then run the following graph update statement", "MATCH (a:TestCollectionOfTypes)-[r]-(b:TestContentPicker1)\r\nWHERE a.uri = \'@URI3@" +

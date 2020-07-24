@@ -204,7 +204,7 @@ this.FeatureBackground();
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 45
- testRunner.Then("the add the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 46
  testRunner.And("the data is present in the PUBLISH Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
