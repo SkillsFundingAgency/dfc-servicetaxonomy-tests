@@ -1049,17 +1049,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.EditItem(p0);
         }
 
-        [Given(@"I delete Graph data for content type ""(.*)""")]
-        public void GivenIDeleteGraphDataForContentType(string p0)
+        [Given(@"I delete ""(.*)"" Graph data for content type ""(.*)""")]
+        public void GivenIDeleteGraphDataForContentType(string target, string type)
         {
-            //todo make use of extension method
-            string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(p0) + "') detach delete n";
             Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+            //TODO_DRAFT improve connection handling
+            switch (target)
+            {
+                case constants.draft:
+                case constants.preview:
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
+
+                    break;
+                case constants.publish:
+                case constants.published:
+                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+                                _scenarioContext.GetEnv().neo4JUid,
+                                _scenarioContext.GetEnv().neo4JPassword);
+
+                    break;
+                //default:
+                //    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
+                //    return false;
+            }
+            string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
             neo4JHelper.ExecuteTableQuery(cypher, null);
         }
+
+
+        //[Given(@"I delete Graph data for content type ""(.*)""")]
+        //public void GivenIDeleteGraphDataForContentType(string type)
+        //{
+        //    //todo make use of extension method
+        //    string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
+        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
+        //    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+        //                        _scenarioContext.GetEnv().neo4JUid,
+        //                        _scenarioContext.GetEnv().neo4JPassword);
+        //    neo4JHelper.ExecuteTableQuery(cypher, null);
+        //}
 
         [Given(@"I delete SQL Server data for content type ""(.*)""")]
         public void GivenIDeleteSQLServerDataForContentType(string p0)

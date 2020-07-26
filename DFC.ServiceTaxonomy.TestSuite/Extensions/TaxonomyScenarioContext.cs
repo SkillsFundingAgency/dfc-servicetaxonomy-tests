@@ -204,11 +204,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems.Count;
         }
 
-        public static string GenerateUri(this ScenarioContext context, string contentType)
+        public static string GenerateUri(this ScenarioContext context, string contentType, string graph = constants.publish)
         {
-            return $"{context.GetEnv().contentApiBaseUrl}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
+            return $"{GetContentPath(context, graph)}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
         }
 
+        public static string GetContentPath(this ScenarioContext context, string graph)
+        {
+            switch (graph)
+            {
+                case constants.publish:
+                    return context.GetEnv().contentApiBaseUrl;
+                case constants.preview:
+                    return context.GetEnv().contentApiDraftBaseUrl;
+                default:
+                    return string.Empty;
+            }
+        }
         public static string GetContentUri(this ScenarioContext context, string contentType)
         {
             return $"{context.GetEnv().contentApiBaseUrl}/{contentType}";

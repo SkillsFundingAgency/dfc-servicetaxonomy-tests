@@ -126,7 +126,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private SharedContent InsertSharedContent( string name, Table dataTable, string graph = constants.publish)
         {
             SharedContent newItem = dataTable.CreateInstance<SharedContent>();
-            newItem.uri = context.GenerateUri(name);
+            newItem.uri = context.GenerateUri(name, graph);
             String cypher = CypherHelper.GenerateCypher<SharedContent>(newItem, name);
 
 
@@ -142,13 +142,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return newItem;
         }
 
-        private void AddRelationship( string uri1, string uri2, string relationshipName)
+        private void AddRelationship( string uri1, string uri2, string relationshipName, string graph)
         {
             String cypher = CypherHelper.AddRelationship("uri", uri1, uri2, relationshipName);
 
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
+            neo4JHelper.connect(graph == constants.publish ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrlDraft,
                                     context.GetEnv().neo4JUid,
                                     context.GetEnv().neo4JPassword);
 
@@ -181,25 +181,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
 
-        [Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
-        public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
-        {
-            string contentTypeName = context.ReplaceTokensInString(p0);
-            InsertSharedContent(contentTypeName, table);
+        //[Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
+        //public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
+        //{
+        //    string contentTypeName = context.ReplaceTokensInString(p0);
+        //    InsertSharedContent(contentTypeName, table);
 
-            AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
-        }
+        //    AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
+        //}
 
         [Given(@"I create an item of ""(.*)"" in the ""(.*)"" graph related by ""(.*)"" to item (.*) with the following data")]
         public void GivenICreateAnItemOfInTheGraphRelatedByToItemWithTheFollowingData(string type, string graph, string relationship, int itemRef, Table dataTable)
         {
             // assume non zero based index is supplied
             string contentTypeName = context.ReplaceTokensInString(type);
-            var item = InsertSharedContent(contentTypeName, dataTable);
+            var item = InsertSharedContent(contentTypeName, dataTable, graph);
 
             _DataItem parentItem = context.GetDataItems()[itemRef - 1];
 
-            AddRelationship(context.GetUri(itemRef - 1), context.GetLatestUri(), relationship);
+            AddRelationship(context.GetUri(itemRef - 1), context.GetLatestUri(), relationship, graph);
             context.RelateDataItems(itemRef - 1, context.GetNumberOfStoredUris() - 1, item.Title, relationship);
         }
 
