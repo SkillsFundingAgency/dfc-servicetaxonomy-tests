@@ -1075,7 +1075,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheNewDataIsPresentInTheGraphDatabases()
         {
             var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>",_scenarioContext.GetEnv().contentApiBaseUrl) } };
+            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>",_scenarioContext.GetEnv().contentApiBaseUrl.ToLower()) } };
+
+            Console.WriteLine("Check data is present in graph:");
+            Console.WriteLine($"Query: {statementTemplate}");
+            Console.WriteLine($"uri: {_scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl.ToLower())}");
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
