@@ -1111,8 +1111,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
         //TODO_DRAFT move this to helper / extension?
-        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, object> parameters, Dictionary<string,string> compareValues, out string message)
+        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message)
         {
+            string uriTokenValue;
             bool match = true;
             message = "";
 
@@ -1126,6 +1127,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
+                    uriTokenValue = _scenarioContext.GetEnv().contentApiUrl;
 
                     break;
                 case constants.publish:
@@ -1133,12 +1135,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
                                 _scenarioContext.GetEnv().neo4JUid,
                                 _scenarioContext.GetEnv().neo4JPassword);
+                    uriTokenValue = _scenarioContext.GetEnv().contentDraftApiUrl
 
                     break;
                 default:
                     message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
                     return false;
             }
+
+            if (parameters.ContainsKey("uri"))
+            {
+                parameters("uri") = parameters("uri").Replace("<<contentapiprefix>>", uri).ToLower();
+            }
+
+            Console.WriteLine("Check data is present in graph:");
+            Console.WriteLine($"Query: {query}");
+            Console.WriteLine($"uri: {DictionaryToString(parameters)}");
+
             Type requiredType = (Type)_scenarioContext[constants.responseType];
             var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters);
 
@@ -1242,8 +1255,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
         {
+            string uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl.ToLower());
             var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
-            var statementParameters = new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } };
+            var statementParameters = new Dictionary<string, object> { { "uri", uri } };
 
             Neo4JHelper neo4JHelper = new Neo4JHelper();
             neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
