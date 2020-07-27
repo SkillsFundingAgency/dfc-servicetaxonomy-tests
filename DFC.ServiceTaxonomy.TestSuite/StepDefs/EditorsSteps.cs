@@ -481,12 +481,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 cypherStatement = cypherStatement.Replace(token, replaceString);
 
             }
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-            neo4JHelper.ExecuteTableQuery(cypherStatement, null);
+            //TODO draft / publish graph
+            _scenarioContext.GetGraphConnection(constants.publish).ExecuteTableQuery(cypherStatement, null);
         }
 
         [Given(@"Load the file ""(.*)""")]
@@ -770,14 +766,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             bool tmModExtended = false;
             while (!done)
             {
-                // check neo count
-                Neo4JHelper neo4JHelper = new Neo4JHelper();
                 try
                 {
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-                    neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
+                    neo4jRecordCount = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypher, null);
                 }
                 catch 
                 {
@@ -986,12 +977,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             bool match;
             message = "";
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-           
-            var results = neo4JHelper.GetSingleRowAsDictionary(cypherQuery);
+          
+            var results = _scenarioContext.GetGraphConnection(constants.publish).GetSingleRowAsDictionary(cypherQuery);
 
             match = AreEqual(expectedresults, results);
             if (!match)
@@ -1052,27 +1039,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I delete ""(.*)"" Graph data for content type ""(.*)""")]
         public void GivenIDeleteGraphDataForContentType(string target, string type)
         {
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            Neo4JHelper neo4JHelper;
             //TODO_DRAFT improve connection handling
             switch (target)
             {
                 case constants.draft:
                 case constants.preview:
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
                     break;
                 case constants.publish:
                 case constants.published:
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
                     break;
-                //default:
-                //    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
-                //    return false;
+                default:
+                    neo4JHelper = null;
+                    "found".Should().Be("false","because target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}");
+                    break;
             }
             string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
             neo4JHelper.ExecuteTableQuery(cypher, null);
@@ -1116,26 +1098,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string uriTokenValue;
             bool match = true;
             message = "";
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
+            Neo4JHelper neo4JHelper;
 
             //TODO_DRAFT improve connection handling
             switch (target)
             {
                 case constants.draft:
                 case constants.preview:
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-                    uriTokenValue = _scenarioContext.GetEnv().contentApiUrl;
-
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
+                    uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
                     break;
                 case constants.publish:
                 case constants.published:
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-                    uriTokenValue = _scenarioContext.GetEnv().contentDraftApiUrl
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
+                    uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
 
                     break;
                 default:
@@ -1145,7 +1121,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             if (parameters.ContainsKey("uri"))
             {
-                parameters("uri") = parameters("uri").Replace("<<contentapiprefix>>", uri).ToLower();
+                parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
             }
 
             Console.WriteLine("Check data is present in graph:");
@@ -1153,7 +1129,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Console.WriteLine($"uri: {DictionaryToString(parameters)}");
 
             Type requiredType = (Type)_scenarioContext[constants.responseType];
-            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters);
+            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
 
             if (returnObject.Count > 0)
             {
@@ -1205,7 +1181,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string message;
             CheckDataIsPresentInGraph(constants.draft,
                                       (string)_scenarioContext[constants.cypherQuery],
-                                      new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
                                       (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
                                       out message).Should().BeTrue($"because {message}");
         }
@@ -1217,7 +1193,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string message;
             CheckDataIsPresentInGraph(constants.publish,
                                       (string)_scenarioContext[constants.cypherQuery],
-                                      new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
                                       (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
                                       out message).Should().BeTrue($"because {message}");
         }
@@ -1229,13 +1205,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             CheckDataIsPresentInGraph( graph,
                                        (string)_scenarioContext[constants.cypherQuery],
-                                        new Dictionary<string, object> { { "uri", _scenarioContext.GetUri(0) } },
+                                        new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
                                        null,
                                        out message).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword); ;
+            //Neo4JHelper neo4JHelper = new Neo4JHelper();
+            //neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
+            //                    _scenarioContext.GetEnv().neo4JUid,
+            //                    _scenarioContext.GetEnv().neo4JPassword); ;
         }
 
         [Then(@"the data is not present in the PUBLISH Graph database")]
@@ -1259,20 +1235,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
             var statementParameters = new Dictionary<string, object> { { "uri", uri } };
 
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-
-            var results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
+            var results = _scenarioContext.GetGraphConnection(constants.publish).ExecuteTableQuery(statementTemplate, statementParameters);
             int count = results.Count();
-            count.Should().Be(0, "Because the record should not be present in the graph database");
+            count.Should().Be(0, "Because the record should not be present in the graph publish database");
 
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrlDraft,
-                    _scenarioContext.GetEnv().neo4JUid,
-                    _scenarioContext.GetEnv().neo4JPassword);
+            uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiDraftBaseUrl.ToLower());
+            statementParameters = new Dictionary<string, object> { { "uri", uri } };
 
-            results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
+            results = _scenarioContext.GetGraphConnection(constants.preview).ExecuteTableQuery(statementTemplate, statementParameters);
             count = results.Count();
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
@@ -1292,12 +1262,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 cypherStatement = cypherStatement.Replace(token, replaceString);
 
             }
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-            int count = neo4JHelper.ExecuteCountQuery(cypherStatement, null);
+            int count = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypherStatement, null);
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
 

@@ -129,13 +129,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             newItem.uri = context.GenerateUri(name, graph);
             String cypher = CypherHelper.GenerateCypher<SharedContent>(newItem, name);
 
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(graph == constants.publish ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrlDraft,
-                                context.GetEnv().neo4JUid,
-                                context.GetEnv().neo4JPassword);
-
-            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
+            var response = context.GetGraphConnection(graph).ExecuteTableQuery(cypher, null);
 
             context.StoreUri(newItem.uri, name, newItem, TeardownOption.Graph);
             context.StoreToken($"__URI{context.GetNumberOfStoredUris()}__", newItem.uri);
@@ -145,15 +139,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private void AddRelationship( string uri1, string uri2, string relationshipName, string graph)
         {
             String cypher = CypherHelper.AddRelationship("uri", uri1, uri2, relationshipName);
-
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(graph == constants.publish ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrlDraft,
-                                    context.GetEnv().neo4JUid,
-                                    context.GetEnv().neo4JPassword);
-
-            var response = neo4JHelper.ExecuteTableQuery(cypher, null);
-
+            var response = context.GetGraphConnection(graph).ExecuteTableQuery(cypher, null);
         }
 
          [Given(@"I create a shared content item with the following data")]
@@ -414,22 +400,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //  check how many skills exist for occupations with related job profile
             var statementTemplate = (p0.ToLower().Equals("skills") ? cypher_skillWithRelatedJobProfile : cypher_occupationWithRelatedJobProfile );
             // var statementParameters = new Dictionary<string, object> { { "uri", context.Get<string>(keyGeneratedUri) } };
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
-                                    context.GetEnv().neo4JUid,
-                                    context.GetEnv().neo4JPassword);
-
-            int numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+            Neo4JHelper graphConnection = context.GetGraphConnection(constants.publish);
+            int numberOfRecords = graphConnection.GetRecordCount(statementTemplate, null);
 
             if (numberOfRecords < 1)
             {
                 // add a record
-                neo4JHelper.ExecuteTableQuery(cypher_AddJobProfileAndRelationToOccupation, null);
+                graphConnection.ExecuteTableQuery(cypher_AddJobProfileAndRelationToOccupation, null);
             }
 
             // check success
-            numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
+            numberOfRecords = graphConnection.GetRecordCount(statementTemplate, null);
             numberOfRecords.Should().BeGreaterThan(0);
 
             // store in context
@@ -441,15 +422,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string uri = "";
             var statementTemplate = cypher_jobProfileUriFromOccupationName.Replace(tokenName, p0);
-                                                                          
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
-                                    context.GetEnv().neo4JUid,
-                                    context.GetEnv().neo4JPassword);
             try
             {
-                uri = neo4JHelper.GetSingleRowAsDictionary(statementTemplate)["uri"];
+                uri = context.GetGraphConnection(constants.publish).GetSingleRowAsDictionary(statementTemplate)["uri"];
             }
             catch (Exception e)
             {

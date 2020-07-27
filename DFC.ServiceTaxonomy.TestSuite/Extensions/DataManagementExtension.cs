@@ -30,24 +30,45 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return ( count>0 ? count /3 : 0);
         }
 
+
+        public static Neo4JHelper GetGraphConnection (this ScenarioContext context, string graph, int instance = 0)
+        {
+            Neo4JHelper connection;
+            string graphUri;
+            switch ( graph)
+            {
+                case constants.publish:
+                    graphUri = context.GetEnv().neo4JUrl;
+                    break;
+                case constants.preview:
+                    graphUri = context.GetEnv().neo4JUrlDraft;
+                    break;
+                default:
+                    return null;
+            }
+            string contextRef = $"graph_{graph}{instance}";
+            if (context.ContainsKey(contextRef))
+            {
+                connection = (Neo4JHelper)context[contextRef];
+            }
+            else
+            {
+                connection = new Neo4JHelper();
+                connection.connect(graphUri,
+                                    context.GetEnv().neo4JUid,
+                                    context.GetEnv().neo4JPassword);
+                context[contextRef] = connection;
+            }
+            return connection;
+        }
+
         public static bool DeleteGraphNodesWithPrefix(this ScenarioContext context, string fieldName, string prefix)
         {
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
                                                                      .Replace("@FIELDNAME@",fieldName);
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
-                                context.GetEnv().neo4JUid,
-                                context.GetEnv().neo4JPassword);
-            
-            neo4JHelper.ExecuteTableQuery(cypher, null);
-
-            neo4JHelper.connect(context.GetEnv().neo4JUrlDraft,
-                    context.GetEnv().neo4JUid,
-                    context.GetEnv().neo4JPassword);
-
-            neo4JHelper.ExecuteTableQuery(cypher, null);
-
+            GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
+            GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
             return true;
         }
 
@@ -55,12 +76,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(context.GetEnv().neo4JUrl,
-                                context.GetEnv().neo4JUid,
-                                context.GetEnv().neo4JPassword);
-
-            neo4JHelper.ExecuteTableQuery(cypher, null);
+            GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
+            GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
 
             return true;
         }
