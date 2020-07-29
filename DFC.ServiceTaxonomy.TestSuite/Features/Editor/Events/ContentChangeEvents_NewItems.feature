@@ -6,6 +6,7 @@ Background:
 	Given I set the content type to be "SharedContent" 
 	Given I set up a data prefix for "Title"
 
+@Editor
 Scenario: 1. A new content item draft is created that passes server validation
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	#And I have ensured the activity I intend to add doesn't exist
@@ -17,6 +18,7 @@ Scenario: 1. A new content item draft is created that passes server validation
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
 
+@Editor
 Scenario: 2. A new content item draft is created that fails server validation
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	#And I have ensured the activity I intend to add doesn't exist
@@ -28,6 +30,7 @@ Scenario: 2. A new content item draft is created that fails server validation
 	Then an "EmptyField" validation error is shown for "Title"
 	And no event is issued
 
+@Editor
 Scenario: 7. A new content item is published succesfully
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	#And I have ensured the activity I intend to add doesn't exist
@@ -39,6 +42,7 @@ Scenario: 7. A new content item is published succesfully
 	Then the edit action completes succesfully
 	And an event of type "Publish" has been issued to notify consumers of the change
 
+@Editor
 Scenario: 8. A new content item is published with validation issues
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	#And I have ensured the activity I intend to add doesn't exist
