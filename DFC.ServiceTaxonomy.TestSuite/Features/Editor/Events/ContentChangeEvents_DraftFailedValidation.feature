@@ -26,6 +26,7 @@ Scenario: 3. A succesful correction is made to a new draft with validation issue
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 	And an event of type "Draft" has been issued to notify consumers of the change
+	And the number of events sent for this content Item is 1
 	
 
 @Editor
@@ -50,6 +51,7 @@ Scenario: 9. A succesful Publishing of new content item which had validation iss
 	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 1
 
 @Editor
 Scenario: 10. An unsuccesful Publishing of new content item which had validation issues on save to draft

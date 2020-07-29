@@ -234,14 +234,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I save the draft item")]
         public void GivenISaveTheDraftItem()
         {
-            _addContentItemBase.SaveActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
-            
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+            _addContentItemBase.SaveActivity();
 
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
+            if (id.Length > 0 )
+            {
+                _scenarioContext.StoreContentItemId(id);
+
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+            }
         }
 
         [Then(@"the values displayed in the editor match")]
@@ -839,31 +846,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I publish the item")]
         public void WhenIPublishTheItem()
         {
-            _addContentItemBase.PublishActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
+            _addContentItemBase.PublishActivity();
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(
-                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                       ).ToList());
+            if (id.Length > 0)
+            {
+                _scenarioContext.StoreContentItemId(id);
 
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(
+                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                           ).ToList());
+            }
         }
 
         [When(@"I save the draft item")]
         public void WhenISaveTheDraftItem()
         {
-            _addContentItemBase.SaveActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(
-                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                       ).ToList());
+            _addContentItemBase.SaveActivity();
 
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
+
+            if (id.Length > 0)
+            {
+                _scenarioContext.StoreContentItemId(id);
+
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(
+                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                           ).ToList());
+            }
         }
 
 

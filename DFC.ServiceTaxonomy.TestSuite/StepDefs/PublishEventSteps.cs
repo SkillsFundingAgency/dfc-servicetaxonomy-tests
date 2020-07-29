@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 using DFC.ServiceTaxonomy.SharedResources;
@@ -32,16 +32,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
+            Thread.Sleep(10000);
+
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
             List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
 
-            indexes.Count.Should().BeGreaterThan(1, "Because otherwise no data has been stored to check against");
+            indexes.Count.Should().BeGreaterThan(0, "Because otherwise no data has been stored to check against");
 
-            int numberOfEvents = _scenarioContext.ContainsKey($"countOf{eventType}Events") ? (int)_scenarioContext[$"countOf{eventType}Events"] : 0;
-            // mock the response until event store is up and running
-            MockEvent(id, _scenarioContext.GetUri(0), eventType);
+            int numberOfEvents = _scenarioContext.ContainsKey($"countOf{eventType.ToLower()}Events") ? (int)_scenarioContext[$"countOf{eventType.ToLower()}Events"] : 0;
+            //// mock the response until event store is up and running
+            //MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
-            List<ContentEvent> list = GetMatchingDocuments(id, eventType);
+            List<ContentEvent> list = GetMatchingDocuments(id, eventType.ToLower());
             list.Count().Should().Be(numberOfEvents +1, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion
@@ -96,14 +98,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private List<ContentEvent> GetMatchingDocuments(string id, string eventType = "")
         {
-            string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType}'";
+            string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}'";
             string query = $"SELECT * FROM c where  c.data.workflowCorrelationId = '{id}'{additionalClause}";
-
+            
             CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
-            List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("EventStore", "events", query);
+            List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
 
+            Console.WriteLine($"Check Event Store: found {list.Count} with query '{query}'");
             return list;
         }
+
+        [Then(@"the number of events sent for this content Item is (.*)")]
+        public void ThenTheNumberOfEventsSentForThisContentItemIs(int p0)
+        {
+            if (!_scenarioContext.GetEnv().checkEvents)
+            {
+                Console.WriteLine("Event store checks are disabled in App Settings");
+                return;
+            }
+            string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
+ 
+            List<ContentEvent> list = GetMatchingDocuments(id);
+            list.Count().Should().Be(p0, $"Because the total number of events sent should be {p0}");
+
+        }
+
+
+
         [Then(@"no event is issued")]
         public void ThenNoEventIsIssued()
         {
@@ -112,6 +133,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
+            // pause to ensure events are received
+            Thread.Sleep(10000);
             string id = _scenarioContext.GetContentItemId(0);
             int numberOfEvents = _scenarioContext.ContainsKey("TotalEvents") ? (int)_scenarioContext["TotalEvents"] : 0 ;
 
@@ -140,6 +163,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
+            // pause to ensure events are received
+            Thread.Sleep(10000);
             string id = _scenarioContext.GetContentItemId(0);
 
             List<ContentEvent> list = GetMatchingDocuments(id);
@@ -147,7 +172,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Dictionary<string, int> tallys = new Dictionary<string, int>();
             foreach (var item in list)
             {
-                int val = tallys.ContainsKey(item.eventType) ? tallys[item.eventType] : 0;
+                int val = tallys.ContainsKey(item.eventType.ToLower()) ? tallys[item.eventType.ToLower()] : 0;
+                val++;
                 tallys[item.eventType] = val;
             }
 

@@ -12,7 +12,7 @@ Background:
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
-	| New Shared Content |  <p>Here it is<p> |
+	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	#Then an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
@@ -24,11 +24,14 @@ Scenario: 18. A new draft version of an existing, published content item is crea
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
-	| updated Shared Content | <p>Here it is now<p> |
+	| updated Shared Content | <p>Here it is now</p> |
 	When I save the draft item
 	Then the save action completes succesfully
 	#And the data is present in the draft graph databases
 	And an event of type "Draft" has been issued to notify consumers of the change
+	And the data is present in the DRAFT Graph database
+	And the intial data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 Scenario: 19. A new draft version of an existing, published content item has validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -36,11 +39,14 @@ Scenario: 19. A new draft version of an existing, published content item has val
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title | Content              |
-	|       | <p>Here it is now<p> |
+	|       | <p>Here it is now</p> |
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
-		And an event of type "Draft" has been issued to notify consumers of the change
+	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
+	And the intial data is present in the DRAFT Graph database
+	And the intial data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 Scenario: 20. Updates to an existing published content item are published succesfully
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -48,10 +54,13 @@ Scenario: 20. Updates to an existing published content item are published succes
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
-	| updated Shared Content | <p>Here it is now<p> |
+	| updated Shared Content | <p>Here it is now</p> |
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
+	And the data is present in the DRAFT Graph database
+	And the data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 Scenario: 21. Updates to an existing published content item fails to publish with validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -59,11 +68,14 @@ Scenario: 21. Updates to an existing published content item fails to publish wit
 	And I select the first item that is found
 	And I Enter the following form data for "SharedContent"
 	| Title | Content              |
-	|       | <p>Here it is now<p> |
+	|       | <p>Here it is now</p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
+	And the intial data is present in the DRAFT Graph database
+	And the intial data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 Scenario: 28. A published item is unpublished from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -72,6 +84,9 @@ Scenario: 28. A published item is unpublished from the content item list view
 	Then the unpublish action completes succesfully
 	And an event of type "Unpublished" has been issued to notify consumers of the change
 	And an event of type "Draft" has been issued to notify consumers of the change
+	And the data is present in the DRAFT Graph database
+	And the data is not present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 3
 
 Scenario: 32. An existing published content item is deleted from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -81,6 +96,8 @@ Scenario: 32. An existing published content item is deleted from the content ite
 	And an event of type "Deleted" has been issued to notify consumers of the change
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
+
 
 Scenario: 35. An existing draft content item is cloned from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 

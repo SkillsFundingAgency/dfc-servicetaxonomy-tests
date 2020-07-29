@@ -14,14 +14,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             switch ( expression.ToLower())
             {
-                case constants.published:
+                //case constants.published:
                 case constants.publish:
                     expression = constants.publish;
                     break;
-                case constants.draft:
+                //case constants.draft:
                 case constants.preview:
                     expression = constants.preview;
                     break;
+                case "draft discarded":
+                    expression = "draft-discarded";
+                    break;
+
                 default:
                     break;
             }

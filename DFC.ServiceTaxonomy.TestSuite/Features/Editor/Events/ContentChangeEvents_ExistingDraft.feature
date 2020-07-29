@@ -31,6 +31,7 @@ Scenario: 13. An update to an existing draft document is succesful
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 	And an event of type "Draft" has been issued to notify consumers of the change
+	And the number of events sent for this content Item is 2
 
 @Editor
 Scenario: 14. An update to an existing draft document fails with validation issues
@@ -46,6 +47,7 @@ Scenario: 14. An update to an existing draft document fails with validation issu
 	And the data is not present in the PUBLISH Graph database
 	And an event of type "Draft" has been issued to notify consumers of the change
 	# FALSE POSITIVE CHECK OUTCOME
+	And the number of events sent for this content Item is 2
 
 @Editor
 Scenario: 15. An existing draft content item is succesfully published
@@ -54,10 +56,11 @@ Scenario: 15. An existing draft content item is succesfully published
 	And I select the first item that is found
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Publish" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 	And an event of type "Draft Discarded" has been issued to notify consumers of the change
 	And the intial data is present in the DRAFT Graph database
 	And the intial data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 3
 
 @Editor
 Scenario: 16. An existing draft content item is updated and fails validation when published
@@ -73,6 +76,7 @@ Scenario: 16. An existing draft content item is updated and fails validation whe
 	# FALSE POSITIVE CHECK OUTCOME
 	And the intial data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 @Editor
 Scenario: 17. An existing draft content item is published from the content item list view
@@ -83,6 +87,7 @@ Scenario: 17. An existing draft content item is published from the content item 
 	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 @Editor
 Scenario: 31. An existing draft content item is deleted from the content item list view
@@ -93,6 +98,7 @@ Scenario: 31. An existing draft content item is deleted from the content item li
 	And an event of type "Deleted" has been issued to notify consumers of the change
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
+	And the number of events sent for this content Item is 2
 
 @Editor
 Scenario: 34. An existing published content item is cloned from the content item list view
