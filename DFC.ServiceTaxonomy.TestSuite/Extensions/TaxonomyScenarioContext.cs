@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -344,6 +345,36 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return (context.ContainsKey(keyExpectedRecordCount) ? context.Get<int>(keyExpectedRecordCount) : 0);
         }
         
+        public static void SetEditorFields( this ScenarioContext context, Dictionary<string,string> vars, bool intial = false)
+        {
+            if (!context.ContainsKey(constants.requestVariables) || intial)
+            {
+                context[constants.requestVariables] = vars;
+            }
+            else
+            {
+                context[constants.requestVariablesUpdated] = vars;
+            }
+        }
+
+        public static Dictionary<string,string> GetEditorFields( this ScenarioContext context, bool intial = false)
+        {
+            Dictionary<string, string> vars;
+            if (context.ContainsKey(constants.requestVariablesUpdated) && !intial)
+            {
+                vars = ( Dictionary<string,string>) context[constants.requestVariablesUpdated];
+            }
+            else if (context.ContainsKey(constants.requestVariables))
+            {
+                vars = (Dictionary<string, string>)context[constants.requestVariables];
+            }
+            else 
+            {
+                vars = new Dictionary<string, string>();
+            }
+            return vars;
+        }
+
         public static Dictionary<string,string> GetTaxonomyApiHeaders(this ScenarioContext context)
         {
             return context.ContainsKey(constants.securityHeader) ? 

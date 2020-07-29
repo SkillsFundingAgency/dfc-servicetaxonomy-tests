@@ -157,6 +157,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 item.Click();
                 item.Clear();
                 item.SendKeys(value);
+                if (_htmlView)
+                {
+                    item = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-viewHTML-button > svg"));
+                    item.Click();
+                    _htmlView = false;
+                }
             }
             catch (Exception e)
             {

@@ -79,6 +79,8 @@ Scenario: 32. An existing published content item is deleted from the content ite
 	And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And an event of type "Deleted" has been issued to notify consumers of the change
+	And the data is not present in the DRAFT Graph database
+	And the data is not present in the PUBLISH Graph database
 
 Scenario: 35. An existing draft content item is cloned from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 

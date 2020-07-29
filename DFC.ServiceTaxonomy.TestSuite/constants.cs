@@ -28,6 +28,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
         public const string requestParam = "requestParam";
         public const string requestVariables = "requestVariables";
+        public const string requestVariablesUpdated = "requestVariablesUpdated";
         public const string contentItemIndexes = "contentItemIndexes";
         public const string contentIdCount = "contentIdCount";
         public const string contentIds = "contentIds";

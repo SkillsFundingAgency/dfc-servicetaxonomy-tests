@@ -219,7 +219,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             _scenarioContext[constants.cypherQuery] = cypher.Replace("@CONTENTTYPE@", contentType);
             _scenarioContext[constants.responseType] = typeof(TestContent);
-            _scenarioContext[constants.requestVariables] = expectedData;
+            //_scenarioContext[constants.requestVariables] = expectedData;
+            _scenarioContext.SetEditorFields(expectedData);
         }
 
         [Given(@"I allow multiple items to be selected")]
@@ -272,7 +273,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 value.Should().Be(row[2]);
                 vars.Add(row[0], row[2]);
             }
-            _scenarioContext[constants.requestVariables] = vars;
+            //_scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars);
         }
 
 
@@ -287,7 +289,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             multilineText.Should().Be(_editContentType.GetFieldValue(contentType,"Html",p0));
 
             vars.Add(p0, multilineText);
-            _scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars, true);
+//            _scenarioContext[constants.requestVariables] = vars;
         }
 
 
@@ -308,7 +311,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 vars.Add(item.value.Key, newValue);
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
-            _scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars);
+            //_scenarioContext[constants.requestVariables] = vars;
         }
 
         [Given(@"I search for the ""(.*)""")]
@@ -903,6 +907,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     throw new Exception($"Unhandled validationType {validationType}");
             }
+            //_scenarioContext.Remove(constants.requestVariables);
         }
 
 
@@ -1093,7 +1098,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
         //TODO_DRAFT move this to helper / extension?
-        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message)
+        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message, bool checkData = true)
         {
             string uriTokenValue;
             bool match = true;
@@ -1133,38 +1138,41 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             if (returnObject.Count > 0)
             {
-                object first = returnObject[0];
+                if( checkData)
+                { 
+                    object first = returnObject[0];
 
-                Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
+                    //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
 
-                foreach (var var in vars)
-                {
-                    Type myType = returnObject[0].GetType();
-                    PropertyInfo propertyInfo = myType.GetProperty(var.Key);
-                    string varValue = "";
-                    try
+                    foreach (var var in compareValues)
                     {
-                        varValue = (string)propertyInfo.GetValue(returnObject[0], null);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
+                        Type myType = returnObject[0].GetType();
+                        PropertyInfo propertyInfo = myType.GetProperty(var.Key);
+                        string varValue = "";
+                        try
+                        {
+                            varValue = (string)propertyInfo.GetValue(returnObject[0], null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
 
-                    string rawValue = varValue;
-                    //Todo keep track of type so tags can only be removed for non html fields rather than by name
-                    switch (var.Key)
-                    {
-                        case "Content":
-                            break;
-                        default:
-                            rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                            break;
-                    }
-                    if (var.Value != rawValue)
-                    {
-                        message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
-                        match = false;
+                        string rawValue = varValue;
+                        //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                        switch (var.Key)
+                        {
+                            case "Content":
+                                break;
+                            default:
+                                rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                                break;
+                        }
+                        if (var.Value != rawValue)
+                        {
+                            message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                            match = false;
+                        }
                     }
                 }
             }
@@ -1175,6 +1183,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return match;
         }
 
+        [Then(@"the intial data is present in the DRAFT Graph database")]
+        public void ThenTheIntialDataIsPresentInTheDRAFTGraphDatabase()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.draft,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(true),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
         [Then(@"the data is present in the DRAFT Graph database")]
         public void ThenTheDataIsPresentInTheDRAFTGraphDatabase()
         {
@@ -1182,7 +1201,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             CheckDataIsPresentInGraph(constants.draft,
                                       (string)_scenarioContext[constants.cypherQuery],
                                       new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
-                                      (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(),
                                       out message).Should().BeTrue($"because {message}");
         }
 
@@ -1194,7 +1213,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             CheckDataIsPresentInGraph(constants.publish,
                                       (string)_scenarioContext[constants.cypherQuery],
                                       new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
-                                      (Dictionary<string, string>)_scenarioContext[constants.requestVariables],
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+
+        [Then(@"the intial data is present in the PUBLISH Graph database")]
+        public void ThenTheInitialDataIsPresentInThePublishGraphDatabases()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.publish,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(true),
                                       out message).Should().BeTrue($"because {message}");
         }
 
@@ -1207,7 +1238,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                        (string)_scenarioContext[constants.cypherQuery],
                                         new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
                                        null,
-                                       out message).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
+                                       out message,
+                                       false).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
             //Neo4JHelper neo4JHelper = new Neo4JHelper();
             //neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
             //                    _scenarioContext.GetEnv().neo4JUid,
