@@ -35,6 +35,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Thread.Sleep(10000);
 
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
             List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
 
             indexes.Count.Should().BeGreaterThan(0, "Because otherwise no data has been stored to check against");
@@ -43,7 +44,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //// mock the response until event store is up and running
             //MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
-            List<ContentEvent> list = GetMatchingDocuments(id, eventType.ToLower());
+            List<ContentEvent> list = GetMatchingDocuments(uri, eventType.ToLower());
             list.Count().Should().Be(numberOfEvents +1, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion
@@ -99,7 +100,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private List<ContentEvent> GetMatchingDocuments(string id, string eventType = "")
         {
             string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}'";
-            string query = $"SELECT * FROM c where  c.data.workflowCorrelationId = '{id}'{additionalClause}";
+            string query = $"SELECT * FROM c where  c.subject = '{id}'{additionalClause}";
             
             CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
             List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
@@ -117,8 +118,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 return;
             }
             string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
- 
-            List<ContentEvent> list = GetMatchingDocuments(id);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
+            List<ContentEvent> list = GetMatchingDocuments(uri);
             list.Count().Should().Be(p0, $"Because the total number of events sent should be {p0}");
 
         }
@@ -166,8 +167,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // pause to ensure events are received
             Thread.Sleep(10000);
             string id = _scenarioContext.GetContentItemId(0);
-
-            List<ContentEvent> list = GetMatchingDocuments(id);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
+            List<ContentEvent> list = GetMatchingDocuments(uri);
 
             Dictionary<string, int> tallys = new Dictionary<string, int>();
             foreach (var item in list)
