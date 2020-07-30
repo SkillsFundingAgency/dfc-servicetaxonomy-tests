@@ -15,9 +15,6 @@ Background:
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	#Then an event of type "draft" has been issued to notify consumers of the change
-	#Given I check time of the latest event message
-	#Given I check the number of events sent for this contentItem
 
 	Given I search for the "Title"
 	And I select the first item that is found
@@ -42,7 +39,7 @@ Scenario: 23. Updates are made to an existing draft version of a published conte
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 3
 
-@Editor	
+@Editor	 @NegativeTest
 Scenario: 24. Updates with validation issues  are made to an existing draft version of a published content item
 	Given I search for the "Title"
 	And I select the first item that is found
@@ -51,8 +48,6 @@ Scenario: 24. Updates with validation issues  are made to an existing draft vers
 	|       | <p>Here it is again</p> |
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
-	#And an event of type "Draft" has been issued to notify consumers of the change
-	# FALSE POSITIVE CHECK OUTCOME
 	#Then the data is present in the DRAFT Graph database
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 2
@@ -70,7 +65,7 @@ Scenario: 25. An existing draft version of a published content item is published
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 4
 
-@Editor	
+@Editor	 @NegativeTest
 Scenario: 26. An existing draft version of a published content item is edited so validation errors exists and publishing fails
 	Given I search for the "Title"
 	And I select the first item that is found
@@ -79,8 +74,6 @@ Scenario: 26. An existing draft version of a published content item is edited so
 	|       | <p>Here it is again</p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	#And an event of type "Draft" has been issued to notify consumers of the change
-	# FALSE POSITIVE CHECK OUTCOME
 	#Then the data is present in the DRAFT Graph database
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 2

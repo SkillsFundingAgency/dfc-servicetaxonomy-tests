@@ -6,9 +6,7 @@ Background:
 	Given I set the content type to be "SharedContent" 
 	Given I set up a data prefix for "Title"
 
-	#Given the test is tagged with ""
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	#And I have ensured the activity I intend to add doesn't exist
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title | Content          |

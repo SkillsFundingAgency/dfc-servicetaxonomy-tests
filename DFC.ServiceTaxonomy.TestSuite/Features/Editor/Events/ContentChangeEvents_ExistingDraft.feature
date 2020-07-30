@@ -33,7 +33,7 @@ Scenario: 13. An update to an existing draft document is succesful
 	And an event of type "Draft" has been issued to notify consumers of the change
 	And the number of events sent for this content Item is 2
 
-@Editor
+@Editor @NegativeTest
 Scenario: 14. An update to an existing draft document fails with validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -45,8 +45,6 @@ Scenario: 14. An update to an existing draft document fails with validation issu
 	Then an "EmptyField" validation error is shown for "Title"
 	And the intial data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	#And an event of type "Draft" has been issued to notify consumers of the change
-	# FALSE POSITIVE CHECK OUTCOME
 	And the number of events sent for this content Item is 1
 
 @Editor
@@ -62,7 +60,7 @@ Scenario: 15. An existing draft content item is succesfully published
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 3
 
-@Editor
+@Editor @NegativeTest
 Scenario: 16. An existing draft content item is updated and fails validation when published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -72,8 +70,6 @@ Scenario: 16. An existing draft content item is updated and fails validation whe
 	|       | <p>Here it is now</p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	#And an event of type "Draft" has been issued to notify consumers of the change
-	# FALSE POSITIVE CHECK OUTCOME
 	And the intial data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1

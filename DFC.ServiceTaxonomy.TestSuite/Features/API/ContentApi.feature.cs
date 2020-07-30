@@ -154,13 +154,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "First Item",
                             "<p>Something</p>"});
 #line 15
- testRunner.And("I create a \" __TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table1, "And ");
+ testRunner.And("I create a \" __TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table1, "And ");
 #line hidden
 #line 18
- testRunner.And("I delete \"Published\" Graph data for content type \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I delete \"Publish\" Graph data for content type \"__TYPE__\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 19
- testRunner.Given("I make a request to the \"Published\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 20
  testRunner.Then("the response code is 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -208,7 +208,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "First Item",
                             "<p>Something</p>"});
 #line 25
- testRunner.And("I create a \"__TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table2, "And ");
+ testRunner.And("I create a \"__TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table2, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -217,7 +217,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2nd Item",
                             "<p>Something else</p>"});
 #line 28
- testRunner.And("I create a \"__TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table3, "And ");
+ testRunner.And("I create a \"__TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table3, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -226,10 +226,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "3rd Item",
                             "<p>Something more</p>"});
 #line 31
- testRunner.And("I create a \"__TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table4, "And ");
+ testRunner.And("I create a \"__TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table4, "And ");
 #line hidden
 #line 37
- testRunner.Given("I make a request to the \"Published\" content API to retrive all \"__TYPE__\" items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive all \"__TYPE__\" items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 38
  testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -284,7 +284,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 47
- testRunner.And("I create a \"__TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table5, "And ");
+ testRunner.And("I create a \"__TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table5, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -297,11 +297,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 50
- testRunner.And("I create an item of \"__TYPE__\" in the \"Published\" graph related by \"hasRelationsh" +
-                        "ip\" to item 1 with the following data", ((string)(null)), table6, "And ");
+ testRunner.And("I create an item of \"__TYPE__\" in the \"Publish\" graph related by \"hasRelationship" +
+                        "\" to item 1 with the following data", ((string)(null)), table6, "And ");
 #line hidden
 #line 53
- testRunner.Given("I make a request to the \"Published\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 54
  testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -359,7 +359,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 62
- testRunner.And("I create a \"__TYPEA__\" item in the \"Published\" graph with the following data", ((string)(null)), table7, "And ");
+ testRunner.And("I create a \"__TYPEA__\" item in the \"Publish\" graph with the following data", ((string)(null)), table7, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -372,8 +372,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 65
- testRunner.And("I create an item of \"__TYPEA__\" in the \"Published\" graph related by \"hasRelations" +
-                        "hip\" to item 1 with the following data", ((string)(null)), table8, "And ");
+ testRunner.And("I create an item of \"__TYPEA__\" in the \"Publish\" graph related by \"hasRelationshi" +
+                        "p\" to item 1 with the following data", ((string)(null)), table8, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -386,11 +386,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 68
- testRunner.And("I create an item of \"__TYPEA__\" in the \"Published\" graph related by \"hasOtherRela" +
-                        "tionship\" to item 1 with the following data", ((string)(null)), table9, "And ");
+ testRunner.And("I create an item of \"__TYPEA__\" in the \"Publish\" graph related by \"hasOtherRelati" +
+                        "onship\" to item 1 with the following data", ((string)(null)), table9, "And ");
 #line hidden
 #line 71
- testRunner.Given("I make a request to the \"Published\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 72
  testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -451,7 +451,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 81
- testRunner.And("I create a \"__TYPEA__\" item in the \"Published\" graph with the following data", ((string)(null)), table10, "And ");
+ testRunner.And("I create a \"__TYPEA__\" item in the \"Publish\" graph with the following data", ((string)(null)), table10, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -464,8 +464,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 84
- testRunner.And("I create an item of \"__TYPEA__\" in the \"Published\" graph related by \"hasRelations" +
-                        "hip\" to item 1 with the following data", ((string)(null)), table11, "And ");
+ testRunner.And("I create an item of \"__TYPEA__\" in the \"Publish\" graph related by \"hasRelationshi" +
+                        "p\" to item 1 with the following data", ((string)(null)), table11, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -478,8 +478,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 87
- testRunner.And("I create an item of \"__TYPEA__\" in the \"Published\" graph related by \"hasRelations" +
-                        "hip\" to item 1 with the following data", ((string)(null)), table12, "And ");
+ testRunner.And("I create an item of \"__TYPEA__\" in the \"Publish\" graph related by \"hasRelationshi" +
+                        "p\" to item 1 with the following data", ((string)(null)), table12, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -492,11 +492,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 90
- testRunner.And("I create an item of \"__TYPEB__\" in the \"Published\" graph related by \"hasOtherRela" +
-                        "tionship\" to item 1 with the following data", ((string)(null)), table13, "And ");
+ testRunner.And("I create an item of \"__TYPEB__\" in the \"Publish\" graph related by \"hasOtherRelati" +
+                        "onship\" to item 1 with the following data", ((string)(null)), table13, "And ");
 #line hidden
 #line 93
- testRunner.Given("I make a request to the \"Published\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 94
  testRunner.When("I build the expected response for item 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -554,7 +554,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 102
- testRunner.And("I create a \"__TYPE__\" item in the \"Published\" graph with the following data", ((string)(null)), table14, "And ");
+ testRunner.And("I create a \"__TYPE__\" item in the \"Publish\" graph with the following data", ((string)(null)), table14, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
@@ -567,11 +567,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "2020-06-17T16:04:41.68Z",
                             "2020-06-17T16:04:41.68Z"});
 #line 105
- testRunner.And("I create an item of \"__TYPE__\" in the \"Published\" graph related by \"hasRelationsh" +
-                        "ip\" to item 1 with the following data", ((string)(null)), table15, "And ");
+ testRunner.And("I create an item of \"__TYPE__\" in the \"Publish\" graph related by \"hasRelationship" +
+                        "\" to item 1 with the following data", ((string)(null)), table15, "And ");
 #line hidden
 #line 108
- testRunner.Given("I make a request to the \"Published\" content API to retrive item 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I make a request to the \"Publish\" content API to retrive item 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 109
  testRunner.When("I build the expected response for item 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
