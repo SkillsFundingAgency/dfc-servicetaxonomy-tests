@@ -60,10 +60,10 @@ Scenario: 25. An existing draft version of a published content item is published
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
-	And an event of type "Draft discarded" has been issued to notify consumers of the change
+	#And an event of type "Draft discarded" has been issued to notify consumers of the change
 	Then the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 4
+	And the number of events sent for this content Item is 3
 
 @Editor	 @NegativeTest
 Scenario: 26. An existing draft version of a published content item is edited so validation errors exists and publishing fails
@@ -84,10 +84,10 @@ Scenario: 27. An existing draft version of a published content item is published
 	And I select the "Publish" option for the first item that is found
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
-	And an event of type "Draft discarded" has been issued to notify consumers of the change
+	#And an event of type "Draft discarded" has been issued to notify consumers of the change
 	Then the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 4
+	And the number of events sent for this content Item is 3
 
 @Editor	
 Scenario: 29. A published item with a draft version is unpublished from the content item list view
@@ -114,10 +114,10 @@ Scenario: 33. An existing published item with a draft version is deleted from th
 	Given I search for the "Title"
 	And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
-	And an event of type "Deleted" has been issued to notify consumers of the change
+	And 2 events of type "Deleted" has been issued to notify consumers of the change
 	Then the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 3
+	And the number of events sent for this content Item is 4
 
 @ignore @Editor	
 Scenario: 36. An existing published content item with a draft version  is cloned from the content item list view

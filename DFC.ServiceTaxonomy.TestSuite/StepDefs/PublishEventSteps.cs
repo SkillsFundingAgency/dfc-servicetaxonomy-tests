@@ -23,10 +23,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext = context;
         }
 
+
+
         [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change")]
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(string eventType)
         {
-            
+            ThenEventsOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(1, eventType);
+        }
+
+        [Then(@"(.*) events of type ""(.*)"" has been issued to notify consumers of the change")]
+        public void ThenEventsOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(int p0, string eventType)
+        {
             if (!_scenarioContext.GetEnv().checkEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
@@ -34,7 +41,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             Thread.Sleep(10000);
 
-            string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds()-1);
+            string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
             List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
 
@@ -45,10 +52,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
             List<ContentEvent> list = GetMatchingDocuments(uri, eventType.ToLower());
-            list.Count().Should().Be(numberOfEvents +1, "Because a cosmos document relating to the event message should have been found");
+            list.Count().Should().Be(numberOfEvents + p0, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion
         }
+
+
+
+
+
 
         [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change and (.*) others")]
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChangeAndOthers(string p0, int p1)
