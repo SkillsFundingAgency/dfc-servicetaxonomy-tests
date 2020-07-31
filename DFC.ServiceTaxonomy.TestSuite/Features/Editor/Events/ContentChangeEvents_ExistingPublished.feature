@@ -94,10 +94,10 @@ Scenario: 32. An existing published content item is deleted from the content ite
 	And I search for the "Title"
 	And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
-	And 2 events of type "Deleted" has been issued to notify consumers of the change
+	And 1 events of type "Deleted" has been issued to notify consumers of the change
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 3
+	And the number of events sent for this content Item is 2
 
 @Editor @ignore
 Scenario: 35. An existing draft content item is cloned from the content item list view
