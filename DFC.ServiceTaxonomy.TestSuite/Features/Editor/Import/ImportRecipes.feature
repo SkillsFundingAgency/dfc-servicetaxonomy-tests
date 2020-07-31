@@ -17,7 +17,7 @@ Background:
 	And I have completed the run once section
 
 
-@Editor
+@Editor @Ignore
 Scenario: Import data from recipe file
 	Given I logon to the editor
 	Given I prepare the test recipes
