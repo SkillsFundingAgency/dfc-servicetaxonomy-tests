@@ -1015,7 +1015,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             cypherQueries.Should().ContainKey(queryReference);
 
-            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
 
             if ( graphReference == constants.preview )
             {

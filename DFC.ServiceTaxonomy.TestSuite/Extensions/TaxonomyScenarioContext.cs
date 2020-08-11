@@ -182,7 +182,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static string ConvertUriToDraft(this ScenarioContext context, string uri)
         {
-            return uri.Replace(context.GetEnv().contentApiBaseUrl, context.GetEnv().contentApiDraftBaseUrl);
+            return uri.ToLower().Replace(context.GetEnv().contentApiBaseUrl.ToLower(), context.GetEnv().contentApiDraftBaseUrl.ToLower());
         }
 
         public static string GetUri(this ScenarioContext context, int index)
