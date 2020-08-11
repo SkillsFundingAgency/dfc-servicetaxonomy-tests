@@ -1046,6 +1046,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             if (!match)
             {
                 message = $"Checking the {graph} graph\n";
+                message = $"Using:\n{cypherQuery}\n";
                 message = $"Expected: \n{DictionaryHelper.DictionaryToString(expectedresults)}\n";
                 message += $"Actual: \n{DictionaryHelper.DictionaryToString(results)}\n";
             }
