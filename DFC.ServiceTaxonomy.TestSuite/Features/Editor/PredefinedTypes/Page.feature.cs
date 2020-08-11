@@ -126,12 +126,12 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table80 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title"});
-                table80.AddRow(new string[] {
+                table96.AddRow(new string[] {
                             "My Test Page"});
 #line 13
- testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table80, "And ");
+ testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table96, "And ");
 #line hidden
 #line 17
  testRunner.And("I select the default page location", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -142,17 +142,17 @@ this.FeatureBackground();
 #line 22
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Html"});
-                table81.AddRow(new string[] {
+                table97.AddRow(new string[] {
                             "My Test Page",
                             "Test Thing 1"});
-                table81.AddRow(new string[] {
+                table97.AddRow(new string[] {
                             "uri::thing2",
                             "Test Thing 2"});
 #line 23
- testRunner.Then("the \"Preview\" graph matches the expect results using the \"page_with_html\" query", ((string)(null)), table81, "Then ");
+ testRunner.Then("the \"Preview\" graph matches the expect results using the \"page_with_html\" query", ((string)(null)), table97, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
