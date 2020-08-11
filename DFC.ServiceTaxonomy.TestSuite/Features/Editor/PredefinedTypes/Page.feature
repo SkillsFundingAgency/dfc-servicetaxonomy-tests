@@ -20,7 +20,6 @@ Scenario: Add a new page with an html item
 	Test HTML
 	"""
 	When I publish the item
-	Then the "Preview" graph matches the expect results using the "page_with_html" query
-	| Title         | Html   | 
-	| My Test Page  | Test Thing 1 | 
-	| uri::thing2 | Test Thing 2 | 
+	Then the preview and publish graphs returns the expected results using the "page_with_html" query
+	| skos__prefLabel | htmlbody_Html    |
+	| My Test Page    | <p>Test HTML</p> |

@@ -55,6 +55,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
                                                                 into #tmpdocids
                                                                 from [dbo].[ContentItemIndex]
                                                                 where @WHERECLAUSE@;
+                                                                delete from [dbo].PageLocationPartIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
+                                                                delete from [dbo].TaxonomyIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
                                                                 delete from [dbo].[ContentItemIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
                                                                 delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
                                                                 drop table #tmpdocids

@@ -1,6 +1,7 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -94,8 +95,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
 
+//                var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+                element = driver.WaitUntilElementFound(By.ClassName("trumbowyg-editor"));
+                    
+                    //wait.Until(driver => driver.FindElement(By.ClassName("trumbowyg-editor")));
+               // element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"lnkDir\"]")));
+
                 //send keys to first html field
-                element = driver.FindElement(By.ClassName("trumbowyg-editor"));
+//element = driver.FindElement(By.ClassName("trumbowyg-editor"));
                 element.SendKeys(htmlValue);
 
             }

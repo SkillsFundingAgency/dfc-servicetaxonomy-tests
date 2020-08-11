@@ -78,7 +78,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private EditContentType _editContentType;
         private GraphSyncPart _GraphSyncPart;
 
-
+        private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
+                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" }
+                                                                    };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
@@ -1000,19 +1002,52 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return output;
         }
 
+        [Then(@"the preview and publish graphs returns the expected results using the ""(.*)"" query")]
+        public void ThenThePreviewAndPublishGraphsReturnsTheExpectedResultsUsingTheQuery(string p0, Table table)
+        {
+            ThenTheGraphMatchesTheExpectResultsUsingTheQuery(constants.preview, p0, table);
+            ThenTheGraphMatchesTheExpectResultsUsingTheQuery(constants.publish, p0, table);
+        }
 
-        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQuery(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
+
+            if ( graphReference == constants.preview )
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message, string graph = constants.publish)
         {
             bool match;
             message = "";
           
-            var results = _scenarioContext.GetGraphConnection(constants.publish).GetSingleRowAsDictionary(cypherQuery);
+            var results = _scenarioContext.GetGraphConnection(graph).GetSingleRowAsDictionary(cypherQuery);
+
+            // check for prefixed field
+            if (_scenarioContext.ContainsKey("prefixField") && expectedresults.ContainsKey((string)_scenarioContext["prefixField"]) )
+            {
+                string field = (string)_scenarioContext["prefixField"];
+                string value = expectedresults[field];
+                expectedresults[field] = (string)_scenarioContext["prefix"] + value;
+            }
 
             match = AreEqual(expectedresults, results);
             if (!match)
             {
-                message = "Expected: \n" + DictionaryToString(expectedresults) + "\n";
-                message += "Actual: \n" + DictionaryToString(results) + "\n";
+                message = $"Checking the {graph} graph\n";
+                message = $"Expected: \n{DictionaryHelper.DictionaryToString(expectedresults)}\n";
+                message += $"Actual: \n{DictionaryHelper.DictionaryToString(results)}\n";
             }
             return match;
         }

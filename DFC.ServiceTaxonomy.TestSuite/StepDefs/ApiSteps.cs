@@ -251,7 +251,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string requestBody = "{}";
             string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
-            var requestItems = table.ToSimpleDictionary();
+            var requestItems = table.SingleColumnToDictionary();
             foreach ( var item in requestItems )
             {
                requestBody = JsonHelper.AddPropertyToJsonString(requestBody, item.Key, item.Value);

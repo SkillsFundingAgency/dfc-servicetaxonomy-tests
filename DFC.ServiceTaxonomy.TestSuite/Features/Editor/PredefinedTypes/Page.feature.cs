@@ -143,16 +143,14 @@ this.FeatureBackground();
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Html"});
+                            "skos__prefLabel",
+                            "htmlbody_Html"});
                 table97.AddRow(new string[] {
                             "My Test Page",
-                            "Test Thing 1"});
-                table97.AddRow(new string[] {
-                            "uri::thing2",
-                            "Test Thing 2"});
+                            "<p>Test HTML</p>"});
 #line 23
- testRunner.Then("the \"Preview\" graph matches the expect results using the \"page_with_html\" query", ((string)(null)), table97, "Then ");
+ testRunner.Then("the preview and publish graphs returns the expected results using the \"page_with_" +
+                        "html\" query", ((string)(null)), table97, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

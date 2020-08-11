@@ -180,7 +180,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems.Last().Uri;
         }
 
-        private static string ConvertUriToDraft(this ScenarioContext context, string uri)
+        public static string ConvertUriToDraft(this ScenarioContext context, string uri)
         {
             return uri.Replace(context.GetEnv().contentApiBaseUrl, context.GetEnv().contentApiDraftBaseUrl);
         }

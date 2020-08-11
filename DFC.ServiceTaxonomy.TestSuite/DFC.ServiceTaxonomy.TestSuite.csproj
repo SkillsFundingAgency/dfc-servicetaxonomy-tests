@@ -19,6 +19,7 @@
   <ItemGroup>
     <Compile Remove="PageObjects\AddActivity.cs" />
     <Compile Remove="PageObjects\AddDayToDayTask.cs" />
+    <Compile Remove="StepDefs\GraphSteps.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.1" />
