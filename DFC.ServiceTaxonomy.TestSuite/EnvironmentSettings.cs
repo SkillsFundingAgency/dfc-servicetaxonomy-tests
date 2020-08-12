@@ -18,6 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
 
         public string contentApiBaseUrl => Configuration["ContentApi:BaseUrl"];
+        public string contentApiDraftBaseUrl => Configuration["ContentApi:BaseUrlDraft"];
         public string contentApiSubscriptionKey => Configuration["ContentApi:SubscriptionKey"];
 
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];
@@ -27,6 +28,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string editorPassword => Configuration["Editor:Password"];
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
+        public string neo4JUrlDraft => Configuration["Neo4j:UrlDraft"];
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
 

@@ -14,5 +14,8 @@ Scenario: Add a new FurtherInfo content item
 	| Title                    |  Url            | LinkText       |
 	| My Test FurtherInfo item |  http://testcom | more info here |
 	When I publish the item
-	Then the add action completes succesfully
-	And the data is present in the Graph databases
+	Then the item is published succesfully
+	And the data is present in the DRAFT Graph database
+	And the data is present in the PUBLISH Graph database
+
+#TODO_DRAFT draft checks

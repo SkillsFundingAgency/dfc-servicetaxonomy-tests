@@ -1,10 +1,8 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Models;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+using System.Runtime.CompilerServices;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -182,6 +180,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems.Last().Uri;
         }
 
+        public static string ConvertUriToDraft(this ScenarioContext context, string uri)
+        {
+            return uri.ToLower().Replace(context.GetEnv().contentApiBaseUrl.ToLower(), context.GetEnv().contentApiDraftBaseUrl.ToLower());
+        }
 
         public static string GetUri(this ScenarioContext context, int index)
         {
@@ -192,20 +194,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems[index].Uri;
         }
 
+        public static string GetDraftUri(this ScenarioContext context, int index)
+        {
+            return ConvertUriToDraft(context, GetUri(context, index));
+        }
+
         public static int GetNumberOfStoredUris(this ScenarioContext context)
         {
             var dataItems = GetDataItems(context);
             return dataItems.Count;
         }
 
-        public static string GenerateUri(this ScenarioContext context, string contentType)
+        public static string GenerateUri(this ScenarioContext context, string contentType, string graph = constants.publish)
         {
-            return $"{context.GetEnv().contentApiBaseUrl}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
+            return $"{GetContentPath(context, graph)}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
         }
 
+        public static string GetContentPath(this ScenarioContext context, string graph)
+        {
+            switch (graph)
+            {
+                case constants.publish:
+                    return context.GetEnv().contentApiBaseUrl;
+                case constants.preview:
+                    return context.GetEnv().contentApiDraftBaseUrl;
+                default:
+                    return string.Empty;
+            }
+        }
         public static string GetContentUri(this ScenarioContext context, string contentType)
         {
             return $"{context.GetEnv().contentApiBaseUrl}/{contentType}";
+        }
+
+        public static string GetDraftContentUri(this ScenarioContext context, string contentType)
+        {
+            return $"{context.GetEnv().contentApiDraftBaseUrl}/{contentType}";
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
@@ -321,6 +345,36 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return (context.ContainsKey(keyExpectedRecordCount) ? context.Get<int>(keyExpectedRecordCount) : 0);
         }
         
+        public static void SetEditorFields( this ScenarioContext context, Dictionary<string,string> vars, bool intial = false)
+        {
+            if (!context.ContainsKey(constants.requestVariables) || intial)
+            {
+                context[constants.requestVariables] = vars;
+            }
+            else
+            {
+                context[constants.requestVariablesUpdated] = vars;
+            }
+        }
+
+        public static Dictionary<string,string> GetEditorFields( this ScenarioContext context, bool intial = false)
+        {
+            Dictionary<string, string> vars;
+            if (context.ContainsKey(constants.requestVariablesUpdated) && !intial)
+            {
+                vars = ( Dictionary<string,string>) context[constants.requestVariablesUpdated];
+            }
+            else if (context.ContainsKey(constants.requestVariables))
+            {
+                vars = (Dictionary<string, string>)context[constants.requestVariables];
+            }
+            else 
+            {
+                vars = new Dictionary<string, string>();
+            }
+            return vars;
+        }
+
         public static Dictionary<string,string> GetTaxonomyApiHeaders(this ScenarioContext context)
         {
             return context.ContainsKey(constants.securityHeader) ? 

@@ -10,7 +10,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
     public class Neo4JHelper
     {
-        public static IDriver Neo4jDriver { get; private set; }
+        public IDriver Neo4jDriver { get; private set; }
 
         public Neo4JHelper()
         {

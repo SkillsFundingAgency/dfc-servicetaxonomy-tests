@@ -129,30 +129,30 @@ this.FeatureBackground();
 #line 17
  testRunner.And("I edit the \"Graph Sync\" part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
                             "Field",
                             "Value"});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "RelationshipType",
                             ""});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "NodeNameTransform",
                             "$\"{Value}\""});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "PropertyNameTransform",
                             "$\"{Value}\""});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "CreateRelationshipType",
                             ""});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "IDPropertyName",
                             "uri"});
-                table44.AddRow(new string[] {
+                table59.AddRow(new string[] {
                             "GenerateIDValue",
                             "$\"http://nationalcareers.service.gov.uk/{Value.ToLowerInvariant()}/{Guid.NewGuid(" +
                                 "):D}\""});
 #line 18
- testRunner.And("I set the following field values", ((string)(null)), table44, "And ");
+ testRunner.And("I set the following field values", ((string)(null)), table59, "And ");
 #line hidden
 #line 26
  testRunner.And("I click the Display Id checkbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -160,17 +160,17 @@ this.FeatureBackground();
 #line 27
  testRunner.And("I save the edited part", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table60 = new TechTalk.SpecFlow.Table(new string[] {
                             "Display Name",
                             "Type"});
-                table45.AddRow(new string[] {
+                table60.AddRow(new string[] {
                             "TextField",
                             "Text Field"});
-                table45.AddRow(new string[] {
+                table60.AddRow(new string[] {
                             "ValueField",
                             "Numeric Field"});
 #line 28
- testRunner.And("I add the following fields", ((string)(null)), table45, "And ");
+ testRunner.And("I add the following fields", ((string)(null)), table60, "And ");
 #line hidden
 #line 33
  testRunner.And("I save the contentItem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -181,39 +181,42 @@ this.FeatureBackground();
 #line 38
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
                             "Field",
                             "Value",
                             "Type"});
-                table46.AddRow(new string[] {
+                table61.AddRow(new string[] {
                             "Title",
                             "TestItem",
                             "Title"});
-                table46.AddRow(new string[] {
+                table61.AddRow(new string[] {
                             "TextField",
                             "Test text",
                             "Text Field"});
-                table46.AddRow(new string[] {
+                table61.AddRow(new string[] {
                             "ValueField",
                             "26",
                             "Numeric Field"});
 #line 39
- testRunner.And("I Enter the following form data", ((string)(null)), table46, "And ");
+ testRunner.And("I Enter the following form data", ((string)(null)), table61, "And ");
 #line hidden
 #line 44
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 45
- testRunner.Then("the add action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 46
- testRunner.And("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the data is present in the PUBLISH Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 47
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 49
- testRunner.Then("the data is present in the Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the data is present in the DRAFT Graph database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 50
+ testRunner.Then("the data is present in the PUBLISH Graph databases", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

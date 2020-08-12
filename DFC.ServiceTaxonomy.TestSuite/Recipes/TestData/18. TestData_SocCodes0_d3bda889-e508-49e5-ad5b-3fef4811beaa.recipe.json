@@ -1,0 +1,546 @@
+{
+  "name": "TestData_SocCodes0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "displayName": "TestData_SocCodes0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "1115"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EChief executives and senior officials\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/ea8b72aa-f705-4e30-9d2a-43b869703e39\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID0__",
+    "ContentItemVersionId": "__TOKENISEDID1__",
+    "ContentType": "SOCCode",
+    "DisplayText": "1115",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "1116"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EElected officers and representatives\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/97d6a0a3-2b06-4221-9009-0e22166605b6\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID2__",
+    "ContentItemVersionId": "__TOKENISEDID3__",
+    "ContentType": "SOCCode",
+    "DisplayText": "1116",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "1121"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EProduction managers and directors in manufacturing\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/23031ffa-6483-4afd-ae17-316d2316a96c\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID4__",
+    "ContentItemVersionId": "__TOKENISEDID5__",
+    "ContentType": "SOCCode",
+    "DisplayText": "1121",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "2121"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ECivil engineers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/dd1ef39a-237c-47bf-aba0-233a467ea96d\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID6__",
+    "ContentItemVersionId": "__TOKENISEDID7__",
+    "ContentType": "SOCCode",
+    "DisplayText": "2121",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "2315"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EPrimary and nursery education teaching professionals\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/98e6b98e-0a95-46ba-a770-56b144ed43f9\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID8__",
+    "ContentItemVersionId": "__TOKENISEDID9__",
+    "ContentType": "SOCCode",
+    "DisplayText": "2315",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "2442"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ESocial workers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/ef91e43c-a652-4e76-a5da-c47fc79ebd69\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID10__",
+    "ContentItemVersionId": "__TOKENISEDID11__",
+    "ContentType": "SOCCode",
+    "DisplayText": "2442",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "3312"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EPolice officers (sergeant and below)\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/e2f953c0-0fbb-4037-8f21-6dd0be38327a\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID12__",
+    "ContentItemVersionId": "__TOKENISEDID13__",
+    "ContentType": "SOCCode",
+    "DisplayText": "3312",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "3319"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EProtective service associate professionals n.e.c.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/9da8e48a-c5bc-4fcc-9eca-2ce23ef04564\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID14__",
+    "ContentItemVersionId": "__TOKENISEDID15__",
+    "ContentType": "SOCCode",
+    "DisplayText": "3319",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "3413"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EActors, entertainers and presenters\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/fdc52386-c18a-4059-9ec5-2f7f551163ac\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID16__",
+    "ContentItemVersionId": "__TOKENISEDID17__",
+    "ContentType": "SOCCode",
+    "DisplayText": "3413",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "4159"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EOther administrative occupations n.e.c.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/a2a5fb2c-ca7b-4a0f-95bf-e6798a1921b1\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID18__",
+    "ContentItemVersionId": "__TOKENISEDID19__",
+    "ContentType": "SOCCode",
+    "DisplayText": "4159",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "4215"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EPersonal assistants and other secretaries\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/f8c9d69b-f910-425c-b432-2993c05c7b7c\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID20__",
+    "ContentItemVersionId": "__TOKENISEDID21__",
+    "ContentType": "SOCCode",
+    "DisplayText": "4215",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "6145"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ECare workers and home carers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/c1b73d44-092c-4b6a-bacb-ca7e862501a0\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID22__",
+    "ContentItemVersionId": "__TOKENISEDID23__",
+    "ContentType": "SOCCode",
+    "DisplayText": "6145",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "6214"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EAir travel assistants\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/57c4db45-5301-458d-8aaf-94d340f23945\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID24__",
+    "ContentItemVersionId": "__TOKENISEDID25__",
+    "ContentType": "SOCCode",
+    "DisplayText": "6214",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "6221"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EHairdressers and barbers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/3a8ce130-d6f1-4c71-90c9-faa98280a2f5\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID26__",
+    "ContentItemVersionId": "__TOKENISEDID27__",
+    "ContentType": "SOCCode",
+    "DisplayText": "6221",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "7111"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ESales and retail assistants\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/046e86f4-ad1a-4cfb-af7c-b44a36ecd4ee\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID28__",
+    "ContentItemVersionId": "__TOKENISEDID29__",
+    "ContentType": "SOCCode",
+    "DisplayText": "7111",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "7214"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ECommunication operators\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/ee89aa95-d85d-4376-b498-6e19dd5801b5\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID30__",
+    "ContentItemVersionId": "__TOKENISEDID31__",
+    "ContentType": "SOCCode",
+    "DisplayText": "7214",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "8149"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EConstruction operatives n.e.c.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/86bc7a29-56aa-401a-9657-93cbd3035338\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID32__",
+    "ContentItemVersionId": "__TOKENISEDID33__",
+    "ContentType": "SOCCode",
+    "DisplayText": "8149",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "8231"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003ETrain and tram drivers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/dd4f3126-9404-402d-a116-16220fb5f7fc\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID34__",
+    "ContentItemVersionId": "__TOKENISEDID35__",
+    "ContentType": "SOCCode",
+    "DisplayText": "8231",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "9211"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EPostal workers, mail sorters, messengers and couriers\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/9b7f5eb2-11cd-45a4-b74e-2e879273a518\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID36__",
+    "ContentItemVersionId": "__TOKENISEDID37__",
+    "ContentType": "SOCCode",
+    "DisplayText": "9211",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "9249"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EElementary security occupations n.e.c.\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/0d6913c8-e921-41e7-b6fd-0206d4b3d068\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID38__",
+    "ContentItemVersionId": "__TOKENISEDID39__",
+    "ContentType": "SOCCode",
+    "DisplayText": "9249",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "9273"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EWaiters and waitresses\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/3807dee2-9d0a-43d9-ad8c-f783213f2160\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID40__",
+    "ContentItemVersionId": "__TOKENISEDID41__",
+    "ContentType": "SOCCode",
+    "DisplayText": "9273",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "XXXX"
+    },
+    "SOCCode": {
+      "Description": {
+        "Html": "\u003Cp\u003EUnknown SOC Code\u003C/p\u003E"
+      }
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/soccode/09b3e2d1-1885-406c-a8c3-fb401848bab6\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID42__",
+    "ContentItemVersionId": "__TOKENISEDID43__",
+    "ContentType": "SOCCode",
+    "DisplayText": "XXXX",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}

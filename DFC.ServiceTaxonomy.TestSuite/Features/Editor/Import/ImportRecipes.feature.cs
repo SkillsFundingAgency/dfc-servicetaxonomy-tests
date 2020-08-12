@@ -79,16 +79,40 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Import
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 11
+#line hidden
+#line 12
+ testRunner.Given("I only want to run this once with this feature", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 14
+ testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 15
+ testRunner.Given("I prepare the test recipes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 16
+ testRunner.And("I load the test recipes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 17
+ testRunner.And("I have completed the run once section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Load from import file")]
-        [NUnit.Framework.CategoryAttribute("ignore")]
-        public virtual void LoadFromImportFile()
+        [NUnit.Framework.DescriptionAttribute("Import data from recipe file")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("Ignore")]
+        public virtual void ImportDataFromRecipeFile()
         {
             string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load from import file", null, new string[] {
-                        "ignore"});
-#line 63
+                    "Editor",
+                    "Ignore"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Import data from recipe file", null, new string[] {
+                        "Editor",
+                        "Ignore"});
+#line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -108,11 +132,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 64
+#line 11
+this.FeatureBackground();
+#line hidden
+#line 22
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 65
- testRunner.And("I import recipes from the file \"content items count.txt\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+ testRunner.Given("I prepare the test recipes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 24
+ testRunner.And("I load the test recipes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

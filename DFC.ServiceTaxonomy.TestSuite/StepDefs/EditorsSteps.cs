@@ -23,7 +23,7 @@ using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using Neo4j.Driver.V1;
-
+using AngleSharp.Css.Dom;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -78,7 +78,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private EditContentType _editContentType;
         private GraphSyncPart _GraphSyncPart;
 
-
+        private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
+                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" }
+                                                                    };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
@@ -161,6 +163,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
+
             _logonScreen.SubmitLogonDetails();
         }
 
@@ -218,7 +221,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             _scenarioContext[constants.cypherQuery] = cypher.Replace("@CONTENTTYPE@", contentType);
             _scenarioContext[constants.responseType] = typeof(TestContent);
-            _scenarioContext[constants.requestVariables] = expectedData;
+            //_scenarioContext[constants.requestVariables] = expectedData;
+            _scenarioContext.SetEditorFields(expectedData);
         }
 
         [Given(@"I allow multiple items to be selected")]
@@ -232,14 +236,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I save the draft item")]
         public void GivenISaveTheDraftItem()
         {
-            _addContentItemBase.SaveActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
-            
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+            _addContentItemBase.SaveActivity();
 
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
+            if (id.Length > 0 )
+            {
+                _scenarioContext.StoreContentItemId(id);
+
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+            }
         }
 
         [Then(@"the values displayed in the editor match")]
@@ -271,7 +282,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 value.Should().Be(row[2]);
                 vars.Add(row[0], row[2]);
             }
-            _scenarioContext[constants.requestVariables] = vars;
+            //_scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars);
         }
 
 
@@ -286,7 +298,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             multilineText.Should().Be(_editContentType.GetFieldValue(contentType,"Html",p0));
 
             vars.Add(p0, multilineText);
-            _scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars, true);
+//            _scenarioContext[constants.requestVariables] = vars;
         }
 
 
@@ -307,7 +320,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 vars.Add(item.value.Key, newValue);
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
-            _scenarioContext[constants.requestVariables] = vars;
+            _scenarioContext.SetEditorFields(vars);
+            //_scenarioContext[constants.requestVariables] = vars;
         }
 
         [Given(@"I search for the ""(.*)""")]
@@ -480,12 +494,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 cypherStatement = cypherStatement.Replace(token, replaceString);
 
             }
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-            neo4JHelper.ExecuteTableQuery(cypherStatement, null);
+            //TODO draft / publish graph
+            _scenarioContext.GetGraphConnection(constants.publish).ExecuteTableQuery(cypherStatement, null);
         }
 
         [Given(@"Load the file ""(.*)""")]
@@ -769,14 +779,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             bool tmModExtended = false;
             while (!done)
             {
-                // check neo count
-                Neo4JHelper neo4JHelper = new Neo4JHelper();
                 try
                 {
-                    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-                    neo4jRecordCount = neo4JHelper.ExecuteCountQuery(cypher, null);
+                    neo4jRecordCount = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypher, null);
                 }
                 catch 
                 {
@@ -843,31 +848,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I publish the item")]
         public void WhenIPublishTheItem()
         {
-            _addContentItemBase.PublishActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
+            _addContentItemBase.PublishActivity();
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(
-                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                       ).ToList());
+            if (id.Length > 0)
+            {
+                _scenarioContext.StoreContentItemId(id);
 
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(
+                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                           ).ToList());
+            }
         }
 
         [When(@"I save the draft item")]
         public void WhenISaveTheDraftItem()
         {
-            _addContentItemBase.SaveActivity();
             string id = _addContentItemBase.ContentItemIdFromUrl();
-            _scenarioContext.StoreContentItemId(id);
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            _scenarioContext.StoreContentItemIndexList(
-                                     sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                       ).ToList());
+            _addContentItemBase.SaveActivity();
 
+            if (id.Length == 0)
+            {
+                id = _addContentItemBase.ContentItemIdFromUrl();
+            }
+
+            if (id.Length > 0)
+            {
+                _scenarioContext.StoreContentItemId(id);
+
+                SQLServerHelper sqlInstance = new SQLServerHelper();
+                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                _scenarioContext.StoreContentItemIndexList(
+                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                           ).ToList());
+            }
         }
 
 
@@ -887,11 +908,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
         #endregion
         #region then steps
-        [Then(@"the add action completes succesfully")]
-        public void ThenTheAddActionCompletesSuccesfully()
+        [Then(@"the item is published succesfully")]
+        public void ThenTheItemIsPublishedSuccesfully()
         {
-            _addContentItemBase.ConfirmSuccess().Should().BeTrue();
+            _addContentItemBase.ConfirmPublishSuccess().Should().BeTrue();
         }
+
+        [Then(@"the item is saved succesfully")]
+        public void ThenTheAddTheItemIsSavedSuccesfully()
+        {
+            _addContentItemBase.ConfirmSaveDraftSuccess().Should().BeTrue();
+        }
+
 
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
         public void ThenAnValidationErrorIsShownFor(string validationType, string field)
@@ -904,6 +932,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     throw new Exception($"Unhandled validationType {validationType}");
             }
+            //_scenarioContext.Remove(constants.requestVariables);
         }
 
 
@@ -973,23 +1002,53 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return output;
         }
 
+        [Then(@"the preview and publish graphs returns the expected results using the ""(.*)"" query")]
+        public void ThenThePreviewAndPublishGraphsReturnsTheExpectedResultsUsingTheQuery(string p0, Table table)
+        {
+            ThenTheGraphMatchesTheExpectResultsUsingTheQuery(constants.preview, p0, table);
+            ThenTheGraphMatchesTheExpectResultsUsingTheQuery(constants.publish, p0, table);
+        }
 
-        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message)
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQuery(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if ( graphReference == constants.preview )
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message, string graph = constants.publish)
         {
             bool match;
             message = "";
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-           
-            var results = neo4JHelper.GetSingleRowAsDictionary(cypherQuery);
+          
+            var results = _scenarioContext.GetGraphConnection(graph).GetSingleRowAsDictionary(cypherQuery);
+
+            // check for prefixed field
+            if (_scenarioContext.ContainsKey("prefixField") && expectedresults.ContainsKey((string)_scenarioContext["prefixField"]) )
+            {
+                string field = (string)_scenarioContext["prefixField"];
+                string value = expectedresults[field];
+                expectedresults[field] = (string)_scenarioContext["prefix"] + value;
+            }
 
             match = AreEqual(expectedresults, results);
             if (!match)
             {
-                message = "Expected: \n" + DictionaryToString(expectedresults) + "\n";
-                message += "Actual: \n" + DictionaryToString(results) + "\n";
+                message = $"Checking the {graph} graph\n";
+                message += $"Using:\n{cypherQuery}\n";
+                message += $"Expected: \n{DictionaryHelper.DictionaryToString(expectedresults)}\n";
+                message += $"Actual: \n{DictionaryHelper.DictionaryToString(results)}\n";
             }
             return match;
         }
@@ -1041,17 +1100,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.EditItem(p0);
         }
 
-        [Given(@"I delete Graph data for content type ""(.*)""")]
-        public void GivenIDeleteGraphDataForContentType(string p0)
+        [Given(@"I delete ""(.*)"" Graph data for content type ""(.*)""")]
+        public void GivenIDeleteGraphDataForContentType(string target, string type)
         {
-            //todo make use of extension method
-            string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(p0) + "') detach delete n";
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
+            Neo4JHelper neo4JHelper;
+            //TODO_DRAFT improve connection handling
+            switch (target)
+            {
+                case constants.draft:
+                case constants.preview:
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
+                    break;
+                case constants.publish:
+                case constants.published:
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
+                    break;
+                default:
+                    neo4JHelper = null;
+                    "found".Should().Be("false","because target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}");
+                    break;
+            }
+            string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
             neo4JHelper.ExecuteTableQuery(cypher, null);
         }
+
+
+        //[Given(@"I delete Graph data for content type ""(.*)""")]
+        //public void GivenIDeleteGraphDataForContentType(string type)
+        //{
+        //    //todo make use of extension method
+        //    string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
+        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
+        //    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
+        //                        _scenarioContext.GetEnv().neo4JUid,
+        //                        _scenarioContext.GetEnv().neo4JPassword);
+        //    neo4JHelper.ExecuteTableQuery(cypher, null);
+        //}
 
         [Given(@"I delete SQL Server data for content type ""(.*)""")]
         public void GivenIDeleteSQLServerDataForContentType(string p0)
@@ -1071,55 +1155,169 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(newUri);
         }
 
-        [Then(@"the data is present in the Graph databases")]
-        public void ThenTheNewDataIsPresentInTheGraphDatabases()
+
+        //TODO_DRAFT move this to helper / extension?
+        private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message, bool checkData = true)
         {
-            string uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl.ToLower());
-            var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
-            var statementParameters = new Dictionary<string, object> { { "uri", uri } };
+            string uriTokenValue;
+            bool match = true;
+            message = "";
+            Neo4JHelper neo4JHelper;
+
+            //TODO_DRAFT improve connection handling
+            switch (target)
+            {
+                case constants.draft:
+                case constants.preview:
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
+                    uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
+                    break;
+                case constants.publish:
+                case constants.published:
+                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
+                    uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
+
+                    break;
+                default:
+                    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
+                    return false;
+            }
+
+            if (parameters.ContainsKey("uri"))
+            {
+                parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
+            }
 
             Console.WriteLine("Check data is present in graph:");
-            Console.WriteLine($"Query: {statementTemplate}");
-            Console.WriteLine($"uri: {uri}");
+            Console.WriteLine($"Query: {query}");
+            Console.WriteLine($"uri: {DictionaryToString(parameters)}");
 
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
             Type requiredType = (Type)_scenarioContext[constants.responseType];
-            var returnObject = neo4JHelper.GetResultsList(requiredType, statementTemplate, statementParameters);
+            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
 
-            object first = returnObject[0];
-
-            Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext[constants.requestVariables];
-
-            foreach ( var var in vars)
+            if (returnObject.Count > 0)
             {
-                Type myType = returnObject[0].GetType();
-                PropertyInfo propertyInfo = myType.GetProperty(var.Key);
-                string varValue = "";
-                try
-                {
-                    varValue = (string)propertyInfo.GetValue(returnObject[0], null);
-                }
-                catch ( Exception e ){
-                    Console.WriteLine(e.Message);
-                }
+                if( checkData)
+                { 
+                    object first = returnObject[0];
 
-                string rawValue = varValue;
-                //Todo keep track of type so tags can only be removed for non html fields rather than by name
-                switch (var.Key)
-                {
-                    case "Content":
-                        break;
-                    default:
-                        rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                        break;
-                }
-                var.Value.Should().Be(rawValue);
+                    //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
 
+                    foreach (var var in compareValues)
+                    {
+                        Type myType = returnObject[0].GetType();
+                        PropertyInfo propertyInfo = myType.GetProperty(var.Key);
+                        string varValue = "";
+                        try
+                        {
+                            varValue = (string)propertyInfo.GetValue(returnObject[0], null);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        string rawValue = varValue;
+                        //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                        switch (var.Key)
+                        {
+                            case "Content":
+                                break;
+                            default:
+                                rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                                break;
+                        }
+                        if (var.Value != rawValue)
+                        {
+                            message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                            match = false;
+                        }
+                    }
+                }
             }
+            else
+            {
+                match = false;
+            }
+            return match;
         }
+
+        [Then(@"the intial data is present in the DRAFT Graph database")]
+        public void ThenTheIntialDataIsPresentInTheDRAFTGraphDatabase()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.draft,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(true),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+        [Then(@"the data is present in the DRAFT Graph database")]
+        public void ThenTheDataIsPresentInTheDRAFTGraphDatabase()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.draft,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+
+        [Then(@"the data is present in the PUBLISH Graph database")]
+        public void ThenTheNewDataIsPresentInThePublishGraphDatabases()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.publish,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+
+        [Then(@"the intial data is present in the PUBLISH Graph database")]
+        public void ThenTheInitialDataIsPresentInThePublishGraphDatabases()
+        {
+            string message;
+            CheckDataIsPresentInGraph(constants.publish,
+                                      (string)_scenarioContext[constants.cypherQuery],
+                                      new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                      (Dictionary<string, string>)_scenarioContext.GetEditorFields(true),
+                                      out message).Should().BeTrue($"because {message}");
+        }
+
+        private void AssertDataNotPresentInGraph( string graph)
+        {
+            string message;
+            graph = (graph == constants.published) ? constants.publish : graph;
+
+            CheckDataIsPresentInGraph( graph,
+                                       (string)_scenarioContext[constants.cypherQuery],
+                                        new Dictionary<string, string> { { "uri", _scenarioContext.GetUri(0) } },
+                                       null,
+                                       out message,
+                                       false).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
+            //Neo4JHelper neo4JHelper = new Neo4JHelper();
+            //neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
+            //                    _scenarioContext.GetEnv().neo4JUid,
+            //                    _scenarioContext.GetEnv().neo4JPassword); ;
+        }
+
+        [Then(@"the data is not present in the PUBLISH Graph database")]
+        public void ThenTheDataIsNotPresentInThePUBLISHGraphDatabase()
+        {
+            AssertDataNotPresentInGraph(constants.publish);
+        }
+
+        [Then(@"the data is not present in the DRAFT Graph database")]
+        public void ThenTheDataIsNotPresentInTheDraftGraphDatabase()
+        {
+            AssertDataNotPresentInGraph(constants.preview);
+        }
+
+
 
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
@@ -1128,15 +1326,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var statementTemplate = (string)_scenarioContext[constants.cypherQuery];
             var statementParameters = new Dictionary<string, object> { { "uri", uri } };
 
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                _scenarioContext.GetEnv().neo4JUid,
-                                _scenarioContext.GetEnv().neo4JPassword);
-
-            var results = neo4JHelper.ExecuteTableQuery(statementTemplate, statementParameters);
+            var results = _scenarioContext.GetGraphConnection(constants.publish).ExecuteTableQuery(statementTemplate, statementParameters);
             int count = results.Count();
+            count.Should().Be(0, "Because the record should not be present in the graph publish database");
+
+            uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiDraftBaseUrl.ToLower());
+            statementParameters = new Dictionary<string, object> { { "uri", uri } };
+
+            results = _scenarioContext.GetGraphConnection(constants.preview).ExecuteTableQuery(statementTemplate, statementParameters);
+            count = results.Count();
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
+
+
 
         [Then(@"the following graph query returns (.*) record")]
         public void ThenTheFollowingGraphQueryReturnsRecord(int p0, string multilineText)
@@ -1151,12 +1353,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 cypherStatement = cypherStatement.Replace(token, replaceString);
 
             }
-
-            Neo4JHelper neo4JHelper = new Neo4JHelper();
-            neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-                                    _scenarioContext.GetEnv().neo4JUid,
-                                    _scenarioContext.GetEnv().neo4JPassword);
-            int count = neo4JHelper.ExecuteCountQuery(cypherStatement, null);
+            int count = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypherStatement, null);
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
 

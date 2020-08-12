@@ -7,7 +7,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
     public static class SpecflowTableExtentions
     {
-        public static Dictionary<string,string> ToSimpleDictionary(this Table table)
+        public static Dictionary<string,string> SingleColumnToDictionary(this Table table)
         {
             var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
@@ -16,5 +16,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return dictionary;
         }
+
+        public static Dictionary<string, string> SingleRowToDictionary(this Table table)
+        {
+            var dictionary = new Dictionary<string, string>();
+            foreach ( var col in table.Rows[0])
+            {
+                dictionary.Add(col.Key, col.Value);
+            }
+            return dictionary;
+        }
+
     }
 }

@@ -28,6 +28,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
         public const string requestParam = "requestParam";
         public const string requestVariables = "requestVariables";
+        public const string requestVariablesUpdated = "requestVariablesUpdated";
         public const string contentItemIndexes = "contentItemIndexes";
         public const string contentIdCount = "contentIdCount";
         public const string contentIds = "contentIds";
@@ -37,6 +38,10 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string prefix = "prefix";
         public const string prefixField = "prefixField";
         public const string ContentType = "contentType";
+        public const string published = "published";
+        public const string publish = "publish";
+        public const string draft = "draft";
+        public const string preview = "preview";
         public const string Title = "Title";
         public const string FieldName = "FieldName";
 
@@ -50,6 +55,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
                                                                 into #tmpdocids
                                                                 from [dbo].[ContentItemIndex]
                                                                 where @WHERECLAUSE@;
+                                                                delete from [dbo].PageLocationPartIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
+                                                                delete from [dbo].TaxonomyIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
                                                                 delete from [dbo].[ContentItemIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
                                                                 delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
                                                                 drop table #tmpdocids

@@ -157,6 +157,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 item.Click();
                 item.Clear();
                 item.SendKeys(value);
+                if (_htmlView)
+                {
+                    item = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-viewHTML-button > svg"));
+                    item.Click();
+                    _htmlView = false;
+                }
             }
             catch (Exception e)
             {
@@ -205,10 +211,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             EnterText(field, value, getLocatorFromType(contenType, type, field));
         }
 
-        public bool ConfirmSuccess()
+        public bool ConfirmPublishSuccess()
         {
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been published.')]]"));
             return ( elements.Count == 1 );
+        }
+
+        public bool ConfirmSaveDraftSuccess()
+        {
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been saved.')]]"));
+            return (elements.Count == 1);
         }
 
         public bool ConfirmEmptyFieldError(string field)

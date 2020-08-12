@@ -42,10 +42,11 @@ Scenario: Add a new content type with Title Part
 	| TextField  | Test text | Text Field     |
 	| ValueField | 26        | Numeric Field  |
 	When I publish the item
-	Then the add action completes succesfully
-	And the data is present in the Graph databases
+	Then the item is published succesfully
+	And the data is present in the PUBLISH Graph databases
 	When I publish the item
 #	Then the graph item matches the one in the editor
-	Then the data is present in the Graph databases
+	Then the data is present in the DRAFT Graph database
+	Then the data is present in the PUBLISH Graph databases
 #	And the graph item matches the one in the editorTODO
 	

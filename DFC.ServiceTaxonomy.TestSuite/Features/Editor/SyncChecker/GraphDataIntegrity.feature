@@ -1,6 +1,12 @@
 ﻿@webtest
 Feature: GraphDataIntegritity
 
+#TODO_DRAFT 
+#add checks for missing data in draft
+#add check for missing draft data in published item
+#review teardown
+#review coverage
+
 
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
@@ -42,7 +48,7 @@ Background:
 	| My Test content | My test description |
 	When I publish the item
 	Given I record the new documentId
-	Then the add action completes succesfully
+	Then the item is published succesfully
 
 # Add 2nd content item to first type @URi2@
 	Given I Navigate to "/Admin/Contents/ContentTypes/TestContentPicker1/Create" 
@@ -53,7 +59,7 @@ Background:
 	| My Test content2 | My test description2 |
 	When I publish the item
 	Given I record the new documentId
-	Then the add action completes succesfully
+	Then the item is published succesfully
 
 
 @Editor @Ignore
@@ -71,7 +77,7 @@ Scenario: Extra relationship
 	| My Test content |
 	When I publish the item
 	Given I record the new documentId
-	Then the add action completes succesfully
+	Then the item is published succesfully
 
 	# Modify neo4J data directly to relate to the second item
 	Given I replace tokens in and then run the following graph update statement
@@ -114,7 +120,7 @@ Scenario: Missing relationship
 	| My Test content2 |
 	When I publish the item
 	Given I record the new documentId
-	Then the add action completes succesfully
+	Then the item is published succesfully
 
 	# Modify neo4J data directly to relate to the second item
 	Given I replace tokens in and then run the following graph update statement
@@ -154,7 +160,7 @@ Scenario: Mistmatched label
 		| My Test content |
 		When I publish the item
 		Given I record the new documentId
-		Then the add action completes succesfully
+		Then the item is published succesfully
 
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
@@ -193,7 +199,7 @@ Scenario: Missing label
 		| My Test content |
 		When I publish the item
 		Given I record the new documentId
-		Then the add action completes succesfully
+		Then the item is published succesfully
 
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
@@ -231,7 +237,7 @@ Scenario: Missing Node
 		| My Test content |
 		When I publish the item
 		Given I record the new documentId
-		Then the add action completes succesfully
+		Then the item is published succesfully
 
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
@@ -269,7 +275,7 @@ Scenario: Missing Node and relationship
 		| My Test content2 |
 		When I publish the item
 		Given I record the new documentId
-		Then the add action completes succesfully
+		Then the item is published succesfully
 
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement
@@ -310,7 +316,7 @@ Scenario: Missing parent and child Nodes and relationship
 		| My Test content |
 		When I publish the item
 		Given I record the new documentId
-		Then the add action completes succesfully
+		Then the item is published succesfully
 
 		# Modify neo4J data directly to relate to the second item
 		Given I replace tokens in and then run the following graph update statement

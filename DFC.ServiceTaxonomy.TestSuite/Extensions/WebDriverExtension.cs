@@ -10,6 +10,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
     public static class WebDriverExtension
     {
+        private static TimeSpan maxWaitTime = new TimeSpan(0, 0, 30);
+
         public static bool ClickButton (this IWebDriver driver, string buttonText)
         {
             if (ClickButtonByText(driver, buttonText)) return true;
@@ -20,6 +22,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
             throw new Exception("Unable to locate button");
 
+        }
+
+        public static IWebElement WaitUntilElementFound(this IWebDriver driver, By elementId)
+        {
+            var wait = new WebDriverWait(driver, maxWaitTime);
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(elementId));
         }
 
         public static bool ClickButtonByText(this IWebDriver driver, string buttonText)
@@ -148,6 +156,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             {
                 return false;
             }
+        }
+
+        public static bool ClickOnItem(this IWebDriver driver, string id)
+        {
+            try
+            {
+                var element = driver.FindElement(By.Id(id));
+                Actions builder = new Actions(driver);
+                var mouseUp = builder.MoveToElement(element)
+                                     .Click()
+                                     .Build(); ;
+                mouseUp.Perform();
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine($"Unable to click on item: {id} - {e.Message}");
+            }
+            return true;
         }
     }
 }

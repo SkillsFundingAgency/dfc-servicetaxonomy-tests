@@ -1,0 +1,341 @@
+{
+  "name": "TestData_ONetOccupationalCodes0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "displayName": "TestData_ONetOccupationalCodes0_d3bda889-e508-49e5-ad5b-3fef4811beaa",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "steps": [
+    {
+      "name": "ContentNoCache",
+      "data": [
+  {
+    "TitlePart": {
+      "Title": "45-2093.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/ed4d1f67-3220-4406-83b6-f55a1ddc9b90\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID44__",
+    "ContentItemVersionId": "__TOKENISEDID45__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "45-2093.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "27-2011.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/5c666424-0986-4e80-90f6-5c569b1a35ba\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID46__",
+    "ContentItemVersionId": "__TOKENISEDID47__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "27-2011.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "43-6014.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/01676ae0-47fc-4e58-a0be-d7dbca0afaa5\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID48__",
+    "ContentItemVersionId": "__TOKENISEDID49__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "43-6014.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "17-2051.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/d155d5b4-0473-48ef-b2b5-ad9b762f16bd\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID50__",
+    "ContentItemVersionId": "__TOKENISEDID51__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "17-2051.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "41-2031.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/9b176254-4127-4142-9f80-28d969622940\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID52__",
+    "ContentItemVersionId": "__TOKENISEDID53__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "41-2031.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "19-3094.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/2f3e05cb-4fc0-495e-80df-1099114de02a\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID54__",
+    "ContentItemVersionId": "__TOKENISEDID55__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "19-3094.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "43-6011.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/f97c688a-fd62-4a2d-932d-3d02019ca8cd\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID56__",
+    "ContentItemVersionId": "__TOKENISEDID57__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "43-6011.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "39-9021.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/82311f1a-7e75-4586-9343-2f25075f3f05\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID58__",
+    "ContentItemVersionId": "__TOKENISEDID59__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "39-9021.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "47-2061.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/35fba1c5-a59e-42ce-93ba-dac677ff586e\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID60__",
+    "ContentItemVersionId": "__TOKENISEDID61__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "47-2061.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "47-2152.02"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/8c372d21-ff65-45f8-a35a-7fe90bb17323\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID62__",
+    "ContentItemVersionId": "__TOKENISEDID63__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "47-2152.02",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "53-4011.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/37855041-a14b-48b7-9436-3e2f2a1f8fd8\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID64__",
+    "ContentItemVersionId": "__TOKENISEDID65__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "53-4011.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "43-5052.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/ff270467-788b-4c66-98cc-6907f8f5ab6e\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID66__",
+    "ContentItemVersionId": "__TOKENISEDID67__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "43-5052.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "25-2021.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/f62ada2d-613b-4cdb-9eef-8a953fcb9c4f\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID68__",
+    "ContentItemVersionId": "__TOKENISEDID69__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "25-2021.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "11-1011.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/06fd25a1-35bd-49d2-b831-3597b4a119b4\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID70__",
+    "ContentItemVersionId": "__TOKENISEDID71__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "11-1011.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "33-3051.01"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/d94d9d25-ed0a-40d8-99ac-5d24fa48ff8c\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID72__",
+    "ContentItemVersionId": "__TOKENISEDID73__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "33-3051.01",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "43-5031.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/7931d261-da9f-4a59-b21d-31b5276d80af\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID74__",
+    "ContentItemVersionId": "__TOKENISEDID75__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "43-5031.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  },
+  {
+    "TitlePart": {
+      "Title": "00-0000.00"
+    },
+    "GraphSyncPart": {
+      "Text": "[js:configuration(\u0027ContentApiPrefix\u0027).toLowerCase() \u002B \u0027/onetoccupationalcode/d3314294-20c6-493b-81e0-b289fbd7b7d4\u0027]"
+    },
+    "ContentItemId": "__TOKENISEDID76__",
+    "ContentItemVersionId": "__TOKENISEDID77__",
+    "ContentType": "ONetOccupationalCode",
+    "DisplayText": "00-0000.00",
+    "Latest": true,
+    "Published": true,
+    "ModifiedUtc": "2020-07-09T12:50:58.8638174Z",
+    "PublishedUtc": "2020-07-09T12:50:58.8638174Z",
+    "CreatedUtc": "2020-07-09T12:50:58.8638174Z",
+    "Owner": "admin",
+    "Author": "admin"
+  }
+      ]
+    }
+  ]
+}
