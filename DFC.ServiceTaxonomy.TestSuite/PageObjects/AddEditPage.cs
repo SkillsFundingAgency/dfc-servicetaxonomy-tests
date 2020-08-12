@@ -91,21 +91,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Unable to set base page location - {e.Message}");
+                Console.WriteLine($"Unable to add HTML Item - {e.Message}");
                 return false;
             }
             return true;
         }
 
-        public bool AddSharedHtmlItem()
+        public bool AddSharedContentItem(string name)
         {
+            var driver = scenarioContext.GetWebDriver();
             try
             {
+                OpenWidgetMenu();
+                var element = driver.FindElement(By.LinkText("HTML Shared"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
+                element.SendKeys(name);
+                element.SendKeys(Keys.Enter);
 
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Unable to set base page location - {e.Message}");
+                Console.WriteLine($"Unable add Shared Content item- {e.Message}");
                 return false;
             }
             return true;

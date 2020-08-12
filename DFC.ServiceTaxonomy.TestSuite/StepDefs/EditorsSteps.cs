@@ -79,7 +79,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private GraphSyncPart _GraphSyncPart;
 
         private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
-                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" }
+                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" },
+                                                                    {"page_with_shared_content","match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" }
                                                                     };
         public EditorsSteps(ScenarioContext scenarioContext)
         {

@@ -44,5 +44,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _addEditPage.AddHtmlItem(htmlValue);
         }
+
+        [Given(@"I add the ""(.*)"" shared content item to the page")]
+        public void GivenIAddTheSharedContentItemToThePage(string contentItem)
+        {
+            _addEditPage.AddSharedContentItem(contentItem);
+        }
+
     }
 }
