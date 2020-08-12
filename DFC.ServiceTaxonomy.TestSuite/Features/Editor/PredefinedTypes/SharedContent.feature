@@ -42,7 +42,6 @@ Scenario: Add a new shared content item
 	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
-	And an event has been published to notify consumers of the change
 
 #Scenario: Edit the new activity
 	Given I Navigate to "/Admin/Contents/ContentItems" 

@@ -23,8 +23,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext = context;
         }
 
-
-
         [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change")]
         public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(string eventType)
         {
@@ -55,31 +53,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             list.Count().Should().Be(numberOfEvents + p0, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion
-        }
-
-
-
-
-
-
-        [Then(@"an event of type ""(.*)"" has been issued to notify consumers of the change and (.*) others")]
-        public void ThenAnEventOfTypeHasBeenIssuedToNotifyConsumersOfTheChangeAndOthers(string p0, int p1)
-        {
-            //TODO also check that no unintended events have been published
-        }
-
-
-
-        [Then(@"an event has been published to notify consumers of the change")]
-        public void ThenAnEventHasBeenPublishedToNotifyConsumersOfTheChange()
-        {
-        //    // get expected content id
-        //    string uri = _scenarioContext.GetUri(0);
-
-        //    // attempt to retrieve document
-        //    // there maybe more than one for the given uri
-        //    string document = CosmosHelper.RetrieveDocumentAsString(_scenarioContext.GetEnv().eventStoreConnectionString, _scenarioContext.GetEnv().eventStoreKey, uri);
-        //    ContentEvent contentEvent = JsonConvert.DeserializeObject<ContentEvent>(document);
         }
 
         private void  MockEvent(string reference, string uri, string expectedType, bool pass = true )
@@ -159,13 +132,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         //[Given(@"I check time of the latest event message")]
         //public void GivenICheckTimeOfTheLatestEventMessage()
         //{
-        //    string id = _scenarioContext.GetContentItemId(0);
-        //    string query = $"SELECT * FROM c where  c.data.itemId = '{id}'";
-
-        //    CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
-        //    List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("EventStore", "events", query);
         //    //TODO
-        //    Console.WriteLine($"");
         //}
 
         [Given(@"I check the number of events sent for this contentItem")]

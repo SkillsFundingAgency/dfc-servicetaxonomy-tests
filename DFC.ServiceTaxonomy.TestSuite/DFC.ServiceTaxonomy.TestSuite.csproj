@@ -19,11 +19,6 @@
   <ItemGroup>
     <Compile Remove="PageObjects\AddActivity.cs" />
     <Compile Remove="PageObjects\AddDayToDayTask.cs" />
-    <Compile Remove="StepDefs\GraphSteps.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Features\API\ContentApi - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
