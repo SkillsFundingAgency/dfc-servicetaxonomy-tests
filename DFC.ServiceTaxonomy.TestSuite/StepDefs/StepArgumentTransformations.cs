@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     [Binding]
     public sealed class StepArgumentTransformations
     {
+        private ScenarioContext _context;
+
+        public StepArgumentTransformations( ScenarioContext context )
+        {
+            _context = context;
+        }
+
         [StepArgumentTransformation]
         public string TransformHumanReadableIntegerExpression(string expression)
         {
@@ -29,7 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     break;
             }
-            return expression;
+            return _context.ReplaceTokensInString(expression);
         }
     }
 }

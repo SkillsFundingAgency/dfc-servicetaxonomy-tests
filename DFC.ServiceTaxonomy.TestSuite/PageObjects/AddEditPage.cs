@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using TechTalk.SpecFlow;
@@ -109,7 +110,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 element.Click();
                 element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
                 element.SendKeys(name);
+                Thread.Sleep(500);
+                //TODO use selenium wait
                 element.SendKeys(Keys.Enter);
+
+
 
             }
             catch (Exception e)

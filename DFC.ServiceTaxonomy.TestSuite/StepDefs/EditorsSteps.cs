@@ -79,8 +79,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private GraphSyncPart _GraphSyncPart;
 
         private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
-                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" },
-                                                                    {"page_with_shared_content","match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" }
+                                                                    { "page_with_html",
+                                                                                        @"match (h:HTML) <-[hasHTML]- (p:Page) 
+                                                                                         where p.uri =  '__URI__' 
+                                                                                         return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" },
+
+                                                                    {"page_with_shared_content",
+                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent)
+                                                                                          where p.uri =  '__URI__' 
+                                                                                          return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" },
+
+                                                                    {"get_sharedhtml_uri_for_page",
+                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared)
+                                                                                          where p.uri =  '__URI__'  return h.uri as uri" },
+
+                                                                    {"page_with_wiget_only",
+                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) 
+                                                                                          where p.uri =  '__URI__'  
+                                                                                          and not (h) --> (:SharedContent)
+                                                                                          return p.skos__prefLabel as skos__prefLabel" },
+                                                                    {"page_by_uri",
+                                                                                        @"match (p:Page) 
+                                                                                          where p.uri =  '__URI__'  
+                                                                                          return count(p) as pages_found" },
+                                                                    {"widget_by_uri",
+                                                                                        @"match (s:SharedHTML) 
+                                                                                          where s.uri =  '__URI__'  
+                                                                                          return count(s) as widgets_found" },
                                                                     };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
@@ -150,6 +175,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _scenarioContext[constants.prefix] = RandomString(5) + "_";
             _scenarioContext[constants.prefixField] = p0;
+            _scenarioContext.StoreToken("__PREFIX__", (string)_scenarioContext[constants.prefix]);
         }
 
         [Given(@"I get the recipe files ready")]
@@ -1015,7 +1041,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheGraphMatchesTheExpectResultsUsingTheQuery(string graphReference, string queryReference, Table expectedResults)
         {
             cypherQueries.Should().ContainKey(queryReference);
-
+           // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
 
             if ( graphReference == constants.preview )
@@ -1024,9 +1050,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
 
             string message;
-            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(), out message, graphReference);
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
             match.Should().BeTrue($"Because {message}");
         }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndThePreviousURI(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(_scenarioContext.GetNumberOfStoredUris()-1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+
+        [Given(@"I store the uri from the ""(.*)"" graph using the ""(.*)"" query")]
+        public void GivenIStoreTheUriFromTheGraphUsingTheQuery(string graphReference, string queryReference)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            var results = _scenarioContext.GetGraphConnection(graphReference).GetSingleRowAsDictionary(cypherQueries[queryReference].Replace("__URI__", uri));
+
+            results.Count.Should().Be(1);
+            results.Should().ContainKey("uri");
+
+            _scenarioContext.StoreUri(results["uri"]);
+
+        }
+
 
         public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message, string graph = constants.publish)
         {
