@@ -45,7 +45,6 @@ Scenario: Add a new page with a shared content item
 Scenario: Add a new page with a shared content item and save as draft
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
-	#And I have ensured the activity I intend to add doesn't exist
 	And I capture the generated URI
 	And I Enter the following form data for "Page"
 	| Title                    |  
@@ -59,49 +58,22 @@ Scenario: Add a new page with a shared content item and save as draft
 	| My Test Page    | Contact us    |
 	And the data is not present in the PUBLISH Graph database
 
-Scenario: Add an unpublished shared item to a new page and attempt to publish
-	Given I logon to the editor
-	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	#And I have ensured the activity I intend to add doesn't exist
-	And I capture the generated URI
-	And I Enter the following form data for "SharedContent"
-	| Title         | Content                   |
-	| Draft Content | <p>Some draft content</p> |
-	When I save the draft item
-	Then the item is saved succesfully
-	And the data is present in the DRAFT Graph database
-	And the data is not present in the PUBLISH Graph database
 
-	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
-	#And I have ensured the activity I intend to add doesn't exist
+Scenario: Attempt to delete a shared content item that is in use
+	Given I logon to the editor
+	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
 	And I capture the generated URI
 	And I Enter the following form data for "Page"
-	| Title        |
-	| My Test Page |
+	| Title                    |  
+	| My Test Page | 
 	#And I run my testbed
 	And I select the default page location
-	And I add the "__PREFIX__Draft Content" shared content item to the page
-	When I publish the item
-	Then the item is published succesfully
-	And the "preview" graph matches the expect results using the "page_with_shared_content" query
-	| skos__prefLabel | sharedContent           |
-	| My Test Page    | __PREFIX__Draft Content |
-	And the "publish" graph matches the expect results using the "page_with_wiget_only" query
-	| skos__prefLabel | 
-	| My Test Page    | 
-
-#Scenario: Delete an published item with a draft shared content item
-	Given I store the uri from the "preview" graph using the "get_sharedhtml_uri_for_page" query 
-	And I Navigate to "/Admin/Contents/ContentItems" 
-	And I search for the "Title"
-	When I delete the item
-	Then the delete action completes succesfully
-	And the "preview" graph matches the expect results using the "page_by_uri" query and the previous URI
-	| pages_found |
-	| 0           |
-	And the "publish" graph matches the expect results using the "widget_by_uri" query and the previous URI
-	| widgets_found |
-	| 0           |
+	And I add the "Contact us" shared content item to the page
+	When I save the draft item
+	Then the "preview" graph matches the expect results using the "page_with_shared_content" query
+	| skos__prefLabel | sharedContent |
+	| My Test Page    | Contact us    |
+	And the data is not present in the PUBLISH Graph database
 
 #	Given I store the uri from the "preview" graph using the "get_sharedhtml_uri_for_page" query 
 

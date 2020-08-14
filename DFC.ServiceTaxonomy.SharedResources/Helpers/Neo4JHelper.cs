@@ -10,8 +10,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
     public class Neo4JHelper
     {
-        public IDriver Neo4jDriver { get; private set; }
+        private const string verificationCypher = "RETURN 1";
 
+        public IDriver Neo4jDriver { get; private set; }
         public Neo4JHelper()
         {
         }
@@ -30,6 +31,19 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         {
             var authToken = ( userName.Equals(string.Empty) ? AuthTokens.None : AuthTokens.Basic(userName, password) ) ;
             Neo4jDriver = GraphDatabase.Driver(new Uri(uri), authToken);
+        }
+
+        public bool Verify()
+        {
+            try
+            {
+                ExecuteTableQuery(verificationCypher,null);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public IStatementResult ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)

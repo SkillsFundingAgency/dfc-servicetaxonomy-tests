@@ -42,7 +42,7 @@ Scenario: 7. A new content item is published succesfully
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	And ans. event of type "Published" has been issued to notify consumers of the change
+	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1

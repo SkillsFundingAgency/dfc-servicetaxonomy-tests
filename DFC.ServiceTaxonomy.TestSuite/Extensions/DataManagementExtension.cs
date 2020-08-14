@@ -59,6 +59,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                     context.GetEnv().neo4JPassword);
                 context[contextRef] = connection;
             }
+            if (!connection.Verify())
+            {
+                context.Remove(contextRef);
+                connection = GetGraphConnection(context, graph, instance);
+            }
             return connection;
         }
 

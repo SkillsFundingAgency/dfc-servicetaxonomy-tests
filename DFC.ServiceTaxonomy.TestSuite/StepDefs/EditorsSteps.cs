@@ -98,14 +98,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                                                                           where p.uri =  '__URI__'  
                                                                                           and not (h) --> (:SharedContent)
                                                                                           return p.skos__prefLabel as skos__prefLabel" },
+                                                                    {"shared_content_with_no_related_items",
+                                                                                        @"match (s:SharedContent)
+                                                                                          where s.uri =  '__URI__'  
+                                                                                          and not (s) --> (n)
+                                                                                          return s.skos__prefLabel as sharedContent" },
                                                                     {"page_by_uri",
                                                                                         @"match (p:Page) 
                                                                                           where p.uri =  '__URI__'  
                                                                                           return count(p) as pages_found" },
                                                                     {"widget_by_uri",
-                                                                                        @"match (s:SharedHTML) 
+                                                                                        @"match (s:HTMLShared) 
                                                                                           where s.uri =  '__URI__'  
                                                                                           return count(s) as widgets_found" },
+                                                                     {"shared_content_by_uri",
+                                                                                        @"match (s:SharedContent) 
+                                                                                          where s.uri =  '__URI__'  
+                                                                                          return count(s) as shared_content_found"  }
                                                                     };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
@@ -205,6 +214,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
             
+        }
+
+        [Given(@"I capture the generated URI and tag it ""(.*)""")]
+        public void GivenICaptureTheGeneratedURIGraphAndTagIt_UriId_Text(string tag)
+        {
+            _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI(), tag);
+
         }
 
         [Given(@"I set the content type to be ""(.*)""")]
@@ -355,6 +371,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenISearchForThe(string searchTerm)
         {
             _manageContent.FindItem(_scenarioContext.Get<string>( searchTerm ));
+        }
+
+        [Given(@"I search for the text ""(.*)""")]
+        public void GivenISearchForTheText(string searchTerm)
+        {
+            _manageContent.FindItem(searchTerm);
         }
 
         [Given(@"I select the first item that is found")]
@@ -1054,12 +1076,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             match.Should().BeTrue($"Because {message}");
         }
 
-        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
-        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndThePreviousURI(string graphReference, string queryReference, Table expectedResults)
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" Uri")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheUri(string graphReference, string queryReference, string tag, Table expectedResults)
         {
             cypherQueries.Should().ContainKey(queryReference);
             // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
-            string uri = _scenarioContext.GetUri(_scenarioContext.GetNumberOfStoredUris()-1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri = _scenarioContext.GetUri(tag).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
 
             if (graphReference == constants.preview)
             {
@@ -1072,8 +1094,50 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
 
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndThePreviousURI(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(_scenarioContext.GetNumberOfStoredUris()-2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the first URI")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheFirstURI(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+
+
         [Given(@"I store the uri from the ""(.*)"" graph using the ""(.*)"" query")]
         public void GivenIStoreTheUriFromTheGraphUsingTheQuery(string graphReference, string queryReference)
+        {
+            GivenIStoreTheUriFromTheGraphAndTagItUsingTheQuery(graphReference, queryReference, string.Empty);
+        }
+
+        [Given(@"I store the uri from the ""(.*)"" graph and tag it ""(.*)"" using the ""(.*)"" query")]
+        public void GivenIStoreTheUriFromTheGraphAndTagItUsingTheQuery(string graphReference, string tag, string queryReference)
         {
             cypherQueries.Should().ContainKey(queryReference);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
@@ -1088,10 +1152,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             results.Count.Should().Be(1);
             results.Should().ContainKey("uri");
 
-            _scenarioContext.StoreUri(results["uri"]);
-
+            _scenarioContext.StoreUri(results["uri"].Replace(_scenarioContext.GetEnv().contentApiBaseUrl.ToLower(), "<<contentapiprefix>>")
+                                                    .Replace(_scenarioContext.GetEnv().contentApiDraftBaseUrl.ToLower(), "<<contentapiprefix>>"), tag);
         }
-
 
         public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message, string graph = constants.publish)
         {
