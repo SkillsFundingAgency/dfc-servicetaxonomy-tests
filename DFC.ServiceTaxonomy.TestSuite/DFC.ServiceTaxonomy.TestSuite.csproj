@@ -49,27 +49,55 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\Registration.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\Registration.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\Restriction.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\Restriction.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\SOCCode.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\SOCCode.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\UniversityLink.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\UniversityLink.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\UniversityRequirement.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\UniversityRequirement.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\RequirementsPrefix.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\RequirementsPrefix.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\8. pages-new_draft_content_on_new_draft_of_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\7. pages-new_draft_content_on_published_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\6. pages-new_draft_content_on_draft_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\5. pages-published_content_on_published_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\4. pages-published_content_on_draft_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\3. pages-draft_content_on_published_page.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Pages\2. pages-draft_content_on_draft_page.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
@@ -88,6 +116,21 @@
   <ItemGroup>
     <Compile Update="Features\API\DraftContentApi.feature.cs">
       <DependentUpon>DraftContentApi.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Editor\Pages\8. pages-new_draft_content_on_new_draft_of_page.feature.cs">
+      <DependentUpon>8. pages-new_draft_content_on_new_draft_of_page.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Editor\Pages\7. pages-new_draft_content_on_published_page.feature.cs">
+      <DependentUpon>7. pages-new_draft_content_on_published_page.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Editor\Pages\6. pages-new_draft_content_on_draft_page.feature.cs">
+      <DependentUpon>6. pages-new_draft_content_on_draft_page.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Editor\Pages\5. pages-published_content_on_published_page.feature.cs">
+      <DependentUpon>5. pages-published_content_on_published_page.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Editor\Pages\4. pages-published_content_on_draft_page.feature.cs">
+      <DependentUpon>4. pages-published_content_on_draft_page.feature</DependentUpon>
     </Compile>
   </ItemGroup>
   

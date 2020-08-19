@@ -57,7 +57,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 }
             }
             catch (Exception e)
-            {
+             {
                 throw new Exception("Error occured executing Cypher query" +
                                  "\n Exception:" + e);
             }

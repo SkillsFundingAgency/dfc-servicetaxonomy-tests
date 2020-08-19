@@ -4,7 +4,7 @@ Feature: Page
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
 
-@Editor
+@Editor @ignore
 Scenario: Add a new page with an html item
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
@@ -24,7 +24,7 @@ Scenario: Add a new page with an html item
 	| skos__prefLabel | htmlbody_Html    |
 	| My Test Page    | <p>Test HTML</p> |
 
-
+	@ignore
 Scenario: Add a new page with a shared content item
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
@@ -41,7 +41,7 @@ Scenario: Add a new page with a shared content item
 	| skos__prefLabel | sharedContent |
 	| My Test Page    | Contact us    |
 
-
+	@ignore
 Scenario: Add a new page with a shared content item and save as draft
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
@@ -58,7 +58,7 @@ Scenario: Add a new page with a shared content item and save as draft
 	| My Test Page    | Contact us    |
 	And the data is not present in the PUBLISH Graph database
 
-
+	@ignore
 Scenario: Attempt to delete a shared content item that is in use
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
+namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.JobProfileTypes
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,9 +20,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Restriction")]
+    [NUnit.Framework.DescriptionAttribute("UniversityRequirement")]
     [NUnit.Framework.CategoryAttribute("webtest")]
-    public partial class RestrictionFeature
+    public partial class UniversityRequirementFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,14 +30,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         private string[] _featureTags = new string[] {
                 "webtest"};
         
-#line 1 "Restriction.feature"
+#line 1 "UniversityRequirement.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Restriction", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UniversityRequirement", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -86,13 +86,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add a new Restriction")]
+        [NUnit.Framework.DescriptionAttribute("Add a new UniversityRequirement")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        public virtual void AddANewRestriction()
+        public virtual void AddANewUniversityRequirement()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new Restriction", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new UniversityRequirement", null, new string[] {
                         "Editor"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
@@ -121,19 +121,19 @@ this.FeatureBackground();
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
- testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/Restriction/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/UniversityRequirement/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table141 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
-                            "Description"});
-                table141.AddRow(new string[] {
-                            "My Test Restriction",
+                            "Text"});
+                table105.AddRow(new string[] {
+                            "My Test UniversityRequirement",
                             "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"Restriction\"", ((string)(null)), table141, "And ");
+ testRunner.And("I Enter the following form data for \"UniversityRequirement\"", ((string)(null)), table105, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

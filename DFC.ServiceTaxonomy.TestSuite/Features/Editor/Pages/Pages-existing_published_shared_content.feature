@@ -13,7 +13,7 @@ Background:
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
 
-@Editor
+@Editor @ignore
 Scenario: Add an published shared item to a new page and publish it. Unpublish the shared content item then the page
 	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
 	And I capture the generated URI and tag it "PageUri"
@@ -64,7 +64,7 @@ Scenario: Add an published shared item to a new page and publish it. Unpublish t
 
 
 
-@Editor
+@Editor @ignore
 Scenario: Add an published shared item to a new page and publish it. Unpublish the page item then the shared content
 	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
 	And I capture the generated URI and tag it "PageUri"
@@ -116,7 +116,7 @@ Scenario: Add an published shared item to a new page and publish it. Unpublish t
 	| shared_content_found |
 	| 0                    |
 
-
+	@ignore
 Scenario: Attempt to delete a shared content item which is in use on a page
 	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
 	And I capture the generated URI and tag it "PageUri"

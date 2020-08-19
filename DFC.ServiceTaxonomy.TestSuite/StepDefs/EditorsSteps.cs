@@ -114,7 +114,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                                                      {"shared_content_by_uri",
                                                                                         @"match (s:SharedContent) 
                                                                                           where s.uri =  '__URI__'  
-                                                                                          return count(s) as shared_content_found"  }
+                                                                                          return count(s) as shared_content_found"  },
+                                                                     {"shared_content_title_by_uri",
+                                                                                        @"match (s:SharedContent) 
+                                                                                          where s.uri =  '__URI__'  
+                                                                                          return s.skos__prefLabel as sharedContent"  }
                                                                     };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
@@ -1024,6 +1028,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.ConfirmRemovedSuccessfully().Should().BeTrue();
         }
 
+        [Then(@"the delete action could not be completed")]
+        public void ThenTheDeleteActionCouldNotBeCompleted()
+        {
+            _manageContent.ConfirmRemovalFailed().Should().BeTrue();
+        }
+
+
         public bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
         {
             if (thisItems.Count != otherItems.Count)
@@ -1168,8 +1179,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 string field = (string)_scenarioContext["prefixField"];
                 string value = expectedresults[field];
-                expectedresults[field] = (string)_scenarioContext["prefix"] + value;
+                string prefix = (string)_scenarioContext["prefix"];
+                if (!value.StartsWith(prefix))
+                {
+                    expectedresults[field] = prefix + value;
+                }
             }
+
 
             match = AreEqual(expectedresults, results);
             if (!match)
@@ -1200,7 +1216,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         newValue = (string)_scenarioContext[constants.prefix] + newValue;
                     }
                     count++;
-                    rowData.Add(i.Key, newValue);
+                    rowData.Add(i.Key, _scenarioContext.ReplaceTokensInString(newValue) );
                     if (count == 1)
                     {
                         cyperQuery += newValue + "' return i.uri as uri";
@@ -1209,7 +1225,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         cyperQuery += " ,i." + i.Key + " as " + i.Key;
                     }
-
                 }
                 var match = matchGraphQueryResultsWithDictionary(cyperQuery, rowData, out message);
                 if (!match)
