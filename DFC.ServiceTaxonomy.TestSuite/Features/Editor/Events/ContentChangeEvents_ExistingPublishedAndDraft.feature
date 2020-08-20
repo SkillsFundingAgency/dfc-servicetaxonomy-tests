@@ -95,9 +95,10 @@ Scenario: 29. A published item with a draft version is unpublished from the cont
 	And I select the "Unpublish" option for the first item that is found
 	Then the unpublish action completes succesfully
 	And an event of type "Unpublished" has been issued to notify consumers of the change
+	And an event of type "Draft" has been issued to notify consumers of the change
 	Then the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 3
+	And the number of events sent for this content Item is 4
 
 @Editor	
 Scenario: 30. An existing draft version of a published content item is discarded from the content item list view
