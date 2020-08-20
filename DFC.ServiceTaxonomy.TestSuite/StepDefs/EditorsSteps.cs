@@ -79,47 +79,70 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private GraphSyncPart _GraphSyncPart;
 
         private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
-                                                                    { "page_with_html",
-                                                                                        @"match (h:HTML) <-[hasHTML]- (p:Page) 
-                                                                                         where p.uri =  '__URI__' 
-                                                                                         return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" },
+    {
+        "page_with_html",
+        @"match (h:HTML) <-[hasHTML]- (p:Page) 
+          where p.uri =  '__URI__' 
+          return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" 
+    },
+    {
+        "page_with_shared_content",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent)
+         where p.uri =  '__URI__' 
+         return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" 
+    },
+    {
+        "get_sharedhtml_uri_for_page",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared)
+          where p.uri =  '__URI__'  return h.uri as uri" 
+    },
+    {   
+        "page_with_wiget_only",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) 
+          where p.uri =  '__URI__'  
+          and not (h) --> (:SharedContent)
+          return p.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "shared_content_with_no_related_items",
+        @"match (s:SharedContent)
+          where s.uri =  '__URI__'  
+          and not (s) --> (n)
+          return s.skos__prefLabel as sharedContent"
+    },
+    {
+        "page_by_uri",
+        @"match (p:Page) 
+         where p.uri =  '__URI__'  
+         return count(p) as pages_found" },
+    {
+        "page_location",
+        @"match (t1:Taxonomy) <-[hasPageLocationsTaxonomy]- (p:Page) -[r1:hasPageLocation]-> (l:PageLocation) <-[r2:hasPageLocation]- (t2:Taxonomy) 
+         where p.uri =  '__URI__'  
+         and t1.uri = t2.uri
+         return l.skos__prefLabel as location"
+    },
+    {
+        "widget_by_uri",
+        @"match (s:HTMLShared) 
+          where s.uri =  '__URI__'  
+          return count(s) as widgets_found"
+    },
+    {
+        "shared_content_by_uri",
+        @"match (s:SharedContent) 
+          where s.uri =  '__URI__'  
+          return count(s) as shared_content_found"  
+    },
+    {
+        "shared_content_title_by_uri",
+        @"match (s:SharedContent) 
+          where s.uri =  '__URI__'  
+          return s.skos__prefLabel as sharedContent"
+    }
+                                                        };
 
-                                                                    {"page_with_shared_content",
-                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent)
-                                                                                          where p.uri =  '__URI__' 
-                                                                                          return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" },
 
-                                                                    {"get_sharedhtml_uri_for_page",
-                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared)
-                                                                                          where p.uri =  '__URI__'  return h.uri as uri" },
-
-                                                                    {"page_with_wiget_only",
-                                                                                        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) 
-                                                                                          where p.uri =  '__URI__'  
-                                                                                          and not (h) --> (:SharedContent)
-                                                                                          return p.skos__prefLabel as skos__prefLabel" },
-                                                                    {"shared_content_with_no_related_items",
-                                                                                        @"match (s:SharedContent)
-                                                                                          where s.uri =  '__URI__'  
-                                                                                          and not (s) --> (n)
-                                                                                          return s.skos__prefLabel as sharedContent" },
-                                                                    {"page_by_uri",
-                                                                                        @"match (p:Page) 
-                                                                                          where p.uri =  '__URI__'  
-                                                                                          return count(p) as pages_found" },
-                                                                    {"widget_by_uri",
-                                                                                        @"match (s:HTMLShared) 
-                                                                                          where s.uri =  '__URI__'  
-                                                                                          return count(s) as widgets_found" },
-                                                                     {"shared_content_by_uri",
-                                                                                        @"match (s:SharedContent) 
-                                                                                          where s.uri =  '__URI__'  
-                                                                                          return count(s) as shared_content_found"  },
-                                                                     {"shared_content_title_by_uri",
-                                                                                        @"match (s:SharedContent) 
-                                                                                          where s.uri =  '__URI__'  
-                                                                                          return s.skos__prefLabel as sharedContent"  }
-                                                                    };
         public EditorsSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
@@ -241,11 +264,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string contentType = (string)_scenarioContext[constants.ContentType];
             string prefix =  (string)_scenarioContext[constants.prefix];
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            //SQLServerHelper sqlInstance = new SQLServerHelper();
+            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
 
             // get initial record count
-            var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
+            var result = _scenarioContext.GetSQLConnection().GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
+            _scenarioContext.CloseSQLConnection();
             _scenarioContext.StoreRecordId(result);
         }
 
@@ -294,9 +318,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                //SQLServerHelper sqlInstance = new SQLServerHelper();
+                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
                 _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+                _scenarioContext.CloseSQLConnection();
             }
         }
 
@@ -721,8 +746,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int returnedAfterSeconds = 0;
             int verifiedSqlCountAfterSeconds = 0;
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            //SQLServerHelper sqlInstance = new SQLServerHelper();
+            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
 
             // get table name
             var pattern = "[a-zA-Z]+";
@@ -734,7 +759,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
 
             // get initial record count
-            var ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
+            var ds = _scenarioContext.GetSQLConnection().GetRecordCount("ContentItemIndex", constants.ContentType, table);
+            
             int startingSQLRecordCount = (int)ds;
 
             try
@@ -796,7 +822,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             while (!done)
             {
-                ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
+                ds = _scenarioContext.GetSQLConnection().GetRecordCount("ContentItemIndex", constants.ContentType, table);
                 discoveredRows = (int)ds;
                 if (ds.Equals(recordCount + startingSQLRecordCount))
                 {
@@ -824,7 +850,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             }
             verifiedSqlCountAfterSeconds = (int) timer.Elapsed.TotalSeconds;
-
+            _scenarioContext.CloseSQLConnection();
             // now check all neo4j records have been synced
             done = false;
             string cypher = "match(a:" + table + ") return count(a)";
@@ -912,11 +938,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+               //SQLServerHelper sqlInstance = new SQLServerHelper();
+                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
                 _scenarioContext.StoreContentItemIndexList(
                                          sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
                                                            ).ToList());
+                _scenarioContext.CloseSQLConnection();
             }
         }
 
@@ -936,11 +963,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+                //SQLServerHelper sqlInstance = new SQLServerHelper();
+                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
                 _scenarioContext.StoreContentItemIndexList(
                                          sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
                                                            ).ToList());
+                _scenarioContext.CloseSQLConnection();
             }
         }
 
@@ -1286,9 +1314,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string sqlCommand = sql_ClearDownAllContentItemsOfType;
             sqlCommand = sqlCommand.Replace("@ContentType@", p0);
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            int count = sqlInstance.ExecuteNonQuery(sqlCommand,null);
+            //SQLServerHelper sqlInstance = new SQLServerHelper();
+            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            int count = _scenarioContext.GetSQLConnection().ExecuteNonQuery(sqlCommand,null);
+            _scenarioContext.CloseSQLConnection();
             Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);
         }
 

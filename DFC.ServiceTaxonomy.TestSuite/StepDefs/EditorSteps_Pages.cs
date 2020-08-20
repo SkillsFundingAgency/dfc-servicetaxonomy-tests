@@ -51,5 +51,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addEditPage.AddSharedContentItem(contentItem);
         }
 
+        [Given(@"I add the ""(.*)"" shared content item to the existing widget")]
+        public void GivenIAddTheSharedContentItemToTheExistingWidget(string contentItem)
+        {
+            _addEditPage.AddSharedContentItemToExistingWidget(contentItem);
+        }
+
+
     }
 }

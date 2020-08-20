@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
 using AngleSharp.Dom;
+using System.Runtime.CompilerServices;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
@@ -20,16 +21,48 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
             //todo error handling
-            string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'"); 
+            string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(context.GetEnv().sqlServerConnectionString);
-            int count = sqlInstance.ExecuteNonQuery(sqlCommand, null);
-            
+            //SQLServerHelper sqlInstance = new SQLServerHelper();
+            //sqlInstance.SetConnection(context.GetEnv().sqlServerConnectionString);
+
+            //int count = sqlInstance.ExecuteNonQuery(sqlCommand, null);
+            int count = GetSQLConnection(context).ExecuteNonQuery(sqlCommand, null);
+            CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
             return ( count>0 ? count /3 : 0);
         }
 
+        public static SQLServerHelper GetSQLConnection(this ScenarioContext context)
+        {
+            SQLServerHelper connection;
+            string contextRef = $"sqlConnection";
+            if (context.ContainsKey(contextRef))
+            {
+                connection = (SQLServerHelper)context[contextRef];
+            }
+            else
+            {
+                connection = new SQLServerHelper();
+                connection.SetConnection(context.GetEnv().sqlServerConnectionString);
+                context[contextRef] = connection;
+            }
+            return connection;
+        }
+
+        public static bool CloseSQLConnection(this ScenarioContext context)
+        {
+            SQLServerHelper connection;
+            string contextRef = $"sqlConnection";
+            if (context.ContainsKey(contextRef))
+            {
+                connection = (SQLServerHelper)context[contextRef];
+                connection.CloseConnection();
+                context.Remove(contextRef);
+                return true;
+            }
+            return false;
+        }
 
         public static Neo4JHelper GetGraphConnection (this ScenarioContext context, string graph, int instance = 0)
         {

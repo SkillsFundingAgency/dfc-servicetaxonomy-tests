@@ -92,14 +92,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
 #line 8
  testRunner.And("I capture the generated URI and tag it \"SharedContentUri\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table226 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table215 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Content"});
-            table226.AddRow(new string[] {
+            table215.AddRow(new string[] {
                         "Draft Content",
                         "<p>Some draft content</p>"});
 #line 9
- testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table226, "And ");
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table215, "And ");
 #line hidden
 #line 12
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -119,12 +119,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
 #line 18
  testRunner.And("I capture the generated URI and tag it \"PageUri\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table227 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table216 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title"});
-            table227.AddRow(new string[] {
+            table216.AddRow(new string[] {
                         "My Test Page"});
 #line 19
- testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table227, "And ");
+ testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table216, "And ");
 #line hidden
 #line 22
  testRunner.And("I select the default page location", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -138,25 +138,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
 #line 25
  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table228 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table217 = new TechTalk.SpecFlow.Table(new string[] {
                         "skos__prefLabel",
                         "sharedContent"});
-            table228.AddRow(new string[] {
+            table217.AddRow(new string[] {
                         "My Test Page",
                         "__PREFIX__Draft Content"});
 #line 26
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
-                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table228, "And ");
+                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table217, "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table229 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table218 = new TechTalk.SpecFlow.Table(new string[] {
                         "skos__prefLabel",
                         "sharedContent"});
-            table229.AddRow(new string[] {
+            table218.AddRow(new string[] {
                         "My Test Page",
                         "__PREFIX__Draft Content"});
 #line 29
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
-                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table229, "And ");
+                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table218, "And ");
 #line hidden
 #line 32
  testRunner.Given("I store the uri from the \"preview\" graph and tag it \"SharedHTMLUri\" using the \"ge" +
@@ -171,14 +171,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
 #line 36
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-            TechTalk.SpecFlow.Table table230 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table219 = new TechTalk.SpecFlow.Table(new string[] {
                         "Title",
                         "Content"});
-            table230.AddRow(new string[] {
+            table219.AddRow(new string[] {
                         "Updated Content",
                         "<p>Some updated content</p>"});
 #line 37
- testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table230, "And ");
+ testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table219, "And ");
 #line hidden
 #line 40
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -186,15 +186,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
 #line 41
  testRunner.Then("the item is saved succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table231 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table220 = new TechTalk.SpecFlow.Table(new string[] {
                         "skos__prefLabel",
                         "sharedContent"});
-            table231.AddRow(new string[] {
+            table220.AddRow(new string[] {
                         "My Test Page",
                         "__PREFIX__Updated Content"});
 #line 42
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
-                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table231, "And ");
+                    "t\" query and the \"PageUri\" Uri", ((string)(null)), table220, "And ");
 #line hidden
         }
         
@@ -242,25 +242,25 @@ this.FeatureBackground();
 #line 73
  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table232 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table221 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table232.AddRow(new string[] {
+                table221.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Updated Content"});
 #line 74
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table232, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table221, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table233 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table222 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table233.AddRow(new string[] {
+                table222.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Updated Content"});
 #line 77
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table233, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table222, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -310,25 +310,25 @@ this.FeatureBackground();
 #line 87
  testRunner.Then("the discard action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table234 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table223 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table234.AddRow(new string[] {
+                table223.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
 #line 88
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table234, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table223, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table235 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table224 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table235.AddRow(new string[] {
+                table224.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
 #line 91
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table235, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table224, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -378,53 +378,53 @@ this.FeatureBackground();
 #line 100
  testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table236 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table225 = new TechTalk.SpecFlow.Table(new string[] {
                             "pages_found"});
-                table236.AddRow(new string[] {
+                table225.AddRow(new string[] {
                             "0"});
 #line 101
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_by_uri\" query and " +
-                        "the \"PageUri\" Uri", ((string)(null)), table236, "And ");
+                        "the \"PageUri\" Uri", ((string)(null)), table225, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table237 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table226 = new TechTalk.SpecFlow.Table(new string[] {
                             "widgets_found"});
-                table237.AddRow(new string[] {
+                table226.AddRow(new string[] {
                             "0"});
 #line 104
  testRunner.And("the \"preview\" graph matches the expect results using the \"widget_by_uri\" query an" +
-                        "d the \"PageUri\" Uri", ((string)(null)), table237, "And ");
+                        "d the \"PageUri\" Uri", ((string)(null)), table226, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table238 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table227 = new TechTalk.SpecFlow.Table(new string[] {
                             "pages_found"});
-                table238.AddRow(new string[] {
+                table227.AddRow(new string[] {
                             "0"});
 #line 107
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_by_uri\" query and " +
-                        "the \"PageUri\" Uri", ((string)(null)), table238, "And ");
+                        "the \"PageUri\" Uri", ((string)(null)), table227, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table239 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table228 = new TechTalk.SpecFlow.Table(new string[] {
                             "widgets_found"});
-                table239.AddRow(new string[] {
+                table228.AddRow(new string[] {
                             "0"});
 #line 110
  testRunner.And("the \"publish\" graph matches the expect results using the \"widget_by_uri\" query an" +
-                        "d the \"PageUri\" Uri", ((string)(null)), table239, "And ");
+                        "d the \"PageUri\" Uri", ((string)(null)), table228, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table240 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table229 = new TechTalk.SpecFlow.Table(new string[] {
                             "sharedContent"});
-                table240.AddRow(new string[] {
+                table229.AddRow(new string[] {
                             "__PREFIX__Updated Content"});
 #line 113
  testRunner.And("the \"preview\" graph matches the expect results using the \"shared_content_title_by" +
-                        "_uri\" query and the \"SharedContentUri\" Uri", ((string)(null)), table240, "And ");
+                        "_uri\" query and the \"SharedContentUri\" Uri", ((string)(null)), table229, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table241 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table230 = new TechTalk.SpecFlow.Table(new string[] {
                             "sharedContent"});
-                table241.AddRow(new string[] {
+                table230.AddRow(new string[] {
                             "__PREFIX__Draft Content"});
 #line 116
  testRunner.And("the \"publish\" graph matches the expect results using the \"shared_content_title_by" +
-                        "_uri\" query and the \"SharedContentUri\" Uri", ((string)(null)), table241, "And ");
+                        "_uri\" query and the \"SharedContentUri\" Uri", ((string)(null)), table230, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -474,25 +474,25 @@ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(nul
 #line 126
  testRunner.Then("the delete action could not be completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table242 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table231 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table242.AddRow(new string[] {
+                table231.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Updated Content"});
 #line 127
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table242, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table231, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table243 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table232 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
                             "sharedContent"});
-                table243.AddRow(new string[] {
+                table232.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
 #line 130
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table243, "And ");
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table232, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -125,6 +125,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
+        public bool AddSharedContentItemToExistingWidget(string name)
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                //OpenWidgetMenu();
+                //var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
+                //element.Click();
+                var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
+                element.SendKeys(name);
+                Thread.Sleep(500);
+                //TODO use selenium wait
+                element.SendKeys(Keys.Enter);
+
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable add Shared Content item- {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
         public bool InsertHtmlItem(int position = 0)
         {
             try
