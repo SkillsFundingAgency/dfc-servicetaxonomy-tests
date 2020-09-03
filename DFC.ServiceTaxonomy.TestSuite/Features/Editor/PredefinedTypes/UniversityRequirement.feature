@@ -4,7 +4,7 @@ Feature: UniversityRequirement
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@EditorR2
 Scenario: Add a new UniversityRequirement
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/UniversityRequirement/Create" 
