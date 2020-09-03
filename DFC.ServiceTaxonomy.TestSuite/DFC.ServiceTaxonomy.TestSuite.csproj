@@ -53,27 +53,27 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\Registration.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\Registration.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\Restriction.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\Restriction.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\SOCCode.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\SOCCode.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\UniversityLink.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\UniversityLink.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\UniversityRequirement.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\UniversityRequirement.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileTypes\RequirementsPrefix.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\PredefinedTypes\RequirementsPrefix.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
