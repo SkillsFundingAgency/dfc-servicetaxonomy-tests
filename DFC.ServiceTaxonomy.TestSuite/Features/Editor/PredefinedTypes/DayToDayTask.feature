@@ -4,7 +4,7 @@ Feature: DayToDayTasks
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
 
-@Editor
+@EditorR2
 Scenario: Add a new DayToDayTask
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/DayToDayTask/Create" 
@@ -19,7 +19,7 @@ Scenario: Add a new DayToDayTask
 	And the data is present in the PUBLISH Graph database
 
 #TODO_DRAFT draft checks
-@Editor
+@EditorR2
 Scenario: Save new draft DayToDayTask
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/DayToDayTask/Create" 
