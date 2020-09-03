@@ -88,12 +88,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new page with an html item")]
         [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("ignore")]
         public virtual void AddANewPageWithAnHtmlItem()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "Editor",
+                    "ignore"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new page with an html item", null, new string[] {
-                        "Editor"});
+                        "Editor",
+                        "ignore"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
