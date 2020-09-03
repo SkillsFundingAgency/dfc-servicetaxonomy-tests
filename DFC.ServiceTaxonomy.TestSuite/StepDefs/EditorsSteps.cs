@@ -92,6 +92,29 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
          return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" 
     },
     {
+        "page_with_two_shared_content_in_same_widget",
+        @"match (s1:SharedContent) <-[r1:hasSharedContent]- (h1:HTMLShared) <-[r2:hasHHTMLShared]- (p:Page) -[r3:hasHTMLShared]-> (h2:HTMLShared) -[r4:hasSharedContent]-> (s2:SharedContent)
+         where p.uri =  '__URI1__' 
+         and s1.uri = '__URI2__'
+         and s1.uri <> s2.uri
+         and h1.uri = h2.uri
+         return p.skos__prefLabel as skos__prefLabel, s1.skos__prefLabel as sharedContent1, s2.skos__prefLabel as sharedContent2"
+    },
+    {
+        "number_of_shared_content_on_widget_on_page",
+        @"match (s:SharedContent) <-[hasSharedContent]- (HTMLShared) <-[hasHTMLShared]- (p:Page) 
+         where p.uri =  '__URI__' 
+         return count (s) as count_of_sharedContent"
+    },
+    {
+        "page_widget_with_two_shared_content",
+        @"match (s1:SharedContent) <-[r1:hasSharedContent]- (h:HTMLShared) -[r2:hasSharedContent]-> (s2:SharedContent)
+         where h.uri =  '__URI1__'
+         and s1.uri = '__URI2__'
+         and s2.uri = '__URI3__'
+         return s1.skos__prefLabel as SharedContent1, s2.skos__prefLabel as SharedContent2"
+    },
+    {
         "get_sharedhtml_uri_for_page",
         @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared)
           where p.uri =  '__URI__'  return h.uri as uri" 
@@ -260,12 +283,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I record the new documentId")]
         public void GivenIRecordTheNewDocumentId()
         {
+            _scenarioContext.GetEnv().sqlServerChecksEnabled.Should().BeTrue("Because sql server checks must be enabled for the step to execute");
+            
             string displayName = (string)_scenarioContext[constants.Title];
             string contentType = (string)_scenarioContext[constants.ContentType];
             string prefix =  (string)_scenarioContext[constants.prefix];
-
-            //SQLServerHelper sqlInstance = new SQLServerHelper();
-            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
 
             // get initial record count
             var result = _scenarioContext.GetSQLConnection().GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
@@ -318,10 +340,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                //SQLServerHelper sqlInstance = new SQLServerHelper();
-                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
-                _scenarioContext.CloseSQLConnection();
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
 
@@ -413,6 +437,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _manageContent.EditFirstItem();
             _scenarioContext.StoreContentItemId(_addContentItemBase.ContentItemIdFromUrl());
+        }
+
+        [Given(@"I confirm the ""(.*)"" option is not available for the first item")]
+        public void GivenIConfirmTheOptionIsNotAvailableForTheFirstItem(string p0)
+        {
+            _manageContent.CheckOptionAvailableToFirstItem(p0).Should().BeFalse($"Because {p0} was unexpectedly found in the action list");
+        }
+
+        [Given(@"I confirm the ""(.*)"" option is available for the first item")]
+        public void GivenIConfirmTheOptionIsAvailableForTheFirstItem(string p0)
+        {
+            _manageContent.CheckOptionAvailableToFirstItem(p0).Should().BeTrue($"Because {p0} was unexpectedly not found in the action list");
         }
 
         //content type
@@ -736,6 +772,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         public int ImportRecipeFile(string filename, int recordCount, Dictionary<string, int> tallies)
         {
+            _scenarioContext.GetEnv().sqlServerChecksEnabled.Should().BeTrue("Because sql server checks are required for this function");
 
             string path = @"F:\temp\output.log";
             int returnStatus = 0;
@@ -938,12 +975,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-               //SQLServerHelper sqlInstance = new SQLServerHelper();
-                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(
-                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                           ).ToList());
-                _scenarioContext.CloseSQLConnection();
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(
+                                             sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                               ).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
 
@@ -963,12 +1002,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                //SQLServerHelper sqlInstance = new SQLServerHelper();
-                var sqlInstance = _scenarioContext.GetSQLConnection();//.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(
-                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                           ).ToList());
-                _scenarioContext.CloseSQLConnection();
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(
+                                             sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                               ).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
 
@@ -1131,6 +1172,88 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
             match.Should().BeTrue($"Because {message}");
         }
+
+        [Then(@"within expected timescales the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" Uri")]
+        public void ThenWithinExpectedTimescalesTheGraphMatchesTheExpectResultsUsingTheQueryAndTheUri(string graphReference, string queryReference, string tag, Table expectedResults)
+        {
+            // get earliest time
+            DateTime earliestTime = (DateTime)_scenarioContext["futureEvent"];
+            // get latest time
+            DateTime latestTime = (DateTime)_scenarioContext["futureEventLatest"];
+            // get poll frequency
+            TimeSpan pollFrequency = new TimeSpan(0, 0, 20);
+            TimeSpan grace = new TimeSpan(0, 0, 5);
+
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(tag).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            bool success = false;
+            while (!success && DateTime.Now < latestTime)
+            {
+                string message;
+                bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+                if (DateTime.Now < earliestTime - grace)
+                {
+                    match.Should().BeFalse("Because otherwise the event has been published too soon");
+                }
+                else if (match)
+                {
+                    success = true;
+                    break;
+                }
+                Thread.Sleep(pollFrequency);
+            }
+            success.Should().BeTrue("Because otherwise the condition was not met within the expected timescale");
+        }
+
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" and ""(.*)"" Uris")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheAndUris(string graphReference, string queryReference, string tag1, string tag2, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri1 = _scenarioContext.GetUri(tag1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri2 = _scenarioContext.GetUri(tag2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri1 = _scenarioContext.ConvertUriToDraft(uri1);
+                uri2 = _scenarioContext.ConvertUriToDraft(uri2);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI1__", uri1).Replace("__URI2__", uri2), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and ""(.*)"" and ""(.*)"" and ""(.*)"" Uris")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndAndAndUris(string graphReference, string queryReference, string tag1, string tag2, string tag3, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri1 = _scenarioContext.GetUri(tag1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri2 = _scenarioContext.GetUri(tag2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri3 = _scenarioContext.GetUri(tag3).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri1 = _scenarioContext.ConvertUriToDraft(uri1);
+                uri2 = _scenarioContext.ConvertUriToDraft(uri2);
+                uri3 = _scenarioContext.ConvertUriToDraft(uri3);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI1__", uri1).Replace("__URI2__", uri2).Replace("__URI3__",uri3), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+
 
 
         [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
@@ -1312,10 +1435,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I delete SQL Server data for content type ""(.*)""")]
         public void GivenIDeleteSQLServerDataForContentType(string p0)
         {
+            if (!_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                return;
+
             string sqlCommand = sql_ClearDownAllContentItemsOfType;
             sqlCommand = sqlCommand.Replace("@ContentType@", p0);
-            //SQLServerHelper sqlInstance = new SQLServerHelper();
-            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
             int count = _scenarioContext.GetSQLConnection().ExecuteNonQuery(sqlCommand,null);
             _scenarioContext.CloseSQLConnection();
             Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);

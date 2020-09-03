@@ -39,11 +39,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             Thread.Sleep(10000);
 
-            string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
+            //string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
-            List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
-
-            indexes.Count.Should().BeGreaterThan(0, "Because otherwise no data has been stored to check against");
+            
+            //List<ContentItemIndexRow> indexes = _scenarioContext.GetContentItemIndexList();
+            //indexes.Count.Should().BeGreaterThan(0, "Because otherwise no data has been stored to check against");
 
             int numberOfEvents = _scenarioContext.ContainsKey($"countOf{eventType.ToLower()}Events") ? (int)_scenarioContext[$"countOf{eventType.ToLower()}Events"] : 0;
             //// mock the response until event store is up and running
@@ -102,7 +102,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
-            string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
+            //string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
             List<ContentEvent> list = GetMatchingDocuments(uri);
             list.Count().Should().Be(p0, $"Because the total number of events sent should be {p0}");
@@ -121,10 +121,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             // pause to ensure events are received
             Thread.Sleep(10000);
-            string id = _scenarioContext.GetContentItemId(0);
+            //string id = _scenarioContext.GetContentItemId(0);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
             int numberOfEvents = _scenarioContext.ContainsKey("TotalEvents") ? (int)_scenarioContext["TotalEvents"] : 0 ;
 
-            List<ContentEvent> list = GetMatchingDocuments(id);
+            List<ContentEvent> list = GetMatchingDocuments(uri);
 
             list.Count().Should().Be(numberOfEvents, "Because no more events should have been raised");
         }
@@ -145,7 +146,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             // pause to ensure events are received
             Thread.Sleep(10000);
-            string id = _scenarioContext.GetContentItemId(0);
+            //string id = _scenarioContext.GetContentItemId(0);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
             List<ContentEvent> list = GetMatchingDocuments(uri);
 
@@ -160,11 +161,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int numberOfEvents = 0;
             foreach ( var item in tallys)
             {
-                Console.WriteLine($"{item.Value} messages of type {item.Key} detected for document {id}");
+                Console.WriteLine($"{item.Value} messages of type {item.Key} detected for uri {uri}");
                 _scenarioContext[$"countOf{item.Key}Events"] = item.Value;
                 numberOfEvents += item.Value;
             }
-            Console.WriteLine($"Total {numberOfEvents} messages detected for document {id}");
+            Console.WriteLine($"Total {numberOfEvents} messages detected for uri {uri}");
             _scenarioContext["TotalEvents"] = numberOfEvents;
         }
     }

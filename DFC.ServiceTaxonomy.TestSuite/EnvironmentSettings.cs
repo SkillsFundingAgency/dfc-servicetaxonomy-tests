@@ -32,6 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
 
+        public bool sqlServerChecksEnabled = Configuration["SqlServer:ChecksEnabled"].ToLower() == "true";
         public string sqlServerConnectionString = Configuration["SqlServer:ConnectionString"];
 
         public bool checkEvents = Configuration["EventStore:CheckEvents"].ToLower() == "true";

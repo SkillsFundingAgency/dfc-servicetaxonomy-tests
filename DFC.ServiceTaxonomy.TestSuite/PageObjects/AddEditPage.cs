@@ -179,5 +179,62 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             return true;
         }
+
+        public bool SetPublishLaterDate(DateTime dateTime)
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                var element = driver.FindElement(By.Id("PublishLaterPart_ScheduledPublishLocalDateTime"));
+                element.SendKeys(dateTime.Day.ToString());
+                element.SendKeys(dateTime.Month.ToString());
+                element.SendKeys(dateTime.Year.ToString());
+                element.SendKeys(Keys.Tab);
+                element.SendKeys(dateTime.Hour.ToString());
+                element.SendKeys(dateTime.Minute.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to publish later date - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetArchiveLaterDate(DateTime dateTime)
+        {
+
+            return true;
+        }
+
+        public bool PublishLater()
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                driver.ClickButton("Publish Later");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to publish later - is the feature enabled? - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool ArchiveLater()
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                driver.ClickButton("Archive Later");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to unpublish later - is the feature enabled? - {e.Message}");
+                return false;
+            }
+            return true;
+        }
     }
 }

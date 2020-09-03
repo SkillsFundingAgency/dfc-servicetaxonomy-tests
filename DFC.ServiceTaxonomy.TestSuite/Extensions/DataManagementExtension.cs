@@ -20,13 +20,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
+            if (!context.GetEnv().sqlServerChecksEnabled)
+                return 0;
             //todo error handling
             string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
-
-            //SQLServerHelper sqlInstance = new SQLServerHelper();
-            //sqlInstance.SetConnection(context.GetEnv().sqlServerConnectionString);
-
-            //int count = sqlInstance.ExecuteNonQuery(sqlCommand, null);
             int count = GetSQLConnection(context).ExecuteNonQuery(sqlCommand, null);
             CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
@@ -35,6 +32,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static SQLServerHelper GetSQLConnection(this ScenarioContext context)
         {
+            //if (!context.GetEnv().sqlServerChecksEnabled)
+            //    return null;
+
             SQLServerHelper connection;
             string contextRef = $"sqlConnection";
             if (context.ContainsKey(contextRef))

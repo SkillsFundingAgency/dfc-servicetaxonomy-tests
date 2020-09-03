@@ -92,6 +92,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public bool CheckOptionAvailableToFirstItem( string action)
+        {
+            try
+            {
+                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
+                var element = _scenarioContext.GetWebDriver().FindElement(By.LinkText(action));
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally
+            {
+                var esc = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".btn-secondary"));
+                if (esc.Count > 0)
+                {
+                    esc[0].SendKeys(Keys.Escape);
+                }
+            }
+            return true;
+        }
+
         public ManageContent ActionFirstItem( string action )
         {
             try
