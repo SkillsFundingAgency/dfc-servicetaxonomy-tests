@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.JobProfileTypes
+namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
 {
     using TechTalk.SpecFlow;
     using System;
@@ -126,14 +126,14 @@ this.FeatureBackground();
 #line 13
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table98 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table305 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Text"});
-                table98.AddRow(new string[] {
+                table305.AddRow(new string[] {
                             "My Test RequirementsPrefix",
                             "My test description"});
 #line 14
- testRunner.And("I Enter the following form data for \"RequirementsPrefix\"", ((string)(null)), table98, "And ");
+ testRunner.And("I Enter the following form data for \"RequirementsPrefix\"", ((string)(null)), table305, "And ");
 #line hidden
 #line 17
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
