@@ -31,7 +31,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                     return By.Id($"Page_RedirectLocations_Text");
                 case "Description":
                     return By.Id("Page_Description_Text");
-                //return By.ClassName("trumbowyg-editor");
                 default:
                     return null;
             }
@@ -86,7 +85,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
-                element = driver.WaitUntilElementFound(By.ClassName("trumbowyg-editor"));
+
+                var elements = driver.FindElements(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
+                element = elements[0];
+                element = driver.WaitUntilElementFound(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
                 element.SendKeys(htmlValue);
 
             }
@@ -130,9 +132,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var driver = scenarioContext.GetWebDriver();
             try
             {
-                //OpenWidgetMenu();
-                //var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
-                //element.Click();
                 var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
                 element.Click();
                 element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
@@ -140,9 +139,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 Thread.Sleep(500);
                 //TODO use selenium wait
                 element.SendKeys(Keys.Enter);
-
-
-
             }
             catch (Exception e)
             {
@@ -156,7 +152,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-
+                //todo
             }
             catch (Exception e)
             {
@@ -170,7 +166,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-
+                //todo
             }
             catch (Exception e)
             {
@@ -203,7 +199,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public bool SetArchiveLaterDate(DateTime dateTime)
         {
-
+            //todo
             return true;
         }
 

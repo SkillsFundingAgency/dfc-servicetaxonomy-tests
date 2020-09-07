@@ -31,7 +31,7 @@ Background:
 	| 0           |
 	Given I store the uri from the "preview" graph and tag it "SharedHTMLUri" using the "get_sharedhtml_uri_for_page" query 
 
-@Editor
+@Editor @ignore
 Scenario: Publish a page later
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -47,7 +47,7 @@ Scenario: Publish a page later
 	And I confirm the "Publish Draft" option is not available for the first item
 	And I confirm the "Unpublish" option is available for the first item
 
-	@Editor
+@Editor  @ignore
 Scenario: Unpublish a page later
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	Then the "publish" graph matches the expect results using the "page_by_uri" query and the "PageUri" Uri

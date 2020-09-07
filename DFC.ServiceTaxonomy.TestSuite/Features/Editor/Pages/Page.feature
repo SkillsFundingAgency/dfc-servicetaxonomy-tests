@@ -4,7 +4,7 @@ Feature: Page
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
 
-@Editor @ignore
+@Editor
 Scenario: Add a new page with an html item
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 

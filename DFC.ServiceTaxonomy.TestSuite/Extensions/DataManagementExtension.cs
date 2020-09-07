@@ -185,23 +185,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return newText;
         }
-
-        public static Table ReplaceTokensInTable(this ScenarioContext context, Table  data)
-        {
-            var tokens = GetTokens(context);
-      //      Table newTable;
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                var v = data.Rows[0].Values.ToList();
-                v.ForEach(c => c = "123"); // context.ReplaceTokensInString(c));
-                //for( int j= 0; j < data.Rows[i].Values.Count; j++)
-                ////foreach ( var kv in data.Rows[i].Values )
-                //{
-                //    data.Rows[i].Values.ElementAt(j). = context.ReplaceTokensInString(data.Rows[i].Values[j]);
-                //}
-            }
-           
-            return data;
-        }
-    }
+     }
 }

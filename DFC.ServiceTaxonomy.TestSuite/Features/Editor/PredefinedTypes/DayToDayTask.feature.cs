@@ -126,14 +126,14 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table297 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table296 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table297.AddRow(new string[] {
+                table296.AddRow(new string[] {
                             "My Test Day to Day task",
                             "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table297, "And ");
+ testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table296, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -192,14 +192,14 @@ this.FeatureBackground();
 #line 27
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table298 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table297 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table298.AddRow(new string[] {
+                table297.AddRow(new string[] {
                             "My Test Day to Day task",
                             "My test description"});
 #line 28
- testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table298, "And ");
+ testRunner.And("I Enter the following form data for \"DayToDayTask\"", ((string)(null)), table297, "And ");
 #line hidden
 #line 31
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
