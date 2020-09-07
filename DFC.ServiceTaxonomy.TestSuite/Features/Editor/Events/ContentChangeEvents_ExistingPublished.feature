@@ -84,6 +84,7 @@ Scenario: 28. A published item is unpublished from the content item list view
 	Then the unpublish action completes succesfully
 	And an event of type "Unpublished" has been issued to notify consumers of the change
 	And an event of type "Draft" has been issued to notify consumers of the change
+	#And an event of type "Draft" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 3
