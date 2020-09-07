@@ -20,9 +20,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("RequirementsPrefix")]
+    [NUnit.Framework.DescriptionAttribute("Page")]
     [NUnit.Framework.CategoryAttribute("webtest")]
-    public partial class RequirementsPrefixFeature
+    public partial class PageFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -30,14 +30,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         private string[] _featureTags = new string[] {
                 "webtest"};
         
-#line 1 "RequirementsPrefix.feature"
+#line 1 "Page.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "RequirementsPrefix", null, ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Page", null, ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -78,23 +78,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         public virtual void FeatureBackground()
         {
-#line 5
+#line 4
 #line hidden
-#line 6
- testRunner.Given("I set up a data prefix for \"Title\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.Given("I set up a data prefix for \"skos__prefLabel\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add a new RequirementsPrefix")]
+        [NUnit.Framework.DescriptionAttribute("Add a new page with an html item")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        public virtual void AddANewRequirementsPrefix()
+        [NUnit.Framework.CategoryAttribute("ignore")]
+        public virtual void AddANewPageWithAnHtmlItem()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new RequirementsPrefix", null, new string[] {
-                        "Editor"});
-#line 9
+                    "Editor",
+                    "ignore"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new page with an html item", null, new string[] {
+                        "Editor",
+                        "ignore"});
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -114,38 +117,43 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 4
 this.FeatureBackground();
 #line hidden
-#line 10
+#line 9
  testRunner.Given("I logon to the editor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 11
- testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/RequirementsPrefix/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 10
+ testRunner.And("I Navigate to \"/Admin/Contents/ContentTypes/Page/Create\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 13
+#line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table306 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Text"});
-                table306.AddRow(new string[] {
-                            "My Test RequirementsPrefix",
-                            "My test description"});
-#line 14
- testRunner.And("I Enter the following form data for \"RequirementsPrefix\"", ((string)(null)), table306, "And ");
+                TechTalk.SpecFlow.Table table302 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title"});
+                table302.AddRow(new string[] {
+                            "My Test Page"});
+#line 13
+ testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table302, "And ");
 #line hidden
 #line 17
- testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I select the default page location", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 18
- testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I add an html item to the page with content", "Test HTML", ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 19
- testRunner.And("the data is present in the DRAFT Graph database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
- testRunner.And("the data is present in the PUBLISH Graph database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                TechTalk.SpecFlow.Table table303 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skos__prefLabel",
+                            "htmlbody_Html"});
+                table303.AddRow(new string[] {
+                            "My Test Page",
+                            "<p>Test HTML</p>"});
+#line 23
+ testRunner.Then("the preview and publish graphs returns the expected results using the \"page_with_" +
+                        "html\" query", ((string)(null)), table303, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
