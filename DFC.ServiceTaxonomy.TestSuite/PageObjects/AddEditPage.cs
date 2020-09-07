@@ -86,7 +86,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
                 element = driver.WaitUntilElementFound(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
-                Thread.Sleep(500);
                 element.SendKeys(htmlValue);
 
             }
