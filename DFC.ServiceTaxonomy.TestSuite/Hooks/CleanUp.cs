@@ -1,11 +1,19 @@
-﻿using DFC.ServiceTaxonomy.TestSuite;
+﻿using DFC.ServiceTaxonomy.Events.Models;
+using DFC.ServiceTaxonomy.Events.Configuration;
+using DFC.ServiceTaxonomy.Events.Services;
+using DFC.ServiceTaxonomy.Events.Services.Interfaces;
+using DFC.ServiceTaxonomy.TestSuite;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using OrchardCore.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Http;
 using TechTalk.SpecFlow;
+//using Microsoft.Extensions.DependencyInjection;
+
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
@@ -13,10 +21,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
+        private readonly IEventGridContentClient _eventGridContentClient;
+        //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context)
+        public CleanUp(ScenarioContext context, IEventGridContentClient eventGridContentClient)//, IServiceCollection services)
         {
             _scenarioContext = context;
+            _eventGridContentClient = eventGridContentClient;
+            // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -31,7 +43,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 //SQL
                 int count = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
                 Console.WriteLine("CLEANUP: Deleted " + count + "content items prefixed with " + prefix);
-                
+
                 //graph
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
                 Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
@@ -39,7 +51,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
         }
 
-        [AfterScenario( Order = 1)]
+        [AfterScenario(Order = 1)]
         public void TearDownDataItems()
         {
             // clear down based on stored uri
@@ -55,6 +67,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 //clear SQL based on URI
                 Console.WriteLine("CLEANUP: Sql clear down based on URI not yet implemented");
 
+            }
+            var dataItems = _scenarioContext.GetContentItemIndexList();
+            foreach (var item in dataItems)
+            {
+                ContentItem contentItem = new ContentItem();
+                contentItem.Author = item.Author;
+                contentItem.ContentItemId = item.ContentItemId;
+                contentItem.ContentItemVersionId = item.ContentItemVersionId;
+                contentItem.ContentType = item.ContentType;
+                contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
+                contentItem.DisplayText = item.DisplayText;
+
+                ContentEvent contentEvent = new ContentEvent(contentItem, "TestUser", DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
+                _eventGridContentClient.Publish(contentEvent);
             }
         }
 
