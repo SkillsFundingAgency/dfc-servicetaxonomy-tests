@@ -10,6 +10,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         private static readonly IConfiguration Configuration =
         new EnvironmentSettingsConfigurationBuilder(nameof(DFC.ServiceTaxonomy.TestSuite)).BuildConfiguration();
 
+        public IConfiguration GetConfiguration() { return Configuration; }
+
         public string taxonomyApiBaseUrl => Configuration["TaxonomyApi:BaseUrl"];
         public string taxonomySubscriptionKey => Configuration["TaxonomyApi:SubscriptionKey"];
 

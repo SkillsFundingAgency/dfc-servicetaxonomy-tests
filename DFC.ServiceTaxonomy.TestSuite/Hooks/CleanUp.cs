@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Http;
 using TechTalk.SpecFlow;
+using Newtonsoft.Json;
 //using Microsoft.Extensions.DependencyInjection;
 
 
@@ -78,9 +79,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 contentItem.ContentType = item.ContentType;
                 contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
                 contentItem.DisplayText = item.DisplayText;
+                var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
+               ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
+                string output = $"[{JsonConvert.SerializeObject(contentEvent)}]";
 
-                ContentEvent contentEvent = new ContentEvent(contentItem, "TestUser", DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
-                _eventGridContentClient.Publish(contentEvent);
+                RestHelper.Post("https://dfc-sit-stax-egt.westeurope-1.eventgrid.azure.net/api/events", output, new Dictionary<string, string>() { { "Aeg-sas-key", "XLl5HCcVcSm7Zs7Obwk68Z+jJD96Hq4VjmwmiacJht4="} });
+
+               //  _eventGridContentClient.Publish(contentEvent);
+               
             }
         }
 
