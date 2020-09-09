@@ -40,5 +40,9 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public bool checkEvents = Configuration["EventStore:CheckEvents"].ToLower() == "true";
         public string eventStoreEndPoint = Configuration["EventStore:BaseUrl"];
         public string eventStoreKey = Configuration["EventStore:Key"];
+
+        public bool sendEvents = Configuration["EventGrid:PublishEvents"].ToLower() == "true";
+        public string eventTopicUrl = Configuration["EventGrid:TopicEndpoint"];
+        public string AegSasKey = Configuration["EventGrid:AegSasKey"];
     }
 }

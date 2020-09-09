@@ -1,18 +1,13 @@
 ﻿using DFC.ServiceTaxonomy.Events.Models;
-using DFC.ServiceTaxonomy.Events.Configuration;
-using DFC.ServiceTaxonomy.Events.Services;
-using DFC.ServiceTaxonomy.Events.Services.Interfaces;
-using DFC.ServiceTaxonomy.TestSuite;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using Newtonsoft.Json;
 using OrchardCore.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Net.Http;
 using TechTalk.SpecFlow;
-using Newtonsoft.Json;
+
 //using Microsoft.Extensions.DependencyInjection;
 
 
@@ -22,14 +17,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
-        private readonly IEventGridContentClient _eventGridContentClient;
         //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context, IEventGridContentClient eventGridContentClient)//, IServiceCollection services)
+        public CleanUp(ScenarioContext context)
         {
             _scenarioContext = context;
-            _eventGridContentClient = eventGridContentClient;
-            // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -69,25 +61,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 Console.WriteLine("CLEANUP: Sql clear down based on URI not yet implemented");
 
             }
+            var env = _scenarioContext.GetEnv();
             var dataItems = _scenarioContext.GetContentItemIndexList();
-            foreach (var item in dataItems)
-            {
-                ContentItem contentItem = new ContentItem();
-                contentItem.Author = item.Author;
-                contentItem.ContentItemId = item.ContentItemId;
-                contentItem.ContentItemVersionId = item.ContentItemVersionId;
-                contentItem.ContentType = item.ContentType;
-                contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
-                contentItem.DisplayText = item.DisplayText;
-                var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
-               ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
-                string output = $"[{JsonConvert.SerializeObject(contentEvent)}]";
-
-                RestHelper.Post("https://dfc-sit-stax-egt.westeurope-1.eventgrid.azure.net/api/events", output, new Dictionary<string, string>() { { "Aeg-sas-key", "XLl5HCcVcSm7Zs7Obwk68Z+jJD96Hq4VjmwmiacJht4="} });
-
-               //  _eventGridContentClient.Publish(contentEvent);
-               
-            }
+            if (env.sendEvents && env.sqlServerChecksEnabled && dataItems.Count > 0)
+            { 
+                foreach (var item in dataItems)
+                {
+                    ContentItem contentItem = new ContentItem();
+                    contentItem.Author = item.Author;
+                    contentItem.ContentItemId = item.ContentItemId;
+                    contentItem.ContentItemVersionId = item.ContentItemVersionId;
+                    contentItem.ContentType = item.ContentType;
+                    contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
+                    contentItem.DisplayText = item.DisplayText;
+                    var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
+                    ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
+                    string json = $"[{JsonConvert.SerializeObject(contentEvent)}]";
+                    var response = RestHelper.Post(env.eventTopicUrl, json, new Dictionary<string, string>() { { "Aeg-sas-key", env.AegSasKey } });
+                    Console.WriteLine($"CLEANUP: send delete event for {uri} - Response Code:{response.StatusCode}");
+                }
+             }
         }
 
         [AfterScenario("webtest", Order = 20)]
