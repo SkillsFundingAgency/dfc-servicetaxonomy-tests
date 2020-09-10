@@ -80,6 +80,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void CLoseWebDriver()
         {
             _scenarioContext.GetWebDriver().Close();
+            _scenarioContext.GetWebDriver().Quit();
         }
     }
 }

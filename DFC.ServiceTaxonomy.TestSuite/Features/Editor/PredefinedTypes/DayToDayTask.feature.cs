@@ -87,13 +87,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new DayToDayTask")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void AddANewDayToDayTask()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new DayToDayTask", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -153,13 +153,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Save new draft DayToDayTask")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void SaveNewDraftDayToDayTask()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Save new draft DayToDayTask", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 23
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

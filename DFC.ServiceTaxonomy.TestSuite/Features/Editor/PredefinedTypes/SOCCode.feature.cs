@@ -88,13 +88,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new SOCCode")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void AddANewSOCCode()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new SOCCode", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
