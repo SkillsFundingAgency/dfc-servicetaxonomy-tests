@@ -250,7 +250,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
         {
-            return (List<ContentItemIndexRow>)context[constants.contentItemIndexes];
+            return context.ContainsKey(constants.contentItemIndexes) ? (List<ContentItemIndexRow>)context[constants.contentItemIndexes]
+                                                                     : new List<ContentItemIndexRow>();
         }
 
         public static void StoreContentItemId(this ScenarioContext context, string newId)
