@@ -37,6 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
             }
+            Console.WriteLine("Wait for 10 seconds to allow events to come through");
             Thread.Sleep(10000);
 
             //string id = _scenarioContext.GetContentItemId(_scenarioContext.GetNumberOfStoredContentIds() - 1);
@@ -50,6 +51,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //MockEvent(id, _scenarioContext.GetUri(0), eventType);
 
             List<ContentEvent> list = GetMatchingDocuments(uri, eventType.ToLower());
+            if (list.Count < numberOfEvents + p0)
+            {
+                Console.WriteLine("Wait longer");
+                Thread.Sleep(5000);
+                list = GetMatchingDocuments(uri, eventType.ToLower());
+            }
             list.Count().Should().Be(numberOfEvents + p0, "Because a cosmos document relating to the event message should have been found");
 
             //TODO incorporate check of dates and contentitemversion

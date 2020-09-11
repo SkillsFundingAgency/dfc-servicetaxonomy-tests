@@ -88,13 +88,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new SOCCode")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void AddANewSOCCode()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new SOCCode", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -127,14 +127,14 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table311 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table310 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table311.AddRow(new string[] {
+                table310.AddRow(new string[] {
                             "My Test SOCCode",
                             "My test description"});
 #line 16
- testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table311, "And ");
+ testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table310, "And ");
 #line hidden
 #line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

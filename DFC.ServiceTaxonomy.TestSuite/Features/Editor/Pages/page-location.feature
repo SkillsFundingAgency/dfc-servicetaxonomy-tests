@@ -96,7 +96,3 @@ Scenario: Add an html item to a page
 	Then the "publish" graph matches the expect results using the "page_with_html" query and the "PageUri" Uri
 	| skos__prefLabel     | htmlbody_Html    |
 	| My Test Page Update | <p>Test HTML</p> |
-	
-	And the "publish" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
-    | skos__prefLabel     | sharedContent |
-    | My Test Page Update | Draft Content |

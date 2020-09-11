@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
+using Microsoft.Extensions.DependencyInjection;
+
 
 //using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +21,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         private ScenarioContext _scenarioContext;
         //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context)
+        public CleanUp(ScenarioContext context )//, IServiceCollection services)
         {
             _scenarioContext = context;
+           // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -40,6 +43,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 //graph
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
                 Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+
+                //ContentItem contentItem = new ContentItem();
+                //ContentEventType eventType = new ContentEventType();
+                //ContentEvent contentEvent = new ContentEvent(contentItem, null, eventType);
+                //RestHttpClient client = new RestHttpClient(null);
+                //EventGridContentRestHttpClientFactory factory = new EventGridContentRestHttpClientFactory(new IHttpClientFactory());
+                //EventGridContentClient _eventGridContentClient = new EventGridContentClient(factory,null);
+                //_eventGridContentClient.Publish(contentEvent);
             }
 
         }
@@ -87,6 +98,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void CLoseWebDriver()
         {
             _scenarioContext.GetWebDriver().Close();
+            _scenarioContext.GetWebDriver().Quit();
         }
     }
 }

@@ -5,7 +5,7 @@ Feature: QCF
 Background:
 	Given I set up a data prefix for "Title"
 
-@Editor
+@EditorR2
 Scenario: Add a new QCF Level
 	Given I logon to the editor
 	And I Navigate to "/Admin/Contents/ContentTypes/QCFLevel/Create" 

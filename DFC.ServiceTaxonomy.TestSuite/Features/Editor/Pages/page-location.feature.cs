@@ -375,16 +375,6 @@ this.FeatureBackground();
  testRunner.Then("the \"publish\" graph matches the expect results using the \"page_with_html\" query a" +
                         "nd the \"PageUri\" Uri", ((string)(null)), table253, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table254 = new TechTalk.SpecFlow.Table(new string[] {
-                            "skos__prefLabel",
-                            "sharedContent"});
-                table254.AddRow(new string[] {
-                            "My Test Page Update",
-                            "Draft Content"});
-#line 100
- testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
-                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table254, "And ");
-#line hidden
             }
             this.ScenarioCleanup();
         }

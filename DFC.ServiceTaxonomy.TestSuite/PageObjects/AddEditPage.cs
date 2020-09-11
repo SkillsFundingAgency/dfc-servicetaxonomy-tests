@@ -85,9 +85,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
-
-                var elements = driver.FindElements(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
-                element = elements[0];
                 element = driver.WaitUntilElementFound(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
                 element.SendKeys(htmlValue);
 

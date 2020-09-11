@@ -18,9 +18,13 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string jobProfileApiBaseUrl => Configuration["JobProfileApi:BaseUrl"];
         public string jobProfileSubscriptionKey => Configuration["JobProfileApi:SubscriptionKey"];
 
+        public string contentApiBaseUrl => Configuration["ContentApi:BaseUrl"].EndsWith("/api/execute") ?
+                                                Configuration["ContentApi:BaseUrl"] :
+                                                $"{Configuration["ContentApi:BaseUrl"]}/api/execute";
 
-        public string contentApiBaseUrl => Configuration["ContentApi:BaseUrl"];
-        public string contentApiDraftBaseUrl => Configuration["ContentApi:BaseUrlDraft"];
+        public string contentApiDraftBaseUrl => Configuration["ContentApi:BaseUrlDraft"].EndsWith("/api/execute")?
+                                                Configuration["ContentApi:BaseUrlDraft"] :
+                                                $"{Configuration["ContentApi:BaseUrlDraft"]}/api/execute";   
         public string contentApiSubscriptionKey => Configuration["ContentApi:SubscriptionKey"];
 
         public string escoApiBaseUrl => Configuration["EscoApi:BaseUrl"];

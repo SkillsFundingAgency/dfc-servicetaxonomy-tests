@@ -87,13 +87,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new Restriction")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void AddANewRestriction()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new Restriction", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -126,14 +126,14 @@ this.FeatureBackground();
 #line 12
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table307 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table306 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table307.AddRow(new string[] {
+                table306.AddRow(new string[] {
                             "My Test Restriction",
                             "My test description"});
 #line 13
- testRunner.And("I Enter the following form data for \"Restriction\"", ((string)(null)), table307, "And ");
+ testRunner.And("I Enter the following form data for \"Restriction\"", ((string)(null)), table306, "And ");
 #line hidden
 #line 16
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

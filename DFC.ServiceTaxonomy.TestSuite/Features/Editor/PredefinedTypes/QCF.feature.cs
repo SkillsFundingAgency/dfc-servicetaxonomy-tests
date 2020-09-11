@@ -87,13 +87,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.PredefinedTypes
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a new QCF Level")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorR2")]
         public virtual void AddANewQCFLevel()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorR2"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a new QCF Level", null, new string[] {
-                        "Editor"});
+                        "EditorR2"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -126,14 +126,14 @@ this.FeatureBackground();
 #line 13
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table304 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table303 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table304.AddRow(new string[] {
+                table303.AddRow(new string[] {
                             "My Test QCF Level",
                             "My test description"});
 #line 14
- testRunner.And("I Enter the following form data for \"QCFLevel\"", ((string)(null)), table304, "And ");
+ testRunner.And("I Enter the following form data for \"QCFLevel\"", ((string)(null)), table303, "And ");
 #line hidden
 #line 17
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
