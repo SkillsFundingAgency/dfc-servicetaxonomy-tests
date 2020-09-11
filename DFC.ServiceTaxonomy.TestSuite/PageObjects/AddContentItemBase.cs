@@ -226,7 +226,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool ConfirmEmptyFieldError(string field)
         {
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{emptyFieldValidationMessage}{field}')]]"));
-            return (elements.Count == 1);
+            return (elements.Count > 0);
          }
     }
 }
