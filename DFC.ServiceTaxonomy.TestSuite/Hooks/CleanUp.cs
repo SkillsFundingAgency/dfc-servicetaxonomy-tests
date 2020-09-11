@@ -1,11 +1,19 @@
-﻿using DFC.ServiceTaxonomy.TestSuite;
+﻿using DFC.ServiceTaxonomy.Events.Models;
+using DFC.ServiceTaxonomy.Events.Configuration;
+using DFC.ServiceTaxonomy.Events.Services;
+using DFC.ServiceTaxonomy.Events.Services.Interfaces;
+using DFC.ServiceTaxonomy.TestSuite;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using OrchardCore.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Http;
 using TechTalk.SpecFlow;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
@@ -13,10 +21,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
+        //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context)
+        public CleanUp(ScenarioContext context )//, IServiceCollection services)
         {
             _scenarioContext = context;
+           // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -35,6 +45,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 //graph
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
                 Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+
+                //ContentItem contentItem = new ContentItem();
+                //ContentEventType eventType = new ContentEventType();
+                //ContentEvent contentEvent = new ContentEvent(contentItem, null, eventType);
+                //RestHttpClient client = new RestHttpClient(null);
+                //EventGridContentRestHttpClientFactory factory = new EventGridContentRestHttpClientFactory(new IHttpClientFactory());
+                //EventGridContentClient _eventGridContentClient = new EventGridContentClient(factory,null);
+                //_eventGridContentClient.Publish(contentEvent);
             }
 
         }

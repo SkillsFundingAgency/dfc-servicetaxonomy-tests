@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using TechTalk.SpecFlow;
@@ -30,7 +31,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                     return By.Id($"Page_RedirectLocations_Text");
                 case "Description":
                     return By.Id("Page_Description_Text");
-                //return By.ClassName("trumbowyg-editor");
                 default:
                     return null;
             }
@@ -85,27 +85,61 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
-                element = driver.WaitUntilElementFound(By.ClassName("trumbowyg-editor"));
+                element = driver.WaitUntilElementFound(By.XPath("//label[contains(@for,'HtmlBodyPart_Html')]/..//div[@class='trumbowyg-editor']"));
                 element.SendKeys(htmlValue);
 
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Unable to set base page location - {e.Message}");
+                Console.WriteLine($"Unable to add HTML Item - {e.Message}");
                 return false;
             }
             return true;
         }
 
-        public bool AddSharedHtmlItem()
+        public bool AddSharedContentItem(string name)
         {
+            var driver = scenarioContext.GetWebDriver();
             try
             {
+                OpenWidgetMenu();
+                var element = driver.FindElement(By.LinkText("HTML Shared"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
+                element.SendKeys(name);
+                Thread.Sleep(500);
+                //TODO use selenium wait
+                element.SendKeys(Keys.Enter);
+
+
 
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Unable to set base page location - {e.Message}");
+                Console.WriteLine($"Unable add Shared Content item- {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool AddSharedContentItemToExistingWidget(string name)
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
+                element.Click();
+                element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
+                element.SendKeys(name);
+                Thread.Sleep(500);
+                //TODO use selenium wait
+                element.SendKeys(Keys.Enter);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable add Shared Content item- {e.Message}");
                 return false;
             }
             return true;
@@ -115,7 +149,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-
+                //todo
             }
             catch (Exception e)
             {
@@ -129,11 +163,68 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-
+                //todo
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Unable to set base page location - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetPublishLaterDate(DateTime dateTime)
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                var element = driver.FindElement(By.Id("PublishLaterPart_ScheduledPublishLocalDateTime"));
+                element.SendKeys(dateTime.Day.ToString());
+                element.SendKeys(dateTime.Month.ToString());
+                element.SendKeys(dateTime.Year.ToString());
+                element.SendKeys(Keys.Tab);
+                element.SendKeys(dateTime.Hour.ToString());
+                element.SendKeys(dateTime.Minute.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to publish later date - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool SetArchiveLaterDate(DateTime dateTime)
+        {
+            //todo
+            return true;
+        }
+
+        public bool PublishLater()
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                driver.ClickButton("Publish Later");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to publish later - is the feature enabled? - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+
+        public bool ArchiveLater()
+        {
+            var driver = scenarioContext.GetWebDriver();
+            try
+            {
+                driver.ClickButton("Archive Later");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to unpublish later - is the feature enabled? - {e.Message}");
                 return false;
             }
             return true;

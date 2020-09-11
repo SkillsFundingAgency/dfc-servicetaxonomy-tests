@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
 using AngleSharp.Dom;
+using System.Runtime.CompilerServices;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
@@ -19,17 +20,49 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
+            if (!context.GetEnv().sqlServerChecksEnabled)
+                return 0;
             //todo error handling
-            string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'"); 
-
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(context.GetEnv().sqlServerConnectionString);
-            int count = sqlInstance.ExecuteNonQuery(sqlCommand, null);
-            
+            string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
+            int count = GetSQLConnection(context).ExecuteNonQuery(sqlCommand, null);
+            CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
             return ( count>0 ? count /3 : 0);
         }
 
+        public static SQLServerHelper GetSQLConnection(this ScenarioContext context)
+        {
+            //if (!context.GetEnv().sqlServerChecksEnabled)
+            //    return null;
+
+            SQLServerHelper connection;
+            string contextRef = $"sqlConnection";
+            if (context.ContainsKey(contextRef))
+            {
+                connection = (SQLServerHelper)context[contextRef];
+            }
+            else
+            {
+                connection = new SQLServerHelper();
+                connection.SetConnection(context.GetEnv().sqlServerConnectionString);
+                context[contextRef] = connection;
+            }
+            return connection;
+        }
+
+        public static bool CloseSQLConnection(this ScenarioContext context)
+        {
+            SQLServerHelper connection;
+            string contextRef = $"sqlConnection";
+            if (context.ContainsKey(contextRef))
+            {
+                connection = (SQLServerHelper)context[contextRef];
+                connection.CloseConnection();
+                context.Remove(contextRef);
+                return true;
+            }
+            return false;
+        }
 
         public static Neo4JHelper GetGraphConnection (this ScenarioContext context, string graph, int instance = 0)
         {
@@ -58,6 +91,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                     context.GetEnv().neo4JUid,
                                     context.GetEnv().neo4JPassword);
                 context[contextRef] = connection;
+            }
+            if (!connection.Verify())
+            {
+                context.Remove(contextRef);
+                connection = GetGraphConnection(context, graph, instance);
             }
             return connection;
         }
@@ -147,5 +185,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return newText;
         }
-    }
+     }
 }

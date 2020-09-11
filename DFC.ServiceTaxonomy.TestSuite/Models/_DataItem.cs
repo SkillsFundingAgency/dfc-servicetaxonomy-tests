@@ -14,7 +14,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
         public bool TearDownGraph { get; }
         public object model { get; set; }
         public string TypeName { get; set; }
-        public _DataItem(string uri, string type, object m, TeardownOption option)
+        public string Tag { get; set; }
+        public _DataItem(string uri, string tag, string type, object m, TeardownOption option)
         {
             Uri = uri;
             switch (option)
@@ -38,6 +39,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
             }
             model = m;
             TypeName = type;
+            Tag = tag;
         }
     }
 

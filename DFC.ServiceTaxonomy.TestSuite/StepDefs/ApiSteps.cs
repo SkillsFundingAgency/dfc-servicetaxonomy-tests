@@ -131,7 +131,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             var response = context.GetGraphConnection(graph).ExecuteTableQuery(cypher, null);
 
-            context.StoreUri(newItem.uri, name, newItem, TeardownOption.Graph);
+            context.StoreUri(newItem.uri, string.Empty, name, newItem, TeardownOption.Graph);
             context.StoreToken($"__URI{context.GetNumberOfStoredUris()}__", newItem.uri);
             return newItem;
         }
