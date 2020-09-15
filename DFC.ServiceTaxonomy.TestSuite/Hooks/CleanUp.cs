@@ -16,7 +16,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
         public CleanUp(ScenarioContext context)
         {
-            _scenarioContext = context;
+            _scenarioContext = context; 
         }
 
         [AfterScenario("webtest", Order = 10)]
