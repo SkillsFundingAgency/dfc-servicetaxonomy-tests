@@ -10,6 +10,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         private static readonly IConfiguration Configuration =
         new EnvironmentSettingsConfigurationBuilder(nameof(DFC.ServiceTaxonomy.TestSuite)).BuildConfiguration();
 
+        public IConfiguration GetConfiguration() { return Configuration; }
+
         public string taxonomyApiBaseUrl => Configuration["TaxonomyApi:BaseUrl"];
         public string taxonomySubscriptionKey => Configuration["TaxonomyApi:SubscriptionKey"];
 
@@ -42,5 +44,9 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public bool checkEvents = Configuration["EventStore:CheckEvents"].ToLower() == "true";
         public string eventStoreEndPoint = Configuration["EventStore:BaseUrl"];
         public string eventStoreKey = Configuration["EventStore:Key"];
+
+        public bool sendEvents = Configuration["EventGrid:PublishEvents"].ToLower() == "true";
+        public string eventTopicUrl = Configuration["EventGrid:TopicEndpoint"];
+        public string AegSasKey = Configuration["EventGrid:AegSasKey"];
     }
 }
