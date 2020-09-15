@@ -196,15 +196,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Extra relationship")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Ignore")]
         public virtual void ExtraRelationship()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor",
-                    "Ignore"};
+                    "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Extra relationship", null, new string[] {
-                        "Editor",
-                        "Ignore"});
+                        "Editor"});
 #line 66
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

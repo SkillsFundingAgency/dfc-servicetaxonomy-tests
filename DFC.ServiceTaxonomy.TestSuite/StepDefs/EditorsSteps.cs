@@ -162,6 +162,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         @"match (s:SharedContent) 
           where s.uri =  '__URI__'  
           return s.skos__prefLabel as sharedContent"
+    },
+    {
+        "remove_relationship_to_widget",
+        @"match (n:Page) --> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          detach delete(s)
+          return n.skos__prefLabel as skos__prefLabel"
     }
                                                         };
 

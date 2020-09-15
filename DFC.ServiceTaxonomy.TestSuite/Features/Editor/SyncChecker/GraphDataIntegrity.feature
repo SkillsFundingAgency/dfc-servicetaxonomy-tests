@@ -62,7 +62,7 @@ Background:
 	Then the item is published succesfully
 
 
-@Editor @Ignore
+@Editor 
 Scenario: Extra relationship
 		
 	# Add content the collection type, only relating the first item @URi3#
