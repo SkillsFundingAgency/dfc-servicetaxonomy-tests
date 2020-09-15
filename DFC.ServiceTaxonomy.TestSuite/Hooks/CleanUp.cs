@@ -43,14 +43,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 //graph
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
                 Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
-
-                //ContentItem contentItem = new ContentItem();
-                //ContentEventType eventType = new ContentEventType();
-                //ContentEvent contentEvent = new ContentEvent(contentItem, null, eventType);
-                //RestHttpClient client = new RestHttpClient(null);
-                //EventGridContentRestHttpClientFactory factory = new EventGridContentRestHttpClientFactory(new IHttpClientFactory());
-                //EventGridContentClient _eventGridContentClient = new EventGridContentClient(factory,null);
-                //_eventGridContentClient.Publish(contentEvent);
             }
 
         }
