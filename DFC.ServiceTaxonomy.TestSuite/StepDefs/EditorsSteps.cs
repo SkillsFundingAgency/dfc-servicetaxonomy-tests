@@ -165,13 +165,55 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     },
     {
         "remove_relationship_to_widget",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          detach delete(r)
+          return n.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "remove_widget",
         @"match (n:Page) --> (s:HTMLShared) 
           where n.uri =  '__URI__' 
           detach delete(s)
           return n.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "remove_properties_from_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          remove r.Alignment, r.Ordinal, r.Size
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+    {
+        "check_properties_for_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+        {
+        "check_for_additional_properties_on_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size, r.Additional as additional"
+    },
+    {
+        "update_properties_for_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          set r.Alignment = 'xxx'
+          set r.Ordinal= 'yyy'
+          set r.Size = 'zzz'
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+    {
+        "add_property_to_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          set r.Additional = 'xxx'
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size, r.Additional as additional"
     }
                                                         };
-
+        
 
         public EditorsSteps(ScenarioContext scenarioContext)
         {

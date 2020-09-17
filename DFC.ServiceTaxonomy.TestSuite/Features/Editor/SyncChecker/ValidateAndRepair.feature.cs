@@ -161,12 +161,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Missing Node")]
-        public virtual void MissingNode()
+        [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Node")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        public virtual void IdentifyAndRepairAMissingNode()
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Missing Node", null, ((string[])(null)));
-#line 34
+            string[] tagsOfScenario = new string[] {
+                    "Editor"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Node", null, new string[] {
+                        "Editor"});
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -193,21 +196,362 @@ this.FeatureBackground();
                             "skos__prefLabel"});
                 table340.AddRow(new string[] {
                             "My Test Page"});
-#line 36
- testRunner.Then("the \"preview\" graph matches the expect results using the \"remove_relationship_to_" +
-                        "widget\" query and the \"PageUri\" Uri", ((string)(null)), table340, "Then ");
-#line hidden
-#line 39
- testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+ testRunner.Then("the \"preview\" graph matches the expect results using the \"remove_widget\" query an" +
+                        "d the \"PageUri\" Uri", ((string)(null)), table340, "Then ");
 #line hidden
 #line 40
- testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 41
- testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 42
- testRunner.Then("document 1 appears in the \"Validated\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 43
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"publish\" and \"Validated\" se" +
+                        "ction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 44
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Failed Valida" +
+                        "tion\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 45
+ testRunner.And("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Repaired\" sec" +
+                        "tion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table341 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skos__prefLabel",
+                            "sharedContent"});
+                table341.AddRow(new string[] {
+                            "My Test Page",
+                            "__PREFIX__Draft Content"});
+#line 46
+ testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table341, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        public virtual void IdentifyAndRepairAMissingRelationship()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Editor"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship", null, new string[] {
+                        "Editor"});
+#line 51
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table342 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skos__prefLabel"});
+                table342.AddRow(new string[] {
+                            "My Test Page"});
+#line 53
+ testRunner.Then("the \"preview\" graph matches the expect results using the \"remove_relationship_to_" +
+                        "widget\" query and the \"PageUri\" Uri", ((string)(null)), table342, "Then ");
+#line hidden
+#line 56
+ testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 57
+ testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 58
+ testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 59
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"publish\" and \"Validated\" se" +
+                        "ction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 60
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Failed Valida" +
+                        "tion\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 61
+ testRunner.And("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Repaired\" sec" +
+                        "tion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table343 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skos__prefLabel",
+                            "sharedContent"});
+                table343.AddRow(new string[] {
+                            "My Test Page",
+                            "__PREFIX__Draft Content"});
+#line 62
+ testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
+                        "t\" query and the \"PageUri\" Uri", ((string)(null)), table343, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship Property")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        public virtual void IdentifyAndRepairAMissingRelationshipProperty()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Editor"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship Property", null, new string[] {
+                        "Editor"});
+#line 67
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table344 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size"});
+                table344.AddRow(new string[] {
+                            "",
+                            "",
+                            ""});
+#line 69
+ testRunner.Then("the \"preview\" graph matches the expect results using the \"remove_properties_from_" +
+                        "page_to_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table344, "Then ");
+#line hidden
+#line 72
+ testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 73
+ testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 74
+ testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 75
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"publish\" and \"Validated\" se" +
+                        "ction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 76
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Failed Valida" +
+                        "tion\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 77
+ testRunner.And("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Repaired\" sec" +
+                        "tion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table345 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size"});
+                table345.AddRow(new string[] {
+                            "Justify",
+                            "0",
+                            "100"});
+#line 78
+ testRunner.And("the \"preview\" graph matches the expect results using the \"check_properties_for_pa" +
+                        "ge_to_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table345, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Identify and repair a mismatching Relationship Property")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        public virtual void IdentifyAndRepairAMismatchingRelationshipProperty()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Editor"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a mismatching Relationship Property", null, new string[] {
+                        "Editor"});
+#line 83
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table346 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size"});
+                table346.AddRow(new string[] {
+                            "xxx",
+                            "yyy",
+                            "zzz"});
+#line 85
+ testRunner.Then("the \"preview\" graph matches the expect results using the \"update_properties_for_p" +
+                        "age_to_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table346, "Then ");
+#line hidden
+#line 88
+ testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 89
+ testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 90
+ testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 91
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"publish\" and \"Validated\" se" +
+                        "ction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 92
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Failed Valida" +
+                        "tion\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 93
+ testRunner.And("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Repaired\" sec" +
+                        "tion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table347 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size"});
+                table347.AddRow(new string[] {
+                            "Justify",
+                            "0",
+                            "100"});
+#line 94
+ testRunner.And("the \"preview\" graph matches the expect results using the \"check_properties_for_pa" +
+                        "ge_to_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table347, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Identify and repair an unexpected Relationship Property")]
+        [NUnit.Framework.CategoryAttribute("Editor")]
+        public virtual void IdentifyAndRepairAnUnexpectedRelationshipProperty()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Editor"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair an unexpected Relationship Property", null, new string[] {
+                        "Editor"});
+#line 99
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table348 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size",
+                            "additional"});
+                table348.AddRow(new string[] {
+                            "Justify",
+                            "0",
+                            "100",
+                            "xxx"});
+#line 101
+ testRunner.Then("the \"preview\" graph matches the expect results using the \"add_property_to_page_to" +
+                        "_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table348, "Then ");
+#line hidden
+#line 104
+ testRunner.Given("I run the sync check", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 105
+ testRunner.And("the sync completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 106
+ testRunner.And("I get the results", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 107
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"publish\" and \"Validated\" se" +
+                        "ction", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 108
+ testRunner.Then("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Failed Valida" +
+                        "tion\" section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 109
+ testRunner.And("the document \"__PREFIX__My Test Page\" appears in the \"preview\" and \"Repaired\" sec" +
+                        "tion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table349 = new TechTalk.SpecFlow.Table(new string[] {
+                            "alignment",
+                            "ordinal",
+                            "size",
+                            "additional"});
+                table349.AddRow(new string[] {
+                            "Justify",
+                            "0",
+                            "100",
+                            ""});
+#line 110
+ testRunner.And("the \"preview\" graph matches the expect results using the \"check_for_additional_pr" +
+                        "operties_on_page_to_widget_relationship\" query and the \"PageUri\" Uri", ((string)(null)), table349, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
