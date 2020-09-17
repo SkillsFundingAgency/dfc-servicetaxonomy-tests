@@ -196,6 +196,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return ConfirmDisplayMessage("could not be removed");
         }
 
+        public bool ConfirmItemStillListed(string id)
+        {
+            var items = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//a[contains(@href,'{id}')]"));
+            return items.Count > 0;
+        }
+
         public bool ConfirmUnpublishedSuccessfully()
         {
             return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, unpublish));

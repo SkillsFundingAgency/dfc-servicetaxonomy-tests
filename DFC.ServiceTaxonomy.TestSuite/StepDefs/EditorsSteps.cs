@@ -1149,7 +1149,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the delete action could not be completed")]
         public void ThenTheDeleteActionCouldNotBeCompleted()
         {
-            _manageContent.ConfirmRemovalFailed().Should().BeTrue();
+            // temporary fix
+            string id = _scenarioContext.GetContentItemId(0);
+            _manageContent.ConfirmItemStillListed(id).Should().BeTrue() ;
+
+            //_manageContent.ConfirmRemovalFailed().Should().BeTrue();
         }
 
 
