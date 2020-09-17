@@ -39,7 +39,6 @@ Scenario: Identify and repair a Missing Node
 	| My Test Page    |
 	Given I run the sync check
 	And the sync completes succesfully
-	And I get the results
 	Then the document "__PREFIX__My Test Page" appears in the "publish" and "Validated" section
 	Then the document "__PREFIX__My Test Page" appears in the "preview" and "Failed Validation" section
 	And the document "__PREFIX__My Test Page" appears in the "preview" and "Repaired" section
@@ -55,7 +54,6 @@ Scenario: Identify and repair a Missing Relationship
 	| My Test Page    |
 	Given I run the sync check
 	And the sync completes succesfully
-	And I get the results
 	Then the document "__PREFIX__My Test Page" appears in the "publish" and "Validated" section
 	Then the document "__PREFIX__My Test Page" appears in the "preview" and "Failed Validation" section
 	And the document "__PREFIX__My Test Page" appears in the "preview" and "Repaired" section
@@ -71,7 +69,6 @@ Scenario: Identify and repair a Missing Relationship Property
 	|           |         |      |
 	Given I run the sync check
 	And the sync completes succesfully
-	And I get the results
 	Then the document "__PREFIX__My Test Page" appears in the "publish" and "Validated" section
 	Then the document "__PREFIX__My Test Page" appears in the "preview" and "Failed Validation" section
 	And the document "__PREFIX__My Test Page" appears in the "preview" and "Repaired" section
@@ -87,7 +84,6 @@ Scenario: Identify and repair a mismatching Relationship Property
 	| xxx       | yyy     | zzz  |
 	Given I run the sync check
 	And the sync completes succesfully
-	And I get the results
 	Then the document "__PREFIX__My Test Page" appears in the "publish" and "Validated" section
 	Then the document "__PREFIX__My Test Page" appears in the "preview" and "Failed Validation" section
 	And the document "__PREFIX__My Test Page" appears in the "preview" and "Repaired" section
@@ -103,7 +99,6 @@ Scenario: Identify and repair an unexpected Relationship Property
 	| Justify   | 0       | 100  | xxx        |
 	Given I run the sync check
 	And the sync completes succesfully
-	And I get the results
 	Then the document "__PREFIX__My Test Page" appears in the "publish" and "Validated" section
 	Then the document "__PREFIX__My Test Page" appears in the "preview" and "Failed Validation" section
 	And the document "__PREFIX__My Test Page" appears in the "preview" and "Repaired" section
