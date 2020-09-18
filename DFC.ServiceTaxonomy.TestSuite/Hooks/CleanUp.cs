@@ -37,8 +37,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 // attempt to clear down data from sql and neo where title / skos__PrefLabel begins with prefix
 
                 //SQL
-                int count = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
-                Console.WriteLine("CLEANUP: Deleted " + count + "content items prefixed with " + prefix);
+                string message = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
+                Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
 
                 //graph
                 bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);

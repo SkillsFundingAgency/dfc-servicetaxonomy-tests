@@ -16,18 +16,72 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     public static class DataManagementExtension
     {
         private static Random random = new Random();
-       
 
-        public static int DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
+        public const string sql_ClearDownAllContentItemsOfType =
+    @"DECLARE @TableName varchar(255) = '';
+    DECLARE @Query varchar(255) = '';
+    DECLARE @Deleted INT = 0;
+    DECLARE @NewDeleted INT = 0;
+    DECLARE @Tables INT = 0;
+
+    DECLARE CUR_INDEXTABS CURSOR FAST_FORWARD FOR
+        SELECT Name 
+	    FROM
+	    SYSOBJECTS
+	    WHERE
+	    xtype = 'U'
+	    and Name like '%Index'
+        and Name not in
+	    ('WorkflowTypeStartActivitiesIndex','WorkflowIndex','WorkflowBlockingActivitiesIndex','DeploymentPlanIndex','LayerMetadataIndex','UserIndex','UserByRoleNameIndex',
+	     'UserByLoginInfoIndex','UserByClaimIndex','WorkflowTypeIndex');
+
+    OPEN CUR_INDEXTABS
+    FETCH NEXT FROM CUR_INDEXTABS INTO @TableName
+
+    begin transaction t1
+
+    select DocumentId
+    into #tmpdocids
+    from [dbo].[ContentItemIndex]
+    where @WHERECLAUSE@;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        SET @Query = 'delete from [dbo].' + @TableName + ' where DocumentId in ( select DocumentId from #tmpdocids ) ';
+        EXECUTE(@Query); 
+		SET @NewDeleted = @@ROWCOUNT
+        IF @NewDeleted > 0
+        BEGIN
+	      SET @TABLES = @TABLES + 1;
+	      SET @Deleted = @Deleted + @NewDeleted;
+        END
+        FETCH NEXT FROM CUR_INDEXTABS INTO @TableName
+    END
+
+    delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
+	SET @NewDeleted = @@ROWCOUNT
+    IF @NewDeleted > 0
+    BEGIN
+	 SET @TABLES = @TABLES + 1;
+	 SET @Deleted = @Deleted + @NewDeleted;
+    END
+    drop table #tmpdocids
+    commit transaction t1;
+
+    CLOSE CUR_INDEXTABS
+    DEALLOCATE CUR_INDEXTABS
+    select Concat(@Deleted,' records deleted from ', @Tables,' tables');";
+
+        public static string DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
             if (!context.GetEnv().sqlServerChecksEnabled)
-                return 0;
+                return string.Empty;
             //todo error handling
-            string sqlCommand = constants.sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
-            int count = GetSQLConnection(context).ExecuteNonQuery(sqlCommand, null);
+            string sqlCommand = sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
+            string message = GetSQLConnection(context).ExecuteScalar(sqlCommand, null);
             CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
-            return ( count>0 ? count /3 : 0);
+            return message;
         }
 
         public static SQLServerHelper GetSQLConnection(this ScenarioContext context)

@@ -49,18 +49,5 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";
         public const string cypher_ClearDownItemsWithUri = @"match (i) where i.uri = '@URI@' detach delete i";
 
-        public const string sql_ClearDownAllContentItemsOfType =
-                                                               @"begin transaction t1
-                                                                select DocumentId
-                                                                into #tmpdocids
-                                                                from [dbo].[ContentItemIndex]
-                                                                where @WHERECLAUSE@;
-                                                                delete from [dbo].PageLocationPartIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
-                                                                delete from [dbo].TaxonomyIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
-                                                                delete from [dbo].[ContentItemIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
-                                                                delete from [dbo].[GraphSyncPartIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
-                                                                delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
-                                                                drop table #tmpdocids
-                                                                commit transaction t1";
     }
 }

@@ -40,11 +40,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keySkillData = "EscoSkillList";
         const string keyListOfStrings = "EscoListOfStrings";
         const string keyExpectedRecordCount = "ExpectedRecordCount";
-        #endregion
+
+     #endregion
 
 
 
-        public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
+    public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
             {
