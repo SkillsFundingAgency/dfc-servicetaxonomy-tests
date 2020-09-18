@@ -76,18 +76,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             foreach (PropertyInfo property in properties)
             {
                 name = property.Name;
-                if (property.PropertyType == typeof(Boolean))
+                value = string.Empty;
+                try
                 {
-                    value = ((bool)property.GetValue(_scenarioContext.GetEnv())).ToString();
-                }
-                else
-                {
-                    value = (string)property.GetValue(_scenarioContext.GetEnv());
-                    if (name.ToLower().Contains("key") || name.ToLower().Contains("password") || name.Contains("pwd") || name.Contains("secret"))
+                    if (property.PropertyType == typeof(Boolean))
                     {
-                        value = mask.Substring(0, value.Length);
+                        value = ((bool)property.GetValue(_scenarioContext.GetEnv())).ToString();
+                    }
+                    else
+                    {
+                        value = (string)property.GetValue(_scenarioContext.GetEnv());
+                        if (name.ToLower().Contains("key") || name.ToLower().Contains("password") || name.Contains("pwd") || name.Contains("secret"))
+                        {
+                            value = mask.Substring(0, value.Length);
+                        }
                     }
                 }
+                catch { }
                 Console.WriteLine($"Env: {property.Name} = {value}");
             }
         }
