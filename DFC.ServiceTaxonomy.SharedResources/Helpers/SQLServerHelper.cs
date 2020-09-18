@@ -329,6 +329,24 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return rowsAffected;
         }
 
+        public string ExecuteScalar(string commandText, string[] parameters)
+        {
+            string message = string.Empty;
+            if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
+            {
+                try
+                {
+                    SqlCommand myCommand = new SqlCommand(commandText, Connection);
+                    message = (string)myCommand.ExecuteScalar();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    message = e.Message;
+                }
+            }
+            return message;
+        }
 
         public DataSet ExecuteStoredProcedure(string procName)
         {
