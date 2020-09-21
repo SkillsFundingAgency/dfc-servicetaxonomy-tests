@@ -15,6 +15,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     [Binding]
     public sealed class setupContext
     {
+        private const string mask = "########################################################################################################################################";
         FeatureContext _featureContext;
         ScenarioContext _scenarioContext;
         private int _WebdriverTimeoutSeconds = 0; // 0 means use default value
@@ -68,7 +69,32 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         [BeforeScenario]
         public void IntialiseEnvironementVariables()
         {
+            string value;
+            string name;
             _scenarioContext.SetEnv(new EnvironmentSettings());
+            PropertyInfo[] properties = typeof(EnvironmentSettings).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                name = property.Name;
+                value = string.Empty;
+                try
+                {
+                    if (property.PropertyType == typeof(Boolean))
+                    {
+                        value = ((bool)property.GetValue(_scenarioContext.GetEnv())).ToString();
+                    }
+                    else
+                    {
+                        value = (string)property.GetValue(_scenarioContext.GetEnv());
+                        if (name.ToLower().Contains("key") || name.ToLower().Contains("password") || name.Contains("pwd") || name.Contains("secret"))
+                        {
+                            value = mask.Substring(0, value.Length);
+                        }
+                    }
+                }
+                catch { }
+                Console.WriteLine($"Env: {property.Name} = {value}");
+            }
         }
     }
 }
