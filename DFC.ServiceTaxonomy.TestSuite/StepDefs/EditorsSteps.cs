@@ -22,7 +22,7 @@ using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using Neo4j.Driver.V1;
+using Neo4j.Driver;
 using AngleSharp.Css.Dom;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
