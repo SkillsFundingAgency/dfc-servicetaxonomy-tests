@@ -1,8 +1,8 @@
-﻿using Neo4j.Driver.V1;
+﻿using Neo4j.Driver;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+using System.Linq;
 
 
 
@@ -46,51 +46,62 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
         }
 
-        public IStatementResult ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
+        public List<Dictionary<string, object>> ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
         {
-            IStatementResult result= null;
+            List<Dictionary<string, object>> resultList = new List< Dictionary<string, object>>();
+            //IResult result= null;
             try
             {
                 using (var session = Neo4jDriver.Session())
                 {
-                    result = session.Run(queryText, queryParameters);
+                    var result = session.Run(queryText, queryParameters);
+                    foreach (var record in result)
+                    {
+                        Dictionary<string, object> item = new Dictionary<string, object>();
+
+                        foreach (var value in record.Values)
+                        {
+                            item.Add(value.Key, value.Value);
+                        }
+                        resultList.Add(item);
+                    }
                 }
+                
             }
             catch (Exception e)
              {
                 throw new Exception("Error occured executing Cypher query" +
                                  "\n Exception:" + e);
             }
-            return result;
+            return resultList;
         }
 
         public int ExecuteCountQuery(string queryText, Dictionary<string, object> queryParameters)
         {
             int recordCount = -1;
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
-            foreach (IRecord record in result)
+            var result = ExecuteTableQuery(queryText, queryParameters);
+            foreach (var record in result)
             {
-                string a = record.Values[record.Keys[0]].ToString(); ;  
+                string a = (string)record.First().Value;
                 int.TryParse(a, out recordCount);
             }
             return recordCount;
-
         }
 
         public int GetRecordCount(string queryText, Dictionary<string, object> queryParameters)
         {
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
-            return result.Keys.Count;
+            var result = ExecuteTableQuery(queryText, queryParameters);
+            return result.First().Keys.Count;
 
         }
 
         public Dictionary<string,string> GetSingleRowAsDictionary(string queryText)
         {
-            IStatementResult result = ExecuteTableQuery(queryText, null);
+            var result = ExecuteTableQuery(queryText, null);
             Dictionary<string, string> results = new Dictionary<string, string>();
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
-                foreach (var item in record.Values)
+                foreach (var item in record)
                 {
                     results.Add(item.Key, (item.Value == null ? "" : item.Value.ToString()) );
                 }
@@ -104,9 +115,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public IList<T> GetResultsList<T>(string queryText, Dictionary<string, object> queryParameters) where T : new()
         {
             IList<T> resultsList = new List<T>();
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            var result = ExecuteTableQuery(queryText, queryParameters);
 
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
                 T newItem = new T();
                 PropertyInfo[] properties = typeof(T).GetProperties();
@@ -115,7 +126,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     string value;
                     try
                     {
-                        value = record.Values[property.Name].ToString();
+                        value = record[property.Name].ToString();
                         property.SetValue(newItem, value);
                     }
                     catch { }
@@ -128,9 +139,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public IList<Object> GetResultsList(Type type, string queryText, Dictionary<string, object> queryParameters) 
         {
             IList<Object> resultsList = new List<Object>();
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            var result = ExecuteTableQuery(queryText, queryParameters);
 
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
                 object newItem = Activator.CreateInstance(type);
                 PropertyInfo[] properties = type.GetProperties();
@@ -139,7 +150,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     string value;
                     try
                     {
-                        value = record.Values[property.Name].ToString();
+                        value = record[property.Name].ToString();
                         property.SetValue(newItem, value);
                     }
                     catch { }
