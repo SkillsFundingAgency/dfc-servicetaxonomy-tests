@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 using Microsoft.Extensions.DependencyInjection;
+using FluentAssertions;
 
 
 //using Microsoft.Extensions.DependencyInjection;
@@ -19,11 +20,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
+        private FeatureContext _featureContext;
         //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context )//, IServiceCollection services)
+        public CleanUp(ScenarioContext context, FeatureContext fContext )//, IServiceCollection services)
         {
             _scenarioContext = context;
+            _featureContext = fContext;
            // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
@@ -37,12 +40,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 // attempt to clear down data from sql and neo where title / skos__PrefLabel begins with prefix
 
                 //SQL
-                string message = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
+                (bool result, string message) = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
                 Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
 
+                if (!result)
+                {
+                    _scenarioContext.AddNotifiableFailure("Sql Cleardown", message);
+                }
+
                 //graph
-                bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
-                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+                try
+                {
+                    result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
+                    Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+                }
+                catch( Exception e)
+                {
+                    _scenarioContext.AddNotifiableFailure("Neo Cleardown", e.Message);
+                }
             }
 
         }
@@ -91,6 +106,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         {
             _scenarioContext.GetWebDriver().Close();
             _scenarioContext.GetWebDriver().Quit();
+        }
+
+        [AfterScenario( Order = 100)]
+        public void CheckForNotifiableFailure()
+        {
+            if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError )
+            {
+            }
+            if (_scenarioContext.ContainsKey(constants.NotifiableFailure))
+            {
+                string messageText = "Fatal error(s) detected in clean up:\n";
+
+                // cancel the rest of the feature run
+                _featureContext["failAll"] = true;
+
+                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.NotifiableFailure] )
+                {
+                    Console.WriteLine($"Error: {message.Key} - {message.Value}");
+                    messageText += $"  {message.Key} - {message.Value}";
+                }
+                throw new Exception(messageText);
+
+            }
+
         }
     }
 }

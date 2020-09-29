@@ -44,6 +44,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string preview = "preview";
         public const string Title = "Title";
         public const string FieldName = "FieldName";
+        public const string NotifiableFailure = "NotifiableFailure";
 
         //cypher query template
         public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";

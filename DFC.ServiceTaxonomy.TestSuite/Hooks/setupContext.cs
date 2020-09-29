@@ -72,6 +72,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             string value;
             string name;
             _scenarioContext.SetEnv(new EnvironmentSettings());
+
+            if (_featureContext.ContainsKey("failAll") && (bool)_featureContext["failAll"] == true)
+            {
+                throw new Exception("Feature run aborted due to earlier failure");
+            }
+
             PropertyInfo[] properties = typeof(EnvironmentSettings).GetProperties();
             foreach (PropertyInfo property in properties)
             {

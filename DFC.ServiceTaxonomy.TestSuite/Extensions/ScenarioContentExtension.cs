@@ -43,5 +43,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             return context.Get<T>(key);
         }
+
+        public static void AddNotifiableFailure(this ScenarioContext context, string messageContext, string message)
+        {
+            Dictionary<string, string> failures;
+            if (context.ContainsKey(constants.NotifiableFailure))
+            {
+                failures = (Dictionary<string, string>)context[constants.NotifiableFailure];
+            }
+            else 
+            {
+                failures = new Dictionary<string, string>();
+            }
+            failures.Add(messageContext, message);
+            context[constants.NotifiableFailure] = failures;
+        }
+
+        public static Dictionary<string,string> GetNotifiableFailure(this ScenarioContext context)
+        {
+            return context.ContainsKey(constants.NotifiableFailure) ? (Dictionary<string, string>)context[constants.NotifiableFailure] : new Dictionary<string, string>();
+        }
     }
 }

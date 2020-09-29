@@ -329,9 +329,10 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return rowsAffected;
         }
 
-        public string ExecuteScalar(string commandText, string[] parameters)
+        public (bool,string) ExecuteScalar(string commandText, string[] parameters)
         {
             string message = string.Empty;
+            bool success = true;
             if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
             {
                 try
@@ -343,9 +344,10 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 {
                     Console.WriteLine(e.ToString());
                     message = e.Message;
+                    success = false;
                 }
             }
-            return message;
+            return (success,message);
         }
 
         public DataSet ExecuteStoredProcedure(string procName)

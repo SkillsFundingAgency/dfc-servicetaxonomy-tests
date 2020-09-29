@@ -72,16 +72,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     DEALLOCATE CUR_INDEXTABS
     select Concat(@Deleted,' records deleted from ', @Tables,' tables');";
 
-        public static string DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
+        public static (bool,string) DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
+            string message;
+            bool result;
             if (!context.GetEnv().sqlServerChecksEnabled)
-                return string.Empty;
+                return (true,string.Empty);
             //todo error handling
             string sqlCommand = sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
-            string message = GetSQLConnection(context).ExecuteScalar(sqlCommand, null);
+            (result,message) = GetSQLConnection(context).ExecuteScalar(sqlCommand, null);
             CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
-            return message;
+            return (result,message);
         }
 
         public static SQLServerHelper GetSQLConnection(this ScenarioContext context)

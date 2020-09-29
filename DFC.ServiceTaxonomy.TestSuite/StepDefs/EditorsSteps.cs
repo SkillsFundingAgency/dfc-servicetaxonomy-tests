@@ -1509,85 +1509,96 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         //TODO_DRAFT move this to helper / extension?
         private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message, bool checkData = true)
         {
-            string uriTokenValue;
+            bool done = false;
+            int graphRef = 0;
             bool match = true;
             message = "";
-            Neo4JHelper neo4JHelper;
-
-            //TODO_DRAFT improve connection handling
-            switch (target)
+            while (!done)
             {
-                case constants.draft:
-                case constants.preview:
-                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
-                    uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
-                    break;
-                case constants.publish:
-                case constants.published:
-                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
-                    uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
+                string uriTokenValue;
 
-                    break;
-                default:
-                    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
-                    return false;
-            }
 
-            if (parameters.ContainsKey("uri"))
-            {
-                parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
-            }
+                Neo4JHelper neo4JHelper;
 
-            Console.WriteLine("Check data is present in graph:");
-            Console.WriteLine($"Query: {query}");
-            Console.WriteLine($"uri: {DictionaryToString(parameters)}");
+                //TODO_DRAFT improve connection handling
+                switch (target)
+                {
+                    case constants.draft:
+                    case constants.preview:
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
+                        uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
+                        done = _scenarioContext.GetEnv().neo4JUrlDraft1.Length == 0;
+                        break;
+                    case constants.publish:
+                    case constants.published:
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
+                        uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
+                        done = _scenarioContext.GetEnv().neo4JUrl1.Length == 0;
 
-            Type requiredType = (Type)_scenarioContext[constants.responseType];
-            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
+                        break;
+                    default:
+                        message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
+                        return false;
+                }
 
-            if (returnObject.Count > 0)
-            {
-                if( checkData)
-                { 
-                    object first = returnObject[0];
+                if (parameters.ContainsKey("uri"))
+                {
+                    parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
+                }
 
-                    //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
+                Console.WriteLine("Check data is present in graph:");
+                Console.WriteLine($"Query: {query}");
+                Console.WriteLine($"uri: {DictionaryToString(parameters)}");
 
-                    foreach (var var in compareValues)
+                Type requiredType = (Type)_scenarioContext[constants.responseType];
+                var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
+
+                if (returnObject.Count > 0)
+                {
+                    if (checkData)
                     {
-                        Type myType = returnObject[0].GetType();
-                        PropertyInfo propertyInfo = myType.GetProperty(var.Key);
-                        string varValue = "";
-                        try
-                        {
-                            varValue = (string)propertyInfo.GetValue(returnObject[0], null);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                        object first = returnObject[0];
 
-                        string rawValue = varValue;
-                        //Todo keep track of type so tags can only be removed for non html fields rather than by name
-                        switch (var.Key)
+                        //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
+
+                        foreach (var var in compareValues)
                         {
-                            case "Content":
-                                break;
-                            default:
-                                rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                                break;
-                        }
-                        if (var.Value != rawValue)
-                        {
-                            message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
-                            match = false;
+                            Type myType = returnObject[0].GetType();
+                            PropertyInfo propertyInfo = myType.GetProperty(var.Key);
+                            string varValue = "";
+                            try
+                            {
+                                varValue = (string)propertyInfo.GetValue(returnObject[0], null);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+
+                            string rawValue = varValue;
+                            //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                            switch (var.Key)
+                            {
+                                case "Content":
+                                    break;
+                                default:
+                                    rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                                    break;
+                            }
+                            if (var.Value != rawValue)
+                            {
+                                message += $"{target}_{graphRef} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                                match = false;
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                match = false;
+                else
+                {
+                    message += $"Not found in {target}_{ graphRef}\n";
+                    match = false;
+                }
+                graphRef++;
             }
             return match;
         }
