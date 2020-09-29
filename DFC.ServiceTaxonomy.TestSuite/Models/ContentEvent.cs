@@ -16,9 +16,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Models
         public string subject { get; set; }
         public ContentEventData data { get; set; }
         public string eventType { get; set; }
-        public string eventTime { get; set; }
+        public DateTime eventTime { get; set; }
         public string dataVersion { get; set; }
         public string metadataVersion { get; set; }
         public string topic { get; set; }
+        public string _ts { get; set; }
     }
 }

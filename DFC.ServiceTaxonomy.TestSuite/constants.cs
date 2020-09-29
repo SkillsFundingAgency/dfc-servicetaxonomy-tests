@@ -30,6 +30,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string requestVariables = "requestVariables";
         public const string requestVariablesUpdated = "requestVariablesUpdated";
         public const string contentItemIndexes = "contentItemIndexes";
+        public const string contentItemHistory = "contentItemHistory";
         public const string contentIdCount = "contentIdCount";
         public const string contentIds = "contentIds";
         public const string recordIdCount = "recordIdCount";

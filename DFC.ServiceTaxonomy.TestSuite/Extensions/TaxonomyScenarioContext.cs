@@ -244,14 +244,52 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return $"{context.GetEnv().contentApiDraftBaseUrl}/{contentType}";
         }
 
-        public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
+        public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list, string expectedEvent = "")
         {
             context[constants.contentItemIndexes] = list;
+
+            // create a list of distinct document states based on key of "{versionID}_{PublishedUtc}_{ModifiedUtc}"
+
+            // set key for each item in the list
+            for (int i = 0; i< list.Count; i++)
+            {
+                list[i]._key = $"{list[i].ContentItemVersionId}_{list[i].PublishedUtc}_{list[i].ModifiedUtc}";
+            }
+            var existingRecords = GetContentItemIndexHistory(context);
+            var newOnes = list.Where(i => !existingRecords.Any(e => e._key == i._key));
+            switch (newOnes.Count())
+            {
+                case 0:
+                    break;
+                case 1:
+                    var newOne = newOnes.First();
+                    newOne.expectedEvents = new string[] { expectedEvent };
+                    newOne.actionStart = (int)context["actionStart"];
+                    newOne.actionEnd = (int)context["actionEnd"];
+                    existingRecords.Add(newOne);
+                    context[constants.contentItemHistory] = existingRecords;
+                    break;
+                default:
+                    throw new Exception("Unhandled Scenario - multiple new keys detected in database");
+            }
+        }
+
+        public static void SetEventExpectationOnLastAction(this ScenarioContext context, String[] events)
+        {
+            var existingRecords = GetContentItemIndexHistory(context);
+            existingRecords[existingRecords.Count-1].expectedEvents = events;
+            context[constants.contentItemHistory] = existingRecords;
         }
 
         public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
         {
             return context.ContainsKey(constants.contentItemIndexes) ? (List<ContentItemIndexRow>)context[constants.contentItemIndexes]
+                                                                     : new List<ContentItemIndexRow>();
+        }
+
+        public static List<ContentItemIndexRow> GetContentItemIndexHistory(this ScenarioContext context)
+        {
+            return context.ContainsKey(constants.contentItemHistory) ? (List<ContentItemIndexRow>)context[constants.contentItemHistory]
                                                                      : new List<ContentItemIndexRow>();
         }
 

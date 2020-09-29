@@ -1,5 +1,5 @@
 ﻿@webtest
-Feature: _OLDContentChangeEvents_NewItems
+Feature: ContentChangeEvents_NewItems
 
 Background:
 	Given I logon to the editor
@@ -15,10 +15,9 @@ Scenario: 1. A new content item draft is created that passes server validation
 	| New Shared Content |  <p>Here it is</p> |
 	When I save the draft item
 	Then the save action completes succesfully
-	And an event of type "Draft" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 1
+	And the expected event messages have been received
 
 @Editor
 Scenario: 2. A new content item draft is created that fails server validation
@@ -29,9 +28,9 @@ Scenario: 2. A new content item draft is created that fails server validation
 	|       | <p>Here it is</p> |
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
+	And no event is issued
 
 @Editor
 Scenario: 7. A new content item is published succesfully
@@ -42,10 +41,9 @@ Scenario: 7. A new content item is published succesfully
 	| New Shared Content |  <p>Here it is</p> |
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 1
+	And the expected event messages have been received
 
 @Editor
 Scenario: 8. A new content item is published with validation issues
@@ -56,9 +54,9 @@ Scenario: 8. A new content item is published with validation issues
 	|       | <p>Here it is</p> |
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
-	And no event is issued
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
+	And no event is issued
 
 @ignore
 #TODO

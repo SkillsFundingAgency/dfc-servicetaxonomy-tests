@@ -1,5 +1,5 @@
 ﻿@webtest
-Feature: _OLDContentChangeEvents_DraftFailedValidation
+Feature: ContentChangeEvents_DraftFailedValidation
 
 Background: 
 	Given I logon to the editor
@@ -25,8 +25,7 @@ Scenario: 3. A succesful correction is made to a new draft with validation issue
 	Then the save action completes succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And an event of type "Draft" has been issued to notify consumers of the change
-	And the number of events sent for this content Item is 1
+	And the expected event messages have been received
 	
 
 @Editor
@@ -37,8 +36,9 @@ Scenario: 4. An unsuccesful  correction is made to a new draft with validation i
 	And I save the draft item
 	Then the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
-	And no event is issued
+#	And no event is issued
 	And an "EmptyField" validation error is shown for "Title"
+	And the expected event messages have been received
 
 
 @Editor
@@ -48,10 +48,9 @@ Scenario: 9. A succesful Publishing of new content item which had validation iss
 	| Title Added |
 	When I publish the item
 	Then the edit action completes succesfully
-	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
 	And the data is present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 1
+	And the expected event messages have been received
 
 @Editor
 Scenario: 10. An unsuccesful Publishing of new content item which had validation issues on save to draft

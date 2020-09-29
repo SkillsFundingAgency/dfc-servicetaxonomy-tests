@@ -1,6 +1,7 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using OpenQA.Selenium;
 using System;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects 
@@ -114,10 +115,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
-        public ManageContent ActionFirstItem( string action )
+        public String ActionFirstItem( string action )
         {
+            string contentItemId = "";
             try
             {
+                // first find first link by text pattern
+                var element = _scenarioContext.GetWebDriver().FindElement(By.XPath("//a[contains(@href,'/Admin/Contents/ContentItems/')]"));
+                string href = element.GetAttribute("href");
+                string pattern = @"[a-zA-Z0-9]{26}";
+                Match m = Regex.Match(href, pattern);
+                if (m.Success)
+                {
+                    contentItemId =  m.Value;
+                }
                 //_scenarioContext.GetWebDriver().SelectButtonGroupClass("btn-group", 3);
                 _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
                 _scenarioContext.GetWebDriver().ClickButton(action);
@@ -126,39 +137,39 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 throw new Exception($"Unable to {action} first item. {e.Message}");
             }
-            return this;
+            return contentItemId;
         }
 
-        public ManageContent PublishFirstItem()
+        public String PublishFirstItem()
         {
             return ActionFirstItem("Publish Draft");
         }
 
-        public ManageContent CloneFirstItem()
+        public String CloneFirstItem()
         {
             return ActionFirstItem("Clone");
         }
 
-        public ManageContent DeleteFirstItem()
+        public String DeleteFirstItem()
         {
-            ActionFirstItem("Delete");
+            var item = ActionFirstItem("Delete");
             _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
             //if (!ConfirmRemovedSuccessfully())
             //{
             //    throw new Exception("Unable to confirm the item has been removed");
             //}
-             return this;
+             return item;
         }
 
-        public ManageContent UnpublishFirstItem()
+        public String UnpublishFirstItem()
         {
-            ActionFirstItem("Unpublish");
+            var item = ActionFirstItem("Unpublish");
             _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
             if (!ConfirmUnpublishedSuccessfully())
             {
                 throw new Exception("Unable to confirm the item has been unpublished");
             }
-            return this;
+            return item;
         }
 
         public ManageContent DiscardDraftOfFirstItem()

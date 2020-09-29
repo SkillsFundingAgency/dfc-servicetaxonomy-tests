@@ -1,5 +1,5 @@
 ﻿@webtest
-Feature: ContentChangeEvent for existing draft
+Feature: _OLDContentChangeEvent for existing draft
 
 Background: 
 	Given I logon to the editor

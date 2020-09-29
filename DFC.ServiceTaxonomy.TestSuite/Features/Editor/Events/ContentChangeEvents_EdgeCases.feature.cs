@@ -20,9 +20,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.3.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("ContentChangeEvents_EdgeCases")]
+    [NUnit.Framework.DescriptionAttribute("_OLDContentChangeEvents_EdgeCases")]
     [NUnit.Framework.CategoryAttribute("webtest")]
-    public partial class ContentChangeEvents_EdgeCasesFeature
+    public partial class _OLDContentChangeEvents_EdgeCasesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -37,7 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ContentChangeEvents_EdgeCases", "\tScenarios that don\'t fit into another section", ProgrammingLanguage.CSharp, new string[] {
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "_OLDContentChangeEvents_EdgeCases", "\tScenarios that don\'t fit into another section", ProgrammingLanguage.CSharp, new string[] {
                         "webtest"});
             testRunner.OnFeatureStart(featureInfo);
         }

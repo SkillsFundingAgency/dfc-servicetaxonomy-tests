@@ -1,5 +1,5 @@
 ﻿@webtest
-Feature: ContentChangeEvents_PublishFailedValidation
+Feature: _OLDContentChangeEvents_PublishFailedValidation
 
 Background: 
 	Given I logon to the editor

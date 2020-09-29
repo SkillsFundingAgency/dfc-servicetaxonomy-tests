@@ -1,5 +1,5 @@
 ﻿@webtest
-Feature: _OLDContentChangeEvents_EdgeCases
+Feature: ContentChangeEvents_EdgeCases
 	Scenarios that don't fit into another section
 
 @Editor

@@ -5,6 +5,9 @@ using System.Reflection;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Newtonsoft.Json;
+using System.Text.Json;
+using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 //todo copied from .net framework project,  update to use .net core compatible nuget package
 namespace DFC.ServiceTaxonomy.SharedResources.Helpers
@@ -22,7 +25,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         {
             try
             {
-                client = new DocumentClient(new Uri(baseUrl), authKey);
+                Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+                settings.DateParseHandling = Newtonsoft.Json.DateParseHandling.DateTime;
+                client = new DocumentClient(new Uri(baseUrl), authKey, settings);
                 return true;
             }
             catch (DocumentClientException de)

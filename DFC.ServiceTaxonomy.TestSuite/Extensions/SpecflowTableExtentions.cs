@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -9,10 +10,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     {
         public static Dictionary<string,string> SingleColumnToDictionary(this Table table, ScenarioContext context = null)
         {
+            int count = 1;
             var dictionary = new Dictionary<string, string>();
             foreach (var row in table.Rows)
             {
-                dictionary.Add(row[0], (context == null ? row[1] : context.ReplaceTokensInString(row[1])));
+                dictionary.Add($"item{count++}", (context == null ? row[0] : context.ReplaceTokensInString(row[0])));
             }
             return dictionary;
         }

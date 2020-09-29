@@ -75,7 +75,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                     contentItem.ContentItemId = item.ContentItemId;
                     contentItem.ContentItemVersionId = item.ContentItemVersionId;
                     contentItem.ContentType = item.ContentType;
-                    contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
+                    contentItem.CreatedUtc = item.CreatedUtc;
                     contentItem.DisplayText = item.DisplayText;
                     var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
                     ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);

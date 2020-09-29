@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using FluentAssertions;
 using TechTalk.SpecFlow;
+using ConsoleTables;
 using DFC.ServiceTaxonomy.SharedResources;
 using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
@@ -69,7 +70,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             mockItem.eventType = expectedType;
             mockItem.id = Guid.NewGuid().ToString();
             mockItem.subject = "/content/sharedcontent/29849536-f716-468d-bf49-41446cb68284";
-            mockItem.eventTime = "";
+            //mockItem.eventTime = "";
             mockItem.dataVersion = "";
             mockItem.metadataVersion = "";
             mockItem.topic = "";
@@ -92,7 +93,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private List<ContentEvent> GetMatchingDocuments(string id, string eventType = "")
         {
             string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}'";
-            string query = $"SELECT * FROM c where  c.subject = '{id}'{additionalClause}";
+            string query = 
+                $"SELECT * FROM c where  c.subject = '{id}'{additionalClause}";
             
             CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
             List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
@@ -115,6 +117,54 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             list.Count().Should().Be(p0, $"Because the total number of events sent should be {p0}");
 
         }
+
+        [Then(@"the expected event messages have been received")]
+        public void ThenTheExpectedEventMessagesHaveBeenReceived()
+        {
+
+            var list = _scenarioContext.GetContentItemIndexHistory();
+
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", "/content");
+            List<ContentEvent> events = GetMatchingDocuments(uri);
+            int eventCount = 0;
+    //bool calibrated = false;
+    //int calibration = 0;
+
+            foreach ( var item in list )//.Where( i => i.expectedEvents.Length > 0 ) )
+            {
+                item.expectedEvents.Count().Should().BeGreaterOrEqualTo(1, "Because all actions should have an event expectation");
+                foreach (var expectedEvent in item.expectedEvents)
+                {
+                    eventCount++;
+                    if (expectedEvent.Length > 0)
+                    {
+                        var match = events.Where(e => e.eventTime.ToString("yyyy-MM-ddTHH:mm:ss.f") == item.ModifiedUtc.ToString("yyyy-MM-ddTHH:mm:ss.f")
+                                      && e.data.versionId == item.ContentItemVersionId
+                                      && e.eventType == expectedEvent
+                                      //&& (
+                                      //( calibrated == false && e.eventTime.ToString("yyyy-MM-ddTHH:mm:ss.f") == item.ModifiedUtc.ToString("yyyy-MM-ddTHH:mm:ss.f")  )
+                                      //||
+
+                                      //(  (int.Parse(e._ts) - calibration) <= item.actionEnd  && (int.Parse(e._ts) - calibration) >= item.actionStart) )
+                                      );
+
+                        // because event time come from modified UTC, it is possible that an items receives more than one event
+                        // which are indestiguishable from each other using these matching criteria. Hence check for duplicates in source list
+                //var numberOfEvents = list.Where(i => i.ModifiedUtc == item.ModifiedUtc
+                //             && i.ContentItemVersionId == item.ContentItemVersionId
+                //             && i.expectedEvents.Contains(expectedEvent)).Count();
+                        match.Count().Should().Be(1, $"Because 1 matching event should be found");
+                //if (!calibrated)
+                //{
+                //    calibration = int.Parse(match.First()._ts) - item.actionEnd;
+                //    calibrated = true;
+                //}
+                    }
+                }
+            }
+            eventCount.Should().Be(events.Count, "Because expected events should match received events");
+        }
+
 
 
 

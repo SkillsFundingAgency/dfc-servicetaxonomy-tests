@@ -50,7 +50,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private const string sql_ContentItemIdPlaceholder = "__ContentItemId__";
         private const string sql_ContentItemIndexes = "select * from dbo.contentitemindex a where a.ContentItemId = '__ContentItemId__' order by ModifiedUtc desc ";
-
+        /*private const string sql_ContentItemIndexes = 
+            @"select 
+                a.Id,
+                a.DocumentId,
+                a.ContentItemId,
+                a.ContentItemVersionId,
+                a.Latest,
+                a.Published,
+                a.ContentType,
+                convert(varchar(23),a.ModifiedUtc,126) as ModifiedUtc,
+                convert(varchar(23),a.PublishedUtc,126) as PublishedUtc,
+                convert(varchar(23),a.CreatedUtc,126) as CreatedUtc,
+                a.Owner,
+                a.Author,
+                a.DisplayText
+                from dbo.contentitemindex a where a.ContentItemId = '__ContentItemId__' order by ModifiedUtc desc ";
+        */
         private const string keyGeneratedUri = "GeneratedURI";
         private const string keyEditorDescriptionField = "Title";
 
@@ -379,12 +395,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenISaveTheDraftItem()
         {
             string id = _addContentItemBase.ContentItemIdFromUrl();
+            _scenarioContext["actionStart"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             _addContentItemBase.SaveActivity();
+            _scenarioContext["actionEnd"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
             if (id.Length == 0)
             {
                 id = _addContentItemBase.ContentItemIdFromUrl();
             }
+            
             if (id.Length > 0 )
             {
                 _scenarioContext.StoreContentItemId(id);
@@ -392,11 +411,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
                 {
                     var sqlInstance = _scenarioContext.GetSQLConnection();
-                    _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+                    _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList(),"draft");
                     _scenarioContext.CloseSQLConnection();
                 }
             }
         }
+
+        [Given(@"set an expecation for the following events to be triggered")]
+        public void GivenSetAnExpecationForTheFollowingEventsToBeTriggered(Table table)
+        {
+            var values = table.SingleColumnToDictionary();
+            _scenarioContext.SetEventExpectationOnLastAction(values.Values.ToArray());
+        }
+
+        [When(@"I set an expecation for the following events to be triggered")]
+        public void WhenISetAnExpecationForTheFollowingEventsToBeTriggered(Table table)
+        {
+            GivenSetAnExpecationForTheFollowingEventsToBeTriggered(table);
+        }
+
 
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
@@ -773,27 +806,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I select the ""(.*)"" option for the first item that is found")]
         public void GivenISelectTheOptionFirstItemThatIsFound(string p0)
         {
+            string contentItemId = string.Empty;
+            string expectedEvent = string.Empty;
+            _scenarioContext["actionStart"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             switch (p0.ToLower())
             {
                 case "publish":
-                    _manageContent.PublishFirstItem();
+                    contentItemId = _manageContent.PublishFirstItem();
+                    expectedEvent = "published";
                     break;
                 case "clone":
-                    _manageContent.CloneFirstItem();
+                    contentItemId = _manageContent.CloneFirstItem();
                     break;
                 case "delete":
-                    _manageContent.DeleteFirstItem();
+                    contentItemId = _manageContent.DeleteFirstItem();
+                    expectedEvent = "deleted";
                     break;
                 case "unpublish":
-                    _manageContent.UnpublishFirstItem();
+                    contentItemId = _manageContent.UnpublishFirstItem();
+                    expectedEvent = "unpublished";
                     break;
                 case "discard draft":
                     _manageContent.DiscardDraftOfFirstItem();
+                    expectedEvent = "draft-discarded";
                     break;
                 default:
                     throw new Exception($"Action first item in list - Unsupported operation: {p0}");
             }
-            
+            _scenarioContext["actionEnd"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            if (contentItemId.Length > 0)
+            {
+                _scenarioContext.StoreContentItemId(contentItemId);
+
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(
+                                             sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, contentItemId)
+                                                               ).ToList(), expectedEvent);
+                    _scenarioContext.CloseSQLConnection();
+                }
+            }
         }
 
 
@@ -1014,12 +1067,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void WhenIPublishTheItem()
         {
             string id = _addContentItemBase.ContentItemIdFromUrl();
+            _scenarioContext["actionStart"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             _addContentItemBase.PublishActivity();
+            _scenarioContext["actionEnd"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             if (id.Length == 0)
             {
                 id = _addContentItemBase.ContentItemIdFromUrl();
             }
-
             if (id.Length > 0)
             {
                 _scenarioContext.StoreContentItemId(id);
@@ -1029,10 +1083,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     var sqlInstance = _scenarioContext.GetSQLConnection();
                     _scenarioContext.StoreContentItemIndexList(
                                              sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                               ).ToList());
+                                                               ).ToList(),"published");
                     _scenarioContext.CloseSQLConnection();
                 }
             }
+        }
+
+        [Given(@"I save the draft item with the expecation of events:")]
+        public void GivenISaveTheDraftItemWithTheExpecationOfEvents(Table table)
+        {
+            ScenarioContext.Current.Pending();
         }
 
         [When(@"I save the draft item")]
@@ -1040,13 +1100,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string id = _addContentItemBase.ContentItemIdFromUrl();
 
+            _scenarioContext["actionStart"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             _addContentItemBase.SaveActivity();
-
+            _scenarioContext["actionEnd"] = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             if (id.Length == 0)
             {
                 id = _addContentItemBase.ContentItemIdFromUrl();
             }
-
+            DateTime tsNow = DateTime.Now;
+            _scenarioContext["timestamp"] = (long)(tsNow - DateTime.MinValue).TotalSeconds;
             if (id.Length > 0)
             {
                 _scenarioContext.StoreContentItemId(id);
@@ -1056,7 +1118,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     var sqlInstance = _scenarioContext.GetSQLConnection();
                     _scenarioContext.StoreContentItemIndexList(
                                              sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                               ).ToList());
+                                                               ).ToList(), "draft");
                     _scenarioContext.CloseSQLConnection();
                 }
             }
