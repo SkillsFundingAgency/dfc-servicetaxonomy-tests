@@ -35,8 +35,12 @@ namespace DFC.ServiceTaxonomy.TestSuite
 
         public string neo4JUrl => Configuration["Neo4j:Url"];
         public string neo4JUrlDraft => Configuration["Neo4j:UrlDraft"];
+        public string neo4JUrl1 => Configuration["Neo4j:Url1"];
+        public string neo4JUrlDraft1 => Configuration["Neo4j:UrlDraft1"];
         public string neo4JUid => Configuration["Neo4j:Uid"];
         public string neo4JPassword => Configuration["Neo4j:Password"];
+        public string neo4JUidDraft => Configuration["Neo4j:UidDraft"];
+        public string neo4JPasswordDraft => Configuration["Neo4j:PasswordDraft"];
 
         public bool sqlServerChecksEnabled => Configuration["SqlServer:ChecksEnabled"].ToLower() == "true";
         public string sqlServerConnectionString => Configuration["SqlServer:ConnectionString"];
