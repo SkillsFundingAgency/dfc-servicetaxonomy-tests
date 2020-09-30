@@ -338,7 +338,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 try
                 {
                     SqlCommand myCommand = new SqlCommand(commandText, Connection);
-                    message = (string)myCommand.ExecuteScalar();
+                    message = myCommand.ExecuteScalar().ToString();
                 }
                 catch (Exception e)
                 {
@@ -401,6 +401,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return success;
         }
+
         public bool DeleteRecord(string table, string primaryKey, string recordId)
         {
             bool success = false;
@@ -423,50 +424,20 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return success;
         }
 
-
-
-
-        public string GetParameterValue(string table, string parameterName)
+        public bool CheckPermissions(string[] requiredPermissions)
         {
-            //todo
-            return null;
+            bool success = false;
+            string returnValue;
+            string query = "SELECT count(permission_name) FROM fn_my_permissions('','DATABASE') where permission_name in (__VALUES__)";
+            string list = string.Empty;
+            foreach (var item in requiredPermissions)
+            {
+                list += (list == string.Empty ? string.Empty : ", ") + $"'{item}'";
+            }
+            (success, returnValue ) = ExecuteScalar(query.Replace("__VALUES__", list),null);
+            success = success && int.Parse(returnValue) == requiredPermissions.Count();
+            return success;
         }
-        //public bool UpsertParameterValue(string table, string parameterName, string ParameterValue)
-        //{
-        //    bool success = true;
-        //    //   parameterTableReferenceFieldName
-        //    //   parameterTableValueFieldName
-        //    string sqlString =
-        //        "IF EXISTS (SELECT {NAMEFIELD} FROM [dbo].[{TABLE}] WHERE {NAMEFIELD} = '{NAME}')" + System.Environment.NewLine +
-        //        "BEGIN" + System.Environment.NewLine +
-        //        "UPDATE[dbo].[{TABLE}] SET {VALUEFIELD} = '{VALUE}' WHERE {NAMEFIELD} = '{NAME}'" + System.Environment.NewLine +
-        //        "END" + System.Environment.NewLine +
-        //        "ELSE" + System.Environment.NewLine +
-        //        "BEGIN" + System.Environment.NewLine +
-        //        "INSERT INTO[dbo].[{TABLE}]" + System.Environment.NewLine +
-        //        "({NAMEFIELD}, {VALUEFIELD}) VALUES('{NAME}', '{VALUE}')" + System.Environment.NewLine +
-        //        "END";
-        //    sqlString = sqlString.Replace("{TABLE}", table);
-        //    sqlString = sqlString.Replace("{NAMEFIELD}", parameterTableReferenceFieldName);
-        //    sqlString = sqlString.Replace("{VALUEFIELD}", parameterTableValueFieldName);
-        //    sqlString = sqlString.Replace("{NAME}", parameterName);
-        //    sqlString = sqlString.Replace("{VALUE}", ParameterValue);
-        //    // check if connected
-        //    if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
-        //    {
-        //        try
-        //        {
-        //            SqlCommand newCommand = new SqlCommand(sqlString, Connection);
-        //            newCommand.ExecuteNonQuery();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine(e.ToString());
-        //            success = false;
-        //        }
-        //    }
-        //    return success;
-        //}
 
 
     }

@@ -124,13 +124,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             Neo4JHelper connection;
             string graphUri;
+            string userId;
+            string password;
+            string graphName;
             switch ( graph)
             {
                 case constants.publish:
-                    graphUri = context.GetEnv().neo4JUrl;
+                    graphUri = instance == 0 ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrl1;
+                    graphName = instance == 0 ? context.GetEnv().neo4JGraphName : context.GetEnv().neo4JGraphName1;
+                    userId = context.GetEnv().neo4JUid;
+                    password = context.GetEnv().neo4JPassword;
                     break;
                 case constants.preview:
-                    graphUri = context.GetEnv().neo4JUrlDraft;
+                    graphUri = instance == 0 ? context.GetEnv().neo4JUrlDraft : context.GetEnv().neo4JUrlDraft1;
+                    graphName = instance == 0 ? context.GetEnv().neo4JGraphNameDraft : context.GetEnv().neo4JGraphNameDraft1;
+                    userId = context.GetEnv().neo4JUidDraft;
+                    password = context.GetEnv().neo4JPasswordDraft;
                     break;
                 default:
                     return null;
@@ -142,10 +151,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             else
             {
-                connection = new Neo4JHelper();
+                connection = new Neo4JHelper(graphName);
                 connection.connect(graphUri,
-                                    context.GetEnv().neo4JUid,
-                                    context.GetEnv().neo4JPassword);
+                                    userId,
+                                    password);
                 context[contextRef] = connection;
             }
             if (!connection.Verify())
@@ -162,7 +171,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string cypher = constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
                                                                      .Replace("@FIELDNAME@",fieldName);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrl1.Length > 0)
+                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+                GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
             return true;
         }
 
@@ -171,7 +184,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrl1.Length > 0)
+                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+                GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
 
             return true;
         }

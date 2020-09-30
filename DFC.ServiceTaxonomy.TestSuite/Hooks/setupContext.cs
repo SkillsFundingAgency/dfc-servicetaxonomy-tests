@@ -6,6 +6,7 @@ using System.Text;
 using System.Reflection;
 using TechTalk.SpecFlow;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -66,7 +67,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
 
 
-        [BeforeScenario]
+        [BeforeScenario  (Order = 1)]
         public void IntialiseEnvironementVariables()
         {
             string value;
@@ -100,6 +101,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 }
                 catch { }
                 Console.WriteLine($"Env: {property.Name} = {value}");
+            }
+        }
+
+        [BeforeScenario(Order = 5)]
+        public void CheckConnections()
+        {
+            // check SQL connection
+            var conn = _scenarioContext.GetSQLConnection();
+            if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
+            {
+                _featureContext["failAll"] = true;
+                throw new Exception("Unable to verify permission on SQL connection");
             }
         }
     }

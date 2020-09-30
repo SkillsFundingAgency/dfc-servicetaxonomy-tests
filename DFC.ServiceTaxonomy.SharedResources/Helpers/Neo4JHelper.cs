@@ -11,15 +11,15 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
     public class Neo4JHelper
     {
         private const string verificationCypher = "RETURN 1";
-
+        private string graphName = "neo4j";
         public IDriver Neo4jDriver { get; private set; }
         public Neo4JHelper()
         {
         }
 
-        public Neo4JHelper ( string uri)
+        public Neo4JHelper ( string _graphName)
         {
-            connect(uri, string.Empty, string.Empty);
+            graphName = _graphName;
         }
 
         public Neo4JHelper(string uri, string userName, string password)
@@ -52,7 +52,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             //IResult result= null;
             try
             {
-                using (var session = Neo4jDriver.Session())
+                using (var session = Neo4jDriver.Session(builder => builder.WithDatabase(graphName)) )
                 {
                     var result = session.Run(queryText, queryParameters);
                     foreach (var record in result)

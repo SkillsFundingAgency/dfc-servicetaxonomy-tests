@@ -33,6 +33,11 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string editorUid => Configuration["Editor:Uid"];
         public string editorPassword => Configuration["Editor:Password"];
 
+        public string neo4JGraphName => Configuration["Neo4j:GraphName"];
+        public string neo4JGraphName1 => Configuration["Neo4j:GraphName1"];
+        public string neo4JGraphNameDraft => Configuration["Neo4j:GraphNameDraft"];
+        public string neo4JGraphNameDraft1 => Configuration["Neo4j:GraphNameDraft1"];
+
         public string neo4JUrl => Configuration["Neo4j:Url"];
         public string neo4JUrlDraft => Configuration["Neo4j:UrlDraft"];
         public string neo4JUrl1 => Configuration["Neo4j:Url1"];

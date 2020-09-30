@@ -1525,15 +1525,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     case constants.draft:
                     case constants.preview:
-                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview, graphRef);
                         uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
-                        done = _scenarioContext.GetEnv().neo4JUrlDraft1.Length == 0;
+                        done = _scenarioContext.GetEnv().neo4JUrlDraft1.Length == 0 || graphRef > 0;
                         break;
                     case constants.publish:
                     case constants.published:
-                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish, graphRef);
                         uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
-                        done = _scenarioContext.GetEnv().neo4JUrl1.Length == 0;
+                        done = _scenarioContext.GetEnv().neo4JUrl1.Length == 0 || graphRef > 0;
 
                         break;
                     default:
@@ -1546,7 +1546,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
                 }
 
-                Console.WriteLine("Check data is present in graph:");
+                Console.WriteLine($"Check data is present in {target}_{graphRef}graph:");
                 Console.WriteLine($"Query: {query}");
                 Console.WriteLine($"uri: {DictionaryToString(parameters)}");
 
