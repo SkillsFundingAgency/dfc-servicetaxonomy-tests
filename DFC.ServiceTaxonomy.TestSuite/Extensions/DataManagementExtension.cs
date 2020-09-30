@@ -171,10 +171,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string cypher = constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
                                                                      .Replace("@FIELDNAME@",fieldName);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1.Length > 0)
+            if (context.GetEnv().neo4JUrl1 != null && context.GetEnv().neo4JUrl1.Length > 0)
                 GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (context.GetEnv().neo4JUrlDraft1 != null && context.GetEnv().neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
             return true;
         }
@@ -184,10 +184,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1.Length > 0)
+            if (context.GetEnv().neo4JUrl1 != null && context.GetEnv().neo4JUrl1.Length > 0)
                 GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (context.GetEnv().neo4JUrlDraft1 != null && context.GetEnv().neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
 
             return true;
