@@ -183,13 +183,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
+            Console.WriteLine($"Clear down graph using query:\n{cypher}");
+            Console.WriteLine("...Publish graph");
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().neo4JUrl1 != null && context.GetEnv().neo4JUrl1.Length > 0)
+            {
+                Console.WriteLine($"...Publish_1 graph {context.GetEnv().neo4JUrl1}");
                 GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
+            }
+            Console.WriteLine($"...Preview graph");
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().neo4JUrlDraft1 != null && context.GetEnv().neo4JUrlDraft1.Length > 0)
+            {
+                Console.WriteLine($"...Preview_1 graph");
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
-
+            }
             return true;
         }
 
