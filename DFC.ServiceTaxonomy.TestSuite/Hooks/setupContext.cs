@@ -111,7 +111,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             var conn = _scenarioContext.GetSQLConnection();
             if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
             {
-                _featureContext["failAll"] = true;
+               // _featureContext["failAll"] = true;
                 throw new Exception("Unable to verify permission on SQL connection");
             }
         }
