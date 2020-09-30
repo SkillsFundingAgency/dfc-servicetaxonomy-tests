@@ -19,7 +19,8 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 
         public Neo4JHelper ( string _graphName)
         {
-            graphName = _graphName;
+            if (_graphName.Length >0)
+                graphName = _graphName;
         }
 
         public Neo4JHelper(string uri, string userName, string password)
