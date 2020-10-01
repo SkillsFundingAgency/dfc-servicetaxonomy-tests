@@ -61,11 +61,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 string prefix = _scenarioContext["prefix"].ToString();
                 string prefixField = _scenarioContext["prefixField"].ToString();
 
-                TeardownDataWithPrefix(prefixField, prefix);
+                TeardownDataWithPrefix(prefix, prefixField);
 
                 if (_scenarioContext.GetEnv().pipelineRun)
                 {
-                    TeardownDataWithPrefix(prefixField, constants.testDataPrefix);
+                    TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
                 }
             }
 
