@@ -111,8 +111,56 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             var conn = _scenarioContext.GetSQLConnection();
             if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
             {
-               // _featureContext["failAll"] = true;
+                _featureContext["failAll"] = true;
                 throw new Exception("Unable to verify permission on SQL connection");
+            }
+
+            // check Graph connections
+            try
+            {
+                _scenarioContext.GetGraphConnection("publish");
+            }
+            catch( Exception e)
+            {
+                _featureContext["failAll"] = true;
+                Console.WriteLine("Unable to verify connection to publish graph");
+                throw e;
+            }
+            try
+            {
+                _scenarioContext.GetGraphConnection("preview");
+            }
+            catch (Exception e)
+            {
+                _featureContext["failAll"] = true;
+                Console.WriteLine("Unable to verify connection to preview graph");
+                throw e;
+            }
+            if (_scenarioContext.GetEnv().neo4JUrl1.Length > 0)
+            {
+                try
+                {
+                    _scenarioContext.GetGraphConnection("publish",1);
+                }
+                catch (Exception e)
+                {
+                    _featureContext["failAll"] = true;
+                    Console.WriteLine("Unable to verify connection to publish1 graph");
+                    throw e;
+                }
+            }
+            if (_scenarioContext.GetEnv().neo4JUrlDraft1.Length > 0)
+            {
+                try
+                {
+                    _scenarioContext.GetGraphConnection("preview", 1);
+                }
+                catch (Exception e)
+                {
+                    _featureContext["failAll"] = true;
+                    Console.WriteLine("Unable to verify connection to preview1 graph");
+                    throw e;
+                }
             }
         }
     }

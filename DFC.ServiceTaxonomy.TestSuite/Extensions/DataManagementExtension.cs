@@ -16,7 +16,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     public static class DataManagementExtension
     {
         private static Random random = new Random();
-
         public const string sql_ClearDownAllContentItemsOfType =
     @"DECLARE @TableName varchar(255) = '';
     DECLARE @Query varchar(255) = '';
@@ -120,6 +119,80 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return false;
         }
 
+        //public static List<Neo4jConnection> GetGraphDetails(this ScenarioContext context, string graph)
+        //{
+        //    List<Neo4jConnection> graphDetails = new List<Neo4jConnection>();
+        //    switch (graph)
+        //    {
+        //        case constants.publish:
+        //            graphDetails.Add(new Neo4jConnection()
+        //            {
+        //                graphName = context.GetEnv().neo4JGraphName,
+        //                uri = context.GetEnv().neo4JUrl,
+        //                userName = context.GetEnv().neo4JUid,
+        //                password = context.GetEnv().neo4JPassword
+        //            });
+
+        //            if (context.GetEnv().neo4JUrl1.Length > 0)
+        //                graphDetails.Add(new Neo4jConnection()
+        //                {
+        //                    graphName = context.GetEnv().neo4JGraphName1,
+        //                    uri = context.GetEnv().neo4JUrl1,
+        //                    userName = context.GetEnv().neo4JUid,
+        //                    password = context.GetEnv().neo4JPassword
+        //                });
+        //            break;
+        //        case constants.preview:
+        //            graphDetails.Add(new Neo4jConnection()
+        //            {
+        //                graphName = context.GetEnv().neo4JGraphNameDraft,
+        //                uri = context.GetEnv().neo4JUrlDraft,
+        //                userName = context.GetEnv().neo4JUidDraft,
+        //                password = context.GetEnv().neo4JPasswordDraft
+        //            });
+
+        //            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+        //                graphDetails.Add(new Neo4jConnection()
+        //                {
+        //                    graphName = context.GetEnv().neo4JGraphNameDraft1,
+        //                    uri = context.GetEnv().neo4JUrlDraft1,
+        //                    userName = context.GetEnv().neo4JUidDraft,
+        //                    password = context.GetEnv().neo4JPasswordDraft
+        //                });
+        //            break;
+        //    }
+        //    return graphDetails;
+        //}
+
+        //public static List<Neo4JHelper> GetGraphConnections(this ScenarioContext context, string graph)
+        //{
+        //    List<Neo4JHelper> connections;
+        //    string contextRef = $"graphCol_{graph}";
+
+        //    if (context.ContainsKey(contextRef))
+        //    {
+        //        connections = (List<Neo4JHelper>)context[contextRef];
+        //    }
+        //    else
+        //    {
+        //        connections = new List<Neo4JHelper>();
+        //        foreach (var conn in context.GetGraphDetails(graph))
+        //        {
+        //            connections.Add(new Neo4JHelper(conn));
+        //        }
+        //        context[contextRef] = connections;
+        //    }
+        //    // verify connections
+        //    foreach( var conn in connections)
+        //    {
+        //        while (!conn.Verify())
+        //        {
+        //            conn.connect();
+        //        }
+        //    }
+        //    return connections;
+        //}
+
         public static Neo4JHelper GetGraphConnection (this ScenarioContext context, string graph, int instance = 0)
         {
             Neo4JHelper connection;
@@ -127,6 +200,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string userId;
             string password;
             string graphName;
+            int connectionAttempts;
+            int maxAttempts = 5;
             switch ( graph)
             {
                 case constants.publish:
@@ -157,11 +232,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                     password);
                 context[contextRef] = connection;
             }
-            if (!connection.Verify())
-            {
-                context.Remove(contextRef);
-                connection = GetGraphConnection(context, graph, instance);
-            }
+
+            connectionAttempts = context.ContainsKey($"Attempts{contextRef}") ? (int)context[$"Attempts{contextRef}"] : 0;
+            connection.Verify();
+            //if (!connection.Verify(connectionAttempts > maxAttempts))
+            //{
+            //    context.Remove(contextRef);
+            //    context[$"Attempts{contextRef}"] = ++connectionAttempts;
+            //    connection = GetGraphConnection(context, graph, instance);
+            //}
             return connection;
         }
 
@@ -171,10 +250,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string cypher = constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
                                                                      .Replace("@FIELDNAME@",fieldName);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1 != null && context.GetEnv().neo4JUrl1.Length > 0)
-                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1 != null && context.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (context.GetEnv().neo4JUrl1.Length > 0)
+                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
             return true;
         }
@@ -183,21 +262,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             //todo error handling
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
-            Console.WriteLine($"Clear down graph using query:\n{cypher}");
-            Console.WriteLine("...Publish graph");
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1 != null && context.GetEnv().neo4JUrl1.Length > 0)
-            {
-                Console.WriteLine($"...Publish_1 graph {context.GetEnv().neo4JUrl1}");
-                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
-            }
-            Console.WriteLine($"...Preview graph");
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1 != null && context.GetEnv().neo4JUrlDraft1.Length > 0)
-            {
-                Console.WriteLine($"...Preview_1 graph");
+            if (context.GetEnv().neo4JUrl1.Length > 0)
+                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
+            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
-            }
+
             return true;
         }
 

@@ -8,43 +8,92 @@ using System.Linq;
 
 namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
+    public class Neo4jConnection
+    {
+        public string uri { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+        public string graphName { get; set; } = "neo4j";
+    }
+
     public class Neo4JHelper
     {
         private const string verificationCypher = "RETURN 1";
+        private Neo4jConnection connection;
         private string graphName = "neo4j";
         public IDriver Neo4jDriver { get; private set; }
-        public Neo4JHelper()
+        //public Neo4JHelper()
+        //{
+        //}
+
+        public Neo4JHelper(Neo4jConnection _connection)
         {
+            connection = _connection;
+            if (connection.graphName.Length > 0)
+                graphName = connection.graphName;
+            connect(connection.uri, connection.userName, connection.password);
         }
 
+        private void initalise()
+        {
+            connection = new Neo4jConnection();
+        }
         public Neo4JHelper ( string _graphName)
         {
+            initalise();
             if (_graphName.Length >0)
                 graphName = _graphName;
         }
 
         public Neo4JHelper(string uri, string userName, string password)
         {
+            initalise();
             connect(uri, userName, password);
+        }
+
+        public void connect()
+        {
+            connect(connection.uri, connection.uri, connection.password);
+        }
+
+        public void connect(Neo4jConnection conn)
+        {
+            connect(conn.uri, conn.uri, conn.password);
         }
 
         public void connect( string uri, string userName, string password)
         {
+            connection.uri = uri;
+            connection.userName = userName;
+            connection.password = password;
             var authToken = ( userName.Equals(string.Empty) ? AuthTokens.None : AuthTokens.Basic(userName, password) ) ;
             Neo4jDriver = GraphDatabase.Driver(new Uri(uri), authToken);
         }
 
         public bool Verify()
         {
-            try
+            int tries = 0;
+            while (tries++ <= 2)
             {
-                ExecuteTableQuery(verificationCypher,null);
-                return true;
+                try
+                {
+                    ExecuteTableQuery(verificationCypher, null);
+                    return true;
+                }
+                catch (Neo4jException e)
+                {
+                    switch (tries)
+                    {
+                        case 1:
+                            Neo4jDriver.Dispose();
+                            connect();
+                            break;
+                        case 2:
+                            throw e;
+                    }
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public List<Dictionary<string, object>> ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
@@ -69,10 +118,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 }
                 
             }
-            catch (Exception e)
-             {
-                throw new Exception("Error occured executing Cypher query" +
-                                 "\n Exception:" + e);
+            catch (Neo4jException e)
+            {
+                throw e;
             }
             return resultList;
         }
