@@ -35,6 +35,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string recordIdCount = "recordIdCount";
         public const string recordIds = "recordIds";
         public const string cypherQuery = "cypherQuery";
+        public const string testDataPrefix = "@@DFC_AT@@";
+        public const string localDataPrefix = "@@L_AT@@";
         public const string prefix = "prefix";
         public const string prefixField = "prefixField";
         public const string ContentType = "contentType";

@@ -23,11 +23,34 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         private FeatureContext _featureContext;
         //private IEventGridContentRestHttpClientFactory i;
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context, FeatureContext fContext )//, IServiceCollection services)
+        public CleanUp(ScenarioContext context, FeatureContext fContext)//, IServiceCollection services)
         {
             _scenarioContext = context;
             _featureContext = fContext;
-           // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
+            // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
+        }
+
+        private void TeardownDataWithPrefix(string prefix, string field)
+        {
+            //SQL
+            (bool result, string message) = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
+            Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
+
+            if (!result)
+            {
+                _scenarioContext.AddNotifiableFailure("Sql Cleardown", message);
+            }
+
+            //graph
+            try
+            {
+                result = _scenarioContext.DeleteGraphNodesWithPrefix(field, prefix);
+                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+            }
+            catch (Exception e)
+            {
+                _scenarioContext.AddNotifiableFailure("Neo Cleardown", e.Message);
+            }
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -37,28 +60,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             {
                 string prefix = _scenarioContext["prefix"].ToString();
                 string prefixField = _scenarioContext["prefixField"].ToString();
-                // attempt to clear down data from sql and neo where title / skos__PrefLabel begins with prefix
 
-                //SQL
-                (bool result, string message) = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
-                Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
+                TeardownDataWithPrefix(prefixField, prefix);
 
-                if (!result)
+                if (_scenarioContext.GetEnv().pipelineRun)
                 {
-                    _scenarioContext.AddNotifiableFailure("Sql Cleardown", message);
-                }
-
-                //graph
-                try
-                {
-                    result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
-                    Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
-                }
-                catch( Exception e)
-                {
-                    _scenarioContext.AddNotifiableFailure("Neo Cleardown", e.Message);
+                    TeardownDataWithPrefix(prefixField, constants.testDataPrefix);
                 }
             }
+
+
 
         }
 

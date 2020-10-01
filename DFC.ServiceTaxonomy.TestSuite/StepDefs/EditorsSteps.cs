@@ -281,7 +281,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I set up a data prefix for ""(.*)""")]
         public void GivenISetUpADataPrefixFor(string p0)
         {
-            _scenarioContext[constants.prefix] = RandomString(5) + "_";
+            _scenarioContext[constants.prefix] = $"{(_scenarioContext.GetEnv().pipelineRun? constants.testDataPrefix : constants.localDataPrefix)}{RandomString(5)}_";
             _scenarioContext[constants.prefixField] = p0;
             _scenarioContext.StoreToken("__PREFIX__", (string)_scenarioContext[constants.prefix]);
         }
