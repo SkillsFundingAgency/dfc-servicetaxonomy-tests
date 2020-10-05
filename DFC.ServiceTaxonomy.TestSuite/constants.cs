@@ -35,6 +35,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string recordIdCount = "recordIdCount";
         public const string recordIds = "recordIds";
         public const string cypherQuery = "cypherQuery";
+        public const string testDataPrefix = "@@DFC_AT@@";
+        public const string localDataPrefix = "@@L_AT@@";
         public const string prefix = "prefix";
         public const string prefixField = "prefixField";
         public const string ContentType = "contentType";
@@ -42,8 +44,10 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string publish = "publish";
         public const string draft = "draft";
         public const string preview = "preview";
-        public const string Title = "Title";
-        public const string FieldName = "FieldName";
+        public const string title = "Title";
+        public const string fieldName = "FieldName";
+        public const string featureFailure = "featureFailure";
+        public const string featureFailAll = "featureFailAll";
 
         //cypher query template
         public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";

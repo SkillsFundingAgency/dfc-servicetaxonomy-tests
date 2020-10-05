@@ -12,53 +12,92 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
     {
         private const string verificationCypher = "RETURN 1";
 
+        private Neo4jConnection connection;
+        private string graphName = "neo4j";
+
         public IDriver Neo4jDriver { get; private set; }
-        public Neo4JHelper()
+
+        public Neo4JHelper(Neo4jConnection _connection)
         {
+            connection = _connection;
+            if (connection.graphName.Length > 0)
+                graphName = connection.graphName;
+            Connect(connection.uri, connection.userName, connection.password);
         }
 
-        public Neo4JHelper ( string uri)
+        private void initalise()
         {
-            connect(uri, string.Empty, string.Empty);
+            connection = new Neo4jConnection();
+        }
+        public Neo4JHelper ( string _graphName)
+        {
+            initalise();
+            if (_graphName.Length > 0)
+                graphName = _graphName;
         }
 
         public Neo4JHelper(string uri, string userName, string password)
         {
-            connect(uri, userName, password);
+            initalise();
+            Connect(uri, userName, password);
         }
 
-        public void connect( string uri, string userName, string password)
+        public void Connect()
         {
+            Connect(connection.uri, connection.uri, connection.password);
+        }
+
+        public void Connect(Neo4jConnection conn)
+        {
+            Connect(conn.uri, conn.uri, conn.password);
+        }
+
+        public void Connect( string uri, string userName, string password)
+        {
+            connection.uri = uri;
+            connection.userName = userName;
+            connection.password = password;
             var authToken = ( userName.Equals(string.Empty) ? AuthTokens.None : AuthTokens.Basic(userName, password) ) ;
             Neo4jDriver = GraphDatabase.Driver(new Uri(uri), authToken);
         }
 
         public bool Verify()
         {
-            try
+            int tries = 0;
+            while (tries++ <= 2)
             {
-                ExecuteTableQuery(verificationCypher,null);
-                return true;
+                try
+                {
+                    ExecuteTableQuery(verificationCypher, null);
+                    return true;
+                }
+                catch (Neo4jException e)
+                {
+                    switch (tries)
+                    {
+                        case 1:
+                            Neo4jDriver.Dispose();
+                            Connect();
+                            break;
+                        case 2:
+                            throw e;
+                    }
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public List<Dictionary<string, object>> ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
         {
             List<Dictionary<string, object>> resultList = new List< Dictionary<string, object>>();
-            //IResult result= null;
             try
             {
-                using (var session = Neo4jDriver.Session())
+                using (var session = Neo4jDriver.Session(builder => builder.WithDatabase(graphName)) )
                 {
                     var result = session.Run(queryText, queryParameters);
                     foreach (var record in result)
                     {
                         Dictionary<string, object> item = new Dictionary<string, object>();
-
                         foreach (var value in record.Values)
                         {
                             item.Add(value.Key, value.Value);
@@ -66,12 +105,10 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                         resultList.Add(item);
                     }
                 }
-                
             }
-            catch (Exception e)
-             {
-                throw new Exception("Error occured executing Cypher query" +
-                                 "\n Exception:" + e);
+            catch (Neo4jException e)
+            {
+                throw e;
             }
             return resultList;
         }
@@ -92,7 +129,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         {
             var result = ExecuteTableQuery(queryText, queryParameters);
             return result.First().Keys.Count;
-
         }
 
         public Dictionary<string,string> GetSingleRowAsDictionary(string queryText)
@@ -159,7 +195,5 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return resultsList;
         }
-
-
     }
 }

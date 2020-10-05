@@ -23,7 +23,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public StartPage NavigateTo( string sPath)
         {
-            _scenarioContext.GetWebDriver().Url = _scenarioContext.GetEnv().editorBaseUrl + "/" + sPath;
+            string url = _scenarioContext.GetEnv().editorBaseUrl + ( sPath.StartsWith("/") ? string.Empty : "/" ) + sPath;
+            _scenarioContext.GetWebDriver().Url = url;
             return this;
         }
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Reflection;
 using TechTalk.SpecFlow;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -66,12 +67,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
 
 
-        [BeforeScenario]
+        [BeforeScenario  (Order = 1)]
         public void IntialiseEnvironementVariables()
         {
             string value;
             string name;
             _scenarioContext.SetEnv(new EnvironmentSettings());
+
+            if (_featureContext.ContainsKey("failAll") && (bool)_featureContext["failAll"] == true)
+            {
+                throw new Exception("Feature run aborted due to earlier failure");
+            }
+
             PropertyInfo[] properties = typeof(EnvironmentSettings).GetProperties();
             foreach (PropertyInfo property in properties)
             {
@@ -94,6 +101,69 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 }
                 catch { }
                 Console.WriteLine($"Env: {property.Name} = {value}");
+            }
+        }
+
+        [BeforeScenario(Order = 5)]
+        public void CheckConnections()
+        {
+            // check SQL connection
+            var conn = _scenarioContext.GetSQLConnection();
+            if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
+            {
+                _featureContext["failAll"] = true;
+                throw new Exception("Unable to verify permission on SQL connection");
+            }
+
+            // check Graph connections
+            try
+            {
+                _scenarioContext.GetGraphConnection(constants.publish);
+            }
+            catch( Exception e)
+            {
+                _featureContext[constants.featureFailAll] = true;
+                Console.WriteLine("Unable to verify connection to publish graph");
+                throw e;
+            }
+
+            try
+            {
+                _scenarioContext.GetGraphConnection(constants.preview);
+            }
+            catch (Exception e)
+            {
+                _featureContext[constants.featureFailAll] = true;
+                Console.WriteLine("Unable to verify connection to preview graph");
+                throw e;
+            }
+
+            if (_scenarioContext.GetEnv().neo4JUrl1.Length > 0)
+            {
+                try
+                {
+                    _scenarioContext.GetGraphConnection(constants.publish, 1);
+                }
+                catch (Exception e)
+                {
+                    _featureContext["failAll"] = true;
+                    Console.WriteLine("Unable to verify connection to publish1 graph");
+                    throw e;
+                }
+            }
+
+            if (_scenarioContext.GetEnv().neo4JUrlDraft1.Length > 0)
+            {
+                try
+                {
+                    _scenarioContext.GetGraphConnection(constants.preview, 1);
+                }
+                catch (Exception e)
+                {
+                    _featureContext[constants.featureFailAll] = true;
+                    Console.WriteLine("Unable to verify connection to preview1 graph");
+                    throw e;
+                }
             }
         }
     }

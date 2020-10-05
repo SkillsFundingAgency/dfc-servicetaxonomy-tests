@@ -7,11 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
-using Microsoft.Extensions.DependencyInjection;
-
-
-//using Microsoft.Extensions.DependencyInjection;
-
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
@@ -19,12 +14,36 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
-        //private IEventGridContentRestHttpClientFactory i;
+        private FeatureContext _featureContext;
+
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context )//, IServiceCollection services)
+        public CleanUp(ScenarioContext context, FeatureContext fContext)
         {
             _scenarioContext = context;
-           // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
+            _featureContext = fContext;
+        }
+
+        private void TeardownDataWithPrefix(string prefix, string field)
+        {
+            //SQL
+            (bool result, string message) = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
+            Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
+
+            if (!result)
+            {
+                _scenarioContext.AddFeatureFailure("Sql Cleardown", message);
+            }
+
+            //graph
+            try
+            {
+                result = _scenarioContext.DeleteGraphNodesWithPrefix(field, prefix);
+                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+            }
+            catch (Exception e)
+            {
+                _scenarioContext.AddFeatureFailure("Neo Cleardown", e.Message);
+            }
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -34,16 +53,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             {
                 string prefix = _scenarioContext["prefix"].ToString();
                 string prefixField = _scenarioContext["prefixField"].ToString();
-                // attempt to clear down data from sql and neo where title / skos__PrefLabel begins with prefix
 
-                //SQL
-                string message = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
-                Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
+                TeardownDataWithPrefix(prefix, prefixField);
 
-                //graph
-                bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
-                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+                if (_scenarioContext.GetEnv().pipelineRun)
+                {
+                    TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
+                }
             }
+
+
 
         }
 
@@ -87,10 +106,34 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         }
 
         [AfterScenario("webtest", Order = 20)]
-        public void CLoseWebDriver()
+        public void CloseWebDriver()
         {
             _scenarioContext.GetWebDriver().Close();
             _scenarioContext.GetWebDriver().Quit();
+        }
+
+        [AfterScenario( Order = 100)]
+        public void CheckForNotifiableFailure()
+        {
+            if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError )
+            {
+            }
+            if (_scenarioContext.ContainsKey(constants.featureFailure))
+            {
+                string messageText = "Fatal error(s) detected in clean up:\n";
+
+                // cancel the rest of the feature run
+                _featureContext[constants.featureFailAll] = true;
+
+                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.featureFailure] )
+                {
+                    Console.WriteLine($"Error: {message.Key} - {message.Value}");
+                    messageText += $"  {message.Key} - {message.Value}";
+                }
+                throw new Exception(messageText);
+
+            }
+
         }
     }
 }
