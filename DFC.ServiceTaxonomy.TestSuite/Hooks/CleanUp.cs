@@ -7,12 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
-using Microsoft.Extensions.DependencyInjection;
-using FluentAssertions;
-
-
-//using Microsoft.Extensions.DependencyInjection;
-
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
@@ -21,13 +15,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     {
         private ScenarioContext _scenarioContext;
         private FeatureContext _featureContext;
-        //private IEventGridContentRestHttpClientFactory i;
+
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context, FeatureContext fContext)//, IServiceCollection services)
+        public CleanUp(ScenarioContext context, FeatureContext fContext)
         {
             _scenarioContext = context;
             _featureContext = fContext;
-            // services.AddSingleton<IEventGridContentRestHttpClientFactory>(i);
         }
 
         private void TeardownDataWithPrefix(string prefix, string field)
@@ -38,7 +31,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
             if (!result)
             {
-                _scenarioContext.AddNotifiableFailure("Sql Cleardown", message);
+                _scenarioContext.AddFeatureFailure("Sql Cleardown", message);
             }
 
             //graph
@@ -49,7 +42,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             }
             catch (Exception e)
             {
-                _scenarioContext.AddNotifiableFailure("Neo Cleardown", e.Message);
+                _scenarioContext.AddFeatureFailure("Neo Cleardown", e.Message);
             }
         }
 
@@ -125,14 +118,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError )
             {
             }
-            if (_scenarioContext.ContainsKey(constants.NotifiableFailure))
+            if (_scenarioContext.ContainsKey(constants.featureFailure))
             {
                 string messageText = "Fatal error(s) detected in clean up:\n";
 
                 // cancel the rest of the feature run
-                _featureContext["failAll"] = true;
+                _featureContext[constants.featureFailAll] = true;
 
-                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.NotifiableFailure] )
+                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.featureFailure] )
                 {
                     Console.WriteLine($"Error: {message.Key} - {message.Value}");
                     messageText += $"  {message.Key} - {message.Value}";

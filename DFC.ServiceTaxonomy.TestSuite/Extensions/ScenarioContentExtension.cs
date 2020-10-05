@@ -44,24 +44,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return context.Get<T>(key);
         }
 
-        public static void AddNotifiableFailure(this ScenarioContext context, string messageContext, string message)
+        public static void AddFeatureFailure(this ScenarioContext context, string messageContext, string message)
         {
             Dictionary<string, string> failures;
-            if (context.ContainsKey(constants.NotifiableFailure))
+            if (context.ContainsKey(constants.featureFailure))
             {
-                failures = (Dictionary<string, string>)context[constants.NotifiableFailure];
+                failures = (Dictionary<string, string>)context[constants.featureFailure];
             }
             else 
             {
                 failures = new Dictionary<string, string>();
             }
             failures.Add(messageContext, message);
-            context[constants.NotifiableFailure] = failures;
+            context[constants.featureFailure] = failures;
         }
 
-        public static Dictionary<string,string> GetNotifiableFailure(this ScenarioContext context)
+        public static Dictionary<string,string> GetFeatureFailure(this ScenarioContext context)
         {
-            return context.ContainsKey(constants.NotifiableFailure) ? (Dictionary<string, string>)context[constants.NotifiableFailure] : new Dictionary<string, string>();
+            return context.ContainsKey(constants.featureFailure) ? (Dictionary<string, string>)context[constants.featureFailure] : new Dictionary<string, string>();
         }
     }
 }

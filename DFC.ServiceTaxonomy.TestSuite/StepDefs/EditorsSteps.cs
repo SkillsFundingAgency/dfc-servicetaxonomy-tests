@@ -334,7 +334,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _scenarioContext.GetEnv().sqlServerChecksEnabled.Should().BeTrue("Because sql server checks must be enabled for the step to execute");
             
-            string displayName = (string)_scenarioContext[constants.Title];
+            string displayName = (string)_scenarioContext[constants.title];
             string contentType = (string)_scenarioContext[constants.ContentType];
             string prefix =  (string)_scenarioContext[constants.prefix];
 
@@ -371,7 +371,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIAllowMultipleItemsToBeSelected()
         {
             string contentType = (string)_scenarioContext[constants.ContentType];
-            string FieldName = (string)_scenarioContext[constants.FieldName];
+            string FieldName = (string)_scenarioContext[constants.fieldName];
             _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
         }
 
@@ -568,7 +568,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string contentType = (string)_scenarioContext[constants.ContentType];
             _addContentType.EditField(contentType, p0);
-            _scenarioContext[constants.FieldName] = p0;
+            _scenarioContext[constants.fieldName] = p0;
         }
 
         //content type
@@ -764,10 +764,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
                 Thread.Sleep(720000);
             }
-
             file.Close();
             Console.WriteLine("There were {0} lines.", counter);
-
         }
 
         [Given(@"I select the ""(.*)"" option for the first item that is found")]
@@ -793,9 +791,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     throw new Exception($"Action first item in list - Unsupported operation: {p0}");
             }
-            
         }
-
 
         public string TransformTableName( string source)
         {
@@ -842,7 +838,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             table = filename.Split('.')[1];
             table = rgx.Match(filename.Split('.')[1]).Value;
             table = TransformTableName(table);
-
 
             // get initial record count
             var ds = _scenarioContext.GetSQLConnection().GetRecordCount("ContentItemIndex", constants.ContentType, table);
@@ -1006,8 +1001,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return returnStatus;
         }
 
-
-
         #endregion
             #region when steps
         [When(@"I publish the item")]
@@ -1062,15 +1055,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
         }
 
-
-
-
         [When(@"I delete the item")]
         public void WhenIDeleteTheItem()
         {
             _manageContent.DeleteFirstItem();
         }
-
 
         [When(@"I confirm the delete action")]
         public void WhenIConfirmTheDeleteAction()
@@ -1091,7 +1080,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentItemBase.ConfirmSaveDraftSuccess().Should().BeTrue();
         }
 
-
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
         public void ThenAnValidationErrorIsShownFor(string validationType, string field)
         {
@@ -1105,8 +1093,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             //_scenarioContext.Remove(constants.requestVariables);
         }
-
-
 
         [Then(@"the edit action completes succesfully")]
         public void ThenTheEditActionCompletesSuccesfully()
@@ -1138,8 +1124,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.ConfirmDiscardedSuccessfully().Should().BeTrue();
         }
 
-
-
         [Then(@"the delete action completes succesfully")]
         public void ThenTheDeleteActionCompletesSuccesfully()
         {
@@ -1152,8 +1136,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // temporary fix
             string id = _scenarioContext.GetContentItemId(0);
             _manageContent.ConfirmItemStillListed(id).Should().BeTrue() ;
-
-            //_manageContent.ConfirmRemovalFailed().Should().BeTrue();
         }
 
 
@@ -1306,9 +1288,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             match.Should().BeTrue($"Because {message}");
         }
 
-
-
-
         [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
         public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndThePreviousURI(string graphReference, string queryReference, Table expectedResults)
         {
@@ -1342,8 +1321,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
             match.Should().BeTrue($"Because {message}");
         }
-
-
 
         [Given(@"I store the uri from the ""(.*)"" graph using the ""(.*)"" query")]
         public void GivenIStoreTheUriFromTheGraphUsingTheQuery(string graphReference, string queryReference)
@@ -1389,7 +1366,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     expectedresults[field] = prefix + value;
                 }
             }
-
 
             match = AreEqual(expectedresults, results);
             if (!match)
@@ -1444,7 +1420,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"I can navigate to the content item ""(.*)"" in Orchard Core core")]
         public void ThenICanNavigateToTheContentItemInOrchardCoreCore(string p0)
         {
-            //_manageContent.FindItem(p0);
             _manageContent.EditItem(p0);
         }
 
@@ -1493,7 +1468,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             string sqlCommand = sql_ClearDownAllContentItemsOfType;
             sqlCommand = sqlCommand.Replace("@ContentType@", p0);
-            int count = _scenarioContext.GetSQLConnection().ExecuteNonQuery(sqlCommand,null);
+            int count = _scenarioContext.GetSQLConnection().ExecuteNonQuery(sqlCommand);
             _scenarioContext.CloseSQLConnection();
             Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);
         }
@@ -1505,7 +1480,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(newUri);
         }
 
-
         //TODO_DRAFT move this to helper / extension?
         private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message, bool checkData = true)
         {
@@ -1516,8 +1490,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             while (!done)
             {
                 string uriTokenValue;
-
-
                 Neo4JHelper neo4JHelper;
 
                 //TODO_DRAFT improve connection handling
@@ -1558,9 +1530,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     if (checkData)
                     {
                         object first = returnObject[0];
-
-                        //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
-
                         foreach (var var in compareValues)
                         {
                             Type myType = returnObject[0].GetType();
@@ -1660,10 +1629,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                        null,
                                        out message,
                                        false).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
-            //Neo4JHelper neo4JHelper = new Neo4JHelper();
-            //neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
-            //                    _scenarioContext.GetEnv().neo4JUid,
-            //                    _scenarioContext.GetEnv().neo4JPassword); ;
         }
 
         [Then(@"the data is not present in the PUBLISH Graph database")]
@@ -1677,8 +1642,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             AssertDataNotPresentInGraph(constants.preview);
         }
-
-
 
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
@@ -1699,8 +1662,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
 
-
-
         [Then(@"the following graph query returns (.*) record")]
         public void ThenTheFollowingGraphQueryReturnsRecord(int p0, string multilineText)
         {
@@ -1717,8 +1678,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int count = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypherStatement, null);
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
-
-  
+ 
     #endregion
     }
 }

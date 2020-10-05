@@ -8,23 +8,14 @@ using System.Linq;
 
 namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
-    public class Neo4jConnection
-    {
-        public string uri { get; set; }
-        public string userName { get; set; }
-        public string password { get; set; }
-        public string graphName { get; set; } = "neo4j";
-    }
-
     public class Neo4JHelper
     {
         private const string verificationCypher = "RETURN 1";
+
         private Neo4jConnection connection;
         private string graphName = "neo4j";
+
         public IDriver Neo4jDriver { get; private set; }
-        //public Neo4JHelper()
-        //{
-        //}
 
         public Neo4JHelper(Neo4jConnection _connection)
         {
@@ -41,7 +32,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public Neo4JHelper ( string _graphName)
         {
             initalise();
-            if (_graphName.Length >0)
+            if (_graphName.Length > 0)
                 graphName = _graphName;
         }
 
@@ -99,7 +90,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public List<Dictionary<string, object>> ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
         {
             List<Dictionary<string, object>> resultList = new List< Dictionary<string, object>>();
-            //IResult result= null;
             try
             {
                 using (var session = Neo4jDriver.Session(builder => builder.WithDatabase(graphName)) )
@@ -108,7 +98,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     foreach (var record in result)
                     {
                         Dictionary<string, object> item = new Dictionary<string, object>();
-
                         foreach (var value in record.Values)
                         {
                             item.Add(value.Key, value.Value);
@@ -116,7 +105,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                         resultList.Add(item);
                     }
                 }
-                
             }
             catch (Neo4jException e)
             {
@@ -141,7 +129,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         {
             var result = ExecuteTableQuery(queryText, queryParameters);
             return result.First().Keys.Count;
-
         }
 
         public Dictionary<string,string> GetSingleRowAsDictionary(string queryText)
@@ -208,7 +195,5 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return resultsList;
         }
-
-
     }
 }

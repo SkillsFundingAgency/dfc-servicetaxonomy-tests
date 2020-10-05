@@ -118,29 +118,31 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             // check Graph connections
             try
             {
-                _scenarioContext.GetGraphConnection("publish");
+                _scenarioContext.GetGraphConnection(constants.publish);
             }
             catch( Exception e)
             {
-                _featureContext["failAll"] = true;
+                _featureContext[constants.featureFailAll] = true;
                 Console.WriteLine("Unable to verify connection to publish graph");
                 throw e;
             }
+
             try
             {
-                _scenarioContext.GetGraphConnection("preview");
+                _scenarioContext.GetGraphConnection(constants.preview);
             }
             catch (Exception e)
             {
-                _featureContext["failAll"] = true;
+                _featureContext[constants.featureFailAll] = true;
                 Console.WriteLine("Unable to verify connection to preview graph");
                 throw e;
             }
+
             if (_scenarioContext.GetEnv().neo4JUrl1.Length > 0)
             {
                 try
                 {
-                    _scenarioContext.GetGraphConnection("publish",1);
+                    _scenarioContext.GetGraphConnection(constants.publish, 1);
                 }
                 catch (Exception e)
                 {
@@ -149,15 +151,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                     throw e;
                 }
             }
+
             if (_scenarioContext.GetEnv().neo4JUrlDraft1.Length > 0)
             {
                 try
                 {
-                    _scenarioContext.GetGraphConnection("preview", 1);
+                    _scenarioContext.GetGraphConnection(constants.preview, 1);
                 }
                 catch (Exception e)
                 {
-                    _featureContext["failAll"] = true;
+                    _featureContext[constants.featureFailAll] = true;
                     Console.WriteLine("Unable to verify connection to preview1 graph");
                     throw e;
                 }
