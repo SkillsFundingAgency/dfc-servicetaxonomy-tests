@@ -227,7 +227,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             else
             {
                 connection = new Neo4JHelper(graphName);
-                connection.connect(graphUri,
+                connection.Connect(graphUri,
                                     userId,
                                     password);
                 context[contextRef] = connection;

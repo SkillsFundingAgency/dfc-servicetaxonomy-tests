@@ -22,7 +22,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             connection = _connection;
             if (connection.graphName.Length > 0)
                 graphName = connection.graphName;
-            connect(connection.uri, connection.userName, connection.password);
+            Connect(connection.uri, connection.userName, connection.password);
         }
 
         private void initalise()
@@ -39,20 +39,20 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public Neo4JHelper(string uri, string userName, string password)
         {
             initalise();
-            connect(uri, userName, password);
+            Connect(uri, userName, password);
         }
 
-        public void connect()
+        public void Connect()
         {
-            connect(connection.uri, connection.uri, connection.password);
+            Connect(connection.uri, connection.uri, connection.password);
         }
 
-        public void connect(Neo4jConnection conn)
+        public void Connect(Neo4jConnection conn)
         {
-            connect(conn.uri, conn.uri, conn.password);
+            Connect(conn.uri, conn.uri, conn.password);
         }
 
-        public void connect( string uri, string userName, string password)
+        public void Connect( string uri, string userName, string password)
         {
             connection.uri = uri;
             connection.userName = userName;
@@ -77,7 +77,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     {
                         case 1:
                             Neo4jDriver.Dispose();
-                            connect();
+                            Connect();
                             break;
                         case 2:
                             throw e;
