@@ -39,7 +39,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
         }
 
-        [AfterScenario( Order = 1)]
+        [AfterScenario( Order = 5)]
         public void TearDownDataItems()
         {
             // clear down based on stored uri
