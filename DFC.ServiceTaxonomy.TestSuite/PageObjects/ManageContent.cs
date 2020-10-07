@@ -15,6 +15,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         const string actionPlaceHolder = "{action}";
         const string confirmationMessage = "has been {action}.";
         const string confirmationMessageClone = "Successfully cloned.";
+        const string pageNotFoundError = "The page could not be found";
 
         #endregion
         ScenarioContext _scenarioContext;
@@ -220,6 +221,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool ConfirmSavedSuccessfully()
         {
             return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, save));
+        }
+
+        public bool ConfirmNoPageError()
+        {
+            return !ConfirmDisplayMessage(pageNotFoundError);
         }
 
         public bool ConfirmClonedSuccessfully()

@@ -1072,12 +1072,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheItemIsPublishedSuccesfully()
         {
             _addContentItemBase.ConfirmPublishSuccess().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the item is saved succesfully")]
         public void ThenTheAddTheItemIsSavedSuccesfully()
         {
             _addContentItemBase.ConfirmSaveDraftSuccess().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
@@ -1098,36 +1100,42 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheEditActionCompletesSuccesfully()
         {
             _manageContent.ConfirmPublishedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the save action completes succesfully")]
         public void ThenTheSaveActionCompletesSuccesfully()
         {
             _manageContent.ConfirmSavedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the clone action completes succesfully")]
         public void ThenTheCloneActionCompletesSuccesfully()
         {
             _manageContent.ConfirmClonedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the unpublish action completes succesfully")]
         public void ThenTheUnpublishActionCompletesSuccesfully()
         {
             _manageContent.ConfirmUnpublishedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the discard action completes succesfully")]
         public void ThenTheDiscardActionCompletesSuccesfully()
         {
             _manageContent.ConfirmDiscardedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the delete action completes succesfully")]
         public void ThenTheDeleteActionCompletesSuccesfully()
         {
             _manageContent.ConfirmRemovedSuccessfully().Should().BeTrue();
+            _manageContent.ConfirmNoPageError().Should().BeTrue();
         }
 
         [Then(@"the delete action could not be completed")]
