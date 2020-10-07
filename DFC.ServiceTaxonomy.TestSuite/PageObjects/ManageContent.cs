@@ -92,6 +92,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public bool CheckOptionAvailableToFirstItem( string action)
+        {
+            try
+            {
+                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
+                var element = _scenarioContext.GetWebDriver().FindElement(By.LinkText(action));
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally
+            {
+                var esc = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".btn-secondary"));
+                if (esc.Count > 0)
+                {
+                    esc[0].SendKeys(Keys.Escape);
+                }
+            }
+            return true;
+        }
+
         public ManageContent ActionFirstItem( string action )
         {
             try
@@ -121,10 +143,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             ActionFirstItem("Delete");
             _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
-            if (!ConfirmRemovedSuccessfully())
-            {
-                throw new Exception("Unable to confirm the item has been removed");
-            }
+            //if (!ConfirmRemovedSuccessfully())
+            //{
+            //    throw new Exception("Unable to confirm the item has been removed");
+            //}
              return this;
         }
 
@@ -166,40 +188,51 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
         public bool ConfirmRemovedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder,remove));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder,remove));
+        }
+
+        public bool ConfirmRemovalFailed()
+        {
+            return ConfirmDisplayMessage("could not be removed");
+        }
+
+        public bool ConfirmItemStillListed(string id)
+        {
+            var items = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//a[contains(@href,'{id}')]"));
+            return items.Count > 0;
         }
 
         public bool ConfirmUnpublishedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, unpublish));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, unpublish));
         }
 
         public bool ConfirmDiscardedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, remove));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, remove));
         }
 
         public bool ConfirmPublishedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, publish));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, publish));
         }
 
         public bool ConfirmSavedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessage.Replace(actionPlaceHolder, save));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, save));
         }
 
         public bool ConfirmClonedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessageClone);
+            return ConfirmDisplayMessage(confirmationMessageClone);
         }
 
         public bool ConfirmDraftDiscardedSuccessfully()
         {
-            return ConfirmActionSuccess(confirmationMessageClone);
+            return ConfirmDisplayMessage(confirmationMessageClone);
         }
 
-        public bool ConfirmActionSuccess(string message)
+        public bool ConfirmDisplayMessage(string message)
         {
             bool returnValue = false;
             try

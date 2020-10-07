@@ -14,21 +14,26 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
     public class SQLServerHelper
     {
+        private const string Apos = "'";
+        private const string permissionsSql = "SELECT count(permission_name) FROM fn_my_permissions('','DATABASE') where permission_name in (__VALUES__)";
 
         private SqlConnection Connection;
         private Dictionary<string, string> ReplacementDict = new Dictionary<string, string>();
-        private const string Apos = "'";
+
         public string parameterTableReferenceFieldName { get; set; } = "ParameterName";
         public string parameterTableValueFieldName { get; set; } = "ParameterValue";
+
         public void AddReplacementRule(string original, string replacement)
         {
             ReplacementDict[original] = replacement;
         }
+
         public void SetConnection(string connectionString)
         {
             connectionString.Should().NotBeNullOrEmpty();
             Connection = new SqlConnection(connectionString);
         }
+
         public Boolean OpenConnection()
         {
             if (Connection.ConnectionString != string.Empty)
@@ -45,6 +50,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return (Connection.State == System.Data.ConnectionState.Open);
         }
+
         public Boolean CloseConnection()
         {
             if (Connection.State == System.Data.ConnectionState.Open)
@@ -54,6 +60,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return false;
         }
+
         string checkForReplacements(string fieldName)
         {
             string returnString = fieldName;
@@ -77,9 +84,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 {
                     using (SqlCommand cmd = new SqlCommand(sql, Connection))
                     {
-
                         SqlDataReader reader = cmd.ExecuteReader();//(CommandBehavior.CloseConnection);
-
                         if (reader.HasRows)
                         {
                             returnValue = true;  // data exists
@@ -112,7 +117,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 try { 
                     using (SqlCommand cmd = new SqlCommand(sql, Connection))
                     {
-
                         SqlDataAdapter da = new SqlDataAdapter();
                         da.SelectCommand = cmd;
                         da.Fill(ds);
@@ -140,11 +144,8 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 {
                     using (SqlCommand cmd = new SqlCommand(sql, Connection))
                     {
-
                         SqlDataAdapter da = new SqlDataAdapter();
-                        returnValue = cmd.ExecuteScalar().ToString(); ;
-                        //da.SelectCommand = cmd;
-                        //da.Fill(ds);
+                        returnValue = cmd.ExecuteScalar().ToString();
                     }
                 }
                 catch (SqlException se)
@@ -163,7 +164,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 
         public long GetRecordCount(string table, string columnName, string recordId)
         {
-            // DataSet ds = new DataSet(table);
             string sql = @"select count(1) from[" + table + "] where " + columnName + " = '" + recordId + "'";
             string returnValueString = "0";
 
@@ -174,9 +174,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     using (SqlCommand cmd = new SqlCommand(sql, Connection))
                     {
                         returnValueString = cmd.ExecuteScalar().ToString(); ;
-                        //SqlDataAdapter da = new SqlDataAdapter();
-                        //da.SelectCommand = cmd;
-                        //da.Fill(ds);
                     }
                 }
                 catch (SqlException se)
@@ -186,7 +183,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return long.Parse(returnValueString);
         }
-
 
         public List<Dictionary<string, string>> GetDataTableDictionaryList(DataSet dataSet, string primaryKey)
         {
@@ -285,9 +281,6 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                                 continue;
                             }
                         }
-
-
-                        //T item = (T)Activator.CreateInstance(typeof(T), row);
                         items.Add(obj);
                     }
                 }
@@ -299,25 +292,14 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return items;
         }
 
-        public int ExecuteNonQuery(string commandText, string[] parameters)
+        public int ExecuteNonQuery(string commandText)
         {
-            string paramsString = "";
             int rowsAffected = 0;
-            //parameters.Where((data, index) =>
-            //{
-            //    paramsString += (index > 0 ? "," : "(") + Apos + data + Apos + (index == parameters.Length - 1 ? ")" : "");
-            //    return false;
-            //}).Any();
-
-    //        string sqlString = "select * from [" + functionName + "] " + paramsString;
             if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
             {
                 try
                 {
                     SqlCommand myCommand = new SqlCommand(commandText, Connection);
-                    // myCommand.CommandText = commandText;
-
-
                     rowsAffected = myCommand.ExecuteNonQuery();
 
                 }
@@ -329,30 +311,27 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return rowsAffected;
         }
 
-
-        public DataSet ExecuteStoredProcedure(string procName)
+        public (bool,string) ExecuteScalar(string commandText, string[] parameters)
         {
-            DataSet ds = new DataSet(procName);
+            string message = string.Empty;
+            bool success = true;
             if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
             {
                 try
                 {
-                    SqlCommand myCommand = new SqlCommand(procName, Connection);
-                    myCommand.CommandType = CommandType.StoredProcedure;
-                    myCommand.Parameters.Add("@TouchPointId", SqlDbType.VarChar).Value = "9000000001";
-                    myCommand.Parameters.Add("@TaxYear", SqlDbType.VarChar).Value = "1920";
-                    SqlDataAdapter da = new SqlDataAdapter();
-                    da.SelectCommand = myCommand;
-                    da.Fill(ds);
-
+                    SqlCommand myCommand = new SqlCommand(commandText, Connection);
+                    message = myCommand.ExecuteScalar().ToString();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
+                    message = e.Message;
+                    success = false;
                 }
             }
-            return ds;
+            return (success,message);
         }
+ 
         public bool CheckRecordExists(string table, string primaryKey, string recordId)
         {
             bool success = false;
@@ -381,6 +360,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return success;
         }
+
         public bool DeleteRecord(string table, string primaryKey, string recordId)
         {
             bool success = false;
@@ -403,51 +383,18 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             return success;
         }
 
-
-
-
-        public string GetParameterValue(string table, string parameterName)
+        public bool CheckPermissions(string[] requiredPermissions)
         {
-            //todo
-            return null;
+            bool success = false;
+            string returnValue;
+            string list = string.Empty;
+            foreach (var item in requiredPermissions)
+            {
+                list += (list == string.Empty ? string.Empty : ", ") + $"'{item}'";
+            }
+            (success, returnValue ) = ExecuteScalar(permissionsSql.Replace("__VALUES__", list),null);
+            success = success && int.Parse(returnValue) == requiredPermissions.Count();
+            return success;
         }
-        //public bool UpsertParameterValue(string table, string parameterName, string ParameterValue)
-        //{
-        //    bool success = true;
-        //    //   parameterTableReferenceFieldName
-        //    //   parameterTableValueFieldName
-        //    string sqlString =
-        //        "IF EXISTS (SELECT {NAMEFIELD} FROM [dbo].[{TABLE}] WHERE {NAMEFIELD} = '{NAME}')" + System.Environment.NewLine +
-        //        "BEGIN" + System.Environment.NewLine +
-        //        "UPDATE[dbo].[{TABLE}] SET {VALUEFIELD} = '{VALUE}' WHERE {NAMEFIELD} = '{NAME}'" + System.Environment.NewLine +
-        //        "END" + System.Environment.NewLine +
-        //        "ELSE" + System.Environment.NewLine +
-        //        "BEGIN" + System.Environment.NewLine +
-        //        "INSERT INTO[dbo].[{TABLE}]" + System.Environment.NewLine +
-        //        "({NAMEFIELD}, {VALUEFIELD}) VALUES('{NAME}', '{VALUE}')" + System.Environment.NewLine +
-        //        "END";
-        //    sqlString = sqlString.Replace("{TABLE}", table);
-        //    sqlString = sqlString.Replace("{NAMEFIELD}", parameterTableReferenceFieldName);
-        //    sqlString = sqlString.Replace("{VALUEFIELD}", parameterTableValueFieldName);
-        //    sqlString = sqlString.Replace("{NAME}", parameterName);
-        //    sqlString = sqlString.Replace("{VALUE}", ParameterValue);
-        //    // check if connected
-        //    if (Connection.State == System.Data.ConnectionState.Open || OpenConnection())
-        //    {
-        //        try
-        //        {
-        //            SqlCommand newCommand = new SqlCommand(sqlString, Connection);
-        //            newCommand.ExecuteNonQuery();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine(e.ToString());
-        //            success = false;
-        //        }
-        //    }
-        //    return success;
-        //}
-
-
     }
 }

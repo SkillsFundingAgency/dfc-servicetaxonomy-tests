@@ -1,8 +1,8 @@
-﻿using Neo4j.Driver.V1;
+﻿using Neo4j.Driver;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+using System.Linq;
 
 
 
@@ -10,73 +10,134 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 {
     public class Neo4JHelper
     {
+        private const string verificationCypher = "RETURN 1";
+
+        private Neo4jConnection connection;
+        private string graphName = "neo4j";
+
         public IDriver Neo4jDriver { get; private set; }
 
-        public Neo4JHelper()
+        public Neo4JHelper(Neo4jConnection _connection)
         {
+            connection = _connection;
+            if (connection.graphName.Length > 0)
+                graphName = connection.graphName;
+            Connect(connection.uri, connection.userName, connection.password);
         }
 
-        public Neo4JHelper ( string uri)
+        private void initalise()
         {
-            connect(uri, string.Empty, string.Empty);
+            connection = new Neo4jConnection();
+        }
+        public Neo4JHelper ( string _graphName)
+        {
+            initalise();
+            if (_graphName.Length > 0)
+                graphName = _graphName;
         }
 
         public Neo4JHelper(string uri, string userName, string password)
         {
-            connect(uri, userName, password);
+            initalise();
+            Connect(uri, userName, password);
         }
 
-        public void connect( string uri, string userName, string password)
+        public void Connect()
         {
+            Connect(connection.uri, connection.uri, connection.password);
+        }
+
+        public void Connect(Neo4jConnection conn)
+        {
+            Connect(conn.uri, conn.uri, conn.password);
+        }
+
+        public void Connect( string uri, string userName, string password)
+        {
+            connection.uri = uri;
+            connection.userName = userName;
+            connection.password = password;
             var authToken = ( userName.Equals(string.Empty) ? AuthTokens.None : AuthTokens.Basic(userName, password) ) ;
             Neo4jDriver = GraphDatabase.Driver(new Uri(uri), authToken);
         }
 
-        public IStatementResult ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
+        public bool Verify()
         {
-            IStatementResult result= null;
-            try
+            int tries = 0;
+            while (tries++ <= 2)
             {
-                using (var session = Neo4jDriver.Session())
+                try
                 {
-                    result = session.Run(queryText, queryParameters);
+                    ExecuteTableQuery(verificationCypher, null);
+                    return true;
+                }
+                catch (Neo4jException e)
+                {
+                    switch (tries)
+                    {
+                        case 1:
+                            Neo4jDriver.Dispose();
+                            Connect();
+                            break;
+                        case 2:
+                            throw e;
+                    }
                 }
             }
-            catch (Exception e)
+            return false;
+        }
+
+        public List<Dictionary<string, object>> ExecuteTableQuery( string queryText, Dictionary<string,object> queryParameters)
+        {
+            List<Dictionary<string, object>> resultList = new List< Dictionary<string, object>>();
+            try
             {
-                throw new Exception("Error occured executing Cypher query" +
-                                 "\n Exception:" + e);
+                using (var session = Neo4jDriver.Session(builder => builder.WithDatabase(graphName)) )
+                {
+                    var result = session.Run(queryText, queryParameters);
+                    foreach (var record in result)
+                    {
+                        Dictionary<string, object> item = new Dictionary<string, object>();
+                        foreach (var value in record.Values)
+                        {
+                            item.Add(value.Key, value.Value);
+                        }
+                        resultList.Add(item);
+                    }
+                }
             }
-            return result;
+            catch (Neo4jException e)
+            {
+                throw e;
+            }
+            return resultList;
         }
 
         public int ExecuteCountQuery(string queryText, Dictionary<string, object> queryParameters)
         {
             int recordCount = -1;
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
-            foreach (IRecord record in result)
+            var result = ExecuteTableQuery(queryText, queryParameters);
+            foreach (var record in result)
             {
-                string a = record.Values[record.Keys[0]].ToString(); ;  
+                string a = (string)record.First().Value;
                 int.TryParse(a, out recordCount);
             }
             return recordCount;
-
         }
 
         public int GetRecordCount(string queryText, Dictionary<string, object> queryParameters)
         {
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
-            return result.Keys.Count;
-
+            var result = ExecuteTableQuery(queryText, queryParameters);
+            return result.First().Keys.Count;
         }
 
         public Dictionary<string,string> GetSingleRowAsDictionary(string queryText)
         {
-            IStatementResult result = ExecuteTableQuery(queryText, null);
+            var result = ExecuteTableQuery(queryText, null);
             Dictionary<string, string> results = new Dictionary<string, string>();
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
-                foreach (var item in record.Values)
+                foreach (var item in record)
                 {
                     results.Add(item.Key, (item.Value == null ? "" : item.Value.ToString()) );
                 }
@@ -90,9 +151,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public IList<T> GetResultsList<T>(string queryText, Dictionary<string, object> queryParameters) where T : new()
         {
             IList<T> resultsList = new List<T>();
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            var result = ExecuteTableQuery(queryText, queryParameters);
 
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
                 T newItem = new T();
                 PropertyInfo[] properties = typeof(T).GetProperties();
@@ -101,7 +162,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     string value;
                     try
                     {
-                        value = record.Values[property.Name].ToString();
+                        value = record[property.Name].ToString();
                         property.SetValue(newItem, value);
                     }
                     catch { }
@@ -114,9 +175,9 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
         public IList<Object> GetResultsList(Type type, string queryText, Dictionary<string, object> queryParameters) 
         {
             IList<Object> resultsList = new List<Object>();
-            IStatementResult result = ExecuteTableQuery(queryText, queryParameters);
+            var result = ExecuteTableQuery(queryText, queryParameters);
 
-            foreach (IRecord record in result)
+            foreach (var record in result)
             {
                 object newItem = Activator.CreateInstance(type);
                 PropertyInfo[] properties = type.GetProperties();
@@ -125,7 +186,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     string value;
                     try
                     {
-                        value = record.Values[property.Name].ToString();
+                        value = record[property.Name].ToString();
                         property.SetValue(newItem, value);
                     }
                     catch { }
@@ -134,7 +195,5 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             }
             return resultsList;
         }
-
-
     }
 }

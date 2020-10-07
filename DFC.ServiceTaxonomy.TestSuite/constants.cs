@@ -35,6 +35,8 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string recordIdCount = "recordIdCount";
         public const string recordIds = "recordIds";
         public const string cypherQuery = "cypherQuery";
+        public const string testDataPrefix = "@@DFC_AT@@";
+        public const string localDataPrefix = "@@L_AT@@";
         public const string prefix = "prefix";
         public const string prefixField = "prefixField";
         public const string ContentType = "contentType";
@@ -42,24 +44,14 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public const string publish = "publish";
         public const string draft = "draft";
         public const string preview = "preview";
-        public const string Title = "Title";
-        public const string FieldName = "FieldName";
+        public const string title = "Title";
+        public const string fieldName = "FieldName";
+        public const string featureFailure = "featureFailure";
+        public const string featureFailAll = "featureFailAll";
 
         //cypher query template
         public const string cypher_ClearDownItemsWithPrefix = @"match (i) where i.@FIELDNAME@ STARTS WITH '@PREFIX@' detach delete i";
         public const string cypher_ClearDownItemsWithUri = @"match (i) where i.uri = '@URI@' detach delete i";
 
-        public const string sql_ClearDownAllContentItemsOfType =
-                                                               @"begin transaction t1
-                                                                select DocumentId
-                                                                into #tmpdocids
-                                                                from [dbo].[ContentItemIndex]
-                                                                where @WHERECLAUSE@;
-                                                                delete from [dbo].PageLocationPartIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
-                                                                delete from [dbo].TaxonomyIndex where DocumentId in ( select DocumentId from #tmpdocids ) 
-                                                                delete from [dbo].[ContentItemIndex] where DocumentId in ( select DocumentId from #tmpdocids ) ;
-                                                                delete from [dbo].Document where id in ( select DocumentId from #tmpdocids );
-                                                                drop table #tmpdocids
-                                                                commit transaction t1";
     }
 }

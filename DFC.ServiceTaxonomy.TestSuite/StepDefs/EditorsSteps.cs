@@ -22,7 +22,7 @@ using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using Neo4j.Driver.V1;
+using Neo4j.Driver;
 using AngleSharp.Css.Dom;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
@@ -79,8 +79,142 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private GraphSyncPart _GraphSyncPart;
 
         private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
-                                                                    { "page_with_html","match (h:HTML) <-[hasHTML]- (p:Page) where p.uri =  '__URI__' return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" }
-                                                                    };
+    {
+        "page_with_html",
+        @"match (h:HTML) <-[hasHTML]- (p:Page) 
+          where p.uri =  '__URI__' 
+          return p.skos__prefLabel as skos__prefLabel ,h.htmlbody_Html as htmlbody_Html" 
+    },
+    {
+        "page_with_shared_content",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) -[hasSharedContent]-> (s:SharedContent)
+         where p.uri =  '__URI__' 
+         return p.skos__prefLabel as skos__prefLabel, s.skos__prefLabel as sharedContent" 
+    },
+    {
+        "page_with_two_shared_content_in_same_widget",
+        @"match (s1:SharedContent) <-[r1:hasSharedContent]- (h1:HTMLShared) <-[r2:hasHHTMLShared]- (p:Page) -[r3:hasHTMLShared]-> (h2:HTMLShared) -[r4:hasSharedContent]-> (s2:SharedContent)
+         where p.uri =  '__URI1__' 
+         and s1.uri = '__URI2__'
+         and s1.uri <> s2.uri
+         and h1.uri = h2.uri
+         return p.skos__prefLabel as skos__prefLabel, s1.skos__prefLabel as sharedContent1, s2.skos__prefLabel as sharedContent2"
+    },
+    {
+        "number_of_shared_content_on_widget_on_page",
+        @"match (s:SharedContent) <-[hasSharedContent]- (HTMLShared) <-[hasHTMLShared]- (p:Page) 
+         where p.uri =  '__URI__' 
+         return count (s) as count_of_sharedContent"
+    },
+    {
+        "page_widget_with_two_shared_content",
+        @"match (s1:SharedContent) <-[r1:hasSharedContent]- (h:HTMLShared) -[r2:hasSharedContent]-> (s2:SharedContent)
+         where h.uri =  '__URI1__'
+         and s1.uri = '__URI2__'
+         and s2.uri = '__URI3__'
+         return s1.skos__prefLabel as SharedContent1, s2.skos__prefLabel as SharedContent2"
+    },
+    {
+        "get_sharedhtml_uri_for_page",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared)
+          where p.uri =  '__URI__'  return h.uri as uri" 
+    },
+    {   
+        "page_with_wiget_only",
+        @"match (p:Page) -[hasHTMLShared]-> (h:HTMLShared) 
+          where p.uri =  '__URI__'  
+          and not (h) --> (:SharedContent)
+          return p.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "shared_content_with_no_related_items",
+        @"match (s:SharedContent)
+          where s.uri =  '__URI__'  
+          and not (s) --> (n)
+          return s.skos__prefLabel as sharedContent"
+    },
+    {
+        "page_by_uri",
+        @"match (p:Page) 
+         where p.uri =  '__URI__'  
+         return count(p) as pages_found" },
+    {
+        "page_location",
+        @"match (t1:Taxonomy) <-[hasPageLocationsTaxonomy]- (p:Page) -[r1:hasPageLocation]-> (l:PageLocation) <-[r2:hasPageLocation]- (t2:Taxonomy) 
+         where p.uri =  '__URI__'  
+         and t1.uri = t2.uri
+         return l.skos__prefLabel as location"
+    },
+    {
+        "widget_by_uri",
+        @"match (s:HTMLShared) 
+          where s.uri =  '__URI__'  
+          return count(s) as widgets_found"
+    },
+    {
+        "shared_content_by_uri",
+        @"match (s:SharedContent) 
+          where s.uri =  '__URI__'  
+          return count(s) as shared_content_found"  
+    },
+    {
+        "shared_content_title_by_uri",
+        @"match (s:SharedContent) 
+          where s.uri =  '__URI__'  
+          return s.skos__prefLabel as sharedContent"
+    },
+    {
+        "remove_relationship_to_widget",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          detach delete(r)
+          return n.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "remove_widget",
+        @"match (n:Page) --> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          detach delete(s)
+          return n.skos__prefLabel as skos__prefLabel"
+    },
+    {
+        "remove_properties_from_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          remove r.Alignment, r.Ordinal, r.Size
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+    {
+        "check_properties_for_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+        {
+        "check_for_additional_properties_on_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size, r.Additional as additional"
+    },
+    {
+        "update_properties_for_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          set r.Alignment = 'xxx'
+          set r.Ordinal= 'yyy'
+          set r.Size = 'zzz'
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size"
+    },
+    {
+        "add_property_to_page_to_widget_relationship",
+        @"match (n:Page) -[r]-> (s:HTMLShared) 
+          where n.uri =  '__URI__' 
+          set r.Additional = 'xxx'
+          return r.Alignment as alignment, r.Ordinal as ordinal, r.Size as size, r.Additional as additional"
+    }
+                                                        };
+        
+
         public EditorsSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
@@ -147,8 +281,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I set up a data prefix for ""(.*)""")]
         public void GivenISetUpADataPrefixFor(string p0)
         {
-            _scenarioContext[constants.prefix] = RandomString(5) + "_";
+            _scenarioContext[constants.prefix] = $"{(_scenarioContext.GetEnv().pipelineRun? constants.testDataPrefix : constants.localDataPrefix)}{RandomString(5)}_";
             _scenarioContext[constants.prefixField] = p0;
+            _scenarioContext.StoreToken("__PREFIX__", (string)_scenarioContext[constants.prefix]);
         }
 
         [Given(@"I get the recipe files ready")]
@@ -180,6 +315,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             
         }
 
+        [Given(@"I capture the generated URI and tag it ""(.*)""")]
+        public void GivenICaptureTheGeneratedURIGraphAndTagIt_UriId_Text(string tag)
+        {
+            _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI(), tag);
+
+        }
+
         [Given(@"I set the content type to be ""(.*)""")]
         public void GivenISetTheContentTypeToBe(string p0)
         {
@@ -190,15 +332,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I record the new documentId")]
         public void GivenIRecordTheNewDocumentId()
         {
-            string displayName = (string)_scenarioContext[constants.Title];
+            _scenarioContext.GetEnv().sqlServerChecksEnabled.Should().BeTrue("Because sql server checks must be enabled for the step to execute");
+            
+            string displayName = (string)_scenarioContext[constants.title];
             string contentType = (string)_scenarioContext[constants.ContentType];
             string prefix =  (string)_scenarioContext[constants.prefix];
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-
             // get initial record count
-            var result = sqlInstance.GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
+            var result = _scenarioContext.GetSQLConnection().GetFieldValueFromRecord("ContentItemId", "ContentItemIndex", $"DisplayText = '{(displayName.StartsWith(prefix) ? string.Empty : prefix)}{displayName}' and ContentType = '{contentType}'");
+            _scenarioContext.CloseSQLConnection();
             _scenarioContext.StoreRecordId(result);
         }
 
@@ -229,7 +371,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenIAllowMultipleItemsToBeSelected()
         {
             string contentType = (string)_scenarioContext[constants.ContentType];
-            string FieldName = (string)_scenarioContext[constants.FieldName];
+            string FieldName = (string)_scenarioContext[constants.fieldName];
             _addContentType.SelectContentPickerAllowMultipleItems(contentType, FieldName);
         }
 
@@ -247,9 +389,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
 
@@ -334,11 +479,29 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.FindItem(_scenarioContext.Get<string>( searchTerm ));
         }
 
+        [Given(@"I search for the text ""(.*)""")]
+        public void GivenISearchForTheText(string searchTerm)
+        {
+            _manageContent.FindItem(searchTerm);
+        }
+
         [Given(@"I select the first item that is found")]
         public void GivenISelectTheFirstItemThatIsFound()
         {
             _manageContent.EditFirstItem();
             _scenarioContext.StoreContentItemId(_addContentItemBase.ContentItemIdFromUrl());
+        }
+
+        [Given(@"I confirm the ""(.*)"" option is not available for the first item")]
+        public void GivenIConfirmTheOptionIsNotAvailableForTheFirstItem(string p0)
+        {
+            _manageContent.CheckOptionAvailableToFirstItem(p0).Should().BeFalse($"Because {p0} was unexpectedly found in the action list");
+        }
+
+        [Given(@"I confirm the ""(.*)"" option is available for the first item")]
+        public void GivenIConfirmTheOptionIsAvailableForTheFirstItem(string p0)
+        {
+            _manageContent.CheckOptionAvailableToFirstItem(p0).Should().BeTrue($"Because {p0} was unexpectedly not found in the action list");
         }
 
         //content type
@@ -409,7 +572,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string contentType = (string)_scenarioContext[constants.ContentType];
             _addContentType.EditField(contentType, p0);
-            _scenarioContext[constants.FieldName] = p0;
+            _scenarioContext[constants.fieldName] = p0;
         }
 
         //content type
@@ -605,10 +768,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
                 Thread.Sleep(720000);
             }
-
             file.Close();
             Console.WriteLine("There were {0} lines.", counter);
-
         }
 
         [Given(@"I select the ""(.*)"" option for the first item that is found")]
@@ -634,9 +795,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 default:
                     throw new Exception($"Action first item in list - Unsupported operation: {p0}");
             }
-            
         }
-
 
         public string TransformTableName( string source)
         {
@@ -662,6 +821,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         public int ImportRecipeFile(string filename, int recordCount, Dictionary<string, int> tallies)
         {
+            _scenarioContext.GetEnv().sqlServerChecksEnabled.Should().BeTrue("Because sql server checks are required for this function");
 
             string path = @"F:\temp\output.log";
             int returnStatus = 0;
@@ -672,8 +832,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int returnedAfterSeconds = 0;
             int verifiedSqlCountAfterSeconds = 0;
 
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
+            //SQLServerHelper sqlInstance = new SQLServerHelper();
+            //sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
 
             // get table name
             var pattern = "[a-zA-Z]+";
@@ -683,9 +843,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             table = rgx.Match(filename.Split('.')[1]).Value;
             table = TransformTableName(table);
 
-
             // get initial record count
-            var ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
+            var ds = _scenarioContext.GetSQLConnection().GetRecordCount("ContentItemIndex", constants.ContentType, table);
+            
             int startingSQLRecordCount = (int)ds;
 
             try
@@ -747,7 +907,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             while (!done)
             {
-                ds = sqlInstance.GetRecordCount("ContentItemIndex", constants.ContentType, table);
+                ds = _scenarioContext.GetSQLConnection().GetRecordCount("ContentItemIndex", constants.ContentType, table);
                 discoveredRows = (int)ds;
                 if (ds.Equals(recordCount + startingSQLRecordCount))
                 {
@@ -775,7 +935,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             }
             verifiedSqlCountAfterSeconds = (int) timer.Elapsed.TotalSeconds;
-
+            _scenarioContext.CloseSQLConnection();
             // now check all neo4j records have been synced
             done = false;
             string cypher = "match(a:" + table + ") return count(a)";
@@ -845,8 +1005,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return returnStatus;
         }
 
-
-
         #endregion
             #region when steps
         [When(@"I publish the item")]
@@ -863,11 +1021,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(
-                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                           ).ToList());
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(
+                                             sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                               ).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
 
@@ -887,23 +1048,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _scenarioContext.StoreContentItemId(id);
 
-                SQLServerHelper sqlInstance = new SQLServerHelper();
-                sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-                _scenarioContext.StoreContentItemIndexList(
-                                         sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
-                                                           ).ToList());
+                if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                {
+                    var sqlInstance = _scenarioContext.GetSQLConnection();
+                    _scenarioContext.StoreContentItemIndexList(
+                                             sqlInstance.ExecuteObject<ContentItemIndexRow>(sql_ContentItemIndexes.Replace(sql_ContentItemIdPlaceholder, id)
+                                                               ).ToList());
+                    _scenarioContext.CloseSQLConnection();
+                }
             }
         }
-
-
-
 
         [When(@"I delete the item")]
         public void WhenIDeleteTheItem()
         {
             _manageContent.DeleteFirstItem();
         }
-
 
         [When(@"I confirm the delete action")]
         public void WhenIConfirmTheDeleteAction()
@@ -924,7 +1084,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentItemBase.ConfirmSaveDraftSuccess().Should().BeTrue();
         }
 
-
         [Then(@"an ""(.*)"" validation error is shown for ""(.*)""")]
         public void ThenAnValidationErrorIsShownFor(string validationType, string field)
         {
@@ -938,8 +1097,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             //_scenarioContext.Remove(constants.requestVariables);
         }
-
-
 
         [Then(@"the edit action completes succesfully")]
         public void ThenTheEditActionCompletesSuccesfully()
@@ -971,13 +1128,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.ConfirmDiscardedSuccessfully().Should().BeTrue();
         }
 
-
-
         [Then(@"the delete action completes succesfully")]
         public void ThenTheDeleteActionCompletesSuccesfully()
         {
             _manageContent.ConfirmRemovedSuccessfully().Should().BeTrue();
         }
+
+        [Then(@"the delete action could not be completed")]
+        public void ThenTheDeleteActionCouldNotBeCompleted()
+        {
+            // temporary fix
+            string id = _scenarioContext.GetContentItemId(0);
+            _manageContent.ConfirmItemStillListed(id).Should().BeTrue() ;
+        }
+
 
         public bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
         {
@@ -1018,7 +1182,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheGraphMatchesTheExpectResultsUsingTheQuery(string graphReference, string queryReference, Table expectedResults)
         {
             cypherQueries.Should().ContainKey(queryReference);
-
+           // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
             string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
 
             if ( graphReference == constants.preview )
@@ -1027,8 +1191,165 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
 
             string message;
-            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(), out message, graphReference);
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
             match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" Uri")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheUri(string graphReference, string queryReference, string tag, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(tag).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"within expected timescales the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" Uri")]
+        public void ThenWithinExpectedTimescalesTheGraphMatchesTheExpectResultsUsingTheQueryAndTheUri(string graphReference, string queryReference, string tag, Table expectedResults)
+        {
+            // get earliest time
+            DateTime earliestTime = (DateTime)_scenarioContext["futureEvent"];
+            // get latest time
+            DateTime latestTime = (DateTime)_scenarioContext["futureEventLatest"];
+            // get poll frequency
+            TimeSpan pollFrequency = new TimeSpan(0, 0, 20);
+            TimeSpan grace = new TimeSpan(0, 0, 5);
+
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(tag).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            bool success = false;
+            while (!success && DateTime.Now < latestTime)
+            {
+                string message;
+                bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+                if (DateTime.Now < earliestTime - grace)
+                {
+                    match.Should().BeFalse("Because otherwise the event has been published too soon");
+                }
+                else if (match)
+                {
+                    success = true;
+                    break;
+                }
+                Thread.Sleep(pollFrequency);
+            }
+            success.Should().BeTrue("Because otherwise the condition was not met within the expected timescale");
+        }
+
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the ""(.*)"" and ""(.*)"" Uris")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheAndUris(string graphReference, string queryReference, string tag1, string tag2, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri1 = _scenarioContext.GetUri(tag1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri2 = _scenarioContext.GetUri(tag2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri1 = _scenarioContext.ConvertUriToDraft(uri1);
+                uri2 = _scenarioContext.ConvertUriToDraft(uri2);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI1__", uri1).Replace("__URI2__", uri2), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and ""(.*)"" and ""(.*)"" and ""(.*)"" Uris")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndAndAndUris(string graphReference, string queryReference, string tag1, string tag2, string tag3, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri1 = _scenarioContext.GetUri(tag1).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri2 = _scenarioContext.GetUri(tag2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+            string uri3 = _scenarioContext.GetUri(tag3).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri1 = _scenarioContext.ConvertUriToDraft(uri1);
+                uri2 = _scenarioContext.ConvertUriToDraft(uri2);
+                uri3 = _scenarioContext.ConvertUriToDraft(uri3);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI1__", uri1).Replace("__URI2__", uri2).Replace("__URI3__",uri3), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the previous URI")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndThePreviousURI(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(_scenarioContext.GetNumberOfStoredUris()-2).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Then(@"the ""(.*)"" graph matches the expect results using the ""(.*)"" query and the first URI")]
+        public void ThenTheGraphMatchesTheExpectResultsUsingTheQueryAndTheFirstURI(string graphReference, string queryReference, Table expectedResults)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            // expectedResults = _scenarioContext.ReplaceTokensInTable(expectedResults);
+            string uri = _scenarioContext.GetUri(0).Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            string message;
+            bool match = matchGraphQueryResultsWithDictionary(cypherQueries[queryReference].Replace("__URI__", uri), expectedResults.SingleRowToDictionary(_scenarioContext), out message, graphReference);
+            match.Should().BeTrue($"Because {message}");
+        }
+
+        [Given(@"I store the uri from the ""(.*)"" graph using the ""(.*)"" query")]
+        public void GivenIStoreTheUriFromTheGraphUsingTheQuery(string graphReference, string queryReference)
+        {
+            GivenIStoreTheUriFromTheGraphAndTagItUsingTheQuery(graphReference, queryReference, string.Empty);
+        }
+
+        [Given(@"I store the uri from the ""(.*)"" graph and tag it ""(.*)"" using the ""(.*)"" query")]
+        public void GivenIStoreTheUriFromTheGraphAndTagItUsingTheQuery(string graphReference, string tag, string queryReference)
+        {
+            cypherQueries.Should().ContainKey(queryReference);
+            string uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl).ToLower();
+
+            if (graphReference == constants.preview)
+            {
+                uri = _scenarioContext.ConvertUriToDraft(uri);
+            }
+
+            var results = _scenarioContext.GetGraphConnection(graphReference).GetSingleRowAsDictionary(cypherQueries[queryReference].Replace("__URI__", uri));
+
+            results.Count.Should().Be(1);
+            results.Should().ContainKey("uri");
+
+            _scenarioContext.StoreUri(results["uri"].Replace(_scenarioContext.GetEnv().contentApiBaseUrl.ToLower(), "<<contentapiprefix>>")
+                                                    .Replace(_scenarioContext.GetEnv().contentApiDraftBaseUrl.ToLower(), "<<contentapiprefix>>"), tag);
         }
 
         public bool matchGraphQueryResultsWithDictionary( string cypherQuery, Dictionary<string,string> expectedresults, out string message, string graph = constants.publish)
@@ -1043,7 +1364,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 string field = (string)_scenarioContext["prefixField"];
                 string value = expectedresults[field];
-                expectedresults[field] = (string)_scenarioContext["prefix"] + value;
+                string prefix = (string)_scenarioContext["prefix"];
+                if (!value.StartsWith(prefix))
+                {
+                    expectedresults[field] = prefix + value;
+                }
             }
 
             match = AreEqual(expectedresults, results);
@@ -1075,7 +1400,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         newValue = (string)_scenarioContext[constants.prefix] + newValue;
                     }
                     count++;
-                    rowData.Add(i.Key, newValue);
+                    rowData.Add(i.Key, _scenarioContext.ReplaceTokensInString(newValue) );
                     if (count == 1)
                     {
                         cyperQuery += newValue + "' return i.uri as uri";
@@ -1084,7 +1409,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     {
                         cyperQuery += " ,i." + i.Key + " as " + i.Key;
                     }
-
                 }
                 var match = matchGraphQueryResultsWithDictionary(cyperQuery, rowData, out message);
                 if (!match)
@@ -1100,7 +1424,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"I can navigate to the content item ""(.*)"" in Orchard Core core")]
         public void ThenICanNavigateToTheContentItemInOrchardCoreCore(string p0)
         {
-            //_manageContent.FindItem(p0);
             _manageContent.EditItem(p0);
         }
 
@@ -1144,11 +1467,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I delete SQL Server data for content type ""(.*)""")]
         public void GivenIDeleteSQLServerDataForContentType(string p0)
         {
+            if (!_scenarioContext.GetEnv().sqlServerChecksEnabled)
+                return;
+
             string sqlCommand = sql_ClearDownAllContentItemsOfType;
             sqlCommand = sqlCommand.Replace("@ContentType@", p0);
-            SQLServerHelper sqlInstance = new SQLServerHelper();
-            sqlInstance.SetConnection(_scenarioContext.GetEnv().sqlServerConnectionString);
-            int count = sqlInstance.ExecuteNonQuery(sqlCommand,null);
+            int count = _scenarioContext.GetSQLConnection().ExecuteNonQuery(sqlCommand);
+            _scenarioContext.CloseSQLConnection();
             Console.WriteLine("Deleted " + count + " records from sql server equating to " + count / 2 + "content items of type " + p0);
         }
 
@@ -1159,89 +1484,94 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.StoreUri(newUri);
         }
 
-
         //TODO_DRAFT move this to helper / extension?
         private bool CheckDataIsPresentInGraph( string target, string query, Dictionary<string, string> parameters, Dictionary<string,string> compareValues, out string message, bool checkData = true)
         {
-            string uriTokenValue;
+            bool done = false;
+            int graphRef = 0;
             bool match = true;
             message = "";
-            Neo4JHelper neo4JHelper;
-
-            //TODO_DRAFT improve connection handling
-            switch (target)
+            while (!done)
             {
-                case constants.draft:
-                case constants.preview:
-                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview);
-                    uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
-                    break;
-                case constants.publish:
-                case constants.published:
-                    neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish);
-                    uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
+                string uriTokenValue;
+                Neo4JHelper neo4JHelper;
 
-                    break;
-                default:
-                    message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
-                    return false;
-            }
+                //TODO_DRAFT improve connection handling
+                switch (target)
+                {
+                    case constants.draft:
+                    case constants.preview:
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.preview, graphRef);
+                        uriTokenValue = _scenarioContext.GetEnv().contentApiDraftBaseUrl;
+                        done = _scenarioContext.GetEnv().neo4JUrlDraft1.Length == 0 || graphRef > 0;
+                        break;
+                    case constants.publish:
+                    case constants.published:
+                        neo4JHelper = _scenarioContext.GetGraphConnection(constants.publish, graphRef);
+                        uriTokenValue = _scenarioContext.GetEnv().contentApiBaseUrl;
+                        done = _scenarioContext.GetEnv().neo4JUrl1.Length == 0 || graphRef > 0;
 
-            if (parameters.ContainsKey("uri"))
-            {
-                parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
-            }
+                        break;
+                    default:
+                        message = $"target must be {constants.draft}, {constants.preview}, {constants.publish} or {constants.published}";
+                        return false;
+                }
 
-            Console.WriteLine("Check data is present in graph:");
-            Console.WriteLine($"Query: {query}");
-            Console.WriteLine($"uri: {DictionaryToString(parameters)}");
+                if (parameters.ContainsKey("uri"))
+                {
+                    parameters["uri"] = parameters["uri"].Replace("<<contentapiprefix>>", uriTokenValue).ToLower();
+                }
 
-            Type requiredType = (Type)_scenarioContext[constants.responseType];
-            var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
+                Console.WriteLine($"Check data is present in {target}_{graphRef}graph:");
+                Console.WriteLine($"Query: {query}");
+                Console.WriteLine($"uri: {DictionaryToString(parameters)}");
 
-            if (returnObject.Count > 0)
-            {
-                if( checkData)
-                { 
-                    object first = returnObject[0];
+                Type requiredType = (Type)_scenarioContext[constants.responseType];
+                var returnObject = neo4JHelper.GetResultsList(requiredType, query, parameters.ToDictionary(pair => pair.Key, pair => (object)pair.Value));
 
-                    //Dictionary<string, string> vars = (Dictionary<string, string>)_scenarioContext.GetEditorFields();
-
-                    foreach (var var in compareValues)
+                if (returnObject.Count > 0)
+                {
+                    if (checkData)
                     {
-                        Type myType = returnObject[0].GetType();
-                        PropertyInfo propertyInfo = myType.GetProperty(var.Key);
-                        string varValue = "";
-                        try
+                        object first = returnObject[0];
+                        foreach (var var in compareValues)
                         {
-                            varValue = (string)propertyInfo.GetValue(returnObject[0], null);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                            Type myType = returnObject[0].GetType();
+                            PropertyInfo propertyInfo = myType.GetProperty(var.Key);
+                            string varValue = "";
+                            try
+                            {
+                                varValue = (string)propertyInfo.GetValue(returnObject[0], null);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
 
-                        string rawValue = varValue;
-                        //Todo keep track of type so tags can only be removed for non html fields rather than by name
-                        switch (var.Key)
-                        {
-                            case "Content":
-                                break;
-                            default:
-                                rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
-                                break;
-                        }
-                        if (var.Value != rawValue)
-                        {
-                            message += $"{target} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
-                            match = false;
+                            string rawValue = varValue;
+                            //Todo keep track of type so tags can only be removed for non html fields rather than by name
+                            switch (var.Key)
+                            {
+                                case "Content":
+                                    break;
+                                default:
+                                    rawValue = Regex.Replace(varValue, @"<[^>]*>", String.Empty);
+                                    break;
+                            }
+                            if (var.Value != rawValue)
+                            {
+                                message += $"{target}_{graphRef} graph - comparing {var.Key}:\nexpected: {var.Value}\nactual: {rawValue}\n";
+                                match = false;
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                match = false;
+                else
+                {
+                    message += $"Not found in {target}_{ graphRef}\n";
+                    match = false;
+                }
+                graphRef++;
             }
             return match;
         }
@@ -1303,10 +1633,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                                        null,
                                        out message,
                                        false).Should().BeFalse($"Because the record should not be present in the {graph} graph database");
-            //Neo4JHelper neo4JHelper = new Neo4JHelper();
-            //neo4JHelper.connect(graph == constants.publish ? _scenarioContext.GetEnv().neo4JUrl : _scenarioContext.GetEnv().neo4JUrlDraft,
-            //                    _scenarioContext.GetEnv().neo4JUid,
-            //                    _scenarioContext.GetEnv().neo4JPassword); ;
         }
 
         [Then(@"the data is not present in the PUBLISH Graph database")]
@@ -1320,8 +1646,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             AssertDataNotPresentInGraph(constants.preview);
         }
-
-
 
         [Then(@"the data is not present in the Graph databases")]
         public void ThenTheDataIsNotPresentInTheGraphDatabases()
@@ -1342,8 +1666,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             count.Should().Be(0, "Because the record should not be present in the graph database");
         }
 
-
-
         [Then(@"the following graph query returns (.*) record")]
         public void ThenTheFollowingGraphQueryReturnsRecord(int p0, string multilineText)
         {
@@ -1360,8 +1682,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int count = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypherStatement, null);
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
-
-  
+ 
     #endregion
     }
 }

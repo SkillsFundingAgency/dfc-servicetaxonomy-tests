@@ -40,11 +40,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keySkillData = "EscoSkillList";
         const string keyListOfStrings = "EscoListOfStrings";
         const string keyExpectedRecordCount = "ExpectedRecordCount";
-        #endregion
+
+     #endregion
 
 
 
-        public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
+    public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
             {
@@ -138,16 +139,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set<IList<Occupation>>(occupations, keyOccupationData);
         }
 
-        public static void StoreUri(this ScenarioContext context, string newUri, string type,  Object model , TeardownOption teardownOption)
+        public static void StoreUri(this ScenarioContext context, string newUri, string tag,  string type,  Object model , TeardownOption teardownOption)
         {
             var dataItems = GetDataItems(context);
-            dataItems.Add(new _DataItem(newUri, type, model, teardownOption) );
+            dataItems.Add(new _DataItem(newUri, tag, type, model, teardownOption) );
             context[constants.dataItems] = dataItems;
         }
 
-        public static void StoreUri(this ScenarioContext context, string newUri)
+        public static void StoreUri(this ScenarioContext context, string newUri, string tag = "")
         {
-            StoreUri(context, newUri, string.Empty, null, TeardownOption.None);
+            StoreUri(context, newUri, tag, string.Empty, null, TeardownOption.None);
         }
 
         public static bool RelateDataItems(this ScenarioContext context, int parentRef, int childRef, string title, string relationshipType)
@@ -192,6 +193,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 return "";
 
             return dataItems[index].Uri;
+        }
+
+        public static string GetUri(this ScenarioContext context, string tag)
+        {
+            string uri = "";
+            try
+            {
+                uri = GetDataItems(context).Where(d => d.Tag == tag).FirstOrDefault().Uri;
+            }
+            catch { }
+            return uri;
         }
 
         public static string GetDraftUri(this ScenarioContext context, int index)
@@ -239,7 +251,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
         {
-            return (List<ContentItemIndexRow>)context[constants.contentItemIndexes];
+            return context.ContainsKey(constants.contentItemIndexes) ? (List<ContentItemIndexRow>)context[constants.contentItemIndexes]
+                                                                     : new List<ContentItemIndexRow>();
         }
 
         public static void StoreContentItemId(this ScenarioContext context, string newId)

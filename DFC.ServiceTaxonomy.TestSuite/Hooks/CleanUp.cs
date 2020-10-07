@@ -1,10 +1,11 @@
-﻿using DFC.ServiceTaxonomy.TestSuite;
+﻿using DFC.ServiceTaxonomy.Events.Models;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using Newtonsoft.Json;
+using OrchardCore.ContentManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
@@ -13,10 +14,36 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class CleanUp
     {
         private ScenarioContext _scenarioContext;
+        private FeatureContext _featureContext;
+
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        public CleanUp(ScenarioContext context)
+        public CleanUp(ScenarioContext context, FeatureContext fContext)
         {
             _scenarioContext = context;
+            _featureContext = fContext;
+        }
+
+        private void TeardownDataWithPrefix(string prefix, string field)
+        {
+            //SQL
+            (bool result, string message) = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
+            Console.WriteLine($"CLEANUP: Deleted SQL Records with prefix {prefix}: {message}");
+
+            if (!result)
+            {
+                _scenarioContext.AddFeatureFailure("Sql Cleardown", message);
+            }
+
+            //graph
+            try
+            {
+                result = _scenarioContext.DeleteGraphNodesWithPrefix(field, prefix);
+                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+            }
+            catch (Exception e)
+            {
+                _scenarioContext.AddFeatureFailure("Neo Cleardown", e.Message);
+            }
         }
 
         [AfterScenario("webtest", Order = 10)]
@@ -26,16 +53,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             {
                 string prefix = _scenarioContext["prefix"].ToString();
                 string prefixField = _scenarioContext["prefixField"].ToString();
-                // attempt to clear down data from sql and neo where title / skos__PrefLabel begins with prefix
 
-                //SQL
-                int count = _scenarioContext.DeleteSQLRecordsWithPrefix(prefix);
-                Console.WriteLine("CLEANUP: Deleted " + count + "content items prefixed with " + prefix);
-                
-                //graph
-                bool result = _scenarioContext.DeleteGraphNodesWithPrefix(prefixField, prefix);
-                Console.WriteLine("CLEANUP: Succesfully deleted GRAPH items prefixed with " + prefix);
+                TeardownDataWithPrefix(prefix, prefixField);
+
+                if (_scenarioContext.GetEnv().pipelineRun)
+                {
+                    TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
+                }
             }
+
+
 
         }
 
@@ -56,13 +83,57 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 Console.WriteLine("CLEANUP: Sql clear down based on URI not yet implemented");
 
             }
+            var env = _scenarioContext.GetEnv();
+            var dataItems = _scenarioContext.GetContentItemIndexList();
+            if (env.sendEvents && env.sqlServerChecksEnabled && dataItems.Count > 0)
+            { 
+                foreach (var item in dataItems)
+                {
+                    ContentItem contentItem = new ContentItem();
+                    contentItem.Author = item.Author;
+                    contentItem.ContentItemId = item.ContentItemId;
+                    contentItem.ContentItemVersionId = item.ContentItemVersionId;
+                    contentItem.ContentType = item.ContentType;
+                    contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
+                    contentItem.DisplayText = item.DisplayText;
+                    var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
+                    ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
+                    string json = $"[{JsonConvert.SerializeObject(contentEvent)}]";
+                    var response = RestHelper.Post(env.eventTopicUrl, json, new Dictionary<string, string>() { { "Aeg-sas-key", env.AegSasKey } });
+                    Console.WriteLine($"CLEANUP: send delete event for {uri} - Response Code:{response.StatusCode}");
+                }
+             }
         }
 
         [AfterScenario("webtest", Order = 20)]
-        public void CLoseWebDriver()
+        public void CloseWebDriver()
         {
             _scenarioContext.GetWebDriver().Close();
             _scenarioContext.GetWebDriver().Quit();
+        }
+
+        [AfterScenario( Order = 100)]
+        public void CheckForNotifiableFailure()
+        {
+            if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError )
+            {
+            }
+            if (_scenarioContext.ContainsKey(constants.featureFailure))
+            {
+                string messageText = "Fatal error(s) detected in clean up:\n";
+
+                // cancel the rest of the feature run
+                _featureContext[constants.featureFailAll] = true;
+
+                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.featureFailure] )
+                {
+                    Console.WriteLine($"Error: {message.Key} - {message.Value}");
+                    messageText += $"  {message.Key} - {message.Value}";
+                }
+                throw new Exception(messageText);
+
+            }
+
         }
     }
 }
