@@ -321,6 +321,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 iAddItem.SetFieldValue(p0, item.value.Key, newValue);
             }
             _scenarioContext.SetEditorFields(vars);
+            Random r = new Random();
+            int rInt = r.Next(0, 100); //for ints
+            rInt.Should().BeLessThan(90);
+
             //_scenarioContext[constants.requestVariables] = vars;
         }
 
