@@ -18,7 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        public void ConfirmDelete()
+        public void ConfirmAction()
         {
             try
             {

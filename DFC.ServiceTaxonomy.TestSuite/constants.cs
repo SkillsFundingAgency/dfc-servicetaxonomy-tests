@@ -9,6 +9,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         None,
         Sql,
         Graph,
+        UI,
         All
     }
     public static class constants

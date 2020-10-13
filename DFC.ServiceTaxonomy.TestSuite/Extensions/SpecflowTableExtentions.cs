@@ -26,6 +26,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return dictionary;
         }
-
     }
 }

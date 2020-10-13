@@ -126,14 +126,14 @@ this.FeatureBackground();
 #line 13
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table303 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table317 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table303.AddRow(new string[] {
+                table317.AddRow(new string[] {
                             "My Test QCF Level",
                             "My test description"});
 #line 14
- testRunner.And("I Enter the following form data for \"QCFLevel\"", ((string)(null)), table303, "And ");
+ testRunner.And("I Enter the following form data for \"QCFLevel\"", ((string)(null)), table317, "And ");
 #line hidden
 #line 17
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
