@@ -118,7 +118,7 @@ Scenario: Add an published shared item to a new page and publish it. Unpublish t
 
 	@ignore
 Scenario: Attempt to delete a shared content item which is in use on a page
-	Given I Navigate to "/Admin/Contents/ContentItems" 
+	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
 	And I capture the generated URI and tag it "PageUri"
 	And I Enter the following form data for "Page"
 	| Title        |
