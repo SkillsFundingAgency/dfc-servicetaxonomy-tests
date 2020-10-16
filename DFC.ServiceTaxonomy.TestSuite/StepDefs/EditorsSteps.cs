@@ -254,7 +254,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "FurtherInfo":
                     _scenarioContext[constants.responseType] = typeof(FurtherInfo);
                     _scenarioContext[constants.cypherQuery] = cypher_FurtherInfoByUri;
-                    return _addLinkItem;
+                    return _addLinkItem.AsA(contentType);
                 case "Activity":
                     _scenarioContext[constants.responseType] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
                     _scenarioContext[constants.cypherQuery] = cypher_activityByUri;
@@ -262,7 +262,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "UniversityLink":
                     _scenarioContext[constants.responseType] = typeof(UniversityLink);
                     _scenarioContext[constants.cypherQuery] = cypher_UniverstyLinkByUri;
-                    return _addLinkItem;
+                    return _addLinkItem.AsA(contentType); ;
                 case "RequirementsPrefix":
                 case "UniversityRequirement":
                     _scenarioContext[constants.responseType] = typeof(GenericContent);

@@ -43,5 +43,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             EnterText(field, value, getLocator(type, field));
         }
 
+        public new void SetFieldValue(string field, string value)
+        {
+            base.EnterText(field, value, getLocator(_contentType, field));
+        }
+
     }
 }
