@@ -18,19 +18,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        public LogonScreen navigateToLoginPage(string url)
+        public LogonScreen NavigateToLoginPage(string url)
         {
             _scenarioContext.GetWebDriver().Url = url;
             return this;
         }
 
-        public LogonScreen enterUsername(string username)
+        public LogonScreen EnterUsername(string username)
         {
             _scenarioContext.GetWebDriver().FindElement(By.Id("UserName")).SendKeys(username);
             return this;
         }
 
-        public LogonScreen enterPassword(string password)
+        public LogonScreen EnterPassword(string password)
         {
             _scenarioContext.GetWebDriver().FindElement(By.Id("Password")).SendKeys(password);
             _scenarioContext.GetWebDriver().FindElement(By.Id("Password")).SendKeys(Keys.Return);
@@ -46,12 +46,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             Console.WriteLine("PWD (length): " + _scenarioContext.GetEnv().editorPassword.Length);
             try
             {
-                navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
+                NavigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
 
                 if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Begin by browsing the menu.')]]")).Count == 0)
                 {
-                    enterUsername(_scenarioContext.GetEnv().editorUid);
-                    enterPassword(_scenarioContext.GetEnv().editorPassword);
+                    EnterUsername(_scenarioContext.GetEnv().editorUid);
+                    EnterPassword(_scenarioContext.GetEnv().editorPassword);
 
                     var url = _scenarioContext.GetWebDriver().Url;
                     var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
@@ -61,7 +61,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                         throw new Exception("Login Failed");
                     }
                 }
-                
             }
             catch (Exception e)
             {
@@ -72,6 +71,4 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return new StartPage(_scenarioContext);
         }
     }
-
-
 }

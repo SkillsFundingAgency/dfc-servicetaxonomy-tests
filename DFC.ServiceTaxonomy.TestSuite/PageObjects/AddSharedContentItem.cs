@@ -34,7 +34,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         private By getLocator(String type, String field)
         {
-            return (getLocatorBase(field) ?? getContentTypeSpecificLocator(type, field));
+            return (GetLocatorBase(field) ?? getContentTypeSpecificLocator(type, field));
 
         }
 

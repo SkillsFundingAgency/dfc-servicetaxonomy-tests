@@ -22,7 +22,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             scenarioContext = context;
         }
 
-        new private By getLocator( String field)
+        new private By GetLocator( String field)
         {
            
             switch (field)
@@ -40,7 +40,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         new public void SetFieldValue( string field, string value)
         {
-            if (!EnterText(field, value, getLocator(field)) )
+            if (!EnterText(field, value, GetLocator(field)) )
                 base.SetFieldValue(field, value);
         }
 

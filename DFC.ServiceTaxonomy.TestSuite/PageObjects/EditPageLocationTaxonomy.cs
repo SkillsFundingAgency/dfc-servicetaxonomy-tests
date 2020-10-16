@@ -21,7 +21,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             scenarioContext = context;
         }
 
-        private By getLocator( String field)
+        private By GetLocator( String field)
         {
            
             switch (field)

@@ -27,7 +27,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch
             {
-                
             }
         }
     }

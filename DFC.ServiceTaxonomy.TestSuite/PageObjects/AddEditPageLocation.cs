@@ -23,7 +23,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             
         }
 
-        new private By getLocator( String field)
+        new private By GetLocator( String field)
         {
            
             switch (field)
@@ -41,7 +41,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                EnterText(field, value, getLocator(field));
+                EnterText(field, value, GetLocator(field));
             }
             catch (Exception e)
             {

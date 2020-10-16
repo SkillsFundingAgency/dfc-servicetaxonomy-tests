@@ -42,8 +42,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 return false;
             }
-           
         }
+
         public EditContentType DeleteContentType(string contentTypeName)
         {
             try
@@ -53,10 +53,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 _scenarioContext.GetWebDriver().ClickButton("modalOkButton");
             }
             catch
-            {
-
-            }
-
+            {}
             return this;
         }
 
