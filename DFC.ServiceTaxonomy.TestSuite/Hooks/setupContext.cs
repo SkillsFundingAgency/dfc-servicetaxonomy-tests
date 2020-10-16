@@ -48,6 +48,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             {
                 _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
             }
+            _scenarioContext.GetWebDriver().Manage().Window.Maximize();
         }
 
         private string FindDriverService()
