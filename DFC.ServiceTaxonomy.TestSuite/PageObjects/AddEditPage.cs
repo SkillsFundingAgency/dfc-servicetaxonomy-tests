@@ -68,7 +68,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                scenarioContext.GetWebDriver().FindElement(By.XPath("//button[@title='Add Widget']")).Click();
+                scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath("//button[@title='Add Widget']")).Click();
             }
             catch (Exception e)
             {
@@ -102,6 +102,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var driver = scenarioContext.GetWebDriver();
             try
             {
+                driver.WaitUntilElementFound(By.XPath("//a[text()='Content']")).Click();
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML Shared"));
                 element.Click();
