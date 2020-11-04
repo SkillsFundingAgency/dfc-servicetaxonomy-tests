@@ -7,7 +7,10 @@ namespace rolling_test_harness
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+           /* TODO
+            * standardise date / time stamps
+            * add csv output
+            */
             TestBase config = new TestBase();
 
             AccountTest accountTest = new AccountTest(config._config["accounts:url"],
@@ -26,6 +29,12 @@ namespace rolling_test_harness
             thread.Start();
         }
 
+
+        private static void RunMethodInSeparateThread(ITest action)
+        {
+            var thread = new Thread(new ThreadStart(action.RunTest));
+            thread.Start();
+        }
 
     }
 
