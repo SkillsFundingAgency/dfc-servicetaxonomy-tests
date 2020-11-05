@@ -36,19 +36,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
         }
 
-        public bool SetFieldValue( string field, string value)
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Unable to set field value {field} - {e.Message}");
-                return false;
-            }
-            return true;
-        }
 
         public bool SetBasePageLocation()
         {
@@ -64,11 +51,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
+        public AddEditPage SelectTab(string tabName)
+        {
+            try
+            {
+                scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='{tabName}']")).Click();
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to select tab {tabName}- {e.Message}");
+            }
+            return this;
+        }
+
         public AddEditPage OpenWidgetMenu()
         {
             try
             {
-                scenarioContext.GetWebDriver().FindElement(By.XPath("//button[@title='Add Widget']")).Click();
+                scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath("//button[@title='Add Widget']")).Click();
             }
             catch (Exception e)
             {
@@ -82,6 +82,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var driver = scenarioContext.GetWebDriver();
             try
             {
+                SelectTab("Content");
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML"));
                 element.Click();
@@ -102,6 +103,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var driver = scenarioContext.GetWebDriver();
             try
             {
+                SelectTab("Content");
                 OpenWidgetMenu();
                 var element = driver.FindElement(By.LinkText("HTML Shared"));
                 element.Click();
@@ -129,6 +131,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var driver = scenarioContext.GetWebDriver();
             try
             {
+                SelectTab("Content");
                 var element = driver.WaitUntilElementFound(By.ClassName("multiselect__tags"));
                 element.Click();
                 element = driver.WaitUntilElementFound(By.ClassName("multiselect__input"));
