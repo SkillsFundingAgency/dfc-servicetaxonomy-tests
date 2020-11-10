@@ -66,7 +66,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             catch (Exception e)
             {
                 Console.WriteLine(@"Logon failed:"+ e.Message);
-                throw e;
+                //throw e;
             }
             Console.WriteLine($"Logon complete.\nURL is now: {_scenarioContext.GetWebDriver().Url}");
             return new StartPage(_scenarioContext);

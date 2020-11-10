@@ -10,9 +10,28 @@ using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using System.Runtime;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
+
+    //public sealed class webDriverContainer
+    //{
+    //    private static readonly Lazy<webDriverContainer>
+    //        lazy =
+    //        new Lazy<webDriverContainer>
+    //            (() => new webDriverContainer());
+            
+    //    public static webDriverContainer Instance { get { return lazy.Value; } }
+
+    //    private ChromeDriver _driver = null;
+    //    public  ChromeDriver getWebDriver()
+    //    {
+    //        return new ChromeDriver();
+    //    }
+    //}
+
+
     [Binding]
     public sealed class setupContext
     {
@@ -34,22 +53,41 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void SetLongRunningTimeout()
         {
             _WebdriverTimeoutSeconds = _WebdriverExtendedTimeout;
+            
         }
 
-        [BeforeScenario("webtest", Order = 20)] 
+        //[BeforeScenario("webtest", Order = 20)]
+
+        [BeforeScenario("webtest", Order = 20)]
         public void IntialiseWebDriver()
         {
-            string DriverPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (_WebdriverTimeoutSeconds > 0)
+            if (!_featureContext.ContainsKey("webdriver"))
             {
-                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService(), new ChromeOptions(), TimeSpan.FromSeconds(_WebdriverTimeoutSeconds)));
+                _featureContext.SetWebDriver(new ChromeDriver(FindDriverService()));
+                
             }
-            else
-            {
-                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
-            }
+            _scenarioContext.SetWebDriver(_featureContext.GetWebDriver());
+            
+            //_scenarioContext.SetWebDriver(_featureContext.ContainsKey("webdriver") ? _featureContext.GetWebDriver()  : new ChromeDriver(FindDriverService()));
+         //   _scenarioContext.SetWebDriver(_featureContext.GetWebDriver() ?? new ChromeDriver(FindDriverService()));
+            //if (_featureContext.GetWebDriver() == nu)
+            //string DriverPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //if (_WebdriverTimeoutSeconds > 0)
+            //{
+            //    _featureContext.SetWebDriver(new ChromeDriver(FindDriverService(), new ChromeOptions(), TimeSpan.FromSeconds(_WebdriverTimeoutSeconds)));
+            //}
+            //else
+            //{
+            //    _featureContext.SetWebDriver(new ChromeDriver(FindDriverService()));
+            //}
             _scenarioContext.GetWebDriver().Manage().Window.Maximize();
         }
+
+        //[BeforeScenario("webtest", Order = 10)]
+        //private void ScenarioWebDriverSetup()
+        //{
+        //    _scenarioContext.SetWebDriver(_featureContext.GetWebDriver());
+        //}
 
         private string FindDriverService()
         {

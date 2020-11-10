@@ -105,12 +105,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
              }
         }
 
-        [AfterScenario("webtest", Order = 20)]
-        public void CloseWebDriver()
-        {
-            _scenarioContext.GetWebDriver().Close();
-            _scenarioContext.GetWebDriver().Quit();
-        }
+        //[AfterFeature(/*TODO TAGGING?*/Order = 20)]
+        //public void CloseWebDriver()
+        //{
+        //    _featureContext.GetWebDriver().Close();
+        //    _featureContext.GetWebDriver().Quit();
+        //}
 
         [AfterScenario( Order = 100)]
         public void CheckForNotifiableFailure()
