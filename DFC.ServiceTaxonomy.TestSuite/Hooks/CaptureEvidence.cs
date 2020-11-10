@@ -31,7 +31,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         {
             if (_scenarioContext.GetEnv().pipelineRun)
             {
-                TakeScreenshot();
+            //    TakeScreenshot();
             }
         }
 
