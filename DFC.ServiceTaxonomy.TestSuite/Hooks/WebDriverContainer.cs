@@ -46,28 +46,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         {
             if (driver != null)
             {
-                driver.Quit();
                 driver.Close();
+                driver.Quit();
                 driver = null;
             }
-        }
-
-        public Neo4JHelper GetGraphConnection( string key, string graphName, string graphUri, string userId, string password)
-        {
-            if (graphConnections==null)
-            {
-                graphConnections = new Dictionary<string, Neo4JHelper>();
-            }
-            if (!graphConnections.ContainsKey(key))
-            {
-                Neo4JHelper newConn = new Neo4JHelper(graphName);
-                newConn.Connect(graphUri,
-                                    userId,
-                                    password);
-                graphConnections[key] = newConn;
-            }
-            graphConnections[key].Verify();
-            return graphConnections[key];
         }
     }
 }
