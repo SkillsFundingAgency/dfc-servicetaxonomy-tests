@@ -49,7 +49,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 navigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
 
                 // are we already logged in?
-                if (_scenarioContext.GetWebDriver().Url != _scenarioContext.GetEnv().editorBaseUrl)
+                if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Welcome to Orchard')]]")).Count == 0)
                 {
                     if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Begin by browsing the menu.')]]")).Count == 0)
                     {
