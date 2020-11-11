@@ -18,6 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     public sealed class WebDriverContainer
     {
         private ChromeDriver driver = null;
+        private Dictionary<string, Neo4JHelper> graphConnections = null;
         private static readonly Lazy<WebDriverContainer>
             lazy =
             new Lazy<WebDriverContainer>
@@ -25,11 +26,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
         public static WebDriverContainer Instance { get { return lazy.Value; } }
 
-        public ChromeDriver GetWebDriver()
+        public ChromeDriver GetWebDriver( string path, int timeoutPeriod = 0)
         {
             if (driver == null)
             {
-                driver = new ChromeDriver();
+                if (timeoutPeriod > 0)
+                { 
+                    driver = new ChromeDriver(path, new ChromeOptions(), TimeSpan.FromSeconds(timeoutPeriod));
+                }
+                else
+                {
+                    driver = new ChromeDriver(path);
+                }
             }
             return driver;
         }

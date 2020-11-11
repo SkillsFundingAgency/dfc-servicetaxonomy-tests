@@ -45,8 +45,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         [BeforeScenario("webtest", Order = 20)]
         public void IntialiseWebDriver()
         {
-            _scenarioContext.SetWebDriver (WebDriverContainer.Instance.GetWebDriver() );
-             _scenarioContext.GetWebDriver().Manage().Window.Maximize();
+            _scenarioContext.SetWebDriver (WebDriverContainer.Instance.GetWebDriver(FindDriverService(), _WebdriverTimeoutSeconds) );
+            _scenarioContext.GetWebDriver().Manage().Window.Maximize();
         }
 
         private string FindDriverService()
@@ -62,9 +62,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
             return driverLocation;
         }
-
-
-
 
         [BeforeScenario  (Order = 1)]
         public void IntialiseEnvironementVariables()

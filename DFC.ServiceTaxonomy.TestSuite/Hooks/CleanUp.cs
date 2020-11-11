@@ -106,11 +106,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         }
 
         
-        [AfterFeature(/*TODO TAGGING?*/Order = 20)]
+        [AfterFeature("webtest",Order = 20)]
         public static void CloseWebDriver()
         {
-            WebDriverContainer webDriverContainer = new WebDriverContainer();
-            webDriverContainer.CloseDriver();
+            WebDriverContainer.Instance.CloseDriver();
         }
 
         [AfterScenario( Order = 100)]
@@ -134,7 +133,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 throw new Exception(messageText);
 
             }
-
         }
     }
 }
