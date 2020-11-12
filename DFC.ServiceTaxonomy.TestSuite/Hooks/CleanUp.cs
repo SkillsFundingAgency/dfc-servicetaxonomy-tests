@@ -105,11 +105,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
              }
         }
 
-        [AfterScenario("webtest", Order = 20)]
-        public void CloseWebDriver()
+        
+        [AfterFeature("webtest",Order = 20)]
+        public static void CloseWebDriver()
         {
-            _scenarioContext.GetWebDriver().Close();
-            _scenarioContext.GetWebDriver().Quit();
+            WebDriverContainer.Instance.CloseDriver();
         }
 
         [AfterScenario( Order = 100)]
@@ -133,7 +133,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 throw new Exception(messageText);
 
             }
-
         }
     }
 }

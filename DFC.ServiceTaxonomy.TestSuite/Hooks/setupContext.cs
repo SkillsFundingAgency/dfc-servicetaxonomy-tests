@@ -10,9 +10,14 @@ using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using System.Runtime;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 {
+
+
+
+
     [Binding]
     public sealed class setupContext
     {
@@ -34,20 +39,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void SetLongRunningTimeout()
         {
             _WebdriverTimeoutSeconds = _WebdriverExtendedTimeout;
+            
         }
 
-        [BeforeScenario("webtest", Order = 20)] 
+        [BeforeScenario("webtest", Order = 20)]
         public void IntialiseWebDriver()
         {
-            string DriverPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (_WebdriverTimeoutSeconds > 0)
-            {
-                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService(), new ChromeOptions(), TimeSpan.FromSeconds(_WebdriverTimeoutSeconds)));
-            }
-            else
-            {
-                _scenarioContext.SetWebDriver(new ChromeDriver(FindDriverService()));
-            }
+            _scenarioContext.SetWebDriver (WebDriverContainer.Instance.GetWebDriver(FindDriverService(), _WebdriverTimeoutSeconds) );
             _scenarioContext.GetWebDriver().Manage().Window.Maximize();
         }
 
@@ -64,9 +62,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
             return driverLocation;
         }
-
-
-
 
         [BeforeScenario  (Order = 1)]
         public void IntialiseEnvironementVariables()
