@@ -70,7 +70,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             string name;
             _scenarioContext.SetEnv(new EnvironmentSettings());
 
-            if (_featureContext.ContainsKey("failAll") && (bool)_featureContext["failAll"] == true)
+            if (_featureContext.ContainsKey(constants.featureFailAll) && (bool)_featureContext[constants.featureFailAll] == true)
             {
                 throw new Exception("Feature run aborted due to earlier failure");
             }
@@ -107,7 +107,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             var conn = _scenarioContext.GetSQLConnection();
             if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
             {
-                _featureContext["failAll"] = true;
+                _featureContext[constants.featureFailAll] = true;
                 throw new Exception("Unable to verify permission on SQL connection");
             }
 
@@ -142,7 +142,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 }
                 catch (Exception e)
                 {
-                    _featureContext["failAll"] = true;
+                    _featureContext[constants.featureFailAll] = true;
                     Console.WriteLine("Unable to verify connection to publish1 graph");
                     throw e;
                 }
