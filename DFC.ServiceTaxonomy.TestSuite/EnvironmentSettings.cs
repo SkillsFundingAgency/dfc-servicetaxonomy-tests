@@ -59,6 +59,7 @@ namespace DFC.ServiceTaxonomy.TestSuite
         public string AegSasKey => Configuration["EventGrid:AegSasKey"];
 
         public bool CaptureScreenshots => Configuration["Config:CaptureScreenshots"].ToLower() == "true";
+        public string targetEnv => Configuration["Config:Environment"];
         public bool pipelineRun => Environment.GetEnvironmentVariable("SYSTEM_TEAMFOUNDATIONCOLLECTIONURI") == "https://sfa-gov-uk.visualstudio.com/";
     }
 }
