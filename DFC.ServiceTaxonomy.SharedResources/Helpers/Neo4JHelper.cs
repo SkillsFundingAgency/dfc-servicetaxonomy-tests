@@ -14,6 +14,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
 
         private Neo4jConnection connection;
         private string graphName = "neo4j";
+        private TimeSpan timeout = new TimeSpan(0,0,30,0); 
 
         public IDriver Neo4jDriver { get; private set; }
 
@@ -94,7 +95,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
             {
                 using (var session = Neo4jDriver.Session(builder => builder.WithDatabase(graphName)) )
                 {
-                    var result = session.Run(queryText, queryParameters);
+                    var result = session.Run(queryText, queryParameters, c => c.WithTimeout(timeout));
                     foreach (var record in result)
                     {
                         Dictionary<string, object> item = new Dictionary<string, object>();

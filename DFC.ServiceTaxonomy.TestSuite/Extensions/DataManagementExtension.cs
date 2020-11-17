@@ -1,4 +1,5 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite;
+using DFC.ServiceTaxonomy.TestSuite.Hooks;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using OpenQA.Selenium;
@@ -201,7 +202,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string password;
             string graphName;
             int connectionAttempts;
-            int maxAttempts = 5;
             switch ( graph)
             {
                 case constants.publish:

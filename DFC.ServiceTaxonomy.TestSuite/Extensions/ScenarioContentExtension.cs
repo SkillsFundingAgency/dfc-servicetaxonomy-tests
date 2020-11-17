@@ -14,37 +14,37 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         private const string EnvSettingsKey = "envsettings";
         #endregion
 
-        public static void SetWebDriver(this ScenarioContext context, IWebDriver webDriver)
+        public static void SetWebDriver(this SpecFlowContext context, IWebDriver webDriver)
         {
             Set(context, webDriver, WebDriverKey);
         }
 
-        public static IWebDriver GetWebDriver(this ScenarioContext context)
+        public static IWebDriver GetWebDriver(this SpecFlowContext context)
         {
             return Get<IWebDriver>(context, WebDriverKey);
         }
 
-        public static void SetEnv(this ScenarioContext context, EnvironmentSettings envSettings)
+        public static void SetEnv(this SpecFlowContext context, EnvironmentSettings envSettings)
         {
             Set(context, envSettings, EnvSettingsKey);
         }
 
-        public static EnvironmentSettings GetEnv(this ScenarioContext context)
+        public static EnvironmentSettings GetEnv(this SpecFlowContext context)
         {
             return Get<EnvironmentSettings>(context, EnvSettingsKey);
         }
 
-        private static void Set<T>(ScenarioContext context, T value, string key)
+        private static void Set<T>(SpecFlowContext context, T value, string key)
         {
             context.Set(value, key);
         }
 
-        public static T Get<T>(ScenarioContext context, string key)
+        public static T Get<T>(SpecFlowContext context, string key)
         {
             return context.Get<T>(key);
         }
 
-        public static void AddFeatureFailure(this ScenarioContext context, string messageContext, string message)
+        public static void AddFeatureFailure(this SpecFlowContext context, string messageContext, string message)
         {
             Dictionary<string, string> failures;
             if (context.ContainsKey(constants.featureFailure))
@@ -59,7 +59,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context[constants.featureFailure] = failures;
         }
 
-        public static Dictionary<string,string> GetFeatureFailure(this ScenarioContext context)
+        public static Dictionary<string,string> GetFeatureFailure(this SpecFlowContext context)
         {
             return context.ContainsKey(constants.featureFailure) ? (Dictionary<string, string>)context[constants.featureFailure] : new Dictionary<string, string>();
         }
