@@ -53,8 +53,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 {
                     if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Begin by browsing the menu.')]]")).Count == 0)
                     {
-                        enterUsername(_scenarioContext.GetEnv().editorUid);
-                        enterPassword(_scenarioContext.GetEnv().editorPassword);
+                        EnterUsername(_scenarioContext.GetEnv().editorUid);
+                        EnterPassword(_scenarioContext.GetEnv().editorPassword);
 
                         var url = _scenarioContext.GetWebDriver().Url;
                         var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
