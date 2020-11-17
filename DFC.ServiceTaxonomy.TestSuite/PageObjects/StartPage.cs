@@ -11,8 +11,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class StartPage
     {
-        //private IWebDriver driver;
-        //EnvironmentSettings env = new EnvironmentSettings();
         private ScenarioContext _scenarioContext;
 
         public StartPage(ScenarioContext context)
@@ -27,13 +25,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext.GetWebDriver().Url = url;
             return this;
         }
-
-
-        //public AddActivity NavigateToNewActivity()
-        //{
-        //    _scenarioContext.GetWebDriver().Url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentTypes/Activity/Create";
-        //    return new AddActivity (_scenarioContext);
-        //}
-
     }
 }

@@ -34,13 +34,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         private By getLocator(String type, String field)
         {
-            return (getLocatorBase(field) ?? getContentTypeSpecificLocator(type, field));
+            return (GetLocatorBase(field) ?? getContentTypeSpecificLocator(type, field));
 
         }
 
         public new void SetFieldValue(string type, string field, string value)
         {
             EnterText(field, value, getLocator(type, field));
+        }
+
+        public new void SetFieldValue(string field, string value)
+        {
+            base.EnterText(field, value, getLocator(_contentType, field));
         }
 
     }

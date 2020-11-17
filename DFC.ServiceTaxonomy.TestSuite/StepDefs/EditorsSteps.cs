@@ -77,6 +77,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private AddContentTypeBaseItem _addContentType;
         private EditContentType _editContentType;
         private GraphSyncPart _GraphSyncPart;
+        private AddEditPage _addEditPage;
+        private AddEditPageLocation _addEditPageLocation;
 
         private readonly Dictionary<string, string> cypherQueries = new Dictionary<string, string>() {
     {
@@ -228,6 +230,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentType = new AddContentTypeBaseItem(scenarioContext);
             _GraphSyncPart = new GraphSyncPart(scenarioContext);
             _editContentType = new EditContentType(scenarioContext);
+            _addEditPageLocation = new AddEditPageLocation(_scenarioContext);
+            _addEditPage = new AddEditPage(_scenarioContext);
         }
 
         private static Random random = new Random();
@@ -246,11 +250,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "DayToDayTask":
                     _scenarioContext[constants.responseType] = typeof(DayToDayTask);
                     _scenarioContext[constants.cypherQuery] = cypher_DayToDayTaskByUri;
-                    return _addContentItemBase;
+                    return _addContentItemBase.AsA(contentType);
                 case "FurtherInfo":
                     _scenarioContext[constants.responseType] = typeof(FurtherInfo);
                     _scenarioContext[constants.cypherQuery] = cypher_FurtherInfoByUri;
-                    return _addLinkItem;
+                    return _addLinkItem.AsA(contentType);
                 case "Activity":
                     _scenarioContext[constants.responseType] = typeof(DFC.ServiceTaxonomy.TestSuite.Models.Activity);
                     _scenarioContext[constants.cypherQuery] = cypher_activityByUri;
@@ -258,21 +262,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "UniversityLink":
                     _scenarioContext[constants.responseType] = typeof(UniversityLink);
                     _scenarioContext[constants.cypherQuery] = cypher_UniverstyLinkByUri;
-                    return _addLinkItem;
+                    return _addLinkItem.AsA(contentType); ;
                 case "RequirementsPrefix":
                 case "UniversityRequirement":
                     _scenarioContext[constants.responseType] = typeof(GenericContent);
                     _scenarioContext[constants.cypherQuery] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", contentType);
-                    return _addContentItemBase;
+                    return _addContentItemBase.AsA(contentType); ;
                 case "SharedContent":
                     _scenarioContext[constants.responseType] = typeof(SharedContent);
                     _scenarioContext[constants.cypherQuery] = cypher_SharedContentByUri;
                     return _addSharedContent;
+                case "Page":
+                    return _addEditPage;
+                case "PageLocation":
+                    return _addEditPageLocation;
                 case "Restriction":
                 default:
                     _scenarioContext[constants.responseType] = typeof(GenericContent);
                     _scenarioContext[constants.cypherQuery] = cypher_GenericItemWithDescriptionByUri.Replace("@CONTENTTYPE@", contentType);
-                    return _addContentItemBase;
+                    return _addContentItemBase.AsA(contentType); ;
             }
         }
 
@@ -398,6 +406,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
         }
 
+        [Given(@"I publish the item")]
+        public void GivenIPublishTheItem()
+        {
+            WhenIPublishTheItem();
+        }
+
+
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
         {
@@ -455,18 +470,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Dictionary<string, string> vars = new Dictionary<string, string>();
             foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
             {
-                string newValue = item.value.Value;
+                string newValue = _scenarioContext.ReplaceTokensInString(item.value.Value);
                 if (item.index == 0)
                 {
-                    newValue = ( _scenarioContext.ContainsKey(constants.prefix) && newValue.Length > 0 ? _scenarioContext[constants.prefix] : "" ) + newValue;
+                    newValue = ( _scenarioContext.ContainsKey(constants.prefix) && !newValue.StartsWith((string)_scenarioContext[constants.prefix]) && newValue.Length > 0 ? _scenarioContext[constants.prefix] : "" ) + newValue;
                     // store first field in scenario context
                     _scenarioContext.Set(newValue, item.value.Key);
+                    if (p0 == "PageLocation")
+                    {
+                        _scenarioContext.AddPageLocation(newValue.Slugify());
+                        _scenarioContext.StoreToken("__PATH__", newValue.Slugify());
+                    }
+                }
+                if (p0 == "Page" && item.value.Key == "URL Name")
+                {
+                    newValue = newValue.Slugify();
                 }
                 vars.Add(item.value.Key, newValue);
-                iAddItem.SetFieldValue(p0, item.value.Key, newValue);
+                iAddItem.SetFieldValue(item.value.Key, newValue);
             }
             _scenarioContext.SetEditorFields(vars);
-            //_scenarioContext[constants.requestVariables] = vars;
         }
 
         [Given(@"I search for the ""(.*)""")]
@@ -793,6 +816,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
         }
 
+        [Given(@"I confirm I wish to proceed")]
+        public void GivenIConfirmIWishToProceed()
+        {
+            _modalOkCancel.ConfirmAction();
+        }
+
+
         public string TransformTableName( string source)
         {
             string fileName = "";
@@ -1064,7 +1094,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I confirm the delete action")]
         public void WhenIConfirmTheDeleteAction()
         {
-            _modalOkCancel.ConfirmDelete();
+            _modalOkCancel.ConfirmAction();
         }
         #endregion
         #region then steps
@@ -1678,7 +1708,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             int count = _scenarioContext.GetGraphConnection(constants.publish).ExecuteCountQuery(cypherStatement, null);
             count.Should().Be(p0, "Because the repaired record should now be present in the graph database");
         }
- 
-    #endregion
+
+        [Then(@"the error ""(.*)"" is displayed")]
+        public void ThenTheErrorIsDisplayed(string p0)
+        {
+            _addContentItemBase.ConfirmMessageDisplayed(p0).Should().BeTrue($"Because the message '{p0}' is expected");
+        }
+
+
+
+        #endregion
     }
 }

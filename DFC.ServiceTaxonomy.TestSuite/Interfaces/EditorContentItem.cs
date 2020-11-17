@@ -7,7 +7,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Interfaces
 {
     public interface IEditorContentItem
     {
-        By getLocator(String field);
+        By GetLocator(String field);
         void SetFieldValue(string type, string field, string value);
+        void SetFieldValue( string field, string value);
     }
 }

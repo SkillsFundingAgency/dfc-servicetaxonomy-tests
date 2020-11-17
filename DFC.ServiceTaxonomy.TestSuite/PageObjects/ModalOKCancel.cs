@@ -18,7 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        public void ConfirmDelete()
+        public void ConfirmAction()
         {
             try
             {
@@ -27,7 +27,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch
             {
-                
             }
         }
     }

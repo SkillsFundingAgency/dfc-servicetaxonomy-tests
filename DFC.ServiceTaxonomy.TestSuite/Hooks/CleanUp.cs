@@ -1,5 +1,6 @@
 ﻿using DFC.ServiceTaxonomy.Events.Models;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using Newtonsoft.Json;
 using OrchardCore.ContentManagement;
@@ -66,7 +67,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
         }
 
-        [AfterScenario( Order = 5)]
+        [AfterScenario("webtest", Order = 15)]
+        public void TearDownDataInUI()
+        {
+            StartPage _startPage = new StartPage(_scenarioContext);
+            EditPageLocationTaxonomy _editPageLocationTaxonomy = new EditPageLocationTaxonomy(_scenarioContext);
+            foreach (var location in _scenarioContext.GetPageLocations())
+            {
+                // attempt to delete page location through the UI 
+                _startPage.NavigateTo("/Admin/Contents/ContentItems/4eembshqzx66drajtdten34tc8/Edit");
+                _editPageLocationTaxonomy.DeletePageLocation(location);
+            }
+        }
+
+        [AfterScenario(Order = 1)]
         public void TearDownDataItems()
         {
             // clear down based on stored uri

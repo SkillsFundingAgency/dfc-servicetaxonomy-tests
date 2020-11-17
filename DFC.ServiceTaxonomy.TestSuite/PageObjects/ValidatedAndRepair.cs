@@ -43,7 +43,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return (elements.Count == 1);
         }
 
-         private IWebElement FindReportSection(string graph,string sectionReference)
+        private IWebElement FindReportSection(string graph,string sectionReference)
         {
             string graphRef = "";
             switch (graph)
@@ -86,6 +86,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var reportSection = FindReportSection(graph, sectionReference);
             var reportItems = reportSection.FindElements(By.XPath($"//*[text()[contains(.,'{recordId}')]]"));
             return reportItems.Count > 1;
-         }
+        }
     }
 }

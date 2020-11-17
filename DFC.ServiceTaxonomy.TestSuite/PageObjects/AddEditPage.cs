@@ -12,17 +12,17 @@ using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
-    class AddEditPage //: AddContentItemBase
+    class AddEditPage : AddContentItemBase, IEditorContentItem
     {
         private const string _contentType = "Page";
         ScenarioContext scenarioContext;
 
-        public AddEditPage(ScenarioContext context)// : base(context)
+        public AddEditPage(ScenarioContext context) : base(context)
         {
             scenarioContext = context;
         }
 
-        private By getLocator( String field)
+        new private By GetLocator( String field)
         {
            
             switch (field)
@@ -31,11 +31,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                     return By.Id($"Page_RedirectLocations_Text");
                 case "Description":
                     return By.Id("Page_Description_Text");
+                case "URL Name":
+                    return By.Id("PageLocationPart_UrlName");
                 default:
                     return null;
             }
         }
 
+        new public void SetFieldValue( string field, string value)
+        {
+            if (!EnterText(field, value, GetLocator(field)) )
+                base.SetFieldValue(field, value);
+        }
 
         public bool SetBasePageLocation()
         {
@@ -51,6 +58,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
+        public bool SetPageLocation(string location)
+        {
+            try
+            {
+                scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + location + "')]")).Click(); ;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to set page location - {e.Message}");
+                return false;
+            }
+            return true;
+        }
+        
         public AddEditPage SelectTab(string tabName)
         {
             try

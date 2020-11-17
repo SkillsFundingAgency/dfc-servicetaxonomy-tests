@@ -35,8 +35,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 _scenarioContext.GetWebDriver().FindElement(By.Id("DisplayName")).SendKeys(name);
 
                 // enter TechnicalName ( not required as it autofills on entry to DisplayName
-                //_scenarioContext.GetWebDriver().FindElement(By.Id("Name")).Clear();
-                //_scenarioContext.GetWebDriver().FindElement(By.Id("Name")).SendKeys(name);
                 _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/div[4]/button")).Click();
 
             }
@@ -126,31 +124,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             return true;
         }
-        //ContentParts/testtype/Fields/testbool/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2Ftesttype
-        //ContentTypes/testtype/ContentParts/TitlePart/Edit
-        //public bool EditItem(string contentType, string itemType, string itemName)
-        //{
-        //    try
-        //    {
-        //        var url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + itemName.Replace(" ", "") + "Part/Edit";
-
-        //        _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //    return true;
-        //}
-
 
         public AddContentTypeBaseItem AddField( string contentType, string displayName, string fieldType, string editorType = "")
         {
             try
             {
                 // click Add button
-                //_scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Add Field']")).Click();
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
           
                 // enter name
@@ -185,7 +164,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // click Add button
-                //_scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Add Field']")).Click();
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentParts/" + contentType +"/Fields/" + displayName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
                 _scenarioContext.GetWebDriver().SelectDropListItemById("field-editor-select", editorType);
                 _scenarioContext.GetWebDriver().ClickButton("Save");
@@ -232,16 +210,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public AddContentTypeBaseItem SelectContentPickerAllowMultipleItems(string contentType, string ItemName)
         {
             string id = contentType + "_" + ItemName + "_ContentPickerFieldSettingsDriver_Multiple";
-
-//TestCollectionOfTypes_PickContent_ContentPickerFieldSettingsDriver_Multiple
             try
             {
                 var cb = _scenarioContext.GetWebDriver().FindElement(By.Id(id));
        
                 cb.SendKeys(" ");
-
-                                            
-
             }
             catch (Exception e)
             {

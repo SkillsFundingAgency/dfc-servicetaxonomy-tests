@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Newtonsoft.Json;
@@ -24,7 +25,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
     public sealed class EditorSteps_Pages
     {
         private AddEditPage _addEditPage;
-
         private readonly ScenarioContext _scenarioContext;
 
         public EditorSteps_Pages(ScenarioContext scenarioContext)
@@ -85,5 +85,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Thread.Sleep(p0 * 60000);
         }
 
+        [Given(@"I select the page location ""(.*)""")]
+        public void GivenISelectThePageLocation(string location)
+        {
+            _addEditPage.SetPageLocation(location.Slugify());
+        }
     }
 }

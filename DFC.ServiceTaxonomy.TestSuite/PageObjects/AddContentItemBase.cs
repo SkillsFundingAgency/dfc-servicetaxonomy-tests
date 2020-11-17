@@ -21,13 +21,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         protected ScenarioContext _scenarioContext;
         protected bool _htmlView = false;
+        private string _contentType;
 
         public AddContentItemBase(ScenarioContext context)//IWebDriver driver, ScenarioContext context)
         {
             _scenarioContext = context;
         }
 
-        protected By getLocatorBase(String field)
+        protected By GetLocatorBase(String field)
         {
             switch (field)
             {
@@ -43,7 +44,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
         }
 
-        protected By getLocatorFromType(String contentType, String type, String field)
+        protected By GetLocatorFromType(String contentType, String type, String field)
         {
             switch (type)
             {
@@ -52,18 +53,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                  case "Numeric Field":
                     return By.Id(contentType + "_ValueField_Value");
                 case "Title":
-                    return getLocatorBase(field);
+                    return GetLocatorBase(field);
                 default:
                     return null;
             }
         }
 
-        public By getLocator(string field)
+        public AddContentItemBase AsA( string type)
         {
-            return getLocatorBase(field);
+            _contentType = type;
+            return this;
         }
 
-        public By getLocator(string contentType, string fieldType, string fieldName)
+        public By GetLocator(string field)
+        {
+            return GetLocatorBase(field);
+        }
+
+        public By GetLocator(string contentType, string fieldType, string fieldName)
         {
             switch (fieldType)
             {
@@ -71,15 +78,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 case "Html":
                     return By.Id($"{contentType}_{fieldName.Replace(" ","")}_{fieldType}");
                 default:
-                    return getLocatorBase(fieldName);
+                    return GetLocatorBase(fieldName);
             }
         }
 
         public string GetGeneratedURI()
         {
-            //return _scenarioContext.GetWebDriver().FindElement(By.Id("Graph_UriId_Text")).GetAttribute("value");
             return _scenarioContext.GetWebDriver().FindElement(By.Id("GraphSyncPart_Text")).GetAttribute("value");
-            
         }
 
         public string ContentItemIdFromUrl()
@@ -94,40 +99,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return "";
         }
 
-        //public AddContentItemBase SetFieldValue( string field, string value, string itemType = "")
-        //{
-        //    string id;
-        //    IWebElement item = null ;
-        //    try
-        //    {
-        //        switch (field)
-        //        {
-        //            case "Title":
-        //                id = "TitlePart_Title";
-        //                item = _scenarioContext.GetWebDriver().FindElement(By.Id(id));
-        //                break;
-        //            case "Description":
-        //                id = "/html/body/div[2]/div[3]/form/div[2]/div/div[2]/div[2]/div/div[2]/p";
-        //                ///html/body/div[2]/div[3]/form/div[2]/div/div[2]/div[2]/div/div[2]/p
-        //                //item = _scenarioContext.GetWebDriver()FindElement(By.XPath(id));
-        //                item = _scenarioContext.GetWebDriver().FindElement(By.ClassName("trumbowyg-editor"));
-        //                ///html/body/div[2]/div[3]/form/div[2]/div/div[2]/div[2]/div/div[2]/p
-        //                break;
-        //            default:
-        //                id = "";
-        //                break;
-        //        }
-        //        item.Click();
-        //        item.Clear();
-        //        item.SendKeys(value);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-
-        //    return this;
-        //}
 
         public AddContentItemBase PublishActivity()
         {
@@ -143,7 +114,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public AddContentItemBase EnterText(string field, string value, By locator)
+        public bool EnterText(string field, string value, By locator)
         {
             IWebElement item = null;
             try
@@ -167,9 +138,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
 
-            return this;
+            return true;
         }
 
         public string GetFieldValue(string contentType, string fieldName)
@@ -178,7 +150,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             string value = "";
             try
             {
-                value = _scenarioContext.GetWebDriver().FindElement(getLocatorBase(fieldName)).GetAttribute("value");
+                value = _scenarioContext.GetWebDriver().FindElement(GetLocatorBase(fieldName)).GetAttribute("value");
             }
             catch
             {
@@ -191,7 +163,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             string value = "";
             try
             {
-                value = _scenarioContext.GetWebDriver().FindElement(getLocator(contentType, fieldType, fieldName)).GetAttribute("value");
+                value = _scenarioContext.GetWebDriver().FindElement(GetLocator(contentType, fieldType, fieldName)).GetAttribute("value");
             }
             catch
             {
@@ -200,15 +172,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         }
 
+        public void SetFieldValue( string field, string value)//, Func <String, By> OverrideLocator)
+        {
+            EnterText(field, value, GetLocatorBase(field));
+        }
 
         public void SetFieldValue(string type, string field, string value)//, Func <String, By> OverrideLocator)
         {
-             EnterText( field, value, getLocatorBase(field)) ;
+             EnterText( _contentType, value, GetLocatorBase(field)) ;
         }
 
         public void SetFieldValueFromType(string contenType, string field, string value, string type)//, Func <String, By> OverrideLocator)
         {
-            EnterText(field, value, getLocatorFromType(contenType, type, field));
+            EnterText(field, value, GetLocatorFromType(contenType, type, field));
         }
 
         public bool ConfirmPublishSuccess()
@@ -228,5 +204,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{emptyFieldValidationMessage}{field}')]]"));
             return (elements.Count > 0);
          }
+
+        public bool ConfirmMessageDisplayed(string message)
+        {
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,\"{message}\")]]"));
+            return (elements.Count > 0);
+        }
+        
     }
 }

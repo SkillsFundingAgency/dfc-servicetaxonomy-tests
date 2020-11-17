@@ -40,12 +40,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keySkillData = "EscoSkillList";
         const string keyListOfStrings = "EscoListOfStrings";
         const string keyExpectedRecordCount = "ExpectedRecordCount";
+        const string PageLocations = "PageLocations";
 
      #endregion
 
 
 
-    public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
+        public static string GetTaxonomyUri(this ScenarioContext context, string resource, string param = "")
         {
             switch (resource.ToLower())
             {
@@ -322,6 +323,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
             return ids[index];
         }
+
+        public static List<string> GetPageLocations(this ScenarioContext context)
+        {
+            return context.ContainsKey(PageLocations) ? (List<string>)context[PageLocations] : new List<string> ();
+            //expect zero based index
+        }
+
+        public static void AddPageLocation(this ScenarioContext context, string pageLocation)
+        {
+            var locations = GetPageLocations(context);
+            locations.Add(pageLocation);
+            context[PageLocations] = locations;
+        }
+
 
         public static IList<Occupation> GetOccupationListData(this ScenarioContext context)
         {
