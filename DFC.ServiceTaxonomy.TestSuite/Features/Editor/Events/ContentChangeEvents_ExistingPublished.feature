@@ -18,7 +18,7 @@ Background:
 	#Given I check time of the latest event message
 	Given I check the number of events sent for this contentItem
 
-@Editor
+@Editor @Events
 Scenario: 18. A new draft version of an existing, published content item is created
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -33,7 +33,7 @@ Scenario: 18. A new draft version of an existing, published content item is crea
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 2
 
-@Editor @NegativeTest
+@Editor @Events @NegativeTest
 Scenario: 19. A new draft version of an existing, published content item has validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -47,7 +47,7 @@ Scenario: 19. A new draft version of an existing, published content item has val
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor
+@Editor @Events
 Scenario: 20. Updates to an existing published content item are published succesfully
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -62,7 +62,7 @@ Scenario: 20. Updates to an existing published content item are published succes
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 2
 
-@Editor @NegativeTest
+@Editor @Events @NegativeTest
 Scenario: 21. Updates to an existing published content item fails to publish with validation issues
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -76,7 +76,7 @@ Scenario: 21. Updates to an existing published content item fails to publish wit
 	And the intial data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor
+@Editor @Events
 Scenario: 28. A published item is unpublished from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -89,7 +89,7 @@ Scenario: 28. A published item is unpublished from the content item list view
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 3
 
-@Editor
+@Editor @Events
 Scenario: 32. An existing published content item is deleted from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
@@ -100,7 +100,7 @@ Scenario: 32. An existing published content item is deleted from the content ite
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 2
 
-@Editor @ignore
+@Editor @Events @ignore
 Scenario: 35. An existing draft content item is cloned from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"

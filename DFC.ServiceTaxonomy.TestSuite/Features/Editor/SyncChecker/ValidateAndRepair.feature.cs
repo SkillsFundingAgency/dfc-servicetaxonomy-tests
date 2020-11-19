@@ -162,13 +162,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.SyncChecker
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Node in the preview graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingNodeInThePreviewGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Node in the preview graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -234,13 +234,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Node in the publish graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingNodeInThePublishGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Node in the publish graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 50
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -306,13 +306,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship in the preview graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingRelationshipInThePreviewGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship in the preview graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 65
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -378,13 +378,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship in the publish graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingRelationshipInThePublishGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship in the publish graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 80
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -450,13 +450,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship Property in the preview graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingRelationshipPropertyInThePreviewGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship Property in the preview graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 95
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -528,13 +528,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a Missing Relationship Property in the publish graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMissingRelationshipPropertyInThePublishGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a Missing Relationship Property in the publish graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 110
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -606,13 +606,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a mismatching Relationship Property in the preview graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMismatchingRelationshipPropertyInThePreviewGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a mismatching Relationship Property in the preview graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 125
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -684,13 +684,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair a mismatching Relationship Property in the publish graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAMismatchingRelationshipPropertyInThePublishGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair a mismatching Relationship Property in the publish graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 140
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -762,13 +762,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair an unexpected Relationship Property in the preview graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAnUnexpectedRelationshipPropertyInThePreviewGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair an unexpected Relationship Property in the preview graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 156
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -844,13 +844,13 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Identify and repair an unexpected Relationship Property in the publish graph")]
-        [NUnit.Framework.CategoryAttribute("Editor")]
+        [NUnit.Framework.CategoryAttribute("EditorExt")]
         public virtual void IdentifyAndRepairAnUnexpectedRelationshipPropertyInThePublishGraph()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor"};
+                    "EditorExt"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Identify and repair an unexpected Relationship Property in the publish graph", null, new string[] {
-                        "Editor"});
+                        "EditorExt"});
 #line 171
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
