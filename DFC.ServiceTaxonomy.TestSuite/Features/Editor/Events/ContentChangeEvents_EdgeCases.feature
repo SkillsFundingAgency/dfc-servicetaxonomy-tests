@@ -2,7 +2,7 @@
 Feature: ContentChangeEvents_EdgeCases
 	Scenarios that don't fit into another section
 
-@Editor @Events
+@Editor @NotDev
 @ignore  
 #todo
 #Publish option not available for a published item in the list view

@@ -94,15 +94,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("1. A new content item draft is created that passes server validation")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Events")]
+        [NUnit.Framework.CategoryAttribute("NotDev")]
         public virtual void _1_ANewContentItemDraftIsCreatedThatPassesServerValidation()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "Events"};
+                    "NotDev"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1. A new content item draft is created that passes server validation", null, new string[] {
                         "Editor",
-                        "Events"});
+                        "NotDev"});
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -166,15 +166,15 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("2. A new content item draft is created that fails server validation")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Events")]
+        [NUnit.Framework.CategoryAttribute("NotDev")]
         public virtual void _2_ANewContentItemDraftIsCreatedThatFailsServerValidation()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "Events"};
+                    "NotDev"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2. A new content item draft is created that fails server validation", null, new string[] {
                         "Editor",
-                        "Events"});
+                        "NotDev"});
 #line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -235,15 +235,15 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("7. A new content item is published succesfully")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Events")]
+        [NUnit.Framework.CategoryAttribute("NotDev")]
         public virtual void _7_ANewContentItemIsPublishedSuccesfully()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "Events"};
+                    "NotDev"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("7. A new content item is published succesfully", null, new string[] {
                         "Editor",
-                        "Events"});
+                        "NotDev"});
 #line 37
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -307,15 +307,15 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("8. A new content item is published with validation issues")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Events")]
+        [NUnit.Framework.CategoryAttribute("NotDev")]
         public virtual void _8_ANewContentItemIsPublishedWithValidationIssues()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "Events"};
+                    "NotDev"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("8. A new content item is published with validation issues", null, new string[] {
                         "Editor",
-                        "Events"});
+                        "NotDev"});
 #line 51
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

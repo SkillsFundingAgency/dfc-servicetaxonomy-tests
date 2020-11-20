@@ -14,7 +14,7 @@ Background:
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 
-@Editor @Events @Thing
+@Editor @NotDev
 Scenario: 5. A succesful save to draft is made to a new content item which had validation issues on publish
 	Given I Enter the following form data for "SharedContent"
 	| Title       | Content          |
@@ -26,7 +26,7 @@ Scenario: 5. A succesful save to draft is made to a new content item which had v
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor @Events
+@Editor @NotDev
 Scenario: 6. An unsuccesful save to draft is made to a new content item which had validation issues on publish
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |
@@ -37,7 +37,7 @@ Scenario: 6. An unsuccesful save to draft is made to a new content item which ha
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 
-@Editor @Events
+@Editor @NotDev
 Scenario: 11. A succesful Publishing of  new content item which had validation issues on publish
 	Given I Enter the following form data for "SharedContent"
 	| Title       | Content          |
@@ -49,7 +49,7 @@ Scenario: 11. A succesful Publishing of  new content item which had validation i
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor @Events
+@Editor @NotDev
 Scenario: 12. An unsuccesful Publishing of  new content item which had validation issues on publish
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |
