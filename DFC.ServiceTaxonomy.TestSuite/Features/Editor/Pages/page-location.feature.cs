@@ -157,15 +157,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Pages
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Add a second content item to a new draft page")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Thing")]
         public virtual void AddASecondContentItemToANewDraftPage()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor",
-                    "Thing"};
+                    "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add a second content item to a new draft page", null, new string[] {
-                        "Editor",
-                        "Thing"});
+                        "Editor"});
 #line 32
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

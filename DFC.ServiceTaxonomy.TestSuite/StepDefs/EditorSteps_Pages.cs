@@ -33,7 +33,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addEditPage = new AddEditPage(_scenarioContext);
         }
 
-
         [Given(@"I select the default page location")]
         public void GivenISelectTheDefaultPageLocation()
         {

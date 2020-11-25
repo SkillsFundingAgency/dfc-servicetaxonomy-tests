@@ -116,8 +116,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         }
 
-
-
         [Then(@"no event is issued")]
         public void ThenNoEventIsIssued()
         {
@@ -136,12 +134,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             list.Count().Should().Be(numberOfEvents, "Because no more events should have been raised");
         }
-
-        //[Given(@"I check time of the latest event message")]
-        //public void GivenICheckTimeOfTheLatestEventMessage()
-        //{
-        //    //TODO
-        //}
 
         [Given(@"I check the number of events sent for this contentItem")]
         public void GivenICheckTheNumberOfEventsSentForThisContentItem()

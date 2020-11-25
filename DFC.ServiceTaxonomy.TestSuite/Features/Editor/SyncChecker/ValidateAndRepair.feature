@@ -31,7 +31,7 @@ Background:
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Node in the preview graph
 
 	Then the "preview" graph matches the expect results using the "remove_widget" query and the "PageUri" Uri
@@ -46,7 +46,7 @@ Scenario: Identify and repair a Missing Node in the preview graph
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Node in the publish graph
 
 	Then the "publish" graph matches the expect results using the "remove_widget" query and the "PageUri" Uri
@@ -61,7 +61,7 @@ Scenario: Identify and repair a Missing Node in the publish graph
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Relationship in the preview graph
 
 	Then the "preview" graph matches the expect results using the "remove_relationship_to_widget" query and the "PageUri" Uri
@@ -76,7 +76,7 @@ Scenario: Identify and repair a Missing Relationship in the preview graph
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Relationship in the publish graph
 
 	Then the "publish" graph matches the expect results using the "remove_relationship_to_widget" query and the "PageUri" Uri
@@ -91,7 +91,7 @@ Scenario: Identify and repair a Missing Relationship in the publish graph
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Relationship Property in the preview graph 
 
 	Then the "preview" graph matches the expect results using the "remove_properties_from_page_to_widget_relationship" query and the "PageUri" Uri
@@ -106,7 +106,7 @@ Scenario: Identify and repair a Missing Relationship Property in the preview gra
 	| alignment | ordinal | size |
 	| Justify   | 0       | 100  |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a Missing Relationship Property in the publish graph 
 
 	Then the "preview" graph matches the expect results using the "remove_properties_from_page_to_widget_relationship" query and the "PageUri" Uri
@@ -121,7 +121,7 @@ Scenario: Identify and repair a Missing Relationship Property in the publish gra
 	| alignment | ordinal | size |
 	| Justify   | 0       | 100  |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a mismatching Relationship Property in the preview graph
 
 	Then the "preview" graph matches the expect results using the "update_properties_for_page_to_widget_relationship" query and the "PageUri" Uri
@@ -136,7 +136,7 @@ Scenario: Identify and repair a mismatching Relationship Property in the preview
 	| alignment | ordinal | size |
 	| Justify   | 0       | 100  |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair a mismatching Relationship Property in the publish graph
 
 	Then the "publish" graph matches the expect results using the "update_properties_for_page_to_widget_relationship" query and the "PageUri" Uri
@@ -152,7 +152,7 @@ Scenario: Identify and repair a mismatching Relationship Property in the publish
 	| Justify   | 0       | 100  |
 
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair an unexpected Relationship Property in the preview graph
 
 	Then the "preview" graph matches the expect results using the "add_property_to_page_to_widget_relationship" query and the "PageUri" Uri
@@ -167,7 +167,7 @@ Scenario: Identify and repair an unexpected Relationship Property in the preview
 	| alignment | ordinal | size | additional |
 	| Justify   | 0       | 100  |            |
 
-@EditorExt
+@Editor @NotDev @NotSit @NotPP
 Scenario: Identify and repair an unexpected Relationship Property in the publish graph
 
 	Then the "publish" graph matches the expect results using the "add_property_to_page_to_widget_relationship" query and the "PageUri" Uri

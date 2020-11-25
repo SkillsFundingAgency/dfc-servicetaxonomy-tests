@@ -10,45 +10,61 @@ Create local config file: appsettings.local.json
 
 Event Store and SQL Server checks can be disabled for locally hosted
 
-Currently there is no support for preview / published graph hosted in a single neo4j enterprise instance 
 
 ```
 {
+  "Config": {
+    "CaptureScreenshots": "false",
+    "Environment": "local"
+  },
   "TaxonomyApi": {
-    "BaseUrl": "################",
-    "SubscriptionKey": "####################"
+    "BaseUrl": "###########################",
+    "SubscriptionKey": "###########################"
   },
   "ContentApi": {
-    "BaseUrl": "########################",
-    "BaseUrlDraft": "#######################",
-    "SubscriptionKey": "##############################"
+    "BaseUrl": "###########################",
+    "BaseUrlDraft": "###########################",
+    "SubscriptionKey": "###########################"
   },
   "JobProfileApi": {
-    "BaseUrl": "#########################",
-    "SubscriptionKey": "#########################"
+    "BaseUrl": "###########################",
+    "SubscriptionKey": "###########################"
   },
   "EscoApi": {
-    "BaseUrl": "############################"
+    "BaseUrl": "http://ec.europa.eu/esco/api"
   },
   "Neo4J": {
-    "Url": "############################",
-    "UrlDraft": "#############################",
-    "Uid": "#####",
-    "Password": "#############"
+    "GraphName": "###########################",
+    "GraphNameDraft": "###########################",
+    "Url": "###########################",
+    "UrlDraft": "###########################",
+    "Url1": "",
+    "UrlDraft1": "",
+    "Uid": "###########################",
+    "Password": "###########################",
+    "UidDraft": "###########################",
+    "PasswordDraft": "###########################"
+
   },
   "Editor": {
-    "BaseUrl": "##########################",
-    "Uid": "###############",
-    "Password": "#####################"
+    "BaseUrl": "###########################",
+    "Uid": "###########################",
+    "Password": "###########################"
   },
   "SqlServer": {
     "ChecksEnabled": "true",
-    "ConnectionString": "#########################"
+    "ConnectionString": "###########################"
   },
   "EventStore": {
     "CheckEvents": "true",
-    "BaseUrl": "#######################################",
-    "Key": "#######################################"
+    "BaseUrl": "###########################",
+    "Key": "###########################"
+  },
+  "EventGrid": {
+    "PublishEvents": "true",
+    "ContentType": "*",
+    "TopicEndpoint": "###########################",
+    "AegSasKey": "###########################"
   }
 }
 ```

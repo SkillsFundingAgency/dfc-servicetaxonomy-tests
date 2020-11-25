@@ -116,16 +116,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         [NUnit.Framework.DescriptionAttribute("5. A succesful save to draft is made to a new content item which had validation i" +
             "ssues on publish")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _5_ASuccesfulSaveToDraftIsMadeToANewContentItemWhichHadValidationIssuesOnPublish()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5. A succesful save to draft is made to a new content item which had validation i" +
                     "ssues on publish", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -184,16 +184,16 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("6. An unsuccesful save to draft is made to a new content item which had validatio" +
             "n issues on publish")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _6_AnUnsuccesfulSaveToDraftIsMadeToANewContentItemWhichHadValidationIssuesOnPublish()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("6. An unsuccesful save to draft is made to a new content item which had validatio" +
                     "n issues on publish", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 30
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -249,16 +249,16 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("11. A succesful Publishing of  new content item which had validation issues on pu" +
             "blish")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _11_ASuccesfulPublishingOfNewContentItemWhichHadValidationIssuesOnPublish()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("11. A succesful Publishing of  new content item which had validation issues on pu" +
                     "blish", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 41
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -317,16 +317,16 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("12. An unsuccesful Publishing of  new content item which had validation issues on" +
             " publish")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _12_AnUnsuccesfulPublishingOfNewContentItemWhichHadValidationIssuesOnPublish()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("12. An unsuccesful Publishing of  new content item which had validation issues on" +
                     " publish", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 53
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

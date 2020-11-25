@@ -103,15 +103,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Import
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Import data from recipe file")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("Ignore")]
         public virtual void ImportDataFromRecipeFile()
         {
             string[] tagsOfScenario = new string[] {
-                    "Editor",
-                    "Ignore"};
+                    "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Import data from recipe file", null, new string[] {
-                        "Editor",
-                        "Ignore"});
+                        "Editor"});
 #line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

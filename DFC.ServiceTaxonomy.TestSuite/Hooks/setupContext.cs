@@ -104,13 +104,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void CheckConnections()
         {
             // check SQL connection
-            var conn = _scenarioContext.GetSQLConnection();
-            if (!conn.CheckPermissions(new [] { "SELECT","DELETE"}))
+            if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
             {
-                _featureContext[constants.featureFailAll] = true;
-                throw new Exception("Unable to verify permission on SQL connection");
+                var conn = _scenarioContext.GetSQLConnection();
+                if (!conn.CheckPermissions(new[] { "SELECT", "DELETE" }))
+                {
+                    _featureContext[constants.featureFailAll] = true;
+                    throw new Exception("Unable to verify permission on SQL connection");
+                }
             }
-
             // check Graph connections
             try
             {

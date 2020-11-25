@@ -24,7 +24,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         ScenarioContext _scenarioContext;
         private ValidatedAndRepair _validateAndRepair;
 
-
         public EditorReportSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;

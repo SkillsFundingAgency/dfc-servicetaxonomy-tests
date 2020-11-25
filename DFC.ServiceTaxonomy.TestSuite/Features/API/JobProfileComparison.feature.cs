@@ -35,8 +35,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "JobProfileComparison", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
-                    "f two numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "JobProfileComparison", "  This was used to  compare the output of the current live JobProfile API against" +
+                    " the new version", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,51 +75,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.API
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile API")]
-        [NUnit.Framework.CategoryAttribute("ignore")]
-        public virtual void CompareOutputFromCurrentAndNewJobProfileAPI()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile API", null, new string[] {
-                        "ignore"});
-#line 7
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 8
- testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 9
- testRunner.Then("The output for each API matches for all job profiles", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile API new version")]
         public virtual void CompareOutputFromCurrentAndNewJobProfileAPINewVersion()
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile API new version", null, ((string[])(null)));
-#line 11
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -139,187 +100,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 12
+#line 6
  testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 13
+#line 7
  testRunner.Then("The output for each API matches for all job profiles NEW VERSION", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Compare output from current and new job profile summary API")]
-        [NUnit.Framework.CategoryAttribute("ignore")]
-        public virtual void CompareOutputFromCurrentAndNewJobProfileSummaryAPI()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Compare output from current and new job profile summary API", null, new string[] {
-                        "ignore"});
-#line 16
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 17
- testRunner.Given("I have got a list of all available job profile from the existing API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 18
- testRunner.And("I have got a list of all available job profile from the new API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 19
-    testRunner.Then("The existing and new job profile summaries are comparable", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Job Profile ACTOR is compared in old and new API")]
-        [NUnit.Framework.CategoryAttribute("ignore")]
-        public virtual void JobProfileACTORIsComparedInOldAndNewAPI()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Job Profile ACTOR is compared in old and new API", null, new string[] {
-                        "ignore"});
-#line 22
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 23
-    testRunner.Given("I compare actor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("htmloutputtest")]
-        public virtual void Htmloutputtest()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("htmloutputtest", null, ((string[])(null)));
-#line 25
-    this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 26
-    testRunner.Given("htmloutputtest", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Check mocked response against api")]
-        [NUnit.Framework.CategoryAttribute("ignore")]
-        public virtual void CheckMockedResponseAgainstApi()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check mocked response against api", null, new string[] {
-                        "ignore"});
-#line 29
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 31
-testRunner.Given("mock test step", "{\r\n  \"SalaryStarter\": \"13500\",\r\n  \"SalaryExperienced\": \"24000\",\r\n  \"LastUpdatedDa" +
-                        "te\": \"ToDo\",\r\n  \"MinimumHours\": 41.0,\r\n  \"RelatedCareers\": [\r\n    \"ToDo\"\r\n  ],\r\n" +
-                        "  \"Soc\": \"9134\",\r\n  \"Title\": \"Bottler\",\r\n  \"Overview\": \"<p>Bottlers fill, pack a" +
-                        "nd operate bottling machinery in food, drink and bottling factories.</p>\",\r\n  \"W" +
-                        "orkingPattern\": \"evenings / weekends\",\r\n  \"AlternativeTitle\": \"canning and bottl" +
-                        "ing operative, canning operative, canning and bottling worker, canner\",\r\n  \"Work" +
-                        "ingHoursDetails\": \"a week\",\r\n  \"Url\": \"https://pp.api.nationalcareers.service.go" +
-                        "v.uk/job-profiles/bottler\",\r\n  \"WhatYouWillDo\": {\r\n    \"WYDDayToDayTasks\": [\r\n  " +
-                        "    \"<p>keeping machinery clean and sterile, to meet high standards of food safe" +
-                        "ty</p>\",\r\n      \"<p>setting up machines and starting the bottling process</p>\",\r" +
-                        "\n      \"<p>making sure bottles or jars are correctly filled and labelled</p>\",\r\n" +
-                        "      \"<p>reporting more serious machinery problems to your line manager or a te" +
-                        "chnician</p>\",\r\n      \"<p>sorting out any problems with the production line so b" +
-                        "ottling is not held up</p>\"\r\n    ],\r\n    \"WorkingEnvironment\": {\r\n      \"Environ" +
-                        "ment\": \"<p>Your working environment may be noisy.</p>\",\r\n      \"Uniform\": \"\",\r\n " +
-                        "     \"Location\": \"<p>You could work in a factory.</p>\"\r\n    }\r\n  },\r\n  \"ONetOccu" +
-                        "pationalCode\": \"ToDo\",\r\n  \"MaximumHours\": 43.0,\r\n  \"WhatItTakes\": {\r\n    \"Skills" +
-                        "\": [\r\n      \"ToDo\"\r\n    ],\r\n    \"DigitalSkillsLevel\": \"<p>to be able to carry ou" +
-                        "t basic tasks on a computer or hand-held device</p>\"\r\n  },\r\n  \"CareerPathAndProg" +
-                        "ression\": {\r\n    \"CareerPathAndProgression\": [\r\n      \"<p>With experience, you c" +
-                        "ould progress to team supervisor or manager.</p>\"\r\n    ]\r\n  },\r\n  \"WorkingPatter" +
-                        "nDetails\": \"on shifts\",\r\n  \"HowToBecome\": {\r\n    \"EntryRoutes\": {\r\n      \"Univer" +
-                        "sity\": {\r\n        \"AdditionalInformation\": [\r\n          \"ToDo\"\r\n        ],\r\n    " +
-                        "    \"EntryRequirements\": [\r\n          \"ToDo\"\r\n        ],\r\n        \"RelevantSubje" +
-                        "cts\": [\r\n          \"ToDo\"\r\n        ],\r\n        \"FurtherInformation\": [\r\n        " +
-                        "  \"ToDo\"\r\n        ],\r\n        \"EntryRequirementPreface\": [\r\n          \"ToDo\"\r\n  " +
-                        "      ]\r\n      }\r\n    },\r\n    \"EntryRouteSummary\": \"ToDo\",\r\n    \"MoreInformation" +
-                        "\": {\r\n      \"Registration\": [\r\n        \"ToDo\"\r\n      ],\r\n      \"FurtherInformati" +
-                        "on\": [\r\n        \"\"\r\n      ],\r\n      \"ProfessionalAndIndustryBodies\": [\r\n        " +
-                        "\"\"\r\n      ],\r\n      \"CareerTips\": [\r\n        \"\"\r\n      ]\r\n    }\r\n  }\r\n}", ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             }
             this.ScenarioCleanup();

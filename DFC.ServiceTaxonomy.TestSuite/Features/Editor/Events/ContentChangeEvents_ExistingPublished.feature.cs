@@ -115,15 +115,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("18. A new draft version of an existing, published content item is created")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _18_ANewDraftVersionOfAnExistingPublishedContentItemIsCreated()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("18. A new draft version of an existing, published content item is created", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -191,18 +191,18 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("19. A new draft version of an existing, published content item has validation iss" +
             "ues")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         [NUnit.Framework.CategoryAttribute("NegativeTest")]
         public virtual void _19_ANewDraftVersionOfAnExistingPublishedContentItemHasValidationIssues()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev",
+                    "NotPP",
                     "NegativeTest"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("19. A new draft version of an existing, published content item has validation iss" +
                     "ues", null, new string[] {
                         "Editor",
-                        "NotDev",
+                        "NotPP",
                         "NegativeTest"});
 #line 37
 this.ScenarioInitialize(scenarioInfo);
@@ -267,15 +267,15 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("20. Updates to an existing published content item are published succesfully")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _20_UpdatesToAnExistingPublishedContentItemArePublishedSuccesfully()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("20. Updates to an existing published content item are published succesfully", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 51
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -343,18 +343,18 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("21. Updates to an existing published content item fails to publish with validatio" +
             "n issues")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         [NUnit.Framework.CategoryAttribute("NegativeTest")]
         public virtual void _21_UpdatesToAnExistingPublishedContentItemFailsToPublishWithValidationIssues()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev",
+                    "NotPP",
                     "NegativeTest"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("21. Updates to an existing published content item fails to publish with validatio" +
                     "n issues", null, new string[] {
                         "Editor",
-                        "NotDev",
+                        "NotPP",
                         "NegativeTest"});
 #line 66
 this.ScenarioInitialize(scenarioInfo);
@@ -419,15 +419,15 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("28. A published item is unpublished from the content item list view")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _28_APublishedItemIsUnpublishedFromTheContentItemListView()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("28. A published item is unpublished from the content item list view", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 80
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -486,16 +486,16 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("32. An existing published content item is deleted from the content item list view" +
             "")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         public virtual void _32_AnExistingPublishedContentItemIsDeletedFromTheContentItemListView()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev"};
+                    "NotPP"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("32. An existing published content item is deleted from the content item list view" +
                     "", null, new string[] {
                         "Editor",
-                        "NotDev"});
+                        "NotPP"});
 #line 93
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -550,17 +550,17 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("35. An existing draft content item is cloned from the content item list view")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         [NUnit.Framework.CategoryAttribute("ignore")]
         public virtual void _35_AnExistingDraftContentItemIsClonedFromTheContentItemListView()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev",
+                    "NotPP",
                     "ignore"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("35. An existing draft content item is cloned from the content item list view", null, new string[] {
                         "Editor",
-                        "NotDev",
+                        "NotPP",
                         "ignore"});
 #line 104
 this.ScenarioInitialize(scenarioInfo);

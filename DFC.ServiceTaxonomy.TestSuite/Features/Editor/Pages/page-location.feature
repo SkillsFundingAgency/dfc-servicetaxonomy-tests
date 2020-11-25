@@ -28,7 +28,7 @@ Background:
 	| My Test Page    | __PREFIX__Draft Content |
 	Given I store the uri from the "preview" graph and tag it "SharedHTMLUri" using the "get_sharedhtml_uri_for_page" query 
 
-@Editor @Thing
+@Editor
 Scenario:  Add a second content item to a new draft page
 
 	Given  I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 

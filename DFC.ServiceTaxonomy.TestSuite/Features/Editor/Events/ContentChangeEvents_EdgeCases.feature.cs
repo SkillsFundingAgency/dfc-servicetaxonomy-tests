@@ -80,18 +80,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Features.Editor.Events
         [NUnit.Framework.DescriptionAttribute("22. Publish draft is selected from the content item list view for an existing pub" +
             "lished item without changes")]
         [NUnit.Framework.CategoryAttribute("Editor")]
-        [NUnit.Framework.CategoryAttribute("NotDev")]
+        [NUnit.Framework.CategoryAttribute("NotPP")]
         [NUnit.Framework.CategoryAttribute("ignore")]
         public virtual void _22_PublishDraftIsSelectedFromTheContentItemListViewForAnExistingPublishedItemWithoutChanges()
         {
             string[] tagsOfScenario = new string[] {
                     "Editor",
-                    "NotDev",
+                    "NotPP",
                     "ignore"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("22. Publish draft is selected from the content item list view for an existing pub" +
                     "lished item without changes", null, new string[] {
                         "Editor",
-                        "NotDev",
+                        "NotPP",
                         "ignore"});
 #line 9
 this.ScenarioInitialize(scenarioInfo);
