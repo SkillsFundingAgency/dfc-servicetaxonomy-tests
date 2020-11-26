@@ -103,7 +103,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         private readonly ScenarioContext context;
         private int comparisonCount = 0;
-        private string JobProfileName = "";
+
         public JobProfileComparisonSteps(ScenarioContext injectedContext)
         {
             context = injectedContext;
@@ -133,55 +133,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context["AllSTAXJobProfiles"] = allJobProfiles;
         }
 
-        [Then(@"The existing and new job profile summaries are comparable")]
-        public void ThenTheExistingAndNewJobProfileSummariesAreComparable()
-        {
-            string padding = "--------------------------------------------------------------------------------------------------------------------------------------------------------";
-            List<JobProfileSummary> existingList = (List<JobProfileSummary>)context["AllJobProfiles"];
-            List<JobProfileSummary> newList = (List<JobProfileSummary>)context["AllSTAXJobProfiles"];
-            int totalFailed = 0;
-            //existingList.Count.Should().Be(newList.Count);
-            
-            // not all are present yet, so drive the checks from the new list
-
-            foreach ( var item in newList)
-            {
-                bool checksOK = true;
-                bool matched, lastUpdateDateCheck, titleCheck, uriCheck;
-                matched = lastUpdateDateCheck = titleCheck = uriCheck = false;
-                string canonicalName = item.url.Substring(item.url.LastIndexOf('/'));
-                var match = existingList.Where(u => u.url.EndsWith(canonicalName)).FirstOrDefault();
-
-                // check titles match
-                matched = ( match != null );
-
-                if (matched)
-                {
-                    // check last updated is not null
-                    lastUpdateDateCheck = item.lastUpdated != null;
-
-                    //title check
-                    titleCheck = item.title == match.title;
-
-                    //uri check
-                    uriCheck = false;
-
-                    checksOK = (matched && lastUpdateDateCheck && titleCheck && uriCheck);
-                }
-                else
-                {
-                    Console.WriteLine("");
-                }
-                Console.WriteLine("Check for {0}{1} is Match {2} \tTitle {3}\tLastUpdate {4}\turi {5}", item.title
-                                                                                                      , padding.Substring(0,50-item.title.Length)
-                                                                                                      , matched.ToString()
-                                                                                                      ,titleCheck
-                                                                                                      , lastUpdateDateCheck
-                                                                                                      , uriCheck);
-                if (!checksOK) totalFailed++;
-            }
-            Console.WriteLine("Total Checked: {0} Total Failed {1}", newList.Count, totalFailed);
-        }
 
         [Then(@"The output for each API matches for all job profiles NEW VERSION")]
         public void ThenTheOutputForEachAPIMatchesForAllJobProfilesNEWVERSION()
@@ -222,7 +173,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 comparedItem headerItem = new comparedItem();
                 //  get source job profile data
 
-                var responseSourceData = RestHelper.Get( context.GetJobProfileApiBaseUrl() + "/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
+                var responseSourceData = RestHelper.Get(context.GetJobProfileApiBaseUrl() + "/" + jobProfile.title /*jobProfile.url*/, context.GetJobProfileApiHeaders());
 
                 //  get test subject job profile data
                 string unslug = char.ToUpper(jobProfile.title[0]) + jobProfile.title.Replace("-", " ").Substring(1);
@@ -302,7 +253,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 {
                     string text = "???";
                     string cssFormat = tdInlineCss;
-                    string toolTip = "" ;
+                    string toolTip = "";
 
                     if (dict.ContainsKey(item.Key))
                     {
@@ -316,8 +267,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         else if (dict[item.Key].ContentMatch)
                         {
                             text += "ContentMatch";
-                            cssFormat = ( dict[item.Key].SourceManipulated ? tdInlineCssGood.Replace("palegreen", "olive") :
-                                                        ( ! dict[item.Key].Manipulated ? tdInlineCssGood : tdInlineCssGood.Replace("palegreen", "darkgreen")  )
+                            cssFormat = (dict[item.Key].SourceManipulated ? tdInlineCssGood.Replace("palegreen", "olive") :
+                                                        (!dict[item.Key].Manipulated ? tdInlineCssGood : tdInlineCssGood.Replace("palegreen", "darkgreen"))
                                                         );
                         }
                         else if (dict[item.Key].ToDo)
@@ -341,7 +292,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             text += "StructureMatch";
                             cssFormat = tdInlineCssGood.Replace("palegreen", "lightyellow");
                         }
- 
+
                         //else if ()
                         else if (!dict[item.Key].Included)
                         {
@@ -386,30 +337,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
         }
 
-        [Given(@"I compare actor")]
-        public void GivenICompareActor()
-        {
-
-            string url = context.GetJobProfileApiBaseUrl()  +"/actor";
-            var responseSourceData = RestHelper.Get(url, context.GetJobProfileApiHeaders());
-
-            Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
-            var responseTestData = RestHelper.Get( context.GetTaxonomyApiBaseUrl() + "/getjobprofilebytitle/Execute/Actor" , context.GetTaxonomyApiHeaders());
-
-            // compare data
-            JObject diffs = FindDiff(JToken.Parse(responseSourceData.Content), JToken.Parse(responseTestData.Content), comparison);
-
-            string output = diffs.ToString();
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine(output);
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-            foreach ( var item in comparison)
-            {
-                Console.WriteLine(item.Key + "," + item.Value.ContentMatch);
-            }
-        }
-
-        private JToken ReplaceTags( JToken source, out bool replacementsMade) 
+        private JToken ReplaceTags(JToken source, out bool replacementsMade)
         {
             bool success = true;
             string replacedValue = "";
@@ -457,7 +385,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 Console.WriteLine("123");
             }
-            return ( success ? (JToken)replacedValue : source );
+            return (success ? (JToken)replacedValue : source);
         }
 
         public class comparedItem
@@ -514,7 +442,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             comparisonCount++;
 
-            if ( comparisonCount == 353)
+            if (comparisonCount == 353)
             {
                 Console.WriteLine("DEBUGBREAKPOINT");
             }
@@ -547,7 +475,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 // is the  model empty
                 comparison.NewEmpty = (Model.Count() == 0);
-                comparison.NewTruncated = ( Model.Count() > 0 ? Current.Count() > Model.Count() : false );
+                comparison.NewTruncated = (Model.Count() > 0 ? Current.Count() > Model.Count() : false);
                 modelSize = Current.Count();
                 comparison.NewFormat = "ARRAY";
                 comparison.ToDo = (Model.Count() > 0 ? Model[0].ToString().ToLower() == "todo" : false);
@@ -556,7 +484,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 comparison.ToDo = (originalModel.ToString().ToLower() == "todo");
                 comparison.NewEmpty = (Model.ToString().Length == 0);
-                comparison.NewTruncated = (Model.ToString().Length > 0 ?  Current.ToString().Length / Model.ToString().Length > 2 : false);
+                comparison.NewTruncated = (Model.ToString().Length > 0 ? Current.ToString().Length / Model.ToString().Length > 2 : false);
                 modelSize = Current.ToString().Length;
                 comparison.NewFormat = "STRING";
             }
@@ -564,9 +492,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             comparison.SizesDiffer = Model.ToString().Length != Current.ToString().Length;
 
             // does the new and old type match
-            comparison.FormatMatch = ( Current.Type == Model.Type );
+            comparison.FormatMatch = (Current.Type == Model.Type);
 
-            
+
             switch (key)
             {
                 case "CareerPathAndProgression":
@@ -586,7 +514,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         Current = newCurrent;
                         comparison.SourceManipulated = true;
                     }
-                break;
+                    break;
                 default:
                     break;
             }
@@ -637,7 +565,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     break;
             }
 
-            if ( Current.Type == JTokenType.Array && Model.Type != JTokenType.Array)
+            if (Current.Type == JTokenType.Array && Model.Type != JTokenType.Array)
             {
                 JArray newModel = new JArray();
                 newModel.Add(Model.ToString());
@@ -681,69 +609,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             comparisons.Add(path, comparison);
 
             return diff;
-        } 
-  
-        [Given(@"mock test step")]
-        public void GivenMockTestStep(string multilineText)
-        {
-            var responseSourceData = RestHelper.Get( context.GetTaxonomyApiBaseUrl() + "/job-profiles/bottler", context.GetJobProfileApiHeaders());
-
-            var responseTestData = multilineText;
-            Dictionary<string, comparedItem> comparison = new Dictionary<string, comparedItem>();
-
-            var tempString = "{  \"SalaryStarter\": \"13500\", \"SalaryExperienced\": \"24000\", \"LastUpdatedDate\": \"ToDo\", \"MinimumHours\": 41.0, \"RelatedCareers\": [ \"ToDo\" ], \"Soc\": \"9134\", \"Title\": \"Bottler\", \"Overview\":\"<p>Bottlers fill, pack and operate bottling machinery in food, drink and bottling factories.</p>\", \"WorkingPattern\": \"evenings / weekends\", \"AlternativeTitle\": \"canning and bottling operative, canningoperative, canning and bottling worker, canner\", \"WorkingHoursDetails\": \"a week\", \"Url\": \"https://pp.api.nationalcareers.service.gov.uk/job-profiles/bottler\", \"WhatYouWillDo\": { \"WYDDayToDayTasks\": [ \"<p>keeping machinery clean and sterile, to meet high standards of food safety</p>\", \"<p>setting up machines and starting the bottling process</p>\", \"<p>making sure bottles or jars are correctly filled andlabelled</p>\", \"<p>reporting more serious machinery problems to your line manager or a technician</p>\", \"<p>sorting out any problems with the production line so bottling is not held up</p>\" ], \"WorkingEnvironment\": { \"Environment\": \"<p>Your working environment may be noisy.</p>\", \"Uniform\": \"\", \"Location\": \"<p>You could work in a factory.</p>\" } }, \"ONetOccupationalCode\": \"ToDo\", \"MaximumHours\": 43.0, \"WhatItTakes\": { \"Skills\": [ \"ToDo\" ], \"DigitalSkillsLevel\": \"<p>to be able to carry out basic tasks on a computer or hand-held device</p>\" }, \"CareerPathAndProgression\": { \"CareerPathAndProgression\": [ \"<p>With experience, you could progress to team supervisor or manager.</p>\" ] }, \"WorkingPatternDetails\": \"on shifts\", \"HowToBecome\": { \"EntryRoutes\": { \"University\": { \"AdditionalInformation\": [ \"ToDo\" ], \"EntryRequirements\": [ \"ToDo\",\"flippy\" ], \"RelevantSubjects\": [ \"ToDo\" ], \"FurtherInformation\": [ \"ToDo\" ], \"EntryRequirementPreface\": [ \"ToDo\" ] } }, \"EntryRouteSummary\": \"ToDo\", \"MoreInformation\": { \"Registration\": [ \"ToDo\" ], \"FurtherInformation\": [ \"\" ], \"ProfessionalAndIndustryBodies\": [ \"\" ], \"CareerTips\": [ \"\" ] } }}";
-            dynamic sourceObject = JsonConvert.DeserializeObject(responseSourceData.Content);
-
-            //exploreObject(sourceObject, 0, "TOP");
-
-            JObject diffs = FindDiff(JToken.Parse(responseTestData), JToken.Parse(tempString), comparison);
-            //exploreJsonObject(JToken.Parse(responseSourceData.Content), 0, "$", JObject.Parse(responseTestData) );
-            string output = diffs.ToString();
-            Console.WriteLine("------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine(output);
-            return;
-     
         }
-
-        [Given(@"htmloutputtest")]
-        public void GivenHtmloutputtest()
-        {
-            var dataList = new List<TestDataClass>
-        {
-            new TestDataClass {Name = "A", Lastname = "B", Other = "ABO"},
-            new TestDataClass {Name = "C", Lastname = "D", Other = "CDO"},
-            new TestDataClass {Name = "E", Lastname = "F", Other = "EFO"},
-            new TestDataClass {Name = "G", Lastname = "H", Other = "GHO"}
-        };
-
-            var headerList = new List<string> { "Name", "Surname", "Merge" };
-
-            var customTableStyle = new List<EnumerableExtension.CustomTableStyle>
-        {
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"font-family", "Comic Sans MS" },{"font-size","15px"}}},
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Table, InlineStyleValueList = new Dictionary<string, string>{{"background-color", "yellow" }}},
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Tr, InlineStyleValueList =new Dictionary<string, string>{{"color","Blue"},{"font-size","10px"}}},
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Th,ClassNameList = new List<string>{"normal","underline"}},
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Th,InlineStyleValueList =new Dictionary<string, string>{{ "background-color", "gray"}}},
-            new EnumerableExtension.CustomTableStyle{CustomTableStylePosition = EnumerableExtension.CustomTableStylePosition.Td, InlineStyleValueList  =new Dictionary<string, string>{{"color","Red"},{"font-size","15px"}}},
-        };
-
-            var htmlResult = dataList.ToHtmlTable(headerList, customTableStyle, x => x.Name, x => x.Lastname, x => $"{x.Name} {x.Lastname}");
-            Console.WriteLine(htmlResult);
-        }
-    }
-
-    public class TestDataClass
-    {
-        public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Other { get; set; }
-    }
-
-    public class CompairisonItem
-    {
-        public string Name { get; set; }
-        public string Lastname { get; set; }
-        public string Other { get; set; }
-    }
+    } 
+ 
 }

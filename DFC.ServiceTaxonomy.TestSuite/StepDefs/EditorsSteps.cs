@@ -306,7 +306,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
-
             _logonScreen.SubmitLogonDetails();
         }
 
@@ -320,14 +319,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenICaptureTheGeneratedURIGraph_UriId_Text()
         {
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI());
-            
         }
 
         [Given(@"I capture the generated URI and tag it ""(.*)""")]
         public void GivenICaptureTheGeneratedURIGraphAndTagIt_UriId_Text(string tag)
         {
             _scenarioContext.StoreUri(_addContentItemBase.GetGeneratedURI(), tag);
-
         }
 
         [Given(@"I set the content type to be ""(.*)""")]
@@ -442,12 +439,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 value.Should().Be(row[2]);
                 vars.Add(row[0], row[2]);
             }
-            //_scenarioContext[constants.requestVariables] = vars;
             _scenarioContext.SetEditorFields(vars);
         }
-
-
-
 
         [Then(@"the editor field ""(.*)"" matches")]
         public void ThenTheEditorFieldMatches(string p0, string multilineText)
@@ -459,9 +452,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             vars.Add(p0, multilineText);
             _scenarioContext.SetEditorFields(vars, true);
-//            _scenarioContext[constants.requestVariables] = vars;
         }
-
 
         [Given(@"I Enter the following form data for ""(.*)""")]
         public void GivenIEnterTheFollowingFormDataFor(string p0, Table table)
@@ -530,7 +521,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // navigate to /Admin/ContentTypes/List
             _scenarioContext[constants.ContentType] = p0;
             _addContentType.AddNew(p0);
- 
         }
 
         [Given(@"I add a new graph contentType called ""(.*)""")]
@@ -542,7 +532,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // now add graph sync item with default settings
             GivenIEditThePart("Graph Sync");
             _GraphSyncPart.SelectSyncType();
-          //  _GraphSyncPart.SetFieldValues(p0,_scenarioContext.GetGraphSyncPartSettings());
             _GraphSyncPart.SaveChanges();
         }
 
@@ -633,7 +622,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _GraphSyncPart.SetDisplayIdCheckbox(contentType);
         }
 
-
         [Given(@"I save the contentItem")]
         public void GivenISaveTheContentItem()
         {
@@ -648,13 +636,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _addContentType.AddField(contentType, row[0], row[1], ( row.Count > 2 && row[2].Length>0? row[2] : null ) );
             }
-        }
-
-        [Given(@"I add a bag part containing the following content types")]
-        public void GivenIAddABagPartContainingTheFollowingContentTypes(Table table)
-        {
-        //    _addContentType.AddPart("Bag");
-            ScenarioContext.Current.Pending();
         }
 
         [Given(@"I pick content")]
@@ -717,7 +698,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     Console.WriteLine("Unhandled situation");
                     //throw new Exception("Unhandled situation");
                 }
-
             }
             catch (Exception e)
             {
@@ -1477,19 +1457,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             neo4JHelper.ExecuteTableQuery(cypher, null);
         }
 
-
-        //[Given(@"I delete Graph data for content type ""(.*)""")]
-        //public void GivenIDeleteGraphDataForContentType(string type)
-        //{
-        //    //todo make use of extension method
-        //    string cypher = "match (n) where any(l in labels(n) where l starts with '" + _scenarioContext.ReplaceTokensInString(type) + "') detach delete n";
-        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
-        //    neo4JHelper.connect(_scenarioContext.GetEnv().neo4JUrl,
-        //                        _scenarioContext.GetEnv().neo4JUid,
-        //                        _scenarioContext.GetEnv().neo4JPassword);
-        //    neo4JHelper.ExecuteTableQuery(cypher, null);
-        //}
-
         [Given(@"I delete SQL Server data for content type ""(.*)""")]
         public void GivenIDeleteSQLServerDataForContentType(string p0)
         {
@@ -1714,9 +1681,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _addContentItemBase.ConfirmMessageDisplayed(p0).Should().BeTrue($"Because the message '{p0}' is expected");
         }
-
-
-
         #endregion
     }
 }

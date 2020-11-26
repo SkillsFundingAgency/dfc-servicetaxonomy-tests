@@ -62,9 +62,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                     TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
                 }
             }
-
-
-
         }
 
         [AfterScenario("webtest", Order = 15)]
@@ -145,7 +142,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                     messageText += $"  {message.Key} - {message.Value}";
                 }
                 throw new Exception(messageText);
-
             }
         }
     }

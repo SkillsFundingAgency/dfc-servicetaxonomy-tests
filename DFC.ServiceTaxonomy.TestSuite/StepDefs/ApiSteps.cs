@@ -40,7 +40,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context = injectedContext;
         }
 
-        public string getNth(string str, char splitChar, int n)
+        public string GetNth(string str, char splitChar, int n)
         {
             int idx;
             string newString = "";
@@ -54,10 +54,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             return newString;
         }
 
-        public string addLinksToJson(string json, _DataItem item)
+        public string AddLinksToJson(string json, _DataItem item)
         {
             int count = item.Uri.Count(f => f == '/');
-            string curie = getNth(item.Uri, '/', count - 1);
+            string curie = GetNth(item.Uri, '/', count - 1);
             string id = item.Uri.Substring(item.Uri.LastIndexOf("/")+1);
 
 
@@ -158,24 +158,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             InsertSharedContent(contentTypeName, dataTable, graph);
         }
 
-        //[Given(@"I publish a ""(.*)"" item with the following values")]
-        //public void GivenIPublishAItemWithTheFollowingValues(string p0, Table table)
-        //{
-        //    string contentTypeName = context.ReplaceTokensInString(p0);
-        //    ScenarioContext.Current.Pending();
-        //}
-
-
-
-        //[Given(@"I create an item of ""(.*)"" related by ""(.*)"" with the following data")]
-        //public void GivenICreateAnItemOfRelatedByWithTheFollowingData(string p0, string p1, Table table)
-        //{
-        //    string contentTypeName = context.ReplaceTokensInString(p0);
-        //    InsertSharedContent(contentTypeName, table);
-
-        //    AddRelationship(context.GetUri(context.GetNumberOfStoredUris() - 2), context.GetLatestUri(), p1 );
-        //}
-
         [Given(@"I create an item of ""(.*)"" in the ""(.*)"" graph related by ""(.*)"" to item (.*) with the following data")]
         public void GivenICreateAnItemOfInTheGraphRelatedByToItemWithTheFollowingData(string type, string graph, string relationship, int itemRef, Table dataTable)
         {
@@ -188,7 +170,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             AddRelationship(context.GetUri(itemRef - 1), context.GetLatestUri(), relationship, graph);
             context.RelateDataItems(itemRef - 1, context.GetNumberOfStoredUris() - 1, item.Title, relationship);
         }
-
 
         [Given(@"I request all occupations from the NCS API")]
         public void GivenIRequestAllOccupationsFromTheNCSAPI()
@@ -335,7 +316,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
                 json = JsonConvert.SerializeObject(requestedItem.model);
 
-                json = addLinksToJson(json, requestedItem);
+                json = AddLinksToJson(json, requestedItem);
             }
             else
             {
@@ -434,36 +415,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.StoreToken("JobProfileUri", uri);
         }
 
-
-
-        //[Given(@"I have made sure that occupations with related job profiles are present in the graph datastore")]
-        //public void GivenIHaveMadeSureThatOccupationsWithRelatedJobProfilesArePresentInTheGraphDatastore()
-        //{
-        //    //  check how many skills exist for occupations with related job profile
-        //    var statementTemplate = cypher_skillWithRelatedJobProfile;
-        //   // var statementParameters = new Dictionary<string, object> { { "uri", context.Get<string>(keyGeneratedUri) } };
-
-        //    Neo4JHelper neo4JHelper = new Neo4JHelper();
-        //    neo4JHelper.connect(context.GetEnv().neo4JUrl,
-        //                            context.GetEnv().neo4JUid,
-        //                            context.GetEnv().neo4JPassword);
-
-        //    int numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
-
-        //    if ( numberOfRecords < 1)
-        //    {
-        //        // add a record
-        //        neo4JHelper.ExecuteTableQuery(cypher_AddJobProfileAndRelationToOccupation,null);
-        //    }
-
-        //    // check success
-        //    numberOfRecords = neo4JHelper.GetRecordCount(statementTemplate, null);
-        //    numberOfRecords.Should().BeGreaterThan(0);
-
-        //    // store in context
-        //    context.SetExpectedRecordCount(numberOfRecords);
-        //}
-
         static bool AreEqual(IDictionary<string, string> thisItems, IDictionary<string, string> otherItems)
         {
             if (thisItems.Count != otherItems.Count)
@@ -496,7 +447,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             // assert result
             match.Should().BeTrue();
         }
-
 
         [Then(@"the skills returned by each service match")]
         public void ThenTheSkillsReturnedByEachServiceMatch()
@@ -547,8 +497,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var result = JsonHelper.CompareJsonString(itemJson, responseJson);
             result.Should().BeTrue("Because the data returned should include all the created items");
         }
-
-
 
         [Then(@"the alternate labels listed for first Occupation returned matches esco data")]
         public void ThenTheAlternateLabelsListedForFirstOccupationReturnedMatchesEscoData()
@@ -755,16 +703,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             distinctValues.Count.Should().Be(JsonHelper.GetDocumentCountInCollection(response, p1));
         }
 
-
         [Then(@"the count of collection ""(.*)"" is (.*)")]
         public void ThenTheCountOfCollectionIs(string p0, int p1)
         {
             string response = (string)context[constants.responseContent];
             JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
         }
-
-
-
 
         [Then(@"the response value for ""(.*)"" is an empty array")]
         public void ThenTheValueForIsAnEmptyArray(string p0)
@@ -791,8 +735,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheTheResponseMessageIs(string p0)
         {
             context[constants.responseContent].Should().Be(p0);
-         }
-
-
+        }
     }
 }

@@ -16,7 +16,7 @@ Background:
 	And I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 
-@Editor
+@Editor @NotPP
 Scenario: 3. A succesful correction is made to a new draft with validation issues
 	Given I Enter the following form data for "SharedContent"
 	| Title       |
@@ -29,7 +29,7 @@ Scenario: 3. A succesful correction is made to a new draft with validation issue
 	And the number of events sent for this content Item is 1
 	
 
-@Editor
+@Editor @NotPP
 Scenario: 4. An unsuccesful  correction is made to a new draft with validation issues
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |
@@ -41,7 +41,7 @@ Scenario: 4. An unsuccesful  correction is made to a new draft with validation i
 	And an "EmptyField" validation error is shown for "Title"
 
 
-@Editor
+@Editor @NotPP
 Scenario: 9. A succesful Publishing of new content item which had validation issues on save to draft
 	Given I Enter the following form data for "SharedContent"
 	| Title       | 
@@ -53,7 +53,7 @@ Scenario: 9. A succesful Publishing of new content item which had validation iss
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor
+@Editor @NotPP
 Scenario: 10. An unsuccesful Publishing of new content item which had validation issues on save to draft
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |

@@ -28,8 +28,7 @@ Feature: CypherBasedRecipes
 	| TextField    | Text Field    |
 	| ValueField   | Numeric Field |
 
-@Editor @ignore
-# TODO not working.
+@Editor @NotDev @NotSit @NotPP
 Scenario: I use recipes to create neo4j content and import it into orchard core
 #CypherCommand
 	Given I load recipe file "create_neo4j_content.json"
@@ -47,8 +46,7 @@ Scenario: I use recipes to create neo4j content and import it into orchard core
 	| uri::thing1 | Test Thing 1 |
 	
 
-
 #TODO_DRAFT 
 #add checks in draft database
 #review cleardown
-# review test coverage
+

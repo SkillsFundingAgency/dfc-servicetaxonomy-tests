@@ -6,7 +6,7 @@ Background:
 	Given I set the content type to be "SharedContent" 
 	Given I set up a data prefix for "Title"
 
-@Editor
+@Editor @NotPP
 Scenario: 1. A new content item draft is created that passes server validation
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	And I capture the generated URI
@@ -20,7 +20,7 @@ Scenario: 1. A new content item draft is created that passes server validation
 	And the data is not present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor
+@Editor @NotPP
 Scenario: 2. A new content item draft is created that fails server validation
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	And I capture the generated URI
@@ -33,7 +33,7 @@ Scenario: 2. A new content item draft is created that fails server validation
 	And the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 
-@Editor
+@Editor @NotPP
 Scenario: 7. A new content item is published succesfully
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	And I capture the generated URI
@@ -47,7 +47,7 @@ Scenario: 7. A new content item is published succesfully
 	And the data is present in the PUBLISH Graph database
 	And the number of events sent for this content Item is 1
 
-@Editor
+@Editor @NotPP
 Scenario: 8. A new content item is published with validation issues
 	Given I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
 	And I capture the generated URI
