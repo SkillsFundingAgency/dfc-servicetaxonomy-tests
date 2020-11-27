@@ -44,8 +44,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.ToString());
-                    return false;
+                    throw new Exception($"Unable to open SQL connection: {e.Message}");
                 }
             }
             return (Connection.State == System.Data.ConnectionState.Open);
@@ -329,6 +328,7 @@ namespace DFC.ServiceTaxonomy.SharedResources.Helpers
                     success = false;
                 }
             }
+            else message = "Connection not opened";
             return (success,message);
         }
  
