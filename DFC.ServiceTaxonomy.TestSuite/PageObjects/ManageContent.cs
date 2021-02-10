@@ -119,7 +119,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 //_scenarioContext.GetWebDriver().SelectButtonGroupClass("btn-group", 3);
-                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
+                _scenarioContext.GetWebDriver().ClickButton(".btn-secondary.actions");
                 _scenarioContext.GetWebDriver().ClickButton(action);
             }
             catch (Exception e)
