@@ -210,6 +210,95 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,\"{message}\")]]"));
             return (elements.Count > 0);
         }
+
+        public bool ConfirmEditorContainsHTML(string html)
+        {
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[contains(@class, \"{html}\")]"));
+            return (elements.Count > 0);
+        }
+
+        public void InsertYoutubeLink(Dictionary<string, string> vars)
+        {
+            var imageButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-image-button"));
+            imageButton.Click();
+            
+            var insertYoutubeLinkButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-youtubeLink-dropdown-button"));
+            insertYoutubeLinkButton.Click();
+
+            var urlInput = _scenarioContext.GetWebDriver().FindElement(By.Name("url"));
+            urlInput.SendKeys(vars["Url"]);
+            var titleInput = _scenarioContext.GetWebDriver().FindElement(By.Name("title"));
+            titleInput.SendKeys(vars["Title"]);
+
+            var confirm = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-modal-submit"));
+            confirm.Click();
+        }
+
+        public void viewHTML()
+        {
+            var viewHTMLButton = _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[@title='View HTML']"));
+            viewHTMLButton.Click();
+        }
+
+        public void SelectSectionBreak()
+        {
+            var sectionButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-sectionBreak-button"));
+            sectionButton.Click();
+            Thread.Sleep(1000);
+            var sectionBreak = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-defaultSectionBreak-dropdown-button"));
+            sectionBreak.Click();
+        }
+
+        public void SelectNumbertList()
+        {
+            var numberList = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-numberList-button"));
+            numberList.Click();
+        }
+
+        public void SelectBulletList()
+        {
+            var bulletList = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-bulletList-button"));
+            bulletList.Click();
+        }
+
+        public void SelectList()
+        {
+            var list = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-list-button"));
+            list.Click();
+        }
+
+        public void SelectFontWeight()
+        {
+            var boldButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-fontWeight-button"));
+            boldButton.Click();
+        }
+
+        public void SelectFontSize(string size)
+        {
+            var fontSizeButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-fontSize-button"));
+            fontSizeButton.Click();
+            Thread.Sleep(1000);
+            var fontSize = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-fontSize_{size}-dropdown-button"));
+            fontSize.Click();
+        }
+
+        public void SelectParagraph(string paragragh)
+        {
+            var paragrapghButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-paragraph-button"));
+            paragrapghButton.Click();
+            Thread.Sleep(1000);
+            var optionButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-paragraph_{paragragh}-dropdown-button"));
+            optionButton.Click();
+        }
+
+        public void SelectHeading(string header)
+        {
+            var headingButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-heading-button"));
+            headingButton.Click();
+            Thread.Sleep(1000);
+            var headerButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-{header}-button"));
+            headerButton.Click();
+        }
         
     }
 }
