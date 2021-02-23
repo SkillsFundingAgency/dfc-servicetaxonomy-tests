@@ -244,7 +244,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var sectionButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-sectionBreak-button"));
             sectionButton.Click();
-            Thread.Sleep(1000);
             var sectionBreak = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-defaultSectionBreak-dropdown-button"));
             sectionBreak.Click();
         }
@@ -277,7 +276,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var fontSizeButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-fontSize-button"));
             fontSizeButton.Click();
-            Thread.Sleep(1000);
             var fontSize = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-fontSize_{size}-dropdown-button"));
             fontSize.Click();
         }
@@ -286,7 +284,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var paragrapghButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-paragraph-button"));
             paragrapghButton.Click();
-            Thread.Sleep(1000);
             var optionButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-paragraph_{paragragh}-dropdown-button"));
             optionButton.Click();
         }
@@ -295,7 +292,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var headingButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-heading-button"));
             headingButton.Click();
-            Thread.Sleep(1000);
             var headerButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-{header}-button"));
             headerButton.Click();
         }
