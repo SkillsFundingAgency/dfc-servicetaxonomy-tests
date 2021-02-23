@@ -1742,6 +1742,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _addContentItemBase.ConfirmEditorContainsHTML(p0).Should().BeTrue($"Because the HTML '{p0}' is expected");
         }
 
+        [Then(@"the editor contains the media html ""(.*)""")]
+        public void ThenTheEditorContainsTheYoutubeHtml(string p0)
+        {
+            _addContentItemBase.ConfirmEditorContainsMediaHTML(p0).Should().BeTrue($"Because the HTML '{p0}' is expected");
+        }
+
         [Given(@"I insert a youtube link")]
         public void GivenIInsertAYoutubeLink(Table table)
         {
@@ -1758,7 +1764,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
 
             _addContentItemBase.InsertYoutubeLink(vars);
-        }        
+        }
+
+        [When(@"I publish and continue")]
+        public void WhenIPublishAndContinue()
+        {
+            _addContentItemBase.PublishAndContinueActivity();
+        }
+
+        [Given(@"I click the Shared Content item")]
+        public void GivenIClickTheSharedContentItem()
+        {
+            _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[@title='New']")).Click();
+            Thread.Sleep(1000);
+            _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[@title='Shared Content']")).Click();
+        }     
         #endregion
     }
 }
