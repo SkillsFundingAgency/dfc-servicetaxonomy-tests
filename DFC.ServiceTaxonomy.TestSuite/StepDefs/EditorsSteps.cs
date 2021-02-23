@@ -1681,6 +1681,84 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _addContentItemBase.ConfirmMessageDisplayed(p0).Should().BeTrue($"Because the message '{p0}' is expected");
         }
+        
+        [Given(@"I select the ""(.*)"" header button")]
+        public void GivenISelectTheHeaderButton(string header)
+        {
+            _addContentItemBase.SelectHeading(header);
+        }
+
+        [Given(@"I select the ""(.*)"" paragraph button")]
+        public void GivenISelectTheParagraphButton(string paragragh)
+        {
+            _addContentItemBase.SelectParagraph(paragragh);
+        }
+
+        [Given(@"I select the ""(.*)"" font size button")]
+        public void GivenISelectTheFontSizeButton(string size)
+        {
+            _addContentItemBase.SelectFontSize(size);
+        }
+
+        [Given(@"I select the bold font button")]
+        public void GivenISelectTheBoldFontButton()
+        {
+            _addContentItemBase.SelectFontWeight();
+        }
+
+        [Given(@"I select the list button")]
+        public void GivenISelectTheListButton()
+        {
+            _addContentItemBase.SelectList();
+        }
+
+        [Given(@"I select the bulleted list button")]
+        public void GivenISelectTheBulletedListButton()
+        {
+            _addContentItemBase.SelectBulletList();
+        }
+
+        [Given(@"I select the numbered list button")]
+        public void GivenISelectTheNumberedListButton()
+        {
+            _addContentItemBase.SelectNumbertList();
+        }
+
+        [Given(@"I select a section break")]
+        public void GivenISelectASectionBreak()
+        {
+            _addContentItemBase.SelectSectionBreak();
+        }
+
+        [Then(@"I click the view HTML button")]
+        public void ThenIClickTheViewHTMLButton()
+        {
+            _addContentItemBase.viewHTML();
+        }
+
+        [Then(@"the editor contains ""(.*)""")]
+        public void ThenTheEditorContains(string p0)
+        {
+            _addContentItemBase.ConfirmEditorContainsHTML(p0).Should().BeTrue($"Because the HTML '{p0}' is expected");
+        }
+
+        [Given(@"I insert a youtube link")]
+        public void GivenIInsertAYoutubeLink(Table table)
+        {
+            Dictionary<string, string> vars = new Dictionary<string, string>();
+            foreach (var item in table.Rows.First().Select((value, index) => new { value, index }))
+            {
+                string newValue = _scenarioContext.ReplaceTokensInString(item.value.Value);
+                if (item.index == 0)
+                {
+                    newValue = (_scenarioContext.ContainsKey(constants.prefix) && !newValue.StartsWith((string)_scenarioContext[constants.prefix]) && newValue.Length > 0 ? _scenarioContext[constants.prefix] : "") + newValue;
+                    _scenarioContext.Set(newValue, item.value.Key);
+                }
+                vars.Add(item.value.Key, newValue);
+            }
+
+            _addContentItemBase.InsertYoutubeLink(vars);
+        }        
         #endregion
     }
 }
