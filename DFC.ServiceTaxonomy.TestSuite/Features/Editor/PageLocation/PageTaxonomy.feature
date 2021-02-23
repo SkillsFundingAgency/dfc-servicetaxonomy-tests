@@ -114,7 +114,7 @@ Scenario: Attempt to add a page location with a path that conflicts with an exis
 	And I publish the item
 	Then the error "The generated URL for '__PATH__' has already been used as a Page URL." is displayed
 
-@Editor
+@Editor @Ignore
 Scenario: Attempt to publish edits to a page location with a full url that conflicts with an existing page full url
 
 	Given I Navigate to "/Admin/Contents/ContentItems/4eembshqzx66drajtdten34tc8/Edit"

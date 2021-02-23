@@ -70,3 +70,150 @@ Scenario: Add a new shared content item
 #re publish with latest draft
 #un publish
 #delete draft
+
+@Editor
+Scenario: HTML Editor Header buttons
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the "h1" header button
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-heading-xl"
+
+
+@Editor
+Scenario: HTML Editor paragraph buttons
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the "Body" paragraph button
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-body"
+
+@Editor
+Scenario: HTML Editor font size buttons
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the "24px" font size button
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-!-font-size-24"
+
+
+@Editor
+Scenario: HTML Editor bold font weight buttons
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |	
+	And I select the bold font button
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-!-font-weight-bold"
+
+@Editor
+Scenario: HTML Editor List button
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the list button 
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-list"
+
+Scenario: HTML Editor bulleted list button
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the bulleted list button 
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-list govuk-list--bullet"
+
+@Editor
+Scenario: HTML Editor numbered list button
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select the numbered list button 
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-list govuk-list--number"
+
+@Editor
+Scenario: HTML Editor section break buttons
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I select a section break 
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "govuk-section-break"
+	
+@Editor
+Scenario: HTML Editor Insert Youtube Link
+	Given I set up a data prefix for "Title"
+	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
+	And I click the Shared Content item
+	And I capture the generated URI
+	And I Enter the following form data for "SharedContent"
+	| Title              |  Content          |
+	| New Shared Content |  Test content	 |
+	And I insert a youtube link 
+	| Title	|  Url												 |
+	| neo4j |  https://www.youtube.com/watch?v=REVkXVxvMQE&t=2s  |
+	Then I click the view HTML button
+	When I publish and continue
+	Then the item is published succesfully
+	And I click the view HTML button
+	And the editor contains "iframe"
