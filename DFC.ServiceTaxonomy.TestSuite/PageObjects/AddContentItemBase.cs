@@ -216,6 +216,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[contains(@class, \"{html}\")]"));
             return (elements.Count > 0);
         }
+        
+        public bool ConfirmEditorContainsMediaHTML(string p0)
+        {
+            var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//iframe[contains(@src, \"{p0}\")]"));
+            return (elements.Count > 0);
+        }
 
         public void InsertYoutubeLink(Dictionary<string, string> vars)
         {
@@ -295,6 +301,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var headerButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-{header}-button"));
             headerButton.Click();
         }
+        
+        public AddContentItemBase PublishAndContinueActivity()
+        {
+            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".publish-continue")).Click();
+            return this;
+        }        
         
     }
 }
