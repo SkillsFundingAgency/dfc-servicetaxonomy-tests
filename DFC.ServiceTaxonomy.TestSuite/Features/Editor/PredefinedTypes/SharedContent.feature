@@ -97,7 +97,7 @@ Scenario: HTML Editor paragraph buttons
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
-	And I select the "Body" paragraph button
+	And I select the "body" paragraph button
 	Then I click the view HTML button
 	When I publish and continue
 	Then the item is published succesfully
@@ -207,13 +207,12 @@ Scenario: HTML Editor Insert Youtube Link
 	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
-	| Title              |  Content          |
-	| New Shared Content |  Test content	 |
+	| Title              |  Content  |
+	| New Shared Content |		 |
 	And I insert a youtube link 
-	| Title	|  Url												 |
-	| neo4j |  https://www.youtube.com/watch?v=REVkXVxvMQE&t=2s  |
-	Then I click the view HTML button
+	| Title	|  Url					              |
+	| neo4j |  https://www.youtube-nocookie.com/embed/BN4rdE2HXaw |
 	When I publish and continue
 	Then the item is published succesfully
 	And I click the view HTML button
-	And the editor contains "iframe"
+	And the editor contains the media html "https://www.youtube-nocookie.com/embed/BN4rdE2HXaw"
