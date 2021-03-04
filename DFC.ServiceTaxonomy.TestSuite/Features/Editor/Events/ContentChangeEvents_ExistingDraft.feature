@@ -13,6 +13,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
+	And I add a comment before submitting for review "To be reviewed"	
 	And I save the draft item
 	#Then an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
