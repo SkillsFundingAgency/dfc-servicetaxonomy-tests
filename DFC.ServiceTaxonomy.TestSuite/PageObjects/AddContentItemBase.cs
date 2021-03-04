@@ -234,7 +234,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var urlInput = _scenarioContext.GetWebDriver().FindElement(By.Name("url"));
             urlInput.SendKeys(vars["Url"]);
             var titleInput = _scenarioContext.GetWebDriver().FindElement(By.Name("title"));
-            titleInput.SendKeys(vars["Title"]);
+            titleInput.SendKeys(vars["VidTitle"]);
 
             var confirm = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-modal-submit"));
             confirm.Click();
@@ -307,7 +307,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();
             _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".publish-continue")).Click();
             return this;
-        }        
+        } 
         
+        public AddContentItemBase PublishAndContinueActivity()
+        {
+            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".publish-continue")).Click();
+            return this;
+        }
+
+        public void EnterComment(string comment)
+        {
+            var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("ContentApprovalPart_Comment"));
+            commentInput.SendKeys(comment);
+        }               
     }
 }
