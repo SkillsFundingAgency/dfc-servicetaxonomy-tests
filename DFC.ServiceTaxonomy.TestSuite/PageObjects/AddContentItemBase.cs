@@ -309,13 +309,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         } 
         
-        public AddContentItemBase PublishAndContinueActivity()
-        {
-            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();
-            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".publish-continue")).Click();
-            return this;
-        }
-
         public void EnterComment(string comment)
         {
             var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("ContentApprovalPart_Comment"));
