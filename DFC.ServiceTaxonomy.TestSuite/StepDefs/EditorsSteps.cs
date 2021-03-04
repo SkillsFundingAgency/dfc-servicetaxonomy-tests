@@ -1778,7 +1778,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[@title='New']")).Click();
             Thread.Sleep(1000);
             _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[@title='Shared Content']")).Click();
-        }     
+        }
+
+        [Given(@"I add a comment before submitting for review ""(.*)""")]
+        public void GivenIAddACommentBeforeSubmittingForReview(string comment)
+        {
+            _addContentItemBase.EnterComment(comment);
+        }        
         #endregion
     }
 }

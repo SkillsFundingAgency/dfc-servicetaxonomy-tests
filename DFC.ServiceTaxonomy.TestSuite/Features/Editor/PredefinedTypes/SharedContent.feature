@@ -80,6 +80,7 @@ Scenario: HTML Editor Header buttons
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the "h1" header button
 	Then I click the view HTML button
 	When I publish and continue
@@ -97,11 +98,14 @@ Scenario: HTML Editor paragraph buttons
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the "body" paragraph button
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-body"
 
 @Editor
@@ -113,28 +117,32 @@ Scenario: HTML Editor font size buttons
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the "24px" font size button
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-!-font-size-24"
-
 
 @Editor
 Scenario: HTML Editor bold font weight buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
-	| New Shared Content |  Test content	 |	
+	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the bold font button
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-!-font-weight-bold"
 
 @Editor
@@ -146,11 +154,14 @@ Scenario: HTML Editor List button
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the list button 
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-list"
 
 Scenario: HTML Editor bulleted list button
@@ -161,11 +172,14 @@ Scenario: HTML Editor bulleted list button
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select the bulleted list button 
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-list govuk-list--bullet"
 
 @Editor
@@ -177,11 +191,14 @@ Scenario: HTML Editor numbered list button
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"	
 	And I select the numbered list button 
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-list govuk-list--number"
 
 @Editor
@@ -193,11 +210,14 @@ Scenario: HTML Editor section break buttons
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  Test content	 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I select a section break 
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-section-break"
 	
 @Editor
@@ -208,11 +228,14 @@ Scenario: HTML Editor Insert Youtube Link
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content  |
-	| New Shared Content |		 |
+	| New Shared Content |			 |
+	And I add a comment before submitting for review "To be reviewed"
 	And I insert a youtube link 
-	| Title	|  Url					              |
+	| VidTitle	|  Url												  |
 	| neo4j |  https://www.youtube-nocookie.com/embed/BN4rdE2HXaw |
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains the media html "https://www.youtube-nocookie.com/embed/BN4rdE2HXaw"
