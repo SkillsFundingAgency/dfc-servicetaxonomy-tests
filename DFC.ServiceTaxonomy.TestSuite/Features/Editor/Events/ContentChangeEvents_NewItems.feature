@@ -13,6 +13,7 @@ Scenario: 1. A new content item draft is created that passes server validation
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
+	And I add a comment before submitting for review "To be reviewed"	
 	When I save the draft item
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -27,6 +28,7 @@ Scenario: 2. A new content item draft is created that fails server validation
 	And I Enter the following form data for "SharedContent"
 	| Title | Content          |
 	|       | <p>Here it is</p> |
+	And I add a comment before submitting for review "To be reviewed"	
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 	And no event is issued
@@ -40,6 +42,7 @@ Scenario: 7. A new content item is published succesfully
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
+	And I add a comment before submitting for review "To be reviewed"	
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
@@ -54,6 +57,7 @@ Scenario: 8. A new content item is published with validation issues
 	And I Enter the following form data for "SharedContent"
 	| Title | Content          |
 	|       | <p>Here it is</p> |
+	And I add a comment before submitting for review "To be reviewed"	
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 	And no event is issued
