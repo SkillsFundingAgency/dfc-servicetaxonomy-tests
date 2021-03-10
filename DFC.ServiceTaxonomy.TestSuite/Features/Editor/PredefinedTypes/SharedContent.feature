@@ -75,7 +75,6 @@ Scenario: Add a new shared content item
 Scenario: HTML Editor Header buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -93,7 +92,6 @@ Scenario: HTML Editor Header buttons
 Scenario: HTML Editor paragraph buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -112,7 +110,6 @@ Scenario: HTML Editor paragraph buttons
 Scenario: HTML Editor font size buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -167,7 +164,6 @@ Scenario: HTML Editor List button
 Scenario: HTML Editor bulleted list button
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -186,7 +182,6 @@ Scenario: HTML Editor bulleted list button
 Scenario: HTML Editor numbered list button
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -205,7 +200,6 @@ Scenario: HTML Editor numbered list button
 Scenario: HTML Editor section break buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
@@ -224,7 +218,6 @@ Scenario: HTML Editor section break buttons
 Scenario: HTML Editor Insert Youtube Link
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
-	And I click the Shared Content item
 	And I capture the generated URI
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content  |
