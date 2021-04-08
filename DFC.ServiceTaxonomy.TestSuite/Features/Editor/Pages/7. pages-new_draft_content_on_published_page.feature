@@ -9,6 +9,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title         | Content                   |
 	| Draft Content | <p>Some draft content</p> |
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
@@ -21,6 +22,7 @@ Background:
 	| My Test Page |
 	And I select the default page location
 	And I add the "__PREFIX__Draft Content" shared content item to the page
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
@@ -37,6 +39,7 @@ Background:
 	And I Enter the following form data for "Page"
 	| Title           | Content                     |
 	| Updated Content | <p>Some updated content</p> |
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the item is saved succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
