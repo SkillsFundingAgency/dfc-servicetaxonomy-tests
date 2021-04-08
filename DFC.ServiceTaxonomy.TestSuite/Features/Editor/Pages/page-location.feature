@@ -9,7 +9,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title         | Content                   |
 	| Draft Content | <p>Some draft content</p> |
-	And I add a comment before submitting for review "To be reviewed"		
+	And I add a comment before submitting for review "To be reviewed "		
 	When I save the draft item
 	Then the item is saved succesfully
 	And the data is present in the DRAFT Graph database
@@ -22,7 +22,7 @@ Background:
 	| My Test Page |
 	And I select the default page location
 	And I add the "__PREFIX__Draft Content" shared content item to the page
-	And I add a comment before submitting for review "To be reviewed"	
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
@@ -38,6 +38,7 @@ Scenario:  Add a second content item to a new draft page
 	And I Enter the following form data for "SharedContent"
 	| Title             | Content                         |
 	| 2nd Draft Content | <p>Some other draft content</p> |
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the item is saved succesfully
 
@@ -48,6 +49,7 @@ Scenario:  Add a second content item to a new draft page
 	| Title                |
 	| My Test Page Updated |
 	And I add the "__PREFIX__2nd Draft Content" shared content item to the existing widget
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the "preview" graph matches the expect results using the "number_of_shared_content_on_widget_on_page" query and the "PageUri" Uri
@@ -91,6 +93,7 @@ Scenario: Add an html item to a page
 	"""
 	Test HTML
 	"""
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the "preview" graph matches the expect results using the "page_with_html" query and the "PageUri" Uri
 	| skos__prefLabel     | htmlbody_Html    |

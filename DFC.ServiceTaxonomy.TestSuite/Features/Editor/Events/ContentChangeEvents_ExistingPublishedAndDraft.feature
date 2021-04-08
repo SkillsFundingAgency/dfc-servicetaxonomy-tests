@@ -13,6 +13,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 
@@ -21,6 +22,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title                 | Content                |
 	| Update Shared Content | <p>Here it is again</p> |
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	Given I check the number of events sent for this contentItem
@@ -32,6 +34,7 @@ Scenario: 23. Updates are made to an existing draft version of a published conte
 	And I Enter the following form data for "SharedContent"
 	| Title                        | Content                |
 	| Newly updated Shared Content | <p>Here it is again</p> |
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -46,6 +49,7 @@ Scenario: 24. Updates with validation issues  are made to an existing draft vers
 	And I Enter the following form data for "SharedContent"
 	| Title | Content                |
 	|       | <p>Here it is again</p> |
+	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 	#Then the data is present in the DRAFT Graph database
@@ -57,6 +61,7 @@ Scenario: 24. Updates with validation issues  are made to an existing draft vers
 Scenario: 25. An existing draft version of a published content item is published succesfully
 	Given I search for the "Title"
 	And I select the first item that is found
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
@@ -72,6 +77,7 @@ Scenario: 26. An existing draft version of a published content item is edited so
 	And I Enter the following form data for "SharedContent"
 	| Title | Content                |
 	|       | <p>Here it is again</p> |
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 	#Then the data is present in the DRAFT Graph database

@@ -38,6 +38,7 @@ Scenario: Add a new shared content item
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
@@ -50,6 +51,7 @@ Scenario: Add a new shared content item
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
 	| updated Shared Content | <p>Here it is now</p> |
+	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 	And the data is present in the DRAFT Graph database
@@ -82,9 +84,11 @@ Scenario: HTML Editor Header buttons
 	And I add a comment before submitting for review "To be reviewed"
 	And I select the "h1" header button
 	Then I click the view HTML button
-	When I publish and continue
+	When I publish the item
 	Then the item is published succesfully
-	And I click the view HTML button
+	Given I search for the "Title"
+	And I select the first item that is found
+	Then I click the view HTML button
 	And the editor contains "govuk-heading-xl"
 
 
