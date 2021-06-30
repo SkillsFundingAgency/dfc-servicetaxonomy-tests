@@ -1,4 +1,4 @@
-﻿@webtest
+﻿
 Feature: 1. pages-location
 
 Background:
@@ -30,7 +30,7 @@ Background:
 	| My Test Page    | __PREFIX__Draft Content |
 	Given I store the uri from the "preview" graph and tag it "SharedHTMLUri" using the "get_sharedhtml_uri_for_page" query 
 
-@Editor
+
 Scenario:  Add a second content item to a new draft page
 
 	Given  I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -81,7 +81,7 @@ Scenario:  Add a second content item to a new draft page
 	| 2                      |
 
 
-@Editor
+
 Scenario: Add an html item to a page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"

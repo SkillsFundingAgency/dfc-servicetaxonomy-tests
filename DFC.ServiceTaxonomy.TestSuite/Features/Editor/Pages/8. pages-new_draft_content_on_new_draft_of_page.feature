@@ -1,4 +1,4 @@
-﻿@webtest
+﻿
 Feature: 8. pages-new_draft_content_on_new_draft_of_page
 
 Background:
@@ -62,7 +62,7 @@ Background:
 
 	#TODO bring 2nd shared content content in to play on new draft
 
-@Editor
+
 Scenario: Publish the draft shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
@@ -75,7 +75,7 @@ Scenario: Publish the draft shared content
 	| skos__prefLabel | sharedContent             |
 	| My Test Page    | __PREFIX__Updated Content |
 
-@Editor
+
 Scenario: Publish the draft page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page Updated"
@@ -89,7 +89,7 @@ Scenario: Publish the draft page
 	| My Test Page Updated | __PREFIX__Draft Content |
 
 
-@Editor
+
 Scenario: discard the draft shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
@@ -102,7 +102,7 @@ Scenario: discard the draft shared content
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@Editor
+
 Scenario: discard the draft page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page Updated"
@@ -115,7 +115,7 @@ Scenario: discard the draft page
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@editor
+
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -141,7 +141,7 @@ Scenario: Delete the page
 	| __PREFIX__Draft Content |
 
 
-@editor
+
 Scenario: Delete the shared content
 Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
