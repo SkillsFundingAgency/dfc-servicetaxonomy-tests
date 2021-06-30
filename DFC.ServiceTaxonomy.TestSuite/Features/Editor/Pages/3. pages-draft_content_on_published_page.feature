@@ -1,4 +1,4 @@
-﻿@webtest
+﻿
 Feature: 3. Pages-draft_content_on_published_page
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
@@ -32,7 +32,7 @@ Background:
 	| My Test Page    | 
 	Given I store the uri from the "preview" graph and tag it "SharedHTMLUri" using the "get_sharedhtml_uri_for_page" query 
 
-@Editor
+
 Scenario: Publish the shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
@@ -45,7 +45,7 @@ Scenario: Publish the shared content
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@Editor
+
 Scenario: Unpublish the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -60,7 +60,7 @@ Scenario: Unpublish the page
 	| widgets_found |
 	| 0             |
 
-@Editor
+
 Scenario: Add new draft version of the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -78,7 +78,7 @@ Scenario: Add new draft version of the page
 	| skos__prefLabel | 
 	| My Test Page    |
 
-@editor
+
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -104,7 +104,7 @@ Scenario: Delete the page
 	| 1                    |
 
 
-@editor
+
 Scenario: Delete the shared content
 Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"

@@ -1,4 +1,4 @@
-﻿@webtest
+﻿
 Feature: 7. pages-new_draft_content_on_published_page
 
 Background:
@@ -68,7 +68,7 @@ Background:
 #	| widgets_found |
 #	| 0             |
 
-@Editor
+
 Scenario: Publish the shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
@@ -82,7 +82,7 @@ Scenario: Publish the shared content
 	| My Test Page    | __PREFIX__Updated Content |
 
 
-@Editor
+
 Scenario: discard the draft shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
@@ -95,7 +95,7 @@ Scenario: discard the draft shared content
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@editor
+
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -121,7 +121,7 @@ Scenario: Delete the page
 	| __PREFIX__Draft Content |
 
 
-@editor
+
 Scenario: Delete the shared content
 Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"

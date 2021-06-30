@@ -73,7 +73,7 @@ Scenario: Add a new shared content item
 #un publish
 #delete draft
 
-@Editor
+
 Scenario: HTML Editor Header buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -92,7 +92,7 @@ Scenario: HTML Editor Header buttons
 	And the editor contains "govuk-heading-xl"
 
 
-@Editor
+
 Scenario: HTML Editor paragraph buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -110,7 +110,7 @@ Scenario: HTML Editor paragraph buttons
 	Then I click the view HTML button
 	And the editor contains "govuk-body"
 
-@Editor
+
 Scenario: HTML Editor font size buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -128,7 +128,7 @@ Scenario: HTML Editor font size buttons
 	Then I click the view HTML button
 	And the editor contains "govuk-!-font-size-24"
 
-@Editor
+
 Scenario: HTML Editor bold font weight buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -146,7 +146,7 @@ Scenario: HTML Editor bold font weight buttons
 	Then I click the view HTML button
 	And the editor contains "govuk-!-font-weight-bold"
 
-@Editor
+
 Scenario: HTML Editor List button
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -182,7 +182,7 @@ Scenario: HTML Editor bulleted list button
 	Then I click the view HTML button
 	And the editor contains "govuk-list govuk-list--bullet"
 
-@Editor
+
 Scenario: HTML Editor numbered list button
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -200,7 +200,7 @@ Scenario: HTML Editor numbered list button
 	Then I click the view HTML button
 	And the editor contains "govuk-list govuk-list--number"
 
-@Editor
+
 Scenario: HTML Editor section break buttons
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 
@@ -218,7 +218,7 @@ Scenario: HTML Editor section break buttons
 	Then I click the view HTML button
 	And the editor contains "govuk-section-break"
 	
-@Editor
+
 Scenario: HTML Editor Insert Youtube Link
 	Given I set up a data prefix for "Title"
 	And I Navigate to "/Admin/Contents/ContentTypes/SharedContent/Create" 

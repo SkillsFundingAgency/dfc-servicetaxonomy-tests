@@ -1,4 +1,4 @@
-﻿@webtest
+﻿
 Feature: 5. pages-published_content_on_published_page
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
@@ -32,7 +32,7 @@ Background:
 	| My Test Page    | __PREFIX__Draft Content |
 	Given I store the uri from the "preview" graph and tag it "SharedHTMLUri" using the "get_sharedhtml_uri_for_page" query 
 
-@Editor
+
 Scenario: Unpublish the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -51,7 +51,7 @@ Scenario: Unpublish the page
 	| shared_content_found |
 	| 1                    |
 
-@Editor
+
 Scenario: Unpublish the shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
@@ -67,7 +67,7 @@ Scenario: Unpublish the shared content
 	| shared_content_found |
 	| 0                    |  
 
-@Editor
+
 Scenario: Create draft version of SharedContent
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
@@ -85,7 +85,7 @@ Scenario: Create draft version of SharedContent
 	| skos__prefLabel | sharedContent           |
 	| My Test Page    | __PREFIX__Draft Content |
 
-@editor
+
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
@@ -111,7 +111,7 @@ Scenario: Delete the page
 	| 1                    |
 
 
-@Editor
+
 Scenario: Create new draft version of the Shared Content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
@@ -130,7 +130,7 @@ Scenario: Create new draft version of the Shared Content
 	| My Test Page | __PREFIX__Draft Content |
 
 
-@editor
+
 Scenario: Delete the shared content
 Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
