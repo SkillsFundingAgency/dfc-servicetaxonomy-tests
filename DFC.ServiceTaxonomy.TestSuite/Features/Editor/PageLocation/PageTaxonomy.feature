@@ -22,7 +22,6 @@ Scenario: Add a page with a full url that conflicts with an existing page locati
 	And I Enter the following form data for "PageLocation"
 	| Breadcrumb     | 
 	| The Breadcrumb | 
-	And I add a comment before submitting for review "comment "
 	And I publish the item
 
 	Given I Navigate to "/Admin/Contents/ContentTypes/Page/Create" 
@@ -55,7 +54,6 @@ Scenario: Attempt to save edit to a page with a full url that conflicts with an 
 	And I Enter the following form data for "PageLocation"
 		| Breadcrumb     | 
 		| The Breadcrumb | 
-	And I add a comment before submitting for review "comment "
 	And I publish the item
 
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -86,7 +84,6 @@ Scenario: Attempt to publish edits to a page with a full url that conflicts with
 	And I Enter the following form data for "PageLocation"
 		| Breadcrumb     | 
 		| The Breadcrumb | 
-	And I add a comment before submitting for review "comment "
 	And I publish the item
 
 	Given I Navigate to "/Admin/Contents/ContentItems" 
@@ -119,7 +116,6 @@ Scenario: Attempt to add a page location with a path that conflicts with an exis
 	And I Enter the following form data for "PageLocation"
 		| Breadcrumb     | 
 		| The Breadcrumb | 
-	And I add a comment before submitting for review "comment "
 	And I publish the item
 	Then the error "The generated URL for '__PATH__' has already been used as a Page URL." is displayed
 
