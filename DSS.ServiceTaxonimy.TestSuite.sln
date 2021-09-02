@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{7E49F423-B080-4D22-8BA5-E85ED436C079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rolling-test-harness", "rolling-test-harness\rolling-test-harness.csproj", "{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +30,16 @@ Global
 		{32C0194E-7A8C-4241-9120-ED913D8B5643}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C0194E-7A8C-4241-9120-ED913D8B5643}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C0194E-7A8C-4241-9120-ED913D8B5643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC9BBCB4-4AEB-4E01-A042-00C43FA3E7BA} = {7E49F423-B080-4D22-8BA5-E85ED436C079}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D876D416-3E67-47DA-A4E6-3286A3A11E06}
