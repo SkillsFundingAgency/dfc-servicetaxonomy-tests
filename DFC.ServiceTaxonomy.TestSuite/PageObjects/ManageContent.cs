@@ -1,9 +1,12 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
+﻿using System;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+
 using OpenQA.Selenium;
-using System;
+
 using TechTalk.SpecFlow;
 
-namespace DFC.ServiceTaxonomy.TestSuite.PageObjects 
+namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class ManageContent// : PageBase
     {
@@ -24,12 +27,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        public ManageContent FindItem( string title)
+        public ManageContent FindItem(string title)
         {
             _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentItems");
-            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).Clear();
-            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).SendKeys(title);
-            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_DisplayText")).SendKeys(Keys.Return);
+            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).Clear();
+            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).SendKeys(title);
+            _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).SendKeys(Keys.Return);
             return this;
         }
 
@@ -92,7 +95,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public bool CheckOptionAvailableToFirstItem( string action)
+        public bool CheckOptionAvailableToFirstItem(string action)
         {
             try
             {
@@ -114,7 +117,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return true;
         }
 
-        public ManageContent ActionFirstItem( string action )
+        public ManageContent ActionFirstItem(string action)
         {
             try
             {
@@ -147,7 +150,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             //{
             //    throw new Exception("Unable to confirm the item has been removed");
             //}
-             return this;
+            return this;
         }
 
         public ManageContent UnpublishFirstItem()
@@ -172,7 +175,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        
+
         public ManageContent EditFirstItem()
         {
             try
@@ -180,7 +183,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 // should just get first Edit button in list
                 _scenarioContext.GetWebDriver().ClickButton("Edit");
             }
-            catch ( Exception e)
+            catch (Exception e)
             {
                 throw new Exception($"Unable to Edit first item. {e.Message}");
             }
@@ -188,7 +191,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
         public bool ConfirmRemovedSuccessfully()
         {
-            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder,remove));
+            return ConfirmDisplayMessage(confirmationMessage.Replace(actionPlaceHolder, remove));
         }
 
         public bool ConfirmRemovalFailed()
@@ -238,12 +241,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{message}')]]"));
-                returnValue = ( elements.Count == 1 );
+                returnValue = (elements.Count == 1);
             }
             catch
-            {}
+            { }
             return returnValue;
         }
     }
 }
-      
+

@@ -1,15 +1,12 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Interfaces;
-using DFC.ServiceTaxonomy.TestSuite.Models;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Interactions;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.Interfaces;
+
+using OpenQA.Selenium;
+
 using TechTalk.SpecFlow;
 
 
@@ -50,7 +47,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 case "Text Field":
                     return By.Id(contentType + "_TextField_Text");
-                 case "Numeric Field":
+                case "Numeric Field":
                     return By.Id(contentType + "_ValueField_Value");
                 case "Title":
                     return GetLocatorBase(field);
@@ -59,7 +56,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
         }
 
-        public AddContentItemBase AsA( string type)
+        public AddContentItemBase AsA(string type)
         {
             _contentType = type;
             return this;
@@ -76,7 +73,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 case "Text":
                 case "Html":
-                    return By.Id($"{contentType}_{fieldName.Replace(" ","")}_{fieldType}");
+                    return By.Id($"{contentType}_{fieldName.Replace(" ", "")}_{fieldType}");
                 default:
                     return GetLocatorBase(fieldName);
             }
@@ -121,8 +118,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 if (_htmlView)
                 {
-                   item = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-viewHTML-button > svg"));
-                   item.Click();
+                    item = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-viewHTML-button > svg"));
+                    item.Click();
                 }
                 item = _scenarioContext.GetWebDriver().FindElement(locator);
                 item.Click();
@@ -172,14 +169,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         }
 
-        public void SetFieldValue( string field, string value)//, Func <String, By> OverrideLocator)
+        public void SetFieldValue(string field, string value)//, Func <String, By> OverrideLocator)
         {
             EnterText(field, value, GetLocatorBase(field));
         }
 
         public void SetFieldValue(string type, string field, string value)//, Func <String, By> OverrideLocator)
         {
-             EnterText( _contentType, value, GetLocatorBase(field)) ;
+            EnterText(_contentType, value, GetLocatorBase(field));
         }
 
         public void SetFieldValueFromType(string contenType, string field, string value, string type)//, Func <String, By> OverrideLocator)
@@ -190,7 +187,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool ConfirmPublishSuccess()
         {
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'has been published.')]]"));
-            return ( elements.Count == 1 );
+            return (elements.Count == 1);
         }
 
         public bool ConfirmSaveDraftSuccess()
@@ -203,7 +200,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[text()[contains(.,'{emptyFieldValidationMessage}{field}')]]"));
             return (elements.Count > 0);
-         }
+        }
 
         public bool ConfirmMessageDisplayed(string message)
         {
@@ -216,7 +213,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//*[contains(@class, \"{html}\")]"));
             return (elements.Count > 0);
         }
-        
+
         public bool ConfirmEditorContainsMediaHTML(string p0)
         {
             var elements = _scenarioContext.GetWebDriver().FindElements(By.XPath($"//iframe[contains(@src, \"{p0}\")]"));
@@ -227,7 +224,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             var imageButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".trumbowyg-image-button"));
             imageButton.Click();
-            
+
             var insertYoutubeLinkButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-youtubeLink-dropdown-button"));
             insertYoutubeLinkButton.Click();
 
@@ -301,18 +298,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var headerButton = _scenarioContext.GetWebDriver().FindElement(By.CssSelector($".trumbowyg-{header}-button"));
             headerButton.Click();
         }
-        
+
         public AddContentItemBase PublishAndContinueActivity()
         {
             _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();
             _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".publish-continue")).Click();
             return this;
-        } 
-        
+        }
+
         public void EnterComment(string comment)
         {
-            var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("ContentApprovalPart_Comment"));
+            var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("AuditTrailPart_Comment"));
             commentInput.SendKeys(comment);
-        }               
+        }
     }
 }
