@@ -101,14 +101,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public AddContentItemBase PublishActivity()
         {
             _scenarioContext.GetWebDriver().FindElements(By.Name("submit.Publish"))?.FirstOrDefault(e => e.GetAttribute("value").Equals("submit.Publish"))?.Click();
-            //.XPath("/html/body/div[1]/div[3]/form/div[2]/div/div[3]/div/button[1]")).Click();
             return this;
         }
 
         public AddContentItemBase SaveActivity()
         {
+            if (_scenarioContext.GetWebDriver().Url.Contains("?returnUrl"))
+            {
+                _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-primary.dropdown-toggle.dropdown-toggle-split"))?.Click();
+            }
+
             _scenarioContext.GetWebDriver().FindElements(By.Name("submit.Save"))?.FirstOrDefault(e => e.GetAttribute("value").Equals("submit.Save"))?.Click();
-            //.XPath("/html/body/div[1]/div[3]/form/div[2]/div/div[3]/div/button[1]")).Click();
             return this;
         }
 
