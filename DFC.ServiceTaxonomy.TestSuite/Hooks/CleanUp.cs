@@ -1,12 +1,16 @@
-﻿using DFC.ServiceTaxonomy.Events.Models;
-using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.PageObjects;
-using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using Newtonsoft.Json;
-using OrchardCore.ContentManagement;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using DFC.ServiceTaxonomy.Events.Models;
+using DFC.ServiceTaxonomy.SharedResources.Helpers;
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.PageObjects;
+
+using Newtonsoft.Json;
+
+using OrchardCore.ContentManagement;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
@@ -14,8 +18,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     [Binding]
     public sealed class CleanUp
     {
-        private ScenarioContext _scenarioContext;
-        private FeatureContext _featureContext;
+        private readonly ScenarioContext _scenarioContext;
+        private readonly FeatureContext _featureContext;
 
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
         public CleanUp(ScenarioContext context, FeatureContext fContext)
@@ -57,7 +61,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
                 TeardownDataWithPrefix(prefix, prefixField);
 
-                if (_scenarioContext.GetEnv().pipelineRun)
+                if (_scenarioContext.GetEnv().PipelineRun)
                 {
                     TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
                 }
@@ -96,8 +100,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             }
             var env = _scenarioContext.GetEnv();
             var dataItems = _scenarioContext.GetContentItemIndexList();
-            if (env.sendEvents && env.sqlServerChecksEnabled && dataItems.Count > 0)
-            { 
+            if (env.SendEvents && env.SqlServerChecksEnabled && dataItems.Count > 0)
+            {
                 foreach (var item in dataItems)
                 {
                     ContentItem contentItem = new ContentItem();
@@ -107,28 +111,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                     contentItem.ContentType = item.ContentType;
                     contentItem.CreatedUtc = DateTime.Parse(item.CreatedUtc);
                     contentItem.DisplayText = item.DisplayText;
-                    var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().contentApiBaseUrl);
-                    ContentEvent contentEvent = new ContentEvent(contentItem, uri, DFC.ServiceTaxonomy.Events.Models.ContentEventType.Deleted);
+                    var uri = _scenarioContext.GetLatestUri().Replace("<<contentapiprefix>>", _scenarioContext.GetEnv().ContentApiBaseUrl);
+                    ContentEvent contentEvent = new ContentEvent(contentItem, uri, ContentEventType.Deleted);
                     string json = $"[{JsonConvert.SerializeObject(contentEvent)}]";
-                    var response = RestHelper.Post(env.eventTopicUrl, json, new Dictionary<string, string>() { { "Aeg-sas-key", env.AegSasKey } });
+                    var response = RestHelper.Post(env.EventTopicUrl, json, new Dictionary<string, string>() { { "Aeg-sas-key", env.AegSasKey } });
                     Console.WriteLine($"CLEANUP: send delete event for {uri} - Response Code:{response.StatusCode}");
                 }
-             }
+            }
         }
 
-        
-        [AfterFeature("webtest",Order = 20)]
+
+        [AfterFeature("webtest", Order = 20)]
         public static void CloseWebDriver()
         {
             WebDriverContainer.Instance.CloseDriver();
         }
 
-        [AfterScenario( Order = 100)]
+        [AfterScenario(Order = 100)]
         public void CheckForNotifiableFailure()
         {
-            if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError )
-            {
-            }
+            //if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError)
+            //{
+            //}
             if (_scenarioContext.ContainsKey(constants.featureFailure))
             {
                 string messageText = "Fatal error(s) detected in clean up:\n";
@@ -136,7 +140,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 // cancel the rest of the feature run
                 _featureContext[constants.featureFailAll] = true;
 
-                foreach ( var message in (Dictionary<string,string>)_scenarioContext[constants.featureFailure] )
+                foreach (var message in (Dictionary<string, string>)_scenarioContext[constants.featureFailure])
                 {
                     Console.WriteLine($"Error: {message.Key} - {message.Value}");
                     messageText += $"  {message.Key} - {message.Value}";

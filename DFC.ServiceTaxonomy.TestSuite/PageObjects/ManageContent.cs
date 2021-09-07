@@ -29,7 +29,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public ManageContent FindItem(string title)
         {
-            _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentItems");
+            _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/Contents/ContentItems");
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).Clear();
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).SendKeys(title);
             _scenarioContext.GetWebDriver().FindElement(By.Id("Options_SearchText")).SendKeys(Keys.Return);
@@ -46,7 +46,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public ManageContent DeleteAllItemsOfType(string type)
         {
-            string typeViewUrl = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/Contents/ContentItems?Options.SelectedContentType=" + type;
+            string typeViewUrl = _scenarioContext.GetEnv().EditorBaseUrl + "/Admin/Contents/ContentItems?Options.SelectedContentType=" + type;
             try
             {
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(typeViewUrl);

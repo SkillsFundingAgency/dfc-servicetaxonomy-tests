@@ -76,7 +76,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             string message;
             bool result;
-            if (!context.GetEnv().sqlServerChecksEnabled)
+            if (!context.GetEnv().SqlServerChecksEnabled)
                 return (true,string.Empty);
             //todo error handling
             string sqlCommand = sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
@@ -100,7 +100,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             else
             {
                 connection = new SQLServerHelper();
-                connection.SetConnection(context.GetEnv().sqlServerConnectionString);
+                connection.SetConnection(context.GetEnv().SqlServerConnectionString);
                 context[contextRef] = connection;
             }
             return connection;
@@ -205,16 +205,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             switch ( graph)
             {
                 case constants.publish:
-                    graphUri = instance == 0 ? context.GetEnv().neo4JUrl : context.GetEnv().neo4JUrl1;
-                    graphName = instance == 0 ? context.GetEnv().neo4JGraphName : context.GetEnv().neo4JGraphName1;
-                    userId = context.GetEnv().neo4JUid;
-                    password = context.GetEnv().neo4JPassword;
+                    graphUri = instance == 0 ? context.GetEnv().Neo4JUrl : context.GetEnv().Neo4JUrl1;
+                    graphName = instance == 0 ? context.GetEnv().Neo4JGraphName : context.GetEnv().Neo4JGraphName1;
+                    userId = context.GetEnv().Neo4JUid;
+                    password = context.GetEnv().Neo4JPassword;
                     break;
                 case constants.preview:
-                    graphUri = instance == 0 ? context.GetEnv().neo4JUrlDraft : context.GetEnv().neo4JUrlDraft1;
-                    graphName = instance == 0 ? context.GetEnv().neo4JGraphNameDraft : context.GetEnv().neo4JGraphNameDraft1;
-                    userId = context.GetEnv().neo4JUidDraft;
-                    password = context.GetEnv().neo4JPasswordDraft;
+                    graphUri = instance == 0 ? context.GetEnv().Neo4JUrlDraft : context.GetEnv().Neo4JUrlDraft1;
+                    graphName = instance == 0 ? context.GetEnv().Neo4JGraphNameDraft : context.GetEnv().Neo4JGraphNameDraft1;
+                    userId = context.GetEnv().Neo4JUidDraft;
+                    password = context.GetEnv().Neo4JPasswordDraft;
                     break;
                 default:
                     return null;
@@ -251,9 +251,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                                                                      .Replace("@FIELDNAME@",fieldName);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1.Length > 0)
+            if (context.GetEnv().Neo4JUrl1.Length > 0)
                 GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (context.GetEnv().Neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
             return true;
         }
@@ -264,9 +264,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
             GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
             GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrl1.Length > 0)
+            if (context.GetEnv().Neo4JUrl1.Length > 0)
                 GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
-            if (context.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (context.GetEnv().Neo4JUrlDraft1.Length > 0)
                 GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
 
             return true;

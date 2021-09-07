@@ -112,7 +112,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             try
             { 
                 Console.WriteLine($"Loading recipe file: {p0}");
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/OrchardCore.Deployment/Import/Index");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/OrchardCore.Deployment/Import/Index");
                 var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
                 webElement.SendKeys(p0);
                 var item = _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Import']"));

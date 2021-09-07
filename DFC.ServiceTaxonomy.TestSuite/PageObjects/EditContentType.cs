@@ -22,7 +22,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         EditContentType OpenContentType( string contentTypeName)
         {
-            string url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/Edit/" + contentTypeName;
+            string url = _scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/Edit/" + contentTypeName;
             try
             {
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);

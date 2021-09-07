@@ -27,7 +27,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public ValidatedAndRepair RunValidateAndRepair()
         {
-            _driver.Navigate().GoToUrl(_env.editorBaseUrl + "/Admin/DFC.ServiceTaxonomy.GraphSync/GraphSync/TriggerSyncValidation");
+            _driver.Navigate().GoToUrl(_env.EditorBaseUrl + "/Admin/DFC.ServiceTaxonomy.GraphSync/GraphSync/TriggerSyncValidation");
             return this;
         }
 

@@ -20,7 +20,7 @@ Scenario: 5. A succesful save to draft is made to a new content item which had v
 	Given I Enter the following form data for "SharedContent"
 	| Title       | Content          |
 	| Title Added | <p>Here it is</p> |
-	And I save the draft item
+	When I save the draft item
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
@@ -32,7 +32,7 @@ Scenario: 6. An unsuccesful save to draft is made to a new content item which ha
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |
 	|       | <p>Change this to this</p> |
-	And I save the draft item
+	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 	And no event is issued
 	And the data is not present in the DRAFT Graph database

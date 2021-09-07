@@ -32,7 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"(.*) events of type ""(.*)"" has been issued to notify consumers of the change")]
         public void ThenEventsOfTypeHasBeenIssuedToNotifyConsumersOfTheChange(int p0, string eventType)
         {
-            if (!_scenarioContext.GetEnv().checkEvents)
+            if (!_scenarioContext.GetEnv().CheckEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
@@ -80,7 +80,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             mockItem.data.author = "Fred";
 
             string response;
-            CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
+            CosmosHelper.Initialise(_scenarioContext.GetEnv().EventStoreEndPoint, _scenarioContext.GetEnv().EventStoreKey);
 
             CosmosHelper.InsertDocumentFromJson<ContentEvent>("EventStore",
                                                               "events",
@@ -94,7 +94,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string additionalClause = eventType.Equals(string.Empty) ? string.Empty : $" and c.eventType = '{eventType.ToLower()}'";
             string query = $"SELECT * FROM c where  c.subject = '{id}'{additionalClause}";
             
-            CosmosHelper.Initialise(_scenarioContext.GetEnv().eventStoreEndPoint, _scenarioContext.GetEnv().eventStoreKey);
+            CosmosHelper.Initialise(_scenarioContext.GetEnv().EventStoreEndPoint, _scenarioContext.GetEnv().EventStoreKey);
             List<ContentEvent> list = CosmosHelper.SearchForDocuments<ContentEvent>("dfc-eventstore", "events", query);
 
             Console.WriteLine($"Check Event Store: found {list.Count} with query '{query}'");
@@ -104,7 +104,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the number of events sent for this content Item is (.*)")]
         public void ThenTheNumberOfEventsSentForThisContentItemIs(int p0)
         {
-            if (!_scenarioContext.GetEnv().checkEvents)
+            if (!_scenarioContext.GetEnv().CheckEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
@@ -119,7 +119,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"no event is issued")]
         public void ThenNoEventIsIssued()
         {
-            if (!_scenarioContext.GetEnv().checkEvents)
+            if (!_scenarioContext.GetEnv().CheckEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;
@@ -138,7 +138,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I check the number of events sent for this contentItem")]
         public void GivenICheckTheNumberOfEventsSentForThisContentItem()
         {
-            if (!_scenarioContext.GetEnv().checkEvents)
+            if (!_scenarioContext.GetEnv().CheckEvents)
             {
                 Console.WriteLine("Event store checks are disabled in App Settings");
                 return;

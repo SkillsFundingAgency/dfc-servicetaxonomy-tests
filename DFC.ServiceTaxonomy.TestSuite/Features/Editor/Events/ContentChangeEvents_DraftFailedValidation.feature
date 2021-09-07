@@ -14,7 +14,7 @@ Background:
 	| Title | Content          |
 	|       | <p>Here it is<p> |
 	And I add a comment before submitting for review "comment "
-	And I save the draft item
+	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 
 @Editor @NotPP
@@ -23,7 +23,7 @@ Scenario: 3. A succesful correction is made to a new draft with validation issue
 	| Title       |
 	| Title Added |
 	And I add a comment before submitting for review "comment "
-	And I save the draft item
+	When I save the draft item
 	Then the save action completes succesfully
 	And the data is present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
@@ -36,7 +36,7 @@ Scenario: 4. An unsuccesful  correction is made to a new draft with validation i
 	Given I Enter the following form data for "SharedContent"
 	| Title | Content                   |
 	|       | <p>Change this to this<p> |
-	And I save the draft item
+	When I save the draft item
 	Then the data is not present in the DRAFT Graph database
 	And the data is not present in the PUBLISH Graph database
 	And no event is issued

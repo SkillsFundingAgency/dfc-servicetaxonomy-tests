@@ -26,7 +26,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // navigate to /Admin/ContentTypes/List
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/List");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/List");
                 // click on "Create new type"
                 _scenarioContext.GetWebDriver().FindElement(By.Id("btnCreate")).Click();
 
@@ -100,7 +100,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                var url = _scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
+                var url = _scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
                
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);
 
@@ -116,7 +116,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentParts/" + contentType + "/Fields/" + FieldName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType + "/Fields/" + FieldName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
             }
             catch (Exception e)
             {
@@ -130,7 +130,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // click Add button
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
           
                 // enter name
                 var textField = _scenarioContext.GetWebDriver().FindElement(By.Id("DisplayName"));
@@ -164,7 +164,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // click Add button
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/ContentParts/" + contentType +"/Fields/" + displayName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType +"/Fields/" + displayName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
                 _scenarioContext.GetWebDriver().SelectDropListItemById("field-editor-select", editorType);
                 _scenarioContext.GetWebDriver().ClickButton("Save");
             }
