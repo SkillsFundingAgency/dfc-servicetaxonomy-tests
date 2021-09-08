@@ -29,7 +29,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         [AfterStep(Order = 1)]
         public void CaputureEvidence()
         {
-            if (_scenarioContext.GetEnv().pipelineRun && _scenarioContext.GetEnv().CaptureScreenshots)
+            if (_scenarioContext.GetEnv().PipelineRun && _scenarioContext.GetEnv().CaptureScreenshots)
             {
                 TakeScreenshot();
             }
@@ -38,7 +38,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         [BeforeScenario(Order = 2)]
         public void SetUpEvidenceFolder()
         {
-            if (_scenarioContext.GetEnv().pipelineRun && _scenarioContext.GetEnv().CaptureScreenshots)
+            if (_scenarioContext.GetEnv().PipelineRun && _scenarioContext.GetEnv().CaptureScreenshots)
             {
                 scenarioDirectory = $"{baseDirectory}\\{DateTime.Now:HH-mm-ss}_{_scenarioContext.ScenarioInfo.Title}";
                 Directory.CreateDirectory(scenarioDirectory);

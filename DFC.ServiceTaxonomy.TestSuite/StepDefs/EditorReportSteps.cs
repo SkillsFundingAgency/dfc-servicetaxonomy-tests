@@ -39,7 +39,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             while (!succesfulAttempt && tries++ < maxTries)
             {
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().editorBaseUrl + "/Admin/DFC.ServiceTaxonomy.GraphSync/GraphSync/TriggerSyncValidation?scope=ModifiedSinceLastValidation");
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/DFC.ServiceTaxonomy.GraphSync/GraphSync/TriggerSyncValidation?scope=ModifiedSinceLastValidation");
                 succesfulAttempt = !_validateAndRepair.CheckIfAlreadyRunning();
                 if (!succesfulAttempt)
                     Thread.Sleep(500);

@@ -104,7 +104,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         public void CheckConnections()
         {
             // check SQL connection
-            if (_scenarioContext.GetEnv().sqlServerChecksEnabled)
+            if (_scenarioContext.GetEnv().SqlServerChecksEnabled)
             {
                 var conn = _scenarioContext.GetSQLConnection();
                 if (!conn.CheckPermissions(new[] { "SELECT", "DELETE" }))
@@ -136,7 +136,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 throw e;
             }
 
-            if (_scenarioContext.GetEnv().neo4JUrl1.Length > 0)
+            if (_scenarioContext.GetEnv().Neo4JUrl1.Length > 0)
             {
                 try
                 {
@@ -150,7 +150,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 }
             }
 
-            if (_scenarioContext.GetEnv().neo4JUrlDraft1.Length > 0)
+            if (_scenarioContext.GetEnv().Neo4JUrlDraft1.Length > 0)
             {
                 try
                 {

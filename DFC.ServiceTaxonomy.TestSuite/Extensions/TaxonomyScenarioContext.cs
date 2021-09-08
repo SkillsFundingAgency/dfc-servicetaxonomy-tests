@@ -1,8 +1,9 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
+using DFC.ServiceTaxonomy.TestSuite.Models;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -42,7 +43,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         const string keyExpectedRecordCount = "ExpectedRecordCount";
         const string PageLocations = "PageLocations";
 
-     #endregion
+        #endregion
 
 
 
@@ -51,25 +52,25 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             switch (resource.ToLower())
             {
                 case GetAllSkills:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllSkills}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllSkills}";
                 case GetAllOccupations:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllOccupations}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetAllOccupations}";
                 case GetSkillById:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillById}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillById}";
                 case GetSkillsForOccupation:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsForOccupation}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsForOccupation}";
                 case GetSkillsGapForOccupationAndGivenSkills:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsGapForOccupationAndGivenSkills}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillsGapForOccupationAndGivenSkills}";
                 case GetJobProfileDetail:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetJobProfileDetail}/{param}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetJobProfileDetail}/{param}";
                 case GetSkillByLabelSearch:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillByLabelSearch}/{param}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetSkillByLabelSearch}/{param}";
                 case GetOccupationByLabelSearch:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationByLabelSearch}/{param}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationByLabelSearch}/{param}";
                 case GetOccupationsWithMatchingSkills:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationsWithMatchingSkills}/{param}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetOccupationsWithMatchingSkills}/{param}";
                 case GetJobProfileSummary:
-                    return $"{context.GetEnv().taxonomyApiBaseUrl}/servicetaxonomy/{UriGetSTAXJobProfileSummary}/{param}";
+                    return $"{context.GetEnv().TaxonomyApiBaseUrl}/servicetaxonomy/{UriGetSTAXJobProfileSummary}/{param}";
                 default:
                     return "";
             }
@@ -91,28 +92,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             switch (resource.ToLower())
             {
                 case "summary":
-                    return context.GetEnv().jobProfileApiBaseUrl + "/" + UriJobProfileSummary;
+                    return context.GetEnv().JobProfileApiBaseUrl + "/" + UriJobProfileSummary;
                 default:
-                    return context.GetEnv().jobProfileApiBaseUrl + "/" + resource;
+                    return context.GetEnv().JobProfileApiBaseUrl + "/" + resource;
             }
         }
 
         #region envsettings
-        public static string GetEscoApiBaseUrl(this ScenarioContext context) { return context.GetEnv().escoApiBaseUrl; }
+        public static string GetEscoApiBaseUrl(this ScenarioContext context) { return context.GetEnv().EscoApiBaseUrl; }
 
-        public static string GetTaxonomyApiBaseUrl(this ScenarioContext context) { return context.GetEnv().taxonomyApiBaseUrl; }
-        public static string GetTaxonomySubscriptionKey(this ScenarioContext context) { return context.GetEnv().taxonomySubscriptionKey; }
+        public static string GetTaxonomyApiBaseUrl(this ScenarioContext context) { return context.GetEnv().TaxonomyApiBaseUrl; }
+        public static string GetTaxonomySubscriptionKey(this ScenarioContext context) { return context.GetEnv().TaxonomySubscriptionKey; }
 
-        public static string GetJobProfileApiBaseUrl(this ScenarioContext context) { return context.GetEnv().jobProfileApiBaseUrl; }
-        public static string GetJobProfileSubscriptionKey(this ScenarioContext context) { return context.GetEnv().jobProfileSubscriptionKey; }
+        public static string GetJobProfileApiBaseUrl(this ScenarioContext context) { return context.GetEnv().JobProfileApiBaseUrl; }
+        public static string GetJobProfileSubscriptionKey(this ScenarioContext context) { return context.GetEnv().JobProfileSubscriptionKey; }
 
-        public static string GetEditorBaseUrl(this ScenarioContext context) { return context.GetEnv().editorBaseUrl; }
-        public static string GetEditorUid(this ScenarioContext context) { return context.GetEnv().editorUid; }
-        public static string GetEditorPassword(this ScenarioContext context) { return context.GetEnv().editorPassword; }
+        public static string GetEditorBaseUrl(this ScenarioContext context) { return context.GetEnv().EditorBaseUrl; }
+        public static string GetEditorUid(this ScenarioContext context) { return context.GetEnv().EditorUid; }
+        public static string GetEditorPassword(this ScenarioContext context) { return context.GetEnv().EditorPassword; }
 
-        public static string GetNeo4JUrl(this ScenarioContext context) { return context.GetEnv().neo4JUrl; }
-        public static string GetNeo4JUid(this ScenarioContext context) { return context.GetEnv().neo4JUid; }
-        public static string GetNeo4JPassword(this ScenarioContext context) { return context.GetEnv().neo4JPassword; }
+        public static string GetNeo4JUrl(this ScenarioContext context) { return context.GetEnv().Neo4JUrl; }
+        public static string GetNeo4JUid(this ScenarioContext context) { return context.GetEnv().Neo4JUid; }
+        public static string GetNeo4JPassword(this ScenarioContext context) { return context.GetEnv().Neo4JPassword; }
 
         #endregion
 
@@ -126,9 +127,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return (uri.Contains("knowledge") ? "knowledge" : "competency");
         }
 
-        public static void SetEscoItemListData( this ScenarioContext context, IList<EscoDataItem> escoData)
+        public static void SetEscoItemListData(this ScenarioContext context, IList<EscoDataItem> escoData)
         {
-             context.Set<IList<EscoDataItem>>(escoData, keyEscoData);
+            context.Set<IList<EscoDataItem>>(escoData, keyEscoData);
         }
         public static IList<EscoDataItem> GetEscoItemListData(this ScenarioContext context)
         {
@@ -140,10 +141,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set<IList<Occupation>>(occupations, keyOccupationData);
         }
 
-        public static void StoreUri(this ScenarioContext context, string newUri, string tag,  string type,  Object model , TeardownOption teardownOption)
+        public static void StoreUri(this ScenarioContext context, string newUri, string tag, string type, Object model, TeardownOption teardownOption)
         {
             var dataItems = GetDataItems(context);
-            dataItems.Add(new _DataItem(newUri, tag, type, model, teardownOption) );
+            dataItems.Add(new _DataItem(newUri, tag, type, model, teardownOption));
             context[constants.dataItems] = dataItems;
         }
 
@@ -157,17 +158,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             var dataItems = GetDataItems(context);
             try
             {
-                dataItems[parentRef].linkedItems.Add(new _LinkedItem( title, relationshipType, dataItems[childRef]));
+                dataItems[parentRef].linkedItems.Add(new _LinkedItem(title, relationshipType, dataItems[childRef]));
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Unable to add relationship: {e.Message}");
-                
+
             }
             return true;
         }
 
-        public static List <_DataItem> GetDataItems(this ScenarioContext context)
+        public static List<_DataItem> GetDataItems(this ScenarioContext context)
         {
             List<_DataItem> dataItems = context.ContainsKey(constants.dataItems) ? (List<_DataItem>)context[constants.dataItems] : new List<_DataItem>(); ;
             return dataItems;
@@ -184,7 +185,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static string ConvertUriToDraft(this ScenarioContext context, string uri)
         {
-            return uri.ToLower().Replace(context.GetEnv().contentApiBaseUrl.ToLower(), context.GetEnv().contentApiDraftBaseUrl.ToLower());
+            return uri.ToLower().Replace(context.GetEnv().ContentApiBaseUrl.ToLower(), context.GetEnv().ContentApiDraftBaseUrl.ToLower());
         }
 
         public static string GetUri(this ScenarioContext context, int index)
@@ -228,21 +229,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             switch (graph)
             {
                 case constants.publish:
-                    return context.GetEnv().contentApiBaseUrl;
+                    return context.GetEnv().ContentApiBaseUrl;
                 case constants.preview:
-                    return context.GetEnv().contentApiDraftBaseUrl;
+                    return context.GetEnv().ContentApiDraftBaseUrl;
                 default:
                     return string.Empty;
             }
         }
         public static string GetContentUri(this ScenarioContext context, string contentType)
         {
-            return $"{context.GetEnv().contentApiBaseUrl}/{contentType}";
+            return $"{context.GetEnv().ContentApiBaseUrl}/{contentType}";
         }
 
         public static string GetDraftContentUri(this ScenarioContext context, string contentType)
         {
-            return $"{context.GetEnv().contentApiDraftBaseUrl}/{contentType}";
+            return $"{context.GetEnv().ContentApiDraftBaseUrl}/{contentType}";
         }
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
@@ -317,7 +318,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             //expect zero based index
             var ids = GetIds(context);
 
-            if (ids.Count < index + 1 )
+            if (ids.Count < index + 1)
             {
                 return "";
             }
@@ -326,7 +327,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static List<string> GetPageLocations(this ScenarioContext context)
         {
-            return context.ContainsKey(PageLocations) ? (List<string>)context[PageLocations] : new List<string> ();
+            return context.ContainsKey(PageLocations) ? (List<string>)context[PageLocations] : new List<string>();
             //expect zero based index
         }
 
@@ -372,8 +373,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             return (context.ContainsKey(keyExpectedRecordCount) ? context.Get<int>(keyExpectedRecordCount) : 0);
         }
-        
-        public static void SetEditorFields( this ScenarioContext context, Dictionary<string,string> vars, bool intial = false)
+
+        public static void SetEditorFields(this ScenarioContext context, Dictionary<string, string> vars, bool intial = false)
         {
             if (!context.ContainsKey(constants.requestVariables) || intial)
             {
@@ -385,32 +386,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             }
         }
 
-        public static Dictionary<string,string> GetEditorFields( this ScenarioContext context, bool intial = false)
+        public static Dictionary<string, string> GetEditorFields(this ScenarioContext context, bool intial = false)
         {
             Dictionary<string, string> vars;
             if (context.ContainsKey(constants.requestVariablesUpdated) && !intial)
             {
-                vars = ( Dictionary<string,string>) context[constants.requestVariablesUpdated];
+                vars = (Dictionary<string, string>)context[constants.requestVariablesUpdated];
             }
             else if (context.ContainsKey(constants.requestVariables))
             {
                 vars = (Dictionary<string, string>)context[constants.requestVariables];
             }
-            else 
+            else
             {
                 vars = new Dictionary<string, string>();
             }
             return vars;
         }
 
-        public static Dictionary<string,string> GetTaxonomyApiHeaders(this ScenarioContext context)
+        public static Dictionary<string, string> GetTaxonomyApiHeaders(this ScenarioContext context)
         {
-            return context.ContainsKey(constants.securityHeader) ? 
-                        (Dictionary < string,string >) context[constants.securityHeader] :
-                        new Dictionary<string, string>(){
-                                  { "Content-Type", "application/json" }, 
-                                  { "Ocp-Apim-Subscription-Key", context.ContainsKey(constants.securityHeader)? (string) context[constants.securityHeader] : context.GetTaxonomySubscriptionKey() } 
-                             };
+            return context.ContainsKey(constants.securityHeader) ?
+                        (Dictionary<string, string>)context[constants.securityHeader] :
+                        new Dictionary<string, string>
+                        {
+                            { "Content-Type", "application/json" },
+                            { "Ocp-Apim-Subscription-Key", context.GetTaxonomySubscriptionKey() }
+                        };
         }
 
         public static Dictionary<string, string> GetJobProfileApiHeaders(this ScenarioContext context)
@@ -426,7 +428,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             return new Dictionary<string, string>(){
                                                         { "Content-Type", "application/json" },
-                                                        { "Ocp-Apim-Subscription-Key", context.GetEnv().contentApiSubscriptionKey }
+                                                        { "Ocp-Apim-Subscription-Key", context.GetEnv().ContentApiSubscriptionKey }
                                                    };
         }
 

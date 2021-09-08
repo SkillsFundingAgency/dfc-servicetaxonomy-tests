@@ -14,7 +14,7 @@ Background:
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
 	And I add a comment before submitting for review "comment "
-	And I save the draft item
+	When I save the draft item
 	#Then an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
 	Given I check the number of events sent for this contentItem

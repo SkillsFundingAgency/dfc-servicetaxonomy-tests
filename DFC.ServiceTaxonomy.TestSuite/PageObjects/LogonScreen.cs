@@ -41,20 +41,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             Console.WriteLine("Attempt to logon");
             Console.WriteLine("----------------");
-            Console.WriteLine("URL: " + _scenarioContext.GetEnv().editorBaseUrl);
-            Console.WriteLine("UID: " + _scenarioContext.GetEnv().editorUid);
-            Console.WriteLine("PWD (length): " + _scenarioContext.GetEnv().editorPassword.Length);
+            Console.WriteLine("URL: " + _scenarioContext.GetEnv().EditorBaseUrl);
+            Console.WriteLine("UID: " + _scenarioContext.GetEnv().EditorUid);
+            Console.WriteLine("PWD (length): " + _scenarioContext.GetEnv().EditorPassword.Length);
             try
             {
-                NavigateToLoginPage(_scenarioContext.GetEnv().editorBaseUrl);
+                NavigateToLoginPage(_scenarioContext.GetEnv().EditorBaseUrl);
 
                 // are we already logged in?
                 if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Welcome to Orchard')]]")).Count == 0)
                 {
                     if (_scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Begin by browsing the menu.')]]")).Count == 0)
                     {
-                        EnterUsername(_scenarioContext.GetEnv().editorUid);
-                        EnterPassword(_scenarioContext.GetEnv().editorPassword);
+                        EnterUsername(_scenarioContext.GetEnv().EditorUid);
+                        EnterPassword(_scenarioContext.GetEnv().EditorPassword);
 
                         var url = _scenarioContext.GetWebDriver().Url;
                         var error = _scenarioContext.GetWebDriver().FindElements(By.XPath("//*[text()[contains(.,'Invalid login attempt')]]"));
