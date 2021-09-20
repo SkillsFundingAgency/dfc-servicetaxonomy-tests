@@ -181,7 +181,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 // should just get first Edit button in list
-                _scenarioContext.GetWebDriver().ClickButton("Edit");
+                _scenarioContext.GetWebDriver().ClickButtonByCssSelector(".list-group-item .contentitem a");
+                //_scenarioContext.GetWebDriver().ClickButton("Edit");
             }
             catch (Exception e)
             {

@@ -100,7 +100,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public AddContentItemBase PublishActivity()
         {
-            _scenarioContext.GetWebDriver().FindElements(By.Name("submit.Publish"))?.FirstOrDefault(e => e.GetAttribute("value").Equals("submit.Publish"))?.Click();
+            var button = _scenarioContext.GetWebDriver().FindElements(By.Name("submit.Publish"))?.FirstOrDefault(e => e.GetAttribute("value").Equals("submit.Publish"));
+            if (button != null && button.Displayed is false)
+            {
+                _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle.dropdown-toggle-split"))?.Click();
+
+            }
+            button?.Click();
             return this;
         }
 
@@ -108,7 +114,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             if (_scenarioContext.GetWebDriver().Url.Contains("?returnUrl"))
             {
-                _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-primary.dropdown-toggle.dropdown-toggle-split"))?.Click();
+                _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-info.dropdown-toggle.dropdown-toggle-split"))?.Click();
             }
 
             _scenarioContext.GetWebDriver().FindElements(By.Name("submit.Save"))?.FirstOrDefault(e => e.GetAttribute("value").Equals("submit.Save"))?.Click();
@@ -312,8 +318,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void EnterComment(string comment)
         {
+            if (_scenarioContext.TryGetValue("contentType", out string value) && value.Equals("Page"))
+            {
+                SelectTab("Content");
+                _scenarioContext.GetWebDriver().WaitUntilElementFound(By.Id("AuditTrailPart_Comment"));
+            }
             var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("AuditTrailPart_Comment"));
             commentInput.SendKeys(comment);
         }
+
+        public void SelectTab(string tabName)
+        {
+            try
+            {
+                _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='{tabName}']")).Click();
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to select tab {tabName}- {e.Message}");
+            }
+        }
+
     }
 }
