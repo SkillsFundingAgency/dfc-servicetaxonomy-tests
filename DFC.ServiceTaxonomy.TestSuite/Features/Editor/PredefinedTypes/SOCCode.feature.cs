@@ -127,14 +127,14 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I capture the generated URI", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table314 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table324 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
-                table314.AddRow(new string[] {
+                table324.AddRow(new string[] {
                             "My Test SOCCode",
                             "My test description"});
 #line 16
- testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table314, "And ");
+ testRunner.And("I Enter the following form data for \"SOCCode\"", ((string)(null)), table324, "And ");
 #line hidden
 #line 19
  testRunner.When("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

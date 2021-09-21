@@ -101,6 +101,7 @@ Scenario: discard the draft shared content
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
+	And I select the first item that is found
 	And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And the "preview" graph matches the expect results using the "page_by_uri" query and the "PageUri" Uri
