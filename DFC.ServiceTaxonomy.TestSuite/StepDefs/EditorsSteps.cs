@@ -404,6 +404,31 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             WhenIPublishTheItem();
         }
 
+        [Given(@"I unpublish the item")]
+        public void GivenIUnpublishTheItem()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Unpublish']")).Click();
+        }
+
+        [Given(@"I click on Discard Draft")]
+        public void GivenIClickOnDiscardDraft()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Discard Draft']")).Click();
+        }
+
+        [Given(@"I delete the item")]
+        public void GivenIDeleteTheItem()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Delete']")).Click();
+        }
+
+        [Given(@"I clone the item")]
+        public void GivenICloneTheItem()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Clone']")).Click();
+        }
+
+
 
         [Then(@"the values displayed in the editor match")]
         public void ThenTheValuesDisplayedInTheEditorMatch(Table table)
@@ -1753,6 +1778,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             Thread.Sleep(1000);
             _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[@title='Shared Content']")).Click();
         }
+
+        [Given(@"I add a comment ""(.*)""")]
+        public void GivenIAddAComment(string comment)
+        {
+            _addContentItemBase.EnterComment(comment);
+        }
+
 
         [Given(@"I add a comment before submitting for review ""(.*)""")]
         public void GivenIAddACommentBeforeSubmittingForReview(string comment)

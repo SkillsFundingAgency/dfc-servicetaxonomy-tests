@@ -85,7 +85,10 @@ Scenario: 21. Updates to an existing published content item fails to publish wit
 Scenario: 28. A published item is unpublished from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Unpublish" option for the first item that is found
+	And I select the first item that is found
+	And I unpublish the item
+	And I confirm I wish to proceed
+	#And I select the "Unpublish" option for the first item that is found
 	Then the unpublish action completes succesfully
 	And an event of type "Unpublished" has been issued to notify consumers of the change
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -98,7 +101,10 @@ Scenario: 28. A published item is unpublished from the content item list view
 Scenario: 32. An existing published content item is deleted from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Delete" option for the first item that is found
+	And I select the first item that is found
+	And I delete the item
+	And I confirm I wish to proceed
+	#And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And 1 events of type "Deleted" has been issued to notify consumers of the change
 	And the data is not present in the DRAFT Graph database
@@ -109,7 +115,10 @@ Scenario: 32. An existing published content item is deleted from the content ite
 Scenario: 35. An existing draft content item is cloned from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Clone" option for the first item that is found
+	And I select the first item that is found
+	And I clone the item
+	And I confirm I wish to proceed
+	#And I select the "Clone" option for the first item that is found
 	Then the clone action completes succesfully
 	Given I select the first item that is found
 	Then no event is issued
