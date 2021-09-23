@@ -309,6 +309,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             headerButton.Click();
         }
 
+        public void Unpublish()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Unpublish']")).Click();
+        }
+
+        public void Clone()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Clone']")).Click();
+        }
+
+        public void DiscardDraft()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Discard Draft']")).Click();
+        }
+
+        public void Delete()
+        {
+            _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='Delete']")).Click();
+        }
+
         public AddContentItemBase PublishAndContinueActivity()
         {
             _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn-success.dropdown-toggle")).Click();

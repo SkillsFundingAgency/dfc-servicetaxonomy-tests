@@ -81,7 +81,10 @@ Scenario: 16. An existing draft content item is updated and fails validation whe
 Scenario: 17. An existing draft content item is published from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Publish" option for the first item that is found
+	And I select the first item that is found
+	And I add a comment before submitting for review "comment "
+	When I publish the item
+	#And I select the "Publish" option for the first item that is found
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
 	And the data is present in the DRAFT Graph database
@@ -92,7 +95,9 @@ Scenario: 17. An existing draft content item is published from the content item 
 Scenario: 31. An existing draft content item is deleted from the content item list view
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Delete" option for the first item that is found
+	And I select the first item that is found
+	And I delete the item
+	#And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And 1 events of type "Deleted" has been issued to notify consumers of the change
 	And the data is not present in the DRAFT Graph database

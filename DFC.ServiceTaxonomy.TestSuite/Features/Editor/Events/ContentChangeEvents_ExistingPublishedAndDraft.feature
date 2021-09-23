@@ -87,7 +87,9 @@ Scenario: 26. An existing draft version of a published content item is edited so
 @Editor @NotPP
 Scenario: 27. An existing draft version of a published content item is published succesfully from the content item list view
 	Given I search for the "Title"
-	And I select the "Publish" option for the first item that is found
+	And I select the first item that is found
+	And I add a comment "comment "
+	And I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
 	#And an event of type "Draft discarded" has been issued to notify consumers of the change
@@ -98,7 +100,9 @@ Scenario: 27. An existing draft version of a published content item is published
 @Editor @NotPP	
 Scenario: 29. A published item with a draft version is unpublished from the content item list view
 	Given I search for the "Title"
-	And I select the "Unpublish" option for the first item that is found
+	And I select the first item that is found
+	And I unpublish the item
+	And I confirm I wish to proceed
 	Then the unpublish action completes succesfully
 	And an event of type "Unpublished" has been issued to notify consumers of the change
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -109,7 +113,10 @@ Scenario: 29. A published item with a draft version is unpublished from the cont
 @Editor @NotPP	
 Scenario: 30. An existing draft version of a published content item is discarded from the content item list view
 	Given I search for the "Title"
-	And I select the "Discard Draft" option for the first item that is found
+	And I select the first item that is found
+	And I click on Discard Draft
+	And I confirm I wish to proceed
+	#And I select the "Discard Draft" option for the first item that is found
 	Then the discard action completes succesfully
 	And an event of type "Draft-Discarded" has been issued to notify consumers of the change
 	Then the intial data is present in the DRAFT Graph database
@@ -119,7 +126,10 @@ Scenario: 30. An existing draft version of a published content item is discarded
 @Editor @NotPP	
 Scenario: 33. An existing published item with a draft version is deleted from the content item list view
 	Given I search for the "Title"
-	And I select the "Delete" option for the first item that is found
+	And I select the first item that is found
+	And I delete the item
+	And I confirm I wish to proceed
+	#And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And 1 events of type "Deleted" has been issued to notify consumers of the change
 	Then the data is not present in the DRAFT Graph database
@@ -131,7 +141,9 @@ Scenario: 36. An existing published content item with a draft version  is cloned
 
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
-	And I select the "Clone" option for the first item that is found
+	And I select the first item that is found
+	And I clone the item
+	And I confirm I wish to proceed
 	Then the clone action completes succesfully
 	Given I select the first item that is found
 	Then no event is issued
