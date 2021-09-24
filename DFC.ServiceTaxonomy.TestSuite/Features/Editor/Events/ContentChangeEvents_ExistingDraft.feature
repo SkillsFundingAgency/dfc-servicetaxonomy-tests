@@ -97,6 +97,7 @@ Scenario: 31. An existing draft content item is deleted from the content item li
 	And I search for the "Title"
 	And I select the first item that is found
 	And I delete the item
+	And I confirm I wish to proceed
 	#And I select the "Delete" option for the first item that is found
 	Then the delete action completes succesfully
 	And 1 events of type "Deleted" has been issued to notify consumers of the change
