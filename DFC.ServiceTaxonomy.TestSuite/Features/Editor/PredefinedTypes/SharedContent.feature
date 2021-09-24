@@ -59,7 +59,9 @@ Scenario: Add a new shared content item
 
 #Scenario: Delete the new activity
 	Given I search for the "Title"
-	When I delete the item
+	And I select the first item that is found
+	And I delete the item
+	And I confirm I wish to proceed
 #	And I confirm the delete action
 	Then the delete action completes succesfully
 	And the data is not present in the Graph databases
