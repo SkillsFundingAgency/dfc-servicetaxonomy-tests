@@ -353,10 +353,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='{tabName}']")).Click();
             }
-            catch (Exception e)
-            {
-                throw new Exception($"Unable to select tab {tabName}- {e.Message}");
-            }
+            catch { /*  */ }
         }
 
     }
