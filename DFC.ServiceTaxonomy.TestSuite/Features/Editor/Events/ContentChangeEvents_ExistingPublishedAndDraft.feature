@@ -121,7 +121,8 @@ Scenario: 30. An existing draft version of a published content item is discarded
 	And an event of type "Draft-Discarded" has been issued to notify consumers of the change
 	Then the intial data is present in the DRAFT Graph database
 	And the intial data is present in the PUBLISH Graph database
-	And the number of events sent for this content Item is 3
+	And the number of events sent for this content Item is 4 
+	# Discard Draft event is sent along with Published event.
 
 @Editor @NotPP	
 Scenario: 33. An existing published item with a draft version is deleted from the content item list view
