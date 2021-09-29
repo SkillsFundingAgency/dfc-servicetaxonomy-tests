@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using TechTalk.SpecFlow;
-using DFC.ServiceTaxonomy.TestSuite.Extensions;
+
 using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using OpenQA.Selenium;
+
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using System.Runtime;
 
 
 namespace DFC.ServiceTaxonomy.TestSuite.Hooks
@@ -19,24 +12,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
     {
         private ChromeDriver driver = null;
         private Dictionary<string, Neo4JHelper> graphConnections = null;
-        private static readonly Lazy<WebDriverContainer>
-            lazy =
-            new Lazy<WebDriverContainer>
-                (() => new WebDriverContainer());
+        private static readonly Lazy<WebDriverContainer> lazy =
+            new Lazy<WebDriverContainer>(() => new WebDriverContainer());
 
         public static WebDriverContainer Instance { get { return lazy.Value; } }
 
-        public ChromeDriver GetWebDriver( string path, int timeoutPeriod = 0)
+        public ChromeDriver GetWebDriver(string path, int timeoutPeriod = 0)
         {
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("no-sandbox");
             if (driver == null)
             {
                 if (timeoutPeriod > 0)
-                { 
-                    driver = new ChromeDriver(path, new ChromeOptions(), TimeSpan.FromSeconds(timeoutPeriod));
+                {
+                    driver = new ChromeDriver(path, options, TimeSpan.FromSeconds(timeoutPeriod));
                 }
                 else
                 {
-                    driver = new ChromeDriver(path);
+                    driver = new ChromeDriver(path, options);
                 }
             }
             return driver;
@@ -52,9 +45,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             }
         }
 
-        public Neo4JHelper GetGraphConnection( string key, string graphName, string graphUri, string userId, string password)
+        public Neo4JHelper GetGraphConnection(string key, string graphName, string graphUri, string userId, string password)
         {
-            if (graphConnections==null)
+            if (graphConnections == null)
             {
                 graphConnections = new Dictionary<string, Neo4JHelper>();
             }
