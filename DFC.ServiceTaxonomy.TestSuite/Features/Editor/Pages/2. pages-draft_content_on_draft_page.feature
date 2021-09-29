@@ -34,7 +34,9 @@ Background:
 Scenario: Publish the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
-	And I select the "Publish" option for the first item that is found
+	And I select the first item that is found
+	And I add a comment before submitting for review "comment "
+	When I publish the item
 	Then the item is published succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
 	| skos__prefLabel | sharedContent           |
@@ -47,7 +49,9 @@ Scenario: Publish the page
 Scenario: Delete the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
-	And I select the "Delete" option for the first item that is found
+	And I select the first item that is found
+	And I delete the item
+	And I confirm I wish to proceed
 	Then the delete action completes succesfully
 	And the "preview" graph matches the expect results using the "page_by_uri" query and the "PageUri" Uri
 	| pages_found |
@@ -66,7 +70,9 @@ Scenario: Delete the page
 Scenario: Delete the shared content
 Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Draft Content"
-	And I select the "Delete" option for the first item that is found
+	And I select the first item that is found
+	And I delete the item
+	And I confirm I wish to proceed
 	Then the delete action could not be completed
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
 	| skos__prefLabel | sharedContent           |
