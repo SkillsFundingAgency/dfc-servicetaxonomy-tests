@@ -261,7 +261,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 case "UniversityRequirement":
                     _scenarioContext[constants.responseType] = typeof(GenericContent);
                     _scenarioContext[constants.cypherQuery] = cypher_GenericItemWithTextByUri.Replace("@CONTENTTYPE@", contentType);
-                    return _addContentItemBase.AsA(contentType); ;
+                    return _addContentItemBase.AsA(contentType);
                 case "SharedContent":
                     _scenarioContext[constants.responseType] = typeof(SharedContent);
                     _scenarioContext[constants.cypherQuery] = cypher_SharedContentByUri;
@@ -473,6 +473,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             vars.Add(p0, multilineText);
             _scenarioContext.SetEditorFields(vars, true);
         }
+
+        [Given(@"the content type is ""(.*)""")]
+        public void GivenTheContentTypeIs(string p0)
+        {
+            SetContentType(p0);
+        }
+
 
         [Given(@"I Enter the following form data for ""(.*)""")]
         public void GivenIEnterTheFollowingFormDataFor(string p0, Table table)

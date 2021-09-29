@@ -207,9 +207,15 @@ this.FeatureBackground();
  testRunner.And("I search for the text \"__PREFIX__My Test Page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 39
- testRunner.And("I select the \"Publish\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 40
+ testRunner.And("I add a comment before submitting for review \"comment \"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 41
+ testRunner.And("I publish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 42
  testRunner.Then("the item is published succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table146 = new TechTalk.SpecFlow.Table(new string[] {
@@ -218,7 +224,7 @@ this.FeatureBackground();
                 table146.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
-#line 41
+#line 43
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
                         "t\" query and the \"PageUri\" Uri", ((string)(null)), table146, "And ");
 #line hidden
@@ -228,7 +234,7 @@ this.FeatureBackground();
                 table147.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
-#line 44
+#line 46
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_with_shared_conten" +
                         "t\" query and the \"PageUri\" Uri", ((string)(null)), table147, "And ");
 #line hidden
@@ -245,7 +251,7 @@ this.FeatureBackground();
                     "editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete the page", null, new string[] {
                         "editor"});
-#line 50
+#line 52
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -268,23 +274,29 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 51
+#line 53
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 52
+#line 54
  testRunner.And("I search for the text \"__PREFIX__My Test Page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 53
- testRunner.And("I select the \"Delete\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 54
+#line 56
+ testRunner.And("I delete the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 57
+ testRunner.And("I confirm I wish to proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 58
  testRunner.Then("the delete action completes succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table148 = new TechTalk.SpecFlow.Table(new string[] {
                             "pages_found"});
                 table148.AddRow(new string[] {
                             "0"});
-#line 55
+#line 59
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_by_uri\" query and " +
                         "the \"PageUri\" Uri", ((string)(null)), table148, "And ");
 #line hidden
@@ -292,7 +304,7 @@ this.FeatureBackground();
                             "widgets_found"});
                 table149.AddRow(new string[] {
                             "0"});
-#line 58
+#line 62
  testRunner.And("the \"preview\" graph matches the expect results using the \"widget_by_uri\" query an" +
                         "d the \"PageUri\" Uri", ((string)(null)), table149, "And ");
 #line hidden
@@ -300,7 +312,7 @@ this.FeatureBackground();
                             "pages_found"});
                 table150.AddRow(new string[] {
                             "0"});
-#line 61
+#line 65
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_by_uri\" query and " +
                         "the \"PageUri\" Uri", ((string)(null)), table150, "And ");
 #line hidden
@@ -308,7 +320,7 @@ this.FeatureBackground();
                             "widgets_found"});
                 table151.AddRow(new string[] {
                             "0"});
-#line 64
+#line 68
  testRunner.And("the \"publish\" graph matches the expect results using the \"widget_by_uri\" query an" +
                         "d the \"PageUri\" Uri", ((string)(null)), table151, "And ");
 #line hidden
@@ -316,7 +328,7 @@ this.FeatureBackground();
                             "shared_content_found"});
                 table152.AddRow(new string[] {
                             "1"});
-#line 67
+#line 71
  testRunner.And("the \"preview\" graph matches the expect results using the \"shared_content_by_uri\" " +
                         "query and the \"SharedContentUri\" Uri", ((string)(null)), table152, "And ");
 #line hidden
@@ -324,7 +336,7 @@ this.FeatureBackground();
                             "shared_content_found"});
                 table153.AddRow(new string[] {
                             "1"});
-#line 70
+#line 74
  testRunner.And("the \"publish\" graph matches the expect results using the \"shared_content_by_uri\" " +
                         "query and the \"SharedContentUri\" Uri", ((string)(null)), table153, "And ");
 #line hidden
@@ -341,7 +353,7 @@ this.FeatureBackground();
                     "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new draft version of the Shared Content", null, new string[] {
                         "Editor"});
-#line 76
+#line 80
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -364,13 +376,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 77
+#line 81
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 78
+#line 82
  testRunner.And("I search for the text \"__PREFIX__Draft Content\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 79
+#line 83
  testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table154 = new TechTalk.SpecFlow.Table(new string[] {
@@ -379,16 +391,16 @@ this.FeatureBackground();
                 table154.AddRow(new string[] {
                             "Updated Content",
                             "<p>Some updated content</p>"});
-#line 80
- testRunner.And("I Enter the following form data for \"Page\"", ((string)(null)), table154, "And ");
+#line 84
+ testRunner.And("I Enter the following form data for \"SharedContent\"", ((string)(null)), table154, "And ");
 #line hidden
-#line 83
+#line 87
  testRunner.And("I add a comment before submitting for review \"comment \"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 84
+#line 88
  testRunner.When("I save the draft item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 85
+#line 89
  testRunner.Then("the item is saved succesfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table155 = new TechTalk.SpecFlow.Table(new string[] {
@@ -397,7 +409,7 @@ this.FeatureBackground();
                 table155.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Updated Content"});
-#line 86
+#line 90
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
                         "t\" query and the \"PageUri\" Uri", ((string)(null)), table155, "And ");
 #line hidden
@@ -405,7 +417,7 @@ this.FeatureBackground();
                             "pages_found"});
                 table156.AddRow(new string[] {
                             "0"});
-#line 89
+#line 93
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_by_uri\" query and " +
                         "the \"PageUri\" Uri", ((string)(null)), table156, "And ");
 #line hidden
@@ -413,7 +425,7 @@ this.FeatureBackground();
                             "widgets_found"});
                 table157.AddRow(new string[] {
                             "0"});
-#line 92
+#line 96
  testRunner.And("the \"publish\" graph matches the expect results using the \"widget_by_uri\" query an" +
                         "d the \"PageUri\" Uri", ((string)(null)), table157, "And ");
 #line hidden
@@ -421,7 +433,7 @@ this.FeatureBackground();
                             "sharedContent"});
                 table158.AddRow(new string[] {
                             "__PREFIX__Draft Content"});
-#line 95
+#line 99
  testRunner.And("the \"publish\" graph matches the expect results using the \"shared_content_title_by" +
                         "_uri\" query and the \"SharedContentUri\" Uri", ((string)(null)), table158, "And ");
 #line hidden
@@ -438,7 +450,7 @@ this.FeatureBackground();
                     "Editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unpublish the shared content", null, new string[] {
                         "Editor"});
-#line 101
+#line 105
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -461,14 +473,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 102
+#line 106
  testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 103
+#line 107
  testRunner.And("I search for the text \"__PREFIX__Draft Content\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 104
- testRunner.And("I select the \"Unpublish\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 109
+ testRunner.And("I unpublish the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 110
+ testRunner.And("I confirm I wish to proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table159 = new TechTalk.SpecFlow.Table(new string[] {
                             "skos__prefLabel",
@@ -476,7 +494,7 @@ this.FeatureBackground();
                 table159.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
-#line 105
+#line 111
  testRunner.Then("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
                         "t\" query and the \"PageUri\" Uri", ((string)(null)), table159, "Then ");
 #line hidden
@@ -484,7 +502,7 @@ this.FeatureBackground();
                             "pages_found"});
                 table160.AddRow(new string[] {
                             "0"});
-#line 108
+#line 114
  testRunner.And("the \"publish\" graph matches the expect results using the \"page_by_uri\" query and " +
                         "the \"PageUri\" Uri", ((string)(null)), table160, "And ");
 #line hidden
@@ -492,7 +510,7 @@ this.FeatureBackground();
                             "widgets_found"});
                 table161.AddRow(new string[] {
                             "0"});
-#line 111
+#line 117
  testRunner.And("the \"publish\" graph matches the expect results using the \"widget_by_uri\" query an" +
                         "d the \"PageUri\" Uri", ((string)(null)), table161, "And ");
 #line hidden
@@ -500,7 +518,7 @@ this.FeatureBackground();
                             "shared_content_found"});
                 table162.AddRow(new string[] {
                             "0"});
-#line 114
+#line 120
  testRunner.And("the \"publish\" graph matches the expect results using the \"shared_content_by_uri\" " +
                         "query and the \"SharedContentUri\" Uri", ((string)(null)), table162, "And ");
 #line hidden
@@ -517,7 +535,7 @@ this.FeatureBackground();
                     "editor"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete the shared content", null, new string[] {
                         "editor"});
-#line 120
+#line 126
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -540,16 +558,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 121
+#line 127
 testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 122
+#line 128
  testRunner.And("I search for the text \"__PREFIX__Draft Content\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 123
- testRunner.And("I select the \"Delete\" option for the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 129
+ testRunner.And("I select the first item that is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 124
+#line 130
+ testRunner.And("I delete the item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 131
+ testRunner.And("I confirm I wish to proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 132
  testRunner.Then("the delete action could not be completed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table163 = new TechTalk.SpecFlow.Table(new string[] {
@@ -558,7 +582,7 @@ testRunner.Given("I Navigate to \"/Admin/Contents/ContentItems\"", ((string)(nul
                 table163.AddRow(new string[] {
                             "My Test Page",
                             "__PREFIX__Draft Content"});
-#line 125
+#line 133
  testRunner.And("the \"preview\" graph matches the expect results using the \"page_with_shared_conten" +
                         "t\" query and the \"PageUri\" Uri", ((string)(null)), table163, "And ");
 #line hidden
