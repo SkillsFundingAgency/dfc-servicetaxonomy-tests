@@ -145,7 +145,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             var dataItems = GetDataItems(context);
             dataItems.Add(new _DataItem(newUri, tag, type, model, teardownOption));
-            context[constants.dataItems] = dataItems;
+            context[Constants.dataItems] = dataItems;
         }
 
         public static void StoreUri(this ScenarioContext context, string newUri, string tag = "")
@@ -170,7 +170,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static List<_DataItem> GetDataItems(this ScenarioContext context)
         {
-            List<_DataItem> dataItems = context.ContainsKey(constants.dataItems) ? (List<_DataItem>)context[constants.dataItems] : new List<_DataItem>(); ;
+            List<_DataItem> dataItems = context.ContainsKey(Constants.dataItems) ? (List<_DataItem>)context[Constants.dataItems] : new List<_DataItem>(); ;
             return dataItems;
         }
 
@@ -219,7 +219,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return dataItems.Count;
         }
 
-        public static string GenerateUri(this ScenarioContext context, string contentType, string graph = constants.publish)
+        public static string GenerateUri(this ScenarioContext context, string contentType, string graph = Constants.publish)
         {
             return $"{GetContentPath(context, graph)}/{contentType}/{Guid.NewGuid().ToString()}".ToLower();
         }
@@ -228,9 +228,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             switch (graph)
             {
-                case constants.publish:
+                case Constants.publish:
                     return context.GetEnv().ContentApiBaseUrl;
-                case constants.preview:
+                case Constants.preview:
                     return context.GetEnv().ContentApiDraftBaseUrl;
                 default:
                     return string.Empty;
@@ -248,19 +248,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void StoreContentItemIndexList(this ScenarioContext context, List<ContentItemIndexRow> list)
         {
-            context[constants.contentItemIndexes] = list;
+            context[Constants.contentItemIndexes] = list;
         }
 
         public static List<ContentItemIndexRow> GetContentItemIndexList(this ScenarioContext context)
         {
-            return context.ContainsKey(constants.contentItemIndexes) ? (List<ContentItemIndexRow>)context[constants.contentItemIndexes]
+            return context.ContainsKey(Constants.contentItemIndexes) ? (List<ContentItemIndexRow>)context[Constants.contentItemIndexes]
                                                                      : new List<ContentItemIndexRow>();
         }
 
         public static void StoreContentItemId(this ScenarioContext context, string newId)
         {
             List<string> uris;
-            int count = (context.ContainsKey(constants.contentIdCount) ? (int)context[constants.contentIdCount] : 0);
+            int count = (context.ContainsKey(Constants.contentIdCount) ? (int)context[Constants.contentIdCount] : 0);
             if (count == 0)
             {
                 //initialise
@@ -269,18 +269,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             else
             {
                 //retreive
-                uris = (List<string>)context[constants.contentIds];
+                uris = (List<string>)context[Constants.contentIds];
             }
             uris.Add(newId);
             count++;
-            context[constants.contentIdCount] = count;
-            context[constants.contentIds] = uris;
+            context[Constants.contentIdCount] = count;
+            context[Constants.contentIds] = uris;
         }
 
         private static List<string> GetIds(this ScenarioContext context)
         {
             //expect zero based index
-            List<string> ids = (context.ContainsKey(constants.contentIds) ? (List<string>)context[constants.contentIds] : new List<string>());
+            List<string> ids = (context.ContainsKey(Constants.contentIds) ? (List<string>)context[Constants.contentIds] : new List<string>());
             return ids;
         }
 
@@ -305,12 +305,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void StoreRecordId(this ScenarioContext context, string newId)
         {
-            int count = (context.ContainsKey(constants.recordIdCount) ? (int)context[constants.recordIdCount] : 0);
+            int count = (context.ContainsKey(Constants.recordIdCount) ? (int)context[Constants.recordIdCount] : 0);
             var ids = GetIds(context);
             ids.Add(newId);
             count++;
-            context[constants.recordIdCount] = count;
-            context[constants.recordIds] = ids;
+            context[Constants.recordIdCount] = count;
+            context[Constants.recordIds] = ids;
         }
 
         public static string GetId(this ScenarioContext context, int index)
@@ -376,26 +376,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void SetEditorFields(this ScenarioContext context, Dictionary<string, string> vars, bool intial = false)
         {
-            if (!context.ContainsKey(constants.requestVariables) || intial)
+            if (!context.ContainsKey(Constants.requestVariables) || intial)
             {
-                context[constants.requestVariables] = vars;
+                context[Constants.requestVariables] = vars;
             }
             else
             {
-                context[constants.requestVariablesUpdated] = vars;
+                context[Constants.requestVariablesUpdated] = vars;
             }
         }
 
         public static Dictionary<string, string> GetEditorFields(this ScenarioContext context, bool intial = false)
         {
             Dictionary<string, string> vars;
-            if (context.ContainsKey(constants.requestVariablesUpdated) && !intial)
+            if (context.ContainsKey(Constants.requestVariablesUpdated) && !intial)
             {
-                vars = (Dictionary<string, string>)context[constants.requestVariablesUpdated];
+                vars = (Dictionary<string, string>)context[Constants.requestVariablesUpdated];
             }
-            else if (context.ContainsKey(constants.requestVariables))
+            else if (context.ContainsKey(Constants.requestVariables))
             {
-                vars = (Dictionary<string, string>)context[constants.requestVariables];
+                vars = (Dictionary<string, string>)context[Constants.requestVariables];
             }
             else
             {
@@ -406,8 +406,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static Dictionary<string, string> GetTaxonomyApiHeaders(this ScenarioContext context)
         {
-            return context.ContainsKey(constants.securityHeader) ?
-                        (Dictionary<string, string>)context[constants.securityHeader] :
+            return context.ContainsKey(Constants.securityHeader) ?
+                        (Dictionary<string, string>)context[Constants.securityHeader] :
                         new Dictionary<string, string>
                         {
                             { "Content-Type", "application/json" },

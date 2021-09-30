@@ -23,12 +23,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             switch ( expression.ToLower())
             {
                 //case constants.published:
-                case constants.publish:
-                    expression = constants.publish;
+                case Constants.publish:
+                    expression = Constants.publish;
                     break;
                 //case constants.draft:
-                case constants.preview:
-                    expression = constants.preview;
+                case Constants.preview:
+                    expression = Constants.preview;
                     break;
                 case "draft discarded":
                     expression = "draft-discarded";

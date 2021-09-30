@@ -47,21 +47,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static void AddFeatureFailure(this SpecFlowContext context, string messageContext, string message)
         {
             Dictionary<string, string> failures;
-            if (context.ContainsKey(constants.featureFailure))
+            if (context.ContainsKey(Constants.featureFailure))
             {
-                failures = (Dictionary<string, string>)context[constants.featureFailure];
+                failures = (Dictionary<string, string>)context[Constants.featureFailure];
             }
             else 
             {
                 failures = new Dictionary<string, string>();
             }
             failures.Add(messageContext, message);
-            context[constants.featureFailure] = failures;
+            context[Constants.featureFailure] = failures;
         }
 
         public static Dictionary<string,string> GetFeatureFailure(this SpecFlowContext context)
         {
-            return context.ContainsKey(constants.featureFailure) ? (Dictionary<string, string>)context[constants.featureFailure] : new Dictionary<string, string>();
+            return context.ContainsKey(Constants.featureFailure) ? (Dictionary<string, string>)context[Constants.featureFailure] : new Dictionary<string, string>();
         }
     }
 }

@@ -123,7 +123,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             context.StoreToken(p0, context.RandomString(10).ToLower());
         }
 
-        private SharedContent InsertSharedContent( string name, Table dataTable, string graph = constants.publish)
+        private SharedContent InsertSharedContent( string name, Table dataTable, string graph = Constants.publish)
         {
             SharedContent newItem = dataTable.CreateInstance<SharedContent>();
             newItem.uri = context.GenerateUri(name, graph);
@@ -152,7 +152,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenICreateAItemInTheGraphWithTheFollowingData(string type, string graph, Table dataTable)
         {
             graph = graph.ToLower();
-            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+            graph.Should().BeOneOf(new[] { Constants.publish, Constants.preview });
 
             string contentTypeName = context.ReplaceTokensInString(type);
             InsertSharedContent(contentTypeName, dataTable, graph);
@@ -212,26 +212,26 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I want to supply an invalid security header")]
         public void GivenIWantToSupplyAnInvalidSecurityHeader()
         {
-            context[constants.securityHeader] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
+            context[Constants.securityHeader] = new Dictionary<string, string> () { { "Ocp-Apim-Subscription-Key", "12345" } };
         }
 
         [Given(@"I want to fail to send a security header")]
         public void GivenIWantToFailToSendASecurityHeader()
         {
-            context[constants.securityHeader] = new Dictionary<string, string>() ;
+            context[Constants.securityHeader] = new Dictionary<string, string>() ;
         }
 
         [Given(@"I want to supply ""(.*)"" as a parameter in the following request")]
         public void GivenIWantToSupplyAsAParameterInTheFollowingRequest(string p0)
         {
-            context[constants.requestParam] = p0;
+            context[Constants.requestParam] = p0;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)""")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPI(string p0, Table table)
         {
             string requestBody = "{}";
-            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            string param = (context.ContainsKey(Constants.requestParam) ? context[Constants.requestParam].ToString() : "");
             var requestItems = table.SingleColumnToDictionary();
             foreach ( var item in requestItems )
             {
@@ -239,17 +239,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             }
             var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), requestBody, context.GetTaxonomyApiHeaders());
             //response.StatusCode.Should().Be(HttpStatusCode.OK);
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
         }
 
         [Given(@"I make a request to the service taxonomy API ""(.*)"" with request body")]
         public void GivenIMakeARequestToTheServiceTaxonomyAPIWithRequestBody(string p0, string multilineText)
         {
-            string param = (context.ContainsKey(constants.requestParam) ? context[constants.requestParam].ToString() : "");
+            string param = (context.ContainsKey(Constants.requestParam) ? context[Constants.requestParam].ToString() : "");
             var response = RestHelper.Post(context.GetTaxonomyUri(p0,param), multilineText, context.GetTaxonomyApiHeaders());
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
         }
 
         [Given(@"I make a request to the content API")]
@@ -257,23 +257,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string uri = context.GetLatestUri();
             var response = RestHelper.Get(uri, context.GetTaxonomyApiHeaders());
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
-            context[constants.responseScope] = constants.resultSingle;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
+            context[Constants.responseScope] = Constants.resultSingle;
         }
 
         [Given(@"I make a request to the ""(.*)"" content API to retrive all ""(.*)"" items")]
         public void GivenIMakeARequestToTheContentAPIToRetriveAllItems(string graph, string type)
         {
             graph = graph.ToLower();
-            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+            graph.Should().BeOneOf(new[] { Constants.publish, Constants.preview });
 
-            string uri = (graph == constants.publish) ? context.GetContentUri(context.ReplaceTokensInString(type)) : 
+            string uri = (graph == Constants.publish) ? context.GetContentUri(context.ReplaceTokensInString(type)) : 
                                                         context.GetDraftContentUri(context.ReplaceTokensInString(type)) ;
             var response = RestHelper.Get(uri, context.GetContentApiHeaders());
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
-            context[constants.responseScope] = constants.resultSummary;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
+            context[Constants.responseScope] = Constants.resultSummary;
         }
 
 
@@ -282,23 +282,23 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             string uri = context.GetContentUri(context.ReplaceTokensInString(p0));
             var response = RestHelper.Get(uri,context.GetContentApiHeaders());
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
-            context[constants.responseScope] = constants.resultSummary;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
+            context[Constants.responseScope] = Constants.resultSummary;
         }
 
         [Given(@"I make a request to the ""(.*)"" content API to retrive item (.*)")]
         public void GivenIMakeARequestToTheContentAPIToRetriveItem(string graph, int itemRef)
         {
             graph = graph.ToLower();
-            graph.Should().BeOneOf(new[] { constants.publish, constants.preview });
+            graph.Should().BeOneOf(new[] { Constants.publish, Constants.preview });
 
-            string uri = (graph == constants.publish ) ? context.GetUri(itemRef - 1) :
+            string uri = (graph == Constants.publish ) ? context.GetUri(itemRef - 1) :
                                                          context.GetDraftUri(itemRef - 1);
             var response = RestHelper.Get(uri, context.GetContentApiHeaders());
-            context[constants.responseStatus] = response.StatusCode;
-            context[constants.responseContent] = response.Content;
-            context[constants.responseScope] = constants.resultSingle;
+            context[Constants.responseStatus] = response.StatusCode;
+            context[Constants.responseContent] = response.Content;
+            context[Constants.responseScope] = Constants.resultSingle;
         }
 
 
@@ -306,7 +306,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I build the expected response for item (.*)")]
         public void WhenIBuildTheExpectedResponseForItem(int p0)
         {
-            bool singleResponse = (string)context[constants.responseScope] == constants.resultSingle;
+            bool singleResponse = (string)context[Constants.responseScope] == Constants.resultSingle;
             string json = "";
 
             if (singleResponse)
@@ -381,7 +381,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             //  check how many skills exist for occupations with related job profile
             var statementTemplate = (p0.ToLower().Equals("skills") ? cypher_skillWithRelatedJobProfile : cypher_occupationWithRelatedJobProfile );
             // var statementParameters = new Dictionary<string, object> { { "uri", context.Get<string>(keyGeneratedUri) } };
-            Neo4JHelper graphConnection = context.GetGraphConnection(constants.publish);
+            Neo4JHelper graphConnection = context.GetGraphConnection(Constants.publish);
             int numberOfRecords = graphConnection.GetRecordCount(statementTemplate, null);
 
             if (numberOfRecords < 1)
@@ -405,7 +405,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var statementTemplate = cypher_jobProfileUriFromOccupationName.Replace(tokenName, p0);
             try
             {
-                uri = context.GetGraphConnection(constants.publish).GetSingleRowAsDictionary(statementTemplate)["uri"];
+                uri = context.GetGraphConnection(Constants.publish).GetSingleRowAsDictionary(statementTemplate)["uri"];
             }
             catch (Exception e)
             {
@@ -472,7 +472,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheResponseMatchesTheCreatedItem()
         {
             var createdItem = context.GetDataItems().Last();
-            string responseJson = (string)context[constants.responseContent];
+            string responseJson = (string)context[Constants.responseContent];
             string itemJson = JsonConvert.SerializeObject(createdItem);
             itemJson = JsonHelper.AddPropertyToJsonString(itemJson,"_links", "[{}]");
 
@@ -492,7 +492,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 responses += $"{JsonConvert.SerializeObject(item)}{(lastItem ? "" : ",")}";
             }
             string itemJson = $"[{responses}]";
-            string responseJson = (string)context[constants.responseContent];
+            string responseJson = (string)context[Constants.responseContent];
 
             var result = JsonHelper.CompareJsonString(itemJson, responseJson);
             result.Should().BeTrue("Because the data returned should include all the created items");
@@ -619,7 +619,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             string message = "";
             string expectedResult = (string)context["expectedResult"];
 
-            bool match = JsonHelper.CompareJsonString(expectedResult, (string)context[constants.responseContent], out message);
+            bool match = JsonHelper.CompareJsonString(expectedResult, (string)context[Constants.responseContent], out message);
             match.Should().BeTrue(message);
         }
 
@@ -641,7 +641,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 }
             }
             string message = "";
-            bool match = JsonHelper.CompareJsonString(multilineText, (string)context[constants.responseContent], out message);
+            bool match = JsonHelper.CompareJsonString(multilineText, (string)context[Constants.responseContent], out message);
             match.Should().BeTrue(message);
 
         }
@@ -651,7 +651,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheResponseJsonHasCollectionWithAnItemMatching(string p0, string multilineText)
         {
             bool bMatch = false;
-            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[constants.responseContent]);
+            dynamic responseJson = JsonConvert.DeserializeObject<dynamic>((string)context[Constants.responseContent]);
             dynamic includedCollection = responseJson[p0];
             foreach ( var item in includedCollection)
             {
@@ -666,7 +666,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with element ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementRemovedMatches(string p0, string multilineText)
         {
-            string response = (string)context[constants.responseContent];
+            string response = (string)context[Constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
         }
@@ -674,7 +674,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response json with elements ""(.*)"" and ""(.*)"" removed matches:")]
         public void ThenTheResponseJsonWithElementsAndRemovedMatches(string p0, string p1, string multilineText)
         {
-            string response = (string)context[constants.responseContent];
+            string response = (string)context[Constants.responseContent];
             string strippedResonse = JsonHelper.RemovePropertyFromJsonString(response, p0);
             strippedResonse = JsonHelper.RemovePropertyFromJsonString(strippedResonse, p1);
             JsonHelper.CompareJsonString(multilineText, strippedResonse).Should().BeTrue();
@@ -685,7 +685,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheElementInTheCollectionHasDistinctValues(string p0, string p1)
         {
             Dictionary<string, string> distinctValues = new Dictionary<string, string>();
-            string response = (string)context[constants.responseContent];
+            string response = (string)context[Constants.responseContent];
             var collection = JsonHelper.GetCollectionPropertyFromJson(response, p1);
             
             foreach ( var item in collection)
@@ -706,20 +706,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the count of collection ""(.*)"" is (.*)")]
         public void ThenTheCountOfCollectionIs(string p0, int p1)
         {
-            string response = (string)context[constants.responseContent];
+            string response = (string)context[Constants.responseContent];
             JsonHelper.GetDocumentCountInCollection(response, p0).Should().Be(p1);
         }
 
         [Then(@"the response value for ""(.*)"" is an empty array")]
         public void ThenTheValueForIsAnEmptyArray(string p0)
         {
-            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[constants.responseContent]);
+            Occupation returnedOccupation = JsonConvert.DeserializeObject<Occupation>((string)context[Constants.responseContent]);
         }
 
         [Then(@"the response body includes the text:")]
         public void ThenTheResponseBodyIncludesTheText(string multilineText)
         {
-            string response = (string)context[constants.responseContent];
+            string response = (string)context[Constants.responseContent];
             bool check = response.Contains(multilineText);
             check.Should().BeTrue();
         }
@@ -728,13 +728,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the response code is (.*)")]
         public void ThenTheResponseCodeIs(int p0)
         {
-            context[constants.responseStatus].Should().Be(p0);
+            context[Constants.responseStatus].Should().Be(p0);
         }
 
         [Then(@"the the response message is (.*)")]
         public void ThenTheTheResponseMessageIs(string p0)
         {
-            context[constants.responseContent].Should().Be(p0);
+            context[Constants.responseContent].Should().Be(p0);
         }
     }
 }

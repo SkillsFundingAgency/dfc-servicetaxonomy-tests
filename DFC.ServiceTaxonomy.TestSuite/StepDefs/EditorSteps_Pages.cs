@@ -1,30 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using DFC.ServiceTaxonomy.TestSuite.PageObjects;
-using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Interfaces;
-using DFC.ServiceTaxonomy.TestSuite.Models;
-using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using System.Threading;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.PageObjects;
+
+using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
     [Binding]
     public sealed class EditorSteps_Pages
     {
-        private AddEditPage _addEditPage;
+        private readonly AddEditPage _addEditPage;
         private readonly ScenarioContext _scenarioContext;
 
         public EditorSteps_Pages(ScenarioContext scenarioContext)

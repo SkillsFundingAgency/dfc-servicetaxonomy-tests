@@ -160,8 +160,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 value = _scenarioContext.GetWebDriver().FindElement(GetLocatorBase(fieldName)).GetAttribute("value");
             }
             catch
-            {
-            }
+            { /**/ }
             return value;
 
         }
@@ -173,8 +172,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 value = _scenarioContext.GetWebDriver().FindElement(GetLocator(contentType, fieldType, fieldName)).GetAttribute("value");
             }
             catch
-            {
-            }
+            { /**/ }
             return value;
 
         }

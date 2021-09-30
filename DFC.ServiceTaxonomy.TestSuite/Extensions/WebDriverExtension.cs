@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DFC.ServiceTaxonomy.TestSuite;
+
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
@@ -12,7 +10,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     {
         private static TimeSpan maxWaitTime = new TimeSpan(0, 0, 30);
 
-        public static bool ClickButton (this IWebDriver driver, string buttonText)
+        public static bool ClickButton(this IWebDriver driver, string buttonText)
         {
             if (ClickButtonByText(driver, buttonText)) return true;
             if (ClickButtonById(driver, buttonText)) return true;
@@ -37,7 +35,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 driver.FindElement(By.XPath("//button[text()='" + buttonText + "']")).Click();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -51,13 +49,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 driver.FindElement(By.CssSelector(cssSelector)).Click();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
         }
 
-        
+
         public static bool ClickButtonByContainsText(this IWebDriver driver, string buttonText)
         {
             try
@@ -65,7 +63,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 driver.FindElement(By.XPath("//*[text()[contains(.,'" + buttonText + "')]]")).Click();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -78,7 +76,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 driver.FindElement(By.Id(buttonId)).Click();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -91,13 +89,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 driver.FindElement(By.LinkText(linkText)).Click();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
         }
 
-        public static bool SelectDropListItemById(this IWebDriver driver, string listId, string textValue )
+        public static bool SelectDropListItemById(this IWebDriver driver, string listId, string textValue)
         {
             try
             {
@@ -106,7 +104,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 selectElement.SelectByText(textValue);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -121,14 +119,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 Actions builder = new Actions(driver);
                 var mouseUp = builder.MoveToElement(element)
                                      .Click()
-                                     .Build(); ;
+                                     .Build();
                 mouseUp.Perform();
-           
+
                 element.SendKeys(textValue);
                 element.SendKeys(Keys.Enter);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -144,15 +142,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 if (elements.Count >= index)
                 {
                     Actions builder = new Actions(driver);
-                    var mouseUp = builder.MoveToElement(elements[index-1])
+                    var mouseUp = builder.MoveToElement(elements[index - 1])
                                          .Click()
-                                         .Build(); ;
+                                         .Build();
                     mouseUp.Perform();
 
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -166,10 +164,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 Actions builder = new Actions(driver);
                 var mouseUp = builder.MoveToElement(element)
                                      .Click()
-                                     .Build(); ;
+                                     .Build();
                 mouseUp.Perform();
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Console.WriteLine($"Unable to click on item: {id} - {e.Message}");
             }

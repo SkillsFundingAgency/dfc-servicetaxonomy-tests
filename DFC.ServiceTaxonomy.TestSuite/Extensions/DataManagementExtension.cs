@@ -1,16 +1,11 @@
-﻿using DFC.ServiceTaxonomy.TestSuite;
-using DFC.ServiceTaxonomy.TestSuite.Hooks;
-using DFC.ServiceTaxonomy.TestSuite.Helpers;
-using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using OpenQA.Selenium;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+
+using DFC.ServiceTaxonomy.SharedResources.Helpers;
+
 using TechTalk.SpecFlow;
-using AngleSharp.Dom;
-using System.Runtime.CompilerServices;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 {
@@ -72,18 +67,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
     DEALLOCATE CUR_INDEXTABS
     select Concat(@Deleted,' records deleted from ', @Tables,' tables');";
 
-        public static (bool,string) DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
+        public static (bool, string) DeleteSQLRecordsWithPrefix(this ScenarioContext context, string prefix)
         {
             string message;
             bool result;
             if (!context.GetEnv().SqlServerChecksEnabled)
-                return (true,string.Empty);
+                return (true, string.Empty);
             //todo error handling
             string sqlCommand = sql_ClearDownAllContentItemsOfType.Replace("@WHERECLAUSE@", "left(DisplayText," + prefix.Length + ") = '" + prefix + "'");
-            (result,message) = GetSQLConnection(context).ExecuteScalar(sqlCommand, null);
+            (result, message) = GetSQLConnection(context).ExecuteScalar(sqlCommand, null);
             CloseSQLConnection(context);
             // delete transaction has 3 parts hence affected record cout is 3 time larger than delete count
-            return (result,message);
+            return (result, message);
         }
 
         public static SQLServerHelper GetSQLConnection(this ScenarioContext context)
@@ -194,23 +189,22 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         //    return connections;
         //}
 
-        public static Neo4JHelper GetGraphConnection (this ScenarioContext context, string graph, int instance = 0)
+        public static Neo4JHelper GetGraphConnection(this ScenarioContext context, string graph, int instance = 0)
         {
             Neo4JHelper connection;
             string graphUri;
             string userId;
             string password;
             string graphName;
-            int connectionAttempts;
-            switch ( graph)
+            switch (graph)
             {
-                case constants.publish:
+                case Constants.publish:
                     graphUri = instance == 0 ? context.GetEnv().Neo4JUrl : context.GetEnv().Neo4JUrl1;
                     graphName = instance == 0 ? context.GetEnv().Neo4JGraphName : context.GetEnv().Neo4JGraphName1;
                     userId = context.GetEnv().Neo4JUid;
                     password = context.GetEnv().Neo4JPassword;
                     break;
-                case constants.preview:
+                case Constants.preview:
                     graphUri = instance == 0 ? context.GetEnv().Neo4JUrlDraft : context.GetEnv().Neo4JUrlDraft1;
                     graphName = instance == 0 ? context.GetEnv().Neo4JGraphNameDraft : context.GetEnv().Neo4JGraphNameDraft1;
                     userId = context.GetEnv().Neo4JUidDraft;
@@ -233,8 +227,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
                 context[contextRef] = connection;
             }
 
-            connectionAttempts = context.ContainsKey($"Attempts{contextRef}") ? (int)context[$"Attempts{contextRef}"] : 0;
             connection.Verify();
+            //int connectionAttempts;
+            //connectionAttempts = context.ContainsKey($"Attempts{contextRef}") ? (int)context[$"Attempts{contextRef}"] : 0;
             //if (!connection.Verify(connectionAttempts > maxAttempts))
             //{
             //    context.Remove(contextRef);
@@ -247,27 +242,27 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         public static bool DeleteGraphNodesWithPrefix(this ScenarioContext context, string fieldName, string prefix)
         {
             //todo error handling
-            string cypher = constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
-                                                                     .Replace("@FIELDNAME@",fieldName);
-            GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
+            string cypher = Constants.cypher_ClearDownItemsWithPrefix.Replace("@PREFIX@", prefix)
+                                                                     .Replace("@FIELDNAME@", fieldName);
+            GetGraphConnection(context, Constants.publish).ExecuteTableQuery(cypher, null);
+            GetGraphConnection(context, Constants.preview).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().Neo4JUrl1.Length > 0)
-                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
+                GetGraphConnection(context, Constants.publish, 1).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().Neo4JUrlDraft1.Length > 0)
-                GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
+                GetGraphConnection(context, Constants.preview, 1).ExecuteTableQuery(cypher, null);
             return true;
         }
 
         public static bool DeleteGraphNodesWithUri(this ScenarioContext context, string uri)
         {
             //todo error handling
-            string cypher = constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
-            GetGraphConnection(context, constants.publish).ExecuteTableQuery(cypher, null);
-            GetGraphConnection(context, constants.preview).ExecuteTableQuery(cypher, null);
+            string cypher = Constants.cypher_ClearDownItemsWithUri.Replace("@URI@", uri);
+            GetGraphConnection(context, Constants.publish).ExecuteTableQuery(cypher, null);
+            GetGraphConnection(context, Constants.preview).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().Neo4JUrl1.Length > 0)
-                GetGraphConnection(context, constants.publish, 1).ExecuteTableQuery(cypher, null);
+                GetGraphConnection(context, Constants.publish, 1).ExecuteTableQuery(cypher, null);
             if (context.GetEnv().Neo4JUrlDraft1.Length > 0)
-                GetGraphConnection(context, constants.preview, 1).ExecuteTableQuery(cypher, null);
+                GetGraphConnection(context, Constants.preview, 1).ExecuteTableQuery(cypher, null);
 
             return true;
         }
@@ -309,21 +304,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
 
         public static void StoreToken(this ScenarioContext context, string token, string value)
         {
-           var tokens = GetTokens(context);
-           if (!tokens.ContainsKey(token))
-           {
+            var tokens = GetTokens(context);
+            if (!tokens.ContainsKey(token))
+            {
                 tokens.Add(token, value);
-           }
-           else
-           {
+            }
+            else
+            {
                 tokens[token] = value;
-           }
-           context[constants.tokens] = tokens;
+            }
+            context[Constants.tokens] = tokens;
         }
 
         public static Dictionary<string, string> GetTokens(this ScenarioContext context)
         {
-            Dictionary<string, string> tokens = context.ContainsKey(constants.tokens) ? (Dictionary<String, string>)context[constants.tokens] : new Dictionary<string, string>();
+            Dictionary<string, string> tokens = context.ContainsKey(Constants.tokens) ? (Dictionary<string, string>)context[Constants.tokens] : new Dictionary<string, string>();
             return tokens;
         }
 
@@ -331,11 +326,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
         {
             var tokens = GetTokens(context);
             string newText = text;
-            foreach ( var token in tokens)
+            foreach (var token in tokens)
             {
                 newText = newText.Replace(token.Key, token.Value);
             }
             return newText;
         }
-     }
+    }
 }

@@ -1,9 +1,9 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
+﻿using System;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using TechTalk.SpecFlow;
 
 
@@ -11,7 +11,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class LogonScreen
     {
-        private ScenarioContext _scenarioContext;
+        private readonly ScenarioContext _scenarioContext;
 
         public LogonScreen(ScenarioContext context)
         {
@@ -37,7 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public StartPage SubmitLogonDetails ()
+        public StartPage SubmitLogonDetails()
         {
             Console.WriteLine("Attempt to logon");
             Console.WriteLine("----------------");
@@ -72,8 +72,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                Console.WriteLine(@"Logon failed:"+ e.Message);
-                throw e;
+                Console.WriteLine(@"Logon failed:" + e.Message);
+                throw;
             }
             Console.WriteLine($"Logon complete.\nURL is now: {_scenarioContext.GetWebDriver().Url}");
             return new StartPage(_scenarioContext);

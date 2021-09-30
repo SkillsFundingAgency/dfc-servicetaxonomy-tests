@@ -20,7 +20,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         const string confirmationMessageClone = "Successfully cloned.";
 
         #endregion
-        ScenarioContext _scenarioContext;
+        readonly ScenarioContext _scenarioContext;
 
         public ManageContent(ScenarioContext context)
         {
@@ -100,9 +100,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 _scenarioContext.GetWebDriver().ClickButton(".btn-secondary");
-                var element = _scenarioContext.GetWebDriver().FindElement(By.LinkText(action));
+                _scenarioContext.GetWebDriver().FindElement(By.LinkText(action));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -245,7 +245,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 returnValue = (elements.Count == 1);
             }
             catch
-            { }
+            { /**/ }
             return returnValue;
         }
     }
