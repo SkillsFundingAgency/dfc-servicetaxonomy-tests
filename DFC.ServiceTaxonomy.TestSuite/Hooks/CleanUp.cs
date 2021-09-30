@@ -63,7 +63,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
                 if (_scenarioContext.GetEnv().PipelineRun)
                 {
-                    TeardownDataWithPrefix(constants.testDataPrefix, prefixField);
+                    TeardownDataWithPrefix(Constants.testDataPrefix, prefixField);
                 }
             }
         }
@@ -133,14 +133,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
             //if (_scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.TestError)
             //{
             //}
-            if (_scenarioContext.ContainsKey(constants.featureFailure))
+            if (_scenarioContext.ContainsKey(Constants.featureFailure))
             {
                 string messageText = "Fatal error(s) detected in clean up:\n";
 
                 // cancel the rest of the feature run
-                _featureContext[constants.featureFailAll] = true;
+                _featureContext[Constants.featureFailAll] = true;
 
-                foreach (var message in (Dictionary<string, string>)_scenarioContext[constants.featureFailure])
+                foreach (var message in (Dictionary<string, string>)_scenarioContext[Constants.featureFailure])
                 {
                     Console.WriteLine($"Error: {message.Key} - {message.Value}");
                     messageText += $"  {message.Key} - {message.Value}";

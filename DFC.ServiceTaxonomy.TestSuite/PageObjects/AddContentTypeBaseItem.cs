@@ -1,13 +1,10 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Interfaces;
-using DFC.ServiceTaxonomy.TestSuite.Models;
+﻿using System;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
@@ -38,10 +35,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/div[4]/button")).Click();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Failed to create new content type called {name}.\nException: {e.message}");
             }
+
             Console.WriteLine($"new content type created called {name}");
             try
             {
@@ -69,69 +67,47 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
 
 
-        private bool SelectPart( String partName)
+        private void SelectPart(string partName)
         {
-            try
+            var element = _scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + partName + "')]/preceding-sibling::*"));
+            if (!element.Selected)
             {
-                var element = _scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + partName + "')]/preceding-sibling::*"));
-                if (!element.Selected)
-                {
-                    Console.WriteLine($"Attempt to select {partName}");
-                    Actions builder = new Actions(_scenarioContext.GetWebDriver());
-                    var mouseUp = builder.MoveToElement(element)
-                                             .Click()
-                                             .Build(); ;
-                    mouseUp.Perform();
-                }
-                else 
-                {
-                    Console.WriteLine($"{partName} already selected");
-                }
-
+                Console.WriteLine($"Attempt to select {partName}");
+                Actions builder = new Actions(_scenarioContext.GetWebDriver());
+                var mouseUp = builder.MoveToElement(element)
+                                         .Click()
+                                         .Build();
+                mouseUp.Perform();
             }
-            catch (Exception e)
+            else
             {
-               throw e;
+                Console.WriteLine($"{partName} already selected");
             }
-            return true;
         }
 
-        public bool EditPart(String contentType, String partName)
+        public bool EditPart(string contentType, string partName)
         {
-            try
-            {
-                var url = _scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
-               
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);
+            var url = _scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/" + contentType + "/ContentParts/" + partName.Replace(" ", "") + "Part/Edit";
 
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            _scenarioContext.GetWebDriver().Navigate().GoToUrl(url);
+
             return true;
         }
 
         public bool EditField(string contentType, string FieldName)
         {
-            try
-            {
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType + "/Fields/" + FieldName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType + "/Fields/" + FieldName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+
             return true;
         }
 
-        public AddContentTypeBaseItem AddField( string contentType, string displayName, string fieldType, string editorType = "")
+        public AddContentTypeBaseItem AddField(string contentType, string displayName, string fieldType, string editorType = "")
         {
             try
             {
                 // click Add button
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentTypes/AddFieldsTo/" + contentType + "?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
-          
+
                 // enter name
                 var textField = _scenarioContext.GetWebDriver().FindElement(By.Id("DisplayName"));
                 textField.Clear();
@@ -141,9 +117,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 _scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + fieldType + "')]")).Click();
 
                 // click Save button
-               _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Save']")).Click();
+                _scenarioContext.GetWebDriver().FindElement(By.XPath("//button[text()='Save']")).Click();
 
-                if ( editorType != null && editorType.Length > 0)
+                if (editorType != null && editorType.Length > 0)
                 {
                     // also set the editor type
                     SetFieldEditorType(contentType, displayName, editorType);
@@ -157,14 +133,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public AddContentTypeBaseItem SetFieldEditorType ( string contentType, string displayName, string editorType)
+        public AddContentTypeBaseItem SetFieldEditorType(string contentType, string displayName, string editorType)
         {
 
             //https://dfc-sit-stax-editor-as.azurewebsites.net/Admin/ContentParts/TestContentPicker1/Fields/Description/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2FTestContentPicker1
             try
             {
                 // click Add button
-                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType +"/Fields/" + displayName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
+                _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/ContentParts/" + contentType + "/Fields/" + displayName + "/Edit?returnUrl=%2FAdmin%2FContentTypes%2FEdit%2F" + contentType);
                 _scenarioContext.GetWebDriver().SelectDropListItemById("field-editor-select", editorType);
                 _scenarioContext.GetWebDriver().ClickButton("Save");
             }
@@ -176,7 +152,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public AddContentTypeBaseItem SelectBagContent (string parentContentType, string contentType)
+        public AddContentTypeBaseItem SelectBagContent(string parentContentType, string contentType)
         {
             try
             {
@@ -192,7 +168,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
-        public AddContentTypeBaseItem SelectContentPickerItems( string contentType)
+        public AddContentTypeBaseItem SelectContentPickerItems(string contentType)
         {
             try
             {
@@ -213,7 +189,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             try
             {
                 var cb = _scenarioContext.GetWebDriver().FindElement(By.Id(id));
-       
+
                 cb.SendKeys(" ");
             }
             catch (Exception e)

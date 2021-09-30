@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DFC.ServiceTaxonomy.TestSuite
+﻿namespace DFC.ServiceTaxonomy.TestSuite
 {
     public enum TeardownOption
     {
@@ -12,9 +8,9 @@ namespace DFC.ServiceTaxonomy.TestSuite
         UI,
         All
     }
-    public static class constants
-    {
 
+    public static class Constants
+    {
         // scenario context storage tags
         public const string tokens = "tokens";
         public const string dataItems = "dataItems";

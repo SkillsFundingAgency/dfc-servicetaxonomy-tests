@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
     [Binding]
-    public sealed class featureControlSteps
+    public sealed class FeatureControlSteps
     {
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
         private readonly ScenarioContext _scenarioContext;
         private readonly FeatureContext _FeatureContext;
 
-        public featureControlSteps(ScenarioContext context, FeatureContext fContext)
+        public FeatureControlSteps(ScenarioContext context, FeatureContext fContext)
         {
             _scenarioContext = context;
             _FeatureContext = fContext;

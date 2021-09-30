@@ -35,6 +35,7 @@ Scenario: Publish the page
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__My Test Page"
 	And I select the first item that is found
+	And I select the content tab
 	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully

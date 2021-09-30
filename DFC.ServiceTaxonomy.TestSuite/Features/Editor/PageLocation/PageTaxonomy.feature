@@ -92,6 +92,7 @@ Scenario: Attempt to publish edits to a page with a full url that conflicts with
 	And I Enter the following form data for "Page"
 	| URL Name                 |
 	| __PREFIX__the breadcrumb |
+	And I select the content tab
 	And I add a comment before submitting for review "comment "
 	When I publish and continue
 	Then the error "This URL has already been used as a Page Location" is displayed

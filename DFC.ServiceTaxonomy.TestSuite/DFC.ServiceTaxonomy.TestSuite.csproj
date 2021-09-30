@@ -119,30 +119,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Features\API\DraftContentApi.feature.cs">
-      <DependentUpon>DraftContentApi.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\page-location.feature.cs">
-      <DependentUpon>page-location.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\8. pages-new_draft_content_on_new_draft_of_page.feature.cs">
-      <DependentUpon>8. pages-new_draft_content_on_new_draft_of_page.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\7. pages-new_draft_content_on_published_page.feature.cs">
-      <DependentUpon>7. pages-new_draft_content_on_published_page.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\6. pages-new_draft_content_on_draft_page.feature.cs">
-      <DependentUpon>6. pages-new_draft_content_on_draft_page.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\5. pages-published_content_on_published_page.feature.cs">
-      <DependentUpon>5. pages-published_content_on_published_page.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Editor\Pages\4. pages-published_content_on_draft_page.feature.cs">
-      <DependentUpon>4. pages-published_content_on_draft_page.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="appsettings.local.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

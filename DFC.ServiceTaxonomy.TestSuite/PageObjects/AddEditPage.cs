@@ -1,12 +1,11 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Interfaces;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium.Support.PageObjects;
-using System;
+﻿using System;
 using System.Threading;
-using System.Collections.Generic;
-using System.Text;
+
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.Interfaces;
+
+using OpenQA.Selenium;
+
 using TechTalk.SpecFlow;
 
 
@@ -14,33 +13,27 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class AddEditPage : AddContentItemBase, IEditorContentItem
     {
-        private const string _contentType = "Page";
-        ScenarioContext scenarioContext;
+        readonly ScenarioContext scenarioContext;
 
         public AddEditPage(ScenarioContext context) : base(context)
         {
             scenarioContext = context;
         }
 
-        new private By GetLocator( String field)
+        new private By GetLocator(String field)
         {
-           
-            switch (field)
+            return field switch
             {
-                case "RedirectLocations":
-                    return By.Id($"Page_RedirectLocations_Text");
-                case "Description":
-                    return By.Id("Page_Description_Text");
-                case "URL Name":
-                    return By.Id("PageLocationPart_UrlName");
-                default:
-                    return null;
-            }
+                "RedirectLocations" => By.Id($"Page_RedirectLocations_Text"),
+                "Description" => By.Id("Page_Description_Text"),
+                "URL Name" => By.Id("PageLocationPart_UrlName"),
+                _ => null,
+            };
         }
 
-        new public void SetFieldValue( string field, string value)
+        new public void SetFieldValue(string field, string value)
         {
-            if (!EnterText(field, value, GetLocator(field)) )
+            if (!EnterText(field, value, GetLocator(field)))
                 base.SetFieldValue(field, value);
         }
 
@@ -62,7 +55,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             try
             {
-                scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + location + "')]")).Click(); ;
+                scenarioContext.GetWebDriver().FindElement(By.XPath("//label[@class='custom-control-label' and contains(text(),'" + location + "')]")).Click();
             }
             catch (Exception e)
             {
@@ -71,19 +64,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             return true;
         }
-        
-        public AddEditPage SelectTab(string tabName)
-        {
-            try
-            {
-                scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath($"//a[text()='{tabName}']")).Click();
-            }
-            catch (Exception e)
-            {
-                throw new Exception($"Unable to select tab {tabName}- {e.Message}");
-            }
-            return this;
-        }
 
         public AddEditPage OpenWidgetMenu()
         {
@@ -91,7 +71,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             {
                 scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath("//button[@title='Add Widget']")).Click();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Unable to open widget menu");
             }
