@@ -1798,6 +1798,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _addContentItemBase.EnterComment(comment);
         }
+
+
+        [Given(@"I select the content tab")]
+        public void GivenISelectTheContentTab()
+        {
+            _addContentItemBase.SelectTab("Content");
+        }
         #endregion
     }
 }

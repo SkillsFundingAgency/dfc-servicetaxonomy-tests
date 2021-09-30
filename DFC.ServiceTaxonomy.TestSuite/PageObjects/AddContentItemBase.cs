@@ -338,12 +338,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void EnterComment(string comment)
         {
-            if (_scenarioContext.TryGetValue("contentType", out string value) && value.Equals("Page"))
-            {
-                SelectTab("Content");
-                _scenarioContext.GetWebDriver().WaitUntilElementFound(By.Id("AuditTrailPart_Comment"));
-            }
-            var commentInput = _scenarioContext.GetWebDriver().FindElement(By.Id("AuditTrailPart_Comment"));
+            var commentInput = _scenarioContext.GetWebDriver().WaitUntilElementFound(By.Id("AuditTrailPart_Comment"));
             commentInput.SendKeys(comment);
         }
 
@@ -355,7 +350,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             }
             catch (Exception e)
             {
-                throw new Exception($"Unable to select tab {tabName}- {e.Message}");
+                throw new Exception($"Unable to select tab {tabName} - {e.Message}");
             }
         }
 
