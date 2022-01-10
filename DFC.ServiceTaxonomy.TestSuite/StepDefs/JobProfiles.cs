@@ -18,7 +18,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly SideNavigator _sideNavigator;
         private readonly JobProfileSpecialism _jobProfileSpecialism;
         private readonly JobProfileCategory _jobProfileCategory;
-
+        private readonly SocCode _socCode;
+        private readonly WorkingHoursDetail _workingHoursDetail;
+        private readonly WorkingPatternDetail _workingPatternDetail;
+        private readonly WorkingPatterns _workingPatterns;
+        private readonly UniversityEntryRequirements _universityEntryRequirements;
+        private readonly UniversityRequirements _universityRequirements;
+        private readonly UniversityLinks _universityLinks;
+        private readonly CollegeEntryRequirements _collegeEntryRequirements;
 
         public JobProfiles(ScenarioContext scenarioContext)
         {
@@ -26,6 +33,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _sideNavigator = new SideNavigator(scenarioContext);
             _jobProfileSpecialism = new JobProfileSpecialism(scenarioContext);
             _jobProfileCategory = new JobProfileCategory(scenarioContext);
+            _socCode = new SocCode(scenarioContext);
+            _workingHoursDetail = new WorkingHoursDetail(scenarioContext);
+            _workingPatternDetail = new WorkingPatternDetail(scenarioContext);
+            _workingPatterns = new WorkingPatterns(scenarioContext);
+            _universityEntryRequirements = new UniversityEntryRequirements(scenarioContext);
+            _universityRequirements = new UniversityRequirements(scenarioContext);
+            _universityLinks = new UniversityLinks(scenarioContext);
+            _collegeEntryRequirements = new CollegeEntryRequirements(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -56,6 +71,86 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _sideNavigator.ClickJobProfileCategory();
                             _jobProfileSpecialism.EnterTitle("JPC");
                             _jobProfileCategory.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "SOC code":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'SOC code')]"));
+                            _sideNavigator.ClickSocCode();
+                            _jobProfileSpecialism.EnterTitle("SC");
+                            _socCode.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Working hours detail":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working hours detail')]"));
+                            _sideNavigator.ClickWorkingHoursDetail();
+                            _jobProfileSpecialism.EnterTitle("WHD");
+                            _workingHoursDetail.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Working pattern detail":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working pattern detail')]"));
+                            _sideNavigator.ClickWorkingPatternDetail();
+                            _jobProfileSpecialism.EnterTitle("WPD");
+                            _workingPatternDetail.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Working patterns":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working patterns')]"));
+                            _sideNavigator.ClickWorkingPatterns();
+                            _jobProfileSpecialism.EnterTitle("WP");
+                            _workingPatterns.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "University entry requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University entry requirements')]"));
+                            _sideNavigator.ClickUniversityEntryRequirements();
+                            _jobProfileSpecialism.EnterTitle("UER");
+                            _universityEntryRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "University requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University requirements')]"));
+                            _sideNavigator.ClickUniversityRequirements();
+                            _jobProfileSpecialism.EnterTitle("UR");
+                            _universityRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "University link":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University link')]"));
+                            _sideNavigator.ClickUniversityLinks();
+                            _jobProfileSpecialism.EnterTitle("UL");
+                            _universityLinks.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "College entry requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College entry requirements')]"));
+                            _sideNavigator.ClickCollegeEntryRequirements();
+                            _jobProfileSpecialism.EnterTitle("CER");
+                            _collegeEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;
