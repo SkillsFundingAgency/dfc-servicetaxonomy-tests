@@ -28,35 +28,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _jobProfileCategory = new JobProfileCategory(scenarioContext);
         }
 
-        [Given(@"I create (.*) '(.*)' Content Types")]
-        public void GivenICreateContentTypeS(int numberOfContentTypes, string contentType)
-        {
-            switch (contentType)
-            {
-                case "Job profile specialism":
-                    for (int i = 0; i < numberOfContentTypes; i++)
-                    {
-                        _sideNavigator.ClickSideNavNew();
-                        WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
-                        _sideNavigator.ClickJobProfileSpecialism();
-                        _jobProfileSpecialism.EnterTitle("JPS");
-                        _jobProfileSpecialism.EnterDescription("This is the test for content item with title ");
-                        _jobProfileSpecialism.ClickSaveDraftAndContinue();
-                    }
-                    break;
-                case "Job profile category":
-                    for (int i = 0; i < numberOfContentTypes; i++)
-                    {
-                        WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile category')]"));
-                        _sideNavigator.ClickJobProfileCategory();
-                        _jobProfileSpecialism.EnterTitle("JPC");
-                        _jobProfileCategory.EnterDescription("This is the test for content item with title ");
-                        _jobProfileSpecialism.ClickSaveDraftAndContinue();
-                    }
-                    break;
-            }
-        }
-
         [Given(@"I create the following number of Content Types")]
         public void GivenICreateTheFollowingNumberOfContentTypes(Table table)
         {
