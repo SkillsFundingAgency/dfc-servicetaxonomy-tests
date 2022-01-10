@@ -28,6 +28,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(elementId));
         }
 
+        public static IWebElement WaitElementToBeClickable(this IWebDriver driver, By elementLocator)
+        {
+            var wait = new WebDriverWait(driver, maxWaitTime);
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(elementLocator));
+        }
+
         public static bool ClickButtonByText(this IWebDriver driver, string buttonText)
         {
             try

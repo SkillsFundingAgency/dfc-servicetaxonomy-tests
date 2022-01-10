@@ -300,7 +300,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
-            _logonScreen.SubmitLogonDetails();
+             _logonScreen.SubmitLogonDetails();
         }
 
         [Given(@"I Navigate to ""(.*)""")]

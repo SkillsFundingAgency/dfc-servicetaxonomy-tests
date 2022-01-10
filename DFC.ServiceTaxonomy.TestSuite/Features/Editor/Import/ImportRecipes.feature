@@ -8,13 +8,13 @@ Feature: ImportRecipes
 #consider using single run background statement + feature level teardown to set up data 
 
 
-Background: 
-	Given I only want to run this once with this feature
-	#Given I import the test recipe files
-	Given I logon to the editor
-	Given I prepare the test recipes
-	And I load the test recipes
-	And I have completed the run once section
+#Background: 
+#	Given I only want to run this once with this feature
+#	#Given I import the test recipe files
+#	Given I logon to the editor
+#	Given I prepare the test recipes
+#	And I load the test recipes
+#	And I have completed the run once section
 
 
 @Editor
