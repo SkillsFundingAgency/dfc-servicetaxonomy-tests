@@ -32,6 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenICreateTheFollowingNumberOfContentTypes(Table table)
         {
             var contents = table.CreateSet<ContentTypes>();
+            string descriptionText = "This is the test for content item with title ";
 
             foreach (ContentTypes contentType in contents)
             {
@@ -44,7 +45,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
                             _sideNavigator.ClickJobProfileSpecialism();
                             _jobProfileSpecialism.EnterTitle("JPS");
-                            _jobProfileSpecialism.EnterDescription("This is the test for content item with title ");
+                            _jobProfileSpecialism.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;
@@ -54,7 +55,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile category')]"));
                             _sideNavigator.ClickJobProfileCategory();
                             _jobProfileSpecialism.EnterTitle("JPC");
-                            _jobProfileCategory.EnterDescription("This is the test for content item with title ");
+                            _jobProfileCategory.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;
