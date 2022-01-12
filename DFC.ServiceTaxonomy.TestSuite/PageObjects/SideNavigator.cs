@@ -51,51 +51,61 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void ClickJobProfileCategory()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile category')]"));
             linkJobProfileCategory.Click();
         }
 
         public void ClickSocCode()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'SOC code')]"));
             linkSocCode.Click();
         }
 
         public void ClickWorkingHoursDetail()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working hours detail')]"));
             linkWorkingHoursDetail.Click();
         }
 
         public void ClickWorkingPatternDetail()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working pattern detail')]"));
             linkWorkingPatternDetail.Click();
         }
 
         public void ClickWorkingPatterns()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working patterns')]"));
             linkWorkingPatterns.Click();
         }
 
         public void ClickUniversityEntryRequirements()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University entry requirements')]"));
             linkUniversityEntryRequirements.Click();
         }
 
         public void ClickUniversityRequirements()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University requirements')]"));
             linkUniversityRequirements.Click();
         }
 
         public void ClickUniversityLinks()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University link')]"));
             linkUniversityLinks.Click();
         }
 
         public void ClickCollegeEntryRequirements()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College entry requirements')]"));
             linkCollegeEntryRequirements.Click();
         }
 
         public void ClickCollegeRequirements()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College requirements')]"));
             linkCollegeRequirements.Click();
         }
 

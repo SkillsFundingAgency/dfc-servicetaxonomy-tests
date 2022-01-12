@@ -4,27 +4,28 @@ Feature: JobProfilesUserActions
 Background:
 	Given I logon to the editor
 	And I create the following number of Content Types
-	| Content Type                  | number |
-	| Job profile specialism        | 1      |
-	#| Job profile category          | 1      |
-	#| SOC code                      | 2      |
-	#| Working hours detail          | 1      |
-	#| Working pattern detail        | 1      |
-	#| Working patterns              | 1      |
-	#| University entry requirements | 1      |
-	#| University requirements | 1      |
-	#| University link | 1      |
-	#| College entry requirements | 1      |
-	#| College requirements | 1      |
-	#| College link | 1      |
-	#| Apprenticeship entry requirements | 1      |
-	#| Apprenticeship requirements | 1      |
-	#| Apprenticeship link | 1      |
-	#| Registration| 1      |
-	#| Restriction | 1      |
-	#| Digital skills | 1      |
-	| Location | 1      |
-	| Environment| 1      |
-	| Uniform | 1      |
+	| Content Type                      | number |
+	| Job profile specialism            | 2      |
+	| Job profile category              | 2      |
+	| SOC code                          | 2      |
+	| Working hours detail              | 2      |
+	| Working pattern detail            | 2      |
+	| Working patterns                  | 2      |
+	| University entry requirements     | 2      |
+	| University requirements           | 2      |
+	| University link                   | 2      |
+	| College entry requirements        | 2      |
+	| College requirements              | 2      |
+	| College link                      | 2      |
+	| Apprenticeship entry requirements | 2      |
+	| Apprenticeship requirements       | 2      |
+	| Apprenticeship link               | 2      |
+	| Registration                      | 2      |
+	| Restriction                       | 2      |
+	| Digital skills                    | 2      |
+	| Location                          | 2      |
+	| Environment                       | 2      |
+	| Uniform                           | 2      |
 
 Scenario: Add Job Profile Content Item
+	#And I start a new Job Profile type

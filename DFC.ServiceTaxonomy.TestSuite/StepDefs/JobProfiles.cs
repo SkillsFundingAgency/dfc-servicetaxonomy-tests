@@ -78,7 +78,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickSideNavNew();
-                            //WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
                             _sideNavigator.ClickJobProfileSpecialism();
                             _jobProfileSpecialism.EnterTitle("JPS");
                             _jobProfileSpecialism.EnterDescription(descriptionText);
@@ -88,7 +87,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "Job profile category":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile category')]"));
                             _sideNavigator.ClickJobProfileCategory();
                             _jobProfileSpecialism.EnterTitle("JPC");
                             _jobProfileCategory.EnterDescription(descriptionText);
@@ -98,7 +96,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "SOC code":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'SOC code')]"));
                             _sideNavigator.ClickSocCode();
                             _jobProfileSpecialism.EnterTitle("SC");
                             _socCode.EnterDescription(descriptionText);
@@ -108,7 +105,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "Working hours detail":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working hours detail')]"));
                             _sideNavigator.ClickWorkingHoursDetail();
                             _jobProfileSpecialism.EnterTitle("WHD");
                             _workingHoursDetail.EnterDescription(descriptionText);
@@ -118,7 +114,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "Working pattern detail":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working pattern detail')]"));
                             _sideNavigator.ClickWorkingPatternDetail();
                             _jobProfileSpecialism.EnterTitle("WPD");
                             _workingPatternDetail.EnterDescription(descriptionText);
@@ -128,7 +123,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "Working patterns":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Working patterns')]"));
                             _sideNavigator.ClickWorkingPatterns();
                             _jobProfileSpecialism.EnterTitle("WP");
                             _workingPatterns.EnterDescription(descriptionText);
@@ -138,7 +132,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "University entry requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University entry requirements')]"));
                             _sideNavigator.ClickUniversityEntryRequirements();
                             _jobProfileSpecialism.EnterTitle("UER");
                             _universityEntryRequirements.EnterDescription(descriptionText);
@@ -148,7 +141,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "University requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University requirements')]"));
+                            
                             _sideNavigator.ClickUniversityRequirements();
                             _jobProfileSpecialism.EnterTitle("UR");
                             _universityRequirements.EnterDescription(descriptionText);
@@ -158,7 +151,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "University link":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'University link')]"));
                             _sideNavigator.ClickUniversityLinks();
                             _jobProfileSpecialism.EnterTitle("UL");
                             _universityLinks.EnterDescription(descriptionText);
@@ -168,7 +160,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "College entry requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College entry requirements')]"));
                             _sideNavigator.ClickCollegeEntryRequirements();
                             _jobProfileSpecialism.EnterTitle("CER");
                             _collegeEntryRequirements.EnterDescription(descriptionText);
@@ -178,7 +169,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "College requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College requirements')]"));
+                            
                             _sideNavigator.ClickCollegeRequirements();
                             _jobProfileSpecialism.EnterTitle("CR");
                             _collegeRequirements.EnterDescription(descriptionText);
