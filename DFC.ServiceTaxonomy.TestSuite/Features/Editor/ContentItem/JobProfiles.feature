@@ -21,7 +21,10 @@ Background:
 	#| Apprenticeship requirements | 1      |
 	#| Apprenticeship link | 1      |
 	#| Registration| 1      |
-	| Restriction | 1      |
+	#| Restriction | 1      |
 	#| Digital skills | 1      |
+	| Location | 1      |
+	| Environment| 1      |
+	| Uniform | 1      |
 
 Scenario: Add Job Profile Content Item

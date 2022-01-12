@@ -34,6 +34,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly Registration _registration;
         private readonly Restriction _restriction;
         private readonly DigitalSkills _digitalSkills;
+        private readonly Location _location;
+        private readonly PageObjects.Environment _environment;
+        private readonly Uniform _uniform;
 
         public JobProfiles(ScenarioContext scenarioContext)
         {
@@ -56,6 +59,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _registration = new Registration(scenarioContext);
             _restriction = new Restriction(scenarioContext);
             _digitalSkills = new DigitalSkills(scenarioContext);
+            _location = new Location(scenarioContext);
+            _environment = new PageObjects.Environment(scenarioContext);
+            _uniform = new Uniform(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -239,6 +245,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _sideNavigator.ClickDigitalSkills();
                             _digitalSkills.EnterTitle("DS");
                             _digitalSkills.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Location":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickLocation();
+                            _jobProfileSpecialism.EnterTitle("Loc");
+                            _location.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Environment":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickEnvironment();
+                            _jobProfileSpecialism.EnterTitle("Env");
+                            _environment.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Uniform":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickUniform();
+                            _jobProfileSpecialism.EnterTitle("Uni");
+                            _uniform.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;

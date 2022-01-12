@@ -34,6 +34,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement linkRegistration => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Registration')]"));
         IWebElement linkRestriction => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Restriction')]"));
         IWebElement linkDigitalSkills => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Digital skills')]"));
+        IWebElement linkLocation => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Location')]"));
+        IWebElement linkEnvironment => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Environment')]"));
+        IWebElement linkUniform => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Uniform')]"));
 
         public void ClickSideNavNew()
         {
@@ -136,6 +139,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Digital skills')]"));
             linkDigitalSkills.Click();
+        }
+
+        public void ClickLocation()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Location')]"));
+            linkLocation.Click();
+        }
+
+        public void ClickEnvironment()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Environment')]"));
+            linkEnvironment.Click();
+        }
+
+        public void ClickUniform()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Uniform')]"));
+            linkUniform.Click();
         }
 
     }
