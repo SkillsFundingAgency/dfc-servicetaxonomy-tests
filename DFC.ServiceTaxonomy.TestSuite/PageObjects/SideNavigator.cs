@@ -26,6 +26,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement linkUniversityRequirements => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'University requirements')]"));
         IWebElement linkUniversityLinks => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'University link')]"));
         IWebElement linkCollegeEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'College entry requirements')]"));
+        IWebElement linkCollegeRequirements => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'College requirements')]"));
+        IWebElement linkCollegeLink => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'College link')]"));
+        IWebElement linkApprenticeshipEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Apprenticeship entry requirements')]"));
+        IWebElement linkApprenticeshipRequirements => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Apprenticeship requirements')]"));
+        IWebElement linkApprenticeshipLink => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Apprenticeship link')]"));
+        IWebElement linkRegistration => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Registration')]"));
+        IWebElement linkRestriction => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Restriction')]"));
+        IWebElement linkDigitalSkills => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Digital skills')]"));
 
         public void ClickSideNavNew()
         {
@@ -34,6 +42,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void ClickJobProfileSpecialism()
         {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
             linkJobProfileSpecialism.Click();
         }
 
@@ -80,6 +89,53 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public void ClickCollegeEntryRequirements()
         {
             linkCollegeEntryRequirements.Click();
+        }
+
+        public void ClickCollegeRequirements()
+        {
+            linkCollegeRequirements.Click();
+        }
+
+        public void ClickCollegeLink()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College link')]"));
+            linkCollegeLink.Click();
+        }
+
+        public void ClicklinkApprenticeshipEntryRequirements()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Apprenticeship entry requirements')]"));
+            linkApprenticeshipEntryRequirements.Click();
+        }
+
+        public void ClicklinkApprenticeshipRequirements()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Apprenticeship requirements')]"));
+            linkApprenticeshipRequirements.Click();
+        }
+
+        public void ClickApprenticeshipLink()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Apprenticeship link')]"));
+            linkApprenticeshipLink.Click();
+        }
+
+        public void ClickRegistration()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Registration')]"));
+            linkRegistration.Click();
+        }
+
+        public void ClickRestriction()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Restriction')]"));
+            linkRestriction.Click();
+        }
+
+        public void ClickDigitalSkills()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Digital skills')]"));
+            linkDigitalSkills.Click();
         }
 
     }

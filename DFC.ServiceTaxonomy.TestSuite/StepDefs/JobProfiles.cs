@@ -26,6 +26,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly UniversityRequirements _universityRequirements;
         private readonly UniversityLinks _universityLinks;
         private readonly CollegeEntryRequirements _collegeEntryRequirements;
+        private readonly CollegeRequirements _collegeRequirements;
+        private readonly CollegeLink _collegeLink;
+        private readonly ApprenticeshipEntryRequirements _apprenticeshipEntryRequirements;
+        private readonly ApprenticeshipRequirements _apprenticeshipRequirements;
+        private readonly ApprenticeshipLink _apprenticeshipLink;
+        private readonly Registration _registration;
+        private readonly Restriction _restriction;
+        private readonly DigitalSkills _digitalSkills;
 
         public JobProfiles(ScenarioContext scenarioContext)
         {
@@ -41,6 +49,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _universityRequirements = new UniversityRequirements(scenarioContext);
             _universityLinks = new UniversityLinks(scenarioContext);
             _collegeEntryRequirements = new CollegeEntryRequirements(scenarioContext);
+            _collegeRequirements = new CollegeRequirements(scenarioContext);
+            _collegeLink = new CollegeLink(scenarioContext);
+            _apprenticeshipEntryRequirements = new ApprenticeshipEntryRequirements(scenarioContext);
+            _apprenticeshipLink = new ApprenticeshipLink(scenarioContext);
+            _registration = new Registration(scenarioContext);
+            _restriction = new Restriction(scenarioContext);
+            _digitalSkills = new DigitalSkills(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -57,7 +72,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickSideNavNew();
-                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
+                            //WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile specialism')]"));
                             _sideNavigator.ClickJobProfileSpecialism();
                             _jobProfileSpecialism.EnterTitle("JPS");
                             _jobProfileSpecialism.EnterDescription(descriptionText);
@@ -151,6 +166,79 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _sideNavigator.ClickCollegeEntryRequirements();
                             _jobProfileSpecialism.EnterTitle("CER");
                             _collegeEntryRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "College requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'College requirements')]"));
+                            _sideNavigator.ClickCollegeRequirements();
+                            _jobProfileSpecialism.EnterTitle("CR");
+                            _collegeRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break; 
+                    case "College link":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickCollegeLink();
+                            _jobProfileSpecialism.EnterTitle("CL");
+                            _collegeLink.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Apprenticeship entry requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClicklinkApprenticeshipEntryRequirements();
+                            _jobProfileSpecialism.EnterTitle("AER");
+                            _apprenticeshipEntryRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Apprenticeship requirements":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClicklinkApprenticeshipRequirements();
+                            _jobProfileSpecialism.EnterTitle("AR");
+                            _apprenticeshipRequirements.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Apprenticeship link":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickApprenticeshipLink();
+                            _jobProfileSpecialism.EnterTitle("AL");
+                            _apprenticeshipLink.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Registration":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickRegistration();
+                            _jobProfileSpecialism.EnterTitle("Reg");
+                            _registration.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Restriction":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickRestriction();
+                            _jobProfileSpecialism.EnterTitle("Res");
+                            _restriction.EnterDescription(descriptionText);
+                            _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                        }
+                        break;
+                    case "Digital skills":
+                        for (int i = 0; i < contentType.number; i++)
+                        {
+                            _sideNavigator.ClickDigitalSkills();
+                            _digitalSkills.EnterTitle("DS");
+                            _digitalSkills.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;

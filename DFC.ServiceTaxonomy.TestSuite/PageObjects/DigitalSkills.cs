@@ -8,18 +8,17 @@ using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
-    class JobProfileSpecialism
+    class DigitalSkills
     {
         private ScenarioContext _scenarioContext;
-        public JobProfileSpecialism(ScenarioContext context) 
+        public DigitalSkills(ScenarioContext context)
         {
             _scenarioContext = context;
         }
 
-        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfileSpecialism_Description_Text"));
-        IWebElement btnSaveDraftAndContinue => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".draft-continue"));
-        
+        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#TitlePart_Title"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#Digitalskills_Description_Text"));
+
         public void EnterTitle(string contentItemInitials)
         {
             fldTitle.SendKeys("Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString());
@@ -30,11 +29,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             var title = fldTitle.GetAttribute("value");
             fldDescription.SendKeys(description + title);
         }
-
-        public void ClickSaveDraftAndContinue()
-        {
-            btnSaveDraftAndContinue.Click();
-        }
-
     }
 }
