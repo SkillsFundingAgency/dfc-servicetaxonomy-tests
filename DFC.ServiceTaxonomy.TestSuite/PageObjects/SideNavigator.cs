@@ -37,6 +37,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement linkLocation => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Location')]"));
         IWebElement linkEnvironment => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Environment')]"));
         IWebElement linkUniform => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Uniform')]"));
+        IWebElement linkJobProfile => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile')]"));
 
         public void ClickSideNavNew()
         {
@@ -167,6 +168,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Uniform')]"));
             linkUniform.Click();
+        }
+
+        public void ClickJobProfile()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile')]"));
+            linkJobProfile.Click();
         }
 
     }
