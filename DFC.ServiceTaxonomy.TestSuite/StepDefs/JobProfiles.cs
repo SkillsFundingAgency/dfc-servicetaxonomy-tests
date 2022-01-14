@@ -40,6 +40,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly PageObjects.Environment _environment;
         private readonly Uniform _uniform;
         private readonly MetaDataTab _metaDataTab;
+        private readonly HeaderTab _headerTab;
 
 
         public JobProfiles(ScenarioContext scenarioContext)
@@ -68,6 +69,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _environment = new PageObjects.Environment(scenarioContext);
             _uniform = new Uniform(scenarioContext);
             _metaDataTab = new MetaDataTab(scenarioContext);
+            _headerTab = new HeaderTab(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -319,10 +321,78 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
         [Given(@"I select option ""(.*)"" from the Related Careers Profiles dropdown field")]
-        public void GivenISelectOptionFromTheRelatedCareersProfilesDropdownField(string selectionRelatedCareersProfiles)
+        public void GivenISelectOptionFromTheRelatedCareersProfilesDropdownField(string relatedCareersProfiles)
         {
-            _metaDataTab.SelectRelatedCareersProfiles(selectionRelatedCareersProfiles);
+            _metaDataTab.SelectRelatedCareersProfiles(relatedCareersProfiles);
         }
+
+        /*HEADER TAB*/
+        [Given(@"I enter ""(.*)"" into the Alternative title field")]
+        public void GivenIEnterIntoTheAlternativeTitleField(string alternativeTitle)
+        {
+            _headerTab.EnterAlternativeTitle(alternativeTitle);
+        }
+
+        [Given(@"I select option ""(.*)"" from the Hidden Alternative Title dropdown field")]
+        public void GivenISelectOptionFromTheHiddenAlternativeTitleDropdownField(string optionHiddenAlternative)
+        {
+            _headerTab.SelectHiddenAlternativeTitle(optionHiddenAlternative);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Widget content title field")]
+        public void GivenIEnterIntoTheWidgetContentTitleField(string widgetContentTitle)
+        {
+            _headerTab.EntertWidgetContentTitle(widgetContentTitle);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Overview field")]
+        public void GivenIEnterIntoTheOverviewField(string overview)
+        {
+            _headerTab.EnterOverview(overview);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Salary starter per year field")]
+        public void GivenIEnterIntoTheSalaryStarterPerYearField(string salaryStarterPerYear)
+        {
+            _headerTab.EnterSalaryStarter(salaryStarterPerYear);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Salary experienced per year field")]
+        public void GivenIEnterIntoTheSalaryExperiencedPerYearField(string salaryExperiencedPerYear)
+        {
+            _headerTab.EnterSalaryExperienced(salaryExperiencedPerYear);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Minimum hours field")]
+        public void GivenIEnterIntoTheMinimumHoursField(string minimumHours)
+        {
+            _headerTab.EnterMinimumHours(minimumHours);
+        }
+
+        [Given(@"I enter ""(.*)"" into the Maximum hours field")]
+        public void GivenIEnterIntoTheMaximumHoursField(string maximumHours)
+        {
+            _headerTab.EnterMaximumHours(maximumHours);
+        }
+
+        [Given(@"I select option ""(.*)"" from the Working hours details dropdown field")]
+        public void GivenISelectOptionFromTheWorkingHoursDetailsDropdownField(string optionWorkingHoursDetails)
+        {
+            _headerTab.SelectWorkingHoursDetails(optionWorkingHoursDetails);
+        }
+
+        [Given(@"I select option ""(.*)"" from the Working pattern dropdown field")]
+        public void GivenISelectOptionFromTheWorkingPatternDropdownField(string optionWorkingPattern)
+        {
+            _headerTab.SelectWorkingPattern(optionWorkingPattern);
+        }
+
+        [Given(@"I select option ""(.*)"" from the Working pattern details dropdown field")]
+        public void GivenISelectOptionFromTheWorkingPatternDetailsDropdownField(string optionWorkingPatternDetails)
+        {
+            _headerTab.SelecetWorkingPatternDetails(optionWorkingPatternDetails);
+        }
+
 
     }
 

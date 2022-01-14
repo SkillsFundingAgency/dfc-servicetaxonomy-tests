@@ -33,9 +33,21 @@ Scenario Outline: Add Job Profile Content Item
 	And I select "As Defined" from the Dynamic Title Prefix dropdown field
 	And I select option "2" from the Job Profile Specialism dropdown field
 	And I select option "2" from the Job Profile Category dropdown field
-	And I enter "Test data for Course Keywords field" into the Course Keywords field
+	And I enter "Test data for field" into the Course Keywords field
 	And I select option "1" from the SOC code dropdown field
 	And I select option "2" from the Related Careers Profiles dropdown field
+
+	And I enter "Test data for field" into the Alternative title field
+	And I select option "1" from the Hidden Alternative Title dropdown field
+	And I enter "Test data for field" into the Widget content title field
+	And I enter "Test data for field" into the Overview field
+	And I enter "Test data for field" into the Salary starter per year field
+	And I enter "Test data for field" into the Salary experienced per year field
+	And I enter "Test data for field" into the Minimum hours field
+	And I enter "Test data for field" into the Maximum hours field
+	And I select option "2" from the Working hours details dropdown field
+	And I select option "1" from the Working pattern dropdown field
+	And I select option "2" from the Working pattern details dropdown field
 	
 
 
