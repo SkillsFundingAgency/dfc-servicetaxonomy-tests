@@ -1,5 +1,6 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement dropdownSocCode => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_SOCcode_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedCareersProfiles => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedcareerprofiles_ContentItemIds + div > .multiselect__tags"));
 
+        
+
         public void SelectDynamicTitlePrefix(string dynamicTitlePrefix)
         {
             dropdownDynamicTitlePrefix.Click();
@@ -37,28 +40,38 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilespecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + jobProfileSpecialism + "]")).Click();
         }
 
-        public void SelectJobProfileCategory(string jobProfileCategory)
+        public void OptionSelection(string option, string field)
         {
-            dropdownJobProfileCategory.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilecategory_ContentItemIds']//following-sibling::div/div[3]//li[" + jobProfileCategory + "]/span/div/span")).Click();
+            switch (field)
+            {
+                case "Job profile specialism":
+                    dropdownJobProfileSpecialism.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilespecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    Assert.IsNotEmpty(_scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Jobprofilespecialism_ContentItemIds'] + div > div:nth-of-type(1) span:nth-of-type(1)")).Text);
+                    break;
+                case "Job profile category":
+                    dropdownJobProfileCategory.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilecategory_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    break;
+                case "SOC code":
+                    dropdownSocCode.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCcode_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    break;
+                case "Related careers profiles":
+                    dropdownRelatedCareersProfiles.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedcareerprofiles_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    break;
+            }
         }
 
-        public void EnterCourseKeywords(string courseKeywords)
+        public void TextEntry(string textToEnter, string field)
         {
-            fldCourseKeywords.SendKeys(courseKeywords);
+            switch(field)
+            {
+                case "Course keywords":
+                    fldCourseKeywords.SendKeys(textToEnter);
+                    break;
+            }
         }
-
-        public void EnterSocCode(string socCode)
-        {
-            dropdownSocCode.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCcode_ContentItemIds']//following-sibling::div/div[3]//li[" + socCode + "]/span/div/span")).Click();
-        }
-
-        public void SelectRelatedCareersProfiles(string relatedCareersProfiles)
-        {
-            dropdownRelatedCareersProfiles.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedcareerprofiles_ContentItemIds']//following-sibling::div/div[3]//li[" + relatedCareersProfiles + "]/span/div/span")).Click();
-        }
-
     }
 }

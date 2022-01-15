@@ -40,7 +40,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly PageObjects.Environment _environment;
         private readonly Uniform _uniform;
         private readonly MetaDataTab _metaDataTab;
-        private readonly HeaderTab _headerTab;
+        private readonly HeaderTab _headerTab; 
+        private readonly HowToBecomeTab _howToBecomeTab;
 
 
         public JobProfiles(ScenarioContext scenarioContext)
@@ -70,6 +71,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _uniform = new Uniform(scenarioContext);
             _metaDataTab = new MetaDataTab(scenarioContext);
             _headerTab = new HeaderTab(scenarioContext);
+            _howToBecomeTab = new HowToBecomeTab(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -296,101 +298,52 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _metaDataTab.SelectDynamicTitlePrefix(selectionDynamicTitlePrefix);
         }
 
-        [Given(@"I select option ""(.*)"" from the Job Profile Specialism dropdown field")]
-        public void GivenISelectOptionFromTheJobProfileSpecialismDropdownField(string selectionJobProfileSpecialism)
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field")]
+        public void GivenISelectOptionFromTheDropdownField(string option, string field)
         {
-            _metaDataTab.SelectJobProfileSpecialism(selectionJobProfileSpecialism);
+            _metaDataTab.OptionSelection(option, field);
         }
 
-        [Given(@"I select option ""(.*)"" from the Job Profile Category dropdown field")]
-        public void GivenISelectOptionFromTheJobProfileCategoryDropdownField(string selectionJobProfileCategory)
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field")]
+        public void GivenIEnterIntoTheField(string textToEnter, string field)
         {
-            _metaDataTab.SelectJobProfileCategory(selectionJobProfileCategory);
+            _metaDataTab.TextEntry(textToEnter, field);
         }
 
-        [Given(@"I enter ""(.*)"" into the Course Keywords field")]
-        public void GivenIEnterIntoTheCourseKeywordsField(string courseKeywords)
+        [Given(@"I switch to the Header tab")]
+        public void GivenISwitchToTheHeaderTab()
         {
-            _metaDataTab.EnterCourseKeywords(courseKeywords);
+            _headerTab.DisplayHeaderTab();
+        }
+        
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Header tab")]
+        public void GivenIEnterIntoTheFieldOfTheHeaderTab(string textToEnter, string field)
+        {
+            _headerTab.TextEntry(textToEnter, field);
         }
 
-        [Given(@"I select option ""(.*)"" from the SOC code dropdown field")]
-        public void GivenISelectOptionFromTheSOCCodeDropdownField(string socCode)
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the Header tab")]
+        public void GivenISelectOptionFromTheDropdownFieldOfTheHeaderTab(string option, string field)
         {
-            _metaDataTab.EnterSocCode(socCode);
+            _headerTab.OptionSelection(option, field);
         }
 
-        [Given(@"I select option ""(.*)"" from the Related Careers Profiles dropdown field")]
-        public void GivenISelectOptionFromTheRelatedCareersProfilesDropdownField(string relatedCareersProfiles)
+        [Given(@"I switch to the How to become tab")]
+        public void GivenISwitchToTheHowToBecomeTab()
         {
-            _metaDataTab.SelectRelatedCareersProfiles(relatedCareersProfiles);
+            _howToBecomeTab.DisplayHowToBecomeTab();
         }
 
-        /*HEADER TAB*/
-        [Given(@"I enter ""(.*)"" into the Alternative title field")]
-        public void GivenIEnterIntoTheAlternativeTitleField(string alternativeTitle)
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the How to become tab")]
+        public void GivenIEnterIntoTheFieldOfTheHowToBecomeTab(string textToEnter, string field)
         {
-            _headerTab.EnterAlternativeTitle(alternativeTitle);
+            _howToBecomeTab.TextEntry(textToEnter, field);
         }
 
-        [Given(@"I select option ""(.*)"" from the Hidden Alternative Title dropdown field")]
-        public void GivenISelectOptionFromTheHiddenAlternativeTitleDropdownField(string optionHiddenAlternative)
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the How to become tab")]
+        public void GivenISelectOptionFromTheDropdownFieldOfTheHowToBecomeTab(string option, string field)
         {
-            _headerTab.SelectHiddenAlternativeTitle(optionHiddenAlternative);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Widget content title field")]
-        public void GivenIEnterIntoTheWidgetContentTitleField(string widgetContentTitle)
-        {
-            _headerTab.EntertWidgetContentTitle(widgetContentTitle);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Overview field")]
-        public void GivenIEnterIntoTheOverviewField(string overview)
-        {
-            _headerTab.EnterOverview(overview);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Salary starter per year field")]
-        public void GivenIEnterIntoTheSalaryStarterPerYearField(string salaryStarterPerYear)
-        {
-            _headerTab.EnterSalaryStarter(salaryStarterPerYear);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Salary experienced per year field")]
-        public void GivenIEnterIntoTheSalaryExperiencedPerYearField(string salaryExperiencedPerYear)
-        {
-            _headerTab.EnterSalaryExperienced(salaryExperiencedPerYear);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Minimum hours field")]
-        public void GivenIEnterIntoTheMinimumHoursField(string minimumHours)
-        {
-            _headerTab.EnterMinimumHours(minimumHours);
-        }
-
-        [Given(@"I enter ""(.*)"" into the Maximum hours field")]
-        public void GivenIEnterIntoTheMaximumHoursField(string maximumHours)
-        {
-            _headerTab.EnterMaximumHours(maximumHours);
-        }
-
-        [Given(@"I select option ""(.*)"" from the Working hours details dropdown field")]
-        public void GivenISelectOptionFromTheWorkingHoursDetailsDropdownField(string optionWorkingHoursDetails)
-        {
-            _headerTab.SelectWorkingHoursDetails(optionWorkingHoursDetails);
-        }
-
-        [Given(@"I select option ""(.*)"" from the Working pattern dropdown field")]
-        public void GivenISelectOptionFromTheWorkingPatternDropdownField(string optionWorkingPattern)
-        {
-            _headerTab.SelectWorkingPattern(optionWorkingPattern);
-        }
-
-        [Given(@"I select option ""(.*)"" from the Working pattern details dropdown field")]
-        public void GivenISelectOptionFromTheWorkingPatternDetailsDropdownField(string optionWorkingPatternDetails)
-        {
-            _headerTab.SelecetWorkingPatternDetails(optionWorkingPatternDetails);
+            _howToBecomeTab.OptionSelection(option, field);
         }
 
 

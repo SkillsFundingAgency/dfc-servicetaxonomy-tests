@@ -1,8 +1,10 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
@@ -23,71 +25,66 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement fldSalaryExperienced => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Salaryexperiencedperyear_Value"));
         IWebElement fldMinimumHours => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Minimumhours_Value"));
         IWebElement fldMaximumHours => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Maximumhours_Value"));
-        IWebElement dropdownWorkingHoursDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_WorkingHoursDetails_ContentItemIds+ div > .multiselect__tags"));
-        IWebElement dropdownWorkingPattern => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Workingpattern_ContentItemIds+ div > .multiselect__tags"));
+        IWebElement dropdownWorkingHoursDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_WorkingHoursDetails_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownWorkingPattern => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Workingpattern_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownWorkingPatternDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Workingpatterndetails_ContentItemIds + div > .multiselect__tags"));
 
         public void DisplayHeaderTab()
         {
+            Utilities.Hover(_scenarioContext.GetWebDriver(), tabHeader);
             tabHeader.Click();
         }
 
-        public void EnterAlternativeTitle(string alternativeTitle)
+        public void OptionSelection(string option, string field)
         {
-            fldAlternativeTitle.SendKeys(alternativeTitle); 
+            switch (field)
+            {
+                case "Hidden alternative title":
+                    dropdownHiddenAlternativeTitle.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_HiddenAlternativeTitle_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    break;
+                case "Working hours details":
+                    dropdownWorkingHoursDetails.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_WorkingHoursDetails_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    break;
+                case "Working pattern":
+                    dropdownWorkingPattern.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpattern_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    break;
+                case "Working pattern details":
+                    dropdownWorkingPatternDetails.Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpatterndetails_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    break;
+            }
         }
 
-        public void SelectHiddenAlternativeTitle(string hiddenAlternativeTitle)
+        public void TextEntry(string textToEnter, string field)
         {
-            dropdownHiddenAlternativeTitle.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_HiddenAlternativeTitle_ContentItemIds']//following-sibling::div/div[3]//li[" + hiddenAlternativeTitle + "]")).Click();
-        }
-
-        public void EntertWidgetContentTitle(string widgetContentTitle)
-        {
-            fldWidgetContentTitle.SendKeys(widgetContentTitle);
-        }
-
-        public void EnterOverview(string overview)
-        {
-            fldOverview.SendKeys(overview);
-        }
-
-        public void EnterSalaryStarter(string salaryStarter)
-        {
-            fldSalaryStarter.SendKeys(salaryStarter);
-        }
-        public void EnterSalaryExperienced(string salaryExperienced)
-        {
-            fldSalaryExperienced.SendKeys(salaryExperienced);
-        }
-
-        public void EnterMinimumHours(string minimumHours)
-        {
-            fldMinimumHours.SendKeys(minimumHours);
-        }
-
-        public void EnterMaximumHours(string maximumHours)
-        {
-            fldMaximumHours.SendKeys(maximumHours);
-        }
-
-        public void SelectWorkingHoursDetails(string workingHoursDetails)
-        {
-            dropdownWorkingHoursDetails.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_WorkingHoursDetails_ContentItemIds']//following-sibling::div/div[3]//li[" + workingHoursDetails + "]")).Click();
-        }
-
-        public void SelectWorkingPattern(string workingPattern)
-        {
-            dropdownWorkingPattern.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpattern_ContentItemIds']//following-sibling::div/div[3]//li[" + workingPattern + "]")).Click();
-        }
-
-        public void SelecetWorkingPatternDetails(string workingPatternDetails)
-        {
-            dropdownWorkingPatternDetails.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpatterndetails_ContentItemIds']//following-sibling::div/div[3]//li[" + workingPatternDetails + "]")).Click();
+            switch (field)
+            {
+                case "Alternative title":
+                    Utilities.Wait(_scenarioContext.GetWebDriver(), fldAlternativeTitle);
+                    fldAlternativeTitle.SendKeys(textToEnter);
+                    break;
+                case "Widget content title":
+                    fldWidgetContentTitle.SendKeys(textToEnter);
+                    break;
+                case "Overview":
+                    fldOverview.SendKeys(textToEnter);
+                    break;
+                case "Salary starter per year":
+                    fldSalaryStarter.SendKeys(textToEnter);
+                    break;
+                case "Salary experienced per year":
+                    fldSalaryExperienced.SendKeys(textToEnter);
+                    break;
+                case "Minimum hours":
+                    fldMinimumHours.SendKeys(textToEnter);
+                    break;
+                case "Maximum hours":
+                    fldMaximumHours.SendKeys(textToEnter);
+                    break;
+            }
         }
     }
 }
