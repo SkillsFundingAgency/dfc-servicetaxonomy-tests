@@ -6,25 +6,25 @@ Background:
 	And I create the following number of Content Types
 	| Content Type                      | number |
 	| Job profile specialism            | 1      |
-	| Job profile category              | 2      |
-	| SOC code                          | 2      |
-	| Working hours detail              | 2      |
-	| Working pattern detail            | 2      |
-	| Working patterns                  | 2      |
-	| University entry requirements     | 2      |
-	| University requirements           | 2      |
-	| University link                   | 2      |
-	| College entry requirements        | 2      |
-	| College requirements              | 2      |
-	| College link                      | 2      |
-	| Apprenticeship entry requirements | 2      |
-	| Apprenticeship requirements       | 2      |
-	| Apprenticeship link               | 2      |
-	| Registration                      | 2      |
-	| Restriction                       | 2      |
-	| Digital skills                    | 2      |
-	| Location                          | 2      |
-	| Environment                       | 2      |
+	#| Job profile category              | 2      |
+	#| SOC code                          | 2      |
+	#| Working hours detail              | 2      |
+	#| Working pattern detail            | 2      |
+	#| Working patterns                  | 2      |
+	#| University entry requirements     | 2      |
+	#| University requirements           | 2      |
+	#| University link                   | 2      |
+	#| College entry requirements        | 2      |
+	#| College requirements              | 2      |
+	#| College link                      | 2      |
+	#| Apprenticeship entry requirements | 2      |
+	#| Apprenticeship requirements       | 2      |
+	#| Apprenticeship link               | 2      |
+	#| Registration                      | 2      |
+	#| Restriction                       | 2      |
+	#| Digital skills                    | 2      |
+	#| Location                          | 2      |
+	#| Environment                       | 2      |
 	| Uniform                           | 1      |
 
 Scenario Outline: Add Job Profile Content Item
@@ -73,6 +73,19 @@ Scenario Outline: Add Job Profile Content Item
 	And I enter "Test data for field" into the "Career tips" field of the How to become tab
 	And I enter "Test data for field" into the "Professional and industry bodies" field of the How to become tab
 	And I enter "Test data for field" into the "Further information" field of the How to become tab
+	And I switch to the What it takes tab
+	And I select option "1" from the "Related restrictions" dropdown field of the What it takes tab
+	And I enter "Test data for field" into the "Other requirements" field of the What it takes tab
+	And I select option "1" from the "Digital skills" dropdown field of the What it takes tab
+	And I switch to the Career path and progression tab
+	And I enter "Test data for field" into the "Other requirements" field of the Career path and progression tab
+	And I switch to the Content tab
+	And I tick the "Override sitemap configuration" tick box of the Content tab
+	And I select "Monthly" from the "Change frequency" dropdown field of the Content tab
+	And I select "0.9" from the "Priority" dropdown field of the Content tab
+	And I select option "1" from the "Related skills" dropdown field of the Content tab
+	And I tick the "Exclude" tick box of the Content tab
+
 	
 
 	

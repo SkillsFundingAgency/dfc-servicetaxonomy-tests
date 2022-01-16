@@ -41,7 +41,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly Uniform _uniform;
         private readonly MetaDataTab _metaDataTab;
         private readonly HeaderTab _headerTab; 
-        private readonly HowToBecomeTab _howToBecomeTab;
+        private readonly HowToBecomeTab _howToBecomeTab; 
+        private readonly WhatItTakesTab _whatItTakesTab;
+        private readonly CareersAndProgressionTab _careersAndProgressionTab;
+        private readonly ContentTab _content;
 
 
         public JobProfiles(ScenarioContext scenarioContext)
@@ -72,6 +75,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _metaDataTab = new MetaDataTab(scenarioContext);
             _headerTab = new HeaderTab(scenarioContext);
             _howToBecomeTab = new HowToBecomeTab(scenarioContext);
+            _whatItTakesTab = new WhatItTakesTab(scenarioContext);
+            _careersAndProgressionTab = new CareersAndProgressionTab(scenarioContext);
+            _content = new ContentTab(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -346,7 +352,53 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _howToBecomeTab.OptionSelection(option, field);
         }
 
+        [Given(@"I switch to the What it takes tab")]
+        public void GivenISwitchToTheWhatItTakesTab()
+        {
+            _whatItTakesTab.DisplayWhatItTakesTab();
+        }
 
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the What it takes tab")]
+        public void GivenISelectOptionFromTheDropdownFieldOfTheWhatItTakesTab(string option, string field)
+        {
+            _whatItTakesTab.OptionSelection(option, field);
+        }
+
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the What it takes tab")]
+        public void GivenIEnterIntoTheFieldOfTheWhatItTakesTab(string textToEnter, string field)
+        {
+            _whatItTakesTab.TextEntry(textToEnter, field);
+        }
+
+        [Given(@"I switch to the Career path and progression tab")]
+        public void GivenISwitchToTheCareerPathAndProgressionTab()
+        {
+            _careersAndProgressionTab.DisplayCareerPathAndProgression();
+        }
+
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Career path and progression tab")]
+        public void GivenIEnterIntoTheFieldOfTheCareerPathAndProgressionTab(string textToEnter, string field)
+        {
+            _careersAndProgressionTab.TextEntry(textToEnter, field);
+        }
+
+        [Given(@"I switch to the Content tab")]
+        public void GivenISwitchToTheContentTab()
+        {
+            _content.DisplayContent();
+        }
+
+        [Given(@"I tick the ""(.*)"" tick box of the Content tab")]
+        public void GivenITickTheTickBoxOfTheContentTab(string tickBox)
+        {
+            _content.TickUntick(tickBox);
+        }
+
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the Content tab")]
+        public void GivenISelectOptionFromTheDropdownFieldOfTheContentTab(string option, string field)
+        {
+            _content.OptionSelection(option, field);
+        }
     }
 
     public class ContentTypes
