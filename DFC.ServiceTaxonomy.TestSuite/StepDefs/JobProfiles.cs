@@ -394,6 +394,19 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _content.TickUntick(tickBox);
         }
 
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Content tab")]
+        public void GivenIEnterIntoTheFieldOfTheContentTab(string p0, string p1)
+        {
+            
+        }
+
+
+        [Given(@"I select ""(.*)"" from the ""(.*)"" dropdown field of the Content tab")]
+        public void GivenISelectFromTheDropdownFieldOfTheContentTab(string option, string field)
+        {
+            _content.OptionSelection(option, field);
+        }
+
         [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the Content tab")]
         public void GivenISelectOptionFromTheDropdownFieldOfTheContentTab(string option, string field)
         {

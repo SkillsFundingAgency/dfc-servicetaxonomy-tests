@@ -19,11 +19,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         }
 
         IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#TitlePart_Title"));
-        IWebElement dropdownDynamicTitlePrefix => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Dynamictitleprefix_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownJobProfileSpecialism => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Jobprofilespecialism_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownJobProfileCategory => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("div[data-field='Jobprofilecategory'] .multiselect__tags"));
+        IWebElement dropdownDynamicTitlePrefix => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_DynamicTitlePrefix_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownJobProfileSpecialism => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_JobProfileSpecialism_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownJobProfileCategory => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("div[data-field='JobProfileCategory'] .multiselect__tags"));
         IWebElement fldCourseKeywords => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Coursekeywords_Text"));
-        IWebElement dropdownSocCode => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_SOCcode_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownSocCode => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_SOCCode_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedCareersProfiles => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedcareerprofiles_ContentItemIds + div > .multiselect__tags"));
 
         
@@ -31,13 +31,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         public void SelectDynamicTitlePrefix(string dynamicTitlePrefix)
         {
             dropdownDynamicTitlePrefix.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Dynamictitleprefix_ContentItemIds']//following-sibling::div/div[3]//span[contains(text(),'" + dynamicTitlePrefix + "')]")).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_DynamicTitlePrefix_ContentItemIds']//following-sibling::div/div[3]//span[contains(text(),'" + dynamicTitlePrefix + "')]")).Click();
         }
 
         public void SelectJobProfileSpecialism(string jobProfileSpecialism)
         {
             dropdownJobProfileSpecialism.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilespecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + jobProfileSpecialism + "]")).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_JobProfileSpecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + jobProfileSpecialism + "]")).Click();
         }
 
         public void OptionSelection(string option, string field)
@@ -46,16 +46,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             {
                 case "Job profile specialism":
                     dropdownJobProfileSpecialism.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilespecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
-                    Assert.IsNotEmpty(_scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Jobprofilespecialism_ContentItemIds'] + div > div:nth-of-type(1) span:nth-of-type(1)")).Text);
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_JobProfileSpecialism_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    Assert.IsNotEmpty(_scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_JobProfileSpecialism_ContentItemIds'] + div > div:nth-of-type(1) span:nth-of-type(1)")).Text);
                     break;
                 case "Job profile category":
                     dropdownJobProfileCategory.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Jobprofilecategory_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_JobProfileCategory_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "SOC code":
                     dropdownSocCode.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCcode_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCCode_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related careers profiles":
                     dropdownRelatedCareersProfiles.Click();

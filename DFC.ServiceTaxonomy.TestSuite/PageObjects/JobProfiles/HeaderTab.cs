@@ -26,8 +26,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement fldMinimumHours => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Minimumhours_Value"));
         IWebElement fldMaximumHours => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Maximumhours_Value"));
         IWebElement dropdownWorkingHoursDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_WorkingHoursDetails_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownWorkingPattern => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Workingpattern_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownWorkingPatternDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Workingpatterndetails_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownWorkingPattern => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_WorkingPattern_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownWorkingPatternDetails => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_WorkingPatternDetails_ContentItemIds + div > .multiselect__tags"));
 
         public void DisplayHeaderTab()
         {
@@ -49,11 +49,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                     break;
                 case "Working pattern":
                     dropdownWorkingPattern.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpattern_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_WorkingPattern_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
                     break;
                 case "Working pattern details":
                     dropdownWorkingPatternDetails.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Workingpatterndetails_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_WorkingPatternDetails_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]")).Click();
                     break;
             }
         }

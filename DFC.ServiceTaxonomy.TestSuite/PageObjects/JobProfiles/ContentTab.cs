@@ -17,9 +17,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         }
 
         IWebElement tabContent => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".nav-tabs li:nth-of-type(7) > a"));
-        IWebElement dropdownChangeFrequency => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedlocations_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownPriority => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedlocations_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedSkills => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedlocations_ContentItemIds + div > .multiselect__tags"));
+        IWebElement fldComment => _scenarioContext.GetWebDriver().FindElement(By.Id("AuditTrailPart_Comment"));
 
         public void DisplayContent()
         {
@@ -45,14 +43,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             switch (field)
             {
                 case "Change Frequency":
-                    Utilities.SelectFromDropdown(dropdownChangeFrequency, option);
+                    Utilities.SelectFromDropdown(_scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_ChangeFrequency")), option);
                     break;
                 case "Priority":
-                    Utilities.SelectFromDropdown(dropdownPriority, option);
+                    Utilities.SelectFromDropdown(_scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_Priority")), option);
                     break;
-                case "Related skills":
-                    dropdownRelatedSkills.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedskills_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+            }
+        }
+
+        public void TextEntry(string textToEnter, string field)
+        {
+            switch (field)
+            {
+                case "Comment":
+                    fldComment.SendKeys(textToEnter); ;
                     break;
             }
         }

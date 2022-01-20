@@ -18,9 +18,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         IWebElement tabWhatYoullDo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".nav-tabs li:nth-of-type(5) > a"));
         IWebElement txtfldDayToDayTasks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Daytodaytasks_Html'] + div > .trumbowyg-editor"));
-        IWebElement dropdownRelatedLocations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedlocations_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedEnvironments => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedenvironments_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedUniforms => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relateduniforms_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedLocations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedLocations_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedEnvironments => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedEnvironments_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedUniforms => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedUniforms_ContentItemIds + div > .multiselect__tags"));
 
         public void DisplayWhatYoullDo()
         {
@@ -34,15 +34,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             {
                 case "Related locations":
                     dropdownRelatedLocations.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedlocations_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedLocations_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related environments":
                     dropdownRelatedEnvironments.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedenvironments_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedEnvironments_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related uniforms":
                     dropdownRelatedUniforms.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relateduniforms_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedUniforms_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
             }
         }

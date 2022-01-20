@@ -20,24 +20,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement txtfldEntryRoutes => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Entryroutes_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldUniversityReleventSubjects => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Universityrelevantsubjects_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldUniversityFurtherRouteInfo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Universityfurtherrouteinfo_Html'] + div > .trumbowyg-editor"));
-        IWebElement dropdownUniversityEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Universityentryrequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedUniversityRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relateduniversityrequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedUniversityLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relateduniversitylinks_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownUniversityEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_UniversityEntryRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedUniversityRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedUniversityRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedUniversityLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedUniversityLinks_ContentItemIds + div > .multiselect__tags"));
         IWebElement txtfldCollegeRelevantSubjects => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Collegerelevantsubjects_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldCollegeFurtherRouteInfo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Collegefurtherrouteinfo_Html'] + div > .trumbowyg-editor"));
-        IWebElement dropdownCollegeEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Collegeentryrequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedCollegeRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedcollegerequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedCollegeLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedcollegelinks_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownCollegeEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_CollegeEntryRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedCollegeRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedCollegeRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedCollegeLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedCollegeLinks_ContentItemIds + div > .multiselect__tags"));
         IWebElement txtfldApprenticeshipReleventSubjects => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Apprenticeshiprelevantsubjects_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldApprenticeshipFurtherRouteInfo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Apprenticeshipfurtherroutesinfo_Html'] + div > .trumbowyg-editor"));
-        IWebElement dropdownApprenticeshipEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Apprenticeshipentryrequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedApprenticeshipRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedapprenticeshiprequirements_ContentItemIds + div > .multiselect__tags"));
-        IWebElement dropdownRelatedApprenticeshipLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedapprenticeshiplinks_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownApprenticeshipEntryRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_ApprenticeshipEntryRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedApprenticeshipRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedApprenticeshipRequirements_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedApprenticeshipLinks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedApprenticeshipLinks_ContentItemIds + div > .multiselect__tags"));
         IWebElement txtfldWork => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Work_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldVolunteering => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Volunteering_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldDirectApplication => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Directapplication_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldOtherRoutes => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Otherroutes_Html'] + div > .trumbowyg-editor"));
-        IWebElement dropdownRelatedRegistrations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedregistrations_ContentItemIds + div > .multiselect__tags"));
+        IWebElement dropdownRelatedRegistrations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedRegistrations_ContentItemIds + div > .multiselect__tags"));
         IWebElement txtfldCareerTips => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Careertips_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldProfessionslAndIndustryBodies => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Professionalandindustrybodies_Html'] + div > .trumbowyg-editor"));
         IWebElement txtfldFurterInformation => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Furtherinformation_Html'] + div > .trumbowyg-editor"));
@@ -54,43 +54,44 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             {
                 case "University entry requirements":
                     dropdownUniversityEntryRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Universityentryrequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_UniversityEntryRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related university requirements":
                     dropdownRelatedUniversityRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relateduniversityrequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedUniversityRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
+                    //do locator
                 case "Related university links":
                     dropdownRelatedUniversityLinks.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relateduniversitylinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedUniversityLinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "College entry requirements":
                     dropdownCollegeEntryRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Collegeentryrequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_CollegeEntryRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related college requirements":
                     dropdownRelatedCollegeRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedcollegerequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedCollegeRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related college links":
                     dropdownRelatedCollegeLinks.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedcollegelinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedCollegeLinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Apprenticeship entry requirements":
                     dropdownApprenticeshipEntryRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Apprenticeshipentryrequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_ApprenticeshipEntryRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related apprenticeship requirements":
                     dropdownRelatedApprenticeshipRequirements.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedapprenticeshiprequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedApprenticeshipRequirements_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related apprenticeship links":
                     dropdownRelatedApprenticeshipLinks.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedapprenticeshiplinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedApprenticeshipLinks_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
                 case "Related registrations":
                     dropdownRelatedRegistrations.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedregistrations_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_RelatedRegistrations_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;
             }
         }

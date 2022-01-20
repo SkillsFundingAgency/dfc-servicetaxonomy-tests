@@ -37,12 +37,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
 
         public void CloseDriver()
         {
-            if (driver != null)
-            {
-                driver.Close();
-                driver.Quit();
-                driver = null;
-            }
+            //if (driver != null)
+            //{
+            //    driver.Close();
+            //    driver.Quit();
+            //    driver = null;
+            //}
         }
 
         public Neo4JHelper GetGraphConnection(string key, string graphName, string graphUri, string userId, string password)

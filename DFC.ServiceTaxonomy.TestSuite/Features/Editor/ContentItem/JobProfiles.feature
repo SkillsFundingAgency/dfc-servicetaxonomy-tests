@@ -85,6 +85,7 @@ Scenario Outline: Add Job Profile Content Item
 	And I select "0.9" from the "Priority" dropdown field of the Content tab
 	And I select option "1" from the "Related skills" dropdown field of the Content tab
 	And I tick the "Exclude" tick box of the Content tab
+	And I enter "Test data for field" into the "Comment" field of the Content tab
 
 	
 
