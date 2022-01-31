@@ -29,7 +29,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         {
             switch (field)
             {
-                case "Career path and progression":
+                case "Career path & progression":
+                    Utilities.Wait(_scenarioContext.GetWebDriver(), txtfldCareerPathAndProgression);
+                    txtfldCareerPathAndProgression.Click();
                     txtfldCareerPathAndProgression.SendKeys(textToEnter);
                     break;
             }

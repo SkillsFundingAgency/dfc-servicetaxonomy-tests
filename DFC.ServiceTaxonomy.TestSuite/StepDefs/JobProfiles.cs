@@ -43,8 +43,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly HeaderTab _headerTab; 
         private readonly HowToBecomeTab _howToBecomeTab; 
         private readonly WhatItTakesTab _whatItTakesTab;
+        private readonly WhatYoullDoTab _whatYoullDoTab;
         private readonly CareersAndProgressionTab _careersAndProgressionTab;
         private readonly ContentTab _content;
+        private readonly JobProfilesPage _jobProfilesPage;
 
 
         public JobProfiles(ScenarioContext scenarioContext)
@@ -76,8 +78,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _headerTab = new HeaderTab(scenarioContext);
             _howToBecomeTab = new HowToBecomeTab(scenarioContext);
             _whatItTakesTab = new WhatItTakesTab(scenarioContext);
+            _whatYoullDoTab = new WhatYoullDoTab(scenarioContext);
             _careersAndProgressionTab = new CareersAndProgressionTab(scenarioContext);
             _content = new ContentTab(scenarioContext);
+            _jobProfilesPage = new JobProfilesPage(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -370,6 +374,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _whatItTakesTab.TextEntry(textToEnter, field);
         }
 
+        [Given(@"I switch to the What youll do tab")]
+        public void GivenISwitchToTheWhatYoullDoTab()
+        {
+            _whatYoullDoTab.DisplayWhatYoullDo();
+        }
+
+        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the What youll do tab")]
+        public void GivenIEnterIntoTheFieldOfTheWhatYoullDoTab(string textToEnter, string field)
+        {
+            _whatYoullDoTab.TextEntry(textToEnter, field);
+        }
+
+        [Given(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the What youll do tab")]
+        public void GivenISelectOptionFromTheDropdownFieldOfTheWhatYoullDoTab(string option, string field)
+        {
+            _whatYoullDoTab.OptionSelection(option, field);
+        }
+
         [Given(@"I switch to the Career path and progression tab")]
         public void GivenISwitchToTheCareerPathAndProgressionTab()
         {
@@ -395,11 +417,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
         [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Content tab")]
-        public void GivenIEnterIntoTheFieldOfTheContentTab(string p0, string p1)
+        public void GivenIEnterIntoTheFieldOfTheContentTab(string textToEnter, string field)
         {
-            
+            _content.TextEntry(textToEnter, field);
         }
-
 
         [Given(@"I select ""(.*)"" from the ""(.*)"" dropdown field of the Content tab")]
         public void GivenISelectFromTheDropdownFieldOfTheContentTab(string option, string field)
@@ -412,6 +433,28 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _content.OptionSelection(option, field);
         }
+
+        [Given(@"I click the Save Draft and Continue button")]
+        public void GivenIClickTheSaveDraftAndContinueButton()
+        {
+            _jobProfilesPage.ClickSaveDraftAndContinue);
+        }
+
+        [When(@"I click the Publish and Exit button after entering a comment")]
+        public void WhenIClickThePublishAndExitButtonAfterEnteringAComment()
+        {
+            _content.DisplayContent();
+            _content.TextEntry("test");
+            _jobProfilesPage.PublishAndExit();
+        }
+
+        [Then(@"the Job profile is created")]
+        public void ThenTheJobProfileIsCreated()
+        {
+            
+        }
+
+
     }
 
     public class ContentTypes

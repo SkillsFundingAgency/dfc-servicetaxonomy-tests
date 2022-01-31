@@ -35,6 +35,5 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             btnSaveDraftAndContinue.Click();
         }
-
     }
 }

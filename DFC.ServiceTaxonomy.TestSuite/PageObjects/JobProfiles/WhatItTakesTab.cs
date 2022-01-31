@@ -32,6 +32,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             switch (field)
             {
                 case "Related restrictions":
+                    Utilities.Wait(_scenarioContext.GetWebDriver(), dropdownRelatedRestrictions);
                     dropdownRelatedRestrictions.Click();
                     _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_Relatedrestrictions_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
                     break;

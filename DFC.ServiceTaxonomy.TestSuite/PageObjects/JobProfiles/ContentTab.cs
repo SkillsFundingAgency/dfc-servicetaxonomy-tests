@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
@@ -27,13 +28,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         public void TickUntick(string tickBox)
         {
-            switch(tickBox)
+            Utilities.Wait(_scenarioContext.GetWebDriver(), fldComment);
+
+            switch (tickBox)
             {
                 case "Override sitemap configuration":
-                    _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='SitemapPart_OverrideSitemapConfig']")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.CssSelector("input[data-val-required='The OverrideSitemapConfig field is required.'] + label")).Click();
                     break;
                 case "Exclude":
-                    _scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_Exclude")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.CssSelector("input[data-val-required='The Exclude field is required.'] + label")).Click();
                     break;
             }
         }
@@ -43,22 +46,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             switch (field)
             {
                 case "Change Frequency":
-                    Utilities.SelectFromDropdown(_scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_ChangeFrequency")), option);
+                    _scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_ChangeFrequency")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath("//select[@id='SitemapPart_ChangeFrequency']/option[contains(text(), '" + option + "')]")).Click();
                     break;
                 case "Priority":
-                    Utilities.SelectFromDropdown(_scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_Priority")), option);
+                    _scenarioContext.GetWebDriver().FindElement(By.Id("SitemapPart_Priority")).Click();
+                    _scenarioContext.GetWebDriver().FindElement(By.XPath("//select[@id='SitemapPart_Priority']/option[contains(text(), '" + option + "')]")).Click();
                     break;
             }
         }
-
-        public void TextEntry(string textToEnter, string field)
+         
+        public void TextEntry(string textToEnter)
         {
-            switch (field)
-            {
-                case "Comment":
-                    fldComment.SendKeys(textToEnter); ;
-                    break;
-            }
+            fldComment.Click();
+            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".tab-content.accordion > div:nth-of-type(7)")).Click();
+            fldComment.SendKeys(textToEnter); ;
         }
 
     }

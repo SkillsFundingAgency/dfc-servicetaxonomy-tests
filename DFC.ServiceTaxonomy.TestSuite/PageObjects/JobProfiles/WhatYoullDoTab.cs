@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
@@ -18,6 +19,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         IWebElement tabWhatYoullDo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".nav-tabs li:nth-of-type(5) > a"));
         IWebElement txtfldDayToDayTasks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Daytodaytasks_Html'] + div > .trumbowyg-editor"));
+        //IWebElement txtfldDayToDayTasks => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Daytodaytasks_Html"));
         IWebElement dropdownRelatedLocations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedLocations_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedEnvironments => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedEnvironments_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedUniforms => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedUniforms_ContentItemIds + div > .multiselect__tags"));
@@ -51,7 +53,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         {
             switch (field)
             {
-                case "Other requirements":
+                case "Day-to-day tasks":
+                    Utilities.Wait(_scenarioContext.GetWebDriver(), dropdownRelatedUniforms);
+                    txtfldDayToDayTasks.Click();
                     txtfldDayToDayTasks.SendKeys(textToEnter);
                     break;
             }
