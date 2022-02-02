@@ -1,4 +1,4 @@
-﻿@webtest @stax
+﻿@webtest
 Feature: JobProfilesUserActions
 
 Background:
