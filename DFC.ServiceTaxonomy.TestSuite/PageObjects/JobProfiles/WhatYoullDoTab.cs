@@ -19,14 +19,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         IWebElement tabWhatYoullDo => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".nav-tabs li:nth-of-type(5) > a"));
         IWebElement txtfldDayToDayTasks => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Daytodaytasks_Html'] + div > .trumbowyg-editor"));
-        //IWebElement txtfldDayToDayTasks => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Daytodaytasks_Html"));
         IWebElement dropdownRelatedLocations => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedLocations_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedEnvironments => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedEnvironments_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedUniforms => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_RelatedUniforms_ContentItemIds + div > .multiselect__tags"));
 
         public void DisplayWhatYoullDo()
         {
-            Utilities.Hover(_scenarioContext.GetWebDriver(), tabWhatYoullDo);
+            Utilities.javascriptScrollUp(_scenarioContext.GetWebDriver());
             tabWhatYoullDo.Click();
         }
 

@@ -48,5 +48,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
         {
             return driver.FindElement(locator).Displayed;
         }
+
+        public static void javascriptClick(IWebDriver driver, By locator)
+        {
+            IJavaScriptExecutor JS = (IJavaScriptExecutor)driver;
+            JS.ExecuteScript("arguments[0].click();", locator);
+        }
+
+        public static void javascriptScrollUp(IWebDriver driver)
+        {
+            IJavaScriptExecutor JS = (IJavaScriptExecutor)driver;
+            JS.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight);");
+        }
     }
 }
