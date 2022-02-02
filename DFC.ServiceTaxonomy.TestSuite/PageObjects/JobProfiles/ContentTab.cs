@@ -58,8 +58,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
          
         public void TextEntry(string textToEnter)
         {
-            fldComment.Click();
-            _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".tab-content.accordion > div:nth-of-type(7)")).Click();
+            Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#AuditTrailPart_Comment + span")));
             fldComment.SendKeys(textToEnter); ;
         }
 

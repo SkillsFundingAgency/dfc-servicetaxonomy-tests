@@ -1,14 +1,16 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
-
+using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using OpenQA.Selenium;
 
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
-    class ManageContent// : PageBase
+    class ManageContent
     {
         #region constants
         const string remove = "removed";
@@ -21,10 +23,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         #endregion
         readonly ScenarioContext _scenarioContext;
+        JobProfilesPage _jobProfilesPage;
 
         public ManageContent(ScenarioContext context)
         {
             _scenarioContext = context;
+            _jobProfilesPage = new JobProfilesPage(context);
         }
 
         public ManageContent FindItem(string title)
@@ -247,6 +251,84 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             catch
             { /**/ }
             return returnValue;
+        }
+
+        IList<IWebElement> all;
+        int i;
+        String[] allText;
+
+        public string[] GetManageContentTitles()
+        {
+            all = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".contentitem.mr-2 > a"));
+            String[] allText = new String[all.Count];
+            i = 0;
+
+            foreach (IWebElement element in all)
+            {
+                allText[i++] = element.Text;
+            }
+
+            return allText;
+        }
+
+        public bool ItemsCompare()
+        {
+            all = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".contentitem.mr-2 > a"));
+            allText = new String[all.Count];
+            int i = 0;
+            bool titlePresent = false;
+
+            foreach (IWebElement element in all)
+            {
+                allText[i++] = element.Text;
+            }
+
+            for (i = 0; i < all.Count; i++)
+            {
+                if (allText[i] == DigitalSkills.JobProfileTitle)
+                {
+                    titlePresent = true;
+                }
+                break;
+            }
+
+            return titlePresent;
+        }
+
+        public void CleanUpManageContent()
+        {
+            string locator = "Options_SearchText";
+
+            IList<IWebElement> itemsCheckBox;
+
+            do
+            {
+                _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).Clear();
+                _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).SendKeys("_Auto_");
+                _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).SendKeys(Keys.Enter);
+                Utilities.HoverClick(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.Id("select-all")));
+
+                itemsCheckBox = _scenarioContext.GetWebDriver().FindElements(By.CssSelector("input[name='itemIds'] + label")).ToList();
+
+                if (_scenarioContext.GetWebDriver().FindElement(By.Id("bulk-action-menu-button")).Displayed)
+                {
+                    Utilities.HoverClick(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.Id("bulk-action-menu-button")));
+                    Utilities.HoverClick(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.XPath("//*[@class='dropdown-menu dropdown-menu-right show']/a[contains(text(), 'Delete')]")));
+                    Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.Id("modalCancelButton")));
+                    var bulkActionOk = _scenarioContext.GetWebDriver().FindElement(By.Id("modalOkButton"));
+                    bulkActionOk.Click();
+                }
+                
+            }
+            while (itemsCheckBox.Count > 1);
+
+            if(itemsCheckBox.Count == 1)
+            {
+                _scenarioContext.GetWebDriver().FindElement(By.XPath("(//div[@class='summary d-flex flex-column flex-md-row']//a)[1]")).Click();
+                Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".item-label.d-flex.menu-configuration")));
+                _jobProfilesPage.ClickDelete();
+                _jobProfilesPage.ClickModalDelete();
+            }
         }
     }
 }

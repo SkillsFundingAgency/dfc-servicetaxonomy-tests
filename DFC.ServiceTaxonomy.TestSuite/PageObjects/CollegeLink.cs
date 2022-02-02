@@ -15,8 +15,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#UniqueTitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#Collegelink_Text_Text"));
+        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("CollegeLink_Text_Text"));
 
         public void EnterDescription(string description)
         {

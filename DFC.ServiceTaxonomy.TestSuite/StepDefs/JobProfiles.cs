@@ -2,6 +2,7 @@
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -46,8 +47,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly WhatYoullDoTab _whatYoullDoTab;
         private readonly CareersAndProgressionTab _careersAndProgressionTab;
         private readonly ContentTab _content;
-        private readonly JobProfilesPage _jobProfilesPage;
-
+        private readonly JobProfilesPage _jobProfilesPage; 
+        private readonly ManageContent _manageContent;
 
         public JobProfiles(ScenarioContext scenarioContext)
         {
@@ -82,6 +83,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _careersAndProgressionTab = new CareersAndProgressionTab(scenarioContext);
             _content = new ContentTab(scenarioContext);
             _jobProfilesPage = new JobProfilesPage(scenarioContext);
+            _manageContent = new ManageContent(scenarioContext);
         }
 
         [Given(@"I create the following number of Content Types")]
@@ -119,6 +121,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _sideNavigator.ClickSocCode();
                             _jobProfileSpecialism.EnterTitle("x2 SC");
                             _socCode.EnterDescription(descriptionText);
+                            _socCode.EnterOnetOccupationCode("29-1126.00");
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                         }
                         break;
@@ -416,12 +419,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _content.TickUntick(tickBox);
         }
 
-        [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Content tab")]
-        public void GivenIEnterIntoTheFieldOfTheContentTab(string textToEnter, string field)
-        {
-            _content.TextEntry(textToEnter, field);
-        }
-
         [Given(@"I select ""(.*)"" from the ""(.*)"" dropdown field of the Content tab")]
         public void GivenISelectFromTheDropdownFieldOfTheContentTab(string option, string field)
         {
@@ -437,24 +434,24 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I click the Save Draft and Continue button")]
         public void GivenIClickTheSaveDraftAndContinueButton()
         {
-            _jobProfilesPage.ClickSaveDraftAndContinue);
+            _jobProfilesPage.ClickSaveDraftAndContinue();
         }
 
         [When(@"I click the Publish and Exit button after entering a comment")]
         public void WhenIClickThePublishAndExitButtonAfterEnteringAComment()
         {
             _content.DisplayContent();
-            _content.TextEntry("test");
+            _content.TextEntry("auto test");
             _jobProfilesPage.PublishAndExit();
         }
 
         [Then(@"the Job profile is created")]
         public void ThenTheJobProfileIsCreated()
         {
-            
+            Assert.True(_manageContent.ItemsCompare(), "This particular item title has not been found");
+
+            _manageContent.CleanUpManageContent();
         }
-
-
     }
 
     public class ContentTypes

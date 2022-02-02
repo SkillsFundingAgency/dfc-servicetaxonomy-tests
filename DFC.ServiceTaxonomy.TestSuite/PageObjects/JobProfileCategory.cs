@@ -15,9 +15,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#UniqueTitlePart_Title"));
+        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
         IWebElement linkJobProfileSpecialism => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile category')]"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#Jobprofilecategory_Description_Text"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfileCategory_Description_Text"));
 
         public void EnterDescription(string description)
         {

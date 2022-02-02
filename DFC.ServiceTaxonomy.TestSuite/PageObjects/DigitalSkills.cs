@@ -16,12 +16,15 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             _scenarioContext = context;
         }
 
-        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#TitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#Digitalskills_Description_Text"));
+        public static string JobProfileTitle { get; set; }
+
+        IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("TitlePart_Title"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("DigitalSkills_Description_Text"));
 
         public void EnterTitle(string contentItemInitials)
         {
-            fldTitle.SendKeys("Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString());
+            JobProfileTitle = "Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString();
+            fldTitle.SendKeys(JobProfileTitle);
         }
 
         public void EnterDescription(string description)

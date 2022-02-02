@@ -8,7 +8,7 @@ using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 
 using Newtonsoft.Json;
-
+using OpenQA.Selenium;
 using OrchardCore.ContentManagement;
 
 using TechTalk.SpecFlow;
@@ -119,7 +119,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
                 }
             }
         }
-
 
         [AfterFeature("webtest", Order = 20)]
         public static void CloseWebDriver()

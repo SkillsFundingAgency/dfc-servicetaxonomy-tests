@@ -17,8 +17,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfileSpecialism_Description_Text"));
-        IWebElement btnSaveDraftAndContinue => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".draft-continue"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfileSpecialism_Description_Text"));
+        IWebElement btnSaveDraftAndContinue => _scenarioContext.GetWebDriver().FindElement(By.ClassName("draft-continue"));
         
         public void EnterTitle(string contentItemInitials)
         {

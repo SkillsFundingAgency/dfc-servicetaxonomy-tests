@@ -24,6 +24,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             action.Perform();
         }
 
+        public static void HoverClick(IWebDriver driver, IWebElement elementLocator)
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(elementLocator);
+            action.Click();
+            action.Perform();
+        }
+
         public static void ScrollIntoView(IWebDriver driver, IWebElement elementLocator)
         {
             IJavaScriptExecutor js = driver as IJavaScriptExecutor;
@@ -34,6 +42,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementToBeClickable(elementLocator));
+        }
+
+        public static bool isElementDisplayed(IWebDriver driver, By locator)
+        {
+            return driver.FindElement(locator).Displayed;
         }
     }
 }
