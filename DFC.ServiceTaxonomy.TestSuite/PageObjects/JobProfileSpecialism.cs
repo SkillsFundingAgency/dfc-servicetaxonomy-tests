@@ -19,7 +19,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
         IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfileSpecialism_Description_Text"));
         IWebElement btnSaveDraftAndContinue => _scenarioContext.GetWebDriver().FindElement(By.ClassName("draft-continue"));
-        
+        IWebElement btnPublishAndContinue => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn.btn-success.publish"));
+
         public void EnterTitle(string contentItemInitials)
         {
             fldTitle.SendKeys("Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString());
@@ -34,6 +35,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public void ClickSaveDraftAndContinue()
         {
             btnSaveDraftAndContinue.Click();
+        }
+
+        public void ClickPublishAndContinue()
+        {
+            btnPublishAndContinue.Click();
         }
     }
 }

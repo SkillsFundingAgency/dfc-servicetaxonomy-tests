@@ -104,6 +104,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 JPS");
                             _jobProfileSpecialism.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Job profile category":
@@ -113,6 +114,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 JPC");
                             _jobProfileCategory.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "SOC code":
@@ -123,6 +125,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _socCode.EnterDescription(descriptionText);
                             _socCode.EnterOnetOccupationCode("29-1126.00");
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Working hours detail":
@@ -132,6 +135,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 WHD");
                             _workingHoursDetail.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Working pattern detail":
@@ -141,6 +145,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 WPD");
                             _workingPatternDetail.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Working patterns":
@@ -150,6 +155,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 WP");
                             _workingPatterns.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "University entry requirements":
@@ -159,16 +165,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 UER");
                             _universityEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "University requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            
                             _sideNavigator.ClickUniversityRequirements();
                             _jobProfileSpecialism.EnterTitle("x2 UR");
                             _universityRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "University link":
@@ -178,6 +185,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 UL");
                             _universityLinks.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "College entry requirements":
@@ -187,6 +195,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 CER");
                             _collegeEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "College requirements":
@@ -197,6 +206,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 CR");
                             _collegeRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break; 
                     case "College link":
@@ -206,6 +216,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 CL");
                             _collegeLink.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Apprenticeship entry requirements":
@@ -215,6 +226,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 AER");
                             _apprenticeshipEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Apprenticeship requirements":
@@ -224,6 +236,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 AR");
                             _apprenticeshipRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Apprenticeship link":
@@ -233,6 +246,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 AL");
                             _apprenticeshipLink.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Registration":
@@ -242,6 +256,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 Reg");
                             _registration.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Restriction":
@@ -251,6 +266,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 Res");
                             _restriction.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Digital skills":
@@ -260,6 +276,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _digitalSkills.EnterTitle("x2 DS");
                             _digitalSkills.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Location":
@@ -269,6 +286,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 Loc");
                             _location.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Environment":
@@ -278,6 +296,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 Env");
                             _environment.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                     case "Uniform":
@@ -287,6 +306,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                             _jobProfileSpecialism.EnterTitle("x2 Uni");
                             _uniform.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
+                            _jobProfileSpecialism.ClickPublishAndContinue();
                         }
                         break;
                 }

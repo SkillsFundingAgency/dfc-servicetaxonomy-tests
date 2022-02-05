@@ -254,22 +254,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         IList<IWebElement> all;
-        int i;
         String[] allText;
-
-        public string[] GetManageContentTitles()
-        {
-            all = _scenarioContext.GetWebDriver().FindElements(By.CssSelector(".contentitem.mr-2 > a"));
-            String[] allText = new String[all.Count];
-            i = 0;
-
-            foreach (IWebElement element in all)
-            {
-                allText[i++] = element.Text;
-            }
-
-            return allText;
-        }
 
         public bool ItemsCompare()
         {
