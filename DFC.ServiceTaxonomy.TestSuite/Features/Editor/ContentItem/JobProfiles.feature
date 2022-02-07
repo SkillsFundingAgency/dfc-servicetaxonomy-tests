@@ -5,7 +5,7 @@ Background:
 	Given I logon to the editor
 	And I create the following number of Content Types
 	| Content Type                      | number |
-	| Job profile specialism            | 1      |
+	| Job profile specialism            | 2      |
 	| Job profile category              | 2      |
 	| SOC code                          | 2      |
 	| Working hours detail              | 2      |
@@ -25,7 +25,7 @@ Background:
 	| Digital skills                    | 2      |
 	| Location                          | 2      |
 	| Environment                       | 2      |
-	| Uniform                           | 1      |
+	| Uniform                           | 2      |
 
 Scenario Outline: Add Job Profile Content Item
 	And I start a new Job Profile type
@@ -58,13 +58,13 @@ Scenario Outline: Add Job Profile Content Item
 	And I enter "Test data for field" into the "College relevant subjects" field of the How to become tab
 	And I enter "Test data for field" into the "College further route info" field of the How to become tab
 	And I select option "1" from the "College entry requirements" dropdown field of the How to become tab
-	And I select option "1" from the "Related College requirements" dropdown field of the How to become tab
-	And I select option "1" from the "Related College links" dropdown field of the How to become tab
+	And I select option "1" from the "Related college requirements" dropdown field of the How to become tab
+	And I select option "1" from the "Related college links" dropdown field of the How to become tab
 	And I enter "Test data for field" into the "Apprenticeship relevant subjects" field of the How to become tab
 	And I enter "Test data for field" into the "Apprenticeship further route info" field of the How to become tab
 	And I select option "1" from the "Apprenticeship entry requirements" dropdown field of the How to become tab
-	And I select option "1" from the "Related Apprenticeship requirements" dropdown field of the How to become tab
-	And I select option "1" from the "Related Apprenticeship links" dropdown field of the How to become tab
+	And I select option "1" from the "Related apprenticeship requirements" dropdown field of the How to become tab
+	And I select option "1" from the "Related apprenticeship links" dropdown field of the How to become tab
 	And I enter "Test data for field" into the "Work" field of the How to become tab
 	And I enter "Test data for field" into the "Volunteering" field of the How to become tab
 	And I enter "Test data for field" into the "Direct application" field of the How to become tab

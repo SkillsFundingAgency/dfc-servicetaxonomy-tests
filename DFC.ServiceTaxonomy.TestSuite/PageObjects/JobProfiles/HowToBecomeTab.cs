@@ -116,7 +116,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                 case "College further route info":
                     txtfldCollegeFurtherRouteInfo.SendKeys(textToEnter);
                     break;
-                case "Apprenticeship relevent subjects":
+                case "Apprenticeship relevant subjects":
                     txtfldApprenticeshipReleventSubjects.SendKeys(textToEnter);
                     break;
                 case "Apprenticeship further route info":
