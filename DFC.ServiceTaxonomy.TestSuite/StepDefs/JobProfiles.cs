@@ -92,6 +92,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             var contents = table.CreateSet<ContentTypes>();
             string descriptionText = "This is the test for content item with title ";
 
+            _sideNavigator.ClickSideNavNew();
+
             foreach (ContentTypes contentType in contents)
             {
                 switch (contentType.contentType)
@@ -99,7 +101,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "Job profile specialism":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            _sideNavigator.ClickSideNavNew();
                             _sideNavigator.ClickJobProfileSpecialism();
                             _jobProfileSpecialism.EnterTitle("x2 JPS");
                             _jobProfileSpecialism.EnterDescription(descriptionText);
@@ -469,9 +470,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void ThenTheJobProfileIsCreated()
         {
             Assert.True(_manageContent.ItemsCompare(), "This particular item title has not been found");
+        }
+
+        [Then(@"the job profile is in ""(.*)"" status")]
+        public void ThenTheJobProfileIsInStatus(string contentItemTypeStatus)
+        {
+            Assert.IsTrue(_manageContent.VerifyContentItemTypeStatus(contentItemTypeStatus), "The content item,type is not in " + contentItemTypeStatus + "status.");
 
             _manageContent.CleanUpManageContent();
         }
+
     }
 
     public class ContentTypes

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using TechTalk.SpecFlow;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
+using System.Threading;
+using DFC.ServiceTaxonomy.TestSuite.Helpers;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
@@ -16,6 +18,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         IWebElement linkNew => _scenarioContext.GetWebDriver().FindElement(By.Id("new"));
+        //IWebElement linkNew => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#new > a > span:nth-of-type(2)"));
         IWebElement linkJobProfileSpecialism => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile specialism')]"));
         IWebElement linkJobProfileCategory => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile category')]"));
         IWebElement linkSocCode => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'SOC code')]"));
@@ -42,6 +45,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public void ClickSideNavNew()
         {
             linkNew.Click();
+            //Utilities.javascriptClick(_scenarioContext.GetWebDriver(), By.Id("new"));
         }
 
         public void ClickJobProfileSpecialism()

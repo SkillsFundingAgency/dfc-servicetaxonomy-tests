@@ -93,3 +93,4 @@ Scenario Outline: Add Job Profile Content Item
 	And I click the Save Draft and Continue button
 	When I click the Publish and Exit button after entering a comment
 	Then the Job profile is created
+	And the job profile is in "Published" status

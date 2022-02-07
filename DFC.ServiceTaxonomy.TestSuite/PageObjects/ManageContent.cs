@@ -315,6 +315,20 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 _jobProfilesPage.ClickModalDelete();
             }
         }
+
+        public bool VerifyContentItemTypeStatus(string status)
+        {
+            bool contentStatus = false;
+            
+            switch(status)
+            {
+                case "Published":
+                    contentStatus = _scenarioContext.GetWebDriver().FindElement(By.XPath("//*[@class='contentitem mr-2']//a[contains(text(), '" + DigitalSkills.JobProfileTitle + "')]//following::div[2]/span[@data-original-title='Published']")).Displayed;
+                    break;
+            }
+
+            return contentStatus;
+        }
     }
 }
 
