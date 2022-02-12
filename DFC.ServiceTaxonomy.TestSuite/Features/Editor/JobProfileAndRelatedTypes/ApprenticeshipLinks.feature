@@ -9,5 +9,5 @@ Scenario: Verify ApprenticeshipLinks content items
 	When I click on the link with text <Title_en>
 	Then I see <Title_en> as unique Title
 	And I see <Id> in Uri field
-	And I see <Url_en> in url field
-	And I see <Text_en> in text field
+	And I see <Url_en> in ApprenticeshipLink url field
+	And I see <Text_en> in ApprenticeshipLink text field

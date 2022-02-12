@@ -5,19 +5,19 @@ using TechTalk.SpecFlow;
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs.CommonFieldsSteps
 {
     [Binding]
-    public class InfoHtmlSteps
+    public class UrlFieldSteps
     {
-        private readonly InfoHtml _info;
+        private readonly UrlField _urlField;
 
-        public InfoHtmlSteps(InfoHtml info)
+        public UrlFieldSteps(UrlField urlField)
         {
-            _info = info;
+            _urlField = urlField;
         }
 
-        [Then(@"I see (.*) in (.*) info field")]
+        [Then(@"I see (.*) in (.*) url field")]
         public void ThenISeeInInfoField(string description, string type)
         {
-            _info.GetValue(type)
+            _urlField.GetValue(type)
                 .Should().Be(description);
         }
     }
