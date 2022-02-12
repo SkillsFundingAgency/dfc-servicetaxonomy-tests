@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using DFC.ServiceTaxonomy.TestSuite.Extensions;
+﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
 using OpenQA.Selenium;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
@@ -47,6 +45,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return this;
         }
 
+        public void SelectFirstMatchedLink(string text)
+        {
+            _scenarioContext.GetWebDriver().FindElement(By.LinkText(text)).Click();
+        }
 
         public ManageContent DeleteAllItemsOfType(string type)
         {
@@ -303,11 +305,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                     var bulkActionOk = _scenarioContext.GetWebDriver().FindElement(By.Id("modalOkButton"));
                     bulkActionOk.Click();
                 }
-                
+
             }
             while (itemsCheckBox.Count > 1);
 
-            if(itemsCheckBox.Count == 1)
+            if (itemsCheckBox.Count == 1)
             {
                 _scenarioContext.GetWebDriver().FindElement(By.XPath("(//div[@class='summary d-flex flex-column flex-md-row']//a)[1]")).Click();
                 Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".item-label.d-flex.menu-configuration")));
@@ -319,8 +321,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public bool VerifyContentItemTypeStatus(string status)
         {
             bool contentStatus = false;
-            
-            switch(status)
+
+            switch (status)
             {
                 case "Published":
                     contentStatus = _scenarioContext.GetWebDriver().FindElement(By.XPath("//*[@class='contentitem mr-2']//a[contains(text(), '" + DigitalSkills.JobProfileTitle + "')]//following::div[2]/span[@data-original-title='Published']")).Displayed;
