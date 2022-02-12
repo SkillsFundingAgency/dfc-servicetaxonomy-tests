@@ -1,27 +1,35 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
     class ApprenticeshipLink
     {
-        private ScenarioContext _scenarioContext;
+        private readonly ScenarioContext _scenarioContext;
         public ApprenticeshipLink(ScenarioContext context)
         {
             _scenarioContext = context;
         }
 
         IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("ApprenticeshipLink_Text_Text"));
+        IWebElement fldText => _scenarioContext.GetWebDriver().FindElement(By.Id("ApprenticeshipLink_Text_Text"));
+        IWebElement fldUrl => _scenarioContext.GetWebDriver().FindElement(By.Id("ApprenticeshipLink_URL_Text"));
 
         public void EnterDescription(string description)
         {
             var title = fldTitle.GetAttribute("value");
-            fldDescription.SendKeys(description + title);
+            fldText.SendKeys(description + title);
+        }
+
+        public string GetText()
+        {
+            return fldText.GetAttribute("value");
+        }
+
+        public string GetUrl()
+        {
+            return fldUrl.GetAttribute("value");
         }
     }
 }

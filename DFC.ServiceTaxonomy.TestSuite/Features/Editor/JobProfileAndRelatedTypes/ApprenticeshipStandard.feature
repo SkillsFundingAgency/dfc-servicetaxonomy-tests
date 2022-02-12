@@ -9,5 +9,5 @@ Scenario: Verify ApprenticeshipStandards content items
 	When I click on the link with text <Title_en>
 	Then I see <Title_en> as unique Title
 	And I see <Id> in Uri field
-	And I see <Description_en> in description field
+	And I see <Description_en> in ApprenticeshipStandard description field
 	And I see <LARScode> in LARS code field

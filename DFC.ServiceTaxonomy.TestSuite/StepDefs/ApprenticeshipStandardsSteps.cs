@@ -15,13 +15,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _page = new ApprenticeshipStandardsPage(scenarioContext);
         }
 
-        [Then(@"I see (.*) in description field")]
-        public void ThenISeeInDescriptionField(string description)
-        {
-            _page.GetDescription()
-                .Should().Be(description);
-        }
-
         [Then(@"I see (.*) in LARS code field")]
         public void ThenISeeInLARSCodeField(string larsCode)
         {
