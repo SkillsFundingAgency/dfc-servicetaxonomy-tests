@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\JobProfileAndRelatedTypes\CollegeEntryRequirements - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\JobProfileAndRelatedTypes\DynamicTitlePrefix - Copy.feature.cs" />
   </ItemGroup>
 
@@ -62,6 +63,10 @@
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\ApprenticeshipStandard.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\Uniform.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

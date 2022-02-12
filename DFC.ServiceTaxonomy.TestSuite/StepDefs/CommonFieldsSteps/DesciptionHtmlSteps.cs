@@ -5,17 +5,17 @@ using TechTalk.SpecFlow;
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs.CommonFieldsSteps
 {
     [Binding]
-    public class DesciptionSteps
+    public class DesciptionHtmlSteps
     {
-        private readonly Description _description;
+        private readonly DescriptionHtml _description;
 
-        public DesciptionSteps(Description description)
+        public DesciptionHtmlSteps(DescriptionHtml description)
         {
             _description = description;
         }
 
-        [Then(@"I see (.*) in (.*) description field")]
-        public void ThenISeeInDescriptionField(string description, string type)
+        [Then(@"I see (.*) in (.*) description html field")]
+        public void ThenISeeInDescriptionHtmlField(string description, string type)
         {
             _description.GetValue(type)
                 .Should().Be(description);
