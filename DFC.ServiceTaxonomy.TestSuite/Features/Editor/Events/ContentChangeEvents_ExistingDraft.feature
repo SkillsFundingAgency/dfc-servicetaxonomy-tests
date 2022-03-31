@@ -13,7 +13,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I save the draft item
 	#Then an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
@@ -27,7 +27,7 @@ Scenario: 13. An update to an existing draft document is succesful
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
 	| updated Shared Content | <p>Here it is now</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	And the data is present in the DRAFT Graph database
@@ -54,7 +54,7 @@ Scenario: 15. An existing draft content item is succesfully published
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
 	And I select the first item that is found
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
@@ -82,7 +82,7 @@ Scenario: 17. An existing draft content item is published from the content item 
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the "Title"
 	And I select the first item that is found
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	#And I select the "Publish" option for the first item that is found
 	Then the edit action completes succesfully

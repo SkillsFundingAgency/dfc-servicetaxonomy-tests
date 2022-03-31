@@ -13,7 +13,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	#Then an event of type "draft" has been issued to notify consumers of the change
 	#Given I check time of the latest event message
@@ -27,7 +27,6 @@ Scenario: 18. A new draft version of an existing, published content item is crea
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
 	| updated Shared Content | <p>Here it is now</p> |
-	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	And an event of type "Draft" has been issued to notify consumers of the change
@@ -43,7 +42,6 @@ Scenario: 19. A new draft version of an existing, published content item has val
 	And I Enter the following form data for "SharedContent"
 	| Title | Content              |
 	|       | <p>Here it is now</p> |
-	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 	And the intial data is present in the DRAFT Graph database
@@ -58,7 +56,7 @@ Scenario: 20. Updates to an existing published content item are published succes
 	And I Enter the following form data for "SharedContent"
 	| Title                  | Content              |
 	| updated Shared Content | <p>Here it is now</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change
@@ -74,7 +72,7 @@ Scenario: 21. Updates to an existing published content item fails to publish wit
 	And I Enter the following form data for "SharedContent"
 	| Title | Content              |
 	|       | <p>Here it is now</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then an "EmptyField" validation error is shown for "Title"
 	And the intial data is present in the DRAFT Graph database

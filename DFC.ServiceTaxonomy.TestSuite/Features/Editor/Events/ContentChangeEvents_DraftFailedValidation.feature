@@ -13,7 +13,6 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title | Content          |
 	|       | <p>Here it is<p> |
-	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then an "EmptyField" validation error is shown for "Title"
 
@@ -22,7 +21,6 @@ Scenario: 3. A succesful correction is made to a new draft with validation issue
 	Given I Enter the following form data for "SharedContent"
 	| Title       |
 	| Title Added |
-	And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the save action completes succesfully
 	And the data is present in the DRAFT Graph database
@@ -48,7 +46,6 @@ Scenario: 9. A succesful Publishing of new content item which had validation iss
 	Given I Enter the following form data for "SharedContent"
 	| Title       | 
 	| Title Added |
-	And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the edit action completes succesfully
 	And an event of type "Published" has been issued to notify consumers of the change

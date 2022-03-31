@@ -16,7 +16,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         IWebElement fldTitle => _scenarioContext.GetWebDriver().FindElement(By.Id("UniqueTitlePart_Title"));
-        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.ClassName("trumbowyg-editor"));
+        IWebElement fldDescription => _scenarioContext.GetWebDriver().FindElement(By.Id("Location_Description_Text"));
         
         public void EnterDescription(string description)
         {

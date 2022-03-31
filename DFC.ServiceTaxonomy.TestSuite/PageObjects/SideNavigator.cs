@@ -18,7 +18,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         }
 
         IWebElement linkNew => _scenarioContext.GetWebDriver().FindElement(By.Id("new"));
-        //IWebElement linkNew => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#new > a > span:nth-of-type(2)"));
         IWebElement linkJobProfileSpecialism => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile specialism')]"));
         IWebElement linkJobProfileCategory => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile category')]"));
         IWebElement linkSocCode => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'SOC code')]"));
@@ -41,11 +40,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement linkEnvironment => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Environment')]"));
         IWebElement linkUniform => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Uniform')]"));
         IWebElement linkJobProfile => _scenarioContext.GetWebDriver().FindElement(By.XPath("//span[contains(text(),'Job profile')]"));
+        IWebElement linkContent => _scenarioContext.GetWebDriver().FindElement(By.Id("content"));
+        IWebElement linkContentItem => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("span[title='Content Items'] + span"));
 
         public void ClickSideNavNew()
         {
             linkNew.Click();
-            //Utilities.javascriptClick(_scenarioContext.GetWebDriver(), By.Id("new"));
         }
 
         public void ClickJobProfileSpecialism()
@@ -178,6 +178,18 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         {
             WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("//span[contains(text(),'Job profile')]"));
             linkJobProfile.Click();
+        }
+
+        public void ClickContent()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("(//span[@class = 'icon' and @title = 'Audit Trail'])[1]//following-sibling::span[contains(text(),'Audit Trail')]"));
+            linkContent.Click();
+        }
+
+        public void ClickContentItem()
+        {
+            WebDriverExtension.WaitElementToBeClickable(_scenarioContext.GetWebDriver(), By.XPath("(//span[@class = 'icon' and @title = 'Audit Trail'])[1]//following-sibling::span[contains(text(),'Audit Trail')]"));
+            linkContentItem.Click();
         }
 
     }

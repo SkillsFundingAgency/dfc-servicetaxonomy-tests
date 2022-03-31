@@ -280,20 +280,21 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             return titlePresent;
         }
 
-        public void CleanUpManageContent()
+        public IList<IWebElement> ManageContentCount()
+        {
+            return _scenarioContext.GetWebDriver().FindElements(By.CssSelector("input[name='itemIds'] + label")).ToList();
+        }
+
+        public void CleanUpManageContent(string titleMidFix = "_Auto_")
         {
             string locator = "Options_SearchText";
-
-            IList<IWebElement> itemsCheckBox;
 
             do
             {
                 _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).Clear();
-                _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).SendKeys("_Auto_");
+                _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).SendKeys(titleMidFix);
                 _scenarioContext.GetWebDriver().FindElement(By.Id(locator)).SendKeys(Keys.Enter);
                 Utilities.HoverClick(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.Id("select-all")));
-
-                itemsCheckBox = _scenarioContext.GetWebDriver().FindElements(By.CssSelector("input[name='itemIds'] + label")).ToList();
 
                 if (_scenarioContext.GetWebDriver().FindElement(By.Id("bulk-action-menu-button")).Displayed)
                 {
@@ -305,9 +306,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                 }
                 
             }
-            while (itemsCheckBox.Count > 1);
+            while (ManageContentCount().Count > 1);
 
-            if(itemsCheckBox.Count == 1)
+            if (ManageContentCount().Count == 1)
             {
                 _scenarioContext.GetWebDriver().FindElement(By.XPath("(//div[@class='summary d-flex flex-column flex-md-row']//a)[1]")).Click();
                 Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".item-label.d-flex.menu-configuration")));

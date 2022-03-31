@@ -38,7 +38,7 @@ Scenario: Add a new shared content item
 	And I Enter the following form data for "SharedContent"
 	| Title              |  Content          |
 	| New Shared Content |  <p>Here it is</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
