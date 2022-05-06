@@ -26,8 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\Import\ImportRecipes - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\JobProfileAndRelatedTypes\CollegeEntryRequirements - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\JobProfileAndRelatedTypes\DynamicTitlePrefix - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Editor\JobProfileAndRelatedTypes\Restrictions - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +43,7 @@
     <PackageReference Include="OrchardCore.ContentManagement" Version="1.0.0-rc3" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.8000" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="100.0.4896.6000" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
     <PackageReference Include="SpecFlow" Version="3.9.52" />
     <PackageReference Include="SpecFlow.ExternalData" Version="3.9.52" />
@@ -58,11 +60,19 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\Import\ImportJobProfiles.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\ApprenticeshipEntryRequirements.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\ApprenticeshipStandard.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\UpdateContextualisedText.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
@@ -215,6 +225,12 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\Editor\Import\ImportJobProfiles.feature.cs">
+      <DependentUpon>ImportJobProfiles.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

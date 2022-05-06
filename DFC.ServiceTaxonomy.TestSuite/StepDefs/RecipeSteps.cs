@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using TechTalk.SpecFlow;
-using OpenQA.Selenium;
-using DFC.ServiceTaxonomy.TestSuite.PageObjects;
+
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Interfaces;
-using DFC.ServiceTaxonomy.TestSuite.Models;
-using DFC.ServiceTaxonomy.SharedResources.Helpers;
-using OrchardCore.Entities;
+
+using OpenQA.Selenium;
+
+using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 {
@@ -106,11 +102,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         }
 
+        [Given(@"I import (.*) into stax")]
+        public void GivenIImportIntoStax(string filePath)
+        {
+            LoadRecipeFile(filePath);
+        }
+
         public void LoadRecipeFile(string p0)
         {
             string error = "";
             try
-            { 
+            {
                 Console.WriteLine($"Loading recipe file: {p0}");
                 _scenarioContext.GetWebDriver().Navigate().GoToUrl(_scenarioContext.GetEnv().EditorBaseUrl + "/Admin/OrchardCore.Deployment/Import/Index");
                 var webElement = _scenarioContext.GetWebDriver().FindElement(By.XPath("/html/body/div[1]/div[3]/form/nav/ul/li/input"));
@@ -124,7 +126,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
                 if (serverError.Count > 0)
                 {
-
+                    Console.WriteLine($"Failed to import. Reason: {serverError[0].Text}");
                 }
                 /*else if (otherError.Count > 0)
                 {
