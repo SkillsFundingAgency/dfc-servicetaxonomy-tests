@@ -44,6 +44,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             wait.Until(ExpectedConditions.ElementToBeClickable(elementLocator));
         }
 
+        public static void WaitVisible(IWebDriver driver, By elementLocator)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(elementLocator));
+        }
+
         public static bool isElementDisplayed(IWebDriver driver, By locator)
         {
             return driver.FindElement(locator).Displayed;

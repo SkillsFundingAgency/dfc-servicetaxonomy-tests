@@ -452,6 +452,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _content.OptionSelection(option, field);
         }
 
+        [Then(@"I click the Save Draft and Continue button")]
         [Given(@"I click the Save Draft and Continue button")]
         public void GivenIClickTheSaveDraftAndContinueButton()
         {
