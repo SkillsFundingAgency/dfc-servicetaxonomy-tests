@@ -1,14 +1,8 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
-using DFC.ServiceTaxonomy.TestSuite.Helpers;
-using DFC.ServiceTaxonomy.TestSuite.PageObjects;
+﻿using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles;
+
 using NUnit.Framework;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -41,13 +35,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly PageObjects.Environment _environment;
         private readonly Uniform _uniform;
         private readonly MetaDataTab _metaDataTab;
-        private readonly HeaderTab _headerTab; 
-        private readonly HowToBecomeTab _howToBecomeTab; 
+        private readonly HeaderTab _headerTab;
+        private readonly HowToBecomeTab _howToBecomeTab;
         private readonly WhatItTakesTab _whatItTakesTab;
         private readonly WhatYoullDoTab _whatYoullDoTab;
         private readonly CareersAndProgressionTab _careersAndProgressionTab;
         private readonly ContentTab _content;
-        private readonly JobProfilesPage _jobProfilesPage; 
+        private readonly JobProfilesPage _jobProfilesPage;
         private readonly ManageContent _manageContent;
 
         public JobProfiles(ScenarioContext scenarioContext)
@@ -202,14 +196,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                     case "College requirements":
                         for (int i = 0; i < contentType.number; i++)
                         {
-                            
+
                             _sideNavigator.ClickCollegeRequirements();
                             _jobProfileSpecialism.EnterTitle("x2 CR");
                             _collegeRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
                         }
-                        break; 
+                        break;
                     case "College link":
                         for (int i = 0; i < contentType.number; i++)
                         {
@@ -349,7 +343,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _headerTab.DisplayHeaderTab();
         }
-        
+
         [Given(@"I enter ""(.*)"" into the ""(.*)"" field of the Header tab")]
         public void GivenIEnterIntoTheFieldOfTheHeaderTab(string textToEnter, string field)
         {
@@ -382,6 +376,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
         [Given(@"I switch to the What it takes tab")]
         public void GivenISwitchToTheWhatItTakesTab()
+        {
+            _whatItTakesTab.DisplayWhatItTakesTab();
+        }
+
+        [When(@"I switch to the What it takes tab")]
+        public void WhenISwitchToTheWhatItTakesTab()
         {
             _whatItTakesTab.DisplayWhatItTakesTab();
         }
@@ -480,6 +480,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _manageContent.CleanUpManageContent();
         }
 
+        [When(@"I order (.*) at (.*)")]
+        public void WhenIOrderAt(string skill, int index)
+        {
+            _jobProfilesPage.SetSkillAt(skill, index);
+        }
+
+
     }
 
     public class ContentTypes
@@ -488,6 +495,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public int number;
     }
 
-    
+
 
 }
