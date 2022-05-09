@@ -16,6 +16,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly GetData _getData;
         private readonly ContentTab _content;
         private readonly JobProfilesPage _jobProfilesPage;
+        private readonly StartPage _startPage;
         private string _dataFile;
         private string _contentType;
         private string _jobProfile;
@@ -30,6 +31,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _whatItTakesTab = new WhatItTakesTab(context);
             _content = new ContentTab(context);
             _jobProfilesPage = new JobProfilesPage(context);
+            _startPage = new StartPage(context);
         }
 
         [Given(@"I search under (.*) for the text (.*)")]
@@ -76,6 +78,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             //Assert.IsTrue(_whatItTakesTab.RelatedSkillsInSequence, "Related skill not in sequence for " + _jobProfile);
             _skillsInSequence = _whatItTakesTab.RelatedSkillsInSequence;
+            //_startPage.NavigateTo("/Admin/Contents/ContentItems");
         }
 
         [Then(@"if it is not then I rearrange them to be the same")]
@@ -87,7 +90,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             {
                 _whatItTakesTab.RearrangeRelatedSkill();
                 _whatItTakesTab.RelatedSkillInSequence(_contentType, _jobProfile, _relatedSkills);
-                Assert.IsTrue(_whatItTakesTab.RelatedSkillsInSequence, "Related skill not in sequence for " + _jobProfile);
+                Assert.IsTrue(_whatItTakesTab.RelatedSkillsInSequence, "Related skills not in sequence for '" + _jobProfile + "'.");
             }
         }
 
@@ -100,6 +103,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                 _content.DisplayContent();
                 _content.TextEntry("Related skill arrangement check for '" + jobProfile + "' job profile.");
                 _jobProfilesPage.PublishAndContinue();
+                //_startPage.NavigateTo("/Admin/Contents/ContentItems");
             }
         }
     }

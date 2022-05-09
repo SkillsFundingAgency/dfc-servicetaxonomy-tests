@@ -28,6 +28,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement txtfldOtherRequirements => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("label[for='JobProfile_Otherrequirements_Html'] + div > .trumbowyg-editor"));
         IWebElement dropdownDigitalSkills => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_DigitalSkills_ContentItemIds + div > .multiselect__tags"));
         IWebElement inputRelatedSkillsDropDown => _scenarioContext.GetWebDriver().FindElement(By.XPath("//input[@id='JobProfile_Relatedskills_ContentItemIds']//following::div[3]"));
+        IWebElement inputRelatedSkillsDropDownCSS => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("input[id='JobProfile_Relatedskills_ContentItemIds'] + div > div:nth-of-type(2)"));
         IWebElement inputRelatedSkills => _scenarioContext.GetWebDriver().FindElement(By.XPath("//input[@id='JobProfile_Relatedskills_ContentItemIds']//following::div[3]/input[@type='text']"));
 
 
@@ -81,6 +82,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         public bool RelatedSkillInSequence(string contentType, string jobProfile, IList<RelatedSkills> relatedSkills)
         {
             Utilities.Wait(_scenarioContext.GetWebDriver(), _scenarioContext.GetWebDriver().FindElement(By.CssSelector("button[value='submit.SaveAndContinue']")));
+            Thread.Sleep(250);
             //Utilities.ScrollIntoView(_scenarioContext.GetWebDriver(), inputRelatedSkillsDropDown);
 
             ExpectedRelatedSkillRecord = SingleRelatedSkillRecord(jobProfile, relatedSkills);
@@ -113,10 +115,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                 foreach (string relatedSkill in ExpectedRelatedSkillRecord)
                 {
                     var xxx = relatedSkill;
-                    inputRelatedSkillsDropDown.Click();
+                    //Utilities.javascriptClick(_scenarioContext.GetWebDriver(), By.XPath("//input[@id='JobProfile_Relatedskills_ContentItemIds']//following::div[3]"));
+                    //Utilities.javascriptClick(_scenarioContext.GetWebDriver(), By.CssSelector("input[id='JobProfile_Relatedskills_ContentItemIds'] + div > div:nth-of-type(2)"));
+                    //Thread.Sleep(750);
+                    inputRelatedSkillsDropDownCSS.Click();
                     inputRelatedSkills.SendKeys(relatedSkill);
                     //Utilities.WaitVisible(_scenarioContext.GetWebDriver(), By.XPath("//input[@id='JobProfile_Relatedskills_ContentItemIds']//following-sibling::div/div[3]//li/span"));
-                    Thread.Sleep(750);
+                    Thread.Sleep(550);
                     _scenarioContext.GetWebDriver().FindElement(By.XPath("//input[@id='JobProfile_Relatedskills_ContentItemIds']//following-sibling::div/div[3]//li/span")).Click();
                 }
             }

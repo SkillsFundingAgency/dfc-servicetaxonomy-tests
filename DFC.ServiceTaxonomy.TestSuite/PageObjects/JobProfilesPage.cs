@@ -3,7 +3,7 @@ using DFC.ServiceTaxonomy.TestSuite.Helpers;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
@@ -56,9 +56,34 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void SetSkillAt(string skillName, int order)
         {
-            IWebElement from = _scenarioContext.GetWebDriver().FindElement(By.XPath("*[data-field=\"Relatedskills\"]/div[1]/ul/div/li[1]/div[1]"));
-            IWebElement to = _scenarioContext.GetWebDriver().FindElement(By.Id("column-b"));
+            //IWebElement from = _scenarioContext.GetWebDriver().FindElement(By.XPath("*[data-field=\"Relatedskills\"]/div[1]/ul/div/li[1]/div[1]"));
+            //IWebElement to = _scenarioContext.GetWebDriver().FindElement(By.Id("column-b"));
+            //builder.DragAndDrop(from, to).Perform();
+            
+            IWebElement from = _scenarioContext.GetWebDriver().FindElement(By.XPath("//div[@data-field='Relatedskills']/div[1]//li/div/span[text()='" + skillName + "']/../.."));
+            IWebElement to = _scenarioContext.GetWebDriver().FindElement(By.XPath("//div[@data-field='Relatedskills']/div[1]//ul/div/li[" + order + "]"));
+
             builder.DragAndDrop(from, to).Perform();
+
+            //Actions action = new Actions(_scenarioContext.GetWebDriver());
+            //Thread.Sleep(750);
+            //Utilities.ScrollToMiddle(_scenarioContext.GetWebDriver(), from);
+            //Thread.Sleep(750);
+            //action.ClickAndHold(from);
+            //Utilities.ScrollToMiddle(_scenarioContext.GetWebDriver(), to);
+            //Thread.Sleep(750);
+            //action.MoveToElement(to);
+            //action.Release(from);
+            //action.Build().Perform();
+            //action.Perform();
+
+            //Actions action = new Actions(_scenarioContext.GetWebDriver());
+            //var dragAndDrop = action.ClickAndHold(from).MoveToElement(to).Release(from).Build();
+            //dragAndDrop.Perform();
+
+
+            //IAction dragAndDrop1 = action.ClickAndHold(from).MoveToElement(to).Release(from).Build();
+            //dragAndDrop1.Perform();
         }
     }
 }

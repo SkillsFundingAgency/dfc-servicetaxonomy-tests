@@ -28,6 +28,6 @@ Scenario: Update Contextualised Text content items
 	And I order <Skill-18> at 18
 	And I order <Skill-19> at 19
 	And I order <Skill-20> at 20
-	And I enter <Contextualised_en> in the the contextualised field
-	And I publish the item
-	Then the item is published succesfully
+	#And I enter <Contextualised_en> in the the contextualised field
+	#And I publish the item
+	#Then the item is published succesfully

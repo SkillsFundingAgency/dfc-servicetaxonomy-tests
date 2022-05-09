@@ -38,6 +38,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
             js.ExecuteScript("arguments[0].scrollIntoView(true);", elementLocator);
         }
 
+        public static void ScrollToMiddle(IWebDriver driver, IWebElement elementLocator)
+        {
+            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].scrollIntoView({block: 'center'});", elementLocator);
+        }
+
         public static void Wait(IWebDriver driver, IWebElement elementLocator)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
