@@ -1,9 +1,9 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
+
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using OpenQA.Selenium.Interactions;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
@@ -24,6 +24,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement btnDiscardDraft => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(""));
         IWebElement btnDelete => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".content-edit-additional-actions-container > div:nth-of-type(3) a"));
         IWebElement btnModalDelete => _scenarioContext.GetWebDriver().FindElement(By.Id("modalOkButton"));
+
+        Actions builder => new Actions(_scenarioContext.GetWebDriver());
 
         public void PublishAndContinue()
         {
@@ -50,6 +52,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         public void ClickModalDelete()
         {
             btnModalDelete.Click();
+        }
+
+        public void SetSkillAt(string skillName, int order)
+        {
+            IWebElement from = _scenarioContext.GetWebDriver().FindElement(By.XPath("*[data-field=\"Relatedskills\"]/div[1]/ul/div/li[1]/div[1]"));
+            IWebElement to = _scenarioContext.GetWebDriver().FindElement(By.Id("column-b"));
+            builder.DragAndDrop(from, to).Perform();
         }
     }
 }
