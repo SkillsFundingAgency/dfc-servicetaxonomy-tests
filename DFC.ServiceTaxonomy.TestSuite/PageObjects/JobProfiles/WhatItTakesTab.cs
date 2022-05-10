@@ -99,7 +99,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         public bool GetSkillsInOrder()
         {
-            return ScenarioContentExtension.GetOrDefault<bool>(_scenarioContext, "Related skills");
+            return _scenarioContext.GetOrDefault<bool>("Related skills");
         }
     }
 }

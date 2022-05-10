@@ -1005,6 +1005,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         }
 
         #endregion
+
         #region when steps
         [When(@"I publish the item")]
         public void WhenIPublishTheItem()
@@ -1049,12 +1050,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _modalOkCancel.ConfirmAction();
         }
         #endregion
+
         #region then steps
         [Then(@"the item is published succesfully")]
         public void ThenTheItemIsPublishedSuccesfully()
         {
-            var isInOrder = ScenarioContentExtension.GetOrDefault<bool>(_scenarioContext, "Related skills");
-            if (isInOrder) return;
+            if (_scenarioContext.GetOrDefault<bool>("Related skills"))
+                return;
 
             _addContentItemBase.ConfirmPublishSuccess().Should().BeTrue();
         }

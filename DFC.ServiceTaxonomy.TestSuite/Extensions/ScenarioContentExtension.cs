@@ -39,7 +39,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set(value, key);
         }
 
-        public static T GetOrDefault<T>(ScenarioContext context, string key)
+        public static T GetOrDefault<T>(this ScenarioContext context, string key)
         {
             return context.ContainsKey(key) ? context.Get<T>(key) : default;
         }

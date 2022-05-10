@@ -4,7 +4,6 @@ Feature: UpdateRelatedSkillsOrder
 @DataSource:Data/JobProfileSkills.xlsx 
 Scenario: Update Contextualised Text content items 
 	Given I logon to the editor
-	And I Navigate to "/Admin/Contents/ContentItems" 
 	And I search under JobProfile for the text <Title>
 	When I click on the link with text <Title>
 	And I switch to the What it takes tab
