@@ -1,8 +1,8 @@
-﻿using DFC.ServiceTaxonomy.TestSuite;
+﻿
 using OpenQA.Selenium;
-using System;
+
 using System.Collections.Generic;
-using System.Text;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.Extensions
@@ -39,6 +39,11 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context.Set(value, key);
         }
 
+        public static T GetOrDefault<T>(ScenarioContext context, string key)
+        {
+            return context.ContainsKey(key) ? context.Get<T>(key) : default;
+        }
+
         public static T Get<T>(SpecFlowContext context, string key)
         {
             return context.Get<T>(key);
@@ -51,7 +56,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             {
                 failures = (Dictionary<string, string>)context[Constants.featureFailure];
             }
-            else 
+            else
             {
                 failures = new Dictionary<string, string>();
             }
@@ -59,7 +64,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.Extensions
             context[Constants.featureFailure] = failures;
         }
 
-        public static Dictionary<string,string> GetFeatureFailure(this SpecFlowContext context)
+        public static Dictionary<string, string> GetFeatureFailure(this SpecFlowContext context)
         {
             return context.ContainsKey(Constants.featureFailure) ? (Dictionary<string, string>)context[Constants.featureFailure] : new Dictionary<string, string>();
         }

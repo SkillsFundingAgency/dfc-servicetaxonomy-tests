@@ -452,6 +452,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _content.OptionSelection(option, field);
         }
 
+        [Then(@"I click the Save Draft and Continue button")]
         [Given(@"I click the Save Draft and Continue button")]
         public void GivenIClickTheSaveDraftAndContinueButton()
         {
@@ -461,6 +462,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [When(@"I click the Publish and Exit button after entering a comment")]
         public void WhenIClickThePublishAndExitButtonAfterEnteringAComment()
         {
+            if (_whatItTakesTab.GetSkillsInOrder()) return;
+
             _content.DisplayContent();
             _content.TextEntry("auto test");
             _jobProfilesPage.PublishAndExit();
@@ -489,6 +492,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _whatItTakesTab.OptionSelection(option, field);
         }
+
+        [When(@"I check order or rearrange list items (.*)")]
+        public void WhenICheckOrderOrRearrangeListItems(string list)
+        {
+            var skills = list.Split("|");
+            _whatItTakesTab.CheckOrRearrangeSkills(skills);
+        }
+
 
         [Then(@"the Job profile is created")]
         public void ThenTheJobProfileIsCreated()

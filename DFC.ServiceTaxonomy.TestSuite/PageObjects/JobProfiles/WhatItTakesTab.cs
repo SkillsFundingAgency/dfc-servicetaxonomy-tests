@@ -1,9 +1,13 @@
-﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
+﻿
+using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
 
 using OpenQA.Selenium;
 
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 
 using TechTalk.SpecFlow;
 
@@ -74,6 +78,33 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                 foreach (var btn in btnDeleteRelatedSkills)
                     btn.Click();
         }
-    }
 
+        public void CheckOrRearrangeSkills(string[] skills)
+        {
+            Thread.Sleep(500);
+            var items = _driver.FindElements(By.CssSelector("div[data-field='Relatedskills'] > div:nth-of-type(1) li span:nth-of-type(1)")).Select(c => c.Text.Trim()).ToArray();
+            if (items.SequenceEqual(skills))
+            {
+                _scenarioContext.Set(true, "Related skills");
+                return;
+            }
+
+            RemoveSkills();
+            foreach (var skill in skills)
+            {
+                OptionSelection(skill, "Related skills");
+            }
+            _scenarioContext.Set(false, "Related skills");
+        }
+
+        public void SetSkillsInOrder(bool isInOrder)
+        {
+            _scenarioContext["SkillsInOrder"] = isInOrder;
+        }
+
+        public bool GetSkillsInOrder()
+        {
+            return ScenarioContentExtension.GetOrDefault<bool>(_scenarioContext, "Related skills");
+        }
+    }
 }

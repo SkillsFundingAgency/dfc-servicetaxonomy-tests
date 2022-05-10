@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-
-using DFC.ServiceTaxonomy.SharedResources.Helpers;
+﻿using DFC.ServiceTaxonomy.SharedResources.Helpers;
 using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Interfaces;
 using DFC.ServiceTaxonomy.TestSuite.Models;
@@ -16,6 +7,15 @@ using DFC.ServiceTaxonomy.TestSuite.PageObjects;
 using FluentAssertions;
 
 using OpenQA.Selenium;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 using TechTalk.SpecFlow;
 
@@ -300,7 +300,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Given(@"I logon to the editor")]
         public void GivenILogonToTheEditor()
         {
-             _logonScreen.SubmitLogonDetails();
+            _logonScreen.SubmitLogonDetails();
         }
 
         [Given(@"I Navigate to ""(.*)""")]
@@ -1053,6 +1053,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         [Then(@"the item is published succesfully")]
         public void ThenTheItemIsPublishedSuccesfully()
         {
+            var isInOrder = ScenarioContentExtension.GetOrDefault<bool>(_scenarioContext, "Related skills");
+            if (isInOrder) return;
+
             _addContentItemBase.ConfirmPublishSuccess().Should().BeTrue();
         }
 

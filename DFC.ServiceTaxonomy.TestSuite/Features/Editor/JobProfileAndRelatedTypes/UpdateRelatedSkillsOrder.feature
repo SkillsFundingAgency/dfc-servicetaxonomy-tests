@@ -8,27 +8,8 @@ Scenario: Update Contextualised Text content items
 	And I search under JobProfile for the text <Title>
 	When I click on the link with text <Title>
 	And I switch to the What it takes tab
-	And I remove all the related skills
-	And I select option "<Skill-01>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-02>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-03>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-04>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-05>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-06>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-07>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-08>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-09>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-10>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-11>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-12>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-33>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-14>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-15>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-16>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-17>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-18>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-19>" from the "Related skills" dropdown field of the What it takes tab
-	And I select option "<Skill-20>" from the "Related skills" dropdown field of the What it takes tab
+	#And I remove all the related skills
+	And I check order or rearrange list items <Skill-01>|<Skill-02>|<Skill-03>|<Skill-04>|<Skill-05>|<Skill-06>|<Skill-07>|<Skill-08>|<Skill-09>|<Skill-10>|<Skill-11>|<Skill-12>|<Skill-33>|<Skill-14>|<Skill-15>|<Skill-16>|<Skill-17>|<Skill-18>|<Skill-19>|<Skill-20>
 	And I switch to the Content tab
 	And I click the Publish and Exit button after entering a comment
 	Then the item is published succesfully
