@@ -466,6 +466,30 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _jobProfilesPage.PublishAndExit();
         }
 
+        [When(@"I order (.*) at (.*)")]
+        public void WhenIOrderAt(string skill, int index)
+        {
+            _jobProfilesPage.SetSkillAt(skill, index);
+        }
+
+        [When(@"I switch to the Content tab")]
+        public void WhenISwitchToTheContentTab()
+        {
+            _content.DisplayContent();
+        }
+
+        [When(@"I remove all the related skills")]
+        public void WhenIRemoveAllTheRelatedSkills()
+        {
+            _whatItTakesTab.RemoveSkills();
+        }
+
+        [When(@"I select option ""(.*)"" from the ""(.*)"" dropdown field of the What it takes tab")]
+        public void WhenISelectOptionFromTheDropdownFieldOfTheWhatItTakesTab(string option, string field)
+        {
+            _whatItTakesTab.OptionSelection(option, field);
+        }
+
         [Then(@"the Job profile is created")]
         public void ThenTheJobProfileIsCreated()
         {
@@ -479,14 +503,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
 
             _manageContent.CleanUpManageContent();
         }
-
-        [When(@"I order (.*) at (.*)")]
-        public void WhenIOrderAt(string skill, int index)
-        {
-            _jobProfilesPage.SetSkillAt(skill, index);
-        }
-
-
     }
 
     public class ContentTypes

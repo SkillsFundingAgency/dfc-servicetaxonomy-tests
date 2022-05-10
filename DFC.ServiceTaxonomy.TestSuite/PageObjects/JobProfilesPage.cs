@@ -56,9 +56,14 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void SetSkillAt(string skillName, int order)
         {
-            IWebElement from = _scenarioContext.GetWebDriver().FindElement(By.XPath("*[data-field=\"Relatedskills\"]/div[1]/ul/div/li[1]/div[1]"));
-            IWebElement to = _scenarioContext.GetWebDriver().FindElement(By.Id("column-b"));
-            builder.DragAndDrop(from, to).Perform();
+            IWebElement from = _scenarioContext.GetWebDriver()
+                .WaitUntilElementFound(By.XPath("//div[@data-field='Relatedskills']/div[1]//li/div/span[text()='" + skillName + "']"));
+            IWebElement to = _scenarioContext.GetWebDriver().WaitUntilElementFound(By.XPath("//div[@data-field='Relatedskills']/div[1]//ul/div/li[" + order + "]/div/span"));
+
+            builder.ClickAndHold(from).MoveToElement(to).Release(to).Build().Perform();
+            builder.MoveToElement(from).Build().Perform();
+            builder.MoveToElement(to).Click().Build().Perform();
+            //builder.DragAndDrop(from, to).Build().Perform();
         }
     }
 }
