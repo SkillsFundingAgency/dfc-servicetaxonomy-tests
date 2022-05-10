@@ -97,11 +97,6 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             _scenarioContext.Set(false, "Related skills");
         }
 
-        public void SetSkillsInOrder(bool isInOrder)
-        {
-            _scenarioContext["SkillsInOrder"] = isInOrder;
-        }
-
         public bool GetSkillsInOrder()
         {
             return ScenarioContentExtension.GetOrDefault<bool>(_scenarioContext, "Related skills");
