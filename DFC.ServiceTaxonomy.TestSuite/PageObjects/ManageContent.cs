@@ -1,9 +1,12 @@
 ﻿using DFC.ServiceTaxonomy.TestSuite.Extensions;
 using DFC.ServiceTaxonomy.TestSuite.Helpers;
+
 using OpenQA.Selenium;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
@@ -47,7 +50,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void SelectFirstMatchedLink(string text)
         {
-            _scenarioContext.GetWebDriver().FindElement(By.LinkText(text)).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.XPath($"//*[@id='items-form']/ul[1]/li[2]/div/div[1]/div[2]/div[1]/a[text()='{text}']")).Click();
         }
 
         public ManageContent DeleteAllItemsOfType(string type)

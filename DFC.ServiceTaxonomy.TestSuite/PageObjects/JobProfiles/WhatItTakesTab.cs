@@ -55,7 +55,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                     break;
                 case "Related skills":
                     dropdownRelatedSkills.Click();
-                    txtRelatedSkills.SendKeys(option.Split('-')[0]);
+                    txtRelatedSkills.SendKeys(option);
                     _driver.WaitUntilElementFound(By.XPath(".//*[@id='JobProfile_Relatedskills_ContentItemIds']//following-sibling::div/div[3]//li['" + option + "']/span/div/span")).Click();
                     break;
             }
@@ -81,6 +81,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         public void CheckOrRearrangeSkills(string[] skills)
         {
+            // Delay for skils to appear.
             Thread.Sleep(500);
             var items = _driver.FindElements(By.CssSelector("div[data-field='Relatedskills'] > div:nth-of-type(1) li span:nth-of-type(1)")).Select(c => c.Text.Trim()).ToArray();
             if (items.SequenceEqual(skills))
