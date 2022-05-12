@@ -24,7 +24,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             _driver = _scenarioContext.GetWebDriver();
         }
 
-        IWebElement tabWhatItTakes => _driver.FindElement(By.CssSelector(".nav-tabs li:nth-of-type(4) > a"));
+        IWebElement tabWhatItTakes => _driver.WaitUntilElementFound(By.LinkText("What it takes"));
         IWebElement dropdownRelatedRestrictions => _driver.FindElement(By.CssSelector("#JobProfile_Relatedrestrictions_ContentItemIds + div > .multiselect__tags"));
         IWebElement txtfldOtherRequirements => _driver.FindElement(By.CssSelector("label[for='JobProfile_Otherrequirements_Html'] + div > .trumbowyg-editor"));
         IWebElement dropdownDigitalSkills => _driver.FindElement(By.CssSelector("#JobProfile_DigitalSkills_ContentItemIds + div > .multiselect__tags"));
@@ -36,7 +36,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
 
         public void DisplayWhatItTakesTab()
         {
-            Utilities.Hover(_driver, tabWhatItTakes);
+            //Utilities.Hover(_driver, tabWhatItTakes);
             tabWhatItTakes.Click();
         }
 
@@ -55,7 +55,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                     break;
                 case "Related skills":
                     dropdownRelatedSkills.Click();
-                    txtRelatedSkills.SendKeys(option);
+                    txtRelatedSkills.SendKeys(option.Split('-')[0]);
                     _driver.WaitUntilElementFound(By.XPath(".//*[@id='JobProfile_Relatedskills_ContentItemIds']//following-sibling::div/div[3]//li['" + option + "']/span/div/span")).Click();
                     break;
             }
@@ -92,7 +92,8 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
             RemoveSkills();
             foreach (var skill in skills)
             {
-                OptionSelection(skill, "Related skills");
+                if (!string.IsNullOrWhiteSpace(skill))
+                    OptionSelection(skill, "Related skills");
             }
             _scenarioContext.Set(false, "Related skills");
         }
