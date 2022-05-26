@@ -61,7 +61,7 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\Import\ImportJobProfiles.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileMigration\ImportJobProfiles.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
@@ -73,11 +73,11 @@
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\UpdateRelatedSkillsOrder.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileMigration\UpdateRelatedSkillsOrder.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileAndRelatedTypes\UpdateContextualisedText.feature">
+    <SpecFlowFeatureFiles Update="Features\Editor\JobProfileMigration\UpdateContextualisedText.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
@@ -233,10 +233,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Features\Editor\Import\ImportJobProfiles.feature.cs">
+    <Compile Update="Features\Editor\JobProfileMigration\ImportJobProfiles.feature.cs">
       <DependentUpon>ImportJobProfiles.feature</DependentUpon>
     </Compile>
-    <Compile Update="Features\Editor\JobProfileAndRelatedTypes\UpdateRelatedSkillsOrder.feature.cs">
+    <Compile Update="Features\Editor\JobProfileMigration\UpdateRelatedSkillsOrder.feature.cs">
       <DependentUpon>UpdateRelatedSkillsOrder.feature</DependentUpon>
     </Compile>
   </ItemGroup>

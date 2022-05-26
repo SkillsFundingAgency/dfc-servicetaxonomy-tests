@@ -50,7 +50,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void SelectFirstMatchedLink(string text)
         {
-            _scenarioContext.GetWebDriver().FindElement(By.XPath($"//*[@id='items-form']/ul[1]/li[2]/div/div[1]/div[2]/div[1]/a[text()='{text}']")).Click();
+            _scenarioContext.GetWebDriver().FindElement(By.XPath($"//*[@id='items-form']/ul[1]/li/div/div[1]/div[2]/div[1]/a[text()=\"{text}\"]")).Click();
         }
 
         public ManageContent DeleteAllItemsOfType(string type)
