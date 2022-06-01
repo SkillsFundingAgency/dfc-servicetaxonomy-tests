@@ -459,6 +459,16 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
             _jobProfilesPage.ClickSaveDraftAndContinue();
         }
 
+        [When(@"I enter a comment ""(.*)"" and click the Publish and Exit button")]
+        public void WhenIEnterACommentAndClickThePublishAndExitButton(string comment)
+        {
+            if (_whatItTakesTab.GetSkillsInOrder()) return;
+
+            _content.DisplayContent();
+            _content.TextEntry(comment);
+            _jobProfilesPage.PublishAndExit();
+        }
+
         [When(@"I click the Publish and Exit button after entering a comment")]
         public void WhenIClickThePublishAndExitButtonAfterEnteringAComment()
         {
