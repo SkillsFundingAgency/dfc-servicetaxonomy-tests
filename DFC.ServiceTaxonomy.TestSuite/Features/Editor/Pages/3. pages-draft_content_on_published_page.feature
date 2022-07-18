@@ -1,4 +1,4 @@
-﻿
+﻿@webtest
 Feature: 3. Pages-draft_content_on_published_page
 Background:
 	Given I set up a data prefix for "skos__prefLabel"
@@ -8,7 +8,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title         | Content                   |
 	| Draft Content | <p>Some draft content</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the item is saved succesfully
 	And the data is present in the DRAFT Graph database

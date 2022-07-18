@@ -70,7 +70,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
                     Console.WriteLine("Already logged in");
                 }
             }
-            catch (Exception e)
+              catch (Exception e)
             {
                 Console.WriteLine(@"Logon failed:" + e.Message);
                 throw;

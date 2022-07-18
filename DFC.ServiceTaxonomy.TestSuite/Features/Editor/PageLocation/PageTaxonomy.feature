@@ -10,7 +10,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title         | Content                   |
 	| Draft Content | <p>Some draft content</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 

@@ -8,7 +8,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title         | Content                   |
 	| Draft Content | <p>Some draft content</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I publish the item
 	Then the item is published succesfully
 	And the data is present in the DRAFT Graph database
@@ -38,7 +38,7 @@ Background:
 	And I Enter the following form data for "SharedContent"
 	| Title           | Content                     |
 	| Updated Content | <p>Some updated content</p> |
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	When I save the draft item
 	Then the item is saved succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri
@@ -67,7 +67,7 @@ Scenario: Publish the shared content
 	Given I Navigate to "/Admin/Contents/ContentItems" 
 	And I search for the text "__PREFIX__Updated Content"
 	And I select the first item that is found
-	And I add a comment before submitting for review "comment "
+	#And I add a comment before submitting for review "comment "
 	And I publish the item
 	Then the item is published succesfully
 	And the "preview" graph matches the expect results using the "page_with_shared_content" query and the "PageUri" Uri

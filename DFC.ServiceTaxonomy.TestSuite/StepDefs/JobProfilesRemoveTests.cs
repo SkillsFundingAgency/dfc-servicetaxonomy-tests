@@ -34,7 +34,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         {
             _sideNavigator.ClickContent();
             _sideNavigator.ClickContentItem();
-            _manageContent.CleanUpManageContent(_titleMidFix);
+            //_manageContent.CleanUpManageContent(_titleMidFix);
         }
 
         [Then(@"all tests with such infix are removed")]
