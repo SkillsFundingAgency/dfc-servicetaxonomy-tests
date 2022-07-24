@@ -39,9 +39,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Hooks
         {
             if (driver != null)
             {
-                //driver.Close();
-                //driver.Quit();
-                //driver = null;
+                driver.Close();
+                driver.Quit();
+                driver = null;
             }
         }
 
