@@ -25,8 +25,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
         IWebElement fldCourseKeywords => _scenarioContext.GetWebDriver().FindElement(By.Id("JobProfile_Coursekeywords_Text"));
         IWebElement dropdownSocCode => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_SOCCode_ContentItemIds + div > .multiselect__tags"));
         IWebElement dropdownRelatedCareersProfiles => _scenarioContext.GetWebDriver().FindElement(By.CssSelector("#JobProfile_Relatedcareerprofiles_ContentItemIds + div > .multiselect__tags"));
+        IWebElement inputSocCode => _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCCode_ContentItemIds']//following-sibling::div/div[2]/input"));
+        IWebElement selectSocCode => _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCCode_ContentItemIds']//following-sibling::div/div[3]/ul/li/span"));
 
-        
 
         public void SelectDynamicTitlePrefix(string dynamicTitlePrefix)
         {
@@ -55,7 +56,10 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects.JobProfiles
                     break;
                 case "SOC code":
                     dropdownSocCode.Click();
-                    _scenarioContext.GetWebDriver().FindElement(By.XPath(".//*[@id='JobProfile_SOCCode_ContentItemIds']//following-sibling::div/div[3]//li[" + option + "]/span/div/span")).Click();
+                    Thread.Sleep(750);
+                    inputSocCode.SendKeys(JobProfileSpecialism.socCode);
+                    Thread.Sleep(750);
+                    selectSocCode.Click();
                     break;
                 case "Related careers profiles":
                     dropdownRelatedCareersProfiles.Click();

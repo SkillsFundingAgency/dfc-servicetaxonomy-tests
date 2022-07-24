@@ -34,7 +34,7 @@ Scenario Outline: Add Job Profile Content Item
 	And I select option "2" from the "Job profile specialism" dropdown field
 	And I select option "1" from the "Job profile category" dropdown field
 	And I enter "Test data for field" into the "Course keywords" field
-	And I select option "2" from the "SOC code" dropdown field
+	And I select the SOC code created earlier from the "SOC code" dropdown field
 	And I select option "2" from the "Related careers profiles" dropdown field
 	And I switch to the Header tab
 	And I enter "Test data for field" into the "Alternative title" field of the Header tab

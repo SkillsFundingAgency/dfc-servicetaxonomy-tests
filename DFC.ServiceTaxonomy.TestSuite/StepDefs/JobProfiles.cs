@@ -49,6 +49,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         private readonly ContentTab _content;
         private readonly JobProfilesPage _jobProfilesPage; 
         private readonly ManageContent _manageContent;
+        RandomsGenerator randomNumber = new RandomsGenerator();
 
         public JobProfiles(ScenarioContext scenarioContext)
         {
@@ -102,7 +103,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickJobProfileSpecialism();
-                            _jobProfileSpecialism.EnterTitle("x3 JPS");
+                            _jobProfileSpecialism.EnterTitle("x5 JPS");
                             _jobProfileSpecialism.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -112,7 +113,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickJobProfileCategory();
-                            _jobProfileSpecialism.EnterTitle("x3 JPC");
+                            _jobProfileSpecialism.EnterTitle("x5 JPC");
                             _jobProfileCategory.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -122,9 +123,13 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickSocCode();
-                            _jobProfileSpecialism.EnterTitle("x3 SC");
+                            _jobProfileSpecialism.EnterTitleSocCode(randomNumber.RandomNumber(1000, 9999) + randomNumber.RandomAlpha());
                             _socCode.EnterDescription(descriptionText);
-                            _socCode.EnterOnetOccupationCode("29-1126.00");
+                            //_socCode.EnterOnetOccupationCode("29-1126.00");
+                            _socCode.EnterOnetOccupationCode("29-1141.03");
+                            _socCode.SelectApprenticeshipStandards("2");
+                            _socCode.EnterSoc2020("Test text: SOC 2020");
+                            _socCode.EnterSoc2020extension("Test text: SOC 2020 extension");
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
                         }
@@ -133,7 +138,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickWorkingHoursDetail();
-                            _jobProfileSpecialism.EnterTitle("x3 WHD");
+                            _jobProfileSpecialism.EnterTitle("x5 WHD");
                             _workingHoursDetail.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -143,7 +148,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickWorkingPatternDetail();
-                            _jobProfileSpecialism.EnterTitle("x3 WPD");
+                            _jobProfileSpecialism.EnterTitle("x5 WPD");
                             _workingPatternDetail.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -153,7 +158,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickWorkingPatterns();
-                            _jobProfileSpecialism.EnterTitle("x3 WP");
+                            _jobProfileSpecialism.EnterTitle("x5 WP");
                             _workingPatterns.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -163,7 +168,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickUniversityEntryRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 UER");
+                            _jobProfileSpecialism.EnterTitle("x5 UER");
                             _universityEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -173,7 +178,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickUniversityRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 UR");
+                            _jobProfileSpecialism.EnterTitle("x5 UR");
                             _universityRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -183,7 +188,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickUniversityLinks();
-                            _jobProfileSpecialism.EnterTitle("x3 UL");
+                            _jobProfileSpecialism.EnterTitle("x5 UL");
                             _universityLinks.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -193,7 +198,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickCollegeEntryRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 CER");
+                            _jobProfileSpecialism.EnterTitle("x5 CER");
                             _collegeEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -204,7 +209,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         {
 
                             _sideNavigator.ClickCollegeRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 CR");
+                            _jobProfileSpecialism.EnterTitle("x5 CR");
                             _collegeRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -214,7 +219,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickCollegeLink();
-                            _jobProfileSpecialism.EnterTitle("x3 CL");
+                            _jobProfileSpecialism.EnterTitle("x5 CL");
                             _collegeLink.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -224,7 +229,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClicklinkApprenticeshipEntryRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 AER");
+                            _jobProfileSpecialism.EnterTitle("x5 AER");
                             _apprenticeshipEntryRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -234,7 +239,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClicklinkApprenticeshipRequirements();
-                            _jobProfileSpecialism.EnterTitle("x3 AR");
+                            _jobProfileSpecialism.EnterTitle("x5 AR");
                             _apprenticeshipRequirements.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -244,7 +249,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickApprenticeshipLink();
-                            _jobProfileSpecialism.EnterTitle("x3 AL");
+                            _jobProfileSpecialism.EnterTitle("x5 AL");
                             _apprenticeshipLink.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -254,7 +259,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickRegistration();
-                            _jobProfileSpecialism.EnterTitle("x3 Reg");
+                            _jobProfileSpecialism.EnterTitle("x5 Reg");
                             _registration.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -264,7 +269,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickRestriction();
-                            _jobProfileSpecialism.EnterTitle("x3 Res");
+                            _jobProfileSpecialism.EnterTitle("x5 Res");
                             _restriction.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -274,7 +279,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickDigitalSkills();
-                            _digitalSkills.EnterTitle("x3 DS");
+                            _digitalSkills.EnterTitle("x5 DS");
                             _digitalSkills.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -284,7 +289,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickLocation();
-                            _jobProfileSpecialism.EnterTitle("x3 Loc");
+                            _jobProfileSpecialism.EnterTitle("x5 Loc");
                             _location.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -294,7 +299,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickEnvironment();
-                            _jobProfileSpecialism.EnterTitle("x3 Env");
+                            _jobProfileSpecialism.EnterTitle("x5 Env");
                             _environment.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -304,7 +309,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
                         for (int i = 0; i < contentType.number; i++)
                         {
                             _sideNavigator.ClickUniform();
-                            _jobProfileSpecialism.EnterTitle("x3 Uni");
+                            _jobProfileSpecialism.EnterTitle("x5 Uni");
                             _uniform.EnterDescription(descriptionText);
                             _jobProfileSpecialism.ClickSaveDraftAndContinue();
                             _jobProfileSpecialism.ClickPublishAndContinue();
@@ -336,6 +341,12 @@ namespace DFC.ServiceTaxonomy.TestSuite.StepDefs
         public void GivenISelectOptionFromTheDropdownField(string option, string field)
         {
             _metaDataTab.OptionSelection(option, field);
+        }
+
+        [Given(@"I select the SOC code created earlier from the ""(.*)"" dropdown field")]
+        public void GivenISelectTheSOCCodeCreatedEarlierFromTheDropdownField(string field)
+        {
+            _metaDataTab.OptionSelection(JobProfileSpecialism.socCode, field);
         }
 
         [Given(@"I enter ""(.*)"" into the ""(.*)"" field")]

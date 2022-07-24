@@ -324,7 +324,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
             switch(status)
             {
                 case "Published":
-                    contentStatus = _scenarioContext.GetWebDriver().FindElement(By.XPath("//*[@class='contentitem mr-2']//a[contains(text(), '" + DigitalSkills.JobProfileTitle + "')]//following::div[2]/span[@data-original-title='Published']")).Displayed;
+                    contentStatus = _scenarioContext.GetWebDriver().FindElement(By.XPath("//*[@class='contentitem mr-2']//a[contains(text(), '" + DigitalSkills.JobProfileTitle + "')]//following::div[2]/span[@title='Published']")).Displayed;
                     break;
             }
 

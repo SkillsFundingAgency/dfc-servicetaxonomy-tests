@@ -23,7 +23,7 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 
         public void EnterTitle(string contentItemInitials)
         {
-            JobProfileTitle = "Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString();
+            JobProfileTitle = "Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString(8);
             fldTitle.SendKeys(JobProfileTitle);
         }
 

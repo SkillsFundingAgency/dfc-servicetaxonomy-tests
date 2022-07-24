@@ -7,9 +7,9 @@ namespace DFC.ServiceTaxonomy.TestSuite.Helpers
 {
     class RandomStringGenerator
     {
-        public static string RandomString()
+        public static string RandomString(int randomStringLength)
         {
-            int randomStringLength = 8;
+            //int randomStringLength = 8;
             
             using (var crypto = new RNGCryptoServiceProvider())
             {

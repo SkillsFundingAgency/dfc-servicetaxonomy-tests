@@ -8,7 +8,7 @@ using TechTalk.SpecFlow;
 
 namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
 {
-    class JobProfileSpecialism
+    public class JobProfileSpecialism
     {
         private ScenarioContext _scenarioContext;
         public JobProfileSpecialism(ScenarioContext context) 
@@ -21,9 +21,17 @@ namespace DFC.ServiceTaxonomy.TestSuite.PageObjects
         IWebElement btnSaveDraftAndContinue => _scenarioContext.GetWebDriver().FindElement(By.ClassName("draft-continue"));
         IWebElement btnPublishAndContinue => _scenarioContext.GetWebDriver().FindElement(By.CssSelector(".btn.btn-success.publish"));
 
+        public static string socCode { get; set; }
+        
         public void EnterTitle(string contentItemInitials)
         {
-            fldTitle.SendKeys("Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString());
+            fldTitle.SendKeys("Test_Auto_" + contentItemInitials + "_" + RandomStringGenerator.RandomString(8));
+        }
+
+        public void EnterTitleSocCode(string socCodeTitle)
+        {
+            socCode = socCodeTitle.ToString();
+            fldTitle.SendKeys(socCode);
         }
 
         public void EnterDescription(string description)
