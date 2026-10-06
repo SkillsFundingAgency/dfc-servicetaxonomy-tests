@@ -2,7 +2,7 @@ variables:
     SolutionBaseName: 'DFC.ServiceTaxonomy'
 
 pool:
-  name: NCS - CI and CD
+  name: dfc-dev-shared-build-mp
   demands:
   - msbuild
   - visualstudio
